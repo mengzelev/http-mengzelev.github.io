@@ -15,7 +15,7 @@
     <meta name="description" content="nothing to write">
     <meta name="Cache-Control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-    <title>Mengzelev&#39;s Blog</title>
+    <title>汇编语言复习笔记（一） · Mengzelev&#39;s Blog</title>
     <style type="text/css">
     @font-face {
         font-family: 'Oswald-Regular';
@@ -70,6 +70,8 @@
 
     <link rel="preload" href= /css/style.css?v=20180721 as="style" onload="this.onload=null;this.rel='stylesheet'" />
     <link rel="stylesheet" href= /css/mobile.css?v=20180721 media="(max-width: 980px)">
+    
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
     
     <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
 /* This file is meant as a standalone workflow for
@@ -194,12 +196,23 @@
 </head>
 
     
+        <body class="post-body">
+    
     
 <header class="header">
 
     <div class="read-progress"></div>
     <div class="header-sidebar-menu">&#xe775;</div>
     <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >Mengzelev&#39;s Blog</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">汇编语言复习笔记（一）</a>
+            </div>
+    </div>
     
     <a class="home-link" href=/>Mengzelev's Blog</a>
 </header>
@@ -213,24 +226,76 @@
 
 
 
+height:50vh;
+
 >
     
     <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
             
     <div class="site-intro-placeholder"></div>
-    <div class="site-intro-img" style="background-image: url(/)"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/yuri.jpg)"></div>
     <div class="site-intro-meta">
         <!-- 标题  -->
         <h1 class="intro-title">
             <!-- 主页  -->
+            
+            汇编语言复习笔记（一）
+            <!-- 404 -->
             
         </h1>
         <!-- 副标题 -->
         <p class="intro-subtitle">
             <!-- 主页副标题  -->
             
+            
+            <!-- 404 -->
+            
         </p>
         <!-- 文章页meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                    <div class= post-intro-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Assembly Language">Assembly Language</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Notes">Notes</a>
+    
+</div>
+                
+                
+                    <div class="post-intro-read">
+                        <span>Word count: <span class="post-count">857</span> / Reading time: <span class="post-count">3 min</span></span>
+                    </div>
+                
+                <div class="post-intro-meta">
+                    <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                    <span class="post-intro-time">2018/08/29</span>
+                    
+                    <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                        <span class="iconfont-archer">&#xe602;</span>
+                        <span id="busuanzi_value_page_pv"></span>
+                    </span>
+                    
+                    <span class="shareWrapper">
+                        <span class="iconfont-archer shareIcon">&#xe71d;</span>
+                        <span class="shareText">Share</span>
+                        <ul class="shareList">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
         
     </div>
 </div>
@@ -331,186 +396,166 @@
 </script>        
         <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
         <div class="container container-unloaded">
-            <main class="main index-page">
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2018/08/29/asm-notes/" >
-            
-                <span>汇编语言复习笔记（一）</span>
-        </a>
-        <div class="abstract-content">
-            前言本文为学校课程面向考试复习笔记，参考内容为老师的课堂讲义&amp;深入理解计算机系统，依据这两者做了一些个人的整理便于复习。然而浪了一个假期在退课的边缘试探
-信息的表示数值的表示
-原码：这个很直观的
-反码：这个几乎不用的
-补码：$D’=R^n-D$ / 按位取反加1；
-移码：见浮点数
+            <main class="main post-page">
+    <article class="article-entry">
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>本文为学校课程面向考试复习笔记，参考内容为老师的课堂讲义&amp;<em>深入理解计算机系统</em>，依据这两者做了一些个人的整理便于复习。<del>然而浪了一个假期在退课的边缘试探</del></p>
+<h1 id="信息的表示"><a href="#信息的表示" class="headerlink" title="信息的表示"></a>信息的表示</h1><h2 id="数值的表示"><a href="#数值的表示" class="headerlink" title="数值的表示"></a>数值的表示</h2><ul>
+<li>原码：这个很直观的</li>
+<li>反码：这个几乎不用的</li>
+<li>补码：$D’=R^n-D$ / 按位取反加1；</li>
+<li>移码：见<a href="#float">浮点数</a></li>
+</ul>
+<p><strong>补码</strong></p>
+<ul>
+<li>相当于取模操作</li>
+<li>着重区分<strong>基数的值(R)</strong>和<strong>补码位表示的实际的值(D)</strong></li>
+<li>R与D的相对大小一致</li>
+<li>$R=D+D_{w-1}\cdot 2^w$</li>
+</ul>
+<h2 id="C语言中的整数"><a href="#C语言中的整数" class="headerlink" title="C语言中的整数"></a>C语言中的整数</h2><ul>
+<li>无符号数：在数后加U或u</li>
+<li>同时有无符号数和带符号数，编译器将带符号数强制转换为<strong>无符号数</strong></li>
+<li>int的最大正值为2147483647，最大负值为-2147483648</li>
+<li><strong>比较时要特别注意是按什么规则进行的</strong></li>
+</ul>
+<h2 id="数据的存放"><a href="#数据的存放" class="headerlink" title="数据的存放"></a>数据的存放</h2><ul>
+<li>小端：最低有效字节存放在<strong>最小</strong>地址</li>
+<li>大端：最低有效字节存放在<strong>最大</strong>地址</li>
+</ul>
+<h2 id="浮点数"><a href="#浮点数" class="headerlink" title="浮点数"></a><span id="float">浮点数</span></h2><p>编码表示分3个字段</p>
+<ul>
+<li>符号s &nbsp; 0正1负 </li>
+<li>阶码E &nbsp; k位阶码字段exp </li>
+<li>尾数M &nbsp; n位小数字段frac &nbsp; 表示的是a/2^n</li>
+</ul>
+<p>float &nbsp; k=8,n=23</p>
+<p>double &nbsp; k=11,n=52</p>
+<p><strong>三种表示情况</strong></p>
+<p><strong>1.规格化</strong> &nbsp;&nbsp;<br><strong>阶码部分既不全0也不全1</strong></p>
+<p>采用偏置形式：<code>E=e-Bias</code></p>
+<p>其中，E为阶码实际的值，e为位模式下的无符号数，偏置Bias= $2^{k-1}-1$ <code>float:127, double:1023</code></p>
+<p>指数范围： <code>float: -126~+127; double -1022~1023</code></p>
+<p>尾数 <code>M=f+1</code> &nbsp; 其中 <code>0&lt;=f&lt;1; 1&lt;=M&lt;2</code></p>
+<p><strong>非规格化</strong> &nbsp;&nbsp;<br><strong>阶码全0</strong></p>
+<p>阶码<code>E=1-Bias</code></p>
+<p>尾数<code>M=f</code></p>
+<p>存在意义：提供了0的表示方法，逐渐溢出 &nbsp; （否则[0,$2^{-n})范围内的数都无法表示）</p>
+<p><strong>特殊值</strong> &nbsp;&nbsp;<br><strong>阶码全1</strong></p>
+<ul>
+<li>尾数全0：正负无穷大</li>
+<li>尾数非全0： NaN</li>
+</ul>
+<p><strong>浮点数加减运算</strong><br>步骤：对阶→加减→规格化（→舍入）</p>
+<p>对阶：小阶向大阶看齐，小阶尾数右移（带上隐含的1）</p>
+<h1 id="整数运算"><a href="#整数运算" class="headerlink" title="整数运算"></a>整数运算</h1><h2 id="位运算"><a href="#位运算" class="headerlink" title="位运算"></a>位运算</h2><p>没什么好说的。</p>
+<h2 id="移位运算"><a href="#移位运算" class="headerlink" title="移位运算"></a>移位运算</h2><ul>
+<li>左移<code>x&lt;&lt;k</code>  丢弃最高k位，在右端补k个0</li>
+<li>右移<code>x&gt;&gt;k</code>  丢弃最低k为，在右端补k个0/符号位</li>
+</ul>
+<h2 id="整数加减法"><a href="#整数加减法" class="headerlink" title="整数加减法"></a>整数加减法</h2><p>发生在n位带标志加法器中</p>
+<p>###条件标志位<br>计算<code>t=a+b</code></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">eflag</th>
+<th style="text-align:center">中文名称</th>
+<th style="text-align:center">有效条件</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">OF</td>
+<td style="text-align:center">溢出标志</td>
+<td style="text-align:center">a,b同号但t与a,b异号</td>
+</tr>
+<tr>
+<td style="text-align:center">SF</td>
+<td style="text-align:center">符号标志</td>
+<td style="text-align:center">t&lt;0</td>
+</tr>
+<tr>
+<td style="text-align:center">ZF</td>
+<td style="text-align:center">零标志</td>
+<td style="text-align:center">t==0</td>
+</tr>
+<tr>
+<td style="text-align:center">CF</td>
+<td style="text-align:center">进位标志</td>
+<td style="text-align:center">(unsigned)t&lt;(unsigned)a</td>
+</tr>
+</tbody>
+</table>
+<p>比较大小相当于做减法</p>
+<ul>
+<li>无符号数： CF==0 $\Leftrightarrow$ a&gt;b</li>
+<li>有符号数： OF==SF $\Leftrightarrow$ a&gt;b</li>
+</ul>
+<h2 id="整数乘法"><a href="#整数乘法" class="headerlink" title="整数乘法"></a>整数乘法</h2><p>乘数中有常数时：采用移位(左移)+加减法相结合的形式</p>
+<h2 id="整数除法"><a href="#整数除法" class="headerlink" title="整数除法"></a>整数除法</h2><p>朝0方向舍入：，即正数商取比自身<strong>小</strong>的最接近整数，负数商取比自身<strong>大</strong>的最接近整数</p>
+<p>除数为2的幂次时，采用右移运算，得到朝0方向舍入的结果</p>
+<ul>
+<li>无符号数、有符号正整数： 移出的地位直接丢弃</li>
+<li>有符号负整数： ：加偏移量 (2^k-1) ，然后再右移k位，低位截断</li>
+</ul>
+<h1 id="作业一的教训"><a href="#作业一的教训" class="headerlink" title="作业一的教训"></a>作业一的教训</h1><p>1.~按位取反 和 ！全部取反要区分清楚</p>
+<p>2.非按位运算操作符非0的都视为true</p>
+<p>3.浮点数的转化要好好看一下，把转化公式写好</p>
 
-补码
-
-相当于取模操作
-着重区分基数的值(R)和补码位表示的实际的值(D)
-R与D的相对大小一致
-$R=D+D_{w-1}\cdot 2^w$
-
-C语言中的整数
-无符号数：在数后加U或u
-同时有无符号数和带符号数，编译器将带符号数强制转换为无符号数
-int的最大正值为2147483647，最大负值为-...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/08/29</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Assembly Language">Assembly Language</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Notes">Notes</a>
-    
-</div>
-            
-        </div>
     </article>
+    <!-- license  -->
     
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2018/08/29/asm2/" >
-            
-                <span>汇编语言复习笔记（二）</span>
-        </a>
-        <div class="abstract-content">
-            数据传送数据传送指令格式： mov S(源操作数), D(目标操作数)
-mov  &nbsp;&nbsp; 一般传送指令
-movs &nbsp;&nbsp; 符号扩展传送
-movz &nbsp;&nbsp; 零扩展传送
-push &nbsp;&nbsp; 压栈，等价于sub+mov
-pop  &nbsp;&nbsp; 退栈，等价于mov+add
-按源操作数的长度加上b,w,l后缀，分别表示1、2、4字节。(movz,movs需要双后缀)
-
-
-见leal与movl的区别
-指令后缀、操作数长度、目标寄存器宽度必须要一致！！
-操作数类型
-立即数 Imm &nbsp;&nbsp; 整型常量，加$...
+        <div class="license-wrapper">
+            <p>原文作者: <a href="http://yoursite.com">Mengzelev</a>
+            <p>原文链接: <a href="http://yoursite.com/2018/08/29/asm-notes/">http://yoursite.com/2018/08/29/asm-notes/</a>
+            <p>发表日期: <a href="http://yoursite.com/2018/08/29/asm-notes/">August 29th 2018, 1:11:42 pm</a>
+            <p>版权声明: 本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
         </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/08/29</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Assembly Language">Assembly Language</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Notes">Notes</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2018/08/18/freshman/" >
-            
-                <span>胡言乱语的大一总结</span>
-        </a>
-        <div class="abstract-content">
-            &emsp;&emsp;生日兼七夕窝在家里无聊于是开了这样一篇文章写了整整两天，都是些碎碎念。本来并没有写这种东西的习惯的(:з」∠)但是既然开了个人blog总要写点什么的于是就写吧！试图掩盖写不出教程的事实将来过好几年来看可能会很有回忆的感觉。
-学习篇刚进大学的时候，军训期间闲得蛋疼去考了计拔居然还被录取了，txp他老人家眼光真的没问题吗，于是就开始了贼船之旅。大一上第一个国庆长假就只能窝在家里写作业写了好久堪称心理阴影，大一上被问求这门神奇的课给吓尿了，动不动就为了赶作业修仙到两点。其实还是有在疯狂补小排球的 到了大一下觉得大一上还是很空闲的，起码不用搭面包板，也不用抄大物作业。大二...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/08/18</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "freshman">freshman</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "college life">college life</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2018/08/12/test-md/" >
-            
-                <span>Markdown test</span>
-        </a>
-        <div class="abstract-content">
-            这是标题君这是副标题君我知道这篇文章看起来很沙雕，因为作者就是一个沙雕
-列表非常有趣
-
-这是第一项
-这是第二项
-这是第三项
-
-
-有时候会有需要强调的内容。
-插入代码是一件非常爽的事情：
-printf(&quot;%s&quot;,&quot;Hello world!\n&quot;);
-突然发现自己不会用printf真是太丢人了。
-
-有时候需要插入链接，这里贴一个百度。
-有时候又需要插入图片
-    
-
-看张血小板冷静一下吧（图源网络）
-图片的尺寸可以用命令进行修改
-
-暂时先写这么多吧，敬请关注后面几期，计划中将会有
-
-汇编课程相关学习笔记
-日本动画制作流程及《白箱》观后感整理
-大一回顾...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/08/12</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "markdown">markdown</a>
-    
-</div>
-            
-        </div>
-    </article>
     
     <!-- paginator  -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+        </li>
+        <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href= "/2018/08/29/asm2/" title= 汇编语言复习笔记（二） >
+                    <div class="prevTitle">汇编语言复习笔记（二）</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+<!-- City版安装代码已完成 -->
     
+    
+    <!--PC和WAP自适应版-->
+
+    <!--PC版-->
+
+
+    
+    
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+    <div id="comment"></div>
+    <script>
+    new Valine({
+        el: '#comment' ,
+        notify:false, 
+        verify:false, 
+        appId: "yj3PGIKmV8xpEnFYOgSseo5x-gzGzoHsz",
+        appKey: "vGSIx5E7w6LLK0M0jUlIUG05",
+        placeholder: "看完了都不说一句再走么(。•ω•)σ)´Д`)",
+        path:window.location.pathname, 
+        avatar:'mm' 
+    });
+    </script>
+
+
+    <!-- 评论 -->
 </main>
             <!-- profile -->
             
@@ -598,6 +643,24 @@ printf(&quot;%s&quot;,&quot;Hello world!\n&quot;);
 </footer>
     </div>
     <!-- toc -->
+    
+    <div class="toc-wrapper" style=
+    
+
+
+
+
+
+
+
+top:50vh;
+
+    >
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#信息的表示"><span class="toc-number">2.</span> <span class="toc-text">信息的表示</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#数值的表示"><span class="toc-number">2.1.</span> <span class="toc-text">数值的表示</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#C语言中的整数"><span class="toc-number">2.2.</span> <span class="toc-text">C语言中的整数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数据的存放"><span class="toc-number">2.3.</span> <span class="toc-text">数据的存放</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#浮点数"><span class="toc-number">2.4.</span> <span class="toc-text">浮点数</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#整数运算"><span class="toc-number">3.</span> <span class="toc-text">整数运算</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#位运算"><span class="toc-number">3.1.</span> <span class="toc-text">位运算</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#移位运算"><span class="toc-number">3.2.</span> <span class="toc-text">移位运算</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#整数加减法"><span class="toc-number">3.3.</span> <span class="toc-text">整数加减法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#整数乘法"><span class="toc-number">3.4.</span> <span class="toc-text">整数乘法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#整数除法"><span class="toc-number">3.5.</span> <span class="toc-text">整数除法</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#作业一的教训"><span class="toc-number">4.</span> <span class="toc-text">作业一的教训</span></a></li></ol>
+    </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
     <div class="sidebar sidebar-hide">
@@ -773,6 +836,8 @@ jsonContent:
     
     </div>
     <!-- async load share.js -->
+    
+        <script src="/scripts/share.js" async></script>    
      
     </body>
 </html>
