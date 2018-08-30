@@ -269,7 +269,7 @@ height:50vh;
                 
                 
                     <div class="post-intro-read">
-                        <span>Word count: <span class="post-count">857</span> / Reading time: <span class="post-count">3 min</span></span>
+                        <span>Word count: <span class="post-count">897</span> / Reading time: <span class="post-count">3 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
@@ -452,6 +452,7 @@ height:50vh;
 <li>左移<code>x&lt;&lt;k</code>  丢弃最高k位，在右端补k个0</li>
 <li>右移<code>x&gt;&gt;k</code>  丢弃最低k为，在右端补k个0/符号位</li>
 </ul>
+<p><strong>移位运算是向下取整</strong></p>
 <h2 id="整数加减法"><a href="#整数加减法" class="headerlink" title="整数加减法"></a>整数加减法</h2><p>发生在n位带标志加法器中</p>
 <p>###条件标志位<br>计算<code>t=a+b</code></p>
 <table>
@@ -491,7 +492,8 @@ height:50vh;
 <li>有符号数： OF==SF $\Leftrightarrow$ a&gt;b</li>
 </ul>
 <h2 id="整数乘法"><a href="#整数乘法" class="headerlink" title="整数乘法"></a>整数乘法</h2><p>乘数中有常数时：采用移位(左移)+加减法相结合的形式</p>
-<h2 id="整数除法"><a href="#整数除法" class="headerlink" title="整数除法"></a>整数除法</h2><p>朝0方向舍入：，即正数商取比自身<strong>小</strong>的最接近整数，负数商取比自身<strong>大</strong>的最接近整数</p>
+<h2 id="整数除法"><a href="#整数除法" class="headerlink" title="整数除法"></a>整数除法</h2><p>默认朝0方向舍入：，即正数商取比自身<strong>小</strong>的最接近整数，负数商取比自身<strong>大</strong>的最接近整数</p>
+<p><strong>用移位代替除法时需要负数需要加上一个偏移量</strong></p>
 <p>除数为2的幂次时，采用右移运算，得到朝0方向舍入的结果</p>
 <ul>
 <li>无符号数、有符号正整数： 移出的地位直接丢弃</li>
@@ -500,14 +502,15 @@ height:50vh;
 <h1 id="作业一的教训"><a href="#作业一的教训" class="headerlink" title="作业一的教训"></a>作业一的教训</h1><p>1.~按位取反 和 ！全部取反要区分清楚</p>
 <p>2.非按位运算操作符非0的都视为true</p>
 <p>3.浮点数的转化要好好看一下，把转化公式写好</p>
+<p>4.移位是向下取整</p>
 
     </article>
     <!-- license  -->
     
         <div class="license-wrapper">
-            <p>原文作者: <a href="http://yoursite.com">Mengzelev</a>
-            <p>原文链接: <a href="http://yoursite.com/2018/08/29/asm-notes/">http://yoursite.com/2018/08/29/asm-notes/</a>
-            <p>发表日期: <a href="http://yoursite.com/2018/08/29/asm-notes/">August 29th 2018, 1:11:42 pm</a>
+            <p>原文作者: <a href="http://mengzelev.github.io">Mengzelev</a>
+            <p>原文链接: <a href="http://mengzelev.github.io/2018/08/29/asm-notes/">http://mengzelev.github.io/2018/08/29/asm-notes/</a>
+            <p>发表日期: <a href="http://mengzelev.github.io/2018/08/29/asm-notes/">August 29th 2018, 1:11:42 pm</a>
             <p>版权声明: 本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
         </div>
     
@@ -515,12 +518,17 @@ height:50vh;
     <ul class="post-paginator">
         <li class="next">
             
+                <div class="nextSlogan">Next Post</div>
+                <a href= "/2018/08/30/asm2/" title= 汇编语言复习笔记（二） >
+                    <div class="nextTitle">汇编语言复习笔记（二）</div>
+                </a>
+            
         </li>
         <li class="previous">
             
                 <div class="prevSlogan">Previous Post</div>
-                <a href= "/2018/08/29/asm2/" title= 汇编语言复习笔记（二） >
-                    <div class="prevTitle">汇编语言复习笔记（二）</div>
+                <a href= "/2018/08/18/freshman/" title= 胡言乱语的大一总结 >
+                    <div class="prevTitle">胡言乱语的大一总结</div>
                 </a>
             
         </li>
@@ -715,6 +723,8 @@ top:50vh;
     
     
     
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
         Total : 5
@@ -733,7 +743,7 @@ top:50vh;
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">08/29</span><a class="archive-post-title" href= "/2018/08/29/asm2/" >汇编语言复习笔记（二）</a>
+            <span class="archive-post-date">08/30</span><a class="archive-post-title" href= "/2018/08/30/asm2/" >汇编语言复习笔记（二）</a>
         </li>
     
     

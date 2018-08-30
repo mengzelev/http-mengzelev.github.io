@@ -339,6 +339,49 @@
     
     
     <article class="index-post">
+        <a class="abstract-title" href = "/2018/08/30/asm2/" >
+            
+                <span>汇编语言复习笔记（二）</span>
+        </a>
+        <div class="abstract-content">
+            数据传送数据传送指令格式： mov S(源操作数), D(目标操作数)
+mov  &nbsp;&nbsp; 一般传送指令
+movs &nbsp;&nbsp; 符号扩展传送
+movz &nbsp;&nbsp; 零扩展传送
+push &nbsp;&nbsp; 压栈，等价于sub+mov
+pop  &nbsp;&nbsp; 退栈，等价于mov+add
+按源操作数的长度加上b,w,l后缀，分别表示1、2、4字节。(movz,movs需要双后缀)
+
+
+见leal与movl的区别
+指令后缀、操作数长度、目标寄存器宽度必须要一致！！
+操作数类型
+立即数 Imm &nbsp;&nbsp; 整型常量，加$...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/08/30</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Assembly Language">Assembly Language</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Notes">Notes</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href = "/2018/08/29/asm-notes/" >
             
                 <span>汇编语言复习笔记（一）</span>
@@ -362,49 +405,6 @@ C语言中的整数
 无符号数：在数后加U或u
 同时有无符号数和带符号数，编译器将带符号数强制转换为无符号数
 int的最大正值为2147483647，最大负值为-...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/08/29</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Assembly Language">Assembly Language</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Notes">Notes</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2018/08/29/asm2/" >
-            
-                <span>汇编语言复习笔记（二）</span>
-        </a>
-        <div class="abstract-content">
-            数据传送数据传送指令格式： mov S(源操作数), D(目标操作数)
-mov  &nbsp;&nbsp; 一般传送指令
-movs &nbsp;&nbsp; 符号扩展传送
-movz &nbsp;&nbsp; 零扩展传送
-push &nbsp;&nbsp; 压栈，等价于sub+mov
-pop  &nbsp;&nbsp; 退栈，等价于mov+add
-按源操作数的长度加上b,w,l后缀，分别表示1、2、4字节。(movz,movs需要双后缀)
-
-
-见leal与movl的区别
-指令后缀、操作数长度、目标寄存器宽度必须要一致！！
-操作数类型
-立即数 Imm &nbsp;&nbsp; 整型常量，加$...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
@@ -567,6 +567,8 @@ pop  &nbsp;&nbsp; 退栈，等价于mov+add
     
     
     
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
         Total : 5
@@ -585,7 +587,7 @@ pop  &nbsp;&nbsp; 退栈，等价于mov+add
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">08/29</span><a class="archive-post-title" href= "/2018/08/29/asm2/" >汇编语言复习笔记（二）</a>
+            <span class="archive-post-date">08/30</span><a class="archive-post-title" href= "/2018/08/30/asm2/" >汇编语言复习笔记（二）</a>
         </li>
     
     
