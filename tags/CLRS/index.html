@@ -6,7 +6,7 @@
 
 
 <head>
-    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" >
     <meta name="author" content="Mengzelev">
     <meta name="renderer" content="webkit">
@@ -189,15 +189,13 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" defer></script>
     <!-- 百度统计  -->
     
-    <!-- 谷歌统计  --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    <!-- 谷歌统计  -->
     
 </head>
 
     
-        <body class="home-body">
     
-    
-<!-- hexo-inject:begin --><!-- hexo-inject:end --><header class="header index-header">
+<header class="header">
 
     <div class="read-progress"></div>
     <div class="header-sidebar-menu">&#xe775;</div>
@@ -215,34 +213,21 @@
 
 
 
-height:50vh;
-
 >
     
     <!-- 主页  -->
-    
-    
-    <!-- 文章页  -->
             
     <div class="site-intro-placeholder"></div>
-    <div class="site-intro-img" style="background-image: url(/intro/index-bg0.jpg)"></div>
+    <div class="site-intro-img" style="background-image: url(/)"></div>
     <div class="site-intro-meta">
         <!-- 标题  -->
         <h1 class="intro-title">
             <!-- 主页  -->
             
-            Mengzelev's Blog
-            <!-- 文章页  -->
-            
         </h1>
         <!-- 副标题 -->
         <p class="intro-subtitle">
             <!-- 主页副标题  -->
-            
-            
-                Do not touch fish!
-            
-            <!-- 文章页  -->
             
         </p>
         <!-- 文章页meta -->
@@ -395,321 +380,10 @@ height:50vh;
         </div>
     </article>
     
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2018/08/30/asm2/" >
-            
-                <span>汇编语言复习笔记（二）</span>
-        </a>
-        <div class="abstract-content">
-            数据传送数据传送指令格式： mov S(源操作数), D(目标操作数)
-mov  &nbsp;&nbsp; 一般传送指令
-movs &nbsp;&nbsp; 符号扩展传送
-movz &nbsp;&nbsp; 零扩展传送
-push &nbsp;&nbsp; 压栈，等价于sub+mov
-pop  &nbsp;&nbsp; 退栈，等价于mov+add
-按源操作数的长度加上b,w,l后缀，分别表示1、2、4字节。(movz,movs需要双后缀)
-
-
-见leal与movl的区别
-指令后缀、操作数长度、目标寄存器宽度必须要一致！！
-操作数类型
-立即数 Imm &nbsp;&nbsp; 整型常量，加$...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/08/30</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Assembly Language">Assembly Language</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Notes">Notes</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2018/08/29/asm-notes/" >
-            
-                <span>汇编语言复习笔记（一）</span>
-        </a>
-        <div class="abstract-content">
-            前言本文为学校课程面向考试复习笔记，参考内容为老师的课堂讲义&amp;深入理解计算机系统，依据这两者做了一些个人的整理便于复习。然而浪了一个假期在退课的边缘试探
-信息的表示数值的表示
-原码：这个很直观的
-反码：这个几乎不用的
-补码：$D’=R^n-D$ / 按位取反加1；
-移码：见浮点数
-
-补码
-
-相当于取模操作
-着重区分基数的值(R)和补码位表示的实际的值(D)
-R与D的相对大小一致
-$R=D+D_{w-1}\cdot 2^w$
-
-C语言中的整数
-无符号数：在数后加U或u
-同时有无符号数和带符号数，编译器将带符号数强制转换为无符号数
-int的最大正值为2147483647，最大负值为-...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/08/29</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Assembly Language">Assembly Language</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Notes">Notes</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2018/08/18/freshman/" >
-            
-                <span>胡言乱语的大一总结</span>
-        </a>
-        <div class="abstract-content">
-            &emsp;&emsp;生日兼七夕窝在家里无聊于是开了这样一篇文章写了整整两天，都是些碎碎念。本来并没有写这种东西的习惯的(:з」∠)但是既然开了个人blog总要写点什么的于是就写吧！试图掩盖写不出教程的事实将来过好几年来看可能会很有回忆的感觉。
-学习篇刚进大学的时候，军训期间闲得蛋疼去考了计拔居然还被录取了，txp他老人家眼光真的没问题吗，于是就开始了贼船之旅。大一上第一个国庆长假就只能窝在家里写作业写了好久堪称心理阴影，大一上被问求这门神奇的课给吓尿了，动不动就为了赶作业修仙到两点。其实还是有在疯狂补小排球的 到了大一下觉得大一上还是很空闲的，起码不用搭面包板，也不用抄大物作业。大二...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/08/18</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "freshman">freshman</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "college life">college life</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2018/08/12/test-md/" >
-            
-                <span>Markdown test</span>
-        </a>
-        <div class="abstract-content">
-            这是标题君这是副标题君我知道这篇文章看起来很沙雕，因为作者就是一个沙雕
-列表非常有趣
-
-这是第一项
-这是第二项
-这是第三项
-
-
-有时候会有需要强调的内容。
-插入代码是一件非常爽的事情：
-printf(&quot;%s&quot;,&quot;Hello world!\n&quot;);
-突然发现自己不会用printf真是太丢人了。
-
-有时候需要插入链接，这里贴一个百度。
-有时候又需要插入图片
-    
-
-看张血小板冷静一下吧（图源网络）
-图片的尺寸可以用命令进行修改
-
-暂时先写这么多吧，敬请关注后面几期，计划中将会有
-
-汇编课程相关学习笔记
-日本动画制作流程及《白箱》观后感整理
-大一回顾...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/08/12</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "markdown">markdown</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2018/07/28/hello-world/" >
-            
-                <span>Hello World</span>
-        </a>
-        <div class="abstract-content">
-            Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick StartCreate a new post1$ hexo new "My New Post"
-More info: Writing
-Run server1$ hexo server
-More...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/07/28</span>
-            </div>
-            <!-- tags  -->
-            
-        </div>
-    </article>
-    
     <!-- paginator  -->
     
 </main>
             <!-- profile -->
-            
-            <div class="profile">
-    <img class="profile-avatar" src= /avatar/teru1.jpg >
-    <div class="profile-name">Mengzelev</div>
-    
-    <div class="profile-signature">
-        Mengzelev
-    </div>
-    
-    
-    <div class="profile-social">
-        
-    
-        
-            
-                <a href="mailto:913426715@qq.com" class="iconfont-archer email" title=email ></a>
-            
-        
-    
-        
-            
-                <a href="//github.com/mengzelev" class="iconfont-archer github" target="_blank" title=github></a>
-            
-        
-    
-        
-            
-                <span class="iconfont-archer wechat" title=wechat>
-                  
-                  <img class="profile-qr" src="/assets/wx.png" />
-                </span>
-            
-        
-    
-        
-            
-                <span class="iconfont-archer qq" title=qq>
-                  
-                  <img class="profile-qr" src="/assets/qq.jpg" />
-                </span>
-            
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-            
-                <a href="/atom.xml" class="iconfont-archer rss" target="_blank" title=rss></a>
-            
-        
-    
-
-    </div>
-    
-    
-        <div class="friends">
-            <div>FRIENDS</div>
-            
-                
-                    <span>
-                        <a href= https://marukohe.github.io target="_black">Marukohe</a>
-                    </span>
-                
-            
-                
-                    <span>
-                        <a href= https://ricky-ting.github.io/ target="_black">Ricky-Ting</a>
-                    </span>
-                
-            
-                
-                    <span>
-                        <a href= https://doowzs.com target="_black">Doowzs</a>
-                    </span>
-                
-            
-        </div>
-    
-    
-        <div class="about-me">
-            <a href = "/about" >ABOUT ME</a>
-        </div>
-    
-</div>
             
         </div>
         <footer class="footer footer-unloaded">
@@ -995,24 +669,7 @@ jsonContent:
     <!-- CNZZ  -->
     
     </div>
-    <!-- async load share.js --><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config("");
-</script>
-
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-      all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-  });
-</script>
-
-<script type="text/javascript" src="custom_mathjax_source">
-</script>
-<!-- End: Injected MathJax -->
-<!-- hexo-inject:end -->
+    <!-- async load share.js -->
      
     </body>
 </html>
