@@ -5,9 +5,9 @@
   
   <link href="/atom.xml" rel="self"/>
   
-  <link href="http://mengzelev.github.io/"/>
+  <link href="https://mengzelev.github.io/"/>
   <updated>2018-09-07T09:55:18.719Z</updated>
-  <id>http://mengzelev.github.io/</id>
+  <id>https://mengzelev.github.io/</id>
   
   <author>
     <name>Mengzelev</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>vim初探</title>
-    <link href="http://mengzelev.github.io/2018/09/06/vim/"/>
-    <id>http://mengzelev.github.io/2018/09/06/vim/</id>
+    <link href="https://mengzelev.github.io/2018/09/06/vim/"/>
+    <id>https://mengzelev.github.io/2018/09/06/vim/</id>
     <published>2018-09-06T15:06:23.000Z</published>
     <updated>2018-09-07T09:55:18.719Z</updated>
     
@@ -36,19 +36,19 @@
     
     </summary>
     
-      <category term="Notes" scheme="http://mengzelev.github.io/categories/Notes/"/>
+      <category term="Notes" scheme="https://mengzelev.github.io/categories/Notes/"/>
     
     
-      <category term="Notes" scheme="http://mengzelev.github.io/tags/Notes/"/>
+      <category term="Notes" scheme="https://mengzelev.github.io/tags/Notes/"/>
     
-      <category term="vim" scheme="http://mengzelev.github.io/tags/vim/"/>
+      <category term="vim" scheme="https://mengzelev.github.io/tags/vim/"/>
     
   </entry>
   
   <entry>
     <title>算法导论学习笔记-动态规划</title>
-    <link href="http://mengzelev.github.io/2018/08/31/clrs-15dp/"/>
-    <id>http://mengzelev.github.io/2018/08/31/clrs-15dp/</id>
+    <link href="https://mengzelev.github.io/2018/08/31/clrs-15dp/"/>
+    <id>https://mengzelev.github.io/2018/08/31/clrs-15dp/</id>
     <published>2018-08-31T08:37:42.000Z</published>
     <updated>2018-09-05T02:12:40.869Z</updated>
     
@@ -65,23 +65,23 @@
     
     </summary>
     
-      <category term="Notes" scheme="http://mengzelev.github.io/categories/Notes/"/>
+      <category term="Notes" scheme="https://mengzelev.github.io/categories/Notes/"/>
     
     
-      <category term="Notes" scheme="http://mengzelev.github.io/tags/Notes/"/>
+      <category term="Notes" scheme="https://mengzelev.github.io/tags/Notes/"/>
     
-      <category term="CLRS" scheme="http://mengzelev.github.io/tags/CLRS/"/>
+      <category term="CLRS" scheme="https://mengzelev.github.io/tags/CLRS/"/>
     
-      <category term="Problem Solving" scheme="http://mengzelev.github.io/tags/Problem-Solving/"/>
+      <category term="Problem Solving" scheme="https://mengzelev.github.io/tags/Problem-Solving/"/>
     
-      <category term="dynamic programming" scheme="http://mengzelev.github.io/tags/dynamic-programming/"/>
+      <category term="dynamic programming" scheme="https://mengzelev.github.io/tags/dynamic-programming/"/>
     
   </entry>
   
   <entry>
     <title>汇编语言复习笔记（二）</title>
-    <link href="http://mengzelev.github.io/2018/08/30/asm2/"/>
-    <id>http://mengzelev.github.io/2018/08/30/asm2/</id>
+    <link href="https://mengzelev.github.io/2018/08/30/asm2/"/>
+    <id>https://mengzelev.github.io/2018/08/30/asm2/</id>
     <published>2018-08-30T08:37:42.000Z</published>
     <updated>2018-08-30T08:42:36.625Z</updated>
     
@@ -96,19 +96,19 @@
     
     </summary>
     
-      <category term="Notes" scheme="http://mengzelev.github.io/categories/Notes/"/>
+      <category term="Notes" scheme="https://mengzelev.github.io/categories/Notes/"/>
     
     
-      <category term="Assembly Language" scheme="http://mengzelev.github.io/tags/Assembly-Language/"/>
+      <category term="Assembly Language" scheme="https://mengzelev.github.io/tags/Assembly-Language/"/>
     
-      <category term="Notes" scheme="http://mengzelev.github.io/tags/Notes/"/>
+      <category term="Notes" scheme="https://mengzelev.github.io/tags/Notes/"/>
     
   </entry>
   
   <entry>
     <title>汇编语言复习笔记（一）</title>
-    <link href="http://mengzelev.github.io/2018/08/29/asm-notes/"/>
-    <id>http://mengzelev.github.io/2018/08/29/asm-notes/</id>
+    <link href="https://mengzelev.github.io/2018/08/29/asm-notes/"/>
+    <id>https://mengzelev.github.io/2018/08/29/asm-notes/</id>
     <published>2018-08-29T05:11:42.000Z</published>
     <updated>2018-08-30T03:32:00.252Z</updated>
     
@@ -123,19 +123,19 @@
     
     </summary>
     
-      <category term="Notes" scheme="http://mengzelev.github.io/categories/Notes/"/>
+      <category term="Notes" scheme="https://mengzelev.github.io/categories/Notes/"/>
     
     
-      <category term="Assembly Language" scheme="http://mengzelev.github.io/tags/Assembly-Language/"/>
+      <category term="Assembly Language" scheme="https://mengzelev.github.io/tags/Assembly-Language/"/>
     
-      <category term="Notes" scheme="http://mengzelev.github.io/tags/Notes/"/>
+      <category term="Notes" scheme="https://mengzelev.github.io/tags/Notes/"/>
     
   </entry>
   
   <entry>
     <title>胡言乱语的大一总结</title>
-    <link href="http://mengzelev.github.io/2018/08/18/freshman/"/>
-    <id>http://mengzelev.github.io/2018/08/18/freshman/</id>
+    <link href="https://mengzelev.github.io/2018/08/18/freshman/"/>
+    <id>https://mengzelev.github.io/2018/08/18/freshman/</id>
     <published>2018-08-18T13:27:02.000Z</published>
     <updated>2018-08-18T15:46:17.255Z</updated>
     
@@ -150,19 +150,19 @@
     
     </summary>
     
-      <category term="Diary" scheme="http://mengzelev.github.io/categories/Diary/"/>
+      <category term="Diary" scheme="https://mengzelev.github.io/categories/Diary/"/>
     
     
-      <category term="freshman" scheme="http://mengzelev.github.io/tags/freshman/"/>
+      <category term="freshman" scheme="https://mengzelev.github.io/tags/freshman/"/>
     
-      <category term="college life" scheme="http://mengzelev.github.io/tags/college-life/"/>
+      <category term="college life" scheme="https://mengzelev.github.io/tags/college-life/"/>
     
   </entry>
   
   <entry>
     <title>Markdown test</title>
-    <link href="http://mengzelev.github.io/2018/08/12/test-md/"/>
-    <id>http://mengzelev.github.io/2018/08/12/test-md/</id>
+    <link href="https://mengzelev.github.io/2018/08/12/test-md/"/>
+    <id>https://mengzelev.github.io/2018/08/12/test-md/</id>
     <published>2018-08-12T13:27:02.000Z</published>
     <updated>2018-08-12T13:35:34.586Z</updated>
     
@@ -177,17 +177,17 @@
     
     </summary>
     
-      <category term="Diary" scheme="http://mengzelev.github.io/categories/Diary/"/>
+      <category term="Diary" scheme="https://mengzelev.github.io/categories/Diary/"/>
     
     
-      <category term="markdown" scheme="http://mengzelev.github.io/tags/markdown/"/>
+      <category term="markdown" scheme="https://mengzelev.github.io/tags/markdown/"/>
     
   </entry>
   
   <entry>
     <title>Hello World</title>
-    <link href="http://mengzelev.github.io/2018/07/28/hello-world/"/>
-    <id>http://mengzelev.github.io/2018/07/28/hello-world/</id>
+    <link href="https://mengzelev.github.io/2018/07/28/hello-world/"/>
+    <id>https://mengzelev.github.io/2018/07/28/hello-world/</id>
     <published>2018-07-28T06:23:10.175Z</published>
     <updated>2017-10-28T00:39:58.000Z</updated>
     
