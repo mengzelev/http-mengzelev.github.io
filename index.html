@@ -354,6 +354,94 @@ height:50vh;
     
     
     <article class="index-post">
+        <a class="abstract-title" href = "/2018/09/12/pa-inspirations/" >
+            
+                <span>做pa的时候可能会用到的操作</span>
+        </a>
+        <div class="abstract-content">
+            当做笔记随便写写的，希望能帮到一些人吧。毕竟作为一名优秀的bug maker，别人遇到的问题我基本都能遇到的。
+vim和tmux另外写了教程：
+vim初探
+tmux教程
+持续更新中
+在整个目录下查找代码在某个文件里看到某个函数或者宏或者变量的定义的时候经常由于不知道是什么而一脸懵逼，除了用/+(搜索内容)靠vim的功能在文件内搜索外，还可以
+$ grep &quot;搜索内容&quot; -r &lt;目录&gt;
+e.g.
+$ grep &quot;CPU_state&quot; -r ~/ics2018/nemu
+如果是函数名称还可以尝试ctags（自己暂时没有配置所以请STFW）
+
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/09/12</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Notes">Notes</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "pa">pa</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Linux">Linux</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href = "/2018/09/12/tmux/" >
+            
+                <span>使用tmux变身炫酷程序猿(x</span>
+        </a>
+        <div class="abstract-content">
+            以前看电影里面的程序猿都是屏幕上花花绿绿键盘噼里啪啦根本不用鼠标的觉得太炫酷了，学了cs以后以为希望破灭了，直到被pa讲义安利了tmux……
+原教程地址
+本文只是一个备忘笔记，方便日后查阅
+更新中未完待续
+按键前缀默认是Ctrl-b，大部分话教程会修改成离得比较近的Ctrl-a
+修改方法：打开tmux配置文件
+$ vim ~/.tmux.conf
+添加如下代码：
+unbind C-b
+set -g prefix C-a
+打开新的session$ tmux new -s &lt;name-of-my-session&gt;
+若当前已经打开了一个session
+new -s &lt;name...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/09/12</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Notes">Notes</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "tmux">tmux</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "linux">linux</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href = "/2018/09/06/vim/" >
             
                 <span>vim初探</span>
@@ -926,9 +1014,45 @@ More...
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 7
+        Total : 9
         </div>
         <!-- search  -->
         
@@ -941,6 +1065,16 @@ More...
     
     <div class="archive-year"> 2018 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/12</span><a class="archive-post-title" href= "/2018/09/12/pa-inspirations/" >做pa的时候可能会用到的操作</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/12</span><a class="archive-post-title" href= "/2018/09/12/tmux/" >使用tmux变身炫酷程序猿(x</a>
+        </li>
     
     
         <li class="archive-post-item">
@@ -998,7 +1132,15 @@ More...
     
         <span class="sidebar-tag-name" data-tags="markdown"><span class="iconfont-archer">&#xe606;</span>markdown</span>
     
+        <span class="sidebar-tag-name" data-tags="tmux"><span class="iconfont-archer">&#xe606;</span>tmux</span>
+    
+        <span class="sidebar-tag-name" data-tags="linux"><span class="iconfont-archer">&#xe606;</span>linux</span>
+    
         <span class="sidebar-tag-name" data-tags="vim"><span class="iconfont-archer">&#xe606;</span>vim</span>
+    
+        <span class="sidebar-tag-name" data-tags="pa"><span class="iconfont-archer">&#xe606;</span>pa</span>
+    
+        <span class="sidebar-tag-name" data-tags="Linux"><span class="iconfont-archer">&#xe606;</span>Linux</span>
     
     </div>
     <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
