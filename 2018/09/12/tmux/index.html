@@ -271,7 +271,7 @@ height:50vh;
                 
                 
                     <div class="post-intro-read">
-                        <span>Word count: <span class="post-count">199</span> / Reading time: <span class="post-count">1 min</span></span>
+                        <span>Word count: <span class="post-count">340</span> / Reading time: <span class="post-count">1 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
@@ -401,19 +401,26 @@ height:50vh;
             <main class="main post-page">
     <article class="article-entry">
         <p>以前看电影里面的程序猿都是屏幕上花花绿绿键盘噼里啪啦根本不用鼠标的觉得太炫酷了，学了cs以后以为希望破灭了，直到被pa讲义安利了tmux……</p>
-<p><a href="https://www.appinn.com/markdown/#link" target="_blank" rel="noopener">原教程地址</a></p>
 <p>本文只是一个备忘笔记，方便日后查阅</p>
 <p><u>更新中未完待续</u></p>
-<h1 id="按键前缀"><a href="#按键前缀" class="headerlink" title="按键前缀"></a>按键前缀</h1><p>默认是<code>Ctrl-b</code>，大部分话教程会修改成离得比较近的<code>Ctrl-a</code></p>
+<h2 id="按键前缀"><a href="#按键前缀" class="headerlink" title="按键前缀"></a>按键前缀</h2><p>默认是<code>Ctrl-b</code>，大部分话教程会修改成离得比较近的<code>Ctrl-a</code></p>
 <p>修改方法：打开tmux配置文件</p>
 <pre><code>$ vim ~/.tmux.conf
 </code></pre><p>添加如下代码：</p>
 <pre><code>unbind C-b
 set -g prefix C-a
-</code></pre><h1 id="打开新的session"><a href="#打开新的session" class="headerlink" title="打开新的session"></a>打开新的session</h1><pre><code>$ tmux new -s &lt;name-of-my-session&gt;
-</code></pre><p>若当前已经打开了一个session</p>
-<pre><code>new -s &lt;name-of-my-new-session&gt;
-</code></pre><p>忙着赶作业来不及写完所以先贴篇别人整理的</p>
+</code></pre><h2 id="分割窗口"><a href="#分割窗口" class="headerlink" title="分割窗口"></a>分割窗口</h2><p>因为是针对pa才学的tmux，所以要用的操作都非常基本</p>
+<p>从terminal进入tmux，直接在命令行里输入tmux即可</p>
+<pre><code>$ tmux
+</code></pre><p>然后进行分屏</p>
+<p>水平分屏: <code>prefix + %</code></p>
+<p>垂直分屏：<code>prefix + &quot;</code></p>
+<p>我一般都使用左1+右2的形式【暂时忘了截图下次贴】</p>
+<p>关闭该窗口：<code>prefix + &amp;</code> 会询问是否确定关闭，按y即可</p>
+<p>切换窗口：<code>prefix +方向键</code></p>
+<p><strong>使用tmux操作时，先按住Ctrl再按前缀键，然后可以稍微停一下再按下一个功能键</strong></p>
+<p>以上操作目前做pa已经够用了，以后遇到新的问题再另寻解决方法并更新该文</p>
+<h2 id="他山之玉"><a href="#他山之玉" class="headerlink" title="他山之玉"></a>他山之玉</h2><p>忙着赶作业来不及写完所以先贴篇别人整理的</p>
 <p><a href="https://blog.csdn.net/a1181986340/article/details/51727297" target="_blank" rel="noopener">tmux多窗口操作</a></p>
 
     </article>
@@ -583,7 +590,7 @@ top:50vh;
         <div class="toc-catalog">
             <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
         </div>
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#按键前缀"><span class="toc-number">1.</span> <span class="toc-text">按键前缀</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#打开新的session"><span class="toc-number">2.</span> <span class="toc-text">打开新的session</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#按键前缀"><span class="toc-number">1.</span> <span class="toc-text">按键前缀</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#分割窗口"><span class="toc-number">2.</span> <span class="toc-text">分割窗口</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#他山之玉"><span class="toc-number">3.</span> <span class="toc-text">他山之玉</span></a></li></ol>
     </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
@@ -596,14 +603,6 @@ top:50vh;
     <div class="sidebar-content sidebar-content-show-archive">
           <div class="sidebar-panel-archives">
     <!-- 在ejs中将archive按照时间排序 -->
-    
-    
-    
-    
-    
-    
-    
-    
     
     
     
@@ -779,6 +778,10 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="dynamic programming"><span class="iconfont-archer">&#xe606;</span>dynamic programming</span>
     
+        <span class="sidebar-tag-name" data-tags="pa"><span class="iconfont-archer">&#xe606;</span>pa</span>
+    
+        <span class="sidebar-tag-name" data-tags="Linux"><span class="iconfont-archer">&#xe606;</span>Linux</span>
+    
         <span class="sidebar-tag-name" data-tags="freshman"><span class="iconfont-archer">&#xe606;</span>freshman</span>
     
         <span class="sidebar-tag-name" data-tags="college life"><span class="iconfont-archer">&#xe606;</span>college life</span>
@@ -790,10 +793,6 @@ top:50vh;
         <span class="sidebar-tag-name" data-tags="linux"><span class="iconfont-archer">&#xe606;</span>linux</span>
     
         <span class="sidebar-tag-name" data-tags="vim"><span class="iconfont-archer">&#xe606;</span>vim</span>
-    
-        <span class="sidebar-tag-name" data-tags="pa"><span class="iconfont-archer">&#xe606;</span>pa</span>
-    
-        <span class="sidebar-tag-name" data-tags="Linux"><span class="iconfont-archer">&#xe606;</span>Linux</span>
     
     </div>
     <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>

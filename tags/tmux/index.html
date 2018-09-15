@@ -345,7 +345,6 @@
         </a>
         <div class="abstract-content">
             以前看电影里面的程序猿都是屏幕上花花绿绿键盘噼里啪啦根本不用鼠标的觉得太炫酷了，学了cs以后以为希望破灭了，直到被pa讲义安利了tmux……
-原教程地址
 本文只是一个备忘笔记，方便日后查阅
 更新中未完待续
 按键前缀默认是Ctrl-b，大部分话教程会修改成离得比较近的Ctrl-a
@@ -354,9 +353,11 @@ $ vim ~/.tmux.conf
 添加如下代码：
 unbind C-b
 set -g prefix C-a
-打开新的session$ tmux new -s &lt;name-of-my-session&gt;
-若当前已经打开了一个session
-new -s &lt;name...
+分割窗口因为是针对pa才学的tmux，所以要用的操作都非常基本
+从terminal进入tmux，直接在命令行里输入tmux即可
+$ tmux
+然后进行分屏
+水平分屏: prefix ...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
@@ -581,14 +582,6 @@ new -s &lt;name...
     
     
     
-    
-    
-    
-    
-    
-    
-    
-    
     <div class="total-and-search">
         <div class="total-archive">
         Total : 9
@@ -665,6 +658,10 @@ new -s &lt;name...
     
         <span class="sidebar-tag-name" data-tags="dynamic programming"><span class="iconfont-archer">&#xe606;</span>dynamic programming</span>
     
+        <span class="sidebar-tag-name" data-tags="pa"><span class="iconfont-archer">&#xe606;</span>pa</span>
+    
+        <span class="sidebar-tag-name" data-tags="Linux"><span class="iconfont-archer">&#xe606;</span>Linux</span>
+    
         <span class="sidebar-tag-name" data-tags="freshman"><span class="iconfont-archer">&#xe606;</span>freshman</span>
     
         <span class="sidebar-tag-name" data-tags="college life"><span class="iconfont-archer">&#xe606;</span>college life</span>
@@ -676,10 +673,6 @@ new -s &lt;name...
         <span class="sidebar-tag-name" data-tags="linux"><span class="iconfont-archer">&#xe606;</span>linux</span>
     
         <span class="sidebar-tag-name" data-tags="vim"><span class="iconfont-archer">&#xe606;</span>vim</span>
-    
-        <span class="sidebar-tag-name" data-tags="pa"><span class="iconfont-archer">&#xe606;</span>pa</span>
-    
-        <span class="sidebar-tag-name" data-tags="Linux"><span class="iconfont-archer">&#xe606;</span>Linux</span>
     
     </div>
     <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>

@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://mengzelev.github.io/"/>
-  <updated>2018-09-12T12:10:22.865Z</updated>
+  <updated>2018-09-15T10:12:52.850Z</updated>
   <id>https://mengzelev.github.io/</id>
   
   <author>
@@ -21,9 +21,9 @@
     <link href="https://mengzelev.github.io/2018/09/12/pa-inspirations/"/>
     <id>https://mengzelev.github.io/2018/09/12/pa-inspirations/</id>
     <published>2018-09-12T11:39:56.000Z</published>
-    <updated>2018-09-12T12:10:22.865Z</updated>
+    <updated>2018-09-15T10:12:52.850Z</updated>
     
-    <content type="html"><![CDATA[<p>当做笔记随便写写的，希望能帮到一些人吧。毕竟作为一名优秀的bug maker，别人遇到的问题我基本都能遇到的。</p><p>vim和tmux另外写了教程：</p><p><a href="https://mengzelev.github.io/2018/09/06/vim/">vim初探</a></p><p><a href="">tmux教程</a></p><p><u>持续更新中</u></p><h2 id="在整个目录下查找代码"><a href="#在整个目录下查找代码" class="headerlink" title="在整个目录下查找代码"></a>在整个目录下查找代码</h2><p>在某个文件里看到某个函数或者宏或者变量的定义的时候经常由于不知道是什么而一脸懵逼，除了用<code>/+(搜索内容)</code>靠vim的功能在文件内搜索外，还可以</p><pre><code>$ grep &quot;搜索内容&quot; -r &lt;目录&gt;</code></pre><p>e.g.</p><pre><code>$ grep &quot;CPU_state&quot; -r ~/ics2018/nemu</code></pre><p>如果是函数名称还可以尝试<code>ctags</code>（自己暂时没有配置所以请STFW）</p>]]></content>
+    <content type="html"><![CDATA[<p>当做笔记随便写写的，希望能帮到一些人吧。毕竟作为一名优秀的bug maker，别人遇到的问题我基本都能遇到的。</p><p>vim和tmux另外写了教程：</p><p><a href="https://mengzelev.github.io/2018/09/06/vim/">vim初探</a></p><p><a href="https://mengzelev.github.io/2018/09/12/tmux/">使用tmux变身炫酷程序猿(x</a></p><p><u>持续更新中</u></p><h1 id="语言规范"><a href="#语言规范" class="headerlink" title="语言规范"></a>语言规范</h1><hr><p>这名字很中二…但其实就是个人写文章的时候一点习惯用的表示，和别人的可能不一样，很可能非常不标准，注意区分就好</p><ul><li>[]方括号表示需要自定义的内容，括起来的只是你应该输入的东西的名字</li></ul><h1 id="在整个目录下查找代码"><a href="#在整个目录下查找代码" class="headerlink" title="在整个目录下查找代码"></a>在整个目录下查找代码</h1><hr><p>在某个文件里看到某个函数或者宏或者变量的定义的时候经常会好奇在哪里、怎么使用过，除了用<code>/+(搜索内容)</code>靠vim的功能在文件内搜索外，还可以</p><pre><code>$ grep &quot;搜索内容&quot; -r &lt;目录&gt;</code></pre><p>e.g.</p><pre><code>$ grep &quot;CPU_state&quot; -r .</code></pre><p>其中-r表示递归搜索，可以搜索整个目录下所有的文件</p><h1 id="一键跳转定义处"><a href="#一键跳转定义处" class="headerlink" title="一键跳转定义处"></a>一键跳转定义处</h1><hr><p>创建接口的时候经常需要查看某些函数、宏、结构体的定义，于是被某位nb的学长安利了ctags神器，可以一键跳转至定义处并一键调回，先贴上自己查到的教程</p><p>首先需要<strong>安装</strong>ctags，一般来说直接apt就好了，但是莫名不行，可能是镜像源的问题</p><pre><code>$ sudo apt install ctags</code></pre><p>于是我选择了从<a href="http://ctags.sourceforge.net/" target="_blank" rel="noopener">ctags官网</a>手动下载<code>ctags-5.8.tar.gz</code></p><p>如果是在host里下载的，下载后通过自己的共享方式扔到虚拟机里面，进行<strong>解压缩</strong></p><pre><code>$ cd [压缩包所在目录]$ tar jxvf [文件名].tar.bz</code></pre><p>解压后<strong>手动安装</strong><br>    $ cd ctags-5.8<br>    $ ./configure<br>    $ make<br>    $ make install</p><p>安装完成后<strong>测试</strong>一下是否安装成功<br>    $ whereis ctags</p><p>你应该能看到让你觉得成功的提示信息。</p><p>安装成功后，为源码<strong>生成tags文件</strong>，在需要使用ctags的目录下(所有子目录都可以享受到)运行</p><pre><code>$ ctags -R</code></pre><p>为了使得字段补全有效，在生成tags时需要一些额外的参数，推荐的c语言（c处可以替换成其他语言）参数主要是：</p><pre><code>$ ctags -R --c-kinds=+px --fields=+iaS --extra=+q</code></pre><p>其中，fileds 用于指定每条标记的扩展字段域，extra 选项用于增加额外的条目，f表示每个文件增加一个条目，q为每个类增加一个条目</p><p>之后<strong>配置vim</strong>，就不用每次都手动设置</p><pre><code>$ vim ~/.vimrc</code></pre><p>在.vimrc 中加入如下内容</p><pre><code>set tags=[path]/tagsset tags=./tags,tags;$HOME</code></pre><p>第二行我暂时也不知道是干什么的，但是不加上去好像用不起来（小声</p><p>然后用vim编辑你需要的代码文件，当光标落到你想查询定义的函数上时使用<code>Ctrl + ]</code>跳转到定义处<s>（其实明明是两键跳转对不对）</s>，然后<code>Ctrl + o</code>或者<code>Ctrl + t</code>返回跳转前的位置。</p><p><a href="https://www.cnblogs.com/zl-graduate/p/5777711.html" target="_blank" rel="noopener">参考教程原地址</a></p>]]></content>
     
     <summary type="html">
     
@@ -50,16 +50,18 @@
     <link href="https://mengzelev.github.io/2018/09/12/tmux/"/>
     <id>https://mengzelev.github.io/2018/09/12/tmux/</id>
     <published>2018-09-12T01:59:29.000Z</published>
-    <updated>2018-09-12T12:12:07.835Z</updated>
+    <updated>2018-09-15T09:46:34.113Z</updated>
     
-    <content type="html"><![CDATA[<p>以前看电影里面的程序猿都是屏幕上花花绿绿键盘噼里啪啦根本不用鼠标的觉得太炫酷了，学了cs以后以为希望破灭了，直到被pa讲义安利了tmux……</p><p><a href="https://www.appinn.com/markdown/#link" target="_blank" rel="noopener">原教程地址</a></p><p>本文只是一个备忘笔记，方便日后查阅</p><p><u>更新中未完待续</u></p><h1 id="按键前缀"><a href="#按键前缀" class="headerlink" title="按键前缀"></a>按键前缀</h1><p>默认是<code>Ctrl-b</code>，大部分话教程会修改成离得比较近的<code>Ctrl-a</code></p><p>修改方法：打开tmux配置文件</p><pre><code>$ vim ~/.tmux.conf</code></pre><p>添加如下代码：</p><pre><code>unbind C-bset -g prefix C-a</code></pre><h1 id="打开新的session"><a href="#打开新的session" class="headerlink" title="打开新的session"></a>打开新的session</h1><pre><code>$ tmux new -s &lt;name-of-my-session&gt;</code></pre><p>若当前已经打开了一个session</p><pre><code>new -s &lt;name-of-my-new-session&gt;</code></pre><p>忙着赶作业来不及写完所以先贴篇别人整理的</p><p><a href="https://blog.csdn.net/a1181986340/article/details/51727297" target="_blank" rel="noopener">tmux多窗口操作</a></p>]]></content>
+    <content type="html"><![CDATA[<p>以前看电影里面的程序猿都是屏幕上花花绿绿键盘噼里啪啦根本不用鼠标的觉得太炫酷了，学了cs以后以为希望破灭了，直到被pa讲义安利了tmux……</p><p>本文只是一个备忘笔记，方便日后查阅</p><p><u>更新中未完待续</u></p><h2 id="按键前缀"><a href="#按键前缀" class="headerlink" title="按键前缀"></a>按键前缀</h2><p>默认是<code>Ctrl-b</code>，大部分话教程会修改成离得比较近的<code>Ctrl-a</code></p><p>修改方法：打开tmux配置文件</p><pre><code>$ vim ~/.tmux.conf</code></pre><p>添加如下代码：</p><pre><code>unbind C-bset -g prefix C-a</code></pre><h2 id="分割窗口"><a href="#分割窗口" class="headerlink" title="分割窗口"></a>分割窗口</h2><p>因为是针对pa才学的tmux，所以要用的操作都非常基本</p><p>从terminal进入tmux，直接在命令行里输入tmux即可</p><pre><code>$ tmux</code></pre><p>然后进行分屏</p><p>水平分屏: <code>prefix + %</code></p><p>垂直分屏：<code>prefix + &quot;</code></p><p>我一般都使用左1+右2的形式【暂时忘了截图下次贴】</p><p>关闭该窗口：<code>prefix + &amp;</code> 会询问是否确定关闭，按y即可</p><p>切换窗口：<code>prefix +方向键</code></p><p><strong>使用tmux操作时，先按住Ctrl再按前缀键，然后可以稍微停一下再按下一个功能键</strong></p><p>以上操作目前做pa已经够用了，以后遇到新的问题再另寻解决方法并更新该文</p><h2 id="他山之玉"><a href="#他山之玉" class="headerlink" title="他山之玉"></a>他山之玉</h2><p>忙着赶作业来不及写完所以先贴篇别人整理的</p><p><a href="https://blog.csdn.net/a1181986340/article/details/51727297" target="_blank" rel="noopener">tmux多窗口操作</a></p>]]></content>
     
     <summary type="html">
     
       
       
         &lt;p&gt;以前看电影里面的程序猿都是屏幕上花花绿绿键盘噼里啪啦根本不用鼠标的觉得太炫酷了，学了cs以后以为希望破灭了，直到被pa讲义安利了tmux……&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;https://www.appinn.com/markdown/#link&quot; target=&quot;_bl
+&lt;p&gt;本文只是一个备忘笔记，方便日后查阅&lt;/p&gt;
+&lt;p&gt;&lt;u&gt;更新中未完待续&lt;/u&gt;&lt;/p&gt;
+&lt;h2 id=&quot;按键前缀&quot;&gt;&lt;
       
     
     </summary>
