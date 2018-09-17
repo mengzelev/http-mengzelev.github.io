@@ -339,6 +339,130 @@
     
     
     <article class="index-post">
+        <a class="abstract-title" href = "/2018/09/17/clrs-17amortized/" >
+            
+                <span>算法导论学习笔记-摊还分析</span>
+        </a>
+        <div class="abstract-content">
+            聚合分析聚合分析指，证明对所有n，一个n个操作的序列的最坏情况下花费的总时间为T(n)。因此在最坏情况下，每个操作的平均代价，或摊还代价为T(n)/n。
+摊还操作可以看作是不带概率计算的平均情况分析。因为概率不好计算。概率什么时候好计算过了
+此摊还代价适用于每个操作，即使序列中有多种类型的操作也是如此。
+算法导论上给出的示例为增加了MULTIPOP的栈操作和二进制计数器递增问题，简单概括一下二者的共同点：
+
+需要分析复杂度的操作由连续的n个操作构成
+每个单步操作的时间复杂度难以确定为与n有关的表达式，与当前状态密切相关
+对每个单步操作取最坏情况得出的上界过于宽松，浪费时间
+n个连续操作的...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/09/17</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Notes">Notes</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "CLRS">CLRS</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Problem Solving">Problem Solving</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "amortized analysis">amortized analysis</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href = "/2018/09/17/clrs-16greedy/" >
+            
+                <span>算法导论学习笔记-贪心算法</span>
+        </a>
+        <div class="abstract-content">
+            前一篇dp写得又乱又烂简直不想看。但愿自己能坚持下去吧。可是这依然改变不了搬运和截图多于实际内容的事实
+基础理论贪心算法可以看做是动态规划的弱化版，处理某一类特殊的具有最优子结构的问题。
+
+在每个贪心算法之下，几乎总有一个更繁琐的动态规划算法。
+
+算法设计步骤
+将最优化问题转化为这样的形式：对其作出一次选择后，只剩下一个子问题需要求解【子问题削减】
+证明作出贪心选择后，原问题总是存在最优解，即贪心选择总是安全的【安全性证明：替换法】
+证明作出贪心选择后，剩余的子问题满足性质：其最优解与贪心选择组合即可得到原问题的最优解，这样就得到了最优子结构【确认最优子结构】
+
+贪心选择性质贪心选择性质...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/09/17</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Notes">Notes</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "CLRS">CLRS</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Problem Solving">Problem Solving</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "greedy algorithm">greedy algorithm</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href = "/2018/09/16/startjava/" >
+            
+                <span>面向OJ的Java学习</span>
+        </a>
+        <div class="abstract-content">
+            各路ddl原因本文目前还处于混乱状态，十分丢人，谨慎阅读源代码为了防止查重，在OJ截止后会附上，也十分丢人
+准备工作下载安装IDE本UI警察使用的是JetBrains的IntelliJ IDEA，可以直接从官网下载，用学生邮箱注册可以免费获得Utilmate版，下载后安装即可。安装时会安利一些插件，根据个人需要选择安装。
+下载后打开IJ，选择新建一个工程，这时候会提醒你选择JDK，只需要点击Download JDK直接在官网上下载即可。（这一步忘记截图了）
+下载并安装完JDK之后，可以先对编辑器进行设置(File -&gt; Settings 或 Ctrl + Alt +S)，选择自己喜...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/09/16</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Notes">Notes</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Java">Java</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "programming">programming</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href = "/2018/09/12/pa-inspirations/" >
             
                 <span>做pa的时候可能会用到的操作</span>
@@ -810,9 +934,44 @@ int的最大正值为2147483647，最大负值为-...
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 9
+        Total : 12
         </div>
         <!-- search  -->
         
@@ -825,6 +984,21 @@ int的最大正值为2147483647，最大负值为-...
     
     <div class="archive-year"> 2018 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/17</span><a class="archive-post-title" href= "/2018/09/17/clrs-17amortized/" >算法导论学习笔记-摊还分析</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/17</span><a class="archive-post-title" href= "/2018/09/17/clrs-16greedy/" >算法导论学习笔记-贪心算法</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/16</span><a class="archive-post-title" href= "/2018/09/16/startjava/" >面向OJ的Java学习</a>
+        </li>
     
     
         <li class="archive-post-item">
@@ -884,11 +1058,19 @@ int的最大正值为2147483647，最大负值为-...
     
         <span class="sidebar-tag-name" data-tags="Problem Solving"><span class="iconfont-archer">&#xe606;</span>Problem Solving</span>
     
+        <span class="sidebar-tag-name" data-tags="greedy algorithm"><span class="iconfont-archer">&#xe606;</span>greedy algorithm</span>
+    
+        <span class="sidebar-tag-name" data-tags="amortized analysis"><span class="iconfont-archer">&#xe606;</span>amortized analysis</span>
+    
         <span class="sidebar-tag-name" data-tags="dynamic programming"><span class="iconfont-archer">&#xe606;</span>dynamic programming</span>
     
         <span class="sidebar-tag-name" data-tags="pa"><span class="iconfont-archer">&#xe606;</span>pa</span>
     
         <span class="sidebar-tag-name" data-tags="Linux"><span class="iconfont-archer">&#xe606;</span>Linux</span>
+    
+        <span class="sidebar-tag-name" data-tags="Java"><span class="iconfont-archer">&#xe606;</span>Java</span>
+    
+        <span class="sidebar-tag-name" data-tags="programming"><span class="iconfont-archer">&#xe606;</span>programming</span>
     
         <span class="sidebar-tag-name" data-tags="freshman"><span class="iconfont-archer">&#xe606;</span>freshman</span>
     
