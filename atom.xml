@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://mengzelev.github.io/"/>
-  <updated>2018-09-17T15:47:37.632Z</updated>
+  <updated>2018-09-21T14:38:21.936Z</updated>
   <id>https://mengzelev.github.io/</id>
   
   <author>
@@ -17,13 +17,44 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>正则表达式学习笔记</title>
+    <link href="https://mengzelev.github.io/2018/09/21/regex/"/>
+    <id>https://mengzelev.github.io/2018/09/21/regex/</id>
+    <published>2018-09-21T14:04:40.000Z</published>
+    <updated>2018-09-21T14:38:21.936Z</updated>
+    
+    <content type="html"><![CDATA[<p>废话不多说，贴4张截图就跑路（。</p><p>有空还是会回来写的，容我先把ddl肝完（瘫）。</p><p><a href="http://docs.huihoo.com/c/linux-c-programming/ch32.html" target="_blank" rel="noopener">PA讲义中的Linux-C教程</a></p><p><img src="/2018/09/21/regex/table1.png"><br><img src="/2018/09/21/regex/table2.png"><br><img src="/2018/09/21/regex/table3.png"><br><img src="/2018/09/21/regex/table4.png"></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;废话不多说，贴4张截图就跑路（。&lt;/p&gt;
+&lt;p&gt;有空还是会回来写的，容我先把ddl肝完（瘫）。&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://docs.huihoo.com/c/linux-c-programming/ch32.html&quot; target=&quot;_blank&quot; r
+      
+    
+    </summary>
+    
+    
+      <category term="Notes" scheme="https://mengzelev.github.io/tags/Notes/"/>
+    
+      <category term="pa" scheme="https://mengzelev.github.io/tags/pa/"/>
+    
+      <category term="regular expressions" scheme="https://mengzelev.github.io/tags/regular-expressions/"/>
+    
+      <category term="linux" scheme="https://mengzelev.github.io/tags/linux/"/>
+    
+  </entry>
+  
+  <entry>
     <title>算法导论学习笔记-摊还分析</title>
     <link href="https://mengzelev.github.io/2018/09/17/clrs-17amortized/"/>
     <id>https://mengzelev.github.io/2018/09/17/clrs-17amortized/</id>
     <published>2018-09-17T15:47:29.000Z</published>
-    <updated>2018-09-17T15:47:37.632Z</updated>
+    <updated>2018-09-20T15:58:45.393Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="聚合分析"><a href="#聚合分析" class="headerlink" title="聚合分析"></a>聚合分析</h1><p>聚合分析指，证明对所有n，一个n个操作的序列的最坏情况下花费的总时间为T(n)。因此在最坏情况下，每个操作的平均代价，或<strong>摊还代价</strong>为T(n)/n。</p><p>摊还操作可以看作是不带概率计算的平均情况分析。因为概率不好计算。<s>概率什么时候好计算过了</s></p><p>此摊还代价适用于<strong>每个</strong>操作，即使序列中有多种类型的操作也是如此。</p><p>算法导论上给出的示例为<strong>增加了MULTIPOP的栈操作</strong>和<strong>二进制计数器递增</strong>问题，简单概括一下二者的共同点：</p><ul><li>需要分析复杂度的操作由连续的n个操作构成</li><li>每个单步操作的时间复杂度难以确定为与n有关的表达式，与当前状态密切相关</li><li>对每个单步操作取最坏情况得出的上界过于宽松，浪费时间</li><li>n个连续操作的总时间复杂度比较容易求得</li></ul><p>大致感觉就是，使用摊还分析可以给这些操作一个<strong>清白</strong>，它们事实上没有那么慢。</p><p><u>睡觉了，先更到这里，明天继续更</u></p>]]></content>
+    <content type="html"><![CDATA[<h1 id="聚合分析"><a href="#聚合分析" class="headerlink" title="聚合分析"></a>聚合分析</h1><p>聚合分析指，证明对所有n，一个n个操作的序列的最坏情况下花费的总时间为T(n)。因此在最坏情况下，每个操作的平均代价，或<strong>摊还代价</strong>为T(n)/n。</p><p>摊还操作可以看作是不带概率计算的平均情况分析。因为概率不好计算。<s>概率什么时候好计算过了</s></p><p>此摊还代价适用于<strong>每个</strong>操作，即使序列中有多种类型的操作也是如此。</p><p>算法导论上给出的示例为<strong>增加了MULTIPOP的栈操作</strong>和<strong>二进制计数器递增</strong>问题，简单概括一下二者的共同点：</p><ul><li>需要分析复杂度的操作由连续的n个操作构成</li><li>每个单步操作的时间复杂度难以确定为与n有关的表达式，与当前状态密切相关</li><li>对每个单步操作取最坏情况得出的上界过于宽松，浪费时间</li><li>n个连续操作的总时间复杂度比较容易求得</li></ul><p>大致感觉就是，使用摊还分析可以给这些操作一个<strong>清白</strong>，它们事实上没有那么慢。</p><h1 id="核算法"><a href="#核算法" class="headerlink" title="核算法"></a>核算法</h1><p>核算法就是对不同的操作赋予不同的信用，这个信用值可能会多于或少于实际消耗的代价。实际操作时采用多退少补的原则，保证总信用（支付的代价-实际的代价）始终非负即可。</p><p>一般用于解决不同操作间具有依赖关系的问题，例如聚合分析中提到的<strong>栈操作问题</strong>（出栈操作次数上界即为进栈操作次数）和<strong>二进制计数器递增问题</strong>（复位操作次数依赖于置位操作次数）。</p><h1 id="势能分析"><a href="#势能分析" class="headerlink" title="势能分析"></a>势能分析</h1><p>势能分析看上去更加数(wu)学(li)一点，与核算法有点类似，不同之处势能分析为每一个状态都设置了一个对应的势能，即势能函数。虽然在操作过程中势能可能有升有降，但只要最终势能是增加的，就可以证明代价的上界。</p><p>选择势能函数应该是比较困难的。产生的摊还代价依赖于选择的势能函数。具体根据需要证明的上界来选择适度的势能函数，毕竟最优势能函数不是那么好找的。</p><h1 id="动态表"><a href="#动态表" class="headerlink" title="动态表"></a>动态表</h1><p>这个有丶玄学，是势能分析的综合应用，建议看书。</p><p><u>睡觉了，先更到这里，明天继续更</u></p>]]></content>
     
     <summary type="html">
     
@@ -162,9 +193,9 @@
     
       <category term="Notes" scheme="https://mengzelev.github.io/tags/Notes/"/>
     
-      <category term="tmux" scheme="https://mengzelev.github.io/tags/tmux/"/>
-    
       <category term="linux" scheme="https://mengzelev.github.io/tags/linux/"/>
+    
+      <category term="tmux" scheme="https://mengzelev.github.io/tags/tmux/"/>
     
   </entry>
   

@@ -339,25 +339,21 @@
     
     
     <article class="index-post">
-        <a class="abstract-title" href = "/2018/09/17/clrs-17amortized/" >
+        <a class="abstract-title" href = "/2018/09/21/regex/" >
             
-                <span>算法导论学习笔记-摊还分析</span>
+                <span>正则表达式学习笔记</span>
         </a>
         <div class="abstract-content">
-            聚合分析聚合分析指，证明对所有n，一个n个操作的序列的最坏情况下花费的总时间为T(n)。因此在最坏情况下，每个操作的平均代价，或摊还代价为T(n)/n。
-摊还操作可以看作是不带概率计算的平均情况分析。因为概率不好计算。概率什么时候好计算过了
-此摊还代价适用于每个操作，即使序列中有多种类型的操作也是如此。
-算法导论上给出的示例为增加了MULTIPOP的栈操作和二进制计数器递增问题，简单概括一下二者的共同点：
+            废话不多说，贴4张截图就跑路（。
+有空还是会回来写的，容我先把ddl肝完（瘫）。
+PA讲义中的Linux-C教程
 
-需要分析复杂度的操作由连续的n个操作构成
-每个单步操作的时间复杂度难以确定为与n有关的表达式，与当前状态密切相关
-对每个单步操作取最坏情况得出的上界过于宽松，浪费时间
-n个连续操作的...
+
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
             <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/09/17</span>
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/09/21</span>
             </div>
             <!-- tags  -->
             
@@ -365,103 +361,11 @@ n个连续操作的...
     
         <a class="post-tag" href="javascript:void(0);" data-tags = "Notes">Notes</a>
     
-        <a class="post-tag" href="javascript:void(0);" data-tags = "CLRS">CLRS</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags = "pa">pa</a>
     
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Problem Solving">Problem Solving</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags = "regular expressions">regular expressions</a>
     
-        <a class="post-tag" href="javascript:void(0);" data-tags = "amortized analysis">amortized analysis</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2018/09/17/clrs-16greedy/" >
-            
-                <span>算法导论学习笔记-贪心算法</span>
-        </a>
-        <div class="abstract-content">
-            前一篇dp写得又乱又烂简直不想看。但愿自己能坚持下去吧。可是这依然改变不了搬运和截图多于实际内容的事实
-基础理论贪心算法可以看做是动态规划的弱化版，处理某一类特殊的具有最优子结构的问题。
-
-在每个贪心算法之下，几乎总有一个更繁琐的动态规划算法。
-
-算法设计步骤
-将最优化问题转化为这样的形式：对其作出一次选择后，只剩下一个子问题需要求解【子问题削减】
-证明作出贪心选择后，原问题总是存在最优解，即贪心选择总是安全的【安全性证明：替换法】
-证明作出贪心选择后，剩余的子问题满足性质：其最优解与贪心选择组合即可得到原问题的最优解，这样就得到了最优子结构【确认最优子结构】
-
-贪心选择性质贪心选择性质...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/09/17</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Notes">Notes</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "CLRS">CLRS</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Problem Solving">Problem Solving</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "greedy algorithm">greedy algorithm</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2018/08/31/clrs-15dp/" >
-            
-                <span>算法导论学习笔记-动态规划</span>
-        </a>
-        <div class="abstract-content">
-            基本原理以下是大段算法导论原句搬运。
-只有带下划线的句子才是自己总结的。
-最优化问题
-动态规划方法通常用来求解最优化问题。这类问题可以有很多可行解，每个解都有一个值，我们希望寻找具有最优值（最小值或最大值）的解。我们成这样的解为问题的一个最优解，而不是最优解。
-
-算法设计步骤
-刻画一个最优解的结构特征
-递归地定义最优解的值
-计算最优解的值，通常采用自底向上的方法
-利用计算出的信息构造一个最优解（有时不需要）
-
-动态规划求解最优化问题应该具备的两个要素：最优子结构和子问题重叠。
-简单来说就是，能根据原问题得到一个递推式（最优子结构），但是在这个递推式的计算过程中会出现大量重复计算的时候（子...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/08/31</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Notes">Notes</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "CLRS">CLRS</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Problem Solving">Problem Solving</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "dynamic programming">dynamic programming</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags = "linux">linux</a>
     
 </div>
             
