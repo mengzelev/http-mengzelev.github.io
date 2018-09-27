@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://mengzelev.github.io/"/>
-  <updated>2018-09-21T14:38:21.936Z</updated>
+  <updated>2018-09-27T03:30:46.356Z</updated>
   <id>https://mengzelev.github.io/</id>
   
   <author>
@@ -15,6 +15,58 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>关于“过程调用”的讨论</title>
+    <link href="https://mengzelev.github.io/2018/09/27/ics-process-calling/"/>
+    <id>https://mengzelev.github.io/2018/09/27/ics-process-calling/</id>
+    <published>2018-09-27T01:59:13.000Z</published>
+    <updated>2018-09-27T03:30:46.356Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="实验一"><a href="#实验一" class="headerlink" title="实验一"></a>实验一</h1><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><pre><code>#include &lt;stdio.h&gt; int main(int argc, char* argv[]){    int a = 10;    double *p = (double*)&amp;a;    printf(&quot;%f\n&quot;, *p);    printf(&quot;%f\n&quot;, ((double)(a)));return 0;}</code></pre><h2 id="windows10"><a href="#windows10" class="headerlink" title="windows10"></a>windows10</h2><p>环境：dev-cpp/TDM-GCC 4.9.2 64bit Release</p><p><img src="/2018/09/27/ics-process-calling/ics1-win.png"></p><p><img src="/2018/09/27/ics-process-calling/ics1-win-asm.png"></p><h2 id="Debian-64bit"><a href="#Debian-64bit" class="headerlink" title="Debian-64bit"></a>Debian-64bit</h2><p><img src="/2018/09/27/ics-process-calling/ics1-debian.png"></p><p><img src="/2018/09/27/ics-process-calling/ics1-debian-asm.png"></p><h2 id="Ubuntu-32bit"><a href="#Ubuntu-32bit" class="headerlink" title="Ubuntu-32bit"></a>Ubuntu-32bit</h2><p><img src="/2018/09/27/ics-process-calling/ics1-ubuntu.png"></p><p><img src="/2018/09/27/ics-process-calling/ics1-ubuntu-asm.png"></p><h1 id="实验二"><a href="#实验二" class="headerlink" title="实验二"></a>实验二</h1><h2 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h2><pre><code>#include&lt;stdio.h&gt;int main(){    double a = 10;    printf(&quot;a = %d\n&quot;, a);    return 0;}</code></pre><h2 id="windows10-1"><a href="#windows10-1" class="headerlink" title="windows10"></a>windows10</h2><p><img src="/2018/09/27/ics-process-calling/ics2-win.png"></p><p><img src="/2018/09/27/ics-process-calling/ics2-win-asm.png"></p><h2 id="Debian"><a href="#Debian" class="headerlink" title="Debian"></a>Debian</h2><p><img src="/2018/09/27/ics-process-calling/ics2-debian.png"></p><p><img src="/2018/09/27/ics-process-calling/ics2-debian-asm.png"></p><h2 id="Ubuntu-32bit-1"><a href="#Ubuntu-32bit-1" class="headerlink" title="Ubuntu-32bit"></a>Ubuntu-32bit</h2><p><img src="/2018/09/27/ics-process-calling/ics2-ubuntu.png"></p><p><img src="/2018/09/27/ics-process-calling/ics2-ubuntu-asm.png"></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;实验一&quot;&gt;&lt;a href=&quot;#实验一&quot; class=&quot;headerlink&quot; title=&quot;实验一&quot;&gt;&lt;/a&gt;实验一&lt;/h1&gt;&lt;h2 id=&quot;代码&quot;&gt;&lt;a href=&quot;#代码&quot; class=&quot;headerlink&quot; title=&quot;代码&quot;&gt;&lt;/a&gt;代码&lt;/h2&gt;&lt;p
+      
+    
+    </summary>
+    
+    
+      <category term="ics" scheme="https://mengzelev.github.io/tags/ics/"/>
+    
+      <category term="process calling" scheme="https://mengzelev.github.io/tags/process-calling/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>图的基本概念</title>
+    <link href="https://mengzelev.github.io/2018/09/24/graph-intro/"/>
+    <id>https://mengzelev.github.io/2018/09/24/graph-intro/</id>
+    <published>2018-09-24T14:44:03.000Z</published>
+    <updated>2018-09-27T03:31:16.966Z</updated>
+    
+    <content type="html"><![CDATA[<p><strong>图(Graph)</strong>:由顶点集V和边集E组成，表示为G=(V,E)<br><strong>顶点集V(vertice)</strong>:有限非空点集<br><strong>边集E(Edge)</strong>:顶点集V的二元子集组成的集合<br><strong>图的相等</strong>：G和H等价当且仅当V(G)=V(H)且E(G)=E(H)</p><p><u>坑先挖这儿了！有时间再填&lt;\u&gt;</u></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;&lt;strong&gt;图(Graph)&lt;/strong&gt;:由顶点集V和边集E组成，表示为G=(V,E)&lt;br&gt;&lt;strong&gt;顶点集V(vertice)&lt;/strong&gt;:有限非空点集&lt;br&gt;&lt;strong&gt;边集E(Edge)&lt;/strong&gt;:顶点集V的二元子集组成的集合&lt;br
+      
+    
+    </summary>
+    
+    
+      <category term="Notes" scheme="https://mengzelev.github.io/tags/Notes/"/>
+    
+      <category term="graph theory" scheme="https://mengzelev.github.io/tags/graph-theory/"/>
+    
+      <category term="problem solving" scheme="https://mengzelev.github.io/tags/problem-solving/"/>
+    
+  </entry>
   
   <entry>
     <title>正则表达式学习笔记</title>
