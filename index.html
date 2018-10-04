@@ -354,12 +354,94 @@ height:50vh;
     
     
     <article class="index-post">
+        <a class="abstract-title" href = "/2018/10/04/pa-inspirations/" >
+            
+                <span>做pa的时候可能会用到的操作</span>
+        </a>
+        <div class="abstract-content">
+            当做笔记随便写写的，希望能帮到一些人吧。毕竟作为一名优秀的bug maker，别人遇到的问题我基本都能遇到的。
+vim和tmux另外写了教程：
+vim初探
+使用tmux变身炫酷程序猿(x
+持续更新中最后更新:
+
+2018/10/04 17:18:29 新增PA2时运行dummy出错的解决方式
+
+语言规范
+这名字很中二…但其实就是个人写文章的时候一点习惯用的表示，和别人的可能不一样，很可能非常不标准，注意区分就好
+
+[]方括号表示需要自定义的内容，括起来的只是你应该输入的东西的名字
+$开头的表示在命令行中键入的代码，否则为文件中的代码
+
+在整个目录下查找代码
+在某个文件里看到某个函数或者宏...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/10/04</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "pa">pa</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Linux">Linux</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "vim">vim</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href = "/2018/10/04/PA1-report/" >
+            
+                <span>PA1实验报告</span>
+        </a>
+        <div class="abstract-content">
+            实验进度2018/9/15：完成阶段一，实现了单步执行、打印寄存器和扫描内存（简易版）开始做之前忘了git checkout pa1导致工作都在pa0分支里完成了，后来在pa1分支下返工了一遍，两边的git log里都可以查到记录所以求求老师不要扣我的分qwq我下次确定一定肯定确认分支后再开始工作
+2018/9/23:完成阶段二，实现了包含(、)、+、-、*、/和十进制数字的表达式计算。为了处理负数将类型都实现为了long long而不是uint32_t，需要按uint32_t类型使用时进行强制类型转换。实现了表达式生成器并测试。
+2018/9/29:完成阶段三，扩展了表达式计算中的==...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/10/04</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Notes">Notes</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "pa">pa</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href = "/2018/09/27/ics-process-calling/" >
             
                 <span>关于“过程调用”的讨论</span>
         </a>
         <div class="abstract-content">
-            实验一代码#include &lt;stdio.h&gt; 
+            这是计算机系统基础课上的开放课题，在不同环境下测试一些UB的结果，照理说此处应该有分析但是萌捷列夫懒了，等ddl处理掉了再来写。
+实验一代码#include &lt;stdio.h&gt; 
 
 int main(int argc, char* argv[]){
     int a = 10;
@@ -368,14 +450,7 @@ int main(int argc, char* argv[]){
     printf(&quot;%f\n&quot;, ((double)(a)));
 return 0;
 }
-windows10环境：dev-cpp/TDM-GCC 4.9.2 64bit Release
-
-
-Debian-64bit
-
-Ubuntu-32bit
-
-实验二代码#include...
+windows10环境：dev-cpp/TDM-GC...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
@@ -389,41 +464,6 @@ Ubuntu-32bit
         <a class="post-tag" href="javascript:void(0);" data-tags = "ics">ics</a>
     
         <a class="post-tag" href="javascript:void(0);" data-tags = "process calling">process calling</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2018/09/24/graph-intro/" >
-            
-                <span>图的基本概念</span>
-        </a>
-        <div class="abstract-content">
-            图(Graph):由顶点集V和边集E组成，表示为G=(V,E)顶点集V(vertice):有限非空点集边集E(Edge):顶点集V的二元子集组成的集合图的相等：G和H等价当且仅当V(G)=V(H)且E(G)=E(H)
-坑先挖这儿了！有时间再填&lt;\u&gt;
-
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/09/24</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Notes">Notes</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "graph theory">graph theory</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "problem solving">problem solving</a>
     
 </div>
             
@@ -587,51 +627,6 @@ n个连续操作的...
         <a class="post-tag" href="javascript:void(0);" data-tags = "Java">Java</a>
     
         <a class="post-tag" href="javascript:void(0);" data-tags = "programming">programming</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2018/09/12/pa-inspirations/" >
-            
-                <span>做pa的时候可能会用到的操作</span>
-        </a>
-        <div class="abstract-content">
-            当做笔记随便写写的，希望能帮到一些人吧。毕竟作为一名优秀的bug maker，别人遇到的问题我基本都能遇到的。
-vim和tmux另外写了教程：
-vim初探
-使用tmux变身炫酷程序猿(x
-持续更新中
-语言规范
-这名字很中二…但其实就是个人写文章的时候一点习惯用的表示，和别人的可能不一样，很可能非常不标准，注意区分就好
-
-[]方括号表示需要自定义的内容，括起来的只是你应该输入的东西的名字
-
-在整个目录下查找代码
-在某个文件里看到某个函数或者宏或者变量的定义的时候经常会好奇在哪里、怎么使用过，除了用/+(搜索内容)靠vim的功能在文件内搜索外，还可以
-$ grep &quot;搜索内容&qu...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/09/12</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Notes">Notes</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "pa">pa</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Linux">Linux</a>
     
 </div>
             
@@ -1169,6 +1164,16 @@ Ctrl-G配合G使用风味更佳（跳转到某一行）
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
         Total : 15
@@ -1187,12 +1192,17 @@ Ctrl-G配合G使用风味更佳（跳转到某一行）
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">09/27</span><a class="archive-post-title" href= "/2018/09/27/ics-process-calling/" >关于“过程调用”的讨论</a>
+            <span class="archive-post-date">10/04</span><a class="archive-post-title" href= "/2018/10/04/pa-inspirations/" >做pa的时候可能会用到的操作</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">09/24</span><a class="archive-post-title" href= "/2018/09/24/graph-intro/" >图的基本概念</a>
+            <span class="archive-post-date">10/04</span><a class="archive-post-title" href= "/2018/10/04/PA1-report/" >PA1实验报告</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/27</span><a class="archive-post-title" href= "/2018/09/27/ics-process-calling/" >关于“过程调用”的讨论</a>
         </li>
     
     
@@ -1213,11 +1223,6 @@ Ctrl-G配合G使用风味更佳（跳转到某一行）
     
         <li class="archive-post-item">
             <span class="archive-post-date">09/16</span><a class="archive-post-title" href= "/2018/09/16/startjava/" >面向OJ的Java学习</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">09/12</span><a class="archive-post-title" href= "/2018/09/12/pa-inspirations/" >做pa的时候可能会用到的操作</a>
         </li>
     
     
@@ -1275,13 +1280,9 @@ Ctrl-G配合G使用风味更佳（跳转到某一行）
     
         <span class="sidebar-tag-name" data-tags="dynamic programming"><span class="iconfont-archer">&#xe606;</span>dynamic programming</span>
     
-        <span class="sidebar-tag-name" data-tags="amortized analysis"><span class="iconfont-archer">&#xe606;</span>amortized analysis</span>
-    
         <span class="sidebar-tag-name" data-tags="greedy algorithm"><span class="iconfont-archer">&#xe606;</span>greedy algorithm</span>
     
-        <span class="sidebar-tag-name" data-tags="graph theory"><span class="iconfont-archer">&#xe606;</span>graph theory</span>
-    
-        <span class="sidebar-tag-name" data-tags="problem solving"><span class="iconfont-archer">&#xe606;</span>problem solving</span>
+        <span class="sidebar-tag-name" data-tags="amortized analysis"><span class="iconfont-archer">&#xe606;</span>amortized analysis</span>
     
         <span class="sidebar-tag-name" data-tags="freshman"><span class="iconfont-archer">&#xe606;</span>freshman</span>
     
@@ -1299,15 +1300,15 @@ Ctrl-G配合G使用风味更佳（跳转到某一行）
     
         <span class="sidebar-tag-name" data-tags="linux"><span class="iconfont-archer">&#xe606;</span>linux</span>
     
-        <span class="sidebar-tag-name" data-tags="tmux"><span class="iconfont-archer">&#xe606;</span>tmux</span>
-    
-        <span class="sidebar-tag-name" data-tags="markdown"><span class="iconfont-archer">&#xe606;</span>markdown</span>
-    
-        <span class="sidebar-tag-name" data-tags="vim"><span class="iconfont-archer">&#xe606;</span>vim</span>
-    
         <span class="sidebar-tag-name" data-tags="Java"><span class="iconfont-archer">&#xe606;</span>Java</span>
     
         <span class="sidebar-tag-name" data-tags="programming"><span class="iconfont-archer">&#xe606;</span>programming</span>
+    
+        <span class="sidebar-tag-name" data-tags="markdown"><span class="iconfont-archer">&#xe606;</span>markdown</span>
+    
+        <span class="sidebar-tag-name" data-tags="tmux"><span class="iconfont-archer">&#xe606;</span>tmux</span>
+    
+        <span class="sidebar-tag-name" data-tags="vim"><span class="iconfont-archer">&#xe606;</span>vim</span>
     
     </div>
     <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
