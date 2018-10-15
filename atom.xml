@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://mengzelev.github.io/"/>
-  <updated>2018-10-04T09:21:25.581Z</updated>
+  <updated>2018-10-15T01:17:40.985Z</updated>
   <id>https://mengzelev.github.io/</id>
   
   <author>
@@ -15,6 +15,99 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>图论学习笔记-树</title>
+    <link href="https://mengzelev.github.io/2018/10/14/tree/"/>
+    <id>https://mengzelev.github.io/2018/10/14/tree/</id>
+    <published>2018-10-14T08:00:05.000Z</published>
+    <updated>2018-10-15T01:17:40.985Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="本章可用结论整理"><a href="#本章可用结论整理" class="headerlink" title="本章可用结论整理"></a>本章可用结论整理</h1><ul><li>定理4.1：e是图G的桥当且仅当e不在G的任何一个cycle上</li><li>定理4.2：图G是树当且仅当G的任意两个顶点只有唯一的path相连</li><li>定理4.3：每一棵非简单树都有至少两个端点(end-vertice)</li><li>定理4.4：每棵有n个顶点的树都有n-1条边</li><li>推论4.6：每棵有k个component的森林都有n-k条边</li><li>定理4.7：每一个有n个顶点的连通图至少有n-1条边</li><li>定理4.8：有n个顶点、m条边的图G，若满足以下3条性质中的2条：(1)连通 (2)无环 (3)m = n - 1，则G是树</li><li>定理4.9：设T是一棵有k个顶点的树。如果图G中最小的度数不小于k-1，那么T与G的某个子图同构</li><li>定理4.10：每个连通图都包含了一棵生成树</li><li>定理4.15(Tree Formula): 有n个不相同的顶点的树的个数为$n^{n-2}$</li><li>定理4.16(Matrix Tree Theorem):<br><img src="/2018/10/14/tree/theorem4-16.png"></li></ul><h1 id="桥-Bridges"><a href="#桥-Bridges" class="headerlink" title="桥(Bridges)"></a>桥(Bridges)</h1><h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><p>如果$e=uv$是连通图$G$的一条边，且$G-e$不连通，则$e$称为连通图$G$的<strong>桥</strong>.</p><p>如果$G$是非连通图，那么<strong>桥</strong>$e$是G一个部分(component)的桥。</p><p>考虑componnet的数目，边$e$是图$G$的桥当且仅当$k(G-e)=k(G)+1$</p><h2 id="定理4-1"><a href="#定理4-1" class="headerlink" title="定理4.1"></a>定理4.1</h2><p>$e$是图$G$的桥当且仅当$e$不在$G$的任何一个cycle上。</p><h1 id="树"><a href="#树" class="headerlink" title="树"></a>树</h1><p>树即<strong>无环的连通图</strong>。<br>树<strong>所有</strong>的边都是桥。<br>树也是所有边都是桥的连通图。</p><p><strong>双星(double star)</strong>:包含了恰好两个非端点的树（这两个端点必然相邻）</p><p><strong>毛虫树(caterpillar)</strong>:定点数大于等于3、除去端点后得到的是path的树。<br>除去端点后得到的path叫作毛虫树的<strong>脊椎(spine)</strong>；<br>顶点数不小于3的path，star，double star都是毛虫树<br><s>端点其实就是毛毛虫的脚脚</s></p><p><strong>森林(Forests)</strong>:无环图。森林的每个component的都是树。(过于形象<br>森林不一定要是连通的，但是树必须是。</p><h2 id="定理4-2"><a href="#定理4-2" class="headerlink" title="定理4.2"></a>定理4.2</h2><p>图$G$是树当且仅当$G$的任意两个顶点只有唯一的path相连</p><p>这个证明嘛，只有唯一的path不是和无环是等价的吗(流汗.jpg</p><h2 id="定理4-3"><a href="#定理4-3" class="headerlink" title="定理4.3"></a>定理4.3</h2><p>每一棵非简单树都有至少两个端点(end-vertice)</p><p>证明取了最长路径的两个端点，利用了最长路径上的端点都不与非路径上点相邻的性质，证得最长路径的两个端点都是end-vertice</p><p>这条性质非常有用，可以成为对树结构使用<strong>数学归纳法</strong>的依据，划掉一个端点就会使order-1<br>使用数学归纳法证明图相关结论的关键在于<strong>找到一个end-vertice</strong></p><h2 id="定理4-4"><a href="#定理4-4" class="headerlink" title="定理4.4"></a>定理4.4</h2><p>每棵有n个顶点的树都有n-1条边</p><p>证明使用了基于定理4.3的数学归纳法，很直观</p><h2 id="推论4-6"><a href="#推论4-6" class="headerlink" title="推论4.6"></a>推论4.6</h2><p>每棵有k个component的森林都有n-k条边</p><p>简单的边数计算就能证明</p><h2 id="定理4-7"><a href="#定理4-7" class="headerlink" title="定理4.7"></a>定理4.7</h2><p>每一个有n个顶点的连通图至少有n-1条边。</p><p>证明用到了最小数原理，假设存在一个顶点最少的图少于n-1条边，然后证明此时至少会有一个端点(end vertex)，这时就可以把那一个端点去掉得到一个更小的满足条件的图，从而与假设矛盾。</p><h2 id="定理4-8"><a href="#定理4-8" class="headerlink" title="定理4.8"></a>定理4.8</h2><p>有n个顶点、m条边的图G，若满足以下3条性质中的2条：</p><ul><li>连通</li><li>无环</li><li>m = n - 1<br>则G是树</li></ul><p>证明非常直观，活用了上面的定理</p><h2 id="定理4-9"><a href="#定理4-9" class="headerlink" title="定理4.9"></a>定理4.9</h2><p>设T是一棵有k个顶点的树。如果图G中最小的度数不小于k-1，那么T与G的某个子图同构</p><h1 id="最小生成树问题"><a href="#最小生成树问题" class="headerlink" title="最小生成树问题"></a>最小生成树问题</h1><p>实际中存在村庄造路的问题，即造一些路使得所有村庄都连通，并保证造这些路的开销最小<br>这样的问题可以归结为最小生成树问题，求解一个有权图中权值最小的生成树</p><h2 id="Kruskal’s-Algorithm"><a href="#Kruskal’s-Algorithm" class="headerlink" title="Kruskal’s Algorithm"></a>Kruskal’s Algorithm</h2><p>算法描述：先取权最小的两条边，从第三次开始，每次都取不与取过的边构成cycle的、权最小的边，直到取满n-1条边为止。类似于贪心算法。</p><p>正确性证明也类似于证明贪心用到的<strong>替换法</strong>，取最优解中与算法解重叠最大的解，进行替换，导出矛盾。</p><h2 id="Prim’s-Algorithm"><a href="#Prim’s-Algorithm" class="headerlink" title="Prim’s Algorithm"></a>Prim’s Algorithm</h2><p>算法描述：先取权最小的一条边，之后每次都选择连接了未连接的点和已连接的点的边中权最小的一条，知道选择了n-1条边为止。类似于动态规划。</p><p>证明思路类似于<strong>剪切-粘贴法</strong>。难以概括……</p><h1 id="生成树的个数"><a href="#生成树的个数" class="headerlink" title="生成树的个数"></a>生成树的个数</h1><p>书上这部分完全就是在讲故事啊(╯°Д°)╯︵┻━┻</p><h1 id="图论证明特点"><a href="#图论证明特点" class="headerlink" title="图论证明特点"></a>图论证明特点</h1><p><s>自己xjb总结的，仅供参考</s></p><ul><li>多用反证法</li><li>…….我再想想</li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;本章可用结论整理&quot;&gt;&lt;a href=&quot;#本章可用结论整理&quot; class=&quot;headerlink&quot; title=&quot;本章可用结论整理&quot;&gt;&lt;/a&gt;本章可用结论整理&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;定理4.1：e是图G的桥当且仅当e不在G的任何一个cycle上&lt;/li&gt;
+&lt;li
+      
+    
+    </summary>
+    
+      <category term="Notes" scheme="https://mengzelev.github.io/categories/Notes/"/>
+    
+    
+      <category term="Notes" scheme="https://mengzelev.github.io/tags/Notes/"/>
+    
+      <category term="Problem Solving" scheme="https://mengzelev.github.io/tags/Problem-Solving/"/>
+    
+      <category term="Graph" scheme="https://mengzelev.github.io/tags/Graph/"/>
+    
+      <category term="Tree" scheme="https://mengzelev.github.io/tags/Tree/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Lab1-乘法 实验报告</title>
+    <link href="https://mengzelev.github.io/2018/10/12/lab1-report/"/>
+    <id>https://mengzelev.github.io/2018/10/12/lab1-report/</id>
+    <published>2018-10-12T09:17:47.000Z</published>
+    <updated>2018-10-15T01:25:08.817Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="任务1：实现multimod"><a href="#任务1：实现multimod" class="headerlink" title="任务1：实现multimod"></a>任务1：实现<code>multimod</code></h1><p>使用了高精度数乘法计算<code>a*b</code>，然后模拟手算除法的形式写了高精度除法（取模）。代码见文件<code>p1.c</code>.</p><h2 id="正确性-伪-证明"><a href="#正确性-伪-证明" class="headerlink" title="正确性(伪)证明"></a>正确性(伪)证明</h2><p>使用python随机生成生成了1000000组a、b、m，0~9223372036854775807(int64_t的最大值)并计算对应答案，与p1.c的计算结果进行对比。</p><p>python随机数生成代码如下：</p><pre><code>import randomMAX = 9223372036854775807for i in range(1,1000000)：    a = random.randint(0,MAX)    b = random.randint(0,MAX)    m = random.randint(1,MAX)    ans = (a * b) % m    print (a,b,m,ans)</code></pre><p>测试结果一百万组全对（从零开始计数的）<br><img src="/2018/10/12/lab1-report/1.png"></p><h1 id="任务2：性能优化"><a href="#任务2：性能优化" class="headerlink" title="任务2：性能优化"></a>任务2：性能优化</h1><p>由于是先听的课再做的lab，出于惰性直接按照jyy课上讲的方法做了<s>（我去面壁）</s>就不多解释了，代码见p2.c</p><h2 id="时间测试思路"><a href="#时间测试思路" class="headerlink" title="时间测试思路"></a>时间测试思路</h2><p>STFW找到了计算使用<code>time.h</code>库函数计算运行时间的方法，也有计算时钟周期的方法，但是后者使用了汇编代码，在对未知事物的恐惧(这样真的不好)的驱使下还是选择了比较好理解、比较好控制的前者。为了防止计算步骤被优化，又不能让多于的操作占用过多的时间，就使程序计算了正确的case的个数并输出。所以得到的时间应该比实际运行时间长一些。</p><h2 id="运行时间"><a href="#运行时间" class="headerlink" title="运行时间"></a>运行时间</h2><p><img src="/2018/10/12/lab1-report/time.png"><br>注：其中<code>p1.c</code>为任务一中的高精度实现，<code>p2.c</code>为任务二中的优化算法，<code>p3.c</code>为任务三中的神奇代码</p><h2 id="运行时间分析"><a href="#运行时间分析" class="headerlink" title="运行时间分析"></a>运行时间分析</h2><p>记<code>a,b,m</code>的位数为n<br>高精度除法需要做<code>O(n)</code>次减法和比较，每次减法和比较的时间复杂度也都为<code>O(n)</code>，因此总时间复杂度是<code>O(n^2)</code><br>任务二中优化过的时间需要循环次数是<code>O(n)</code>的，每次循环的操作都能在常数时间<code>O(1)</code>内完成，因此总时间复杂度为<code>O(n)</code><br>而神奇代码对任何输入消耗的时间都是相同的，时间复杂度为<code>O(1)</code><br>从运行时间上来看的确是<code>t(p1)&gt;t(p2)&gt;t(p3)</code>，符合预期<br>一个神奇的现象是，随着优化等级的升高，运行时间不一定缩短。尤其是p2.c的运行情况，O1和O2反而不如O0（虽然也只差了0.001ms），于是我反汇编对比了一下，发现<code>multimod</code>、<code>testcases</code>和<code>main</code>几个函数的汇编代码几乎一模一样，但对应行的行数不同，可能是调用了不同的系统库函数。对优化的原理不太了解，暂时无法想到合理的解释。可能是因为这个程序的优化空间不是太大？但是编译器肯定比我智能多了，我想不到优化方法不能看不起编译器啊。</p><h1 id="任务3：解析神秘代码"><a href="#任务3：解析神秘代码" class="headerlink" title="任务3：解析神秘代码"></a>任务3：解析神秘代码</h1><p><strong>结论</strong>：<code>ab</code>乘积不超过<code>2^53</code>次方，<code>m</code>在<code>int64_t</code>范围内任意取值，可以保证<code>multimod_fast</code>总是能返回正确的数值</p><p>过程非常曲折，以下都是流水账碎碎念，老师嫌长可以不看，自己写着好玩，回头上传个人Blog</p><p>刚拿到手先试了一大堆随机数据，发现一百万组测试样例总只能过1w+组，正确率非常低。后来和同学讨论了一下，听说<code>m</code>比较小的时候结果最容易出错，我就把<code>m</code>的随机范围改成了<code>1~3</code>，果然错误率高了很多。大概是因为神秘代码中<code>(int64_t)((double)a * b / m + 1e-8)</code>强制类型转换后要除以<code>m</code>，如果<code>m</code>偏小，那么<code>a*b</code>的误差就很容易保存下来，引起答案出错。</p><p>保持<code>m</code>1~3的范围，我又试了几组大数。发现是在<code>ab</code>乘积为<code>10^19</code>左右的时候（a和b在算法找中地位是等价的，所以只需要关注<code>ab</code>的乘积的范围）会出现计算错误，于是在这个范围附近取了一些数，绝了，这个使结果正确的区间并不是连续的！然后理智烧却瞎测了几组数据，不太能发现规律，决定先冷静下来，从理论上思考一下算法。<s>毕竟这次是关于数据表示形式的Lab嘛</s></p><p>这个神奇代码大概是把ab乘积转换为<code>double</code>类型。<code>double</code>类型能表示的范围是大于<code>int64_t</code>的，但是精度不够，尾数部分只有52位的精度（加上前面的1一共是53位），所以应该是只能保证这53位的精度，于是我打开<code>python</code>计算器计算了一下<code>2^26.5 =</code>，大概是94900000，于是我把任务一中随机数的生成范围改为了<code>(0,94900000)</code>，测试了5次，每次一百万组，都是全对的。</p><p><img src="/2018/10/12/lab1-report/double.png"></p><p>到这里我就很想吐槽了，这范围怎么还能算<code>int64_t</code>的，保证结果正确的<code>a</code>和<code>b</code>的范围<code>int</code>都达不到，如果能保证输入在这个范围之内，还不如直接用<code>int64_t</code>算呢，<code>ab</code>相乘肯定不会溢出的。但是如果<code>a</code>和<code>b</code>乘积位表示下末尾零比较多，还是有可能正确的。所以这根本就是一份拼人品的神奇代码吗…..</p><p>目前尚未想通的问题：</p><ul><li>为什么要<code>+1e-8</code>？</li><li>为什么返回时需要判断<code>t</code>的正负并做相应修正？</li></ul><p>最后，这个神奇代码毕竟是<code>O(1)</code>的，凭我的算法功底实在没办法优化到<code>O(n)</code>以下，所以神奇代码虽然正确率不高，但是效率还是很感人的</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;任务1：实现multimod&quot;&gt;&lt;a href=&quot;#任务1：实现multimod&quot; class=&quot;headerlink&quot; title=&quot;任务1：实现multimod&quot;&gt;&lt;/a&gt;任务1：实现&lt;code&gt;multimod&lt;/code&gt;&lt;/h1&gt;&lt;p&gt;使用了高精度数乘法
+      
+    
+    </summary>
+    
+    
+      <category term="Notes" scheme="https://mengzelev.github.io/tags/Notes/"/>
+    
+      <category term="Lab" scheme="https://mengzelev.github.io/tags/Lab/"/>
+    
+      <category term="Ics" scheme="https://mengzelev.github.io/tags/Ics/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>算法导论学习笔记-用于不相交集合的数据结构</title>
+    <link href="https://mengzelev.github.io/2018/10/06/clrs-21DisjointSets/"/>
+    <id>https://mengzelev.github.io/2018/10/06/clrs-21DisjointSets/</id>
+    <published>2018-10-06T08:05:58.000Z</published>
+    <updated>2018-10-07T07:33:25.694Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="不相交集合的操作"><a href="#不相交集合的操作" class="headerlink" title="不相交集合的操作"></a>不相交集合的操作</h1><p>一个<strong>不相交集合数据结构</strong>维护了一个不相交动态集的集合<br>每个集合都有一个<strong>代表</strong>标识，它是该集合的某个成员</p><p>我们希望集合支持以下三个操作：</p><p><img src="/2018/10/06/clrs-21DisjointSets/operations.png"></p><h2 id="应用：确定无向图的连通分量"><a href="#应用：确定无向图的连通分量" class="headerlink" title="应用：确定无向图的连通分量"></a>应用：确定无向图的连通分量</h2><center><br><img src="/2018/10/06/clrs-21DisjointSets/g21-1.png"><br><img src="/2018/10/06/clrs-21DisjointSets/alg1.png"><br></center><p>算法就是将连通的顶点全部合并到同一个集合中。</p><h1 id="不相交集合的链表表示"><a href="#不相交集合的链表表示" class="headerlink" title="不相交集合的链表表示"></a>不相交集合的链表表示</h1><p>每个集合可以用一个自己的链表来表示<br>链表中对象可以以任意次序出现</p><p>每个链表组成为：</p><ul><li><code>head</code>– 指向表的第一个对象（代表元）</li><li><code>tail</code>– 指向表的最后一个对象</li></ul><p>链表中每个对象的组成为：</p><ul><li>关键字<code>key</code></li><li>指向<code>head</code>的指针<code>prev</code></li><li>指向后一个对象的指针<code>next</code></li></ul><p>时间复杂度：<br><code>MAKE-SET</code>  O(1)<br><code>FIND-SET</code>  O(1)<br><code>UNION</code>（简单实现） $\Theta(n^2)$  【摊还分析】</p><h2 id="简单加权合并启发式策略"><a href="#简单加权合并启发式策略" class="headerlink" title="简单加权合并启发式策略"></a>简单加权合并启发式策略</h2><p>策略是，每次合并时都将较小的链表挂到较大的链表上，需要多维护一个链表长度的属性。</p><p><img src="/2018/10/06/clrs-21DisjointSets/21.1.png"></p><p>证明的核心在于每个对象的指针在所有的<code>UNION</code>操作中最多被更新$\lceil\lg n\rceil$次，因此所有<code>UNION</code>操作中被更新的对象的指针总数为$O(n\lg n)$。加上<code>MAKE-SET</code>和<code>FIND-SEt</code>的O(m)。 </p><h1 id="不相交集合森林"><a href="#不相交集合森林" class="headerlink" title="不相交集合森林"></a>不相交集合森林</h1><p>使用有根树来表示集合。<br>每棵树表示一个集合，树的根结点是该集合的代表元。<br>执行<code>UNION</code>操作时将两棵树的树根合并。<br>实现时可以用到两种改进运行时间的启发式策略。</p><h2 id="按秩合并"><a href="#按秩合并" class="headerlink" title="按秩合并"></a>按秩合并</h2><p>类似链表的加权合并启发式策略<br>为了易于分析，对于每个结点，维护一个<strong>秩</strong>，表示该结点高度的一个上界。<br>秩<code>x.rank</code>代表x的高度的一个上界，高度即<u>从x到某一后代叶结点的最长简单路径上边的数目</u>。<br><code>UNION</code>操作中</p><ul><li>如果根的秩不同，则让较大秩的根成为较小秩的根的父结点，但秩本身保持不变</li><li>如果根的秩相同，则任意选择两个中的一个作为父结点，并使它的秩+1</li></ul><h2 id="路径压缩"><a href="#路径压缩" class="headerlink" title="路径压缩"></a>路径压缩</h2><p>在<code>FIND-SET</code>操作中是查找路径中的每个结点直接指向根，不改变任何结点的秩。</p><h2 id="伪代码"><a href="#伪代码" class="headerlink" title="伪代码"></a>伪代码</h2><center><br><img src="/2018/10/06/clrs-21DisjointSets/makeset.png"><br><img src="/2018/10/06/clrs-21DisjointSets/union.png"><br><img src="/2018/10/06/clrs-21DisjointSets/findset.png"><br></center>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;不相交集合的操作&quot;&gt;&lt;a href=&quot;#不相交集合的操作&quot; class=&quot;headerlink&quot; title=&quot;不相交集合的操作&quot;&gt;&lt;/a&gt;不相交集合的操作&lt;/h1&gt;&lt;p&gt;一个&lt;strong&gt;不相交集合数据结构&lt;/strong&gt;维护了一个不相交动态集的集合&lt;br&gt;
+      
+    
+    </summary>
+    
+      <category term="Notes" scheme="https://mengzelev.github.io/categories/Notes/"/>
+    
+    
+      <category term="Notes" scheme="https://mengzelev.github.io/tags/Notes/"/>
+    
+      <category term="CLRS" scheme="https://mengzelev.github.io/tags/CLRS/"/>
+    
+      <category term="Problem Solving" scheme="https://mengzelev.github.io/tags/Problem-Solving/"/>
+    
+      <category term="Disjoint Sets" scheme="https://mengzelev.github.io/tags/Disjoint-Sets/"/>
+    
+      <category term="Data Structure" scheme="https://mengzelev.github.io/tags/Data-Structure/"/>
+    
+  </entry>
   
   <entry>
     <title>做pa的时候可能会用到的操作</title>
@@ -333,9 +426,9 @@
       <category term="Notes" scheme="https://mengzelev.github.io/categories/Notes/"/>
     
     
-      <category term="Assembly Language" scheme="https://mengzelev.github.io/tags/Assembly-Language/"/>
-    
       <category term="Notes" scheme="https://mengzelev.github.io/tags/Notes/"/>
+    
+      <category term="Assembly Language" scheme="https://mengzelev.github.io/tags/Assembly-Language/"/>
     
   </entry>
   
@@ -360,9 +453,9 @@
       <category term="Notes" scheme="https://mengzelev.github.io/categories/Notes/"/>
     
     
-      <category term="Assembly Language" scheme="https://mengzelev.github.io/tags/Assembly-Language/"/>
-    
       <category term="Notes" scheme="https://mengzelev.github.io/tags/Notes/"/>
+    
+      <category term="Assembly Language" scheme="https://mengzelev.github.io/tags/Assembly-Language/"/>
     
   </entry>
   
