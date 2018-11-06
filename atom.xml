@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://mengzelev.github.io/"/>
-  <updated>2018-10-15T01:17:40.985Z</updated>
+  <updated>2018-11-06T01:34:50.453Z</updated>
   <id>https://mengzelev.github.io/</id>
   
   <author>
@@ -15,6 +15,103 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>PA2实验报告</title>
+    <link href="https://mengzelev.github.io/2018/11/06/PA2-report/"/>
+    <id>https://mengzelev.github.io/2018/11/06/PA2-report/</id>
+    <published>2018-11-06T01:33:26.000Z</published>
+    <updated>2018-11-06T01:34:50.453Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="实验进度描述"><a href="#实验进度描述" class="headerlink" title="实验进度描述"></a>实验进度描述</h1><p><strong>2018/10/04</strong><br>RTF实验讲义，RTFSC，我是谁，我在哪儿，我要干什么</p><p><strong>2018/10/05</strong><br>经历了两天的RTFSC后终于看懂了框架代码是干嘛的，RTFM实现了<code>sub</code>,<code>push</code>,<code>ret</code>,<code>call</code>等指令，在nemu中运行了第一个程序<code>dummy</code></p><p><strong>2018/10/21</strong><br>听了同学们的建议，先实现了<code>diff-test</code>，结果发现PA2.1的指令实现有bug。修复了这些bug并温故框架代码的构成</p><p><strong>2018/10/22</strong><br>花了一整天对照着FM实现了exec目录下大部分指令，填写<code>opcode_table</code>巨表，然而有海量bug等待发现</p><p><strong>2018/10/27</strong><br>开<code>diff-test</code>跑完了cputest中所有的测试，修复了能发现的PA2.2中的bug。<code>bash runall</code>后看到了绿油油的full-combo，心情舒畅。<s>然而并不知道2.3的时候还有海量bug等着自己</s></p><p><strong>2018/10/28</strong><br>实现了<code>string.c</code>中所有的库函数和<code>sprintf</code>，先在nemu外单独手动测试，然后放入klib中，成功运行<code>string.c</code>和<code>hell-str.c</code>，PA2.2基本完成，<code>make submit</code></p><p><strong>2018/11/2</strong><br>实现了<code>in/out</code>指令，成功运行<code>hello</code>。与同学出去吃火锅，讨论发现自己的<code>diff-test</code>歪打正着可以正常运行。</p><p><strong>2018/11/3</strong><br>实现了<code>printf</code>，测试时钟时陷入莫名其妙的Segmentation Fault，在指令中加入大量Log测试，无果；找到大腿进行文件替换，无果；把指令实现和库函数又给了大腿二号进行替换，发现一切运行正常。心态爆炸，怀疑人生，git滚回到2.2完成的状态，从2开始的PA2.3。修仙实现了时钟、键盘和vga，并通过了相关测试，成功运行打字游戏（虽然慢的一笔）。跑分测试时还是出现了bug，遂开启<code>diff-test</code>后滚去睡觉</p><p><strong>2018/11/4</strong><br>起来看到结果发现是<code>neg</code>指令写错了，修复bug后成功运行了三个跑分测试。看到超级无敌慢动作马里奥，差点笑死，<s>录成视频发到qq空间被jyy点赞了</s>。复习链接相关知识，自学Makefile语法，编写硬核实验报告。</p><h1 id="必答题"><a href="#必答题" class="headerlink" title="必答题"></a>必答题</h1><blockquote><p>只有聪明的人才看得见</p></blockquote><h1 id="我遇到的那些bug"><a href="#我遇到的那些bug" class="headerlink" title="我遇到的那些bug"></a>我遇到的那些bug</h1><p>以后实验报告新增这一环节，希望可以帮到其他人</p><ul><li>有些指令不是RTL完了就完事的，还需要<code>operand_write</code>写入到相应位置</li><li>test指令手册表意不清，虽然写了<code>DEST := LeftSRC AND RightSRC</code>，但是两个操作数并不需要改变，不需要进行<code>operand_write</code></li><li>框架里已经为你准备了丰富多彩的译码函数，有些指令有自己特殊的译码函数，赶紧到<code>decode.h</code>里去康康吧！</li><li><code>ret</code>指令需要跳转到返回地址的，没有好好RTFM的后果</li><li><code>sar</code>是需要符号扩展的</li><li>译码函数的立即数读入也是需要符号扩展的</li><li>编译<code>timetest</code>的时候链接出错：<code>undefined reference to</code>，其实是因为<code>stdio.c</code>没有加上重要的头文件</li><li>运行跑分测试<code>coremark</code>时出现内存地址越界，发现是<code>opcode_table</code>中的<code>imul</code>指令的译码函数写错了</li><li><code>neg</code>指令只需要直接取反加一</li><li>不知道时钟怎么写，可以参考一下<code>_putc</code>的代码，里面有提示</li><li><code>native</code>的输入输出实现里有不少提示可供参考</li><li><strong>框架代码中没有rol指令，不知道是可爱PA作者的疏忽还是故意让我们练手的</strong></li></ul><h1 id="蓝框思考题"><a href="#蓝框思考题" class="headerlink" title="蓝框思考题"></a>蓝框思考题</h1><p>临近期中考试，时间不是很充裕，写得很少，但愿今后有机会二周目思考吧</p><ul><li><p>Q:AT&amp;T格式反汇编结果中的少量指令, 与i386手册中列出的指令名称不符, 如cltd. 除了STFW之外, 你有办法在手册中找到对应的指令吗? 如果有的话, 为什么这个办法是有效的呢?<br>A:先STFW试图搞清楚这个指令是干什么的，然后翻手册的目录寻找描述差不多的指令。比如<code>cltd</code>是Convert longword to doubleword的意思，翻手册的目录能找到意思差不多的Convert word to double word。运气好的话可能在STFW的时候就能找到对应的i386的指令名称了。</p></li><li><p>Q：你或许会感到疑惑, 代码优化不是一件好事情吗? 为什么会有volatile这种奇葩的存在? 思考一下, 如果代码中p指向的地址最终被映射到一个设备寄存器, 去掉volatile可能会带来什么问题?<br>  A：因为编译器基本是根据输入输出状态进行的代码优化，而我们有些时候是care中间过程的，例如lab01中的性能测试。如果代码中<code>p</code>指向的地址最终被映射到一个设备寄存器，可能会发生设备状态的跳变，比如显示器某块地方应该是由蓝变绿再变红，会直接从蓝色变成红色。</p></li></ul><h1 id="实验心得"><a href="#实验心得" class="headerlink" title="实验心得"></a>实验心得</h1><ul><li>未测试的代码永远是错的，测试过的代码也不会是对的！隐藏bug无处不在。【PA2.2full-combo的大家几乎都在2.3里发现了cputests没能暴露的bug，以此类推PA3的时候可能还会发现PA2的bug</li><li>要及时坚定滚回去从头再来的决心，试过了力所能及的所有方法都找不出来的bug就不要找了，肯定是在一些玄学的地方犯了玄学的错误，干脆从头重新写一遍</li><li>am相关的概念还不是非常清楚，目前还不影响做实验，但还是想进一步了解</li><li>Copy-paste是坏文明</li><li>github private远程库保命是真的很重要，安心多了</li><li>跑分结果堪忧，但是本着先写对，再完美的宗旨，<s>不管了</s>还是值得开心一下的</li><li>bug死活找不出的时候容易心态血崩，但是这时候只要实现一个小的功能就能瞬间高兴回来</li><li>敲代码真**开心</li></ul><h1 id="Appreciation"><a href="#Appreciation" class="headerlink" title="Appreciation"></a>Appreciation</h1><ul><li>感谢“™写™PA真™开心”群的群友们，一起修仙，一起写bug，一起交流bug，帮忙debug，<s>还在心态快崩的时候一起出去约了顿火锅</s></li><li>感谢xy同学，提供了可供替换的大腿，做得太快了，还给我剧透了不少，让我少踩了不少坑</li><li>感谢ldw同学，用我的代码替换到了他的代码上证明我的指令集和库函数并没有大问题，给了我滚回去重做的决心（</li><li>感谢某位还是不愿意透露姓名的nb学长，通过千里眼，帮忙发现了不少bug</li></ul><p>本实验报告同样会将去掉必答题的版本同步上传至<a href="https://mengzelev.github.io/">个人blog</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;实验进度描述&quot;&gt;&lt;a href=&quot;#实验进度描述&quot; class=&quot;headerlink&quot; title=&quot;实验进度描述&quot;&gt;&lt;/a&gt;实验进度描述&lt;/h1&gt;&lt;p&gt;&lt;strong&gt;2018/10/04&lt;/strong&gt;&lt;br&gt;RTF实验讲义，RTFSC，我是谁，我在哪儿，
+      
+    
+    </summary>
+    
+    
+      <category term="Notes" scheme="https://mengzelev.github.io/tags/Notes/"/>
+    
+      <category term="pa" scheme="https://mengzelev.github.io/tags/pa/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>算法导论学习笔记-单源最短路径</title>
+    <link href="https://mengzelev.github.io/2018/10/30/clrs-24Single-Source-Shortest-Path/"/>
+    <id>https://mengzelev.github.io/2018/10/30/clrs-24Single-Source-Shortest-Path/</id>
+    <published>2018-10-30T14:29:50.000Z</published>
+    <updated>2018-11-06T01:35:41.702Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="前备概念"><a href="#前备概念" class="headerlink" title="前备概念"></a>前备概念</h1><h2 id="环路"><a href="#环路" class="headerlink" title="环路"></a>环路</h2><p>如果有<strong>负权重环路</strong>，问题比较大，因为你在环路里往死里转路径要多短有多短，这时候定义最短路径长度为负无穷。$\delta(u,v)=-\infty$</p><p>如果有<strong>正权重环路</strong>，那最短路径肯定不会走这个环路，所以不影响</p><p>如果有<strong>0权重环路</strong>，那这个环路等于没有，也不影响</p><h2 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h2><p>$v.d$：最短路径估计</p><p>使用下面运行时间为$\Theta(V)$的算法来对最短路径估计和前驱结点进行初始化：</p><p><img src="/2018/10/30/clrs-24Single-Source-Shortest-Path/initialize.png"></p><p>初始化操作的时间复杂度为$\Theta(V)$</p><h2 id="松弛操作"><a href="#松弛操作" class="headerlink" title="松弛操作"></a>松弛操作</h2><p>松弛过程：试图改善从$s$到$v$的最短路径。<br>可能降低最短路径的估计值$v.d$并更新$v$的前驱属性$v.\pi$</p><p><img src="/2018/10/30/clrs-24Single-Source-Shortest-Path/relax.png"></p><p>松弛是<strong>唯一</strong>导致最短路径估计和前驱结点发生变化的操作</p><p>本章讨论的所有算法之间的不同之处是对每条边进行松弛的次数和松弛边的次序有所不同</p><h2 id="最短路径和松弛操作的性质"><a href="#最短路径和松弛操作的性质" class="headerlink" title="最短路径和松弛操作的性质"></a>最短路径和松弛操作的性质</h2><p><img src="/2018/10/30/clrs-24Single-Source-Shortest-Path/properties.png"><br>这几条最好要背下来的，我觉得考试很容易考</p><p>为了方便记忆，po主尝试着<s>用人话</s>复述一遍：</p><ul><li><strong>三角不等式性质：</strong>图里任意两个点和源点$s$构成一个三角形（可以退化为直线），有两边之和大于等于第三边</li><li><strong>上界性质：</strong>$v.d$撑死就是$\delta(s,v)$，不能再小了</li><li><strong>非路径性质：</strong>原话已经很人话了</li><li><strong>收敛性质：</strong>松弛前边的起点已求得最短路径，松弛后边的终点也将获得最短路径buff</li><li><strong>路径松弛性质：</strong>只要一条最短路径上的点是按松弛的，那么估计值就等于最短路径</li><li><strong>前驱子图性质：</strong>最短路径算完了，前驱子图是一颗根结点为$s$的最短路径树</li></ul><h2 id="Bellman-Ford算法"><a href="#Bellman-Ford算法" class="headerlink" title="Bellman-Ford算法"></a>Bellman-Ford算法</h2><h2 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h2><ul><li>先将结点进行初始化</li><li>对每条边进行$|V|-1$次松弛操作</li><li>当存在负权重环路时会返回FALSE</li><li>如果不存在负权重环路，则返回TRUE，每个结点的$v.d$即为源点$s$到该点的最短路径长度</li></ul><h2 id="伪代码"><a href="#伪代码" class="headerlink" title="伪代码"></a>伪代码</h2><p><img src="/2018/10/30/clrs-24Single-Source-Shortest-Path/BF-alg.png"></p><h2 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h2><p>$O(VE)$</p><h2 id="正确性证明"><a href="#正确性证明" class="headerlink" title="正确性证明"></a>正确性证明</h2><p>用到了三角不等式 + 非路径性质 + 前驱子图性质 </p><h1 id="有向无环图（DAG）中的单源最短路径问题"><a href="#有向无环图（DAG）中的单源最短路径问题" class="headerlink" title="有向无环图（DAG）中的单源最短路径问题"></a>有向无环图（DAG）中的单源最短路径问题</h1><p>无环，因此没有负权重的环，对于任何结点，最短路径都是存在的</p><h2 id="算法描述"><a href="#算法描述" class="headerlink" title="算法描述"></a>算法描述</h2><p>先对DAG进行拓扑排序，按照拓扑排序的顺序对每个结点进行松弛操作</p><h2 id="伪代码-1"><a href="#伪代码-1" class="headerlink" title="伪代码"></a>伪代码</h2><p><img src="/2018/10/30/clrs-24Single-Source-Shortest-Path/dag-alg.png"></p><h2 id="时间复杂度-1"><a href="#时间复杂度-1" class="headerlink" title="时间复杂度"></a>时间复杂度</h2><ul><li>拓扑排序(1)： $\Theta(V+E)$</li><li>初始化(2)：$\Theta(V)$</li><li>3~5行的循环（聚合分析）：$\Theta(V)$<br>总时间复杂度：$\Theta(V+E)$</li></ul><h2 id="正确性证明-1"><a href="#正确性证明-1" class="headerlink" title="正确性证明"></a>正确性证明</h2><p><img src="/2018/10/30/clrs-24Single-Source-Shortest-Path/24-5.png"><br>精髓还是在于神奇的路径松弛性质，只要保证每条最短路径上边的松弛次序，就能得出算法终止时$v_i.d=\delta(s,v_i)$</p><h2 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h2><p>PERT图</p><h1 id="Dijkstra算法"><a href="#Dijkstra算法" class="headerlink" title="Dijkstra算法"></a>Dijkstra算法</h1><h2 id="描述-1"><a href="#描述-1" class="headerlink" title="描述"></a>描述</h2><ul><li>解决带权重的有向图上的单源最短路径问题</li><li>要求所有边的权重都为<strong>非负值</strong></li><li>维护一组结点结合$S$，从源点$s$到该集合中每个结点之间的最短路径已经被找到</li><li>使用贪心策略，每次都从结点集$V-S$中选择最短路径估计最小的结点$u$，然后更新与$u$相连的结点的最短路径估计值</li></ul><h2 id="伪代码-2"><a href="#伪代码-2" class="headerlink" title="伪代码"></a>伪代码</h2><p><img src="/2018/10/30/clrs-24Single-Source-Shortest-Path/dijkstra-alg.png"></p><h2 id="正确性证明-2"><a href="#正确性证明-2" class="headerlink" title="正确性证明"></a>正确性证明</h2><p>循环不变式：在算法第4~8行的<code>while</code>语句的每次循环开始前，对于每个结点$v\in S$，有$v.d=\delta(s,v)$</p><p>证明使用了反证法+最小数原理<br>关键步用到了收敛性质和权重非负的假设</p><h2 id="时间复杂度-2"><a href="#时间复杂度-2" class="headerlink" title="时间复杂度"></a>时间复杂度</h2><p>依赖于最小优先队列的实现</p><ul><li>数组遍历： $O(V^2)$</li><li>二叉堆：$O(E\lg V)$</li><li>斐波那契堆:$O(V\lg V+E)$</li></ul><h1 id="最短路径性质的证明"><a href="#最短路径性质的证明" class="headerlink" title="最短路径性质的证明"></a>最短路径性质的证明</h1><h2 id="三角不等式"><a href="#三角不等式" class="headerlink" title="三角不等式"></a>三角不等式</h2><p>根据最短路径的定义即可得证</p><h2 id="最短路径树性质"><a href="#最短路径树性质" class="headerlink" title="最短路径树性质"></a>最短路径树性质</h2><p>最短路径树的三条性质：</p><ul><li>$v’$是图$G$中从源结点$s$可以到达的所有结点的集合</li><li>$G’$形成一棵根结点为$s$的树</li><li>对于所有的结点$v\in V’$，图$G’$中从结点$s$到结点$v$的唯一简单路径是图$G$中从结点$s$到结点$v$的一条最短路径</li></ul><p><u>未完待不会续</u></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;前备概念&quot;&gt;&lt;a href=&quot;#前备概念&quot; class=&quot;headerlink&quot; title=&quot;前备概念&quot;&gt;&lt;/a&gt;前备概念&lt;/h1&gt;&lt;h2 id=&quot;环路&quot;&gt;&lt;a href=&quot;#环路&quot; class=&quot;headerlink&quot; title=&quot;环路&quot;&gt;&lt;/a&gt;环路&lt;/h
+      
+    
+    </summary>
+    
+      <category term="Notes" scheme="https://mengzelev.github.io/categories/Notes/"/>
+    
+    
+      <category term="Notes" scheme="https://mengzelev.github.io/tags/Notes/"/>
+    
+      <category term="CLRS" scheme="https://mengzelev.github.io/tags/CLRS/"/>
+    
+      <category term="Problem Solving" scheme="https://mengzelev.github.io/tags/Problem-Solving/"/>
+    
+      <category term="Single Source Shortest Path" scheme="https://mengzelev.github.io/tags/Single-Source-Shortest-Path/"/>
+    
+      <category term="Bellman-Ford" scheme="https://mengzelev.github.io/tags/Bellman-Ford/"/>
+    
+      <category term="Dijkstra" scheme="https://mengzelev.github.io/tags/Dijkstra/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>算法导论学习笔记-基本图论算法</title>
+    <link href="https://mengzelev.github.io/2018/10/24/clrs-22graphic-algs/"/>
+    <id>https://mengzelev.github.io/2018/10/24/clrs-22graphic-algs/</id>
+    <published>2018-10-24T06:20:35.000Z</published>
+    <updated>2018-10-30T15:04:07.416Z</updated>
+    
+    <content type="html"><![CDATA[<p><u>辣鸡po主只挖坑不填坑</u><br>因为作业实在太多了！！！</p><p>试一下<code>Mathjax</code>有没有配置成功！</p><h1 id="图的表示"><a href="#图的表示" class="headerlink" title="图的表示"></a>图的表示</h1><h2 id="邻接链表-Adjacency-list"><a href="#邻接链表-Adjacency-list" class="headerlink" title="邻接链表(Adjacency-list)"></a>邻接链表(Adjacency-list)</h2><ul><li>由一个包含$|V|$条链表的数组<code>Adj</code>所构成，<code>Adj[u]</code>包含所有与结点u之间有右边相连的结点v</li><li>存储空间需求：$\Theta(V+E)$</li><li>鲁棒性高，稍加修改可以支持许多图的变种（如：有权图）</li><li>缺陷：无法快速判断一条边是否在图中</li></ul><h2 id="邻接矩阵-Adjacency-matrix"><a href="#邻接矩阵-Adjacency-matrix" class="headerlink" title="邻接矩阵(Adjacency-matrix)"></a>邻接矩阵(Adjacency-matrix)</h2><ul><li>用矩阵来存储连通信息</li><li>存储空间需求：<code>\Theta(V^2)</code> 与边数|E|无关</li><li>简单，图规模较小时优先使用</li></ul><h1 id="广度优先搜索BFS"><a href="#广度优先搜索BFS" class="headerlink" title="广度优先搜索BFS"></a>广度优先搜索BFS</h1><h2 id="算法描述"><a href="#算法描述" class="headerlink" title="算法描述"></a>算法描述</h2><ul><li>从一个源结点s开始，每次从已发现的结点向未发现的结点扩展</li><li>算法需要在发现所有距离源结点s为k的所有结点之后，才会发现距离源结点s为k+1的其他结点</li><li>用三种颜色标记结点的访问状态：<ul><li>白色：未被发现</li><li>黑色：本身被发现且所有与之相连的结点都已经被发现</li><li>灰色：本身被发现且与之相连的结点中存在未被发现的</li></ul></li><li>结果可能以来</li></ul><h2 id="伪代码"><a href="#伪代码" class="headerlink" title="伪代码"></a>伪代码</h2><center><br><img src="/2018/10/24/clrs-22graphic-algs/bfs-alg.png"><br></center><ul><li>使用队列存储所有灰色结点</li><li><code>while</code>循环的循环不变式：队列Q中包含的是灰色结点的集合</li></ul><h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><ul><li>结点信息初始化： O(V)</li><li>队列操作总时间： O(V) （每个结点都要进出各一次）</li><li>扫描邻接链表： O(E)</li></ul><p><strong>总时间复杂度：</strong> O(V+E)<br>是图G的邻接链表大小的一个线性函数</p><h2 id="最短路径正确性证明"><a href="#最短路径正确性证明" class="headerlink" title="最短路径正确性证明"></a>最短路径正确性证明</h2><p>一堆定理和证明</p><h2 id="广度优先树"><a href="#广度优先树" class="headerlink" title="广度优先树"></a>广度优先树</h2><h1 id="深度优先搜索DFS"><a href="#深度优先搜索DFS" class="headerlink" title="深度优先搜索DFS"></a>深度优先搜索DFS</h1><h2 id="算法描述-1"><a href="#算法描述-1" class="headerlink" title="算法描述"></a>算法描述</h2><ul><li>大胆地往前走，走到底再回头（雾</li><li>深度优先搜索的前驱子图可能有多棵树组成，即<strong>深度优先森林</strong>因为搜索可能从多个源结点重复进行</li><li>对结点进行黑白灰染色，可以保证每个结点仅在一棵深度优先树中出现，保证所有的深度优先树是不相交的</li><li>时间戳： 每个结点v有两个时间戳<ul><li>第一个时间戳<code>v.d</code>记录结点v第一次被发现的时间（染上灰色的时候）</li><li>第二个时间戳<code>v.f</code>记录搜索完成对v的邻接链表扫描的时间（图上黑色的时候）</li><li>时间戳都是处于1和2|V|之间的整数</li><li><code>u.d</code> &lt; <code>u.f</code></li></ul></li><li>非树边：<ul><li>前向边F：从祖先指向后代</li><li>后向边B：从后代指向祖先（包括有向图中的自循环）</li><li>横向边C：两端点无血缘关系</li></ul></li></ul><h2 id="伪代码-1"><a href="#伪代码-1" class="headerlink" title="伪代码"></a>伪代码</h2><center><br><img src="/2018/10/24/clrs-22graphic-algs/dfs-alg.png"><br></center><h2 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h2><ul><li>结点信息初始化： O(V)</li><li><code>DFS-VISIT</code>： O(E)</li></ul><p><strong>总运行时间： </strong>O(V+E)</p><h2 id="性质"><a href="#性质" class="headerlink" title="性质"></a>性质</h2><p>能提供关于图结构的价值很高的信息</p><h2 id="括号化结构"><a href="#括号化结构" class="headerlink" title="括号化结构"></a>括号化结构</h2>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;&lt;u&gt;辣鸡po主只挖坑不填坑&lt;/u&gt;&lt;br&gt;因为作业实在太多了！！！&lt;/p&gt;
+&lt;p&gt;试一下&lt;code&gt;Mathjax&lt;/code&gt;有没有配置成功！&lt;/p&gt;
+&lt;h1 id=&quot;图的表示&quot;&gt;&lt;a href=&quot;#图的表示&quot; class=&quot;headerlink&quot; title=&quot;图的表
+      
+    
+    </summary>
+    
+      <category term="Notes" scheme="https://mengzelev.github.io/categories/Notes/"/>
+    
+    
+      <category term="Notes" scheme="https://mengzelev.github.io/tags/Notes/"/>
+    
+      <category term="CLRS" scheme="https://mengzelev.github.io/tags/CLRS/"/>
+    
+      <category term="Problem Solving" scheme="https://mengzelev.github.io/tags/Problem-Solving/"/>
+    
+      <category term="Single Source Shortest Path" scheme="https://mengzelev.github.io/tags/Single-Source-Shortest-Path/"/>
+    
+      <category term="Bellman-Ford" scheme="https://mengzelev.github.io/tags/Bellman-Ford/"/>
+    
+      <category term="Dijkstra" scheme="https://mengzelev.github.io/tags/Dijkstra/"/>
+    
+  </entry>
   
   <entry>
     <title>图论学习笔记-树</title>
@@ -508,27 +605,6 @@
     
     
       <category term="markdown" scheme="https://mengzelev.github.io/tags/markdown/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Hello World</title>
-    <link href="https://mengzelev.github.io/2018/07/28/hello-world/"/>
-    <id>https://mengzelev.github.io/2018/07/28/hello-world/</id>
-    <published>2018-07-28T06:23:10.175Z</published>
-    <updated>2017-10-28T00:39:58.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.
-      
-    
-    </summary>
-    
     
   </entry>
   
