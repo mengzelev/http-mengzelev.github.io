@@ -339,6 +339,288 @@
     
     
     <article class="index-post">
+        <a class="abstract-title" href = "/2018/11/28/matchings/" >
+            
+                <span>图论学习笔记-图中的匹配与覆盖</span>
+        </a>
+        <div class="abstract-content">
+            匹配匹配的定义独立：若图的边集中任意两条边不邻接，则称该集合是独立的
+匹配：图$G$中的边的一个独立集$G$的匹配是一个边的集合$M={e_1,e_2,…,e_k}$，其中$e_i=u_iw_i(1\le i\le k)$，使得$u_1,u_2,…,u_k$是$U$中$k$个不同的顶点，$w_1,w_2,…,w_k$是$W$中$k$个不同的顶点。
+匹配存在的条件邻域(neighbourhood)$N(X)$：设$G$为二部图，其部集为$U$和$W$，且$|U|\le |W|$，对于$U$的非空子集$X$，$X$中所有顶点的邻域的并。
+Hall’s condition/友好的(neighb...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/11/28</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Notes">Notes</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Problem Solving">Problem Solving</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Graph Theory">Graph Theory</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Matchings">Matchings</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Factorization">Factorization</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href = "/2018/11/24/lab3-report/" >
+            
+                <span>Lab3：链接与加载（2）实验报告</span>
+        </a>
+        <div class="abstract-content">
+            实现描述寻找正确的入口地址在框架代码抽取出的symtab中主项寻找，如果该项的Type属性为STT_FUNC，就根据其st_name属性去字符串表strtab里寻找该函数的Name属性，并与main进行对比，就能找到main函数对应的表项，此时该表项的st_value属性即 我们需要的入口地址。
+加载程序loader()函数的实现需要程序头表，模仿load_elf_table()函数的写法可将程序头表抽取到结构体Elf32_phdr中，找到p_type为PT_LOAD的表项，读取其p_offset，p_vaddr，p_filesz，p_memsz属性，按照讲义的描述，使用fread函数将...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/11/24</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Notes">Notes</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Lab">Lab</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Ics">Ics</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href = "/2018/11/21/traversability/" >
+            
+                <span>图论学习笔记-旅行问题</span>
+        </a>
+        <div class="abstract-content">
+            Euler图Euler回路(Euler cycle)：图$G$的一条包含$G$的每一条边的回路$C$
+Euler图(Euler graph):含有Euler回路的连通图
+Euler迹(Euler trial)含有连通图$G$的每条边的开迹
+当讨论图的Euler性质时，
+定理6.1：一个非平凡连通图$G$是Euler的 当且仅当 $G$的每个顶点的度都为偶数
+推论6.2：一个连通图$G$含有一条Euler迹当且仅当$G$恰有两个度为奇数的顶点，而且$G$的每一条Euler迹始于一个度为奇数的顶点而终止于另一个度为奇数的顶点。
+例6.3结论：设$G$和$H$是两个非平凡的连通图，则$G\ti...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/11/21</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Notes">Notes</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Problem Solving">Problem Solving</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Graph Theory">Graph Theory</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Traversibility">Traversibility</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href = "/2018/11/18/PA3-report/" >
+            
+                <span>PA3实验报告</span>
+        </a>
+        <div class="abstract-content">
+            PA3 实验报告姓名：刘恩萌学号：171860013
+实验进度我已完成所有内容。好，下面是惯例碎碎念。
+2018/11/18心态爆炸的一天！先是因为脑子短路完全没有想到idt的地址就在lidt译码过后的id_dest里。然后还因为惯性思维从id_dest-&gt;val里读地址，疯狂出错才发现应该在id_dest-&gt;addr里（因为是地址）。组织Context的时候思考了半天，最后问了大腿才知道怎么判断上下文的组织结构。感觉还是课本知识学得不够扎实的恶果。今日不宜PA，关机睡觉。
+2018/11/19PA3.1完成。感觉测试手段都不太给力，不知道有没有埋下隐藏bug
+2018/11...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/11/18</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Notes">Notes</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "pa">pa</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href = "/2018/11/14/connectivity/" >
+            
+                <span>图论学习笔记-图中的连通性与距离</span>
+        </a>
+        <div class="abstract-content">
+            割点割点的定义：去掉这个点后，原图不再连通
+定理5.1：设$v$是连通图$G$中与bridge相连的一个结点，则$v$是割点当且仅当$deg v\ge 2$非简单树 = 端点 + 割点
+推论5.2：设$G$是一个至少有3个顶点的连通图，若$G$有bridge，则$G$一定有割点
+定理5.3：设$v$是连通图$G$的一个割点，$u$和$w$是$G-v$不同components中的两个顶点，则$v$位于$G$的任意一条$u-w$路径上。
+回顾定理4.1：边$e$是bridge当且仅当$e$不存在于任何一个cycle上
+推论5.4：$v$是连通图$G$的一个割点 当且仅当 存在与$v$不同的两...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/11/14</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Notes">Notes</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Problem Solving">Problem Solving</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Graph Theory">Graph Theory</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Connectivity">Connectivity</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href = "/2018/11/07/clrs-25All-Pairs-Shortest-Paths/" >
+            
+                <span>算法导论学习笔记-所有结点对的最短路径问题</span>
+        </a>
+        <div class="abstract-content">
+            矩阵乘法最优子结构$l_{ij}^(m)}$:从结点$i$到结点$j$的至多包含$m$条边的任意路径中的最小权重。$$l_{ij}^{(m)} = \min\limits_{1\lek\le n}{l_{ik}^{(m1)}+w_{kj}}$$
+自底向上计算最短路径权重
+三重循环，时间复杂度为$\Theta(n^3)$
+形式上与矩阵乘法的计算非常类似
+计算$L^{(n-1)}=W^{n-1}$
+这个算法本质上就是对$n$个点每个跑了一遍Bellman-Ford
+改进运行时间重复平方技术二分计算矩阵的幂
+
+
+优化后时间复杂度为$\Theta(n^3\lgn n)$
+Floyd-Warsha...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/11/07</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Notes">Notes</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "CLRS">CLRS</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Problem Solving">Problem Solving</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Graph Algorithms">Graph Algorithms</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "All-Pairs Shortest Path">All-Pairs Shortest Path</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href = "/2018/11/06/lab2-report/" >
+            
+                <span>Lab2:链接与加载 实验报告</span>
+        </a>
+        <div class="abstract-content">
+            实验过程按照实验讲义的提示，首先找到了libc库所在的位置，输出基本与讲义中给出的一致，不作赘述。
+编写的测试文件a.c的代码为
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+int main (){
+    int a = rand();
+    printf(&quot;%d\n&quot;,a);
+    return 0;
+}
+只需要有对rand的调用且保证不会被编译器优化掉就可以了。
+找到动态库文件之后，对该二进制文件进行反汇编
+$ objdump -d /lib/x86_64-linux-gnu/libc.so.6 &...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/11/06</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Notes">Notes</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Lab">Lab</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Ics">Ics</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href = "/2018/11/06/PA2-report/" >
             
                 <span>PA2实验报告</span>
@@ -727,9 +1009,127 @@
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 21
+        Total : 29
         </div>
         <!-- search  -->
         
@@ -742,6 +1142,46 @@
     
     <div class="archive-year"> 2018 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/05</span><a class="archive-post-title" href= "/2018/12/05/clrs-26Maximum-Flow/" >算法导论学习笔记-最大流</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/28</span><a class="archive-post-title" href= "/2018/11/28/matchings/" >图论学习笔记-图中的匹配与覆盖</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/24</span><a class="archive-post-title" href= "/2018/11/24/lab3-report/" >Lab3：链接与加载（2）实验报告</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/21</span><a class="archive-post-title" href= "/2018/11/21/traversability/" >图论学习笔记-旅行问题</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/18</span><a class="archive-post-title" href= "/2018/11/18/PA3-report/" >PA3实验报告</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/14</span><a class="archive-post-title" href= "/2018/11/14/connectivity/" >图论学习笔记-图中的连通性与距离</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/07</span><a class="archive-post-title" href= "/2018/11/07/clrs-25All-Pairs-Shortest-Paths/" >算法导论学习笔记-所有结点对的最短路径问题</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/06</span><a class="archive-post-title" href= "/2018/11/06/lab2-report/" >Lab2:链接与加载 实验报告</a>
+        </li>
     
     
         <li class="archive-post-item">
@@ -775,12 +1215,12 @@
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">10/04</span><a class="archive-post-title" href= "/2018/10/04/pa-inspirations/" >做pa的时候可能会用到的操作</a>
+            <span class="archive-post-date">10/04</span><a class="archive-post-title" href= "/2018/10/04/PA1-report/" >PA1实验报告</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">10/04</span><a class="archive-post-title" href= "/2018/10/04/PA1-report/" >PA1实验报告</a>
+            <span class="archive-post-date">10/04</span><a class="archive-post-title" href= "/2018/10/04/pa-inspirations/" >做pa的时候可能会用到的操作</a>
         </li>
     
     
@@ -879,6 +1319,14 @@
     
         <span class="sidebar-tag-name" data-tags="Dijkstra"><span class="iconfont-archer">&#xe606;</span>Dijkstra</span>
     
+        <span class="sidebar-tag-name" data-tags="Graph Algorithms"><span class="iconfont-archer">&#xe606;</span>Graph Algorithms</span>
+    
+        <span class="sidebar-tag-name" data-tags="All-Pairs Shortest Path"><span class="iconfont-archer">&#xe606;</span>All-Pairs Shortest Path</span>
+    
+        <span class="sidebar-tag-name" data-tags="Graph Theory"><span class="iconfont-archer">&#xe606;</span>Graph Theory</span>
+    
+        <span class="sidebar-tag-name" data-tags="Connectivity"><span class="iconfont-archer">&#xe606;</span>Connectivity</span>
+    
         <span class="sidebar-tag-name" data-tags="freshman"><span class="iconfont-archer">&#xe606;</span>freshman</span>
     
         <span class="sidebar-tag-name" data-tags="college life"><span class="iconfont-archer">&#xe606;</span>college life</span>
@@ -891,6 +1339,10 @@
     
         <span class="sidebar-tag-name" data-tags="Ics"><span class="iconfont-archer">&#xe606;</span>Ics</span>
     
+        <span class="sidebar-tag-name" data-tags="Matchings"><span class="iconfont-archer">&#xe606;</span>Matchings</span>
+    
+        <span class="sidebar-tag-name" data-tags="Factorization"><span class="iconfont-archer">&#xe606;</span>Factorization</span>
+    
         <span class="sidebar-tag-name" data-tags="Linux"><span class="iconfont-archer">&#xe606;</span>Linux</span>
     
         <span class="sidebar-tag-name" data-tags="vim"><span class="iconfont-archer">&#xe606;</span>vim</span>
@@ -901,15 +1353,19 @@
     
         <span class="sidebar-tag-name" data-tags="markdown"><span class="iconfont-archer">&#xe606;</span>markdown</span>
     
-        <span class="sidebar-tag-name" data-tags="tmux"><span class="iconfont-archer">&#xe606;</span>tmux</span>
-    
         <span class="sidebar-tag-name" data-tags="Java"><span class="iconfont-archer">&#xe606;</span>Java</span>
     
         <span class="sidebar-tag-name" data-tags="programming"><span class="iconfont-archer">&#xe606;</span>programming</span>
     
+        <span class="sidebar-tag-name" data-tags="tmux"><span class="iconfont-archer">&#xe606;</span>tmux</span>
+    
+        <span class="sidebar-tag-name" data-tags="Traversibility"><span class="iconfont-archer">&#xe606;</span>Traversibility</span>
+    
         <span class="sidebar-tag-name" data-tags="Graph"><span class="iconfont-archer">&#xe606;</span>Graph</span>
     
         <span class="sidebar-tag-name" data-tags="Tree"><span class="iconfont-archer">&#xe606;</span>Tree</span>
+    
+        <span class="sidebar-tag-name" data-tags="Maximum Flow"><span class="iconfont-archer">&#xe606;</span>Maximum Flow</span>
     
     </div>
     <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>

@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://mengzelev.github.io/"/>
-  <updated>2018-11-06T01:34:50.453Z</updated>
+  <updated>2018-12-08T02:14:21.948Z</updated>
   <id>https://mengzelev.github.io/</id>
   
   <author>
@@ -15,6 +15,249 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>算法导论学习笔记-最大流</title>
+    <link href="https://mengzelev.github.io/2018/12/05/clrs-26Maximum-Flow/"/>
+    <id>https://mengzelev.github.io/2018/12/05/clrs-26Maximum-Flow/</id>
+    <published>2018-12-05T07:03:20.000Z</published>
+    <updated>2018-12-08T02:14:21.948Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="流网络"><a href="#流网络" class="headerlink" title="流网络"></a>流网络</h1><h2 id="流网络-1"><a href="#流网络-1" class="headerlink" title="流网络"></a>流网络</h2><ul><li>有向图$G=(V,E)$</li><li>图中中每条边$(u,v)\in E$有一个非负的<strong>容量值</strong>$c(u,v)\ge 0$</li><li>如果$(u,v)\notin E$，定义$c(u,v)=0$</li><li>如果边集合$E$包含一条边$(u,v)$，则图中不存在反方向的边$(v,u)$</li><li>有<strong>源结点$s$</strong>和<strong>汇点$t$</strong></li><li>流网络图是连通的</li><li>除源结点外的每个结点都至少有一条进入的边，$|E|\ge |V|-1$</li></ul><h2 id="流"><a href="#流" class="headerlink" title="流"></a>流</h2><p>设$G=(V,E)$为一个流网络，其容量函数为$c$。设$s$为网络的源结点，$t$为汇点。$G$中的流是一个实值函数$f: V\times V \to \mathbb{R}$，满足下面两条性质：</p><ul><li><strong>容量限制</strong>：对于所有的结点$u,v\in V$，要求$0\le f(u,v)\le c(u,v)$</li><li><strong>流量守恒</strong>：对于所有的结点$u\in V-{s,t}$，要求$$\sum\limits f(v,u)=\sum\limits f(u,v)$$当$(u,v)\notin E$时，从结点$u$到结点$v$之间没有流，因此$f(u,v)=0$</li></ul><p>称非负数值$f(u,v)$为从结点$u$到结点$v$的流。（流入=流出）</p><p>一个流$f$的<strong>值</strong>$|f|=\sum\limits_{v\in V}f(s,v)-\sum\limits_{v\in V}f(v,s)$ （从源结点流出的总流量减去流入源结点的总流量）</p><p><strong>最大流问题</strong>：给定一个流网络$G$、一个源结点$s$、一个汇点$t$，找到值最大的一个流</p><h2 id="反平行边"><a href="#反平行边" class="headerlink" title="反平行边 "></a><strong>反平行边</strong> </h2><p>如果要使用反平行边来模拟一个流问题，就选择两条反平行边中的一条，加入一个新结点来将其分解为两段，并以新的结点到原来边的结点的两条路替换所选边，同时将两条新设立的边的容量设置为与原来的边的容量相同。</p><p><img src="/2018/12/05/clrs-26Maximum-Flow/antiparallel.png"></p><h2 id="具有多个源结点和多个汇点的网络"><a href="#具有多个源结点和多个汇点的网络" class="headerlink" title="具有多个源结点和多个汇点的网络"></a>具有多个源结点和多个汇点的网络</h2><p>加入一个<strong>超级源结点$s$</strong>和一个<strong>超级汇点$t$</strong></p><p><img src="/2018/12/05/clrs-26Maximum-Flow/multi.png"></p><h1 id="Ford-Fulkerson方法"><a href="#Ford-Fulkerson方法" class="headerlink" title="Ford-Fulkerson方法"></a>Ford-Fulkerson方法</h1><p><img src="/2018/12/05/clrs-26Maximum-Flow/ffm.png"></p><h2 id="残存网络"><a href="#残存网络" class="headerlink" title="残存网络"></a>残存网络</h2><p>给定流网络$G$和流量$f$，残存网络$G_f$由那些仍有空间对流量进行调整的边构成。</p><p>残存容量为$c_f(u,c)=c(u,v)-f(u,v)$</p><p>对正流量的<strong>缩减</strong>：将边$(v,u)$加入到图$G_f$中，并将其残存容量设置为$c_f(v,u)=f(u,v)$</p><p><strong>残存容量</strong>的形式化定义如下：<br><img src="/2018/12/05/clrs-26Maximum-Flow/residual_capacity.png"></p><p>给定一个流网络$G=(V,E)$和一个流$f$，则有$f$所诱导的图$G$的残存网络为$G_f=(V,E_f)$，其中$E_f={(u,v)\in V\times V: c_f(u,v)&gt;0}$，有$|E_f|\le 2|E|$</p><p><strong>递增</strong>：如果$f$是$G$的一个流，$f’$是对应的残存网络$G_f$的中的一个流，定义$$f’\uparrow f’:V\times V\to\mathbb{R}$$为流$f’$对流$f$的<strong>递增</strong></p><p><img src="/2018/12/05/clrs-26Maximum-Flow/augmentation.png"></p><p><strong>抵消操作</strong>：在残存网络中将流量推送回去</p><p><strong>引理26.1</strong>：$$|f\uparrow f’|=|f|+|f’|$$</p><h2 id="增广路径"><a href="#增广路径" class="headerlink" title="增广路径"></a>增广路径</h2><p><strong>增广路径</strong>$p$：残存网络$G_f$中一条从源结点$s$到汇点$t$的简单路径</p><p><strong>残存容量</strong>：在一条增广路径$p$上能够为每条边增加的流量的最大值$$c_f(p)=\min{c_f(u,v): (u,v)\in p}$$</p><p><img src="/2018/12/05/clrs-26Maximum-Flow/Lemma26-2.png"><br><img src="/2018/12/05/clrs-26Maximum-Flow/Lemma26-3.png"></p><h2 id="流网络的切割"><a href="#流网络的切割" class="headerlink" title="流网络的切割"></a>流网络的切割</h2><p><strong>流网络的切割</strong>：将结点集合$V$划分为$S$和$T=V-S$两个集合，使得$s\in S, t\in T$</p><p>横跨切割的$(S,T)$的<strong>净流量</strong>$f(S,T)$：$$f(S,T)=\sum\limits_{u\in S}\sum\limits_{v\in T}f(u,v)-\sum\limits_{u\in S}\sum\limits_{v\in T}f(v,u)$$</p><p>切割$(S,T)$的<strong>容量</strong>：$$c(S,T)=\sum\limits_{v\in S}\sum\limits_{v\in T}c(u,v)$$<br><strong>最小切割</strong>：整个网络中容量最小的切割</p><ul><li>对于容量，只计算从集合$S$发出进入集合$T$的边的容量，而忽略反方向边上的容量</li><li>对于流，考虑从$S$到$T$的流量减去从$T$到$S$的反方向的流量</li></ul><p><strong>引理26.4</strong>：整个流网络的流量与横跨某一个切割的流量相等$$f(S,T)=|f|$$</p><p><strong>推论26.5</strong>：$|f|\ge c(S,T)$</p><p><strong>定理26.6(最大流最小割定理)</strong><br><img src="/2018/12/05/clrs-26Maximum-Flow/Theorem26-6.png"></p><h2 id="基本的Ford-Fulkerson算法"><a href="#基本的Ford-Fulkerson算法" class="headerlink" title="基本的Ford-Fulkerson算法"></a>基本的Ford-Fulkerson算法</h2><p><img src="/2018/12/05/clrs-26Maximum-Flow/ff.png"></p><p>粗糙的时间复杂度上界：$O(E|f<em>|)$（$f</em>$为将有理数流网络转换成整数流网络后，网络中的一个最大流）</p><h2 id="Edmonds-Karp算法"><a href="#Edmonds-Karp算法" class="headerlink" title="Edmonds-Karp算法"></a>Edmonds-Karp算法</h2><p>在Ford-Fulkerson算法的第三行使用<strong>广度优先搜索</strong>来寻找增广路径。<br>每次在残存网络中选择的增广路径是一条从源结点$s$到汇点$t$的最短路径，其中每条边的权重为单位距离。</p><p>时间复杂度：$O(VE^2)$</p><p><strong>引理26.7</strong>：使用Edmonds-Karp算法，对于除源结点和汇点外的所有结点$v$，残存网络$G_f$中的最短路径距离$\delta_f(s,v)$随着每次流量的递增而单调递增。</p><p><strong>定理26.8</strong>：Edmonds-Karp算法所执行的流量递增操作的总次数为$O(VE)$</p><p><strong>关键边</strong>：在残存网络中，一条路径$p$的残存容量是该条路径上边$(u,v)$的残存容量，即$c_f(p)=c_f(u,v)$<br>对于$E$的每条边来说，其成为关键边的次数最多为$|V|/2$次。</p><h1 id="最大二分匹配"><a href="#最大二分匹配" class="headerlink" title="最大二分匹配"></a>最大二分匹配</h1><p>在一个二分图中，结点集合可以划分为$V=L\cup R$，其中$L$和$R$是不相交的，并且边集合$E$中所有的边都横跨$L$和$R$。</p><p>构造一个流网络$G=(V’,E’)$，其中$$V’=V\cup{s,t}$$$$E={(s,u):u\in L, u\in L}\cup {(u,v):(u,v)\in E}\cup {(v,t):v\in\mathbb{R}}$$<br>给$E’$中的每条边赋单位容量</p><p><img src="/2018/12/05/clrs-26Maximum-Flow/26-9.png"></p><p>流$f$是<strong>整数值</strong>的：对于所有的边$(u,v)\in V\times V$，$f(u,v)$都是整数值。</p><p><strong>定理26.10（完整性定理Integrality theorem）</strong>：如果容量函数$c$只能取整数值，则$Ford-Fulkerson$方法所生成的最大流$f$满足$|f|$是整数值的性质。而且，对于所有的结点$u$和$v$，$f(u,v)$都是整数。</p><p><strong>推论26.11</strong>：二分图$G$中的一个最大匹配$M$的基数等于其对应的流网络$G’$中某一最大流$f$的值。</p><p>时间复杂度：$O(VE)$</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;流网络&quot;&gt;&lt;a href=&quot;#流网络&quot; class=&quot;headerlink&quot; title=&quot;流网络&quot;&gt;&lt;/a&gt;流网络&lt;/h1&gt;&lt;h2 id=&quot;流网络-1&quot;&gt;&lt;a href=&quot;#流网络-1&quot; class=&quot;headerlink&quot; title=&quot;流网络&quot;&gt;&lt;/a&gt;流网
+      
+    
+    </summary>
+    
+      <category term="Notes" scheme="https://mengzelev.github.io/categories/Notes/"/>
+    
+    
+      <category term="Notes" scheme="https://mengzelev.github.io/tags/Notes/"/>
+    
+      <category term="CLRS" scheme="https://mengzelev.github.io/tags/CLRS/"/>
+    
+      <category term="Problem Solving" scheme="https://mengzelev.github.io/tags/Problem-Solving/"/>
+    
+      <category term="Graph Algorithms" scheme="https://mengzelev.github.io/tags/Graph-Algorithms/"/>
+    
+      <category term="Maximum Flow" scheme="https://mengzelev.github.io/tags/Maximum-Flow/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>图论学习笔记-图中的匹配与覆盖</title>
+    <link href="https://mengzelev.github.io/2018/11/28/matchings/"/>
+    <id>https://mengzelev.github.io/2018/11/28/matchings/</id>
+    <published>2018-11-28T06:59:39.000Z</published>
+    <updated>2018-12-01T02:14:22.945Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="匹配"><a href="#匹配" class="headerlink" title="匹配"></a>匹配</h1><h2 id="匹配的定义"><a href="#匹配的定义" class="headerlink" title="匹配的定义"></a>匹配的定义</h2><p><strong>独立</strong>：若图的边集中任意两条边不邻接，则称该集合是独立的</p><p><strong>匹配</strong>：图$G$中的边的一个独立集<br>$G$的<strong>匹配</strong>是一个边的集合$M={e_1,e_2,…,e_k}$，其中$e_i=u_iw_i(1\le i\le k)$，使得$u_1,u_2,…,u_k$是$U$中$k$个不同的顶点，$w_1,w_2,…,w_k$是$W$中$k$个不同的顶点。</p><h2 id="匹配存在的条件"><a href="#匹配存在的条件" class="headerlink" title="匹配存在的条件"></a>匹配存在的条件</h2><p><strong>邻域(neighbourhood)</strong>$N(X)$：设$G$为二部图，其部集为$U$和$W$，且$|U|\le |W|$，对于$U$的非空子集$X$，$X$中所有顶点的邻域的并。</p><p><strong>Hall’s condition/友好的(neighborly)</strong>：对于$U$的任意非空子集$X$，均有$|N(X)|\ge |X|$。</p><p><strong>定理8.3</strong>：设$G$为二部图，其部集为$U$和$W$，且$r=|U|\le |W|$。则$G$包含一个基数为$r$的匹配当且仅当$U$是<strong>友好的</strong>。 </p><p><strong>定理8.4</strong>：非空有限集族${S_1,S_2,…,S_n}$有一个互异代表元系(system of distinct representative) 当且仅当 对于任一整数$k(1\le k\le n)$，集族中任意$k$个集合的并至少包含$k$个元素。</p><p><strong>定理8.5(婚姻定理)</strong>:在一个由$r$个女人和$s$个男人构成的人群中，$1\le r\le s$，在熟识的男女之间可能出现$r$对婚姻当且仅当对每个整数$k(1\le k\le r)$，任意$k$个女人共认识至少$k$个男人。</p><p><strong>最大匹配(maximum matching)</strong>：具有最大基数的匹配</p><p><strong>完美匹配(perfect matching)</strong>：阶为$2k$的图$G$存在一个基数为$k$的匹配$M$，则称该匹配$M$为完美匹配</p><p><strong>定理8.6</strong>：任意$r$正则二部图$(r\ge 1)$均有一个完美匹配。</p><h2 id="边的独立性参数"><a href="#边的独立性参数" class="headerlink" title="边的独立性参数"></a>边的独立性参数</h2><p><strong>边独立数(edge independence number)</strong>$\alpha ‘(G)$：最大边独立集的基数</p><p><strong>覆盖</strong>：一个顶点和与其相连的一条边</p><p><strong>边覆盖数(edge covering number)</strong>$\beta ‘(G)$：$G$中所有边覆盖的最小基数</p><p><strong>最小边覆盖集(minimum edge cover)</strong>：具有最小基数的边覆盖集</p><p><strong>定理8.7</strong>：对于任意不包含孤立点的$n$阶图$G$，$$\alpha’(G)+\beta’(G)=n$$</p><h2 id="顶点的独立性参数"><a href="#顶点的独立性参数" class="headerlink" title="顶点的独立性参数"></a>顶点的独立性参数</h2><p>如果图中的一个顶点集合中任意两顶点都不邻接，则称该顶点的集合是<strong>独立</strong>的</p><p><strong>点独立数(vertex independence number)</strong>$\alpha(G)$:$G$中点独立集的最大基数，又称<strong>独立数</strong></p><p><strong>最大独立集(maximum independence set)</strong>：图$G$中基数为$\alpha(G)$的独立集</p><p><strong>点覆盖(vertex cover)</strong>：图$G$的某个顶点子集可以覆盖$G$的所有边</p><p><strong>点覆盖数(vertex covering number)</strong>$\beta(G)$：$G$的所有点覆盖的最小基数</p><p><strong>最小点覆盖(minimum vertex cover)</strong>：基数为$\beta(G)$的点覆盖</p><p><strong>定理8.8</strong>:对于任意不包含孤立点的$n$阶图，$$\alpha(G)+\beta(G)=n$$</p><p><strong>定理8.7</strong>与<strong>定理8.8</strong>合称为<strong>Gallai恒等式</strong></p><p>一般独立集比覆盖集好求</p><h1 id="因子分解"><a href="#因子分解" class="headerlink" title="因子分解"></a>因子分解</h1><h2 id="1因子"><a href="#1因子" class="headerlink" title="1因子"></a>1因子</h2><p><strong>1因子(1-factor)</strong>：图$G$的1正则生成子图。<br>$n$阶图$G$的完美匹配$M$的诱导的子图$F[M]$是$G$的1因子。<br>图$G$有1因子当且仅当$G$有完美匹配。</p><p>连通分支的<strong>奇偶性</strong>就是该连通分支的阶的<strong>奇偶性</strong>。<br>$k_O(G)$表示图$G$的<strong>奇连通分支</strong>的个数。</p><p><strong>定理8.10</strong>：图$G$包含1因子当且仅当对于$V(G)$的任意真子集$S$，$k_O(G-S)\le |S|$。</p><p><strong>定理8.11(Petersen定理)</strong>：所有无割边的3正则图包含1因子。</p><p><strong>定理8.12</strong>：任一至多含有两条割边的3正则图包含1因子。</p><h2 id="分解"><a href="#分解" class="headerlink" title="分解"></a>分解</h2><p><strong>可因子分解的(1-factorable)</strong>：若$G$有1因子$F_1,F_2,…,F_r$，使得${E(F_1),E(F_2),…,E(F_r)}$是$E(G)$的一个划分，此时我们称$G$被<strong>因子分解(factored)</strong>成1因子$F_1,F_2,…,F_r$；这些1因子构成了$G$的<strong>1因子分解(1-factorization)</strong></p><p>任一可1因子分解的图是正则的，反之不真，反例：Peterson图</p><p><strong>定理8.13</strong>：Petersen图是不可1因子分解的。</p><p><strong>定理8.14</strong>：对于任意正整数$k$，完全图$K_{2k}$是可1因子分解的。</p><p><strong>循环因子分解(cyclic factorization)</strong>：如图所示，所有因子分解可以由某一个因子分解旋转一定角度得到</p><p><img src="/2018/11/28/matchings/cyclic.png"></p><p><strong>定理8.15</strong>：任意$r$正则的二部图$(r\ge 1)$是可1因子分解的。</p><h2 id="2因子"><a href="#2因子" class="headerlink" title="2因子"></a>2因子</h2><p><strong>2因子(2-factor)</strong>：图$G$的二正则生成子图</p><p>2因子的任一连通分支是一个圈。</p><p><strong>可2因子分解的(2-factorable)</strong>：定义类似1因子</p><p><strong>定理8.16</strong>：图$G$是可2因子分解的当且仅当存在某个正偶数$r$，是的$G$是$r$正则的。</p><p><strong>*Hamilton因子分解(Hamilton factorization)</strong>：$G$的一个2因子分解，满足该分解中所有2因子均是Hamilton圈</p><p><strong>定理8.17</strong>：对于任一整数$k\ge 1$，完全图$K_{2k+1}$是可Hamilton分解的。<br>证明：构造法（如图）</p><p><img src="/2018/11/28/matchings/K9.png"></p><h2 id="因子"><a href="#因子" class="headerlink" title="因子"></a>因子</h2><p><strong>因子(factor)</strong>：图$G$不含有孤立点的生成子图</p><p><strong>可因子分解(factorable)</strong>：因子$F_1,F_2,…,F_r$，满足${E(F_1),E(F_2),…,E(F_r)}$是$E(G)$的一个划分。</p><p><strong>可F-因子分解的(F-factorable)</strong>：若存在某个图$F$，是的每个因子$F_i\cong F$</p><h2 id="Kirkman三元系"><a href="#Kirkman三元系" class="headerlink" title="Kirkman三元系"></a>Kirkman三元系</h2><p><strong>n阶的Kirkman三元系(Kirkman triple system)</strong>：有一个基数为$n$的集合$S$，和$S$的三元子集（称为<strong>三元组(triple)</strong>）族$T$，以及$T$的一个划分$\mathcal{P}$构成，且满足如下性质：</p><ol><li>$S$中任意两个不同的元素属于$T$中唯一的三元组</li><li>$S$中任一元素属于划分$\mathcal{P}$的每一元素的唯一的三元组</li></ol><p>存在一个$6k+3$阶Kirkman三元系当且仅当存在一个$K_{6k+3}$的$(2k+1)K_3$因子分解</p><p><strong>定理8.19</strong>：$n(n\ge 3)$阶的Kirkman三元系存在当且仅当$n\equiv 3(mod 6)$，即$n=6k+3$</p><p><strong>定理8.20</strong>：对于每个整数$k\ge 1$，完全图$K_{2k}$可因子分解为$k-1$个Hamilton圈和一个1因子。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;匹配&quot;&gt;&lt;a href=&quot;#匹配&quot; class=&quot;headerlink&quot; title=&quot;匹配&quot;&gt;&lt;/a&gt;匹配&lt;/h1&gt;&lt;h2 id=&quot;匹配的定义&quot;&gt;&lt;a href=&quot;#匹配的定义&quot; class=&quot;headerlink&quot; title=&quot;匹配的定义&quot;&gt;&lt;/a&gt;匹配的定
+      
+    
+    </summary>
+    
+      <category term="Notes" scheme="https://mengzelev.github.io/categories/Notes/"/>
+    
+    
+      <category term="Notes" scheme="https://mengzelev.github.io/tags/Notes/"/>
+    
+      <category term="Problem Solving" scheme="https://mengzelev.github.io/tags/Problem-Solving/"/>
+    
+      <category term="Graph Theory" scheme="https://mengzelev.github.io/tags/Graph-Theory/"/>
+    
+      <category term="Matchings" scheme="https://mengzelev.github.io/tags/Matchings/"/>
+    
+      <category term="Factorization" scheme="https://mengzelev.github.io/tags/Factorization/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Lab3：链接与加载（2）实验报告</title>
+    <link href="https://mengzelev.github.io/2018/11/24/lab3-report/"/>
+    <id>https://mengzelev.github.io/2018/11/24/lab3-report/</id>
+    <published>2018-11-24T09:17:47.000Z</published>
+    <updated>2018-11-30T14:18:07.067Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="实现描述"><a href="#实现描述" class="headerlink" title="实现描述"></a>实现描述</h1><h2 id="寻找正确的入口地址"><a href="#寻找正确的入口地址" class="headerlink" title="寻找正确的入口地址"></a>寻找正确的入口地址</h2><p>在框架代码抽取出的<code>symtab</code>中主项寻找，如果该项的<code>Type</code>属性为<code>STT_FUNC</code>，就根据其<code>st_name</code>属性去字符串表<code>strtab</code>里寻找该函数的<code>Name</code>属性，并与<code>main</code>进行对比，就能找到<code>main</code>函数对应的表项，此时该表项的<code>st_value</code>属性即 我们需要的入口地址。</p><h2 id="加载程序"><a href="#加载程序" class="headerlink" title="加载程序"></a>加载程序</h2><p><code>loader()</code>函数的实现需要程序头表，模仿<code>load_elf_table()</code>函数的写法可将程序头表抽取到结构体<code>Elf32_phdr</code>中，找到<code>p_type</code>为<code>PT_LOAD</code>的表项，读取其<code>p_offset</code>，<code>p_vaddr</code>，<code>p_filesz</code>，<code>p_memsz</code>属性，按照讲义的描述，使用<code>fread</code>函数将可执行文件中相对文件偏移<code>p_offset</code>的内容读取<code>p_filedz</code>到内存地址为<code>[p_addr, p_addr + p_filesz</code>的地方，并用<code>memset</code>函数将<code>[p_vaddr + p_filesz, p_vaddr + p_memsiz)</code>对应的物理区间清零。</p><h2 id="打印栈帧链"><a href="#打印栈帧链" class="headerlink" title="打印栈帧链"></a>打印栈帧链</h2><p>第一次打印<code>eip</code>的值作为当前地址，之后每次都取内存中<code>ebp-4</code>的地址存放的返回地址作为函数调用的地址。函数的名字通过去<code>symtab</code>中寻找对应表项并从<code>strtab</code>中提取而得。仿照gdb的<code>bt</code>命令输出打印出来。对<code>ebp</code>的值解引用能得到上一个函数的<code>ebp</code>的值。如此循环直到<code>ebp</code>的信息为0为止。</p><h1 id="实验过程"><a href="#实验过程" class="headerlink" title="实验过程"></a>实验过程</h1><p>留着以后当笑话看的碎碎念</p><h2 id="寻找正确的入口地址-1"><a href="#寻找正确的入口地址-1" class="headerlink" title="寻找正确的入口地址"></a>寻找正确的入口地址</h2><p>我本来以为这个只要做好RTFSC就不会花太多时间的，<code>man 5 elf</code>之后理所当然地写了如下代码：</p><pre><code>if(symtab[i].st_info == STT_FUNC)</code></pre><p>发现怎么都找不到<code>main</code>，各种调试了一个多小时之后，问了同学才意识到，<code>st_info</code>不是直接的<code>type</code>值，<code>type</code>只占了低四位，高四位为绑定属性<code>bind</code>，把FM继续往下翻可以看到</p><pre><code>ELF32_ST_BIND(info), ELF64_ST_BIND(info)                                                                    Extract a binding from an st_info value. </code></pre><p><s>泪，可以流下来吗</s><br>论耐心RTFM的重要性</p><h2 id="加载程序-1"><a href="#加载程序-1" class="headerlink" title="加载程序"></a>加载程序</h2><p>这部分基本是照抄框架代码抽取<code>El32_Shdr</code>的方法抽取了<code>Elf32_Phdr</code>，让我自己写大概还是写不出来的吧[自卑.jpg]</p><h2 id="打印栈帧连"><a href="#打印栈帧连" class="headerlink" title="打印栈帧连"></a>打印栈帧连</h2><p>先用gdb调试了给的<code>segmentfault.c</code>，摸索了一下<code>bt</code>命令的打印格式，确认了打印的栈帧链中的地址为函数调用时压入栈中的返回地址。</p><h1 id="思考题"><a href="#思考题" class="headerlink" title="思考题"></a>思考题</h1><h2 id="堆和栈在哪里？"><a href="#堆和栈在哪里？" class="headerlink" title="堆和栈在哪里？"></a>堆和栈在哪里？</h2><p>经过PA3.2的调教，可以知道堆是程序运行时调用<code>malloc</code>动态向高地址申请空间维护的。堆区的开始位置就是数据段的结束位置。当调用<code>malloc</code>函数时，会触发系统调用<code>sbrk</code>查询并调整堆区的结束位置，即program break，以调整堆区的大小。<br>栈区是从内核虚存区开始向低地址方向生长的，栈顶的地址保存在寄存器<code>esp</code>中。通过<code>push</code>和<code>pop</code>等指令来调整栈区大小。<br>堆和栈的内容不放入可执行文件，我猜想一方面因为这些部分是动态生成的，程序执行过程中它们的大小时刻变化着，因此不能放入静态的可执行文件中。另一方面，栈区会有一个随机化操作来防止恶意攻击，不便于放入可读的可执行文件中。</p><h2 id="如何识别不同格式的可执行文件？"><a href="#如何识别不同格式的可执行文件？" class="headerlink" title="如何识别不同格式的可执行文件？"></a>如何识别不同格式的可执行文件？</h2><p>ELF可执行目标文件有ELF头，根据ELF可执行文件的各种规范书写。Windows生成的可执行文件应该也有自己的文件头的格式，在GNU/Linux下执行时，系统按照ELF头的格式解析该文件的文件头出现了错误，例如没有读到“魔数”，就会报告“格式错误”。</p><h2 id="消失的符号"><a href="#消失的符号" class="headerlink" title="消失的符号"></a>消失的符号</h2><p>因为这些符号只在本模块内被使用，其被动态分配在栈中，链接器并不需要这些符号的信息，因此不会出现在符号表中。符号是指参与链接的变量名和函数名。</p><h2 id="寻找”Hello-World-”"><a href="#寻找”Hello-World-”" class="headerlink" title="寻找”Hello World!”"></a>寻找”Hello World!”</h2><p>用上述方法找到<code>hello</code>程序的字符串表，会发现“Hello World!”字符串…它…根本不在字符串表中，而是在<code>.rodata</code>节中。</p><p><img src="/2018/11/24/lab3-report/HelloWorld.png"></p><p>因为<code>printf</code>中的格式化字符串是一个只读的字符串，所以编译时会被放入只读数据节<code>.rodata</code>节中。</p><h2 id="冗余的符号表"><a href="#冗余的符号表" class="headerlink" title="冗余的符号表"></a>冗余的符号表</h2><p>编译单独的hello程序没有问题，但是尝试对hello.o进行链接时就会链接报错（忘了截图了）。因为符号表用于链接中的符号解析，单独运行程序时没有符号表，单有指令就也没有问题。</p><h2 id="冗余的属性？"><a href="#冗余的属性？" class="headerlink" title="冗余的属性？"></a>冗余的属性？</h2><p>起初我猜测是.bss节的数据没有在<code>Filesz</code>中被计算，而是计算在了<code>Memsz</code>中。但是我把.bss节的大小加上<code>Filesz</code>后还是比<code>Memsz</code>小一些，STFW发现stackoverflow上有人问了类似的问题，欣喜地点进去发现并没有人回答….我再思考一下说不定就有stackoverflow首答了…</p><h2 id="为什么要清零？"><a href="#为什么要清零？" class="headerlink" title="为什么要清零？"></a>为什么要清零？</h2><p>数电和问求还没写完，溜了…….</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;实现描述&quot;&gt;&lt;a href=&quot;#实现描述&quot; class=&quot;headerlink&quot; title=&quot;实现描述&quot;&gt;&lt;/a&gt;实现描述&lt;/h1&gt;&lt;h2 id=&quot;寻找正确的入口地址&quot;&gt;&lt;a href=&quot;#寻找正确的入口地址&quot; class=&quot;headerlink&quot; title=
+      
+    
+    </summary>
+    
+    
+      <category term="Notes" scheme="https://mengzelev.github.io/tags/Notes/"/>
+    
+      <category term="Lab" scheme="https://mengzelev.github.io/tags/Lab/"/>
+    
+      <category term="Ics" scheme="https://mengzelev.github.io/tags/Ics/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>图论学习笔记-旅行问题</title>
+    <link href="https://mengzelev.github.io/2018/11/21/traversability/"/>
+    <id>https://mengzelev.github.io/2018/11/21/traversability/</id>
+    <published>2018-11-21T13:05:50.000Z</published>
+    <updated>2018-11-30T14:19:40.503Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Euler图"><a href="#Euler图" class="headerlink" title="Euler图"></a>Euler图</h1><p><strong>Euler回路(Euler cycle)</strong>：图$G$的一条包含$G$的每一条边的回路$C$</p><p><strong>Euler图(Euler graph)</strong>:含有Euler回路的连通图</p><p><strong>Euler迹(Euler trial)</strong>含有连通图$G$的每条边的开迹</p><p>当讨论图的Euler性质时，</p><p><strong>定理6.1</strong>：一个非平凡连通图$G$是Euler的 当且仅当 $G$的每个顶点的度都为偶数</p><p><strong>推论6.2</strong>：一个连通图$G$含有一条Euler迹当且仅当$G$恰有两个度为奇数的顶点，而且$G$的每一条Euler迹始于一个度为奇数的顶点而终止于另一个度为奇数的顶点。</p><p><strong>例6.3结论</strong>：设$G$和$H$是两个非平凡的连通图，则$G\times H$是Euler的当且仅当$G$和$H$都是Euler的或者$G$和$H$的每个顶点度均为奇数。</p><h1 id="Hamilton图"><a href="#Hamilton图" class="headerlink" title="Hamilton图"></a>Hamilton图</h1><p><strong>Hamilton圈(Hamiltonian cycle)</strong>：一个含图$G$的每个顶点的圈</p><p><strong>Hamilton图(Hamiltonian graph)</strong>：一个含有Hamilton圈的图</p><p><strong>Hamilton路(Hamiltonian path)</strong>：一条含图$G$的每个顶点的路</p><p>有Hamilton圈, 一定有Hamilton路；<br>有Hamilton路，不一定有Hamilton圈</p><h2 id="Hamilton图的特征"><a href="#Hamilton图的特征" class="headerlink" title="Hamilton图的特征"></a>Hamilton图的特征</h2><ul><li>$n\ge 3$阶图的一个Hamilton圈$C$是$n$阶的连通2正则子图</li><li>$C$不含有阶小于$n$的圈作为子图</li><li>$G$也不含有有度大于等于3的子图</li><li>如果$G$含有度为2的顶点，则与$v$关联的两条边一定位于$C$上</li></ul><p><strong>定理6.4</strong>：Peterson图不是Hamilton的</p><h2 id="Hamilton图的性质"><a href="#Hamilton图的性质" class="headerlink" title="Hamilton图的性质"></a>Hamilton图的性质</h2><p>$k(G)$：图的连通分支数</p><p><strong>定理6.5</strong>：如果$G$是一个Hamilton图，则对$G$顶点的任一非空真子集$S$，都有$k(G-S)\ge |S|$（一个图是Hamilton图的<strong>必要条件</strong>）<br>逆否命题：设$G$为一个图。如果对$V(G)$的某个非空真子集$S$,有$k(G-S)&gt;|S|$，则$G$不是Hamilton的（一个图为非Hamilton的充分条件）<br>如果图$G$含有一个割点$v$，则$G$不是Hamilton的</p><h2 id="Hamilton图的充分条件"><a href="#Hamilton图的充分条件" class="headerlink" title="Hamilton图的充分条件"></a>Hamilton图的充分条件</h2><p><strong>定理6.6(Ore 定理)</strong>：设$G$为一个$n(n\ge 3)$阶的图，如果对于$G$的每对不邻接的顶点$u,v$，有$deg u +deg v\ge n$,则$G$是Hamilton的。<br>该定理给出的界是紧的</p><p><strong>推论6.7</strong>：设$G$为一个$n\ge 3$的图，如果对于$G$的每个顶点$v$，均有$deg v\ge n/2$，则$G$是Hamilton的。</p><p><strong>定理6.8</strong>：设$u$和$v$是一个$n$阶图$G$的两个不邻接的顶点，并且$deg u + deg v\ge n$，则$G+uv$是Hamilton的当且仅当$G$是Hamilton的。</p><p><strong>闭包(closure)</strong>：由$G$出发递归地连接度数之和至少为$n$的不邻接顶点对，记为$C(G)$</p><p><strong>定理6.9</strong>：一个图是Hamilton的当且仅当它的闭包是Hamilton的。</p><p><strong>推论6.10</strong>：如果$G$是一个阶至少为3的图，且它的闭包$C(G)$是一个完全图，则$G$是一个Hamilton图</p><p><strong>定理 6.11</strong>：设$G$是一个$n(n\ge 3)$阶的图。如果对于每个整数$j(1\le j&lt;\frac{n}{2})$，$G$中度至多为$j$的顶点数小于$j$，则$G$是Hamilton的。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;Euler图&quot;&gt;&lt;a href=&quot;#Euler图&quot; class=&quot;headerlink&quot; title=&quot;Euler图&quot;&gt;&lt;/a&gt;Euler图&lt;/h1&gt;&lt;p&gt;&lt;strong&gt;Euler回路(Euler cycle)&lt;/strong&gt;：图$G$的一条包含$G$的每一条
+      
+    
+    </summary>
+    
+      <category term="Notes" scheme="https://mengzelev.github.io/categories/Notes/"/>
+    
+    
+      <category term="Notes" scheme="https://mengzelev.github.io/tags/Notes/"/>
+    
+      <category term="Problem Solving" scheme="https://mengzelev.github.io/tags/Problem-Solving/"/>
+    
+      <category term="Graph Theory" scheme="https://mengzelev.github.io/tags/Graph-Theory/"/>
+    
+      <category term="Traversibility" scheme="https://mengzelev.github.io/tags/Traversibility/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>PA3实验报告</title>
+    <link href="https://mengzelev.github.io/2018/11/18/PA3-report/"/>
+    <id>https://mengzelev.github.io/2018/11/18/PA3-report/</id>
+    <published>2018-11-18T08:00:32.000Z</published>
+    <updated>2018-12-08T09:43:23.426Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="PA3-实验报告"><a href="#PA3-实验报告" class="headerlink" title="PA3 实验报告"></a>PA3 实验报告</h1><p>姓名：刘恩萌<br>学号：171860013</p><h1 id="实验进度"><a href="#实验进度" class="headerlink" title="实验进度"></a>实验进度</h1><p>我已完成所有内容。<br>好，下面是惯例碎碎念。</p><p>2018/11/18<br>心态爆炸的一天！先是因为脑子短路完全没有想到<code>idt</code>的地址就在<code>lidt</code>译码过后的<code>id_dest</code>里。然后还因为惯性思维从<code>id_dest-&gt;val</code>里读地址，疯狂出错才发现应该在<code>id_dest-&gt;addr</code>里（因为是地址）。组织Context的时候思考了半天，最后问了大腿才知道怎么判断上下文的组织结构。感觉还是课本知识学得不够扎实的恶果。今日不宜PA，关机睡觉。</p><p>2018/11/19<br>PA3.1完成。感觉测试手段都不太给力，不知道有没有埋下隐藏bug</p><p>2018/11/24<br>PA3.2完成。感觉莫名顺利，可能是3.3要自闭的征兆</p><p>2018/12/1<br>开始自闭PA3.3，实现了文件读写操作，死活看不到PASS!!!，文件读写时对长度超过文件大小的情况的处理有一些麻烦，调了半天，最后发现是PA3.2时就好了的SYS_write没有加上刚刚写的<code>fs_write</code>，喷了。开始编写设备文件操作，看不懂vga那块到底是要干啥，机房关门了，回去睡觉。</p><p>2018/12/2<br>继续自闭PA3.3。为了看懂VGA那块的架构直接翻出了bmptest的源码，然后一路摸到NDL库的源码，花了大概一个下去终于显示出了ProjectN的Logo。实现<code>events_read()</code>时还把事件的格式搞错了debug了半天，终于可以开始跑仙剑了。小心翼翼地开始游戏，没有注释掉<code>Log</code>因此看到了瀑布般的<code>Log</code>信息，然后50min才播放完片头对话，所幸无事。然后注释掉了所有<code>Log</code>，又胆战心惊地开始尝试所有存档点，尝试了穿墙和穿人，全部失败，确认了没有肉眼可见的bug。长舒一口气，然后加急写完了批处理系统，机房关门，走人。难以置信我居然跑出了仙剑，亢奋。</p><h1 id="必答题"><a href="#必答题" class="headerlink" title="必答题"></a>必答题</h1><p><s>其实我写PA的时候都在系统调用过程梳理里做好笔记了</s></p><h2 id="游戏的存档"><a href="#游戏的存档" class="headerlink" title="游戏的存档"></a>游戏的存档</h2><ul><li>仙剑奇侠传中调用C标准I/O库函数<code>fread()</code></li><li>库函数<code>fread()</code>会调用libos中的系统调用的封装函数<code>_read()</code></li><li>libos中的<code>_read()</code>函数通过调用<code>_syscall_()</code>，直接使用内联汇编语句编译出<code>int 0x81</code>的系统调用内陷指令，并将相应的参数放入约定的寄存器中(<code>%eax</code>,<code>%ebx</code>，<code>%ecx</code>，<code>%edx</code>)</li><li>nemu执行指令时遇到了<code>int 0x81</code>指令，译码后执行<code>raise_intr()</code>，将EFLAGS，CS，EIP的值压入栈中，并到am中的中断门描述符表<code>idt</code>中查询0x81对应的跳转目标的偏移量offset，为<code>vectrap()</code></li><li><code>vectrap()</code>直接通过汇编指令将错误码<code>irq</code>压栈，然后跳转到<code>asm_jmp</code>函数执行（nexus-am/am/arch/x86-nemu/src/trap.S中定义）</li><li>在<code>asm_trap</code>中通过<code>pusha</code>指令让nemu将所有寄存器压栈，然后执行<code>irq_handle()</code>函数（在nexus-am/am/arch/x86-nemu/src/cte.c中）</li><li><code>irq_handle()</code>把执行流切换的原因打包成事件，然后调用在<code>_cte_init()</code> 中注册的事件处理回调函数, 将事件交给Nanos-lite来处理</li><li>Nanos-lite中的<code>do_event()</code>函数根据nemu打包传过来的时间决定系统调用类型，此处是<code>_EVENT_SYSCALL</code>类型的，就调用<code>do_syscall()</code>函数来处理这个系统调用</li><li><code>do_syscall()</code>根据上下文中寄存器<code>%eax</code>保存的参数确定系统调用的类型，此时为<code>SYS_read</code>类型，就调用文件系统中的<code>fs_read()</code>并将相应的参数传入</li><li><code>fs_read()</code>根据传入的文件名（存档信息文件的名称）读取需要的长度到指定的位置，恢复成存档前的状态，就可以从存档点继续游戏</li><li><code>fs_read()</code>执行完成后，一路返回到<code>asm_trap</code>中，恢复之前压入栈中保存的寄存器，然后执行<code>iret</code>指令</li><li>nemu执行<code>iret</code>指令，恢复EFLAGS，CS，EIP，跳转到EIP所指向的地方继续执行之后的指令</li></ul><p>至此，一次读取存档的系统调用全部完成</p><h2 id="更新屏幕"><a href="#更新屏幕" class="headerlink" title="更新屏幕"></a>更新屏幕</h2><ul><li>仙剑奇侠传中调用libndl中的库函数<code>NDL_DrawRect()</code></li><li><code>NDL_DrawRect()</code>会调用C标准I/O库函数<code>fwrite()</code>，将当前的像素信息写入<code>stdout</code>中，这里的<code>stdout</code>不是终端里的标准输出，而是应用程序的标准输出<code>_REENT-&gt;stdout</code></li><li>系统调用过程同上，此处不再赘述。进入Nanos-lite的文件系统后，由于是对显示设备抽象成的文件<code>/dev/fb</code>进行读取，<code>fs_write()</code>调用的是<code>fb_write()</code></li><li><code>fb_write()</code>调用了am的klib中提供的<code>screen_width()</code>和<code>draw_rect()</code></li><li>am中的<code>draw_rect()</code>调用了vga设备的写函数<code>video_write()</code>，把相应的像素信息写入到映射到<code>vga_memory</code>的物理内存中</li><li>当nemu访问到从0x4000开始的一段被映射到I/O空间的物理地址时，就会通过<code>mmio_write</code>来修改I/O空间的数据</li><li>I/O空间的数据被修改后调用了<code>update_screen()</code>，由nemu把更新后的屏幕显示信息显示了出来</li><li>进行系统调用的返回操作，同样不再赘述</li></ul><p>至此，一次更新屏幕的系统调用完成</p><h1 id="蓝框思考题"><a href="#蓝框思考题" class="headerlink" title="蓝框思考题"></a>蓝框思考题</h1><p>最近太忙了一题都没写…<br>想写的时候讲义又挂了…<br>二周目的时候再思考吧orz</p><h1 id="实验中的发现"><a href="#实验中的发现" class="headerlink" title="实验中的发现"></a>实验中的发现</h1><h2 id="关于nanos-lite和nemu是怎么通讯的"><a href="#关于nanos-lite和nemu是怎么通讯的" class="headerlink" title="关于nanos-lite和nemu是怎么通讯的"></a>关于nanos-lite和nemu是怎么通讯的</h2><p>在写PA3.1中的<code>lidt</code>指令的时候，我有个很大的疑惑，<code>idt</code>是在nanos-lite里被定义的，nemu要怎么获取它的地址呢？<code>_cte_init</code>中有一步调用了<code>set_idt</code>函数，将idt的地址和大小用内联汇编语句写入了指令集。因此当nanos编译成nemu可执行的指令后，idt的地址就可以通过相应的译码函数写入<code>id_dest</code>中。<br>问了一位nb的学长后，学长给出了如下理解</p><blockquote><p>不在system.c里的指令，一般靠编译c文件成机器码就可以给nemu做事，所以pa2很顺利；而system.c的东西依赖于系统（比如中断），只靠编译c文件做不到int、lidt这些东西，所以要内联汇编</p></blockquote><h2 id="关于如何判断-Context结构的组织顺序"><a href="#关于如何判断-Context结构的组织顺序" class="headerlink" title="关于如何判断_Context结构的组织顺序"></a>关于如何判断<code>_Context</code>结构的组织顺序</h2><p><code>_Context</code>是在函数<code>irq_handle</code>里作为参数的类型被传入的，然而<code>irq_handle</code>是通过汇编代码直接调用的，因此没有显式的参数传递语句，实际的参数是存放在栈中<code>%ebp-8</code>的位置开始的位置，观察<code>call irq_handle</code>之前所有的<code>push</code>相关语句就可以得知寄存器的顺序。而<code>eip</code>,<code>eflags</code>和<code>eip</code>是硬件保存的，因此需要观察<code>int</code>指令中的入栈顺序才能知道这三者的顺序。</p><h2 id="系统调用过程梳理"><a href="#系统调用过程梳理" class="headerlink" title="系统调用过程梳理"></a>系统调用过程梳理</h2><ol><li>用户层navy-apps在相应的系统调用函数（如<code>_exit()</code>）中调用系统调用接口函数<code>_syscall_()</code></li><li><code>_syscall_</code>用内联汇编语句将<code>int 0x80</code>和相应的系统调用参数传给nemu</li><li>nemu执行<code>int</code>指令，叫出nanos-lite</li><li><code>irq_handler</code>通过<code>int</code>指令传入的参数识别出这是一次系统调用的event，打包传给<code>do_event</code></li><li><code>irq.c</code>中的<code>do_event()</code>函数调用<code>do_syscall()</code>执行系统调用事件</li><li><code>syscall.c</code>中的<code>do_syscall()</code>函数根据传入的参数（在上下文的相应寄存器中）执行相应的系统调用操作，设置返回值并返回</li></ol><h1 id="我遇到的bug"><a href="#我遇到的bug" class="headerlink" title="我遇到的bug"></a>我遇到的bug</h1><ul><li>堆区管理的时候声明的用于记录program break的变量<code>pbrk</code>没有初始化【所以说初始化真的是个好文明</li><li>写了<code>fs_write</code>却忘了修改相应的系统调用<code>SYS_write</code>找了一个下午</li><li>所有关于文件读写的系统操作都需要控制<code>open_offset</code>，不能超过当前文件的size，但是<code>serial_write</code>和<code>dispinfo_read</code>等不同文件的读写又不能一概而论，写bug和debug的时候要特别注意</li><li><code>fs_lseek</code>最后要控制当前的<code>open_offset</code>，不然可能会导致<code>fs_read</code>和<code>fs_write</code>的功能无法正常使用</li><li><code>fs_read</code>和<code>fs_write</code>需要对<code>open_offset</code>做出修改</li><li>函数指针的调用就跟函数一样用就行了</li><li><code>fb_write</code>里的<code>offset</code>怎么用，怎么给<code>draw_rect</code>传参，可能要一直摸到<code>libnbl</code>才能搞清楚</li><li>字符串不能x**初始化，会由于某些我搞不懂的原因编译出<code>STOS</code>指令，导致看到亲切的i386 Logo</li><li><code>if((keytemp &amp; 0x8000) == 1)</code>和<code>if(keytemp &amp; 0x8000)</code>是不一样的！！！！！！[你是沙雕吗.jpg]</li></ul><h1 id="对讲义的一些建议（你们选择性反馈给yzh）"><a href="#对讲义的一些建议（你们选择性反馈给yzh）" class="headerlink" title="对讲义的一些建议（你们选择性反馈给yzh）"></a>对讲义的一些建议（你们选择性反馈给yzh）</h1><ul><li>建议把能看到<code>PASS!!!</code>信息的放在<code>serial_write()</code>之后，不少同学都在实现完<code>SYS_write</code>之后没看到PASS！！！感到困惑（当然仔细想一下还是能想通）</li><li>堆区管理那一块太考验阅读理解水平了，而且大部分人会忘掉PA2还接触过AM里一个叫<code>heap</code>的结构体，就稍微提醒一下下呗（</li><li>让dummy实现<code>_syscall_</code>时，最好能提醒一下如果按照之前加系统调用一下加入<code>do_event</code>中会触发死循环，或者干脆把下面的必做部分并到一起写，减少困惑</li></ul><h1 id="实验心得"><a href="#实验心得" class="headerlink" title="实验心得"></a>实验心得</h1><ul><li>RTFSC是很难的，不要一下子看不出来就自闭，<s>不然会出事情的</s></li><li>要成为一名优秀的程序猿，首先你要学好语文</li><li>出bug不可怕，如果能通过debug的过程对框架代码和计算机系统的原理有更深刻的理解，其实是一件很赚的事情。听了助教讲课之后我深刻感受到，一出bug就问大腿“怎么写才是对的”，实在太亏了，应该搞清楚哪里写错了，为什么写的fault这个出现这样的failure。</li></ul><h1 id="Appreciation"><a href="#Appreciation" class="headerlink" title="Appreciation"></a>Appreciation</h1><ul><li>感谢某人提供的探路和debug服务，我觉得有点保护过度了再这样下去我要不会自己写代码了【捂脸</li><li>感谢名字一直在换的学习群的群友们互帮互助的debug氛围</li></ul><p>本实验报告同样会将去掉必答题的版本同步上传至<a href="https://mengzelev.github.io/">个人blog</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;PA3-实验报告&quot;&gt;&lt;a href=&quot;#PA3-实验报告&quot; class=&quot;headerlink&quot; title=&quot;PA3 实验报告&quot;&gt;&lt;/a&gt;PA3 实验报告&lt;/h1&gt;&lt;p&gt;姓名：刘恩萌&lt;br&gt;学号：171860013&lt;/p&gt;
+&lt;h1 id=&quot;实验进度&quot;&gt;&lt;a hr
+      
+    
+    </summary>
+    
+    
+      <category term="Notes" scheme="https://mengzelev.github.io/tags/Notes/"/>
+    
+      <category term="pa" scheme="https://mengzelev.github.io/tags/pa/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>图论学习笔记-图中的连通性与距离</title>
+    <link href="https://mengzelev.github.io/2018/11/14/connectivity/"/>
+    <id>https://mengzelev.github.io/2018/11/14/connectivity/</id>
+    <published>2018-11-14T08:19:10.000Z</published>
+    <updated>2018-11-30T14:19:28.693Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="割点"><a href="#割点" class="headerlink" title="割点"></a>割点</h1><p>割点的定义：去掉这个点后，原图不再连通</p><p><strong>定理5.1</strong>：设$v$是连通图$G$中与bridge相连的一个结点，则$v$是割点当且仅当$deg v\ge 2$<br>非简单树 = 端点 + 割点</p><p><strong>推论5.2</strong>：设$G$是一个至少有3个顶点的连通图，若$G$有bridge，则$G$一定有割点</p><p><strong>定理5.3</strong>：设$v$是连通图$G$的一个割点，$u$和$w$是$G-v$不同components中的两个顶点，则$v$位于$G$的任意一条$u-w$路径上。</p><p>回顾<strong>定理4.1</strong>：边$e$是bridge当且仅当$e$不存在于任何一个cycle上</p><p><strong>推论5.4</strong>：$v$是连通图$G$的一个割点 当且仅当 存在与$v$不同的两个顶点$u$和$w$，使得$v$位于$G$的任意一条$u-w$路上</p><p><strong>定理5.5</strong>：设$G$是非平凡连通图，$u\in V(G)$。若$v$是$G$中距离$u$最远的顶点，则$v$不是$G$的割点。</p><p><strong>推论5.6</strong>：任意非平凡的连通图至少包含两个非割点的顶点。</p><h1 id="块-Blocks"><a href="#块-Blocks" class="headerlink" title="块(Blocks)"></a>块(Blocks)</h1><p><strong>不可分图(nonseparable graph)：</strong>没有割点的非平凡连通图</p><p><strong>定理5.7</strong>：结点数不少于3的图是不可分的 当且仅当 任意两个顶点都位于某个圈上</p><p><strong>块(block)</strong>:图$G$的一个最大的不可分子图</p><p><strong>定理5.8</strong>：$R$是定义在非平凡连通图$G$的边集上的关系：对于$e,f\in E(G)$，若$e=f$或$e,f$位于$G$的同一个圈上，则$e,f$有关系$R$，即为$eRf$且$R$是等价关系。<br>该定理将图$G$的边画划分为了若干等价类。</p><p><strong>推论5.9</strong>：非平凡连通图$G$的任意两个不同的块$B_1$和$B_2$具有下面性质：</p><ul><li>$B_1$和$B_2$是不相交的</li><li>$B_1$和$B_2$至多有一个公共结点</li><li>若$B_1$和$B_2$有一个公共结点$v$，则$v$是$G$的割点</li></ul><h1 id="连通度"><a href="#连通度" class="headerlink" title="连通度"></a>连通度</h1><h2 id="顶点割"><a href="#顶点割" class="headerlink" title="顶点割"></a>顶点割</h2><p><strong>顶点割(vertex-cut)</strong>：顶点集$U$，$G-U$是不连通的</p><p><strong>最小顶点割</strong>：自行感受一下</p><p>只有非完全图才有顶点割，且所有非完全图都有顶点割</p><p><strong>(点)连通度(vertex-connectivity)</strong>:$\kappa(G)$=最小顶点割的基数<br>$$ 0\le \kappa(G)\le n-1 $$</p><p>图$G$是k-连通的(k-connected)，即$\kappa(G)\ge k$，随便去掉$k$个点之后依然是连通的</p><h2 id="边割-edge-cut"><a href="#边割-edge-cut" class="headerlink" title="边割(edge-cut)"></a>边割(edge-cut)</h2><p><strong>边割(edge-cut)</strong>：边集$X$，$G-X$是不连通的</p><p><strong>最小边割</strong>和<strong>极小边割</strong>是不同的概念</p><p><strong>边连通度(edge-connectivity)</strong>:$\lambda(G)$=最小边割的基数<br>$$ 0\le \lambda(G)\le n-1 $$</p><p>完全图的边连通度$\lambda(K_n)=n-1$</p><h2 id="点、边连通度间的关系"><a href="#点、边连通度间的关系" class="headerlink" title="点、边连通度间的关系"></a>点、边连通度间的关系</h2><p><strong>定理5.11</strong>：对于任意图$G$，$$\kappa(G)\le \lambda(G)\le \delta(G)$$<br>点连通度$\le$边连通度$\le$最小度数</p><p><strong>定理5.12</strong>：立方图$\kappa(G)=\lambda(G)$</p><p><strong>定理5.13</strong>：$G$顶点数为$n$，边数为$m$，则$\kappa(G)\le \lfloor\frac{2m}{n}\rfloor$</p><h2 id="Harary图"><a href="#Harary图" class="headerlink" title="Harary图"></a>Harary图</h2><p><strong>定理5.14</strong>：如果$G$是至少有3个结点的连通图，则$G^2$时候2-连通的。</p><p><strong>定理5.15</strong>：对于任意整数$r,n$满足$2\le r&lt;n$，有$$\kappa(H_{r,n})=r$</p><h1 id="Menger定理"><a href="#Menger定理" class="headerlink" title="Menger定理"></a>Menger定理</h1><p><strong>分离集(separating set)</strong>：$S$是图$G$的顶点集的一个子集，$u$和$v$是$G$的两个顶点。若$G-S$是不连通的且$u$和$v$属于$G-S$不同的连通分支，则称$S$<strong>分离</strong>$u$和$v$，$S$是一个<strong>$u-v$分离集</strong></p><p><strong>内点(internal vertex)</strong>:一条$u-v$路径上除去$u,v$的点<br><strong>内部不相交(internally disjoint)</strong>：两条路径除端点外没有公共点</p><p><strong>定理5.16(Menger定理)：</strong>设$u$和$v$是图$G$的不邻接的两个顶点，则$u-v$分离集中顶点的最小个数等于$G$中内部不相交$u-v$路的最大个数。<br>证明使用了数学归纳法，归纳步时分了3种情况讨论</p><p><strong>定理5.17</strong>：一个非平凡图$G$是$k$连通的($k\ge 2$) 当且仅当 对于$G$的任意两个顶点$u,v$，$G$至少有$k$条内部内部不相交的$u-v$路。</p><p><strong>推论5.18</strong>：设$G$为$k$连通图，$S$是由$G$中任意$k$个顶点构成的集合。若图$H$是由$G$通过添加一个新的顶点$w$以及连接$w$到$S$中所有的顶点所得，则$H$也是$k$连通的。</p><p><strong>推论5.19</strong>：若$G$为$k$连通图，$u,v_1,v_2,…,v_k$为$G$中$k+1$个不同的顶点，则$G$有内部不相交的$u-v_i$路($1\le i\le k$)</p><p><strong>定理5.20</strong>：若$G$为$k$连通图($k\ge 2$)，则$G$中任意$k$个顶点均位于某一个圈上。</p><p><strong>定理5.21</strong>：对于图$G$两个不同的顶点$u$和$v$，$G$中分离$u,v$的边的最小个额数等于$G$中边不相交$u-v$路的最大个数</p><p><strong>定理5.22</strong>：一个非平凡图$G$是$k$边连通的当且仅当对于$G$中任意两个不同的顶点$u,v$，$G$包含$k$条边不相交的$u-v$路</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;割点&quot;&gt;&lt;a href=&quot;#割点&quot; class=&quot;headerlink&quot; title=&quot;割点&quot;&gt;&lt;/a&gt;割点&lt;/h1&gt;&lt;p&gt;割点的定义：去掉这个点后，原图不再连通&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;定理5.1&lt;/strong&gt;：设$v$是连通图$G$中与bridge相
+      
+    
+    </summary>
+    
+      <category term="Notes" scheme="https://mengzelev.github.io/categories/Notes/"/>
+    
+    
+      <category term="Notes" scheme="https://mengzelev.github.io/tags/Notes/"/>
+    
+      <category term="Problem Solving" scheme="https://mengzelev.github.io/tags/Problem-Solving/"/>
+    
+      <category term="Graph Theory" scheme="https://mengzelev.github.io/tags/Graph-Theory/"/>
+    
+      <category term="Connectivity" scheme="https://mengzelev.github.io/tags/Connectivity/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>算法导论学习笔记-所有结点对的最短路径问题</title>
+    <link href="https://mengzelev.github.io/2018/11/07/clrs-25All-Pairs-Shortest-Paths/"/>
+    <id>https://mengzelev.github.io/2018/11/07/clrs-25All-Pairs-Shortest-Paths/</id>
+    <published>2018-11-07T08:17:34.000Z</published>
+    <updated>2018-11-19T00:56:44.573Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="矩阵乘法"><a href="#矩阵乘法" class="headerlink" title="矩阵乘法"></a>矩阵乘法</h1><h2 id="最优子结构"><a href="#最优子结构" class="headerlink" title="最优子结构"></a>最优子结构</h2><p>$l_{ij}^(m)}$:从结点$i$到结点$j$的至多包含$m$条边的任意路径中的最小权重。<br>$$<br>l_{ij}^{(m)} = \min\limits_{1\lek\le n}{l_{ik}^{(m1)}+w_{kj}}<br>$$</p><h2 id="自底向上计算最短路径权重"><a href="#自底向上计算最短路径权重" class="headerlink" title="自底向上计算最短路径权重"></a>自底向上计算最短路径权重</h2><p><img src="/2018/11/07/clrs-25All-Pairs-Shortest-Paths/extend.png"></p><p>三重循环，时间复杂度为$\Theta(n^3)$</p><p>形式上与矩阵乘法的计算非常类似</p><p>计算$L^{(n-1)}=W^{n-1}$</p><p><img src="/2018/11/07/clrs-25All-Pairs-Shortest-Paths/slowall.png"><br>这个算法本质上就是对$n$个点每个跑了一遍Bellman-Ford</p><h2 id="改进运行时间"><a href="#改进运行时间" class="headerlink" title="改进运行时间"></a>改进运行时间</h2><p>重复平方技术<br>二分计算矩阵的幂</p><p><img src="/2018/11/07/clrs-25All-Pairs-Shortest-Paths/chongfu.png"></p><p><img src="/2018/11/07/clrs-25All-Pairs-Shortest-Paths/faster.png"></p><p>优化后时间复杂度为$\Theta(n^3\lgn n)$</p><h1 id="Floyd-Warshall算法"><a href="#Floyd-Warshall算法" class="headerlink" title="Floyd-Warshall算法"></a>Floyd-Warshall算法</h1><p>枚举最短路径上的中间结点来进行递归的计算</p><ul><li>不允许有负权重环</li><li>但是可以做到在有负权重环的情况下报告（看对角元是否有负数）</li></ul><p>$d_{ij}^{(k)}$：从$i$到$j$经过的中间结点为${1,…k}$的子集的最短路径长度<br><img src="/2018/11/07/clrs-25All-Pairs-Shortest-Paths/d.png"></p><h2 id="伪代码"><a href="#伪代码" class="headerlink" title="伪代码"></a>伪代码</h2><p><img src="/2018/11/07/clrs-25All-Pairs-Shortest-Paths/floyd-alg.png"></p><h2 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h2><p>$\Theta(n^3)$</p><h2 id="空间复杂度"><a href="#空间复杂度" class="headerlink" title="空间复杂度"></a>空间复杂度</h2><p>看似需要$\Theta(n^3)$，但是作业题中证明了只需要一个矩阵来存储，为$\Theta(n^2)$</p><h2 id="构建最短路径"><a href="#构建最短路径" class="headerlink" title="构建最短路径"></a>构建最短路径</h2><p>采用动态规划的思想，递推式如下</p><p><img src="/2018/11/07/clrs-25All-Pairs-Shortest-Paths/pi0.png"></p><p><img src="/2018/11/07/clrs-25All-Pairs-Shortest-Paths/pik.png"></p><h1 id="用于稀疏图的Johnson算法"><a href="#用于稀疏图的Johnson算法" class="headerlink" title="用于稀疏图的Johnson算法"></a>用于稀疏图的Johnson算法</h1><p>用一种神奇的方式对图中每条边的权重进行重新赋值，使新的图满足</p><ul><li>所有权重都为非负值</li><li>新图中的最短路径就是旧图中的最短路径</li></ul><h2 id="伪代码-1"><a href="#伪代码-1" class="headerlink" title="伪代码"></a>伪代码</h2><p><img src="/2018/11/07/clrs-25All-Pairs-Shortest-Paths/Johnson.png"></p><p>先增加一个新结点$s$，该点到原先各结点都有边相连，权重为0<br>对新图进行一次Bellman-Ford算法，寻找是否有负权重环路<br>没有负权重环，就用神奇的长得像顶点的势能函数一样的函数给每条边重新赋值<br>$$ \hat{w}(u,v)=w(u,v)+h(u)-h(v)$$<br>$$ h(u)=\delta(s,u)$$<br>然后对每个点进行Dijkstra<br>最后记得将最短路径的权重恢复，并存入矩阵$D$中返回</p><h2 id="时间复杂度-1"><a href="#时间复杂度-1" class="headerlink" title="时间复杂度"></a>时间复杂度</h2><p>二叉最小优先队列实现Dijkstra：$O(VE\lg V)$<br>斐波那契堆实现：$O(V^2\lgV+VE)$<br>在稀疏图的情况下，表现比Floyd-Warshall好</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;矩阵乘法&quot;&gt;&lt;a href=&quot;#矩阵乘法&quot; class=&quot;headerlink&quot; title=&quot;矩阵乘法&quot;&gt;&lt;/a&gt;矩阵乘法&lt;/h1&gt;&lt;h2 id=&quot;最优子结构&quot;&gt;&lt;a href=&quot;#最优子结构&quot; class=&quot;headerlink&quot; title=&quot;最优子结构&quot;&gt;
+      
+    
+    </summary>
+    
+      <category term="Notes" scheme="https://mengzelev.github.io/categories/Notes/"/>
+    
+    
+      <category term="Notes" scheme="https://mengzelev.github.io/tags/Notes/"/>
+    
+      <category term="CLRS" scheme="https://mengzelev.github.io/tags/CLRS/"/>
+    
+      <category term="Problem Solving" scheme="https://mengzelev.github.io/tags/Problem-Solving/"/>
+    
+      <category term="Graph Algorithms" scheme="https://mengzelev.github.io/tags/Graph-Algorithms/"/>
+    
+      <category term="All-Pairs Shortest Path" scheme="https://mengzelev.github.io/tags/All-Pairs-Shortest-Path/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Lab2:链接与加载 实验报告</title>
+    <link href="https://mengzelev.github.io/2018/11/06/lab2-report/"/>
+    <id>https://mengzelev.github.io/2018/11/06/lab2-report/</id>
+    <published>2018-11-06T09:17:47.000Z</published>
+    <updated>2018-11-30T14:17:54.141Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="实验过程"><a href="#实验过程" class="headerlink" title="实验过程"></a>实验过程</h2><p>按照实验讲义的提示，首先找到了libc库所在的位置，输出基本与讲义中给出的一致，不作赘述。</p><p>编写的测试文件a.c的代码为</p><pre><code>#include &lt;stdio.h&gt;#include &lt;stdlib.h&gt;int main (){    int a = rand();    printf(&quot;%d\n&quot;,a);    return 0;}</code></pre><p>只需要有对<code>rand</code>的调用且保证不会被编译器优化掉就可以了。</p><p>找到动态库文件之后，对该二进制文件进行反汇编</p><pre><code>$ objdump -d /lib/x86_64-linux-gnu/libc.so.6 &gt; libc64</code></pre><p>然后对反汇编后的文件进行查看，可以看到一堆库函数的反汇编代码。此时我看到了讲义中的这句话：</p><blockquote><p>然后你会发现这个文件对你并没有什么卵用，好吧，其实一会儿是会用到的。</p></blockquote><p>导致我真的以为现在用不到这个文件，于是，我<s>傻fufu地</s>按照讲义的指示去找<code>rand</code>函数的地址了。<br><code>gdb</code>，启动！看到了一堆跳转语句，感受到了自己对课本内容掌握不足；<br>课本，打开！复习了一下动态链接相关的知识点；<br><code>gdb</code>，开始！单步执行到<code>&lt;rand@plt&gt;</code>处时，发现了<code>rand</code>对应的GOT表项的地址，为<code>0x55555575020</code></p><p><img src="/2018/11/06/lab2-report/rand_id.png"></p><p>然后疯狂<code>si</code>，会看一堆<code>dl_</code>开头的，八成是和动态链接有关的函数。一不小心回车过头，最后在<code>main</code>里停下来，总之动态链接过程已经完成了，这时候可以查看内存地址为<code>0x55555575020</code>处的内容为<code>0x7ffff7a70820</code>（忘了截图了）</p><p>打印<code>0x7ffff7a70820</code>的内容，确认了确实为<code>rand</code>函数的地址</p><p><img src="/2018/11/06/lab2-report/rand.png"></p><p>做到这里，感觉像是完成了什么，开始思考下一步要做什么。等一下，我们的最终目标不是只要得到<code>system</code>到<code>rand</code>的偏移量吗，那我费尽千辛万苦搞到<code>rand</code>的地址干什么……算了，就当复习了一下动态链接的相关知识点和回忆了一下<code>gdb</code>的使用方法吧</p><p>不管了，总之先打开之前反汇编的动态库看一下，分别找到<code>rand</code>和<code>system</code>的地址</p><p><img src="/2018/11/06/lab2-report/rand64.png"></p><p><img src="/2018/11/06/lab2-report/system64.png"></p><p>偏移量为<code>0x3f480-0x36820=0x8c60</code></p><p>为了验证一下正确性，使用<code>gdb</code>打印了和<code>rand</code>具有相应偏移量（其实就是后3位不同）出的内存内容</p><p><img src="/2018/11/06/lab2-report/system.png"></p><p>这下准没错了，于是开始编写<code>oj_killer</code>函数</p><h2 id="代码解释"><a href="#代码解释" class="headerlink" title="代码解释"></a>代码解释</h2><p>最初仅考虑64位情况的<code>oj_killer</code>函数代码如下</p><pre><code>#include &lt;stdlib.h&gt;void* oj_killer(){        void* randptr = (void *)rand;        //获得rand函数的地址        return (void*)(randptr + 0x8c60);        //加上libc中rand到system的偏移量，返回system函数的地址}</code></pre><p>编译运行后能够成功输出<code>Hello World</code></p><p><img src="/2018/11/06/lab2-report/hello64.png"></p><h2 id="兼容32位"><a href="#兼容32位" class="headerlink" title="兼容32位"></a>兼容32位</h2><p>接下来考虑32位的情况</p><p>如果将上述程序直接编译为32位，会得到<code>Illegal instruction</code>的错误</p><p><img src="/2018/11/06/lab2-report/illegal.png"></p><p>对<code>a.c</code>加上<code>-m32</code>选项进行编译后查看其调用的动态链接库，可以发现调用的是32位的库，和64位的库是不一样的（当然了</p><pre><code>$gcc a.c -m32 -o a32.out$file a32.outa32.out: ELF 32-bit LSB shared object, Intel 80386, version 1 (SYSV), dynamically link│ed, interpreter /lib/ld-linux.so.2, for GNU/Linux 2.6.32, BuildID[sha1]=b3e591a0858f18│2549e63239c338f5fd30496ce2, not stripped $ldd a32.out                                              linux-gate.so.1 (0xf77ac000)                                                      libc.so.6 =&gt; /lib32/libc.so.6 (0xf75d1000)                                        /lib/ld-linux.so.2 (0xf77ae000)$file -L /lib32/libc.so.6                             /lib32/libc.so.6: ELF 32-bit LSB shared object, Intel 80386, version 1 (GNU/Linux), dynamically linked, interpreter /lib/ld-linux.so.2, BuildID[sha1]=84bb53910470c7ceb2a0963044117fdf8a2bb975, for GNU/Linux 2.6.32, stripped  </code></pre><p>使用同样的方法进行反汇编后</p><pre><code>$objdump -d /lib32/libc.so.6 &gt; libc32</code></pre><p>分别得到<code>rand</code>和<code>system</code>在<code>libc</code>内的地址</p><p><img src="/2018/11/06/lab2-report/rand32.png"></p><p><img src="/2018/11/06/lab2-report/system32.png"></p><p>于是可以按照同样的思路编写代码</p><h2 id="真·代码解释"><a href="#真·代码解释" class="headerlink" title="真·代码解释"></a>真·代码解释</h2><pre><code>void* oj_killer(){    int type = sizeof(void*);    void* randptr = (void *)rand;    //获得rand函数的地址    if(type == 8)     //判断当前环境是否为64-bit        return (void*)(randptr + 0x8c60);    //加上64位时libc中的偏移量    else return (void*)(randptr - 0x2f6f0 + 0x3a850);         //加上32位时libc的偏移量}</code></pre><p>为了保证代码的可移植性，特意将变量<code>randptr</code>声明为<code>void*</code>类型，而非<code>int</code>或<code>long long</code>。<br>判断当前环境为32/64位则依靠对<code>void*</code>长度的判断。 <s>暴露了不太会用<code>#if</code>预编译指令的事实</s></p><p>分别按32位和64位编译后，可以得到<code>Hello World</code>的输出：</p><p><img src="/2018/11/06/lab2-report/success.png"></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;实验过程&quot;&gt;&lt;a href=&quot;#实验过程&quot; class=&quot;headerlink&quot; title=&quot;实验过程&quot;&gt;&lt;/a&gt;实验过程&lt;/h2&gt;&lt;p&gt;按照实验讲义的提示，首先找到了libc库所在的位置，输出基本与讲义中给出的一致，不作赘述。&lt;/p&gt;
+&lt;p&gt;编写的测试文件a.
+      
+    
+    </summary>
+    
+    
+      <category term="Notes" scheme="https://mengzelev.github.io/tags/Notes/"/>
+    
+      <category term="Lab" scheme="https://mengzelev.github.io/tags/Lab/"/>
+    
+      <category term="Ics" scheme="https://mengzelev.github.io/tags/Ics/"/>
+    
+  </entry>
   
   <entry>
     <title>PA2实验报告</title>
@@ -46,7 +289,7 @@
     <link href="https://mengzelev.github.io/2018/10/30/clrs-24Single-Source-Shortest-Path/"/>
     <id>https://mengzelev.github.io/2018/10/30/clrs-24Single-Source-Shortest-Path/</id>
     <published>2018-10-30T14:29:50.000Z</published>
-    <updated>2018-11-06T01:35:41.702Z</updated>
+    <updated>2018-11-07T08:18:49.729Z</updated>
     
     <content type="html"><![CDATA[<h1 id="前备概念"><a href="#前备概念" class="headerlink" title="前备概念"></a>前备概念</h1><h2 id="环路"><a href="#环路" class="headerlink" title="环路"></a>环路</h2><p>如果有<strong>负权重环路</strong>，问题比较大，因为你在环路里往死里转路径要多短有多短，这时候定义最短路径长度为负无穷。$\delta(u,v)=-\infty$</p><p>如果有<strong>正权重环路</strong>，那最短路径肯定不会走这个环路，所以不影响</p><p>如果有<strong>0权重环路</strong>，那这个环路等于没有，也不影响</p><h2 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h2><p>$v.d$：最短路径估计</p><p>使用下面运行时间为$\Theta(V)$的算法来对最短路径估计和前驱结点进行初始化：</p><p><img src="/2018/10/30/clrs-24Single-Source-Shortest-Path/initialize.png"></p><p>初始化操作的时间复杂度为$\Theta(V)$</p><h2 id="松弛操作"><a href="#松弛操作" class="headerlink" title="松弛操作"></a>松弛操作</h2><p>松弛过程：试图改善从$s$到$v$的最短路径。<br>可能降低最短路径的估计值$v.d$并更新$v$的前驱属性$v.\pi$</p><p><img src="/2018/10/30/clrs-24Single-Source-Shortest-Path/relax.png"></p><p>松弛是<strong>唯一</strong>导致最短路径估计和前驱结点发生变化的操作</p><p>本章讨论的所有算法之间的不同之处是对每条边进行松弛的次数和松弛边的次序有所不同</p><h2 id="最短路径和松弛操作的性质"><a href="#最短路径和松弛操作的性质" class="headerlink" title="最短路径和松弛操作的性质"></a>最短路径和松弛操作的性质</h2><p><img src="/2018/10/30/clrs-24Single-Source-Shortest-Path/properties.png"><br>这几条最好要背下来的，我觉得考试很容易考</p><p>为了方便记忆，po主尝试着<s>用人话</s>复述一遍：</p><ul><li><strong>三角不等式性质：</strong>图里任意两个点和源点$s$构成一个三角形（可以退化为直线），有两边之和大于等于第三边</li><li><strong>上界性质：</strong>$v.d$撑死就是$\delta(s,v)$，不能再小了</li><li><strong>非路径性质：</strong>原话已经很人话了</li><li><strong>收敛性质：</strong>松弛前边的起点已求得最短路径，松弛后边的终点也将获得最短路径buff</li><li><strong>路径松弛性质：</strong>只要一条最短路径上的点是按松弛的，那么估计值就等于最短路径</li><li><strong>前驱子图性质：</strong>最短路径算完了，前驱子图是一颗根结点为$s$的最短路径树</li></ul><h2 id="Bellman-Ford算法"><a href="#Bellman-Ford算法" class="headerlink" title="Bellman-Ford算法"></a>Bellman-Ford算法</h2><h2 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h2><ul><li>先将结点进行初始化</li><li>对每条边进行$|V|-1$次松弛操作</li><li>当存在负权重环路时会返回FALSE</li><li>如果不存在负权重环路，则返回TRUE，每个结点的$v.d$即为源点$s$到该点的最短路径长度</li></ul><h2 id="伪代码"><a href="#伪代码" class="headerlink" title="伪代码"></a>伪代码</h2><p><img src="/2018/10/30/clrs-24Single-Source-Shortest-Path/BF-alg.png"></p><h2 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h2><p>$O(VE)$</p><h2 id="正确性证明"><a href="#正确性证明" class="headerlink" title="正确性证明"></a>正确性证明</h2><p>用到了三角不等式 + 非路径性质 + 前驱子图性质 </p><h1 id="有向无环图（DAG）中的单源最短路径问题"><a href="#有向无环图（DAG）中的单源最短路径问题" class="headerlink" title="有向无环图（DAG）中的单源最短路径问题"></a>有向无环图（DAG）中的单源最短路径问题</h1><p>无环，因此没有负权重的环，对于任何结点，最短路径都是存在的</p><h2 id="算法描述"><a href="#算法描述" class="headerlink" title="算法描述"></a>算法描述</h2><p>先对DAG进行拓扑排序，按照拓扑排序的顺序对每个结点进行松弛操作</p><h2 id="伪代码-1"><a href="#伪代码-1" class="headerlink" title="伪代码"></a>伪代码</h2><p><img src="/2018/10/30/clrs-24Single-Source-Shortest-Path/dag-alg.png"></p><h2 id="时间复杂度-1"><a href="#时间复杂度-1" class="headerlink" title="时间复杂度"></a>时间复杂度</h2><ul><li>拓扑排序(1)： $\Theta(V+E)$</li><li>初始化(2)：$\Theta(V)$</li><li>3~5行的循环（聚合分析）：$\Theta(V)$<br>总时间复杂度：$\Theta(V+E)$</li></ul><h2 id="正确性证明-1"><a href="#正确性证明-1" class="headerlink" title="正确性证明"></a>正确性证明</h2><p><img src="/2018/10/30/clrs-24Single-Source-Shortest-Path/24-5.png"><br>精髓还是在于神奇的路径松弛性质，只要保证每条最短路径上边的松弛次序，就能得出算法终止时$v_i.d=\delta(s,v_i)$</p><h2 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h2><p>PERT图</p><h1 id="Dijkstra算法"><a href="#Dijkstra算法" class="headerlink" title="Dijkstra算法"></a>Dijkstra算法</h1><h2 id="描述-1"><a href="#描述-1" class="headerlink" title="描述"></a>描述</h2><ul><li>解决带权重的有向图上的单源最短路径问题</li><li>要求所有边的权重都为<strong>非负值</strong></li><li>维护一组结点结合$S$，从源点$s$到该集合中每个结点之间的最短路径已经被找到</li><li>使用贪心策略，每次都从结点集$V-S$中选择最短路径估计最小的结点$u$，然后更新与$u$相连的结点的最短路径估计值</li></ul><h2 id="伪代码-2"><a href="#伪代码-2" class="headerlink" title="伪代码"></a>伪代码</h2><p><img src="/2018/10/30/clrs-24Single-Source-Shortest-Path/dijkstra-alg.png"></p><h2 id="正确性证明-2"><a href="#正确性证明-2" class="headerlink" title="正确性证明"></a>正确性证明</h2><p>循环不变式：在算法第4~8行的<code>while</code>语句的每次循环开始前，对于每个结点$v\in S$，有$v.d=\delta(s,v)$</p><p>证明使用了反证法+最小数原理<br>关键步用到了收敛性质和权重非负的假设</p><h2 id="时间复杂度-2"><a href="#时间复杂度-2" class="headerlink" title="时间复杂度"></a>时间复杂度</h2><p>依赖于最小优先队列的实现</p><ul><li>数组遍历： $O(V^2)$</li><li>二叉堆：$O(E\lg V)$</li><li>斐波那契堆:$O(V\lg V+E)$</li></ul><h1 id="最短路径性质的证明"><a href="#最短路径性质的证明" class="headerlink" title="最短路径性质的证明"></a>最短路径性质的证明</h1><h2 id="三角不等式"><a href="#三角不等式" class="headerlink" title="三角不等式"></a>三角不等式</h2><p>根据最短路径的定义即可得证</p><h2 id="最短路径树性质"><a href="#最短路径树性质" class="headerlink" title="最短路径树性质"></a>最短路径树性质</h2><p>最短路径树的三条性质：</p><ul><li>$v’$是图$G$中从源结点$s$可以到达的所有结点的集合</li><li>$G’$形成一棵根结点为$s$的树</li><li>对于所有的结点$v\in V’$，图$G’$中从结点$s$到结点$v$的唯一简单路径是图$G$中从结点$s$到结点$v$的一条最短路径</li></ul><p><u>未完待不会续</u></p>]]></content>
     
@@ -73,6 +316,8 @@
       <category term="Bellman-Ford" scheme="https://mengzelev.github.io/tags/Bellman-Ford/"/>
     
       <category term="Dijkstra" scheme="https://mengzelev.github.io/tags/Dijkstra/"/>
+    
+      <category term="Graph Algorithms" scheme="https://mengzelev.github.io/tags/Graph-Algorithms/"/>
     
   </entry>
   
@@ -377,234 +622,6 @@
       <category term="Problem Solving" scheme="https://mengzelev.github.io/tags/Problem-Solving/"/>
     
       <category term="greedy algorithm" scheme="https://mengzelev.github.io/tags/greedy-algorithm/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>面向OJ的Java学习</title>
-    <link href="https://mengzelev.github.io/2018/09/16/startjava/"/>
-    <id>https://mengzelev.github.io/2018/09/16/startjava/</id>
-    <published>2018-09-16T05:34:22.000Z</published>
-    <updated>2018-09-17T15:49:24.661Z</updated>
-    
-    <content type="html"><![CDATA[<p><u>各路ddl原因本文目前还处于混乱状态，十分丢人，谨慎阅读</u><br><u>源代码为了防止查重，在OJ截止后会附上，也十分丢人</u></p><h1 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h1><h2 id="下载安装IDE"><a href="#下载安装IDE" class="headerlink" title="下载安装IDE"></a>下载安装IDE</h2><p>本UI警察使用的是JetBrains的IntelliJ IDEA，可以直接从<a href="https://www.jetbrains.com/idea/" target="_blank" rel="noopener">官网</a>下载，用学生邮箱注册可以免费获得Utilmate版，下载后安装即可。安装时会安利一些插件，根据个人需要选择安装。</p><p>下载后打开IJ，选择新建一个工程，这时候会提醒你选择JDK，只需要点击<u>Download JDK</u>直接在官网上下载即可。（这一步忘记截图了）</p><p>下载并安装完JDK之后，可以先对编辑器进行设置(File -&gt; Settings 或 Ctrl + Alt +S)，选择自己喜欢的字体和配色风格。我使用的是默认的Darcula配色和Monaco字体。</p><center><br>&lt;img src = “startjava/font.png”, height=300&gt;<br></center><p>大致效果如下（我jio得非常好看（请无视xjb乱写的第一个java程序</p><center><br>&lt;img src = “startjava/a+b.png”, height=300&gt;<br></center><h2 id="创建新项目"><a href="#创建新项目" class="headerlink" title="创建新项目"></a>创建新项目</h2><p>由于<strong>暂时用于应付oj</strong>，以下步骤非常不严谨，<strong>不适合开发相关</strong>，只确保能正常完成oj作业，欢迎随时指出不严谨之处</p><p>点击<code>File -&gt; New -&gt; Project</code>，新建一个项目，其他东西可以暂时不用管，在新的项目中找到src文件夹，右键选择<code>New -&gt; Java class</code>，注意<a href="#name">命名规范</a></p><p>之后会得到一个有模板的<code>.java</code>代码文件（球球无视一切xjb命名）</p><center><br>&lt;img src = “startjava/newclass.png”, height=300&gt;<br></center><p>移动光标就可以开始敲代码啦！装了IdeaVim插件的童鞋别忘了用vim的相关快捷键啊~<s>某捷列傻直接Ctrl-C+Ctrl-V半天没有反应</s></p><h2 id="编译运行"><a href="#编译运行" class="headerlink" title="编译运行"></a>编译运行</h2><p>拷贝了一下poj上a + b问题的源代码，之后就要来尝试编译运行了。IJ并没有像dev一样的一键运行，但是如果做oj题的话还是比较方便的，直接右击左边项目列表的该.java文件选择<code>Run &#39;Main.main()&#39;</code>(快捷键<code>Ctrl + Shift +F10</code>)就可以在屏幕下方的运行窗口里得到运行结果并输入数据进行验证。</p><center><br>&lt;img src = “startjava/runa+b.png”, height=130&gt;<br></center><p><s>某捷列傻可是等了半天的黑框框的</s></p><h1 id="开始编程"><a href="#开始编程" class="headerlink" title="开始编程"></a>开始编程</h1><p>基本工作都做好了以后可以开始学习一点基础的语法应付oj了，大佬们推荐了Thinking in Java这本书（可以下载到pdf），比较适合系统学习Java，但是萌捷列夫的ddl迫在眉睫，所以只能采用简易一点的<a href="http://www.runoob.com/java/java-tutorial.html" target="_blank" rel="noopener">菜鸟教程</a></p><p>Java的语法总体与C语言是比较相似的，而且默认本教程读者已有一定的C/C++编程基础，萌捷列夫在学的时候大致按照<a href="#similar">和C一样放心使用</a>和<a href="#diff">和C不一样了</a>两大类进行了整理，以供参考</p><p>时间原因暂时不能贴出比较简洁易懂的示例代码，可以参考上文的<a href="http://www.runoob.com/java/java-tutorial.html" target="_blank" rel="noopener">菜鸟教程</a>中的代码，本文最后也会贴出本次OJ所有题的题解代码以供参考。</p><h2 id="头文件"><a href="#头文件" class="headerlink" title="头文件"></a>头文件</h2><p>写C程序的时候，第一件事肯定是<code>#inlcude&lt;xxxx&gt;</code>，在Java里也需要头文件，但稍有区别。</p><p>Java中的头文件分为<code>package</code>和<code>import</code>两类。<code>package</code>语句用于表示一个类定义在某个包中，包主要用来对类和接口进行分类。当开发Java程序时，可能编写成百上千的类，因此很有必要对类和接口进行分类。这个我们写oj暂时用不到我就先晾这儿了。</p><p><code>import</code>语句的作用类似于C的<code>inlcude</code>，用来提供一个合理的路径，使编译器可以找到某个类。poj的a+b程序源码中有</p><pre><code>import java.io.*;</code></pre><p>就是用于让命令编译器载入java_installation/java/io路径下的所有类，从名称可以看出这些类与输入输出有关。<br>特别地，IJ提供自动补全import语句的功能，萌捷列夫在手动赋值a+b源码的时候IJ自动将POJ上的import替换为了</p><pre><code>import java.util.Scanner;</code></pre><p>一样可以正常运行。</p><p>头文件命名要遵循的规范：</p><ul><li>如果一个类定义在某个包中，那么package语句应该在源文件的首行</li><li>如果源文件包含import语句，那么应该放在package语句和类定义之间。如果没有package语句，那么import语句应该在源文件中最前面</li><li>import语句和package语句对源文件中定义的所有类都有效。在同一源文件中，不能给不同的类不同的包声明</li></ul><h2 id="各种声明"><a href="#各种声明" class="headerlink" title="各种声明"></a>各种声明</h2><p>写C的时候敲完所有头文件，差不多就该<code>int main()</code>了，（当然还有全局变量和函数声明），Java也有类似的<strong>主方法入口</strong>：</p><pre><code>public static void main(String []args)</code></pre><p>所有Java程序都是从这个入口开始执行的。</p><p>Java里也有变量的概念，但声明不是从变量开始的，而是<strong>从类开始</strong>的，充分贯彻了OOP的思想。类声明类似于用C++进行OOP编程，有<code>public</code>和<code>private</code>之别，还有其他一些特殊的类，写oj暂时用不到。类中可以定义变量和方法。</p><h2 id="类与对象"><a href="#类与对象" class="headerlink" title="类与对象"></a>类与对象</h2><p>类的声明遵循以下规范：</p><ul><li>一个源文件中只能有<strong>一个</strong>public类</li><li>一个源文件可以有多个非public类</li><li>源文件的名称应该和public类的类名保持<strong>一致</strong>。例如：源文件中public类的类名是Employee，那么源文件应该命名为Employee.java</li></ul><p>同C++一样，类也可以添加不同的访问修饰词</p><ul><li><code>public</code>:表示公开的类和变量，既所有的类都可以引入使用的</li><li><code>protected</code>：表示受保护的类，只有子孙类和本类可以引入使用</li><li><code>private</code>：表示私人的，只有在本类中可以引入使用</li><li><code>啥都不加</code>（默认）：表示同包中和本类中可以引入使用。</li></ul><p>定义了类之后可以使用<code>new</code>关键字创建属于这个类的<strong>对象</strong>。对象是类的实例化，大致需要以下三步：</p><ul><li>声明：声明一个对象，包括对象名称和对象类型。</li><li>实例化：使用关键字<code>new</code>来创建一个对象。</li><li>初始化：使用<code>new</code>创建对象时，会调用构造方法初始化对象。</li></ul><h2 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h2><p>Java中的变量有三种：</p><ul><li>局部变量： 定义在方法、构造方法或者语句块之中，变量声明和初始化都是在方法中，方法结束后，变量就会自动销毁。例如循环变量<code>i</code></li><li>成员变量： 定义在类中、方法体之外，表示类的某种属性，在创建对象的时候实例化。成员变量可以被类中方法、构造方法和特定类的语句块访问，例如人的身高、体重数据</li><li>类变量：声明在类中、方法体之外，但必须声明为static类型，为属于该类的所有对象所共有，不会因为对象的个体差异而改变。例如<code>Student</code>类中可以定义一个类变量<code>n</code>来统计学生的总人数，不会因为是不同的学生而不同。</li></ul><h2 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h2><p>Java的内置数据类型基本同C，<code>char</code>,<code>short</code>,<code>int</code>,<code>long</code>,<code>float</code>,<code>double</code>,<code>boolean</code>都可以放心使用，默认值都是相应类型下的<code>0</code>。相比于C多出来一个<code>byte</code>，表示8位、有符号的，以二进制补码表示的整数。</p><p>Java还有一类<strong>引用数据类型变量</strong>，类似于C的指针，引用类型指向一个对象，指向对象的变量是引用变量。这些变量在声明时被指定为一个特定的类型，比如 Employee、Puppy 等。变量一旦声明后，类型就不能被改变了。对象、数组都是引用数据类型，所有引用类型的默认值都是null。一个引用变量可以用来引用任何与之兼容的类型。e.g.<code>Site site = new Site(&quot;Runoob&quot;)</code></p><h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p><strong>构造方法</strong>：每个类都需要一个构造方法。如果没有显示定义，编译器会提供一个默认构造方法（这点同C）。在创建一个对象的时候，至少要调用一个构造方法。构造方法的名称必须与类同名，一个类可以有多个构造方法</p><h2 id="输入"><a href="#输入" class="headerlink" title="输入"></a>输入</h2><p>声明完乱七八糟一堆东西之后，一般会从输入入手。Java输入需要调用<code>Scanner</code>这个类，包含在“头文件”<code>import java.util.Scanner</code>中。</p><p>先要创建<code>Scanner</code>对象</p><pre><code>Scanner cin = new Scanner(System.in)</code></pre><p>读入整数，其中<code>nextInt()</code>是指输入中的下一个整数，类似的也可以有空白的<code>next()</code></p><pre><code>int a = cin.nextInt();</code></pre><h2 id="Java命名规范"><a href="#Java命名规范" class="headerlink" title="Java命名规范"></a><span id="name">Java命名规范</span></h2><p>首先，切记：<strong>Java是大小写敏感的</strong></p><ul><li><p><strong>类名</strong>：对于所有的类来说，类名的首字母应该大写。如果类名由若干单词组成，那么每个单词的首字母应该大写，例如 MyFirstJavaClass </p></li><li><p><strong>方法名</strong>：所有的方法名都应该以小写字母开头。如果方法名含有若干单词，则后面的每个单词首字母大写，例如myFirstJavaMethod</p></li><li><p><strong>源文件名</strong>：源文件名必须和类名相同。当保存文件的时候，你应该使用类名作为文件名保存（切记Java是大小写敏感的），文件名的后缀为.java（如果文件名和类名不相同则会导致编译错误）</p></li></ul><p>Java所有的组成部分都需要名字，类名、变量名以及方法名都被称为<strong>标识符</strong>。标识符的命名规范与C/C++基本相同（不同之处已标出）：</p><ul><li>所有的标识符都应该以字母（A-Z或者a-z）,<strong>美元符（$）</strong>、或者下划线（_）开始</li><li>首字符之后可以是字母（A-Z或者a-z）,<strong>美元符（$）</strong>、下划线（_）或数字的任何字符组合</li><li>关键字不能用作标识符</li><li>标识符是大小写敏感的</li><li>合法标识符举例：age、$salary、_value、__1_value</li><li>非法标识符举例：123abc、-salary</li></ul><h1 id="相关整理"><a href="#相关整理" class="headerlink" title="相关整理"></a>相关整理</h1><h2 id="和C一样放心使用"><a href="#和C一样放心使用" class="headerlink" title="和C一样放心使用"></a><span id="similar">和C一样放心使用</span></h2><ul><li>注释语法</li><li>枚举语法<code>enum</code></li><li>变量类型，如<code>int</code>,<code>string</code>,<code>void</code>等</li></ul><h2 id="和C不一样了"><a href="#和C不一样了" class="headerlink" title="和C不一样了"></a><span id="diff">和C不一样了</span></h2><ul><li>没有指针<s>大快人心哈哈哈哈</s></li></ul>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;&lt;u&gt;各路ddl原因本文目前还处于混乱状态，十分丢人，谨慎阅读&lt;/u&gt;&lt;br&gt;&lt;u&gt;源代码为了防止查重，在OJ截止后会附上，也十分丢人&lt;/u&gt;&lt;/p&gt;
-&lt;h1 id=&quot;准备工作&quot;&gt;&lt;a href=&quot;#准备工作&quot; class=&quot;headerlink&quot; title=&quot;准备工作&quot;
-      
-    
-    </summary>
-    
-    
-      <category term="Notes" scheme="https://mengzelev.github.io/tags/Notes/"/>
-    
-      <category term="Java" scheme="https://mengzelev.github.io/tags/Java/"/>
-    
-      <category term="programming" scheme="https://mengzelev.github.io/tags/programming/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>使用tmux变身炫酷程序猿(x</title>
-    <link href="https://mengzelev.github.io/2018/09/12/tmux/"/>
-    <id>https://mengzelev.github.io/2018/09/12/tmux/</id>
-    <published>2018-09-12T01:59:29.000Z</published>
-    <updated>2018-09-15T09:46:34.113Z</updated>
-    
-    <content type="html"><![CDATA[<p>以前看电影里面的程序猿都是屏幕上花花绿绿键盘噼里啪啦根本不用鼠标的觉得太炫酷了，学了cs以后以为希望破灭了，直到被pa讲义安利了tmux……</p><p>本文只是一个备忘笔记，方便日后查阅</p><p><u>更新中未完待续</u></p><h2 id="按键前缀"><a href="#按键前缀" class="headerlink" title="按键前缀"></a>按键前缀</h2><p>默认是<code>Ctrl-b</code>，大部分话教程会修改成离得比较近的<code>Ctrl-a</code></p><p>修改方法：打开tmux配置文件</p><pre><code>$ vim ~/.tmux.conf</code></pre><p>添加如下代码：</p><pre><code>unbind C-bset -g prefix C-a</code></pre><h2 id="分割窗口"><a href="#分割窗口" class="headerlink" title="分割窗口"></a>分割窗口</h2><p>因为是针对pa才学的tmux，所以要用的操作都非常基本</p><p>从terminal进入tmux，直接在命令行里输入tmux即可</p><pre><code>$ tmux</code></pre><p>然后进行分屏</p><p>水平分屏: <code>prefix + %</code></p><p>垂直分屏：<code>prefix + &quot;</code></p><p>我一般都使用左1+右2的形式【暂时忘了截图下次贴】</p><p>关闭该窗口：<code>prefix + &amp;</code> 会询问是否确定关闭，按y即可</p><p>切换窗口：<code>prefix +方向键</code></p><p><strong>使用tmux操作时，先按住Ctrl再按前缀键，然后可以稍微停一下再按下一个功能键</strong></p><p>以上操作目前做pa已经够用了，以后遇到新的问题再另寻解决方法并更新该文</p><h2 id="他山之玉"><a href="#他山之玉" class="headerlink" title="他山之玉"></a>他山之玉</h2><p>忙着赶作业来不及写完所以先贴篇别人整理的</p><p><a href="https://blog.csdn.net/a1181986340/article/details/51727297" target="_blank" rel="noopener">tmux多窗口操作</a></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;以前看电影里面的程序猿都是屏幕上花花绿绿键盘噼里啪啦根本不用鼠标的觉得太炫酷了，学了cs以后以为希望破灭了，直到被pa讲义安利了tmux……&lt;/p&gt;
-&lt;p&gt;本文只是一个备忘笔记，方便日后查阅&lt;/p&gt;
-&lt;p&gt;&lt;u&gt;更新中未完待续&lt;/u&gt;&lt;/p&gt;
-&lt;h2 id=&quot;按键前缀&quot;&gt;&lt;
-      
-    
-    </summary>
-    
-      <category term="Notes" scheme="https://mengzelev.github.io/categories/Notes/"/>
-    
-    
-      <category term="Notes" scheme="https://mengzelev.github.io/tags/Notes/"/>
-    
-      <category term="linux" scheme="https://mengzelev.github.io/tags/linux/"/>
-    
-      <category term="tmux" scheme="https://mengzelev.github.io/tags/tmux/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>vim初探</title>
-    <link href="https://mengzelev.github.io/2018/09/06/vim/"/>
-    <id>https://mengzelev.github.io/2018/09/06/vim/</id>
-    <published>2018-09-06T15:06:23.000Z</published>
-    <updated>2018-10-01T14:59:18.004Z</updated>
-    
-    <content type="html"><![CDATA[<p>网上类似的教程已经有很多了，只是在玩耍<code>vimtutor</code>过程中的一点笔记。</p><p>同时开markdownPad和vim输入的后果就是在精神分裂的边缘试探.jpg</p><p>然而关键还是多用，这些破整理并没有卵用。（不知道我能坚持用vim到什么时候</p><p>在学的过程中不断出现的提示：</p><center><br><img src="/2018/09/06/vim/learnbyusing.png"><br><img src="/2018/09/06/vim/lbu2.png"><br></center><h1 id="光标移动"><a href="#光标移动" class="headerlink" title="光标移动"></a>光标移动</h1><p>方向键：<code>j↓ k↓ h← l→</code> （两边左右，中间下上）</p><p><s>所以h这篇文l章里j突然出现一些hjkl也不奇怪了呢</s></p><p>光标向前移动n个单词:<code>1w,2w,3w...</code></p><p>光标向前移动至第n个单词的末尾：<code>1e,2e,3e...</code></p><p>移动至行首：<code>0</code></p><p>移动至文末：<code>G</code></p><p>移动至文章开始：<code>gg</code></p><p><code>Ctrl-G</code>配合<code>G</code>使用风味更佳（跳转到某一行）</p><p>选中：<code>v+光标移动</code></p><h1 id="模式切换"><a href="#模式切换" class="headerlink" title="模式切换"></a>模式切换</h1><p>Normal mode: <code>ESC</code></p><p>进入输入模式:<code>i</code>（要操作时记得按esc退出）</p><h1 id="保存退出"><a href="#保存退出" class="headerlink" title="保存退出"></a>保存退出</h1><p>不保存并退出：<code>:q!</code></p><p>保存并退出：<code>:wq</code></p><p>另存为：<code>:w [filename]</code></p><h1 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h1><p>删除字符：<code>x</code></p><p>删除单词：<code>dw</code>(光标需移动到单词的开头</p><p>删除至行末：<code>d$</code></p><p>删除至词末:<code>dw</code></p><p>用count进行删除：<code>d2w,d1e...</code></p><p>删除整行：<code>dd，2dd,...</code> </p><p><s>从此dd具有了全新的意思</s></p><p>用<code>dd</code>删除的行被放入了寄存器中，<code>p</code>可在上方恢复</p><h1 id="撤销"><a href="#撤销" class="headerlink" title="撤销"></a>撤销</h1><p>撤销最后一步操作:<code>u</code></p><p>撤销整行所有的操作：<code>U</code></p><p>恢复撤销：<code>Ctrl+R</code></p><h1 id="修改"><a href="#修改" class="headerlink" title="修改"></a>修改</h1><p>改写单个字符（rewrite）：<code>r+(the right character)</code></p><p>改写多个字符：<code>R+(right characters)</code></p><p>改写至词尾：<code>ce</code>（记得esc退出输入模式）</p><p>改写至行尾：<code>c$</code></p><p>整词替换：</p><pre><code>:s/old/new         //替换第一个:s/old/new/g     //在光标所在单行内将&quot;old&quot;全部替换为&quot;new&quot;\#,#old/new/g     //在\#标记出的行数范围内进行替换:%s/old/new/g    //在全文范围内进行替换:%s/old/new/gc    //在全文范围内查找并询问是否需要替换</code></pre><h1 id="插入"><a href="#插入" class="headerlink" title="插入"></a>插入</h1><p>插入某个文件的内容：<code>:r+[filename]</code></p><p>插入某个命令行函数的返回值:e.g.<code>:r !dir</code></p><p>在光标上方新建一行：<code>O</code></p><p>在光标下方新建一行：<code>o</code></p><p>从词末开始输入：<code>a</code></p><p>从行末开始输入：<code>A</code>（Append）</p><p>复制：<code>y(yank)</code> <code>yw</code>可以复制一整个单词</p><p>粘贴：<code>p(paste)</code></p><h1 id="查找"><a href="#查找" class="headerlink" title="查找"></a>查找</h1><p>查找内容：<code>/+（查找内容）</code></p><p>正向查找：<code>n</code></p><p>反向查找：<code>N</code></p><p>从文末开始查找：<code>?+(查找内容)</code></p><p>返回查找前的地方：<code>ctrl-o</code> <strong>是字母O不是数字0</strong></p><p>括号匹配：<code>%</code></p><p>忽略大小写：<code>:set ic</code>(ignore case)</p><p>关闭忽略大小写:<code>:set noic</code></p><p>查找内容高亮：<code>:set hls/hlsearch</code></p><p>关闭高亮：<code>:nohlsearch</code></p><p>部分查找：<code>:set is/incsearch</code> (incsearch)</p><h1 id="分屏"><a href="#分屏" class="headerlink" title="分屏"></a>分屏</h1><p>看到一篇不错的教程，就不复述了</p><p><a href="https://www.cnblogs.com/manziluo/p/5789700.html" target="_blank" rel="noopener">vim分屏功能总结</a></p><h1 id="暂时无法分组指令"><a href="#暂时无法分组指令" class="headerlink" title="暂时无法分组指令"></a>暂时无法分组指令</h1><p>输入命令行指令:<code>:!+(命令行指令)</code></p><p>帮助：<code>F1</code> or <code>help</code></p><p>指令补全：<code>Ctrl-D</code>配合<code>Tab</code></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;网上类似的教程已经有很多了，只是在玩耍&lt;code&gt;vimtutor&lt;/code&gt;过程中的一点笔记。&lt;/p&gt;
-&lt;p&gt;同时开markdownPad和vim输入的后果就是在精神分裂的边缘试探.jpg&lt;/p&gt;
-&lt;p&gt;然而关键还是多用，这些破整理并没有卵用。（不知道我能坚持用vim到
-      
-    
-    </summary>
-    
-      <category term="Notes" scheme="https://mengzelev.github.io/categories/Notes/"/>
-    
-    
-      <category term="Notes" scheme="https://mengzelev.github.io/tags/Notes/"/>
-    
-      <category term="vim" scheme="https://mengzelev.github.io/tags/vim/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>算法导论学习笔记-动态规划</title>
-    <link href="https://mengzelev.github.io/2018/08/31/clrs-15dp/"/>
-    <id>https://mengzelev.github.io/2018/08/31/clrs-15dp/</id>
-    <published>2018-08-31T08:37:42.000Z</published>
-    <updated>2018-09-05T02:12:40.869Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="基本原理"><a href="#基本原理" class="headerlink" title="基本原理"></a>基本原理</h1><p>以下是大段算法导论原句搬运。</p><p>只有带<u>下划线</u>的句子才是自己总结的。</p><h2 id="最优化问题"><a href="#最优化问题" class="headerlink" title="最优化问题"></a>最优化问题</h2><blockquote><p>动态规划方法通常用来求解<strong>最优化问题</strong>。这类问题可以有很多可行解，每个解都有一个值，我们希望寻找具有最优值（最小值或最大值）的解。我们成这样的解为问题的<u>一个</u>最优解，而不是最优解。</p></blockquote><h2 id="算法设计步骤"><a href="#算法设计步骤" class="headerlink" title="算法设计步骤"></a>算法设计步骤</h2><ul><li>刻画一个最优解的结构特征</li><li>递归地定义最优解的值</li><li>计算最优解的值，通常采用自底向上的方法</li><li>利用计算出的信息构造一个最优解（有时不需要）</li></ul><p>动态规划求解最优化问题应该具备的两个要素：<strong>最优子结构</strong>和<strong>子问题重叠</strong>。</p><p><u>简单来说就是，能根据原问题得到一个递推式（最优子结构），但是在这个递推式的计算过程中会出现大量重复计算的时候（子问题重叠），可以使用动态规划。</u></p><h2 id="最优子结构性质"><a href="#最优子结构性质" class="headerlink" title="最优子结构性质"></a>最优子结构性质</h2><blockquote><p>问题的最优解由相关子问题的最优解组合而成，而这些子问题可以独立求解。</p></blockquote><p>在发觉最优子结构性质的过程中，实际上遵循了如下的通用模式：<br>1.证明问题最优解的第一个组成部分是做出一个选择；<br>2.对于一个给定问题，在其可能的第一步选择中，你假定已经知道哪种选择才会得到最优解。<br>3.给定可获得的最优解的选择后，你确定这次选择会产生哪些子问题，以及如何最好地刻画子问题空间；<br>4.利用“剪切-粘贴”技术证明：作为构成原问题最优解的组成部分，每个子问题的解就是它本身的最优解（反证法）：<u>假设子问题存在更优解，将子结构从整体中删除替换为更优解，与最优假设矛盾。</u></p><p>保持子问题空间尽可能简单，只在必要时才扩展它。（e.g.矩阵链乘法问题必须允许子问题在“两端”都可变）</p><p>可以用<strong>子问题的总数</strong>和<strong>每个问题需要考察多少种选择</strong>这两个因素的乘积来粗略肥西动态规划算法的运行时间。</p><p>具有最优子结构的问题子问题之间是<strong>无关</strong>，同一个原问题的一个子问题的解不影响另一个子问题的解。e.g.无权最短路径vs无权最长路径</p><h2 id="子问题重叠"><a href="#子问题重叠" class="headerlink" title="子问题重叠"></a>子问题重叠</h2><p>如果递归方法反复求解相同的子问题，我们就称最优化问题具有重叠子问题性质。与之相对的，利用分治方法求解的问题通常在递归的每一步都生成全新的子问题。</p><p>重构最优解：用另一个数组来记录最优解</p><h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><ul><li>自顶向下的备忘算法</li><li>自底向上的动态规划算法<br>一般自底向上的动态规划算法会比较快（没有递归调用开销，表的维护开销也更小）</li></ul><p>如果子问题空间中的某些子问题完全不必求解，备忘方法就会体现出优势</p><h1 id="钢条切割问题"><a href="#钢条切割问题" class="headerlink" title="钢条切割问题"></a>钢条切割问题</h1><h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>某公司出售一段长度为i英寸的钢条的价格为$p_i(i=1,2,…,$单位为美元）。给定一段长度为n英寸的钢条和一个价格表$p_i(i=1,2,…,n)$，求切割钢条方案，使得销售收益$r_n$最大。</p><h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>长度为n英寸的钢条共有$2^{n-1}$中不同的切割方案。</p><p>如果一个最优解将钢条切割为k段$(1\le k\le n$)，那么最优切割方案<br>$$ n=i_1+i_2+…+i_k$$</p><p>将钢条切割为长度分别为$i_1,i_2,…,i_k$的小段，得到最大收益<br>$$ r_n=p_{i_1}+p_{i_2}+…+p_{i_k}$$</p><p>对于$r_n\ge 1$，我们可以用更短的钢条的最优切割收益来描述：<br>$$r_n=max(p_n,r_1+r_{n-1},r_2+r_{n-2},…,r_{n-1}+r_1)$$</p><p>更简单的，我们将钢条从左边切割下长度为$i$的一段，只对右边剩下的长度为$n-i$的一段继续进行切割（递归求解），对左边的一段则不再进行切割。可以得到$$r_n=max\limits_{1\le i\le n}(p_i+r_{n-i})$$<br>这样原问题只包含一个相关子问题的解而不是两个。</p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间复杂度：$\Theta(n^2)$</p><h2 id="子问题图"><a href="#子问题图" class="headerlink" title="子问题图"></a>子问题图</h2><center><br><img src="/2018/08/31/clrs-15dp/subpro.png" height="500"><br></center><h1 id="矩阵链乘法"><a href="#矩阵链乘法" class="headerlink" title="矩阵链乘法"></a>矩阵链乘法</h1><p>懒得写了。</p><h2 id="最优子结构"><a href="#最优子结构" class="headerlink" title="最优子结构"></a>最优子结构</h2><center><br><img src="/2018/08/31/clrs-15dp/matrix1.png" height="80"><br></center><p>对子问题的分析发现必须是子问题必须是两头可动的（i.e.一维数组是不够的）</p><h2 id="伪代码"><a href="#伪代码" class="headerlink" title="伪代码"></a>伪代码</h2><p><del>为什么原书是分页的我还得手敲一遍不能忍</del></p><pre><code>MATRIX-CHAIN-ORDER(p)    //自底向上的动态规划实现    n=p.length-1    let m[1..n,1..n] and s[1..n-1,2..n] be new tables    for i=1 to n        m[i,i]=0    for l=2 to n        for i=1 to n-l+1            j=i+l-1            m[i,j]=\infty            for k=i to j-1                q=m[i,k]+m[k+1,j]+p[i-1]*p[k]*p[j]                if q&lt;m[i,j]                    m[i,j]=q                    s[i,j]=k    return m and s</code></pre><h1 id="最长公共子序列（LCS）"><a href="#最长公共子序列（LCS）" class="headerlink" title="最长公共子序列（LCS）"></a>最长公共子序列（LCS）</h1><h2 id="问题定义"><a href="#问题定义" class="headerlink" title="问题定义"></a>问题定义</h2><p>先略</p><h2 id="最优子结构-1"><a href="#最优子结构-1" class="headerlink" title="最优子结构"></a>最优子结构</h2><center><br><img src="/2018/08/31/clrs-15dp/lcs1.png" height="120"><br><img src="/2018/08/31/clrs-15dp/lcs2.png" height="100"><br></center><h2 id="伪代码-1"><a href="#伪代码-1" class="headerlink" title="伪代码"></a>伪代码</h2><center><br><img src="/2018/08/31/clrs-15dp/lcs-length.png" height="500"><br><img src="/2018/08/31/clrs-15dp/lcs-table.png" height="300"><br></center><h1 id="最优二叉搜索树"><a href="#最优二叉搜索树" class="headerlink" title="最优二叉搜索树"></a>最优二叉搜索树</h1><p>和矩阵链乘法类似</p><p>也懒得抄了</p><p><s>一份毫无营养的学习笔记就完成了</s></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;基本原理&quot;&gt;&lt;a href=&quot;#基本原理&quot; class=&quot;headerlink&quot; title=&quot;基本原理&quot;&gt;&lt;/a&gt;基本原理&lt;/h1&gt;&lt;p&gt;以下是大段算法导论原句搬运。&lt;/p&gt;
-&lt;p&gt;只有带&lt;u&gt;下划线&lt;/u&gt;的句子才是自己总结的。&lt;/p&gt;
-&lt;h2 id=&quot;最优化
-      
-    
-    </summary>
-    
-      <category term="Notes" scheme="https://mengzelev.github.io/categories/Notes/"/>
-    
-    
-      <category term="Notes" scheme="https://mengzelev.github.io/tags/Notes/"/>
-    
-      <category term="CLRS" scheme="https://mengzelev.github.io/tags/CLRS/"/>
-    
-      <category term="Problem Solving" scheme="https://mengzelev.github.io/tags/Problem-Solving/"/>
-    
-      <category term="dynamic programming" scheme="https://mengzelev.github.io/tags/dynamic-programming/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>汇编语言复习笔记（二）</title>
-    <link href="https://mengzelev.github.io/2018/08/30/asm2/"/>
-    <id>https://mengzelev.github.io/2018/08/30/asm2/</id>
-    <published>2018-08-30T08:37:42.000Z</published>
-    <updated>2018-08-30T08:42:36.625Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="数据传送"><a href="#数据传送" class="headerlink" title="数据传送"></a>数据传送</h1><h2 id="数据传送指令"><a href="#数据传送指令" class="headerlink" title="数据传送指令"></a>数据传送指令</h2><p><u>格式： mov S(源操作数), D(目标操作数)</u></p><p>mov  &nbsp;&nbsp; 一般传送指令</p><p>movs &nbsp;&nbsp; 符号扩展传送</p><p>movz &nbsp;&nbsp; 零扩展传送</p><p>push &nbsp;&nbsp; 压栈，等价于sub+mov</p><p>pop  &nbsp;&nbsp; 退栈，等价于mov+add</p><p>按源操作数的长度加上b,w,l后缀，分别表示1、2、4字节。(movz,movs需要双后缀)</p><center><br><img src="/2018/08/30/asm2/mov.png" height="400"><br></center><p>见<a href="#lealmov">leal与movl的区别</a></p><p><strong>指令后缀、操作数长度、目标寄存器宽度必须要一致！！</strong></p><h2 id="操作数类型"><a href="#操作数类型" class="headerlink" title="操作数类型"></a>操作数类型</h2><ul><li>立即数 Imm &nbsp;&nbsp; 整型常量，加<code>$</code>前缀，e.g.<code>$233, $0x66FFCC</code></li><li>寄存器 Reg &nbsp;&nbsp; 加%前缀，e.g.<code>%eax,%ebx,%esp</code></li><li>存储器 Mem &nbsp;&nbsp; 寻址操作</li></ul><center><br><img src="/2018/08/30/asm2/memaddr.png" height="400"><br></center><p><strong>不能在一条指令里实现存储器到存储器的传送！！</strong>要实现存储器间的传送必须经过寄存器。</p><h2 id="寄存器"><a href="#寄存器" class="headerlink" title="寄存器"></a>寄存器</h2><center><br><img src="/2018/08/30/asm2/regs.png" height="400"><br></center><p>所有寄存器都可以单独读取低16位</p><p>只有%eax,%ecx,%edx,%ebx可以读取低8位（x字辈）</p><h2 id="地址运算指令"><a href="#地址运算指令" class="headerlink" title="地址运算指令"></a>地址运算指令</h2><p><u>格式: leal S,D </u></p><p>S是<strong>复杂寻址地址形式的表达式</strong>，将表达式表示的值写入D，其中D一定是<strong>寄存器</strong></p><p>用途：</p><ul><li>直接计算地址的值 e.g.<code>p=&amp;x</code></li><li>执行简单的算数运算</li></ul><p><span id="lealmov"> leal与mov操作的区别： </span><br><strong>leal不会对寻址表达式解引用</strong></p><p>e.g.</p><pre><code>//R[%edx]=xmovl 7(%edx,%edx,4),%eax    //R[%eax]=M[5x+7]leal 7(%edx,%edx,4),%eax    //R[%eax]=5x+7</code></pre><h1 id="算术和逻辑操作"><a href="#算术和逻辑操作" class="headerlink" title="算术和逻辑操作"></a>算术和逻辑操作</h1><h2 id="看表"><a href="#看表" class="headerlink" title="看表"></a>看表</h2><center><br><img src="/2018/08/30/asm2/arith.png" height="500"><br></center><p><strong>※使用时也需要根据操作数长度添加后缀</strong></p><h2 id="特殊操作"><a href="#特殊操作" class="headerlink" title="特殊操作"></a>特殊操作</h2><p>imull &nbsp;&nbsp; 带符号乘法指令，只有一个操作数时，另一个乘数隐含在%eax中，乘积的高32位放入%edx,低32位存入%eax</p><p>idivl &nbsp;&nbsp; 带符号除法指令，只有一个操作数时，%edx-%eax为被除数，操作数为除数，商存入%eax,余数存入%edx</p><p>还有无符号版本mull和divl</p><p>cltd 符号扩展指令，将%eax中的数符号扩展至%edx成为64位,经常用于idivl的准备工作</p><center><br><img src="/2018/08/30/asm2/sparith.png" height="350"><br></center><h2 id="关于imul"><a href="#关于imul" class="headerlink" title="关于imul"></a>关于imul</h2><table><thead><tr><th style="text-align:center">操作数个数</th><th style="text-align:center">格式</th><th style="text-align:left">操作</th><th style="text-align:center">结果存放</th></tr></thead><tbody><tr><td style="text-align:center">1</td><td style="text-align:center"><code>imul src</code></td><td style="text-align:left">src*R[%eax]，完全乘法（自己取的名字）</td><td style="text-align:center">%edx-%eax</td></tr><tr><td style="text-align:center">2</td><td style="text-align:center"><code>imul src dst</code></td><td style="text-align:left">src*dst,高位截断，只保留低位</td><td style="text-align:center">dst</td></tr><tr><td style="text-align:center">3</td><td style="text-align:center"><code>imul reg src imm</code></td><td style="text-align:left">R[reg]=src*imm，只保留低位</td><td style="text-align:center">reg</td></tr></tbody></table><p>具体还是看老师ppt截图吧（侵权删）</p><center><br><img src="/2018/08/30/asm2/imull.png" height="400"><br></center><h1 id="条件控制指令"><a href="#条件控制指令" class="headerlink" title="条件控制指令"></a>条件控制指令</h1><h2 id="比较与测试"><a href="#比较与测试" class="headerlink" title="比较与测试"></a>比较与测试</h2><center><br><img src="/2018/08/30/asm2/cmp.png" height="350"><br></center><p>cmp和test指令实际上是用减法和按位与操作实现的。</p><p>注意两个操作数的先后顺序与实际是<strong>相反</strong>的</p><h2 id="条件置位指令setX"><a href="#条件置位指令setX" class="headerlink" title="条件置位指令setX"></a>条件置位指令setX</h2><p>setX指令根据相应的条件标志位将某一位置0或置1。</p><p>有符号数的大小关系用greater/less表示，无符号数的用above/below表示。</p><center><br><img src="/2018/08/30/asm2/set.png" height="400"><br></center><h2 id="条件跳转指令jmpX"><a href="#条件跳转指令jmpX" class="headerlink" title="条件跳转指令jmpX"></a>条件跳转指令jmpX</h2><p>基本同setX</p><center><br><img src="/2018/08/30/asm2/jmp.png" height="400"><br></center><p>间接跳转：跳转的目标是从寄存器或存储器中读取的，e.g.<code>jmp *%eax</code>表示跳转至R[%eax]存储的地址位置</p><p>跳转地址分为<strong>绝对地址</strong>和<a href="#pc-r"><strong>相对地址(PC-relative addressing)</strong></a>。</p><p>绝对地址即4个字节直接指定的目标地址。</p><h2 id="PC-relative-addressing"><a href="#PC-relative-addressing" class="headerlink" title="PC-relative addressing"></a><span id="pc-r">PC-relative addressing</span></h2><p>程序计数器的值是<strong>跳转指令后</strong>的那条指令的地址，而非跳转指令本身的地址</p><p>实际跳转到的地址=下一条指令的地址+右边的操作数<strong>（小端补码表示）</strong></p><p>e.g.</p><pre><code>804828f:    74 05                je         XXXXXXX8048291:    e8 1e 00 00 00         call    80482b4XXXXXXX=0x8048291+0x05=0x8048296</code></pre><h2 id="条件传送指令cmovX"><a href="#条件传送指令cmovX" class="headerlink" title="条件传送指令cmovX"></a>条件传送指令cmovX</h2><p>满足某个条件时执行mov操作</p><p><strong>※必须与cmp操作连用，比较的不是cmov指令的两个操作数而是cmp的两个操作数</strong></p><center><br><img src="/2018/08/30/asm2/cmov.png" height="400"><br></center><h2 id="条件分支语句的编译"><a href="#条件分支语句的编译" class="headerlink" title="条件分支语句的编译"></a>条件分支语句的编译</h2><p>if-else语句通常按goto方式执行</p><p>一般翻译思路为:</p><pre><code>if (test-expr)     then-statementelse    else-statement</code></pre><p>会被翻译为</p><pre><code>if(!test-expr)    goto falsethen-statementgoto donefalse:else-statementdone:</code></pre><p>可以参考下图中示例：</p><center><br><img src="/2018/08/30/asm2/ifelse.png" height="600"><br></center><h1 id="循环控制语句"><a href="#循环控制语句" class="headerlink" title="循环控制语句"></a>循环控制语句</h1><h2 id="do-while循环"><a href="#do-while循环" class="headerlink" title="do-while循环"></a>do-while循环</h2><p>一般循环语句都最终翻译成do-while的形式</p><pre><code>do    body-statementwhile(test-expr)</code></pre><p>会被翻译为</p><pre><code>loop:    body-statement    if(test-expr) goto loop;</code></pre><center><br><img src="/2018/08/30/asm2/dowhile.png" height="500"><br></center><h2 id="while循环"><a href="#while循环" class="headerlink" title="while循环"></a>while循环</h2><pre><code>while(test-expr)    body-statement</code></pre><p>会被翻译为</p><pre><code>if(!test-expr) goto done;loop:    body-statement    if(test-expr) goto loop;done:</code></pre><h2 id="for循环"><a href="#for循环" class="headerlink" title="for循环"></a>for循环</h2><pre><code>for(init-expr; test-expr; update-expr)    body-statement</code></pre><p>会被翻译为</p><pre><code>init-expr;if(!test-expr) goto done;loop:    body-statement    update-expr    if(test-expr) goto loop;done:</code></pre><h1 id="switch语句"><a href="#switch语句" class="headerlink" title="switch语句"></a>switch语句</h1><h2 id="跳跃表"><a href="#跳跃表" class="headerlink" title="跳跃表"></a>跳跃表</h2><p>跳跃表是一个数组，其中每个下标i对应一个代码段的地址<br><img src="/2018/08/30/asm2/jumplist.png" height="300"></p><p>好处：执行一个switch语句的时间和case的数量无关<br>跳跃表一般被存放在内存的某个位置，可以调用gdb查看</p><p>一大波截图预警</p><center><br><img src="/2018/08/30/asm2/switch1.png" height="1000"><br><img src="/2018/08/30/asm2/switch2.png" height="800"><br></center><h1 id="作业二的教训"><a href="#作业二的教训" class="headerlink" title="作业二的教训"></a>作业二的教训</h1><hr><p>1.几个指令的名称对应功能要背熟</p><p>2.确定数据类型：确定长度+<strong>有无符号</strong></p><p>3.别忘了<strong>指针</strong>也是一种数据类型</p><p>4.jmp指令的第二个操作数是<strong>小端补码表示</strong></p><p>5.模拟汇编控制流就是要把代码拆分成简单语句（注意运算优先级）</p><p>6.分清<strong>andl</strong>和<strong>addl</strong></p><p>7.补充C代码的时候就不要再写<strong>8x</strong>这样意义不明的东西了，是<strong><code>8*x</code></strong>啊老兄</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;数据传送&quot;&gt;&lt;a href=&quot;#数据传送&quot; class=&quot;headerlink&quot; title=&quot;数据传送&quot;&gt;&lt;/a&gt;数据传送&lt;/h1&gt;&lt;h2 id=&quot;数据传送指令&quot;&gt;&lt;a href=&quot;#数据传送指令&quot; class=&quot;headerlink&quot; title=&quot;数据传送指
-      
-    
-    </summary>
-    
-      <category term="Notes" scheme="https://mengzelev.github.io/categories/Notes/"/>
-    
-    
-      <category term="Notes" scheme="https://mengzelev.github.io/tags/Notes/"/>
-    
-      <category term="Assembly Language" scheme="https://mengzelev.github.io/tags/Assembly-Language/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>汇编语言复习笔记（一）</title>
-    <link href="https://mengzelev.github.io/2018/08/29/asm-notes/"/>
-    <id>https://mengzelev.github.io/2018/08/29/asm-notes/</id>
-    <published>2018-08-29T05:11:42.000Z</published>
-    <updated>2018-08-30T03:32:00.252Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>本文为学校课程面向考试复习笔记，参考内容为老师的课堂讲义&amp;<em>深入理解计算机系统</em>，依据这两者做了一些个人的整理便于复习。<del>然而浪了一个假期在退课的边缘试探</del></p><h1 id="信息的表示"><a href="#信息的表示" class="headerlink" title="信息的表示"></a>信息的表示</h1><h2 id="数值的表示"><a href="#数值的表示" class="headerlink" title="数值的表示"></a>数值的表示</h2><ul><li>原码：这个很直观的</li><li>反码：这个几乎不用的</li><li>补码：$D’=R^n-D$ / 按位取反加1；</li><li>移码：见<a href="#float">浮点数</a></li></ul><p><strong>补码</strong></p><ul><li>相当于取模操作</li><li>着重区分<strong>基数的值(R)</strong>和<strong>补码位表示的实际的值(D)</strong></li><li>R与D的相对大小一致</li><li>$R=D+D_{w-1}\cdot 2^w$</li></ul><h2 id="C语言中的整数"><a href="#C语言中的整数" class="headerlink" title="C语言中的整数"></a>C语言中的整数</h2><ul><li>无符号数：在数后加U或u</li><li>同时有无符号数和带符号数，编译器将带符号数强制转换为<strong>无符号数</strong></li><li>int的最大正值为2147483647，最大负值为-2147483648</li><li><strong>比较时要特别注意是按什么规则进行的</strong></li></ul><h2 id="数据的存放"><a href="#数据的存放" class="headerlink" title="数据的存放"></a>数据的存放</h2><ul><li>小端：最低有效字节存放在<strong>最小</strong>地址</li><li>大端：最低有效字节存放在<strong>最大</strong>地址</li></ul><h2 id="浮点数"><a href="#浮点数" class="headerlink" title="浮点数"></a><span id="float">浮点数</span></h2><p>编码表示分3个字段</p><ul><li>符号s &nbsp; 0正1负 </li><li>阶码E &nbsp; k位阶码字段exp </li><li>尾数M &nbsp; n位小数字段frac &nbsp; 表示的是a/2^n</li></ul><p>float &nbsp; k=8,n=23</p><p>double &nbsp; k=11,n=52</p><p><strong>三种表示情况</strong></p><p><strong>1.规格化</strong> &nbsp;&nbsp;<br><strong>阶码部分既不全0也不全1</strong></p><p>采用偏置形式：<code>E=e-Bias</code></p><p>其中，E为阶码实际的值，e为位模式下的无符号数，偏置Bias= $2^{k-1}-1$ <code>float:127, double:1023</code></p><p>指数范围： <code>float: -126~+127; double -1022~1023</code></p><p>尾数 <code>M=f+1</code> &nbsp; 其中 <code>0&lt;=f&lt;1; 1&lt;=M&lt;2</code></p><p><strong>非规格化</strong> &nbsp;&nbsp;<br><strong>阶码全0</strong></p><p>阶码<code>E=1-Bias</code></p><p>尾数<code>M=f</code></p><p>存在意义：提供了0的表示方法，逐渐溢出 &nbsp; （否则[0,$2^{-n})范围内的数都无法表示）</p><p><strong>特殊值</strong> &nbsp;&nbsp;<br><strong>阶码全1</strong></p><ul><li>尾数全0：正负无穷大</li><li>尾数非全0： NaN</li></ul><p><strong>浮点数加减运算</strong><br>步骤：对阶→加减→规格化（→舍入）</p><p>对阶：小阶向大阶看齐，小阶尾数右移（带上隐含的1）</p><h1 id="整数运算"><a href="#整数运算" class="headerlink" title="整数运算"></a>整数运算</h1><h2 id="位运算"><a href="#位运算" class="headerlink" title="位运算"></a>位运算</h2><p>没什么好说的。</p><h2 id="移位运算"><a href="#移位运算" class="headerlink" title="移位运算"></a>移位运算</h2><ul><li>左移<code>x&lt;&lt;k</code>  丢弃最高k位，在右端补k个0</li><li>右移<code>x&gt;&gt;k</code>  丢弃最低k为，在右端补k个0/符号位</li></ul><p><strong>移位运算是向下取整</strong></p><h2 id="整数加减法"><a href="#整数加减法" class="headerlink" title="整数加减法"></a>整数加减法</h2><p>发生在n位带标志加法器中</p><p>###条件标志位<br>计算<code>t=a+b</code></p><table><thead><tr><th style="text-align:center">eflag</th><th style="text-align:center">中文名称</th><th style="text-align:center">有效条件</th></tr></thead><tbody><tr><td style="text-align:center">OF</td><td style="text-align:center">溢出标志</td><td style="text-align:center">a,b同号但t与a,b异号</td></tr><tr><td style="text-align:center">SF</td><td style="text-align:center">符号标志</td><td style="text-align:center">t&lt;0</td></tr><tr><td style="text-align:center">ZF</td><td style="text-align:center">零标志</td><td style="text-align:center">t==0</td></tr><tr><td style="text-align:center">CF</td><td style="text-align:center">进位标志</td><td style="text-align:center">(unsigned)t&lt;(unsigned)a</td></tr></tbody></table><p>比较大小相当于做减法</p><ul><li>无符号数： CF==0 $\Leftrightarrow$ a&gt;b</li><li>有符号数： OF==SF $\Leftrightarrow$ a&gt;b</li></ul><h2 id="整数乘法"><a href="#整数乘法" class="headerlink" title="整数乘法"></a>整数乘法</h2><p>乘数中有常数时：采用移位(左移)+加减法相结合的形式</p><h2 id="整数除法"><a href="#整数除法" class="headerlink" title="整数除法"></a>整数除法</h2><p>默认朝0方向舍入：，即正数商取比自身<strong>小</strong>的最接近整数，负数商取比自身<strong>大</strong>的最接近整数</p><p><strong>用移位代替除法时需要负数需要加上一个偏移量</strong></p><p>除数为2的幂次时，采用右移运算，得到朝0方向舍入的结果</p><ul><li>无符号数、有符号正整数： 移出的地位直接丢弃</li><li>有符号负整数： ：加偏移量 (2^k-1) ，然后再右移k位，低位截断</li></ul><h1 id="作业一的教训"><a href="#作业一的教训" class="headerlink" title="作业一的教训"></a>作业一的教训</h1><p>1.~按位取反 和 ！全部取反要区分清楚</p><p>2.非按位运算操作符非0的都视为true</p><p>3.浮点数的转化要好好看一下，把转化公式写好</p><p>4.移位是向下取整</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;本文为学校课程面向考试复习笔记，参考内容为老师的课堂讲义&amp;amp;&lt;em&gt;深入理解计算机系统&lt;/em&gt;，依据这两者做了一些个人的整理便于复习
-      
-    
-    </summary>
-    
-      <category term="Notes" scheme="https://mengzelev.github.io/categories/Notes/"/>
-    
-    
-      <category term="Notes" scheme="https://mengzelev.github.io/tags/Notes/"/>
-    
-      <category term="Assembly Language" scheme="https://mengzelev.github.io/tags/Assembly-Language/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>胡言乱语的大一总结</title>
-    <link href="https://mengzelev.github.io/2018/08/18/freshman/"/>
-    <id>https://mengzelev.github.io/2018/08/18/freshman/</id>
-    <published>2018-08-18T13:27:02.000Z</published>
-    <updated>2018-08-18T15:46:17.255Z</updated>
-    
-    <content type="html"><![CDATA[<p>&emsp;&emsp;生日兼七夕窝在家里无聊于是开了这样一篇文章写了整整两天，都是些碎碎念。本来并没有写这种东西的习惯的<em>(:з」∠)</em>但是既然开了个人blog总要写点什么的于是就写吧！<del>试图掩盖写不出教程的事实</del>将来过好几年来看可能会很有回忆的感觉。</p><h2 id="学习篇"><a href="#学习篇" class="headerlink" title="学习篇"></a>学习篇</h2><p>刚进大学的时候，军训期间闲得蛋疼去考了计拔居然还被录取了，<del>txp他老人家眼光真的没问题吗，</del>于是就开始了贼船之旅。大一上第一个国庆长假就只能窝在家里写作业写了好久堪称心理阴影，大一上被问求这门神奇的课给吓尿了，动不动就为了赶作业修仙到两点。<del>其实还是有在疯狂补小排球的</del> 到了大一下觉得大一上还是很空闲的，起码不用搭面包板，也不用抄大物作业。大二上可能会觉得大一下很轻松吧，笑着活下去.jpg</p><center><br><img src="/2018/08/18/freshman/up.png" height="500"><br><br>大一上课表<br><br><img src="/2018/08/18/freshman/down.png" height="400"><br><br>大一下课表<br></center><p>随便说说几门课给我的感受。</p><p><strong>微积分</strong>早有耳闻，学起来没有觉得很难，可能也是托了qlz的福，这样有主见有原则的老师我超级赞赏的，上课还会讲故事，<del>最重要的是他给分高啊！</del> 本来和害怕数学的我渐渐也能感受到数学的美了吧，大概。</p><p><strong>微电子</strong>，浪费生命的水课，课听了，作业做了，考试考了但是感觉毫无收获。 </p><p><strong>大物实验</strong>，水课，求求来个人告诉我实验报告怎样才能拿到优。</p><p> <strong>大物</strong>，不明觉厉，学学物理其实挺好玩的，但是ldx这本书为什么这么…【无fuck说.jpg】<del>果然xmw这种老师还是早点辞退比较好</del> xw是真的很卖力啊但是为什么我还是听不懂，对不起他。虽然物理课每节都有在听但是经常忍不住水群导致错过了好多，下学期请务必全神贯注，不然电磁学要GG了。 </p><p><strong>思修</strong>， <strong>军理</strong>， <strong>马原</strong>， 水课三连，马原老师讲的哲学还有那么点意思，可惜全在写oj了没认真听。<del>军理部分老师太sb了请立刻辞退</del></p><p><strong>数电</strong> 嘛，还挺有意思的，搭面包板有点抓狂但是比比大班就有心里安慰了。<del>还有wgs真的好帅啊！！！</del> </p><p><strong>英语</strong>， 我喜欢，大一上的视听说拍视频很开心，<del>虽然我只是个压榨组员的主催</del>。大一下的配音和演讲超有意思的，演讲做了啊你妹相关的虽然很花时间但还是超开心的。Ruth的读写课天下第一好，我吹爆她！第一学期的时候就猜对了一个谜语而已她居然觉得我很厉害还送了我一个史迪仔期末还给了我满分，真的只是非洲人突然偷渡入欧而已…总之超级感谢的…第二学期结课的时候Ruth还哭了…能跟学生交心的老师是真的难得啊qwq</p><p><strong>问求</strong>， 终于到了这门让我百感交集无fuck说的课。大一上:卧槽我在学什么；大一下：卧槽这题该怎么做。大一上作业不算难但是量炒鸡大，期末考试也莫名其妙。大一下，作业不多但是好多不会做的，其他课作业又比较多只能出卖灵魂与网络上的算法导论参考答案签订契约成为期末挂科烧酒（雾）。OJ…别提了…我只是题解的搬运工…期末mj查什么重啊…您出题出这么难不找题解还怎么做啊…把OJ当acm校队选拔吗…</p><p><strong>汇编</strong>，一定要告诫学弟学妹，千万别听whj讲课，看csapp自学效率最高。whj讲课听不懂催眠效果还极好。实验部分装装Linux调调gdb还是挺好玩的，作业也还行，做下来对CPU的工作方式算是有了个全新的认识。【然而汇编笔记的文章还是没有产出来】拆炸弹是真的很有意思，每拆完一个phase都超有成就感，我应该是走火入魔了，连着3个晚上没睡好觉，闭眼就是寄存器，然后被自己炸醒。拆了三天也是够慢的，自卑.jpg.马上开学要考试了完全不想复习，在退课的边缘试探，，，</p><p><strong>通识</strong>, 感觉这一年里还是太忙于专业课的学习了，通识课上下来并没有太大的收获，基本都是上课不听埋头写作业<del>或者沉迷水群</del>，期末论文之类的也是东拼西凑的学术垃圾。和进大学之前想的完全不一样唉…悦读经典emmmmm论理想与现实的差距，目前为止选的三本书没有哪一本是认真看过的，我什么时候能中《呐喊》、《彷徨》呢？即使中了，在专业课重压之下真的会好好看吗？</p><p>课外学习的话，平时在校根本挤不出时间，总是带着不到ddl不写作业的惰性思维，这一点希望能改啊，<del>可是既然有时间难道不应该优先看番吗</del>。暑假龟速自学了git和markdown，其实都不是很有技术含量的东西，接下来的时间看看能不能学…你数学建模相关还一点没看呢吧…吧…美赛还没报名呢吧…咕掉了校内培训和选拔的严重后果…总之，加油吧。</p><p>也一度因为周围的人都去打acm迷茫过要不要去打，但是高中三年noip下来其实也不是太愉快，貌似不太喜欢这种过于理论、过于数学的题目，可能也是一种逃避现实的借口吧。嘛，既然决定了不打acm就一定要认真科研啊。不过现在学得太少真的不敢妄下定论自己喜欢什么。<del>西瓜书，请。</del></p><p>还有既然决定要出国了，请认真背单词。</p><blockquote><p>这个人真的不是精神分裂吗</p></blockquote><h2 id="社团活动篇"><a href="#社团活动篇" class="headerlink" title="社团活动篇"></a>社团活动篇</h2><p>说到大学必须得有社团活动哒！上大学之前幻想了很多的，进了大学为生活所迫也就活跃了几个地方。</p><p><strong>吉协</strong>是早就想去的，结果实际上也就大一上去上了弹唱提高班。老师还挺好的吧，至少比家这里的好，还稍微入门了一下指弹。之后的活动完全没有参加了orz什么时候才能把曲子练到能上台表演的水平呢…</p><p><strong>辩队</strong>还是有好好待的！<del>虽然是被学姐忽悠进去的还只打了两场正式比赛全是输给冠军的一轮游。</del>在辩队一年还从来没赢过一场，太惨了。每次比赛前讨论真的好花时间。一开始写一辩稿还好，后来开始被钦定打三辩稿子都是开场前30min写的了简直丢人。受了信管那边的学长学姐好多照顾（包括wrc)，除了辩论技巧还被拖着玩了狼人杀，所以，传火吧，骚年！</p><p><strong>CAC音乐部</strong>每天水水群约约饭很开心der!还认识了一帮宅友！好多会玩乐器的、唱歌超好听的小哥哥小姐姐！<del>还有豹跳如雷的海豹们两个月四对的传说</del>！还有每次交作业被33处刑…去过大活楼梯间约歌（一次），线上歌会（两次），107（等末子姐姐拍照一次），完美错过所有线下约k。也算是遗憾比较大的一个地方，当初大一上觉得自己作业太多了没去Monge，乐队的锅也没接。现在Monge都凉了，大二上更不可能有空了。仔细想想大一上其实能好好安排时间的话完全是有空的，但是刚进大学谁能想到呢？还是太求稳了缺少逼自己一把的勇气吧。为才能不足而自卑.jpg。接了vocal团的锅希望表达一点愧疚之意吧。<del>你们的(副)团长是全团最不会唱歌的人。</del></p><p><strong>流跡</strong>是在你群水群聊骨头社意外被33拉进去的。之前完全没想过还有这么硬核的探讨宅话题的地方。一开始什么都看不懂（现在依然是），但是以此为契机了解了不少<del>其实也不多</del>啊你妹制作相关的知识。后来进来的玄枝爷爷讲了好多叙事学的东西，很厉害的样子但是完全没听懂自卑.jpg。自从能在流跡吹水新番之后感觉自己的追番越来越勤快了，经各位的安利看番面也越来越广了。和各位的约饭也非常愉快。英语pre做了动画制作流程相关的内容以及现在补《白箱》都和流跡脱不了干系，想快点变得pro能和各位聊起来啊qwq</p><p><strong>排队</strong>是恶补了小排球之后才加的，虽然没有小排球里那么刺激<del>也没有那么多可爱的男孩子</del>但是打排球真的好开心！在场边加油很晒应该没晒黑多少吧(bushi)学姐们都好厉害！一路打进了院系杯四强！技术不足还不足以成为战力下个学期要好好加油了！</p><p>除此之外开学乱加的几个早就为作业所迫咕掉了。比如校会学创啊，信管乒队什么的。（你真的会打乒乓吗）大二上也不敢对社团活动有所奢望了，好好在辩队带带小孩、vocal团的工作做做好，流跡快点把制作流程产出，我就满足了。<code>你看又开始求稳没有拼劲了</code></p><h2 id="生活篇"><a href="#生活篇" class="headerlink" title="生活篇"></a>生活篇</h2><p>大学生活的第一年吗…总体还算平稳的吧。</p><p>宿舍不是太愉快。烦心事也就不多提了，忘掉最好。</p><p>一年来基本都靠食堂过日子，叫外卖的次数屈指可数。大一上基本没出过几次校门，大一下逐渐开始放浪形骸。</p><p>寒假鼓起勇气买了人生第一套jk制服，月野家的奶油黄基础款冬服，到快入夏的时候才到的，也就穿了一次。之后入了优马家的绀金和红酒雪梨，燕子家的白五本，从此走上攒钱买衣服的不归路。优马大小姐的定金已经下了，最近出了那么多问题…等浅色的出货爱咋滴咋地吧。代码定金也下了，坐等出货，我也想穿着代码敲代码！</p><p>es军训的时候还在肝rock，开学后尝到了生活的艰辛，尤其是在做人情肝了一发节分守门两小时作业一笔未动修仙勉强做完后，从此es脱坑。现在极其想把手头的谷子都卖掉，忘记我这个出坑的人渣吧。fgo军训无聊稍微玩了一下，总之是不想过靠肝和欧生活的日子了，这月就不登了。</p><p>大一下开始学车，暑假的时候留校一个多礼拜把科三给考了，过得超惊险。大二上要在上课和作业的夹缝中学科二了。</p><h2 id="补番篇"><a href="#补番篇" class="headerlink" title="补番篇"></a>补番篇</h2><p>就不一一列举了这一年里补/追过的番了，类似于推荐的形式挑几部印象深刻的写吧。</p><p><strong>小排球</strong>  强推！吹爆！运动番天花板！剧情作画配乐都堪称一流！看到停不下来！一般深夜补番的我多次因为小排球亢奋到睡不着。好久没看这么从头正到尾的番了，既有很现实的设定（及川大王和影山）也有理想的处理（日向和乌野的大家）。不会气活牛顿的科学运动番，<del>唯一不现实的地方是现实中的小男孩哪有这么可爱。</del>看完甚至开始打排球的我不是一个人。心情不好的时候看看小排球就能马上开心起来。有生之年能遇到这样的番真是太好了。</p><p><strong>三月的狮子</strong> 对上电波的慢节奏番，吹爆羽海野老师和新房！！零酱超可爱！！（摸摸）很喜欢这种有关人生与成长的题材，零酱和三姐妹经历的困难特殊而普遍，仿佛能看到自己的过去。身世悲惨的他们也时常享有寻常的幸福，这种强烈对比大概就是三狮的动人之处。岛田大师兄、小胖、老师等配角刻画得也很好。虽然将棋部分的内容完全看不懂但也不妨碍其成为一部佳作。</p><p><strong>超自然九人组</strong> 志仓千代丸的作品，剧情，尤其是开头和中间展开很精彩，节奏飞快，收尾略显仓促，不少坑挖了没填，听说游戏表现得反而没有动画好有点可惜。<del>佐仓这回治好了我的巨乳控！</del></p><p><strong>宅男腐女恋爱难</strong> 太甜了！一部刷新我恋爱观的番！我萌捷列夫就是饿死，死外边，也不会看狗粮番的——真香！</p><p>其他看过的番bangumi上都有记录了就不作赘述了。顺便贴上<a href="http://bangumi.tv/user/426807/&quot;萌捷列夫的bangumi&quot;" target="_blank" rel="noopener">我的bangumi</a>。</p><h2 id="恋爱篇"><a href="#恋爱篇" class="headerlink" title="恋爱篇"></a>恋爱篇</h2><p>您是不是一上来就通过目录索引跳这儿来了？哈哈！对不起！毛都没有！</p><p>……</p><p>没有对象但还是想说说恋爱观的，毕竟之前也没有认真思考过这个问题，就大一上拒了俩然后被吓到了发表了一堆独身主义宣言<del>现在想想全tm是黑历史啊好想删说说。</del>其实也没有那么抗拒了啦<code>首先你得...</code>只是自己不是那种想随便玩玩的人，所以想尽可能抱着认真谨慎的心态来对待这么重要的事情<code>首先你得...</code>不过话说回来还是作业太多了，客观上不想再多加一件需要操心的事情了<code>首先你得...</code>没有空间里那些对象怪那么迫切，还是很享受单身的自由生活的，只要管好自己就行了，<del>想喜欢谁就喜欢谁做个dd不好吗？</del>也就是出去玩找不到小伙伴的时候会稍微有点寂寞（）。各有各的生活方式吧。总之，这么看缘分的事情还是随缘吧…</p><p>嗯？您问有没有喜欢的人了？这篇文章没加密我当然不会说啦！(doge)</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;&amp;emsp;&amp;emsp;生日兼七夕窝在家里无聊于是开了这样一篇文章写了整整两天，都是些碎碎念。本来并没有写这种东西的习惯的&lt;em&gt;(:з」∠)&lt;/em&gt;但是既然开了个人blog总要写点什么的于是就写吧！&lt;del&gt;试图掩盖写不出教程的事实&lt;/del&gt;将来过好几年来看可能会很有
-      
-    
-    </summary>
-    
-      <category term="Diary" scheme="https://mengzelev.github.io/categories/Diary/"/>
-    
-    
-      <category term="freshman" scheme="https://mengzelev.github.io/tags/freshman/"/>
-    
-      <category term="college life" scheme="https://mengzelev.github.io/tags/college-life/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Markdown test</title>
-    <link href="https://mengzelev.github.io/2018/08/12/test-md/"/>
-    <id>https://mengzelev.github.io/2018/08/12/test-md/</id>
-    <published>2018-08-12T13:27:02.000Z</published>
-    <updated>2018-08-12T13:35:34.586Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="这是标题君"><a href="#这是标题君" class="headerlink" title="这是标题君"></a>这是标题君</h1><h2 id="这是副标题君"><a href="#这是副标题君" class="headerlink" title="这是副标题君"></a>这是副标题君</h2><p>我知道这篇文章看起来很沙雕，因为作者就是一个沙雕</p><p>列表非常有趣</p><ul><li>这是第一项</li><li>这是第二项</li><li>这是第三项</li></ul><hr><p>有时候会有需要<strong>强调</strong>的内容。</p><p>插入代码是一件非常爽的事情：</p><pre><code>printf(&quot;%s&quot;,&quot;Hello world!\n&quot;);</code></pre><p>突然发现自己不会用printf真是太丢人了。</p><hr><p>有时候需要插入链接，这里贴一个<a href="http://www.baidu.com/" target="_blank" rel="noopener">百度</a>。</p><p>有时候又需要插入图片</p><center><br>    <img src="https://pic2.zhimg.com/80/v2-bf04338ea0065cea5dc853e7d1675c25_hd.jpg" height="330"><br></center><p>看张血小板冷静一下吧（图源网络）</p><p>图片的尺寸可以用命令进行修改</p><hr><p>暂时先写这么多吧，敬请关注后面几期，计划中将会有</p><ul><li>汇编课程相关学习笔记</li><li>日本动画制作流程及《白箱》观后感整理</li><li>大一回顾与总结</li></ul><blockquote><p>但愿到时候不要鸽（小声）<br>评论功能等我明天再来开<br>不要问我这里为什么是引用格式，看不出来我只是在试试吗</p></blockquote>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;这是标题君&quot;&gt;&lt;a href=&quot;#这是标题君&quot; class=&quot;headerlink&quot; title=&quot;这是标题君&quot;&gt;&lt;/a&gt;这是标题君&lt;/h1&gt;&lt;h2 id=&quot;这是副标题君&quot;&gt;&lt;a href=&quot;#这是副标题君&quot; class=&quot;headerlink&quot; title=&quot;这
-      
-    
-    </summary>
-    
-      <category term="Diary" scheme="https://mengzelev.github.io/categories/Diary/"/>
-    
-    
-      <category term="markdown" scheme="https://mengzelev.github.io/tags/markdown/"/>
     
   </entry>
   

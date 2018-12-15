@@ -339,6 +339,359 @@
     
     
     <article class="index-post">
+        <a class="abstract-title" href = "/2018/10/24/clrs-22graphic-algs/" >
+            
+                <span>算法导论学习笔记-基本图论算法</span>
+        </a>
+        <div class="abstract-content">
+            辣鸡po主只挖坑不填坑因为作业实在太多了！！！
+试一下Mathjax有没有配置成功！
+图的表示邻接链表(Adjacency-list)
+由一个包含$|V|$条链表的数组Adj所构成，Adj[u]包含所有与结点u之间有右边相连的结点v
+存储空间需求：$\Theta(V+E)$
+鲁棒性高，稍加修改可以支持许多图的变种（如：有权图）
+缺陷：无法快速判断一条边是否在图中
+
+邻接矩阵(Adjacency-matrix)
+用矩阵来存储连通信息
+存储空间需求：\Theta(V^2) 与边数|E|无关
+简单，图规模较小时优先使用
+
+广度优先搜索BFS算法描述
+从一个源结点s开始，每次从已发现的结点向未发...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/10/24</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Notes">Notes</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "CLRS">CLRS</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Problem Solving">Problem Solving</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Single Source Shortest Path">Single Source Shortest Path</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Bellman-Ford">Bellman-Ford</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Dijkstra">Dijkstra</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href = "/2018/10/14/tree/" >
+            
+                <span>图论学习笔记-树</span>
+        </a>
+        <div class="abstract-content">
+            本章可用结论整理
+定理4.1：e是图G的桥当且仅当e不在G的任何一个cycle上
+定理4.2：图G是树当且仅当G的任意两个顶点只有唯一的path相连
+定理4.3：每一棵非简单树都有至少两个端点(end-vertice)
+定理4.4：每棵有n个顶点的树都有n-1条边
+推论4.6：每棵有k个component的森林都有n-k条边
+定理4.7：每一个有n个顶点的连通图至少有n-1条边
+定理4.8：有n个顶点、m条边的图G，若满足以下3条性质中的2条：(1)连通 (2)无环 (3)m = n - 1，则G是树
+定理4.9：设T是一棵有k个顶点的树。如果图G中最小的度数不小于k-1，那么T与G的某...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/10/14</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Notes">Notes</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Problem Solving">Problem Solving</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Graph">Graph</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Tree">Tree</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href = "/2018/10/12/lab1-report/" >
+            
+                <span>Lab1-乘法 实验报告</span>
+        </a>
+        <div class="abstract-content">
+            任务1：实现multimod使用了高精度数乘法计算a*b，然后模拟手算除法的形式写了高精度除法（取模）。代码见文件p1.c.
+正确性(伪)证明使用python随机生成生成了1000000组a、b、m，0~9223372036854775807(int64_t的最大值)并计算对应答案，与p1.c的计算结果进行对比。
+python随机数生成代码如下：
+import random
+
+MAX = 9223372036854775807
+
+for i in range(1,1000000)：
+    a = random.randint(0,MAX)
+    b = random.randint(...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/10/12</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Notes">Notes</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Lab">Lab</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Ics">Ics</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href = "/2018/10/06/clrs-21DisjointSets/" >
+            
+                <span>算法导论学习笔记-用于不相交集合的数据结构</span>
+        </a>
+        <div class="abstract-content">
+            不相交集合的操作一个不相交集合数据结构维护了一个不相交动态集的集合每个集合都有一个代表标识，它是该集合的某个成员
+我们希望集合支持以下三个操作：
+
+应用：确定无向图的连通分量
+
+算法就是将连通的顶点全部合并到同一个集合中。
+不相交集合的链表表示每个集合可以用一个自己的链表来表示链表中对象可以以任意次序出现
+每个链表组成为：
+
+head– 指向表的第一个对象（代表元）
+tail– 指向表的最后一个对象
+
+链表中每个对象的组成为：
+
+关键字key
+指向head的指针prev
+指向后一个对象的指针next
+
+时间复杂度：MAKE-SET  O(1)FIND-SET  O(1)UNION（简单实...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/10/06</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Notes">Notes</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "CLRS">CLRS</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Problem Solving">Problem Solving</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Disjoint Sets">Disjoint Sets</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Data Structure">Data Structure</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href = "/2018/10/04/PA1-report/" >
+            
+                <span>PA1实验报告</span>
+        </a>
+        <div class="abstract-content">
+            实验进度2018/9/15：完成阶段一，实现了单步执行、打印寄存器和扫描内存（简易版）开始做之前忘了git checkout pa1导致工作都在pa0分支里完成了，后来在pa1分支下返工了一遍，两边的git log里都可以查到记录所以求求老师不要扣我的分qwq我下次确定一定肯定确认分支后再开始工作
+2018/9/23:完成阶段二，实现了包含(、)、+、-、*、/和十进制数字的表达式计算。为了处理负数将类型都实现为了long long而不是uint32_t，需要按uint32_t类型使用时进行强制类型转换。实现了表达式生成器并测试。
+2018/9/29:完成阶段三，扩展了表达式计算中的==...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/10/04</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Notes">Notes</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "pa">pa</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href = "/2018/09/21/regex/" >
+            
+                <span>正则表达式学习笔记</span>
+        </a>
+        <div class="abstract-content">
+            废话不多说，贴4张截图就跑路（。
+有空还是会回来写的，容我先把ddl肝完（瘫）。
+PA讲义中的Linux-C教程
+
+
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/09/21</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Notes">Notes</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "pa">pa</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "regular expressions">regular expressions</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "linux">linux</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href = "/2018/09/17/clrs-17amortized/" >
+            
+                <span>算法导论学习笔记-摊还分析</span>
+        </a>
+        <div class="abstract-content">
+            聚合分析聚合分析指，证明对所有n，一个n个操作的序列的最坏情况下花费的总时间为T(n)。因此在最坏情况下，每个操作的平均代价，或摊还代价为T(n)/n。
+摊还操作可以看作是不带概率计算的平均情况分析。因为概率不好计算。概率什么时候好计算过了
+此摊还代价适用于每个操作，即使序列中有多种类型的操作也是如此。
+算法导论上给出的示例为增加了MULTIPOP的栈操作和二进制计数器递增问题，简单概括一下二者的共同点：
+
+需要分析复杂度的操作由连续的n个操作构成
+每个单步操作的时间复杂度难以确定为与n有关的表达式，与当前状态密切相关
+对每个单步操作取最坏情况得出的上界过于宽松，浪费时间
+n个连续操作的...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/09/17</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Notes">Notes</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "CLRS">CLRS</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Problem Solving">Problem Solving</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "amortized analysis">amortized analysis</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href = "/2018/09/17/clrs-16greedy/" >
+            
+                <span>算法导论学习笔记-贪心算法</span>
+        </a>
+        <div class="abstract-content">
+            前一篇dp写得又乱又烂简直不想看。但愿自己能坚持下去吧。可是这依然改变不了搬运和截图多于实际内容的事实
+基础理论贪心算法可以看做是动态规划的弱化版，处理某一类特殊的具有最优子结构的问题。
+
+在每个贪心算法之下，几乎总有一个更繁琐的动态规划算法。
+
+算法设计步骤
+将最优化问题转化为这样的形式：对其作出一次选择后，只剩下一个子问题需要求解【子问题削减】
+证明作出贪心选择后，原问题总是存在最优解，即贪心选择总是安全的【安全性证明：替换法】
+证明作出贪心选择后，剩余的子问题满足性质：其最优解与贪心选择组合即可得到原问题的最优解，这样就得到了最优子结构【确认最优子结构】
+
+贪心选择性质贪心选择性质...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/09/17</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Notes">Notes</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "CLRS">CLRS</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Problem Solving">Problem Solving</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "greedy algorithm">greedy algorithm</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href = "/2018/09/16/startjava/" >
             
                 <span>面向OJ的Java学习</span>
@@ -415,193 +768,10 @@ $ tmux
         </div>
     </article>
     
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2018/09/06/vim/" >
-            
-                <span>vim初探</span>
-        </a>
-        <div class="abstract-content">
-            网上类似的教程已经有很多了，只是在玩耍vimtutor过程中的一点笔记。
-同时开markdownPad和vim输入的后果就是在精神分裂的边缘试探.jpg
-然而关键还是多用，这些破整理并没有卵用。（不知道我能坚持用vim到什么时候
-在学的过程中不断出现的提示：
-
-
-光标移动方向键：j↓ k↓ h← l→ （两边左右，中间下上）
-所以h这篇文l章里j突然出现一些hjkl也不奇怪了呢
-光标向前移动n个单词:1w,2w,3w...
-光标向前移动至第n个单词的末尾：1e,2e,3e...
-移动至行首：0
-移动至文末：G
-移动至文章开始：gg
-Ctrl-G配合G使用风味更佳（跳转到某一行）
-选中：v...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/09/06</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Notes">Notes</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "vim">vim</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2018/08/31/clrs-15dp/" >
-            
-                <span>算法导论学习笔记-动态规划</span>
-        </a>
-        <div class="abstract-content">
-            基本原理以下是大段算法导论原句搬运。
-只有带下划线的句子才是自己总结的。
-最优化问题
-动态规划方法通常用来求解最优化问题。这类问题可以有很多可行解，每个解都有一个值，我们希望寻找具有最优值（最小值或最大值）的解。我们成这样的解为问题的一个最优解，而不是最优解。
-
-算法设计步骤
-刻画一个最优解的结构特征
-递归地定义最优解的值
-计算最优解的值，通常采用自底向上的方法
-利用计算出的信息构造一个最优解（有时不需要）
-
-动态规划求解最优化问题应该具备的两个要素：最优子结构和子问题重叠。
-简单来说就是，能根据原问题得到一个递推式（最优子结构），但是在这个递推式的计算过程中会出现大量重复计算的时候（子...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/08/31</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Notes">Notes</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "CLRS">CLRS</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Problem Solving">Problem Solving</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "dynamic programming">dynamic programming</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2018/08/30/asm2/" >
-            
-                <span>汇编语言复习笔记（二）</span>
-        </a>
-        <div class="abstract-content">
-            数据传送数据传送指令格式： mov S(源操作数), D(目标操作数)
-mov  &nbsp;&nbsp; 一般传送指令
-movs &nbsp;&nbsp; 符号扩展传送
-movz &nbsp;&nbsp; 零扩展传送
-push &nbsp;&nbsp; 压栈，等价于sub+mov
-pop  &nbsp;&nbsp; 退栈，等价于mov+add
-按源操作数的长度加上b,w,l后缀，分别表示1、2、4字节。(movz,movs需要双后缀)
-
-
-见leal与movl的区别
-指令后缀、操作数长度、目标寄存器宽度必须要一致！！
-操作数类型
-立即数 Imm &nbsp;&nbsp; 整型常量，加$...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/08/30</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Notes">Notes</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Assembly Language">Assembly Language</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2018/08/29/asm-notes/" >
-            
-                <span>汇编语言复习笔记（一）</span>
-        </a>
-        <div class="abstract-content">
-            前言本文为学校课程面向考试复习笔记，参考内容为老师的课堂讲义&amp;深入理解计算机系统，依据这两者做了一些个人的整理便于复习。然而浪了一个假期在退课的边缘试探
-信息的表示数值的表示
-原码：这个很直观的
-反码：这个几乎不用的
-补码：$D’=R^n-D$ / 按位取反加1；
-移码：见浮点数
-
-补码
-
-相当于取模操作
-着重区分基数的值(R)和补码位表示的实际的值(D)
-R与D的相对大小一致
-$R=D+D_{w-1}\cdot 2^w$
-
-C语言中的整数
-无符号数：在数后加U或u
-同时有无符号数和带符号数，编译器将带符号数强制转换为无符号数
-int的最大正值为2147483647，最大负值为-...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/08/29</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Notes">Notes</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Assembly Language">Assembly Language</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
     <!-- paginator  -->
     
     <nav class="page-nav">
-        <a class="extend prev" rel="prev" href="/tags/Notes/">&#60; PREV</a><a class="page-number" href="/tags/Notes/">1</a><span class="page-number current">2</span>
+        <a class="extend prev" rel="prev" href="/tags/Notes/">&#60; PREV</a><a class="page-number" href="/tags/Notes/">1</a><span class="page-number current">2</span><a class="page-number" href="/tags/Notes/page/3/">3</a><a class="extend next" rel="next" href="/tags/Notes/page/3/">NEXT &#62;</a>
     </nav>
     
 </main>
@@ -961,9 +1131,127 @@ int的最大正值为2147483647，最大负值为-...
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 21
+        Total : 29
         </div>
         <!-- search  -->
         
@@ -976,6 +1264,46 @@ int的最大正值为2147483647，最大负值为-...
     
     <div class="archive-year"> 2018 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/05</span><a class="archive-post-title" href= "/2018/12/05/clrs-26Maximum-Flow/" >算法导论学习笔记-最大流</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/28</span><a class="archive-post-title" href= "/2018/11/28/matchings/" >图论学习笔记-图中的匹配与覆盖</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/24</span><a class="archive-post-title" href= "/2018/11/24/lab3-report/" >Lab3：链接与加载（2）实验报告</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/21</span><a class="archive-post-title" href= "/2018/11/21/traversability/" >图论学习笔记-旅行问题</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/18</span><a class="archive-post-title" href= "/2018/11/18/PA3-report/" >PA3实验报告</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/14</span><a class="archive-post-title" href= "/2018/11/14/connectivity/" >图论学习笔记-图中的连通性与距离</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/07</span><a class="archive-post-title" href= "/2018/11/07/clrs-25All-Pairs-Shortest-Paths/" >算法导论学习笔记-所有结点对的最短路径问题</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/06</span><a class="archive-post-title" href= "/2018/11/06/lab2-report/" >Lab2:链接与加载 实验报告</a>
+        </li>
     
     
         <li class="archive-post-item">
@@ -1009,12 +1337,12 @@ int的最大正值为2147483647，最大负值为-...
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">10/04</span><a class="archive-post-title" href= "/2018/10/04/pa-inspirations/" >做pa的时候可能会用到的操作</a>
+            <span class="archive-post-date">10/04</span><a class="archive-post-title" href= "/2018/10/04/PA1-report/" >PA1实验报告</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">10/04</span><a class="archive-post-title" href= "/2018/10/04/PA1-report/" >PA1实验报告</a>
+            <span class="archive-post-date">10/04</span><a class="archive-post-title" href= "/2018/10/04/pa-inspirations/" >做pa的时候可能会用到的操作</a>
         </li>
     
     
@@ -1113,6 +1441,14 @@ int的最大正值为2147483647，最大负值为-...
     
         <span class="sidebar-tag-name" data-tags="Dijkstra"><span class="iconfont-archer">&#xe606;</span>Dijkstra</span>
     
+        <span class="sidebar-tag-name" data-tags="Graph Algorithms"><span class="iconfont-archer">&#xe606;</span>Graph Algorithms</span>
+    
+        <span class="sidebar-tag-name" data-tags="All-Pairs Shortest Path"><span class="iconfont-archer">&#xe606;</span>All-Pairs Shortest Path</span>
+    
+        <span class="sidebar-tag-name" data-tags="Graph Theory"><span class="iconfont-archer">&#xe606;</span>Graph Theory</span>
+    
+        <span class="sidebar-tag-name" data-tags="Connectivity"><span class="iconfont-archer">&#xe606;</span>Connectivity</span>
+    
         <span class="sidebar-tag-name" data-tags="freshman"><span class="iconfont-archer">&#xe606;</span>freshman</span>
     
         <span class="sidebar-tag-name" data-tags="college life"><span class="iconfont-archer">&#xe606;</span>college life</span>
@@ -1125,6 +1461,10 @@ int的最大正值为2147483647，最大负值为-...
     
         <span class="sidebar-tag-name" data-tags="Ics"><span class="iconfont-archer">&#xe606;</span>Ics</span>
     
+        <span class="sidebar-tag-name" data-tags="Matchings"><span class="iconfont-archer">&#xe606;</span>Matchings</span>
+    
+        <span class="sidebar-tag-name" data-tags="Factorization"><span class="iconfont-archer">&#xe606;</span>Factorization</span>
+    
         <span class="sidebar-tag-name" data-tags="Linux"><span class="iconfont-archer">&#xe606;</span>Linux</span>
     
         <span class="sidebar-tag-name" data-tags="vim"><span class="iconfont-archer">&#xe606;</span>vim</span>
@@ -1135,15 +1475,19 @@ int的最大正值为2147483647，最大负值为-...
     
         <span class="sidebar-tag-name" data-tags="markdown"><span class="iconfont-archer">&#xe606;</span>markdown</span>
     
-        <span class="sidebar-tag-name" data-tags="tmux"><span class="iconfont-archer">&#xe606;</span>tmux</span>
-    
         <span class="sidebar-tag-name" data-tags="Java"><span class="iconfont-archer">&#xe606;</span>Java</span>
     
         <span class="sidebar-tag-name" data-tags="programming"><span class="iconfont-archer">&#xe606;</span>programming</span>
     
+        <span class="sidebar-tag-name" data-tags="tmux"><span class="iconfont-archer">&#xe606;</span>tmux</span>
+    
+        <span class="sidebar-tag-name" data-tags="Traversibility"><span class="iconfont-archer">&#xe606;</span>Traversibility</span>
+    
         <span class="sidebar-tag-name" data-tags="Graph"><span class="iconfont-archer">&#xe606;</span>Graph</span>
     
         <span class="sidebar-tag-name" data-tags="Tree"><span class="iconfont-archer">&#xe606;</span>Tree</span>
+    
+        <span class="sidebar-tag-name" data-tags="Maximum Flow"><span class="iconfont-archer">&#xe606;</span>Maximum Flow</span>
     
     </div>
     <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
