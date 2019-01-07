@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://mengzelev.github.io/"/>
-  <updated>2018-12-08T02:14:21.948Z</updated>
+  <updated>2019-01-07T11:15:17.436Z</updated>
   <id>https://mengzelev.github.io/</id>
   
   <author>
@@ -15,6 +15,169 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Lab4 实验报告</title>
+    <link href="https://mengzelev.github.io/2018/12/29/lab4-report/"/>
+    <id>https://mengzelev.github.io/2018/12/29/lab4-report/</id>
+    <published>2018-12-29T09:22:55.000Z</published>
+    <updated>2019-01-07T11:15:17.436Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="实验进度描述"><a href="#实验进度描述" class="headerlink" title="实验进度描述"></a>实验进度描述</h1><p>我已完成所有内容。</p><p>以下是可以忽略的碎碎念：</p><ul><li>实验开始一小时：写代码；实验开始两小时推翻前一个小时写的代码；实验开始四小时：推翻前两小时写的代码……</li><li>会发生上面的情况其实是因为写<code>cache_read</code>的时候觉得调入调出可以封装为函数，写到<code>cache_write</code>的时候觉得<code>cache_read</code>里的寻找比对、缺失处理都可以封装成函数。在写PA的时候深受Copy-paste其害，所以想把能共享的代码都尽量封装成函数，减轻debug的痛苦</li><li>测试的时候曾经出现过写过的地址从cache调出之后回写到内存不成功。加了回写检查函数<code>check_write_back()</code>依然没有定位错误。出去吹了冷风突然意识到可能是回写的内存地址算错了。回去一看发现是cache装入的时候tag没有更新。结论：吹冷风调试法真有用</li><li>一开始在虚拟机里用vim写的时候，为了区分变量，都取了超长的名字，打起来很累，后来无奈先在windows里用CLion打开写了基本框架再放到Linux里进行调试(因为虚拟机里开CLion会卡爆)。CLion写代码真的是体验极佳，下学期OSLab双系统走起了</li><li>我个**！！！第一遍做完数据没用给定的trace！第二遍做的数据被我一个手抖永久删除了！！！excel还没办法脚本导入！！！一个数据做了3遍！！！</li></ul><h1 id="代码解释"><a href="#代码解释" class="headerlink" title="代码解释"></a>代码解释</h1><p>为了提高代码的复用率、降低debug负担，我封装了很多API。</p><ul><li>为了模拟cache结构定义了如下结构体</li></ul><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">CacheLine</span> &#123;</span></span><br><span class="line">    <span class="keyword">bool</span> valid; <span class="comment">//有效位</span></span><br><span class="line">    <span class="keyword">bool</span> dirty; <span class="comment">//脏位</span></span><br><span class="line">    <span class="keyword">uint32_t</span> tag; <span class="comment">//标记位</span></span><br><span class="line">    <span class="keyword">uint32_t</span> data[<span class="number">16</span>]; <span class="comment">//一行64B数据</span></span><br><span class="line">&#125;line[<span class="number">1024</span>];</span><br></pre></td></tr></table></figure><ul><li>定义了如下全局变量来记录cache的相关信息</li></ul><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* cache info */</span></span><br><span class="line"><span class="keyword">int</span> ass_width; <span class="comment">//关联宽度</span></span><br><span class="line"><span class="keyword">int</span> total_width; <span class="comment">//总宽度</span></span><br><span class="line"><span class="keyword">int</span> group_width; <span class="comment">//组宽度(指cache组号在主存地址中的位数)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> NR_ASS exp2(ass_width) <span class="comment">//宏定义，组内行数</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> OFFSET  0x3f <span class="comment">//与操作后可以取出块内偏移量</span></span></span><br></pre></td></tr></table></figure><p>将以下功能封装为了API。因为宏定义会涉及到加括号等问题，怕出现奇奇怪怪的bug，所以并没有使用宏定义，而是直接用函数代替</p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">uint32_t</span> get_tag(<span class="keyword">uintptr_t</span> addr) &#123;</span><br><span class="line"><span class="comment">//获得一个内存地址的tag字段</span></span><br><span class="line">    <span class="keyword">return</span> (addr &gt;&gt; (group_width + BLOCK_WIDTH));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">uint32_t</span> get_group(<span class="keyword">uintptr_t</span> addr) &#123;</span><br><span class="line">    <span class="comment">//获得一个内存地址的cache组号字段</span></span><br><span class="line">    <span class="keyword">return</span> ((addr &gt;&gt; BLOCK_WIDTH) &amp; mask_with_len(group_width));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">move_in</span><span class="params">(<span class="keyword">uintptr_t</span> addr, <span class="keyword">int</span> line_num)</span> </span>&#123;</span><br><span class="line">    <span class="comment">//将主存中某一块调入cache中</span></span><br><span class="line">assert(line[line_num].valid == <span class="literal">false</span>);</span><br><span class="line"><span class="keyword">uint32_t</span> block_num = addr &gt;&gt; BLOCK_WIDTH;</span><br><span class="line">mem_read(block_num, (<span class="keyword">uint8_t</span>*)(line[line_num].data));</span><br><span class="line">line[line_num].valid = <span class="literal">true</span>;</span><br><span class="line">line[line_num].dirty = <span class="literal">false</span>;</span><br><span class="line">line[line_num].tag = get_tag(addr);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">move_out</span><span class="params">(<span class="keyword">int</span> group_num, <span class="keyword">int</span> line_num)</span> </span>&#123;</span><br><span class="line"><span class="comment">//将cache的某一行调回到主存中，同时判断dirty bit并写回</span></span><br><span class="line">assert(line[line_num].valid == <span class="literal">true</span>);</span><br><span class="line">assert(line_num &lt; <span class="number">1024</span>);</span><br><span class="line">line[line_num].valid = <span class="literal">false</span>;</span><br><span class="line"><span class="keyword">if</span>(line[line_num].dirty) &#123;</span><br><span class="line"><span class="keyword">uintptr_t</span> block_num = (line[line_num].tag &lt;&lt; group_width) + group_num;</span><br><span class="line"></span><br><span class="line">mem_write(block_num, (<span class="keyword">uint8_t</span>*)line[line_num].data);</span><br><span class="line">line[line_num].dirty = <span class="literal">false</span>;</span><br><span class="line"><span class="comment">//write back</span></span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">find_in_group</span><span class="params">(<span class="keyword">uintptr_t</span> addr, <span class="keyword">int</span> group_num)</span> </span>&#123;</span><br><span class="line"><span class="comment">//在某一组寻找找某主存地址对应的行，返回其所在行号，缺失则返回-1</span></span><br><span class="line"><span class="keyword">int</span> group_start = group_num * NR_ASS;</span><br><span class="line"><span class="keyword">int</span> group_end = group_start + NR_ASS;</span><br><span class="line"><span class="keyword">uint32_t</span> tag = get_tag(addr);</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = group_start; i &lt; group_end; ++i) &#123;</span><br><span class="line"><span class="keyword">if</span>(line[i].valid &amp;&amp; line[i].tag == tag) &#123;</span><br><span class="line">cycle_increase(<span class="number">1</span>);</span><br><span class="line">hit_visit ++;</span><br><span class="line"><span class="keyword">return</span> i;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">replace_in_group</span><span class="params">(<span class="keyword">uintptr_t</span> addr, <span class="keyword">int</span> group_num)</span> </span>&#123;</span><br><span class="line"><span class="comment">//将主存地址对应的主存块调入cache中</span></span><br><span class="line">miss_visit ++;</span><br><span class="line"><span class="keyword">int</span> group_start = group_num * NR_ASS;</span><br><span class="line"><span class="keyword">int</span> group_end = group_start + NR_ASS;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = group_start; i &lt; group_end; ++i) &#123;</span><br><span class="line"><span class="keyword">if</span>(!line[i].valid) &#123;</span><br><span class="line">move_in(addr, i);</span><br><span class="line"><span class="keyword">return</span> i;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//如果组内有空行，则直接放入空行中</span></span><br><span class="line"><span class="keyword">int</span> line_out = group_start + choose(NR_ASS);</span><br><span class="line">assert(line_out &lt; group_end);</span><br><span class="line"></span><br><span class="line">move_out(group_num, line_out);</span><br><span class="line">move_in(addr, line_out);</span><br><span class="line"><span class="comment">//否则随机替换一行</span></span><br><span class="line"><span class="keyword">return</span> line_out;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">write_in_line</span><span class="params">(<span class="keyword">int</span> line_num, <span class="keyword">int</span> index, <span class="keyword">uint32_t</span> data, <span class="keyword">uint32_t</span> wmask)</span> </span>&#123;</span><br><span class="line"><span class="comment">//将数据写入cache某一行的某个index中</span></span><br><span class="line">line[line_num].dirty = <span class="literal">true</span>;</span><br><span class="line">line[line_num].data[index] &amp;= (~wmask);</span><br><span class="line">line[line_num].data[index] |= (data &amp; wmask);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><ul><li>这样一来需要实现的3个函数只需要调用以上API即可</li></ul><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init_cache</span><span class="params">(<span class="keyword">int</span> total_size_width, <span class="keyword">int</span> associativity_width)</span> </span>&#123;</span><br><span class="line"><span class="comment">/*设置cache的一系列参数*/</span></span><br><span class="line">total_width = total_size_width;</span><br><span class="line">assert(total_width &lt;= <span class="number">14</span>);</span><br><span class="line">ass_width = associativity_width;</span><br><span class="line">group_width = total_width - ass_width - BLOCK_WIDTH;</span><br><span class="line"><span class="comment">/*初始化用于统计的变量*/</span></span><br><span class="line">cycle_cnt = <span class="number">0</span>;</span><br><span class="line">total_visit = hit_visit = miss_visit = <span class="number">0</span>;</span><br><span class="line"><span class="comment">/* set all the valid bits and dirty bits to invalid */</span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; NR_LINE; ++i) line[i].valid = line[i].dirty = <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">uint32_t</span> cache_read(<span class="keyword">uintptr_t</span> addr) &#123;</span><br><span class="line">total_visit ++;</span><br><span class="line"><span class="keyword">uint32_t</span> group_num = get_group(addr);</span><br><span class="line"><span class="keyword">uint32_t</span> index = (addr &amp; OFFSET) / <span class="keyword">sizeof</span>(<span class="keyword">int</span>); <span class="comment">//index in group</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> line_num = find_in_group(addr, group_num);</span><br><span class="line"><span class="keyword">if</span>(line_num &gt;= <span class="number">0</span>) <span class="keyword">return</span> line[line_num].data[index];</span><br><span class="line"><span class="comment">//hit则直接读出</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> line_out = replace_in_group(addr, group_num);</span><br><span class="line"><span class="keyword">return</span> line[line_out].data[index];</span><br><span class="line"><span class="comment">//否则从主存调入cache</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">cache_write</span><span class="params">(<span class="keyword">uintptr_t</span> addr, <span class="keyword">uint32_t</span> data, <span class="keyword">uint32_t</span> wmask)</span> </span>&#123;</span><br><span class="line">total_visit++;</span><br><span class="line"><span class="keyword">uint32_t</span> group_num = get_group(addr);</span><br><span class="line"><span class="keyword">uint32_t</span> index = (addr &amp; OFFSET) / <span class="keyword">sizeof</span>(<span class="keyword">int</span>); <span class="comment">//index in group</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> line_num = find_in_group(addr, group_num);</span><br><span class="line"><span class="keyword">if</span>(line_num &gt;= <span class="number">0</span>) </span><br><span class="line">write_in_line(line_num, index, data, wmask);</span><br><span class="line"><span class="comment">//hit则直接写入</span></span><br><span class="line"><span class="keyword">else</span> &#123;</span><br><span class="line"><span class="keyword">int</span> line_out = replace_in_group(addr, group_num);</span><br><span class="line">write_in_line(line_out, index, data, wmask);</span><br><span class="line">&#125;<span class="comment">//否则写分配</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h1 id="cache性能测试"><a href="#cache性能测试" class="headerlink" title="cache性能测试"></a>cache性能测试</h1><h1 id="运行时间测算"><a href="#运行时间测算" class="headerlink" title="运行时间测算"></a>运行时间测算</h1><ul><li>框架代码已经给内存的读写赋好了相应的时钟周期数，所以我很自然地想到通过统计<strong>时钟周期数</strong>来统计运行的时间</li><li>关于怎么对cache读写操作的时钟周期测算，讲义说可以建立关于关联度的带参数的模型，但是我回想起来课本上讲过，组相联组内是用了很多比较器进行<strong>并行</strong>比较的。所以我认为读写的时钟周期数应该和关联度以及cache容量关系不大，所以将读写的时钟周期都设置为1。<s>&gt;可能也有想省事的惰性成分在里面</s></li><li>除时钟周期数外，还衡量一个缺失率。由于主存读写比cache读写慢得多，读写命中率也能表征cache的性能</li></ul><p>声明了一些用于统计的变量</p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* statistics */</span></span><br><span class="line"><span class="keyword">uint64_t</span> total_visit = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">uint64_t</span> hit_visit = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">uint64_t</span> miss_visit = <span class="number">0</span>;</span><br></pre></td></tr></table></figure><ul><li>测算方法：控制变量法，控制组相联度或cache总宽度其中一个量不变，改变另外一个量。每种配置测量3次后取平均。根据结果使用excel作图，得到如下结果。【数据已经放在打包上传的.xlsx文件中】</li></ul><center><br><img src="/2018/12/29/lab4-report/miss-width.png"><br><img src="/2018/12/29/lab4-report/clk-width.png"><br><img src="/2018/12/29/lab4-report/miss-ass.png"><br><img src="/2018/12/29/lab4-report/clk-ass.png"><br></center><p>从以上数据和图表中可以看出：</p><ul><li>cache容量越大，缺失率越低，花费的总时钟周期数也越少。这是因为cache容量大了以后，能装入更多的主存块，缺失率就会相应地降低，需要进行替换的次数也会变少。但是cache大就意味着高昂的造价，而且SDRAM的材质(?)决定了cache不可能做到很大。而且由图中可以看出，当cache容量增大到一定大小时，其性能增长就很不明显了，因此一般会选择比较中等的大小。</li><li><p>缺失率与组相联度似乎并不是呈单调关系。原理上分析，组相联度越大，同一组内发生冲突的概率就越低，需要调出的次数也会越低。但有可能microbench-test中的访存顺序会导致某些经常访问的块，在相联度较小时被放到了不同的组中，而相联度较大时被放到了同一组中，导致发生冲突的次数增加。而且越高的组相联度，意味着越多的比较器，意味着更大的体积和更高的造价。</p></li><li><p>综上，对于microbench-test下的workload，我认为最佳的组相联宽度是2(4路组相联)。如果有钱任性，cache容量越大越好；如果要省钱经济，12或13的容量宽度(4KB或8KB的容量)是比较理想的。</p></li></ul><h1 id="思考题"><a href="#思考题" class="headerlink" title="思考题"></a>思考题</h1><h1 id="数据对齐和存储层次结构"><a href="#数据对齐和存储层次结构" class="headerlink" title="数据对齐和存储层次结构"></a>数据对齐和存储层次结构</h1><ul><li>如果没有对齐，同一个数据可能会被分配再两个主存块的交界处，读取这个数据的时候发生cache miss的概率更大，cache miss后可能需要调入两个主存块，代价更大，运行速度会大大降低。</li></ul><h1 id="不知道cache的复杂性对频率的影响"><a href="#不知道cache的复杂性对频率的影响" class="headerlink" title="不知道cache的复杂性对频率的影响?"></a>不知道cache的复杂性对频率的影响?</h1><ul><li>我不是很看得懂这里的建模的意思。我认为$ak^2+b$中%a,b$只是两个参数，考察它们对cache性能的影响是没有意义的，而是应该固定$a,b$，考察组相联度和cache容量对cache性能的影响。但是我已经在上文提到了我并没有把这两者与cache的读写速度关联起来。所以我没有建立带参数的模型。</li></ul><h1 id="Acknowledgements"><a href="#Acknowledgements" class="headerlink" title="Acknowledgements"></a>Acknowledgements</h1><ul><li>感谢不水的正经学习群的朋友们当我的小黄鸭，帮我调试</li><li>感谢*<em>的自己，因为一系列\</em>*行为，成功锻炼了心理承受能力</li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;实验进度描述&quot;&gt;&lt;a href=&quot;#实验进度描述&quot; class=&quot;headerlink&quot; title=&quot;实验进度描述&quot;&gt;&lt;/a&gt;实验进度描述&lt;/h1&gt;&lt;p&gt;我已完成所有内容。&lt;/p&gt;
+&lt;p&gt;以下是可以忽略的碎碎念：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;实验开始一小时：写代码
+      
+    
+    </summary>
+    
+    
+      <category term="Notes" scheme="https://mengzelev.github.io/tags/Notes/"/>
+    
+      <category term="Lab" scheme="https://mengzelev.github.io/tags/Lab/"/>
+    
+      <category term="Ics" scheme="https://mengzelev.github.io/tags/Ics/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>PA4实验报告</title>
+    <link href="https://mengzelev.github.io/2018/12/28/PA4-report/"/>
+    <id>https://mengzelev.github.io/2018/12/28/PA4-report/</id>
+    <published>2018-12-28T08:00:32.000Z</published>
+    <updated>2019-01-07T11:13:04.106Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="实验进度"><a href="#实验进度" class="headerlink" title="实验进度"></a>实验进度</h2><p>我已完成全部实验内容。</p><p>2018/12/15:<br>完成PA4.1。不少自认为关键的地方竟然怎么改都是对的，有点慌</p><p>2018/12/16:<br>PA4.2第一个任务完成，再不开始做数电大实验就要死了，只能封印PA</p><p>2018/12/23：<br>被数电大实验折磨完，PA4.2完成。仙剑跑得慢到感人。</p><p>2018/12/24：<br>平安夜，发现4.2最后一个task忘了跑了，定位了半天bug发现是<code>context_kload</code>忘了改成<code>context_uload</code>，心情简单。开始做4.3，但是由于前几天睡眠不足连着写了好几个沙雕bug，于是决定先放弃。</p><p>2018/12/25：<br>圣诞节，继续写PA4.3，花了一个小时解决了平安夜昏睡状态下写出的沙雕bug，花了4个小时解决了当天写出的沙雕bug，也就是PA最后一个bug。PA通关!</p><h2 id="蓝框思考题"><a href="#蓝框思考题" class="headerlink" title="蓝框思考题"></a>蓝框思考题</h2><p>迫于作业和复习考试压力，这次也一道都没做……</p><h2 id="我遇到的bug"><a href="#我遇到的bug" class="headerlink" title="我遇到的bug"></a>我遇到的bug</h2><ul><li>没看到讲义上要求把<code>loader</code>把文件映射到物理页的要求，映射到虚拟页上，结果一直出发<code>pte.present==0</code>的assert。仔细一想<code>loader</code>的确有义务把程序搬到合适的实际位置</li><li>即使是一个简单的dummy程序，其内容也有两页多。而且不能直接用文件大小/PGSIZE，否则余数部分会被丢弃</li><li><code>make run</code>的时候可能会碰到一大堆链接报错，原因不明，目前解决方案是在所有目录下都来一遍<code>clean(-update)-run</code>全家桶。<s>这时候调试公理1是不是被打破了呢？</s></li><li><code>_switch</code>是用来切换到下一个进程的，因此传入参数肯定为<code>next</code>而非<code>tf</code>【这不是我遇到的bug，是我不少同学都遇到的bug，所以也记下来了</li><li>增加时钟中断时需要填写idt表，太久没碰系统调用这个都忘了</li><li>4.3最后测试进程切换的时候千万不要因为嫌仙剑跑得太慢换成<code>bmptest</code>，这玩意儿是根本block了<code>events_read()</code>的，导致我debug了4个小时才发现</li></ul><h2 id="实验中的发现"><a href="#实验中的发现" class="headerlink" title="实验中的发现"></a>实验中的发现</h2><ul><li>与<code>cr3</code>和<code>cr0</code>有关的指令的译码函数其实可以使用框架代码提供的现成的译码函数,只不过需要研究一下怎么使用</li><li>在写<code>_map</code>函数时，我思考了很久，为什么当页目录的present位无效时，要用回调函数申请一个新的物理页。觉得应该是把这一页作为了存放页表的物理页</li><li>一些头文件里有不少讲义没提到的、可以方便coding的宏定义，例如<code>x86.h</code>和<code>mmu.h</code>,论RTFSC的重要性</li></ul><h2 id="实验心得"><a href="#实验心得" class="headerlink" title="实验心得"></a>实验心得</h2><ul><li>一定要好好读讲义</li><li>和同学交流了一下，发现不一定要全部理解了再开始写代码。可以把框架代码中提供的东西输出一下，根据输出的值来猜测这个变量的含义，或者这个函数的功能。做实验和理解理论是相辅相成的</li><li>每次开机，看着一行行初始化Log，就会想到这只是一个比我刚刚造完的<s>(其实大部分都是yzh写的)</s>的东西复杂一点<s>(这个一点有点多)</s>的家伙，就觉得五味杂陈</li><li>迫于时间压力不少挑战极限的选做题都没做</li><li>这学期做PA还是依赖了不少人的帮助，寒假想要二周目并完成PA5，希望也能把不少选做题都做一下</li></ul><h1 id="Acknowledgements"><a href="#Acknowledgements" class="headerlink" title="Acknowledgements"></a>Acknowledgements</h1><ul><li>感谢某人提供的探路和盯着写bug服务</li><li>感谢不水的正经学习群的群友们互帮互助的debug氛围</li></ul><p>本实验报告同样会将去掉必答题的版本同步上传至<a href="https://mengzelev.github.io/">个人blog</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;实验进度&quot;&gt;&lt;a href=&quot;#实验进度&quot; class=&quot;headerlink&quot; title=&quot;实验进度&quot;&gt;&lt;/a&gt;实验进度&lt;/h2&gt;&lt;p&gt;我已完成全部实验内容。&lt;/p&gt;
+&lt;p&gt;2018/12/15:&lt;br&gt;完成PA4.1。不少自认为关键的地方竟然怎么改都是对的，
+      
+    
+    </summary>
+    
+    
+      <category term="Notes" scheme="https://mengzelev.github.io/tags/Notes/"/>
+    
+      <category term="pa" scheme="https://mengzelev.github.io/tags/pa/"/>
+    
+      <category term="ICS" scheme="https://mengzelev.github.io/tags/ICS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>算法导论学习笔记-矩阵运算</title>
+    <link href="https://mengzelev.github.io/2018/12/18/clrs28Matrix-Operation/"/>
+    <id>https://mengzelev.github.io/2018/12/18/clrs28Matrix-Operation/</id>
+    <published>2018-12-18T01:50:18.000Z</published>
+    <updated>2019-01-07T11:16:02.932Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="求解线性方程组"><a href="#求解线性方程组" class="headerlink" title="求解线性方程组"></a>求解线性方程组</h1><p>$$Ax=b$$<br><strong>欠定的(underdetermined)</strong>：方程的数目少于未知变量数目$n$，则该线性方程组为欠定的<br><strong>超定的(overdetermined)</strong>:方程数目超过未知变量数目$n$<br><strong>非奇异矩阵</strong>：$A$的秩等于未知变量的个数$n$</p><h2 id="LUP分解"><a href="#LUP分解" class="headerlink" title="LUP分解"></a>LUP分解</h2><p>思想：找出3个$n\times n$矩阵$L,U,P$，满足$PA=LU$,其中<br>$L$是一个单位下三角矩阵<br>$U$是一个上三角矩阵<br>$P$是一个置换矩阵<br>每一个非奇异矩阵$A$都会有这样一种分解<br>$$Ax=b$$<br>$$PAx=Pb$$<br>$$LUx=Pbx$$<br>求解两个三角线性系统<br>下三角系统$Ly=Pb$<br>上三角系统$Ux=y$</p><h2 id="正向替换与方向替换"><a href="#正向替换与方向替换" class="headerlink" title="正向替换与方向替换"></a>正向替换与方向替换</h2><p>可在$\Theta(n^2)$时间内求解下三角系统</p><p>置换阵$P$可以用数组$\pi[1..n]$表示<br>$$P_{i,j}=<br>\begin{cases}<br>1 &amp; (j == \pi[i])\<br>0 &amp; (j\neq\pi[i])<br>\end{cases}<br>$$<br>从第一个式子开始正向替换，可以得到<br>$$y_i=b_{\pi[i]}-\sum\limits_{j=1}^{i-1}l_{ij}y_i$$</p><p>反向替换同理，最终可以得到<br>$$x_i=(y_i-\sum\limits_{j=i+1}^{n}u_{ij}x_j)/u_{ii}$$</p><p><img src="/2018/12/18/clrs28Matrix-Operation/LUP-SOLVE.png"></p><h2 id="LU分解计算"><a href="#LU分解计算" class="headerlink" title="LU分解计算"></a>LU分解计算</h2><p>Gauss消元法：</p><ul><li>行消元得到的行梯阵即$U$</li><li>$L$由消去变量所用的行的乘数组成</li></ul><p><img src="/2018/12/18/clrs28Matrix-Operation/1.png"><br><img src="/2018/12/18/clrs28Matrix-Operation/2.png"></p><p><img src="/2018/12/18/clrs28Matrix-Operation/LU-DE.png"></p><p>可以看成$$a_{ij}=a_{ij}-\frac{a_{ik}a_{kj}}{a_{kk}}$$</p><p>运行时间$\Theta(n^3)$</p><h2 id="LUP分解计算"><a href="#LUP分解计算" class="headerlink" title="LUP分解计算"></a>LUP分解计算</h2><p>在LU分解的基础上，为了保证除数不为0和减少数值不稳定，每次选择该列中具有最大绝对值的元素，交换到对角元的位置</p><p><img src="/2018/12/18/clrs28Matrix-Operation/LUP-DE.png"></p><p>运行时间$\Theta(n^3)$</p><h1 id="矩阵求逆"><a href="#矩阵求逆" class="headerlink" title="矩阵求逆"></a>矩阵求逆</h1><p>LUP分解可以用于计算逆矩阵(废话，高斯消元可以，LUP当然可以)$$AX_{i}=e_i$$</p><p>矩阵乘法和矩阵求逆具有相同的时间复杂度</p><p>证明时间复杂度相同：两个问题都能在O(另一个问题算法的时间复杂度)时间内解决</p><ul><li>证明的时候可能会用到分块阵的思想来转化问题</li></ul><h1 id="对称正定阵"><a href="#对称正定阵" class="headerlink" title="对称正定阵"></a>对称正定阵</h1><p><strong>引理28.3</strong>：任何对称正定矩阵都是非奇异矩阵<br>任何对称正定矩阵都有逆矩阵。</p><p><strong>引理28.4</strong>：如果$A$是一个对称正定矩阵，那么$A$的每一个主子矩阵都是对称正定的。</p><p><strong>舒尔补</strong>：矩阵$A$关于主子矩阵$A_k$的舒尔补为$S=C-B{A_k}^{-1}B^T$。其中，$A$为对称正定阵且<br>$$A=\left[<br>    \begin{matrix}<br>    A_k &amp; B^T \<br>    B &amp; C<br>    \end{matrix}<br>    \right]$$</p><p><strong>舒尔补定理</strong>：如果$A$是一个对称正定矩阵，$A_k$是$A$的$k\times k$主子矩阵，那么$A$关于$A_k$的舒尔补是对称正定的。</p><p><strong>推论28.6</strong>：一个对称正定矩阵的LU分解永远不会出现除数为0的情形</p><h1 id="最小二乘逼近"><a href="#最小二乘逼近" class="headerlink" title="最小二乘逼近"></a>最小二乘逼近</h1><p>就是看上去很厉害实际上真的很厉害的曲线拟合</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;求解线性方程组&quot;&gt;&lt;a href=&quot;#求解线性方程组&quot; class=&quot;headerlink&quot; title=&quot;求解线性方程组&quot;&gt;&lt;/a&gt;求解线性方程组&lt;/h1&gt;&lt;p&gt;$$Ax=b$$&lt;br&gt;&lt;strong&gt;欠定的(underdetermined)&lt;/strong&gt;：
+      
+    
+    </summary>
+    
+      <category term="Notes" scheme="https://mengzelev.github.io/categories/Notes/"/>
+    
+    
+      <category term="CLRS" scheme="https://mengzelev.github.io/tags/CLRS/"/>
+    
+      <category term="Problem Solving" scheme="https://mengzelev.github.io/tags/Problem-Solving/"/>
+    
+      <category term="Graph Algorithms" scheme="https://mengzelev.github.io/tags/Graph-Algorithms/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>图论学习笔记-平面图与着色</title>
+    <link href="https://mengzelev.github.io/2018/12/13/planar-graph-and-coloring/"/>
+    <id>https://mengzelev.github.io/2018/12/13/planar-graph-and-coloring/</id>
+    <published>2018-12-13T06:30:30.000Z</published>
+    <updated>2018-12-15T03:40:57.630Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="平面图"><a href="#平面图" class="headerlink" title="平面图"></a>平面图</h1><p><strong>平面图(planar graph)：</strong>如果$G$能够被画在一个平面上而使得任何两条边都不会交叉</p><p><strong>平图(plane graph)</strong>：如果$G$是平面图且$G$的任何两条边都不交叉</p><p>平面图的例子：cycle, path, star, tree</p><p><strong>区域(regions)</strong>：一个平图把平面分成一些连通片<br><strong>外区域(exterior region)</strong>：每个平图中总有的一个无界的区域<br><strong>边界(boundary)</strong>：在一个平图中，顶点和边斗鱼某个给定区域$R$关联的子图称为是$R$的边界</p><p>割边总是恰好在一个区域的边界上<br>非割边一定位于两个区域的边界上</p><p>如果$G$是一个至少含有三条边的连通平图，则$G$的而每个区域的边界至少含有三条边</p><p><strong>定理9.1(Euler恒等式)</strong>：如果$G$是一个阶为$n$，边数为$m$且含有$r$个区域的连通平图，则$n-m+r=2$</p><p><strong>定理9.2</strong>：如果$G$是一个阶为$n\ge 3$且边数为$m$的平面图，则$m\le 3n-6$。(平面图的必要条件，非平面图的充分条件)<br>逆否命题：设$G$阶为$n$，若$m&gt;3n-6$，则$G$是非平面图。<br>注：满足$m\le 3n-6$的不一定是平面图</p><p><strong>推论9.3</strong>：每个平面图含有一个度小于或等于5的顶点。</p><p><strong>推论9.4</strong>：完全图$K_5$是非平面的。</p><p><strong>极大平面的(maximal planar)</strong>：若$G$是平面的，且在$G$的任意两个不邻接的顶点之间添加一条边即可产生一个非平面图。<br>另一种表述：$G$是平面的，但$G$不是任何一个平面图的生成子图<br>极大平面图满足$m=3n-6$</p><p><strong>定理9.5</strong>：图$K_{3,3}$是非平面的</p><p><strong>细分(subdivision)</strong>： 如果有一个或多个度为2的顶点被插入到$G$的一条或多条边中，则称图$G’$是图$G$的一个细分</p><p><strong>定理9.7(Kuratowski定理)</strong>：一个图$G$是平面图当且仅当$G$不含$K_5$，$K_{3,3}$，或者$K_5$或$K_{3,3}$的一个细分作为子图。</p><p>如果一个图$G$含有(1)至多4个度大于或等于4的顶点(2)至多5个度大于或等于3的顶点，则$G$必定是平面的。</p><h1 id="顶点染色"><a href="#顶点染色" class="headerlink" title="顶点染色"></a>顶点染色</h1><p><strong>对偶(dual)</strong>：每张地图都有一个与之关联的图$G$，称为该地图的对偶，其中$G$的顶点即为地图的区域，$G$的两个顶点是邻接的当且仅当它们所对应的区域是相邻的<br>每张地图的对偶图都是平面图，每个连通的平面图都是某个地图的对偶。</p><p><strong>真染色(proper coloring)</strong>：给$G$的顶点分配一些颜色(来自于某个颜色集合)，是的每个顶点都能分配到一种颜色，且邻接的顶点被染成不同的颜色，简称为<strong>染色(coloring)</strong></p><p><strong>色数(chromatic number)$\chi(G)$</strong>：在$G$的所有染色中，所用的最少颜色数</p><p><strong>$k$可染色的(k-colorable)</strong>：如果能用一个含有$k$种颜色的集合给$G$的顶点染色，则称$G$是$k$<strong>可染色的(k-colorable)</strong>，应用$k$种颜色的染色称为是<strong>$k$染色(k-coloring)</strong>。</p><p>若$\chi(G)=k$，则$G$也称为是<strong>$k$色的(k-chromatic)</strong>，并且$G$的每个$k$染色都是$G$的<strong>最小染色(minimum coloring)</strong></p><p><strong>定理10.1(四色定理)</strong>：每个平面图的色数至多是4</p><p><strong>色类(color classes)</strong>：若$G$是一个$k$色图，则可以把$V(G)$划分成$k$个独立集$V_1,V_2,…,V_k$，此时这些顶点集称为色类。</p><p><strong>定理10.2</strong>：图$G$的色数是2当且仅当$G$是一个非空的二部图。</p><p>(复习：<strong>定理1.12</strong>：图$G$是二部的当且仅当其不含奇圈)<br>若$G$含有奇圈，则$\chi(G)\ge 3$</p><p>$n$阶图$G$的色数为$n$当且仅当$G=K_n$</p><p>证明$\chi(G)=k$，必须证明：</p><ul><li>至少需要$k$种颜色来为$G$染色(不能用$k-1$种颜色为$G$染色)</li><li>存在$G$的一个$k$染色</li></ul><p>若$H$为$G$的一个子图，则$\chi(H)\le\chi(G)$</p><p><strong>团(clique)</strong>：$G$的一个完全子图<br><strong>团数(clique number)\omega(G)</strong>：图$G$中最大团的阶数<br>$\alpha(G)=k$当且仅当$\omega(G)=k$</p><p><strong>定理10.5</strong>：对每个$n$阶图$G$：$$\chi(G)\ge\omega(G), \chi(G)\ge\frac{n}{\alpha(G)}$$<br>(给出了图$G$的色数的下限)</p><p>图$G$的染色可以看成是$V(G)\to\mathbb{N}$的一个函数$c:V(G)\to\mathbb{N}$，使得当$uv\in E(G)$时，$c(u)\neq c(v)$</p><p><strong>定理10.7</strong>：对于每个图$G$，$\chi(G)\le 1+\Delta(G)$。($\Delta(G)$为$G$的最大度)</p><p><strong>定理10.8(Brooks定理)</strong>：对每个非奇圈也非完全的连通图$G$，$\chi(G)\le\Delta(G)$</p><p><strong>定理10.9</strong>：对于每个图$G$,$\chi(G)\le 1+\max{\delta(H)}$，其中$\max$取遍$G$的所有诱导子图$H$。</p><p><strong>影子图(shadow graph)$S(G)$</strong>:通过在$G$中，对其每个顶点$v$，增加一个新的顶点$v’$，称之为$v$的<strong>影子顶点(shadow vertex)</strong></p><p><img src="/2018/12/13/planar-graph-and-coloring/shadow.png"></p><p><strong>定理10.10</strong>：对于每个整数$k\ge 3$，都存在一个色数为$k$的无三角的图。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;平面图&quot;&gt;&lt;a href=&quot;#平面图&quot; class=&quot;headerlink&quot; title=&quot;平面图&quot;&gt;&lt;/a&gt;平面图&lt;/h1&gt;&lt;p&gt;&lt;strong&gt;平面图(planar graph)：&lt;/strong&gt;如果$G$能够被画在一个平面上而使得任何两条边都不会交叉&lt;/p
+      
+    
+    </summary>
+    
+      <category term="Notes" scheme="https://mengzelev.github.io/categories/Notes/"/>
+    
+    
+      <category term="Notes" scheme="https://mengzelev.github.io/tags/Notes/"/>
+    
+      <category term="Problem Solving" scheme="https://mengzelev.github.io/tags/Problem-Solving/"/>
+    
+      <category term="Graph Theory" scheme="https://mengzelev.github.io/tags/Graph-Theory/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>卫宫家今天的饭</title>
+    <link href="https://mengzelev.github.io/2018/12/10/Dinner/"/>
+    <id>https://mengzelev.github.io/2018/12/10/Dinner/</id>
+    <published>2018-12-10T08:22:19.000Z</published>
+    <updated>2018-12-10T09:43:06.918Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="题源"><a href="#题源" class="headerlink" title="题源"></a>题源</h1><p>POJ 3281 Dining<br><a href="http://bailian.openjudge.cn/practice/3479/" target="_blank" rel="noopener">openjudge传送门</a><br><s>饱受OJ折磨的我决定以德报怨给大家出道水题</s></p><h1 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h1><p>基本只是把原题搬到了月球上</p><ul><li>N位客人，F种食物，D种饮料</li><li>每位客人有多种喜欢的事物和饮料</li><li>每位客人只吃一种食物、只喝一种饮料</li><li>每种食物，每种饮料只能被一位客人吃/喝</li></ul><p>可以看成两个二分图最大匹配问题</p><h1 id="构建流网络"><a href="#构建流网络" class="headerlink" title="构建流网络"></a>构建流网络</h1><ul><li>先尝试：食物-客人-饮料 <ul><li>会出现一位客人对应多份食物或饮料的情况</li><li>客人结点需要加上结点容量</li><li>将每个客人结点拆分为两个</li></ul></li><li>源点s-食物-客人1-客人2-饮料-汇点</li></ul><h1 id="最大流算法"><a href="#最大流算法" class="headerlink" title="最大流算法"></a>最大流算法</h1><ul><li>数据规模[1,100]</li><li>EK完全OK</li><li>没有刻意生成卡任何算法的数据，也许可以尝试暴力</li><li>板子写起来有丶难度</li><li>代码虽然我贴了，但是务必自己写一遍！</li></ul><h1 id="EK板子"><a href="#EK板子" class="headerlink" title="EK板子"></a>EK板子</h1><p><img src="/2018/12/10/Dinner/ff.png"></p><ul><li><s>容量c[N][N]，流量f[N][N]</s></li><li>只需要一个记录当前残存容量的数组map[N][N]</li><li>随便搜一下就能找到</li></ul><h2 id="板子代码"><a href="#板子代码" class="headerlink" title="板子代码"></a>板子代码</h2><pre><code>int edmonds_karp() {    int ans = 0;    int minc;    while((minc = bfs()) != -1) { //bfs找到一条增广路径        ans += minc;    //加上这条增广路径的流量        int tt = t,pt;          while(tt != s) {            pt = pre[tt];            map[pt][tt] -= minc;            map[tt][pt] += minc;            tt = pt;        }   //修改这条增广路径上的边的残存容量    }    return ans;}</code></pre><h2 id="bfs寻找增广路径"><a href="#bfs寻找增广路径" class="headerlink" title="bfs寻找增广路径"></a>bfs寻找增广路径</h2><pre><code>int bfs(){    memset(pre, -1, sizeof(pre));    int minc = 1e9;    queue &lt;int&gt; q;    q.push(s);    while(!q.empty()){        int u = q.front();        q.pop();        if(u == t) break;        for(int i = 1; i &lt;= t; ++i) {            if(pre[i] == -1 &amp;&amp; map[u][i]) {                minc = min(minc, map[u][i]);                //更新当前路径的最小残存容量                q.push(i);                pre[i] = u;                 //pre数组用于记录bfs找到的增广路径            }        }    }    if(pre[t] == -1) return -1;    else return minc;}</code></pre><h2 id="建图"><a href="#建图" class="headerlink" title="建图"></a>建图</h2><p>代码不贴惹，自己写吧:)</p><p>Tips:<br>为了将各种不同类型的所有点都囊括在一个数组里的同时，增强代码的可读性，可以使用宏定义</p><pre><code>#define FOOD(x) **我**#define GUEST1(x) **是**#define GUEST2(x) **马**#define DRINK(x) **赛**#define s **克**#define t **!**</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;题源&quot;&gt;&lt;a href=&quot;#题源&quot; class=&quot;headerlink&quot; title=&quot;题源&quot;&gt;&lt;/a&gt;题源&lt;/h1&gt;&lt;p&gt;POJ 3281 Dining&lt;br&gt;&lt;a href=&quot;http://bailian.openjudge.cn/practice/3479/
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>PA3实验报告</title>
+    <link href="https://mengzelev.github.io/2018/12/08/PA3-report/"/>
+    <id>https://mengzelev.github.io/2018/12/08/PA3-report/</id>
+    <published>2018-12-08T08:00:32.000Z</published>
+    <updated>2019-01-07T11:11:41.963Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="实验进度"><a href="#实验进度" class="headerlink" title="实验进度"></a>实验进度</h1><p>我已完成所有内容。<br>好，下面是惯例碎碎念。</p><p>2018/11/18<br>心态爆炸的一天！先是因为脑子短路完全没有想到<code>idt</code>的地址就在<code>lidt</code>译码过后的<code>id_dest</code>里。然后还因为惯性思维从<code>id_dest-&gt;val</code>里读地址，疯狂出错才发现应该在<code>id_dest-&gt;addr</code>里（因为是地址）。组织Context的时候思考了半天，最后问了大腿才知道怎么判断上下文的组织结构。感觉还是课本知识学得不够扎实的恶果。今日不宜PA，关机睡觉。</p><p>2018/11/19<br>PA3.1完成。感觉测试手段都不太给力，不知道有没有埋下隐藏bug</p><p>2018/11/24<br>PA3.2完成。感觉莫名顺利，可能是3.3要自闭的征兆</p><p>2018/12/1<br>开始自闭PA3.3，实现了文件读写操作，死活看不到PASS!!!，文件读写时对长度超过文件大小的情况的处理有一些麻烦，调了半天，最后发现是PA3.2时就好了的SYS_write没有加上刚刚写的<code>fs_write</code>，喷了。开始编写设备文件操作，看不懂vga那块到底是要干啥，机房关门了，回去睡觉。</p><p>2018/12/2<br>继续自闭PA3.3。为了看懂VGA那块的架构直接翻出了bmptest的源码，然后一路摸到NDL库的源码，花了大概一个下去终于显示出了ProjectN的Logo。实现<code>events_read()</code>时还把事件的格式搞错了debug了半天，终于可以开始跑仙剑了。小心翼翼地开始游戏，没有注释掉<code>Log</code>因此看到了瀑布般的<code>Log</code>信息，然后50min才播放完片头对话，所幸无事。然后注释掉了所有<code>Log</code>，又胆战心惊地开始尝试所有存档点，尝试了穿墙和穿人，全部失败，确认了没有肉眼可见的bug。长舒一口气，然后加急写完了批处理系统，机房关门，走人。难以置信我居然跑出了仙剑，亢奋。</p><h1 id="必答题"><a href="#必答题" class="headerlink" title="必答题"></a>必答题</h1><p><s>其实我写PA的时候都在系统调用过程梳理里做好笔记了</s></p><h2 id="游戏的存档"><a href="#游戏的存档" class="headerlink" title="游戏的存档"></a>游戏的存档</h2><ul><li>仙剑奇侠传中调用C标准I/O库函数<code>fread()</code></li><li>库函数<code>fread()</code>会调用libos中的系统调用的封装函数<code>_read()</code></li><li>libos中的<code>_read()</code>函数通过调用<code>_syscall_()</code>，直接使用内联汇编语句编译出<code>int 0x81</code>的系统调用内陷指令，并将相应的参数放入约定的寄存器中(<code>%eax</code>,<code>%ebx</code>，<code>%ecx</code>，<code>%edx</code>)</li><li>nemu执行指令时遇到了<code>int 0x81</code>指令，译码后执行<code>raise_intr()</code>，将EFLAGS，CS，EIP的值压入栈中，并到am中的中断门描述符表<code>idt</code>中查询0x81对应的跳转目标的偏移量offset，为<code>vectrap()</code></li><li><code>vectrap()</code>直接通过汇编指令将错误码<code>irq</code>压栈，然后跳转到<code>asm_jmp</code>函数执行（nexus-am/am/arch/x86-nemu/src/trap.S中定义）</li><li>在<code>asm_trap</code>中通过<code>pusha</code>指令让nemu将所有寄存器压栈，然后执行<code>irq_handle()</code>函数（在nexus-am/am/arch/x86-nemu/src/cte.c中）</li><li><code>irq_handle()</code>把执行流切换的原因打包成事件，然后调用在<code>_cte_init()</code> 中注册的事件处理回调函数, 将事件交给Nanos-lite来处理</li><li>Nanos-lite中的<code>do_event()</code>函数根据nemu打包传过来的时间决定系统调用类型，此处是<code>_EVENT_SYSCALL</code>类型的，就调用<code>do_syscall()</code>函数来处理这个系统调用</li><li><code>do_syscall()</code>根据上下文中寄存器<code>%eax</code>保存的参数确定系统调用的类型，此时为<code>SYS_read</code>类型，就调用文件系统中的<code>fs_read()</code>并将相应的参数传入</li><li><code>fs_read()</code>根据传入的文件名（存档信息文件的名称）读取需要的长度到指定的位置，恢复成存档前的状态，就可以从存档点继续游戏</li><li><code>fs_read()</code>执行完成后，一路返回到<code>asm_trap</code>中，恢复之前压入栈中保存的寄存器，然后执行<code>iret</code>指令</li><li>nemu执行<code>iret</code>指令，恢复EFLAGS，CS，EIP，跳转到EIP所指向的地方继续执行之后的指令</li></ul><p>至此，一次读取存档的系统调用全部完成</p><h2 id="更新屏幕"><a href="#更新屏幕" class="headerlink" title="更新屏幕"></a>更新屏幕</h2><ul><li>仙剑奇侠传中调用libndl中的库函数<code>NDL_DrawRect()</code></li><li><code>NDL_DrawRect()</code>会调用C标准I/O库函数<code>fwrite()</code>，将当前的像素信息写入<code>stdout</code>中，这里的<code>stdout</code>不是终端里的标准输出，而是应用程序的标准输出<code>_REENT-&gt;stdout</code></li><li>系统调用过程同上，此处不再赘述。进入Nanos-lite的文件系统后，由于是对显示设备抽象成的文件<code>/dev/fb</code>进行读取，<code>fs_write()</code>调用的是<code>fb_write()</code></li><li><code>fb_write()</code>调用了am的klib中提供的<code>screen_width()</code>和<code>draw_rect()</code></li><li>am中的<code>draw_rect()</code>调用了vga设备的写函数<code>video_write()</code>，把相应的像素信息写入到映射到<code>vga_memory</code>的物理内存中</li><li>当nemu访问到从0x4000开始的一段被映射到I/O空间的物理地址时，就会通过<code>mmio_write</code>来修改I/O空间的数据</li><li>I/O空间的数据被修改后调用了<code>update_screen()</code>，由nemu把更新后的屏幕显示信息显示了出来</li><li>进行系统调用的返回操作，同样不再赘述</li></ul><p>至此，一次更新屏幕的系统调用完成</p><h1 id="蓝框思考题"><a href="#蓝框思考题" class="headerlink" title="蓝框思考题"></a>蓝框思考题</h1><p>最近太忙了一题都没写…<br>想写的时候讲义又挂了…<br>二周目的时候再思考吧orz</p><h1 id="实验中的发现"><a href="#实验中的发现" class="headerlink" title="实验中的发现"></a>实验中的发现</h1><h2 id="关于nanos-lite和nemu是怎么通讯的"><a href="#关于nanos-lite和nemu是怎么通讯的" class="headerlink" title="关于nanos-lite和nemu是怎么通讯的"></a>关于nanos-lite和nemu是怎么通讯的</h2><p>在写PA3.1中的<code>lidt</code>指令的时候，我有个很大的疑惑，<code>idt</code>是在nanos-lite里被定义的，nemu要怎么获取它的地址呢？<code>_cte_init</code>中有一步调用了<code>set_idt</code>函数，将idt的地址和大小用内联汇编语句写入了指令集。因此当nanos编译成nemu可执行的指令后，idt的地址就可以通过相应的译码函数写入<code>id_dest</code>中。<br>问了一位nb的学长后，学长给出了如下理解</p><blockquote><p>不在system.c里的指令，一般靠编译c文件成机器码就可以给nemu做事，所以pa2很顺利；而system.c的东西依赖于系统（比如中断），只靠编译c文件做不到int、lidt这些东西，所以要内联汇编</p></blockquote><h2 id="关于如何判断-Context结构的组织顺序"><a href="#关于如何判断-Context结构的组织顺序" class="headerlink" title="关于如何判断_Context结构的组织顺序"></a>关于如何判断<code>_Context</code>结构的组织顺序</h2><p><code>_Context</code>是在函数<code>irq_handle</code>里作为参数的类型被传入的，然而<code>irq_handle</code>是通过汇编代码直接调用的，因此没有显式的参数传递语句，实际的参数是存放在栈中<code>%ebp-8</code>的位置开始的位置，观察<code>call irq_handle</code>之前所有的<code>push</code>相关语句就可以得知寄存器的顺序。而<code>eip</code>,<code>eflags</code>和<code>eip</code>是硬件保存的，因此需要观察<code>int</code>指令中的入栈顺序才能知道这三者的顺序。</p><h2 id="系统调用过程梳理"><a href="#系统调用过程梳理" class="headerlink" title="系统调用过程梳理"></a>系统调用过程梳理</h2><ol><li>用户层navy-apps在相应的系统调用函数（如<code>_exit()</code>）中调用系统调用接口函数<code>_syscall_()</code></li><li><code>_syscall_</code>用内联汇编语句将<code>int 0x80</code>和相应的系统调用参数传给nemu</li><li>nemu执行<code>int</code>指令，叫出nanos-lite</li><li><code>irq_handler</code>通过<code>int</code>指令传入的参数识别出这是一次系统调用的event，打包传给<code>do_event</code></li><li><code>irq.c</code>中的<code>do_event()</code>函数调用<code>do_syscall()</code>执行系统调用事件</li><li><code>syscall.c</code>中的<code>do_syscall()</code>函数根据传入的参数（在上下文的相应寄存器中）执行相应的系统调用操作，设置返回值并返回</li></ol><h1 id="我遇到的bug"><a href="#我遇到的bug" class="headerlink" title="我遇到的bug"></a>我遇到的bug</h1><ul><li>堆区管理的时候声明的用于记录program break的变量<code>pbrk</code>没有初始化【所以说初始化真的是个好文明</li><li>写了<code>fs_write</code>却忘了修改相应的系统调用<code>SYS_write</code>找了一个下午</li><li>所有关于文件读写的系统操作都需要控制<code>open_offset</code>，不能超过当前文件的size，但是<code>serial_write</code>和<code>dispinfo_read</code>等不同文件的读写又不能一概而论，写bug和debug的时候要特别注意</li><li><code>fs_lseek</code>最后要控制当前的<code>open_offset</code>，不然可能会导致<code>fs_read</code>和<code>fs_write</code>的功能无法正常使用</li><li><code>fs_read</code>和<code>fs_write</code>需要对<code>open_offset</code>做出修改</li><li>函数指针的调用就跟函数一样用就行了</li><li><code>fb_write</code>里的<code>offset</code>怎么用，怎么给<code>draw_rect</code>传参，可能要一直摸到<code>libnbl</code>才能搞清楚</li><li>字符串不能x**初始化，会由于某些我搞不懂的原因编译出<code>STOS</code>指令，导致看到亲切的i386 Logo</li><li><code>if((keytemp &amp; 0x8000) == 1)</code>和<code>if(keytemp &amp; 0x8000)</code>是不一样的！！！！！！[你是沙雕吗.jpg]</li></ul><h1 id="对讲义的一些建议（你们选择性反馈给yzh）"><a href="#对讲义的一些建议（你们选择性反馈给yzh）" class="headerlink" title="对讲义的一些建议（你们选择性反馈给yzh）"></a>对讲义的一些建议（你们选择性反馈给yzh）</h1><ul><li>建议把能看到<code>PASS!!!</code>信息的放在<code>serial_write()</code>之后，不少同学都在实现完<code>SYS_write</code>之后没看到PASS！！！感到困惑（当然仔细想一下还是能想通）</li><li>堆区管理那一块太考验阅读理解水平了，而且大部分人会忘掉PA2还接触过AM里一个叫<code>heap</code>的结构体，就稍微提醒一下下呗（</li><li>让dummy实现<code>_syscall_</code>时，最好能提醒一下如果按照之前加系统调用一下加入<code>do_event</code>中会触发死循环，或者干脆把下面的必做部分并到一起写，减少困惑</li></ul><h1 id="实验心得"><a href="#实验心得" class="headerlink" title="实验心得"></a>实验心得</h1><ul><li>RTFSC是很难的，不要一下子看不出来就自闭，<s>不然会出事情的</s></li><li>要成为一名优秀的程序猿，首先你要学好语文</li><li>出bug不可怕，如果能通过debug的过程对框架代码和计算机系统的原理有更深刻的理解，其实是一件很赚的事情。听了助教讲课之后我深刻感受到，一出bug就问大腿“怎么写才是对的”，实在太亏了，应该搞清楚哪里写错了，为什么写的fault这个出现这样的failure。</li></ul><h1 id="Appreciation"><a href="#Appreciation" class="headerlink" title="Appreciation"></a>Appreciation</h1><ul><li>感谢某人提供的探路和debug服务，我觉得有点保护过度了再这样下去我要不会自己写代码了【捂脸</li><li>感谢名字一直在换的学习群的群友们互帮互助的debug氛围</li></ul><p>本实验报告同样会将去掉必答题的版本同步上传至<a href="https://mengzelev.github.io/">个人blog</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;实验进度&quot;&gt;&lt;a href=&quot;#实验进度&quot; class=&quot;headerlink&quot; title=&quot;实验进度&quot;&gt;&lt;/a&gt;实验进度&lt;/h1&gt;&lt;p&gt;我已完成所有内容。&lt;br&gt;好，下面是惯例碎碎念。&lt;/p&gt;
+&lt;p&gt;2018/11/18&lt;br&gt;心态爆炸的一天！先是因为脑子短路
+      
+    
+    </summary>
+    
+    
+      <category term="Notes" scheme="https://mengzelev.github.io/tags/Notes/"/>
+    
+      <category term="pa" scheme="https://mengzelev.github.io/tags/pa/"/>
+    
+  </entry>
   
   <entry>
     <title>算法导论学习笔记-最大流</title>
@@ -141,32 +304,6 @@
   </entry>
   
   <entry>
-    <title>PA3实验报告</title>
-    <link href="https://mengzelev.github.io/2018/11/18/PA3-report/"/>
-    <id>https://mengzelev.github.io/2018/11/18/PA3-report/</id>
-    <published>2018-11-18T08:00:32.000Z</published>
-    <updated>2018-12-08T09:43:23.426Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="PA3-实验报告"><a href="#PA3-实验报告" class="headerlink" title="PA3 实验报告"></a>PA3 实验报告</h1><p>姓名：刘恩萌<br>学号：171860013</p><h1 id="实验进度"><a href="#实验进度" class="headerlink" title="实验进度"></a>实验进度</h1><p>我已完成所有内容。<br>好，下面是惯例碎碎念。</p><p>2018/11/18<br>心态爆炸的一天！先是因为脑子短路完全没有想到<code>idt</code>的地址就在<code>lidt</code>译码过后的<code>id_dest</code>里。然后还因为惯性思维从<code>id_dest-&gt;val</code>里读地址，疯狂出错才发现应该在<code>id_dest-&gt;addr</code>里（因为是地址）。组织Context的时候思考了半天，最后问了大腿才知道怎么判断上下文的组织结构。感觉还是课本知识学得不够扎实的恶果。今日不宜PA，关机睡觉。</p><p>2018/11/19<br>PA3.1完成。感觉测试手段都不太给力，不知道有没有埋下隐藏bug</p><p>2018/11/24<br>PA3.2完成。感觉莫名顺利，可能是3.3要自闭的征兆</p><p>2018/12/1<br>开始自闭PA3.3，实现了文件读写操作，死活看不到PASS!!!，文件读写时对长度超过文件大小的情况的处理有一些麻烦，调了半天，最后发现是PA3.2时就好了的SYS_write没有加上刚刚写的<code>fs_write</code>，喷了。开始编写设备文件操作，看不懂vga那块到底是要干啥，机房关门了，回去睡觉。</p><p>2018/12/2<br>继续自闭PA3.3。为了看懂VGA那块的架构直接翻出了bmptest的源码，然后一路摸到NDL库的源码，花了大概一个下去终于显示出了ProjectN的Logo。实现<code>events_read()</code>时还把事件的格式搞错了debug了半天，终于可以开始跑仙剑了。小心翼翼地开始游戏，没有注释掉<code>Log</code>因此看到了瀑布般的<code>Log</code>信息，然后50min才播放完片头对话，所幸无事。然后注释掉了所有<code>Log</code>，又胆战心惊地开始尝试所有存档点，尝试了穿墙和穿人，全部失败，确认了没有肉眼可见的bug。长舒一口气，然后加急写完了批处理系统，机房关门，走人。难以置信我居然跑出了仙剑，亢奋。</p><h1 id="必答题"><a href="#必答题" class="headerlink" title="必答题"></a>必答题</h1><p><s>其实我写PA的时候都在系统调用过程梳理里做好笔记了</s></p><h2 id="游戏的存档"><a href="#游戏的存档" class="headerlink" title="游戏的存档"></a>游戏的存档</h2><ul><li>仙剑奇侠传中调用C标准I/O库函数<code>fread()</code></li><li>库函数<code>fread()</code>会调用libos中的系统调用的封装函数<code>_read()</code></li><li>libos中的<code>_read()</code>函数通过调用<code>_syscall_()</code>，直接使用内联汇编语句编译出<code>int 0x81</code>的系统调用内陷指令，并将相应的参数放入约定的寄存器中(<code>%eax</code>,<code>%ebx</code>，<code>%ecx</code>，<code>%edx</code>)</li><li>nemu执行指令时遇到了<code>int 0x81</code>指令，译码后执行<code>raise_intr()</code>，将EFLAGS，CS，EIP的值压入栈中，并到am中的中断门描述符表<code>idt</code>中查询0x81对应的跳转目标的偏移量offset，为<code>vectrap()</code></li><li><code>vectrap()</code>直接通过汇编指令将错误码<code>irq</code>压栈，然后跳转到<code>asm_jmp</code>函数执行（nexus-am/am/arch/x86-nemu/src/trap.S中定义）</li><li>在<code>asm_trap</code>中通过<code>pusha</code>指令让nemu将所有寄存器压栈，然后执行<code>irq_handle()</code>函数（在nexus-am/am/arch/x86-nemu/src/cte.c中）</li><li><code>irq_handle()</code>把执行流切换的原因打包成事件，然后调用在<code>_cte_init()</code> 中注册的事件处理回调函数, 将事件交给Nanos-lite来处理</li><li>Nanos-lite中的<code>do_event()</code>函数根据nemu打包传过来的时间决定系统调用类型，此处是<code>_EVENT_SYSCALL</code>类型的，就调用<code>do_syscall()</code>函数来处理这个系统调用</li><li><code>do_syscall()</code>根据上下文中寄存器<code>%eax</code>保存的参数确定系统调用的类型，此时为<code>SYS_read</code>类型，就调用文件系统中的<code>fs_read()</code>并将相应的参数传入</li><li><code>fs_read()</code>根据传入的文件名（存档信息文件的名称）读取需要的长度到指定的位置，恢复成存档前的状态，就可以从存档点继续游戏</li><li><code>fs_read()</code>执行完成后，一路返回到<code>asm_trap</code>中，恢复之前压入栈中保存的寄存器，然后执行<code>iret</code>指令</li><li>nemu执行<code>iret</code>指令，恢复EFLAGS，CS，EIP，跳转到EIP所指向的地方继续执行之后的指令</li></ul><p>至此，一次读取存档的系统调用全部完成</p><h2 id="更新屏幕"><a href="#更新屏幕" class="headerlink" title="更新屏幕"></a>更新屏幕</h2><ul><li>仙剑奇侠传中调用libndl中的库函数<code>NDL_DrawRect()</code></li><li><code>NDL_DrawRect()</code>会调用C标准I/O库函数<code>fwrite()</code>，将当前的像素信息写入<code>stdout</code>中，这里的<code>stdout</code>不是终端里的标准输出，而是应用程序的标准输出<code>_REENT-&gt;stdout</code></li><li>系统调用过程同上，此处不再赘述。进入Nanos-lite的文件系统后，由于是对显示设备抽象成的文件<code>/dev/fb</code>进行读取，<code>fs_write()</code>调用的是<code>fb_write()</code></li><li><code>fb_write()</code>调用了am的klib中提供的<code>screen_width()</code>和<code>draw_rect()</code></li><li>am中的<code>draw_rect()</code>调用了vga设备的写函数<code>video_write()</code>，把相应的像素信息写入到映射到<code>vga_memory</code>的物理内存中</li><li>当nemu访问到从0x4000开始的一段被映射到I/O空间的物理地址时，就会通过<code>mmio_write</code>来修改I/O空间的数据</li><li>I/O空间的数据被修改后调用了<code>update_screen()</code>，由nemu把更新后的屏幕显示信息显示了出来</li><li>进行系统调用的返回操作，同样不再赘述</li></ul><p>至此，一次更新屏幕的系统调用完成</p><h1 id="蓝框思考题"><a href="#蓝框思考题" class="headerlink" title="蓝框思考题"></a>蓝框思考题</h1><p>最近太忙了一题都没写…<br>想写的时候讲义又挂了…<br>二周目的时候再思考吧orz</p><h1 id="实验中的发现"><a href="#实验中的发现" class="headerlink" title="实验中的发现"></a>实验中的发现</h1><h2 id="关于nanos-lite和nemu是怎么通讯的"><a href="#关于nanos-lite和nemu是怎么通讯的" class="headerlink" title="关于nanos-lite和nemu是怎么通讯的"></a>关于nanos-lite和nemu是怎么通讯的</h2><p>在写PA3.1中的<code>lidt</code>指令的时候，我有个很大的疑惑，<code>idt</code>是在nanos-lite里被定义的，nemu要怎么获取它的地址呢？<code>_cte_init</code>中有一步调用了<code>set_idt</code>函数，将idt的地址和大小用内联汇编语句写入了指令集。因此当nanos编译成nemu可执行的指令后，idt的地址就可以通过相应的译码函数写入<code>id_dest</code>中。<br>问了一位nb的学长后，学长给出了如下理解</p><blockquote><p>不在system.c里的指令，一般靠编译c文件成机器码就可以给nemu做事，所以pa2很顺利；而system.c的东西依赖于系统（比如中断），只靠编译c文件做不到int、lidt这些东西，所以要内联汇编</p></blockquote><h2 id="关于如何判断-Context结构的组织顺序"><a href="#关于如何判断-Context结构的组织顺序" class="headerlink" title="关于如何判断_Context结构的组织顺序"></a>关于如何判断<code>_Context</code>结构的组织顺序</h2><p><code>_Context</code>是在函数<code>irq_handle</code>里作为参数的类型被传入的，然而<code>irq_handle</code>是通过汇编代码直接调用的，因此没有显式的参数传递语句，实际的参数是存放在栈中<code>%ebp-8</code>的位置开始的位置，观察<code>call irq_handle</code>之前所有的<code>push</code>相关语句就可以得知寄存器的顺序。而<code>eip</code>,<code>eflags</code>和<code>eip</code>是硬件保存的，因此需要观察<code>int</code>指令中的入栈顺序才能知道这三者的顺序。</p><h2 id="系统调用过程梳理"><a href="#系统调用过程梳理" class="headerlink" title="系统调用过程梳理"></a>系统调用过程梳理</h2><ol><li>用户层navy-apps在相应的系统调用函数（如<code>_exit()</code>）中调用系统调用接口函数<code>_syscall_()</code></li><li><code>_syscall_</code>用内联汇编语句将<code>int 0x80</code>和相应的系统调用参数传给nemu</li><li>nemu执行<code>int</code>指令，叫出nanos-lite</li><li><code>irq_handler</code>通过<code>int</code>指令传入的参数识别出这是一次系统调用的event，打包传给<code>do_event</code></li><li><code>irq.c</code>中的<code>do_event()</code>函数调用<code>do_syscall()</code>执行系统调用事件</li><li><code>syscall.c</code>中的<code>do_syscall()</code>函数根据传入的参数（在上下文的相应寄存器中）执行相应的系统调用操作，设置返回值并返回</li></ol><h1 id="我遇到的bug"><a href="#我遇到的bug" class="headerlink" title="我遇到的bug"></a>我遇到的bug</h1><ul><li>堆区管理的时候声明的用于记录program break的变量<code>pbrk</code>没有初始化【所以说初始化真的是个好文明</li><li>写了<code>fs_write</code>却忘了修改相应的系统调用<code>SYS_write</code>找了一个下午</li><li>所有关于文件读写的系统操作都需要控制<code>open_offset</code>，不能超过当前文件的size，但是<code>serial_write</code>和<code>dispinfo_read</code>等不同文件的读写又不能一概而论，写bug和debug的时候要特别注意</li><li><code>fs_lseek</code>最后要控制当前的<code>open_offset</code>，不然可能会导致<code>fs_read</code>和<code>fs_write</code>的功能无法正常使用</li><li><code>fs_read</code>和<code>fs_write</code>需要对<code>open_offset</code>做出修改</li><li>函数指针的调用就跟函数一样用就行了</li><li><code>fb_write</code>里的<code>offset</code>怎么用，怎么给<code>draw_rect</code>传参，可能要一直摸到<code>libnbl</code>才能搞清楚</li><li>字符串不能x**初始化，会由于某些我搞不懂的原因编译出<code>STOS</code>指令，导致看到亲切的i386 Logo</li><li><code>if((keytemp &amp; 0x8000) == 1)</code>和<code>if(keytemp &amp; 0x8000)</code>是不一样的！！！！！！[你是沙雕吗.jpg]</li></ul><h1 id="对讲义的一些建议（你们选择性反馈给yzh）"><a href="#对讲义的一些建议（你们选择性反馈给yzh）" class="headerlink" title="对讲义的一些建议（你们选择性反馈给yzh）"></a>对讲义的一些建议（你们选择性反馈给yzh）</h1><ul><li>建议把能看到<code>PASS!!!</code>信息的放在<code>serial_write()</code>之后，不少同学都在实现完<code>SYS_write</code>之后没看到PASS！！！感到困惑（当然仔细想一下还是能想通）</li><li>堆区管理那一块太考验阅读理解水平了，而且大部分人会忘掉PA2还接触过AM里一个叫<code>heap</code>的结构体，就稍微提醒一下下呗（</li><li>让dummy实现<code>_syscall_</code>时，最好能提醒一下如果按照之前加系统调用一下加入<code>do_event</code>中会触发死循环，或者干脆把下面的必做部分并到一起写，减少困惑</li></ul><h1 id="实验心得"><a href="#实验心得" class="headerlink" title="实验心得"></a>实验心得</h1><ul><li>RTFSC是很难的，不要一下子看不出来就自闭，<s>不然会出事情的</s></li><li>要成为一名优秀的程序猿，首先你要学好语文</li><li>出bug不可怕，如果能通过debug的过程对框架代码和计算机系统的原理有更深刻的理解，其实是一件很赚的事情。听了助教讲课之后我深刻感受到，一出bug就问大腿“怎么写才是对的”，实在太亏了，应该搞清楚哪里写错了，为什么写的fault这个出现这样的failure。</li></ul><h1 id="Appreciation"><a href="#Appreciation" class="headerlink" title="Appreciation"></a>Appreciation</h1><ul><li>感谢某人提供的探路和debug服务，我觉得有点保护过度了再这样下去我要不会自己写代码了【捂脸</li><li>感谢名字一直在换的学习群的群友们互帮互助的debug氛围</li></ul><p>本实验报告同样会将去掉必答题的版本同步上传至<a href="https://mengzelev.github.io/">个人blog</a></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;PA3-实验报告&quot;&gt;&lt;a href=&quot;#PA3-实验报告&quot; class=&quot;headerlink&quot; title=&quot;PA3 实验报告&quot;&gt;&lt;/a&gt;PA3 实验报告&lt;/h1&gt;&lt;p&gt;姓名：刘恩萌&lt;br&gt;学号：171860013&lt;/p&gt;
-&lt;h1 id=&quot;实验进度&quot;&gt;&lt;a hr
-      
-    
-    </summary>
-    
-    
-      <category term="Notes" scheme="https://mengzelev.github.io/tags/Notes/"/>
-    
-      <category term="pa" scheme="https://mengzelev.github.io/tags/pa/"/>
-    
-  </entry>
-  
-  <entry>
     <title>图论学习笔记-图中的连通性与距离</title>
     <link href="https://mengzelev.github.io/2018/11/14/connectivity/"/>
     <id>https://mengzelev.github.io/2018/11/14/connectivity/</id>
@@ -203,7 +340,7 @@
     <link href="https://mengzelev.github.io/2018/11/07/clrs-25All-Pairs-Shortest-Paths/"/>
     <id>https://mengzelev.github.io/2018/11/07/clrs-25All-Pairs-Shortest-Paths/</id>
     <published>2018-11-07T08:17:34.000Z</published>
-    <updated>2018-11-19T00:56:44.573Z</updated>
+    <updated>2019-01-07T11:15:54.734Z</updated>
     
     <content type="html"><![CDATA[<h1 id="矩阵乘法"><a href="#矩阵乘法" class="headerlink" title="矩阵乘法"></a>矩阵乘法</h1><h2 id="最优子结构"><a href="#最优子结构" class="headerlink" title="最优子结构"></a>最优子结构</h2><p>$l_{ij}^(m)}$:从结点$i$到结点$j$的至多包含$m$条边的任意路径中的最小权重。<br>$$<br>l_{ij}^{(m)} = \min\limits_{1\lek\le n}{l_{ik}^{(m1)}+w_{kj}}<br>$$</p><h2 id="自底向上计算最短路径权重"><a href="#自底向上计算最短路径权重" class="headerlink" title="自底向上计算最短路径权重"></a>自底向上计算最短路径权重</h2><p><img src="/2018/11/07/clrs-25All-Pairs-Shortest-Paths/extend.png"></p><p>三重循环，时间复杂度为$\Theta(n^3)$</p><p>形式上与矩阵乘法的计算非常类似</p><p>计算$L^{(n-1)}=W^{n-1}$</p><p><img src="/2018/11/07/clrs-25All-Pairs-Shortest-Paths/slowall.png"><br>这个算法本质上就是对$n$个点每个跑了一遍Bellman-Ford</p><h2 id="改进运行时间"><a href="#改进运行时间" class="headerlink" title="改进运行时间"></a>改进运行时间</h2><p>重复平方技术<br>二分计算矩阵的幂</p><p><img src="/2018/11/07/clrs-25All-Pairs-Shortest-Paths/chongfu.png"></p><p><img src="/2018/11/07/clrs-25All-Pairs-Shortest-Paths/faster.png"></p><p>优化后时间复杂度为$\Theta(n^3\lgn n)$</p><h1 id="Floyd-Warshall算法"><a href="#Floyd-Warshall算法" class="headerlink" title="Floyd-Warshall算法"></a>Floyd-Warshall算法</h1><p>枚举最短路径上的中间结点来进行递归的计算</p><ul><li>不允许有负权重环</li><li>但是可以做到在有负权重环的情况下报告（看对角元是否有负数）</li></ul><p>$d_{ij}^{(k)}$：从$i$到$j$经过的中间结点为${1,…k}$的子集的最短路径长度<br><img src="/2018/11/07/clrs-25All-Pairs-Shortest-Paths/d.png"></p><h2 id="伪代码"><a href="#伪代码" class="headerlink" title="伪代码"></a>伪代码</h2><p><img src="/2018/11/07/clrs-25All-Pairs-Shortest-Paths/floyd-alg.png"></p><h2 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h2><p>$\Theta(n^3)$</p><h2 id="空间复杂度"><a href="#空间复杂度" class="headerlink" title="空间复杂度"></a>空间复杂度</h2><p>看似需要$\Theta(n^3)$，但是作业题中证明了只需要一个矩阵来存储，为$\Theta(n^2)$</p><h2 id="构建最短路径"><a href="#构建最短路径" class="headerlink" title="构建最短路径"></a>构建最短路径</h2><p>采用动态规划的思想，递推式如下</p><p><img src="/2018/11/07/clrs-25All-Pairs-Shortest-Paths/pi0.png"></p><p><img src="/2018/11/07/clrs-25All-Pairs-Shortest-Paths/pik.png"></p><h1 id="用于稀疏图的Johnson算法"><a href="#用于稀疏图的Johnson算法" class="headerlink" title="用于稀疏图的Johnson算法"></a>用于稀疏图的Johnson算法</h1><p>用一种神奇的方式对图中每条边的权重进行重新赋值，使新的图满足</p><ul><li>所有权重都为非负值</li><li>新图中的最短路径就是旧图中的最短路径</li></ul><h2 id="伪代码-1"><a href="#伪代码-1" class="headerlink" title="伪代码"></a>伪代码</h2><p><img src="/2018/11/07/clrs-25All-Pairs-Shortest-Paths/Johnson.png"></p><p>先增加一个新结点$s$，该点到原先各结点都有边相连，权重为0<br>对新图进行一次Bellman-Ford算法，寻找是否有负权重环路<br>没有负权重环，就用神奇的长得像顶点的势能函数一样的函数给每条边重新赋值<br>$$ \hat{w}(u,v)=w(u,v)+h(u)-h(v)$$<br>$$ h(u)=\delta(s,u)$$<br>然后对每个点进行Dijkstra<br>最后记得将最短路径的权重恢复，并存入矩阵$D$中返回</p><h2 id="时间复杂度-1"><a href="#时间复杂度-1" class="headerlink" title="时间复杂度"></a>时间复杂度</h2><p>二叉最小优先队列实现Dijkstra：$O(VE\lg V)$<br>斐波那契堆实现：$O(V^2\lgV+VE)$<br>在稀疏图的情况下，表现比Floyd-Warshall好</p>]]></content>
     
@@ -219,15 +356,11 @@
       <category term="Notes" scheme="https://mengzelev.github.io/categories/Notes/"/>
     
     
-      <category term="Notes" scheme="https://mengzelev.github.io/tags/Notes/"/>
-    
       <category term="CLRS" scheme="https://mengzelev.github.io/tags/CLRS/"/>
     
       <category term="Problem Solving" scheme="https://mengzelev.github.io/tags/Problem-Solving/"/>
     
       <category term="Graph Algorithms" scheme="https://mengzelev.github.io/tags/Graph-Algorithms/"/>
-    
-      <category term="All-Pairs Shortest Path" scheme="https://mengzelev.github.io/tags/All-Pairs-Shortest-Path/"/>
     
   </entry>
   
@@ -477,151 +610,6 @@
       <category term="Linux" scheme="https://mengzelev.github.io/tags/Linux/"/>
     
       <category term="vim" scheme="https://mengzelev.github.io/tags/vim/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>PA1实验报告</title>
-    <link href="https://mengzelev.github.io/2018/10/04/PA1-report/"/>
-    <id>https://mengzelev.github.io/2018/10/04/PA1-report/</id>
-    <published>2018-10-04T09:17:47.000Z</published>
-    <updated>2018-10-04T09:18:35.194Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="实验进度"><a href="#实验进度" class="headerlink" title="实验进度"></a>实验进度</h1><p><strong>2018/9/15：</strong><br>完成阶段一，实现了单步执行、打印寄存器和扫描内存（简易版）<br>开始做之前忘了<code>git checkout pa1</code>导致工作都在pa0分支里完成了，后来在pa1分支下返工了一遍，<strong>两边的git log里都可以查到记录所以求求老师不要扣我的分qwq</strong>我下次确定一定肯定确认分支后再开始工作</p><p><strong>2018/9/23:</strong><br>完成阶段二，实现了包含<code>(</code>、<code>)</code>、<code>+</code>、<code>-</code>、<code>*</code>、<code>/</code>和十进制数字的表达式计算。为了处理负数将类型都实现为了<code>long long</code>而不是<code>uint32_t</code>，需要按<code>uint32_t</code>类型使用时进行强制类型转换。实现了表达式生成器并测试。</p><p><strong>2018/9/29:</strong><br>完成阶段三，扩展了表达式计算中的<code>==</code>、<code>!=</code>、<code>&gt;=</code>、<code>&lt;=</code>、<code>&gt;</code>、<code>&lt;</code>、解除引用和寄存器计算。实现了监视点添加、删除和打印信息功能。用自带的用户镜像初步测试无问题。</p><p><strong>2018/9/30:</strong><br>早上起来和同学聊天发现了自己监视点实现的隐藏bug，一开始看了半天没理解到底怎么回事，然后动手加了一堆<code>printf</code>语句缩小范围终于找到了出错的区间，虽然具体的原理还没理解透彻，但是靠着一知半解成功修复了隐藏bug。</p><p><img src="/2018/10/04/PA1-report/bug.png" height="200"></p><h1 id="必答题"><a href="#必答题" class="headerlink" title="必答题"></a>必答题</h1><p>不敢po上来的！</p><h1 id="部分蓝框思考题"><a href="#部分蓝框思考题" class="headerlink" title="部分蓝框思考题"></a>部分蓝框思考题</h1><p><strong>Q：</strong>假设你在Windows中使用Docker安装了一个GNU/Linux container, 然后在container中完成PA, 通过NEMU运行Hello World程序. 在这样的情况下, 尝试画出相应的层次图.<br><strong>A：</strong>参考了docker官网上的架构图</p><table><thead><tr><th style="text-align:center">架构</th></tr></thead><tbody><tr><td style="text-align:center">“Hello World” program</td></tr><tr><td style="text-align:center">simulated x86 hardware</td></tr><tr><td style="text-align:center">NEMU</td></tr><tr><td style="text-align:center">bins/libs</td></tr><tr><td style="text-align:center">Docker</td></tr><tr><td style="text-align:center">host os  (windows)</td></tr><tr><td style="text-align:center">Hardware</td></tr></tbody></table><p><strong>Q：</strong>如果没有寄存器, 计算机还可以工作吗? 如果可以, 这会对硬件提供的编程模型有什么影响呢?<br><strong>A：</strong>我认为没有寄存器计算机是可以工作的，但是效率会非常低，因为数据的读写只能从内存中进行，而内存的读写速度是慢于寄存器的。而且现在我们学的IA-32架构是不允许在两个内存单元之间进行数据操作的，必须用寄存器作为中间媒介。编程模型一周目的我查了一下没有看懂，但愿二周目的我能看懂吧。</p><p><strong>Q：</strong>我们知道, 时序逻辑电路里面有”状态”的概念. 那么, 对于TRM来说, 是不是也有这样的概念呢? 具体地, 什么东西表征了TRM的状态? 在状态模型中, 执行指令和执行程序, 其本质分别是什么?<br><strong>A：</strong>TRM中存在一个叫做状态寄存器的组成部分，会存储图灵机当前的状态。（状态模型又是什么）执行指令和执行程序的本质区别是程序是一大堆指令的集合。（个人理解）</p><p><strong>Q：</strong>嗯… 如果你觉得提示还不够, 那就来一个劲爆的: 回忆程序设计课的内容, 一个程序从哪里开始执行呢?如果你不屑于回答这个问题, 不妨先冷静下来. 其实这是一个值得探究的问题, 你会在将来重新审视它.<br><strong>A：</strong>我正在尝试冷静下来….</p><p><strong>Q：</strong>阅读reg_test()的代码, 思考代码中的assert()条件是根据什么写出来的<br><strong>A：</strong>我不太理解“根据什么写出来”是什么意思……反正没有对错我就说一下个人理解吧。reg_test里的assert们应该是check了一下所有寄存器的存储状态，包括整个32位、低16位和两个低8位，从而来检查CPU_state的结构是否正确。根据…根据CPU_state应有的结构写出来的？</p><p><strong>Q：</strong>在cmd_c()函数中, 调用cpu_exec()的时候传入了参数-1, 你知道这是什么意思吗?<br><strong>A：</strong>这样就不会做<code>cpu_exec()</code>中的for循环而直接执行<code>if(nemu_state == NEMU_RUNNING) nemu_state = NEMU_STOP</code>语句实现单步执行。</p><p><strong>Q：</strong>opcode_table到底是个什么类型的数组?<br><strong>A：</strong>是一个opcode_entry结构体类型的数组，通过RTFSC推测应该是模拟指令码的结构体。</p><p><strong>Q：</strong>你可能会抑制不住编码的冲动: 与其RTFM, 还不如自己写. 如果真是这样, 你可以考虑一下, 你会如何测试自己编写的字符串处理函数?<br><strong>A：</strong><s>其实我更愿意RTFM，有现成的为什么要造轮子</s><br>写个随机生成字符串的程序产生输入，然后将输入和输出全部都输出肉眼比对一下，大概测试个20组没问题就当过了吧。（做oj的后遗症）</p><p><strong>Q：</strong>框架代码中定义<code>wp_pool</code>等变量的时候使用了关键字<code>static</code>, <code>static</code>在此处的含义是什么? 为什么要在此处使用它?<br><strong>A：</strong>static是Internal Linkage的意思，是指编译过程中进行链接时由<code>static</code>修饰的变量不参与与外部文件的链接。这样就使外部的函数一旦使用了这几个变量，编译器就会报错，保证了与WP相关的操作都只能定义在这个文件中。（如果真是这样就有点OOP的感觉？对外只提供接口，实现都在内部，保证了数据和操作的安全性）</p><p>剩下一些思考题要么是能力不够STFW找不到满意的答案，要么是找到了看上去满意的答案然而看不懂….</p><h1 id="遇到的问题以及对问题的思考"><a href="#遇到的问题以及对问题的思考" class="headerlink" title="遇到的问题以及对问题的思考"></a>遇到的问题以及对问题的思考</h1><ul><li>git merge的时候发生了conflict<br>STFW之后发现需要先git reset –merge然后cat冲突文件查看是哪里冲突，修改相应地方之后再git merge</li><li>全部写完之后才发现写错分支了<br>本来以为git merge之后再给分支重命名就可以了，但是各种冲突实在太多了，所以重新写了一遍，血的教训告诉我们以后一定要在写之前反复检查git branch。因为难以找到一段完整的时间一次性写完，所以每次开始工作之前都需要git branch。</li><li>vim忽然“死机”<br>写完一段之后下意识Ctrl+S，之后发现其实是把vim锁定了，Ctrl+Q解锁</li><li>vim非正常退出后再次打开与.swp文件发生冲突<br>按R检查是否是自己需要的状态，然后rm .[filename].c.swp将交换文件删除（删之前一定要谨慎不然就是作死）</li><li><strong>量子态更新<a href="https://mengzelev.github.io/">个人blog</a>中，<s>欢迎老师视奸后加分</s></strong></li></ul><h1 id="实验心得"><a href="#实验心得" class="headerlink" title="实验心得"></a>实验心得</h1><ul><li>PA虽然是个时间黑洞但是真的很好玩！</li><li>开始动手之前一定要认真RTFSC</li><li>看不懂代码的时候手动加点测试可以帮助理解</li><li>人真是越学越挑剔，曾经我可以看着全默认的ui手动缩进代码，现在编辑器要是没有（配置）喜欢的字体、自动缩进、括号匹配、甚至一键函数跳转，我可能都会当场疯掉<s>某种意义上越挑剔也就越有学习的欲望</s>很多大佬的故事都告诉我们，工具的改进源于对现有工具的极大不爽</li><li>PA1完全是写给自己用的程序而不是OJ那样的了，一定要扪心自问：你写的代码对得起你自己吗？</li></ul><h1 id="Acknowledegments"><a href="#Acknowledegments" class="headerlink" title="Acknowledegments"></a>Acknowledegments</h1><ul><li>感谢 Massimo同学 在我vim出现异常的时候告诉我是<code>Ctrl+s</code>把屏幕给锁死了并成功教我“急救”方法</li><li>感谢 某不愿透露姓名的nb学长 帮忙看了一下表达式生成器的bug，还解决了我的一堆疑问，并且提供深夜debug陪聊服务，并给我负罪感使我以后牢记优先STFW</li><li>感谢 xy同学 提供轻度剧透，使我避免了一些bug，还告诉了我一个隐藏bug的存在</li><li>感谢 不学习的正经水群 交流pa心得一起快乐编程</li></ul><p><u>实验报告虽然写了很多还是意犹未尽啊，为了赶ddl并尽快愉快地开始PA2先交了，等ddl过了之后会上传删掉了必做题的版本到个人blog，不定时更新</u></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;实验进度&quot;&gt;&lt;a href=&quot;#实验进度&quot; class=&quot;headerlink&quot; title=&quot;实验进度&quot;&gt;&lt;/a&gt;实验进度&lt;/h1&gt;&lt;p&gt;&lt;strong&gt;2018/9/15：&lt;/strong&gt;&lt;br&gt;完成阶段一，实现了单步执行、打印寄存器和扫描内存（简易版）&lt;b
-      
-    
-    </summary>
-    
-    
-      <category term="Notes" scheme="https://mengzelev.github.io/tags/Notes/"/>
-    
-      <category term="pa" scheme="https://mengzelev.github.io/tags/pa/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>关于“过程调用”的讨论</title>
-    <link href="https://mengzelev.github.io/2018/09/27/ics-process-calling/"/>
-    <id>https://mengzelev.github.io/2018/09/27/ics-process-calling/</id>
-    <published>2018-09-27T01:59:13.000Z</published>
-    <updated>2018-10-04T09:15:16.428Z</updated>
-    
-    <content type="html"><![CDATA[<p>这是计算机系统基础课上的开放课题，在不同环境下测试一些UB的结果，照理说此处应该有分析但是萌捷列夫懒了，等ddl处理掉了再来写。</p><h1 id="实验一"><a href="#实验一" class="headerlink" title="实验一"></a>实验一</h1><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><pre><code>#include &lt;stdio.h&gt; int main(int argc, char* argv[]){    int a = 10;    double *p = (double*)&amp;a;    printf(&quot;%f\n&quot;, *p);    printf(&quot;%f\n&quot;, ((double)(a)));return 0;}</code></pre><h2 id="windows10"><a href="#windows10" class="headerlink" title="windows10"></a>windows10</h2><p>环境：dev-cpp/TDM-GCC 4.9.2 64bit Release</p><p><img src="/2018/09/27/ics-process-calling/ics1-win.png"></p><p><img src="/2018/09/27/ics-process-calling/ics1-win-asm.png"></p><h2 id="Debian-64bit"><a href="#Debian-64bit" class="headerlink" title="Debian-64bit"></a>Debian-64bit</h2><p><img src="/2018/09/27/ics-process-calling/ics1-debian.png"></p><p><img src="/2018/09/27/ics-process-calling/ics1-debian-asm.png"></p><h2 id="Ubuntu-32bit"><a href="#Ubuntu-32bit" class="headerlink" title="Ubuntu-32bit"></a>Ubuntu-32bit</h2><p><img src="/2018/09/27/ics-process-calling/ics1-ubuntu.png"></p><p><img src="/2018/09/27/ics-process-calling/ics1-ubuntu-asm.png"></p><h1 id="实验二"><a href="#实验二" class="headerlink" title="实验二"></a>实验二</h1><h2 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h2><pre><code>#include&lt;stdio.h&gt;int main(){    double a = 10;    printf(&quot;a = %d\n&quot;, a);    return 0;}</code></pre><h2 id="windows10-1"><a href="#windows10-1" class="headerlink" title="windows10"></a>windows10</h2><p><img src="/2018/09/27/ics-process-calling/ics2-win.png"></p><p><img src="/2018/09/27/ics-process-calling/ics2-win-asm.png"></p><h2 id="Debian"><a href="#Debian" class="headerlink" title="Debian"></a>Debian</h2><p><img src="/2018/09/27/ics-process-calling/ics2-debian.png"></p><p><img src="/2018/09/27/ics-process-calling/ics2-debian-asm.png"></p><h2 id="Ubuntu-32bit-1"><a href="#Ubuntu-32bit-1" class="headerlink" title="Ubuntu-32bit"></a>Ubuntu-32bit</h2><p><img src="/2018/09/27/ics-process-calling/ics2-ubuntu.png"></p><p><img src="/2018/09/27/ics-process-calling/ics2-ubuntu-asm.png"></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;这是计算机系统基础课上的开放课题，在不同环境下测试一些UB的结果，照理说此处应该有分析但是萌捷列夫懒了，等ddl处理掉了再来写。&lt;/p&gt;
-&lt;h1 id=&quot;实验一&quot;&gt;&lt;a href=&quot;#实验一&quot; class=&quot;headerlink&quot; title=&quot;实验一&quot;&gt;&lt;/a&gt;实验一&lt;/
-      
-    
-    </summary>
-    
-    
-      <category term="ics" scheme="https://mengzelev.github.io/tags/ics/"/>
-    
-      <category term="process calling" scheme="https://mengzelev.github.io/tags/process-calling/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>正则表达式学习笔记</title>
-    <link href="https://mengzelev.github.io/2018/09/21/regex/"/>
-    <id>https://mengzelev.github.io/2018/09/21/regex/</id>
-    <published>2018-09-21T14:04:40.000Z</published>
-    <updated>2018-09-21T14:38:21.936Z</updated>
-    
-    <content type="html"><![CDATA[<p>废话不多说，贴4张截图就跑路（。</p><p>有空还是会回来写的，容我先把ddl肝完（瘫）。</p><p><a href="http://docs.huihoo.com/c/linux-c-programming/ch32.html" target="_blank" rel="noopener">PA讲义中的Linux-C教程</a></p><p><img src="/2018/09/21/regex/table1.png"><br><img src="/2018/09/21/regex/table2.png"><br><img src="/2018/09/21/regex/table3.png"><br><img src="/2018/09/21/regex/table4.png"></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;废话不多说，贴4张截图就跑路（。&lt;/p&gt;
-&lt;p&gt;有空还是会回来写的，容我先把ddl肝完（瘫）。&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;http://docs.huihoo.com/c/linux-c-programming/ch32.html&quot; target=&quot;_blank&quot; r
-      
-    
-    </summary>
-    
-    
-      <category term="Notes" scheme="https://mengzelev.github.io/tags/Notes/"/>
-    
-      <category term="pa" scheme="https://mengzelev.github.io/tags/pa/"/>
-    
-      <category term="regular expressions" scheme="https://mengzelev.github.io/tags/regular-expressions/"/>
-    
-      <category term="linux" scheme="https://mengzelev.github.io/tags/linux/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>算法导论学习笔记-摊还分析</title>
-    <link href="https://mengzelev.github.io/2018/09/17/clrs-17amortized/"/>
-    <id>https://mengzelev.github.io/2018/09/17/clrs-17amortized/</id>
-    <published>2018-09-17T15:47:29.000Z</published>
-    <updated>2018-09-20T15:58:45.393Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="聚合分析"><a href="#聚合分析" class="headerlink" title="聚合分析"></a>聚合分析</h1><p>聚合分析指，证明对所有n，一个n个操作的序列的最坏情况下花费的总时间为T(n)。因此在最坏情况下，每个操作的平均代价，或<strong>摊还代价</strong>为T(n)/n。</p><p>摊还操作可以看作是不带概率计算的平均情况分析。因为概率不好计算。<s>概率什么时候好计算过了</s></p><p>此摊还代价适用于<strong>每个</strong>操作，即使序列中有多种类型的操作也是如此。</p><p>算法导论上给出的示例为<strong>增加了MULTIPOP的栈操作</strong>和<strong>二进制计数器递增</strong>问题，简单概括一下二者的共同点：</p><ul><li>需要分析复杂度的操作由连续的n个操作构成</li><li>每个单步操作的时间复杂度难以确定为与n有关的表达式，与当前状态密切相关</li><li>对每个单步操作取最坏情况得出的上界过于宽松，浪费时间</li><li>n个连续操作的总时间复杂度比较容易求得</li></ul><p>大致感觉就是，使用摊还分析可以给这些操作一个<strong>清白</strong>，它们事实上没有那么慢。</p><h1 id="核算法"><a href="#核算法" class="headerlink" title="核算法"></a>核算法</h1><p>核算法就是对不同的操作赋予不同的信用，这个信用值可能会多于或少于实际消耗的代价。实际操作时采用多退少补的原则，保证总信用（支付的代价-实际的代价）始终非负即可。</p><p>一般用于解决不同操作间具有依赖关系的问题，例如聚合分析中提到的<strong>栈操作问题</strong>（出栈操作次数上界即为进栈操作次数）和<strong>二进制计数器递增问题</strong>（复位操作次数依赖于置位操作次数）。</p><h1 id="势能分析"><a href="#势能分析" class="headerlink" title="势能分析"></a>势能分析</h1><p>势能分析看上去更加数(wu)学(li)一点，与核算法有点类似，不同之处势能分析为每一个状态都设置了一个对应的势能，即势能函数。虽然在操作过程中势能可能有升有降，但只要最终势能是增加的，就可以证明代价的上界。</p><p>选择势能函数应该是比较困难的。产生的摊还代价依赖于选择的势能函数。具体根据需要证明的上界来选择适度的势能函数，毕竟最优势能函数不是那么好找的。</p><h1 id="动态表"><a href="#动态表" class="headerlink" title="动态表"></a>动态表</h1><p>这个有丶玄学，是势能分析的综合应用，建议看书。</p><p><u>睡觉了，先更到这里，明天继续更</u></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;聚合分析&quot;&gt;&lt;a href=&quot;#聚合分析&quot; class=&quot;headerlink&quot; title=&quot;聚合分析&quot;&gt;&lt;/a&gt;聚合分析&lt;/h1&gt;&lt;p&gt;聚合分析指，证明对所有n，一个n个操作的序列的最坏情况下花费的总时间为T(n)。因此在最坏情况下，每个操作的平均代价，或&lt;s
-      
-    
-    </summary>
-    
-      <category term="Notes" scheme="https://mengzelev.github.io/categories/Notes/"/>
-    
-    
-      <category term="Notes" scheme="https://mengzelev.github.io/tags/Notes/"/>
-    
-      <category term="CLRS" scheme="https://mengzelev.github.io/tags/CLRS/"/>
-    
-      <category term="Problem Solving" scheme="https://mengzelev.github.io/tags/Problem-Solving/"/>
-    
-      <category term="amortized analysis" scheme="https://mengzelev.github.io/tags/amortized-analysis/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>算法导论学习笔记-贪心算法</title>
-    <link href="https://mengzelev.github.io/2018/09/17/clrs-16greedy/"/>
-    <id>https://mengzelev.github.io/2018/09/17/clrs-16greedy/</id>
-    <published>2018-09-17T02:53:05.000Z</published>
-    <updated>2018-09-18T03:10:20.626Z</updated>
-    
-    <content type="html"><![CDATA[<p>前一篇dp写得又乱又烂简直不想看。但愿自己能坚持下去吧。<s>可是这依然改变不了搬运和截图多于实际内容的事实</s></p><h1 id="基础理论"><a href="#基础理论" class="headerlink" title="基础理论"></a>基础理论</h1><p>贪心算法可以看做是动态规划的弱化版，处理某一类特殊的具有最优子结构的问题。</p><blockquote><p>在每个贪心算法之下，几乎总有一个更繁琐的动态规划算法。</p></blockquote><h2 id="算法设计步骤"><a href="#算法设计步骤" class="headerlink" title="算法设计步骤"></a>算法设计步骤</h2><ol><li>将最优化问题转化为这样的形式：对其作出一次选择后，只剩下<strong>一个</strong>子问题需要求解【子问题削减】</li><li>证明作出贪心选择后，原问题总是存在最优解，即贪心选择总是安全的【安全性证明：<strong>替换法</strong>】</li><li>证明作出贪心选择后，剩余的子问题满足性质：其最优解与贪心选择组合即可得到原问题的最优解，这样就得到了最优子结构【确认最优子结构】</li></ol><h2 id="贪心选择性质"><a href="#贪心选择性质" class="headerlink" title="贪心选择性质"></a>贪心选择性质</h2><p>贪心选择性质是指，当进行选择时，我们直接作出在当前问题中看来最优的选择，而不必考虑子问题的解【鼠目寸光】</p><p>贪心起来不太方便的时候，可以改进贪心选择，例如做一些预处理（活动选择问题中按照结束时间对活动进行排序）</p><h2 id="最优子结构"><a href="#最优子结构" class="headerlink" title="最优子结构"></a>最优子结构</h2><p>证明：子问题最优解 + 贪心选择 = 原问题最优解<br>隐含地使用了数学归纳法</p><h2 id="两种背包问题"><a href="#两种背包问题" class="headerlink" title="两种背包问题"></a>两种背包问题</h2><ul><li><strong>0-1背包问题</strong></li><li><strong>分数背包问题</strong></li></ul><p>共同的条件是有一堆不同价值、重量的东西，用一个有一定承重量的背包去装，求装得的最大价值。<br>不同在于，<strong>0-1背包问题</strong>中每个东西要么拿要么不拿，而<strong>分数背包问题</strong>中可以拿分数个东西。</p><p>前者无法用贪心算法求解，但后者可以，主要区别在于考虑<strong>0-1背包问题</strong>中是否将一个商品装入背包时，必须比较包含此商品的子问题的解和不包含此商品的子问题的解。简单来说就是，空闲空间的存在非常讨厌。只能使用动态规划来求解</p><h1 id="活动选择问题"><a href="#活动选择问题" class="headerlink" title="活动选择问题"></a>活动选择问题</h1><h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><center><br><img src="/2018/09/17/clrs-16greedy/activity1.png" height="200"><br></center><h2 id="最优子结构-1"><a href="#最优子结构-1" class="headerlink" title="最优子结构"></a>最优子结构</h2><p>通俗地说，对于某一个活动$a_k$，在它开始之前结束的所有活动，和在它结束之后开始的所有活动，这两个集合都应该取到最优解，可以使用剪切-粘贴发得到证明。因为如果子问题存在更优解，只需替换即可得到原问题的最优解，与原问题已经是最优解矛盾。</p><p>严谨化表述可以描述为：</p><center><br><img src="/2018/09/17/clrs-16greedy/activity2.png" height="100"><br></center><br>其中，$S{ij}$表示在$ai$结束后开始、在$aj$开始前结束的活动的集合；<br>c[i,j]表示集合$S{ij}$的最优解。<br><br>贪心选择<br>———————————<br>抛开各种分析直接来看这个问题，或者说和一个不知道动态规划的人谈起这个问题，很容易（大概）有这样一种想法：<br>对于每一次选择，都取不冲突的、最早结束的活动，感觉应该能够得到最优解。<br><br>事实上这个想法是对的，可以使用<a href="#replace">替换法</a>进行证明。<br><center><br><img src="/2018/09/17/clrs-16greedy/activity3.png" height="200"><br></center><p>这样每次做选择的时候就只剩下了一个子问题。</p><h2 id="递归实现"><a href="#递归实现" class="headerlink" title="递归实现"></a>递归实现</h2><p>贪心算法可以自顶向下实现。</p><center><br><img src="/2018/09/17/clrs-16greedy/activity4.png" height="200"><br></center><h2 id="迭代实现"><a href="#迭代实现" class="headerlink" title="迭代实现"></a>迭代实现</h2><center><br><img src="/2018/09/17/clrs-16greedy/activity5.png" height="250"><br></center><p>其中Q是一个单调队列。如果用最小堆实现，则该算法的时间复杂度为O(nlgn)。</p><h2 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h2><p>如果直接使用dp，状态转移是O(n)的，子问题总数为O(n^2)，因此总时间复杂度为O(n^3)。</p><p>而如果使用贪心策略，压缩了解空间，限制了解的范围，从伪代码可以看出每个$a_{i}$都被检查且只被检查了一次，因此时间复杂度是O(n)的。</p><p>如果输入数据是无序的那么还需要一个O(nlgn)的排序时间，总体的时间复杂度为O(nlgn)。</p><h1 id="赫夫曼编码"><a href="#赫夫曼编码" class="headerlink" title="赫夫曼编码"></a>赫夫曼编码</h1><h2 id="问题描述-1"><a href="#问题描述-1" class="headerlink" title="问题描述"></a>问题描述</h2><p>解释起来有点麻烦，提供STFW快捷入口</p><p><a href="https://baike.baidu.com/item/%E5%93%88%E5%A4%AB%E6%9B%BC%E7%BC%96%E7%A0%81/1719730?fr=aladdin" target="_blank" rel="noopener">百度百科-哈夫曼编码</a></p><p><a href="https://en.wikipedia.org/wiki/Huffman_coding" target="_blank" rel="noopener">wikipedia-Huffman coding</a></p><p>简单概括一下：</p><ul><li>用变长编码压缩编码长度</li><li>Huffman树的叶结点与码字的编码一一对应</li><li>字符的二进制码字用从根结点到该字符对应的叶结点的简单路径表示</li><li>代价的定义：<center><br><img src="/2018/09/17/clrs-16greedy/huffman2.png" height="150"><br></center></li></ul><h2 id="伪代码"><a href="#伪代码" class="headerlink" title="伪代码"></a>伪代码</h2><center><br><img src="/2018/09/17/clrs-16greedy/huffman1.png" height="200"><br></center><h2 id="正确性证明"><a href="#正确性证明" class="headerlink" title="正确性证明"></a>正确性证明</h2><p>这一块设计很多数学推导，难度比较大，此处指概括大致思路，<u>配合算法导论原书食用风味更佳</u></p><p>主要是需要证明两个引理。</p><p><center><br><img src="/2018/09/17/clrs-16greedy/huffman3.png" height="100"><br></center><br>引理2旨在说明在单步选择下，贪心能得到是最优解。用的是<strong>替换法</strong>。从假想出一个<strong>抽象的最优解T</strong>，经过某些变换得到<strong>根据贪心选择构造出的解T’’</strong>，运用数学手段证明这两个解具有相等的代价。<br>此处采用的是相减得到大于等于关系，与最优解天然具有的小于等于构造解相结合，证明等价。</p><p><center><br><img src="/2018/09/17/clrs-16greedy/huffman4.png" height="120"><br></center><br>引理3旨在证明该问题的最优子结构。采用了<s>喜闻乐见的</s>的剪切-粘贴法，也使用了一定的数学手段导出了矛盾。</p><p>引理2+引理3能证明上文的贪心算法可以生成一个最优前缀码。</p><p><s>课程要求暂时只需要看前三章</s></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;前一篇dp写得又乱又烂简直不想看。但愿自己能坚持下去吧。&lt;s&gt;可是这依然改变不了搬运和截图多于实际内容的事实&lt;/s&gt;&lt;/p&gt;
-&lt;h1 id=&quot;基础理论&quot;&gt;&lt;a href=&quot;#基础理论&quot; class=&quot;headerlink&quot; title=&quot;基础理论&quot;&gt;&lt;/a&gt;基础理论&lt;/h1
-      
-    
-    </summary>
-    
-      <category term="Notes" scheme="https://mengzelev.github.io/categories/Notes/"/>
-    
-    
-      <category term="Notes" scheme="https://mengzelev.github.io/tags/Notes/"/>
-    
-      <category term="CLRS" scheme="https://mengzelev.github.io/tags/CLRS/"/>
-    
-      <category term="Problem Solving" scheme="https://mengzelev.github.io/tags/Problem-Solving/"/>
-    
-      <category term="greedy algorithm" scheme="https://mengzelev.github.io/tags/greedy-algorithm/"/>
     
   </entry>
   

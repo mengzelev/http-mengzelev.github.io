@@ -339,6 +339,207 @@
     
     
     <article class="index-post">
+        <a class="abstract-title" href = "/2018/10/04/PA1-report/" >
+            
+                <span>PA1实验报告</span>
+        </a>
+        <div class="abstract-content">
+            实验进度2018/9/15：完成阶段一，实现了单步执行、打印寄存器和扫描内存（简易版）开始做之前忘了git checkout pa1导致工作都在pa0分支里完成了，后来在pa1分支下返工了一遍，两边的git log里都可以查到记录所以求求老师不要扣我的分qwq我下次确定一定肯定确认分支后再开始工作
+2018/9/23:完成阶段二，实现了包含(、)、+、-、*、/和十进制数字的表达式计算。为了处理负数将类型都实现为了long long而不是uint32_t，需要按uint32_t类型使用时进行强制类型转换。实现了表达式生成器并测试。
+2018/9/29:完成阶段三，扩展了表达式计算中的==...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/10/04</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Notes">Notes</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "pa">pa</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href = "/2018/09/27/ics-process-calling/" >
+            
+                <span>关于“过程调用”的讨论</span>
+        </a>
+        <div class="abstract-content">
+            这是计算机系统基础课上的开放课题，在不同环境下测试一些UB的结果，照理说此处应该有分析但是萌捷列夫懒了，等ddl处理掉了再来写。
+实验一代码#include &lt;stdio.h&gt; 
+
+int main(int argc, char* argv[]){
+    int a = 10;
+    double *p = (double*)&amp;a;
+    printf(&quot;%f\n&quot;, *p);
+    printf(&quot;%f\n&quot;, ((double)(a)));
+return 0;
+}
+windows10环境：dev-cpp/TDM-GC...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/09/27</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "ics">ics</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "process calling">process calling</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href = "/2018/09/21/regex/" >
+            
+                <span>正则表达式学习笔记</span>
+        </a>
+        <div class="abstract-content">
+            废话不多说，贴4张截图就跑路（。
+有空还是会回来写的，容我先把ddl肝完（瘫）。
+PA讲义中的Linux-C教程
+
+
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/09/21</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Notes">Notes</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "pa">pa</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "regular expressions">regular expressions</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "linux">linux</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href = "/2018/09/17/clrs-17amortized/" >
+            
+                <span>算法导论学习笔记-摊还分析</span>
+        </a>
+        <div class="abstract-content">
+            聚合分析聚合分析指，证明对所有n，一个n个操作的序列的最坏情况下花费的总时间为T(n)。因此在最坏情况下，每个操作的平均代价，或摊还代价为T(n)/n。
+摊还操作可以看作是不带概率计算的平均情况分析。因为概率不好计算。概率什么时候好计算过了
+此摊还代价适用于每个操作，即使序列中有多种类型的操作也是如此。
+算法导论上给出的示例为增加了MULTIPOP的栈操作和二进制计数器递增问题，简单概括一下二者的共同点：
+
+需要分析复杂度的操作由连续的n个操作构成
+每个单步操作的时间复杂度难以确定为与n有关的表达式，与当前状态密切相关
+对每个单步操作取最坏情况得出的上界过于宽松，浪费时间
+n个连续操作的...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/09/17</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Notes">Notes</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "CLRS">CLRS</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Problem Solving">Problem Solving</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "amortized analysis">amortized analysis</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href = "/2018/09/17/clrs-16greedy/" >
+            
+                <span>算法导论学习笔记-贪心算法</span>
+        </a>
+        <div class="abstract-content">
+            前一篇dp写得又乱又烂简直不想看。但愿自己能坚持下去吧。可是这依然改变不了搬运和截图多于实际内容的事实
+基础理论贪心算法可以看做是动态规划的弱化版，处理某一类特殊的具有最优子结构的问题。
+
+在每个贪心算法之下，几乎总有一个更繁琐的动态规划算法。
+
+算法设计步骤
+将最优化问题转化为这样的形式：对其作出一次选择后，只剩下一个子问题需要求解【子问题削减】
+证明作出贪心选择后，原问题总是存在最优解，即贪心选择总是安全的【安全性证明：替换法】
+证明作出贪心选择后，剩余的子问题满足性质：其最优解与贪心选择组合即可得到原问题的最优解，这样就得到了最优子结构【确认最优子结构】
+
+贪心选择性质贪心选择性质...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/09/17</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Notes">Notes</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "CLRS">CLRS</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Problem Solving">Problem Solving</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "greedy algorithm">greedy algorithm</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href = "/2018/09/16/startjava/" >
             
                 <span>面向OJ的Java学习</span>
@@ -550,170 +751,10 @@ pop  &nbsp;&nbsp; 退栈，等价于mov+add
         </div>
     </article>
     
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2018/08/29/asm-notes/" >
-            
-                <span>汇编语言复习笔记（一）</span>
-        </a>
-        <div class="abstract-content">
-            前言本文为学校课程面向考试复习笔记，参考内容为老师的课堂讲义&amp;深入理解计算机系统，依据这两者做了一些个人的整理便于复习。然而浪了一个假期在退课的边缘试探
-信息的表示数值的表示
-原码：这个很直观的
-反码：这个几乎不用的
-补码：$D’=R^n-D$ / 按位取反加1；
-移码：见浮点数
-
-补码
-
-相当于取模操作
-着重区分基数的值(R)和补码位表示的实际的值(D)
-R与D的相对大小一致
-$R=D+D_{w-1}\cdot 2^w$
-
-C语言中的整数
-无符号数：在数后加U或u
-同时有无符号数和带符号数，编译器将带符号数强制转换为无符号数
-int的最大正值为2147483647，最大负值为-...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/08/29</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Notes">Notes</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Assembly Language">Assembly Language</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2018/08/18/freshman/" >
-            
-                <span>胡言乱语的大一总结</span>
-        </a>
-        <div class="abstract-content">
-            &emsp;&emsp;生日兼七夕窝在家里无聊于是开了这样一篇文章写了整整两天，都是些碎碎念。本来并没有写这种东西的习惯的(:з」∠)但是既然开了个人blog总要写点什么的于是就写吧！试图掩盖写不出教程的事实将来过好几年来看可能会很有回忆的感觉。
-学习篇刚进大学的时候，军训期间闲得蛋疼去考了计拔居然还被录取了，txp他老人家眼光真的没问题吗，于是就开始了贼船之旅。大一上第一个国庆长假就只能窝在家里写作业写了好久堪称心理阴影，大一上被问求这门神奇的课给吓尿了，动不动就为了赶作业修仙到两点。其实还是有在疯狂补小排球的 到了大一下觉得大一上还是很空闲的，起码不用搭面包板，也不用抄大物作业。大二...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/08/18</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "freshman">freshman</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "college life">college life</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2018/08/12/test-md/" >
-            
-                <span>Markdown test</span>
-        </a>
-        <div class="abstract-content">
-            这是标题君这是副标题君我知道这篇文章看起来很沙雕，因为作者就是一个沙雕
-列表非常有趣
-
-这是第一项
-这是第二项
-这是第三项
-
-
-有时候会有需要强调的内容。
-插入代码是一件非常爽的事情：
-printf(&quot;%s&quot;,&quot;Hello world!\n&quot;);
-突然发现自己不会用printf真是太丢人了。
-
-有时候需要插入链接，这里贴一个百度。
-有时候又需要插入图片
-    
-
-看张血小板冷静一下吧（图源网络）
-图片的尺寸可以用命令进行修改
-
-暂时先写这么多吧，敬请关注后面几期，计划中将会有
-
-汇编课程相关学习笔记
-日本动画制作流程及《白箱》观后感整理
-大一回顾...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/08/12</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "markdown">markdown</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2018/07/28/hello-world/" >
-            
-                <span>Hello World</span>
-        </a>
-        <div class="abstract-content">
-            Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick StartCreate a new post1$ hexo new "My New Post"
-More info: Writing
-Run server1$ hexo server
-More...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/07/28</span>
-            </div>
-            <!-- tags  -->
-            
-        </div>
-    </article>
-    
     <!-- paginator  -->
     
     <nav class="page-nav">
-        <a class="extend prev" rel="prev" href="/archives/page/2/">&#60; PREV</a><a class="page-number" href="/archives/">1</a><a class="page-number" href="/archives/page/2/">2</a><span class="page-number current">3</span>
+        <a class="extend prev" rel="prev" href="/archives/page/2/">&#60; PREV</a><a class="page-number" href="/archives/">1</a><a class="page-number" href="/archives/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/archives/page/4/">4</a><a class="extend next" rel="next" href="/archives/page/4/">NEXT &#62;</a>
     </nav>
     
 </main>
@@ -1191,9 +1232,108 @@ More...
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 29
+        Total : 34
         </div>
         <!-- search  -->
         
@@ -1206,6 +1346,36 @@ More...
     
     <div class="archive-year"> 2018 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/29</span><a class="archive-post-title" href= "/2018/12/29/lab4-report/" >Lab4 实验报告</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/28</span><a class="archive-post-title" href= "/2018/12/28/PA4-report/" >PA4实验报告</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/18</span><a class="archive-post-title" href= "/2018/12/18/clrs28Matrix-Operation/" >算法导论学习笔记-矩阵运算</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/13</span><a class="archive-post-title" href= "/2018/12/13/planar-graph-and-coloring/" >图论学习笔记-平面图与着色</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/10</span><a class="archive-post-title" href= "/2018/12/10/Dinner/" >卫宫家今天的饭</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/08</span><a class="archive-post-title" href= "/2018/12/08/PA3-report/" >PA3实验报告</a>
+        </li>
     
     
         <li class="archive-post-item">
@@ -1225,11 +1395,6 @@ More...
     
         <li class="archive-post-item">
             <span class="archive-post-date">11/21</span><a class="archive-post-title" href= "/2018/11/21/traversability/" >图论学习笔记-旅行问题</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">11/18</span><a class="archive-post-title" href= "/2018/11/18/PA3-report/" >PA3实验报告</a>
         </li>
     
     
@@ -1369,13 +1534,13 @@ More...
     
         <span class="sidebar-tag-name" data-tags="dynamic programming"><span class="iconfont-archer">&#xe606;</span>dynamic programming</span>
     
-        <span class="sidebar-tag-name" data-tags="greedy algorithm"><span class="iconfont-archer">&#xe606;</span>greedy algorithm</span>
-    
-        <span class="sidebar-tag-name" data-tags="amortized analysis"><span class="iconfont-archer">&#xe606;</span>amortized analysis</span>
-    
         <span class="sidebar-tag-name" data-tags="Disjoint Sets"><span class="iconfont-archer">&#xe606;</span>Disjoint Sets</span>
     
         <span class="sidebar-tag-name" data-tags="Data Structure"><span class="iconfont-archer">&#xe606;</span>Data Structure</span>
+    
+        <span class="sidebar-tag-name" data-tags="amortized analysis"><span class="iconfont-archer">&#xe606;</span>amortized analysis</span>
+    
+        <span class="sidebar-tag-name" data-tags="greedy algorithm"><span class="iconfont-archer">&#xe606;</span>greedy algorithm</span>
     
         <span class="sidebar-tag-name" data-tags="Single Source Shortest Path"><span class="iconfont-archer">&#xe606;</span>Single Source Shortest Path</span>
     
@@ -1383,9 +1548,11 @@ More...
     
         <span class="sidebar-tag-name" data-tags="Dijkstra"><span class="iconfont-archer">&#xe606;</span>Dijkstra</span>
     
+        <span class="sidebar-tag-name" data-tags="All-Pairs Shortest Path"><span class="iconfont-archer">&#xe606;</span>All-Pairs Shortest Path</span>
+    
         <span class="sidebar-tag-name" data-tags="Graph Algorithms"><span class="iconfont-archer">&#xe606;</span>Graph Algorithms</span>
     
-        <span class="sidebar-tag-name" data-tags="All-Pairs Shortest Path"><span class="iconfont-archer">&#xe606;</span>All-Pairs Shortest Path</span>
+        <span class="sidebar-tag-name" data-tags="Maximum Flow"><span class="iconfont-archer">&#xe606;</span>Maximum Flow</span>
     
         <span class="sidebar-tag-name" data-tags="Graph Theory"><span class="iconfont-archer">&#xe606;</span>Graph Theory</span>
     
@@ -1395,41 +1562,41 @@ More...
     
         <span class="sidebar-tag-name" data-tags="college life"><span class="iconfont-archer">&#xe606;</span>college life</span>
     
-        <span class="sidebar-tag-name" data-tags="ics"><span class="iconfont-archer">&#xe606;</span>ics</span>
-    
-        <span class="sidebar-tag-name" data-tags="process calling"><span class="iconfont-archer">&#xe606;</span>process calling</span>
-    
         <span class="sidebar-tag-name" data-tags="Lab"><span class="iconfont-archer">&#xe606;</span>Lab</span>
     
         <span class="sidebar-tag-name" data-tags="Ics"><span class="iconfont-archer">&#xe606;</span>Ics</span>
     
-        <span class="sidebar-tag-name" data-tags="Matchings"><span class="iconfont-archer">&#xe606;</span>Matchings</span>
+        <span class="sidebar-tag-name" data-tags="ics"><span class="iconfont-archer">&#xe606;</span>ics</span>
     
-        <span class="sidebar-tag-name" data-tags="Factorization"><span class="iconfont-archer">&#xe606;</span>Factorization</span>
+        <span class="sidebar-tag-name" data-tags="process calling"><span class="iconfont-archer">&#xe606;</span>process calling</span>
     
         <span class="sidebar-tag-name" data-tags="Linux"><span class="iconfont-archer">&#xe606;</span>Linux</span>
     
         <span class="sidebar-tag-name" data-tags="vim"><span class="iconfont-archer">&#xe606;</span>vim</span>
     
+        <span class="sidebar-tag-name" data-tags="Matchings"><span class="iconfont-archer">&#xe606;</span>Matchings</span>
+    
+        <span class="sidebar-tag-name" data-tags="Factorization"><span class="iconfont-archer">&#xe606;</span>Factorization</span>
+    
         <span class="sidebar-tag-name" data-tags="regular expressions"><span class="iconfont-archer">&#xe606;</span>regular expressions</span>
     
         <span class="sidebar-tag-name" data-tags="linux"><span class="iconfont-archer">&#xe606;</span>linux</span>
     
+        <span class="sidebar-tag-name" data-tags="tmux"><span class="iconfont-archer">&#xe606;</span>tmux</span>
+    
         <span class="sidebar-tag-name" data-tags="markdown"><span class="iconfont-archer">&#xe606;</span>markdown</span>
+    
+        <span class="sidebar-tag-name" data-tags="Traversibility"><span class="iconfont-archer">&#xe606;</span>Traversibility</span>
     
         <span class="sidebar-tag-name" data-tags="Java"><span class="iconfont-archer">&#xe606;</span>Java</span>
     
         <span class="sidebar-tag-name" data-tags="programming"><span class="iconfont-archer">&#xe606;</span>programming</span>
     
-        <span class="sidebar-tag-name" data-tags="tmux"><span class="iconfont-archer">&#xe606;</span>tmux</span>
-    
-        <span class="sidebar-tag-name" data-tags="Traversibility"><span class="iconfont-archer">&#xe606;</span>Traversibility</span>
-    
         <span class="sidebar-tag-name" data-tags="Graph"><span class="iconfont-archer">&#xe606;</span>Graph</span>
     
         <span class="sidebar-tag-name" data-tags="Tree"><span class="iconfont-archer">&#xe606;</span>Tree</span>
     
-        <span class="sidebar-tag-name" data-tags="Maximum Flow"><span class="iconfont-archer">&#xe606;</span>Maximum Flow</span>
+        <span class="sidebar-tag-name" data-tags="ICS"><span class="iconfont-archer">&#xe606;</span>ICS</span>
     
     </div>
     <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
