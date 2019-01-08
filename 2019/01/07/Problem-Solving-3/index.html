@@ -1,0 +1,1792 @@
+<!DOCTYPE html>
+<html>
+    <!-- title -->
+
+
+
+
+<head>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" >
+    <meta name="author" content="Mengzelev">
+    <meta name="renderer" content="webkit">
+    <meta name="copyright" content="Mengzelev">
+    <meta name="keywords" content="Mengzelev's blog | Mengzelev">
+    <meta name="description" content="nothing to write">
+    <meta name="Cache-Control" content="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <title>问题求解3-总复习 · Mengzelev&#39;s Blog</title>
+    <style type="text/css">
+    @font-face {
+        font-family: 'Oswald-Regular';
+        src: url("/font/Oswald-Regular.ttf");
+    }
+
+    body {
+        margin: 0;
+    }
+
+    header,
+    footer,
+    .back-top,
+    .sidebar,
+    .container,
+    .site-intro-meta,
+    .toc-wrapper {
+        display: none;
+    }
+
+    .site-intro {
+        position: relative;
+        z-index: 3;
+        width: 100%;
+        /* height: 50vh; */
+        overflow: hidden;
+    }
+
+    .site-intro-placeholder {
+        position: absolute;
+        z-index: -2;
+        top: 0;
+        left: 0;
+        width: calc(100% + 300px);
+        height: 100%;
+        background: repeating-linear-gradient(-45deg, #444 0, #444 80px, #333 80px, #333 160px);
+        background-position: center center;
+        transform: translate3d(-226px, 0, 0);
+        animation: gradient-move 2.5s ease-out 0s 1;
+    }
+
+    @keyframes gradient-move {
+        0% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        100% {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+
+</style>
+
+    <link rel="preload" href= /css/style.css?v=20180721 as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <link rel="stylesheet" href= /css/mobile.css?v=20180721 media="(max-width: 980px)">
+    
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    
+    <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+/* This file is meant as a standalone workflow for
+- testing support for link[rel=preload]
+- enabling async CSS loading in browsers that do not support rel=preload
+- applying rel preload css once loaded, whether supported or not.
+*/ -->
+<script>
+(function( w ){
+	"use strict";
+	// rel=preload support test
+	if( !w.loadCSS ){
+		w.loadCSS = function(){};
+	}
+	// define on the loadCSS obj
+	var rp = loadCSS.relpreload = {};
+	// rel=preload feature support test
+	// runs once and returns a function for compat purposes
+	rp.support = (function(){
+		var ret;
+		try {
+			ret = w.document.createElement( "link" ).relList.supports( "preload" );
+		} catch (e) {
+			ret = false;
+		}
+		return function(){
+			return ret;
+		};
+	})();
+
+	// if preload isn't supported, get an asynchronous load by using a non-matching media attribute
+	// then change that media back to its intended value on load
+	rp.bindMediaToggle = function( link ){
+		// remember existing media attr for ultimate state, or default to 'all'
+		var finalMedia = link.media || "all";
+
+		function enableStylesheet(){
+			link.media = finalMedia;
+		}
+
+		// bind load handlers to enable media
+		if( link.addEventListener ){
+			link.addEventListener( "load", enableStylesheet );
+		} else if( link.attachEvent ){
+			link.attachEvent( "onload", enableStylesheet );
+		}
+
+		// Set rel and non-applicable media type to start an async request
+		// note: timeout allows this to happen async to let rendering continue in IE
+		setTimeout(function(){
+			link.rel = "stylesheet";
+			link.media = "only x";
+		});
+		// also enable media after 3 seconds,
+		// which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
+		setTimeout( enableStylesheet, 3000 );
+	};
+
+	// loop through link elements in DOM
+	rp.poly = function(){
+		// double check this to prevent external calls from running
+		if( rp.support() ){
+			return;
+		}
+		var links = w.document.getElementsByTagName( "link" );
+		for( var i = 0; i < links.length; i++ ){
+			var link = links[ i ];
+			// qualify links to those with rel=preload and as=style attrs
+			if( link.rel === "preload" && link.getAttribute( "as" ) === "style" && !link.getAttribute( "data-loadcss" ) ){
+				// prevent rerunning on link
+				link.setAttribute( "data-loadcss", true );
+				// bind listeners to toggle media back
+				rp.bindMediaToggle( link );
+			}
+		}
+	};
+
+	// if unsupported, run the polyfill
+	if( !rp.support() ){
+		// run once at least
+		rp.poly();
+
+		// rerun poly on an interval until onload
+		var run = w.setInterval( rp.poly, 500 );
+		if( w.addEventListener ){
+			w.addEventListener( "load", function(){
+				rp.poly();
+				w.clearInterval( run );
+			} );
+		} else if( w.attachEvent ){
+			w.attachEvent( "onload", function(){
+				rp.poly();
+				w.clearInterval( run );
+			} );
+		}
+	}
+
+
+	// commonjs
+	if( typeof exports !== "undefined" ){
+		exports.loadCSS = loadCSS;
+	}
+	else {
+		w.loadCSS = loadCSS;
+	}
+}( typeof global !== "undefined" ? global : this ) );
+</script>
+
+    <link rel="icon" href= "/assets/moe.ico" />
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js" as="script" />
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js" as="script" />
+    <link rel="preload" href="/scripts/main.js" as="script" />
+    <link rel="preload" as="font" href="/font/Oswald-Regular.ttf" crossorigin>
+    <link rel="preload" as="font" href="https://at.alicdn.com/t/font_327081_1dta1rlogw17zaor.woff" crossorigin>
+    
+    <!-- fancybox -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" defer></script>
+    <!-- 百度统计  -->
+    
+    <!-- 谷歌统计  --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    
+</head>
+
+    
+        <body class="post-body">
+    
+    
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><header class="header">
+
+    <div class="read-progress"></div>
+    <div class="header-sidebar-menu">&#xe775;</div>
+    <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >Mengzelev&#39;s Blog</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">问题求解3-总复习</a>
+            </div>
+    </div>
+    
+    <a class="home-link" href=/>Mengzelev's Blog</a>
+</header>
+    <div class="wrapper">
+        <div class="site-intro" style=
+
+
+
+
+
+
+
+
+height:50vh;
+
+>
+    
+    <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
+            
+    <div class="site-intro-placeholder"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/hinata.jpg)"></div>
+    <div class="site-intro-meta">
+        <!-- 标题  -->
+        <h1 class="intro-title">
+            <!-- 主页  -->
+            
+            问题求解3-总复习
+            <!-- 404 -->
+            
+        </h1>
+        <!-- 副标题 -->
+        <p class="intro-subtitle">
+            <!-- 主页副标题  -->
+            
+            
+            <!-- 404 -->
+            
+        </p>
+        <!-- 文章页meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                    <div class= post-intro-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Problem Solving">Problem Solving</a>
+    
+</div>
+                
+                
+                    <div class="post-intro-read">
+                        <span>Word count: <span class="post-count">4,130</span> / Reading time: <span class="post-count">18 min</span></span>
+                    </div>
+                
+                <div class="post-intro-meta">
+                    <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                    <span class="post-intro-time">2019/01/07</span>
+                    
+                    <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                        <span class="iconfont-archer">&#xe602;</span>
+                        <span id="busuanzi_value_page_pv"></span>
+                    </span>
+                    
+                    <span class="shareWrapper">
+                        <span class="iconfont-archer shareIcon">&#xe71d;</span>
+                        <span class="shareText">Share</span>
+                        <ul class="shareList">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
+        
+    </div>
+</div>
+        <script>
+ 
+  // get user agent
+  var browser = {
+    versions: function () {
+      var u = window.navigator.userAgent;
+      return {
+        userAgent: u,
+        trident: u.indexOf('Trident') > -1, //IE内核
+        presto: u.indexOf('Presto') > -1, //opera内核
+        webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+        gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+        mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+        ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+        android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+        iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
+        iPad: u.indexOf('iPad') > -1, //是否为iPad
+        webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
+        weixin: u.indexOf('MicroMessenger') == -1, //是否为微信浏览器
+        uc: u.indexOf('UCBrowser') > -1 //是否为android下的UC浏览器
+      };
+    }()
+  }
+  console.log("userAgent:" + browser.versions.userAgent);
+
+  // callback
+  function fontLoaded() {
+    console.log('font loaded');
+    if (document.getElementsByClassName('site-intro-meta')) {
+      document.getElementsByClassName('intro-title')[0].classList.add('intro-fade-in');
+      document.getElementsByClassName('intro-subtitle')[0].classList.add('intro-fade-in');
+      var postIntros = document.getElementsByClassName('post-intros')[0]
+      if (postIntros) {
+        postIntros.classList.add('post-fade-in');
+      }
+    }
+  }
+
+  // UC不支持跨域，所以直接显示
+  function asyncCb(){
+    if (browser.versions.uc) {
+      console.log("UCBrowser");
+      fontLoaded();
+    } else {
+      WebFont.load({
+        custom: {
+          families: ['Oswald-Regular']
+        },
+        loading: function () {  //所有字体开始加载
+          // console.log('loading');
+        },
+        active: function () {  //所有字体已渲染
+          fontLoaded();
+        },
+        inactive: function () { //字体预加载失败，无效字体或浏览器不支持加载
+          console.log('inactive: timeout');
+          fontLoaded();
+        },
+        timeout: 5000 // Set the timeout to two seconds
+      });
+    }
+  }
+
+  function asyncErr(){
+    console.warn('script load from CDN failed, will load local script')
+  }
+
+  // load webfont-loader async, and add callback function
+  function async(u, cb, err) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (cb) { o.addEventListener('load', function (e) { cb(null, e); }, false); }
+    if (err) { o.addEventListener('error', function (e) { err(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+
+  var asyncLoadWithFallBack = function(arr, success, reject) {
+      var currReject = function(){
+        reject()
+        arr.shift()
+        if(arr.length)
+          async(arr[0], success, currReject)
+        }
+
+      async(arr[0], success, currReject)
+  }
+
+  asyncLoadWithFallBack([
+    "https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js", 
+    "https://cdn.bootcss.com/webfont/1.6.28/webfontloader.js",
+    "/lib/webfontloader.min.js"
+  ], asyncCb, asyncErr)
+</script>        
+        <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
+        <div class="container container-unloaded">
+            <main class="main post-page">
+    <article class="article-entry">
+        <h1 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h1><h2 id="最优子结构"><a href="#最优子结构" class="headerlink" title="最优子结构"></a>最优子结构</h2><ul>
+<li>问题的最优解由相关子问题的最优解组合而成，这些子问题可以独立求解</li>
+<li>使用“剪切-粘贴”技术证明：假设原问题取得最优解时，子问题没有取最优解，那么可以将子结构从整体删除替换为最优解，这与原问题取得最优解的前提矛盾</li>
+<li>子问题间互相独立</li>
+<li>运行时间：子问题总数*每个问题要考察的选择数</li>
+</ul>
+<p>求解时先找出最优子结构，列出递推式</p>
+<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><ul>
+<li>自顶向下的备忘算法（带备忘的递归）</li>
+<li>自底向上的动态规划算法（难写，但是快）</li>
+<li>并没有板子</li>
+</ul>
+<h2 id="能解决的问题"><a href="#能解决的问题" class="headerlink" title="能解决的问题"></a>能解决的问题</h2><ul>
+<li>矩阵乘法问题</li>
+<li>最长公共子序列</li>
+<li>最长上升子序列</li>
+</ul>
+<p><s>&gt;主要就是一个列递推式的问题但是就是列不出来</s></p>
+<h1 id="贪心"><a href="#贪心" class="headerlink" title="贪心"></a>贪心</h1><h2 id="贪心选择性质"><a href="#贪心选择性质" class="headerlink" title="贪心选择性质"></a>贪心选择性质</h2><ul>
+<li>进行选择时，直接做出当前问题中看来最优的选择，而不必考虑子问题的解</li>
+<li>贪心不太方便时可以进行预处理</li>
+<li>证明：替换法<ul>
+<li>贪心算法得到一个解S，假设存在一个抽象的最优解S’，证明S’可以通过若干步满足要求的替换变成S</li>
+<li>也可以证明S优于S(e.g.S的代价$\le$S’的代价)，加上S’优于S的天然条件，可知S与S’都是最优解</li>
+</ul>
+</li>
+</ul>
+<h2 id="解决问题"><a href="#解决问题" class="headerlink" title="解决问题"></a>解决问题</h2><ul>
+<li>教室安排问题</li>
+<li>Huffman编码树【可以等价为叶结点的带权路径长度之和最小问题</li>
+<li>区间选点问题<ul>
+<li>数轴上有n个闭区间$[a_i,b_i]$。取尽量少的点，使得每个区间内都至少有一个点（不同区间内含的点可以是同一个）</li>
+<li>将区间按右端点升序排序，优先处理小区间</li>
+</ul>
+</li>
+</ul>
+<h2 id="实现-1"><a href="#实现-1" class="headerlink" title="实现"></a>实现</h2><ul>
+<li>这个完全就是因题而异的了啊【哭了</li>
+</ul>
+<h1 id="并查集"><a href="#并查集" class="headerlink" title="并查集"></a>并查集</h1><h2 id="三个基本操作"><a href="#三个基本操作" class="headerlink" title="三个基本操作"></a>三个基本操作</h2><ul>
+<li>MAKE-SET($x$)</li>
+<li>UNION($x,y$)</li>
+<li>FIND-SET($x$)：返回$x$所在集合的代表元</li>
+</ul>
+<h2 id="链表"><a href="#链表" class="headerlink" title="链表"></a>链表</h2><ul>
+<li>时间复杂度make和find是$O(1)$，UNION$O(n\lg n)$</li>
+<li>简单加权合并式启发策略（小的并到大的上</li>
+</ul>
+<h2 id="不相交集合森林"><a href="#不相交集合森林" class="headerlink" title="不相交集合森林"></a>不相交集合森林</h2><ul>
+<li>按秩合并，路径压缩</li>
+<li>make和find$O(1)$，UNION$O(m_{\alpha}(n))$</li>
+</ul>
+<h2 id="板子"><a href="#板子" class="headerlink" title="板子"></a>板子</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">        f[i] = i;            </span><br><span class="line">        rank[i] = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*递归版*/</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> i)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> f[i] == i ? i : f[i] = find(f[i]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*非递归版*/</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> root = f[x];</span><br><span class="line">    <span class="keyword">while</span>(root != f[root]) root = f[root];</span><br><span class="line">    <span class="keyword">int</span> y = f[x];</span><br><span class="line">    <span class="keyword">while</span>(x != root) &#123;</span><br><span class="line">        y = f[x];</span><br><span class="line">        f[x] = root;</span><br><span class="line">        x = y;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> root;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">unite</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> fa = find(a);</span><br><span class="line">    <span class="keyword">int</span> fb = find(b);</span><br><span class="line">    <span class="keyword">if</span>(fa != fb) &#123;</span><br><span class="line">        <span class="keyword">if</span>(rank[a] &lt; rank[b]) f[a] = fb;</span><br><span class="line">        <span class="keyword">else</span> f[b] = fa;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="变种"><a href="#变种" class="headerlink" title="变种"></a>变种</h2><ul>
+<li>带权并查集</li>
+<li>分类并查集</li>
+</ul>
+<p><s>&gt;考到自求多福</s></p>
+<h2 id="解决问题-1"><a href="#解决问题-1" class="headerlink" title="解决问题"></a>解决问题</h2><ul>
+<li>无向图连通分量个数</li>
+</ul>
+<h1 id="图的基本概念"><a href="#图的基本概念" class="headerlink" title="图的基本概念"></a>图的基本概念</h1><p>参考了ytr的整理</p>
+<h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><ul>
+<li>诱导子图</li>
+<li>链walk，迹trail，路path</li>
+<li>回路circuit，圈cycle</li>
+<li>连通性，连通分支</li>
+<li>距离，测地线(长度为$u-v$距离的$u-v$路)，直径</li>
+<li>环(loop)，你 连 你 自 己</li>
+<li>平行边：重边</li>
+<li>度数deg，最小度数$\delta(G)$，最大度数$\Delta(G)$</li>
+<li>度序列，可图的</li>
+</ul>
+<h2 id="几种图"><a href="#几种图" class="headerlink" title="几种图"></a>几种图</h2><ul>
+<li>完全图$K_n$</li>
+<li>补图</li>
+<li>二部图，完全二部图($K_{s,t}$)，星图star($K_{1,s}$)</li>
+<li>多部图，完全多部图(K_{s,s,s})</li>
+<li>$G+H$：$G$和$H$放一起，顶点两两连起来</li>
+<li>$G\times H$：$G$的每个点都替换成一个$H$</li>
+<li>n方体cube($Q_n=Q_{n-1}\times K_2$)</li>
+<li>$r-$正则图：每个点度数都为$r$</li>
+</ul>
+<h2 id="定理"><a href="#定理" class="headerlink" title="定理"></a>定理</h2><ul>
+<li>设$G$是一个阶至少为3的图，则$G$是连通的当且仅当$G$包含两个不同的顶点$u$和$v$,使得$G-u$和$G-v$都是连<br>通的</li>
+<li>非平凡图$G$是二部的当且仅当$G$不含奇圈</li>
+<li><strong>图论第一定理</strong>：度数和=边数*2</li>
+<li>每一个图都有偶数个奇点</li>
+<li>设$G$为$n$阶图,若对于$G$中任意两个不邻接的顶点$u$和$v$, 都满足$$deg~u+deg~v\geq n-1$$，则$G$是连通的且$diam(G)\leq$2</li>
+<li>设$r$和$n$为满足$0\leq r\leq n-1$的整数． 则存在n阶的r正则图当且仅当$r$和$n$中至少有一个为偶数</li>
+<li>度序列可图的充要条件(删掉一个点依然可图)</li>
+</ul>
+<h1 id="树"><a href="#树" class="headerlink" title="树"></a>树</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><ul>
+<li>割边</li>
+<li>树，森林</li>
+</ul>
+<h2 id="定理-1"><a href="#定理-1" class="headerlink" title="定理"></a>定理</h2><ul>
+<li>某条边是割边当且仅当该边不在任何一个cycle上</li>
+<li>每一棵非平凡树都至少有两个端点(最长路径的两个端点)<ul>
+<li><strong>【可以成为数学归纳法的依据】</strong></li>
+<li>使用数学归纳法证明图论问题的关键在于找到一个端点</li>
+</ul>
+</li>
+<li>有$k$个连通分量的森林有$n-k$条边，树就有$n-1$条边</li>
+<li>每一个有$n$个顶点的连通图至少有$n-1$条边【证明：最小数原理】</li>
+<li>任意两条可得树：连通、无环、$m=n-1$</li>
+<li>每个连通图都包含一棵生成树</li>
+<li>Matrix Tree Theorem：连通图$G$的生成树个数可以用行列式求得</li>
+<li>$T$是唯一最小生成树当且仅当$\forall e\in G\setminus T: w(e)&gt;w(\text{every other edge on the cycle in $T+e$})$<ul>
+<li>推论：distinct weights $\Leftarrow$ unique MST</li>
+<li>推论：Maximum-weight edge in any cycle is unique $\Leftarrow$ unique MST </li>
+</ul>
+</li>
+<li>若每个点度数大于等于2，则该图有cycle</li>
+<li>$e$是割边当且仅当$e$存在于$G$的某一棵生成树上</li>
+</ul>
+<h2 id="最小生成树性质"><a href="#最小生成树性质" class="headerlink" title="最小生成树性质"></a>最小生成树性质</h2><ul>
+<li>Cut Property <ul>
+<li>VER I:$X$是某棵最小生成树的一部分，$(S,V\setminus S)$是一个$X$没有横跨的切割，$e$为横跨$(S,V\setminus)$的一条最轻的边，则$X\cup {e}$是某棵最小生成树$T_2$的一部分。</li>
+<li>VER II:$e$为横跨$(S,V\setminus)$的一条最轻的边，则$e$属于某棵最小生成树</li>
+<li>贪心选择性质，可由替换法证明</li>
+</ul>
+</li>
+<li>Cycle Property<ul>
+<li>若$e$为任意一个cycle上权重最大的一条边，则存在一棵最小生成树$T$，使$e\notin T$</li>
+</ul>
+</li>
+</ul>
+<h2 id="Kruskal"><a href="#Kruskal" class="headerlink" title="Kruskal"></a>Kruskal</h2><ul>
+<li>$O(E\lg~V)$</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">kruskal</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    sort(edge, edge + m, cmp);<span class="comment">//将边按权重从小到大排序</span></span><br><span class="line">    <span class="keyword">int</span> cnt = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i) f[i] = i;<span class="comment">//初始化并查集</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m; ++i) &#123;</span><br><span class="line">        <span class="keyword">int</span> a = edge[i].u;</span><br><span class="line">        <span class="keyword">int</span> b = edge[i].v;</span><br><span class="line">        <span class="keyword">int</span> fa = find(a), fb = find(b);</span><br><span class="line">        <span class="keyword">if</span>(fa != fb) &#123;</span><br><span class="line">            f[fa] = fb;</span><br><span class="line">            ans += edge[i].w;</span><br><span class="line">            cnt ++;</span><br><span class="line">            <span class="keyword">if</span>(cnt == n - <span class="number">1</span>) <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Prim"><a href="#Prim" class="headerlink" title="Prim"></a>Prim</h2><ul>
+<li>$O(E\lg V)$</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">my_prim</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; ++i) &#123;</span><br><span class="line">        mincost[i] = INF;</span><br><span class="line">        vis[i] = <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span>(<span class="literal">true</span>)&#123;</span><br><span class="line">        <span class="keyword">int</span> v = <span class="number">-1</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; ++i) &#123;</span><br><span class="line">            <span class="keyword">if</span>(!vis[i] &amp;&amp; (v == <span class="number">-1</span> || mincost[i] &lt; mincost[v])) v = i;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(v == <span class="number">-1</span>) <span class="keyword">break</span>;</span><br><span class="line">        vis[v] = <span class="literal">true</span>;</span><br><span class="line">        ans += mincost[v];</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; ++i) &#123;</span><br><span class="line">            mincost[i] = min(mincost[i], <span class="built_in">map</span>[v][i]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="图的计算机表示及其遍历"><a href="#图的计算机表示及其遍历" class="headerlink" title="图的计算机表示及其遍历"></a>图的计算机表示及其遍历</h1><h1 id="图的表示"><a href="#图的表示" class="headerlink" title="图的表示"></a>图的表示</h1><ul>
+<li>邻接链表</li>
+<li>邻接矩阵</li>
+</ul>
+<h2 id="BFS"><a href="#BFS" class="headerlink" title="BFS"></a>BFS</h2><ul>
+<li>维护一个队列</li>
+<li>时间复杂度$O(V+E)$</li>
+<li>搜完了会得到广度优先树</li>
+</ul>
+<h2 id="DFS"><a href="#DFS" class="headerlink" title="DFS"></a>DFS</h2><ul>
+<li>前驱子图：深度优先森林</li>
+<li>边的类型<ul>
+<li>树边</li>
+<li>前向边F：祖宗指向儿子</li>
+<li>后向边B：儿子指向祖宗</li>
+<li>横向边C：没有亲缘关系</li>
+</ul>
+</li>
+<li>复杂度$O(V+E)$</li>
+<li>每个结点有两个时间戳<ul>
+<li>$v.d$：记录该结点第一次被发现的时间</li>
+<li>$v.f$：记录搜索完成对$v$的邻接链表的扫描的时间</li>
+<li>$v.d&lt;v.f$</li>
+</ul>
+</li>
+</ul>
+<h2 id="拓扑排序"><a href="#拓扑排序" class="headerlink" title="拓扑排序"></a>拓扑排序</h2><ul>
+<li>根据DFS后的$v.f$时间戳降序排序，即拓扑序最前的最晚结束访问</li>
+<li>若$(u,v)\in G$，则$v.f&lt;u.f$</li>
+<li>只有DAG才有拓扑排序</li>
+</ul>
+<h2 id="SCC"><a href="#SCC" class="headerlink" title="SCC"></a>SCC</h2><p>算法描述</p>
+<ul>
+<li>DFS($G$)</li>
+<li>DFS($G^{T})$，在主循环根据$v.f$的大小降序访问其邻接点，得到的每棵树都是一个强连通分量</li>
+</ul>
+<h1 id="单源最短路径"><a href="#单源最短路径" class="headerlink" title="单源最短路径"></a>单源最短路径</h1><ul>
+<li><strong>松弛操作</strong>是<strong>唯一</strong>导致最短路径估计和前驱结点发生变化的操作</li>
+</ul>
+<h2 id="性质"><a href="#性质" class="headerlink" title="性质"></a>性质</h2><ul>
+<li>三角不等式性质：$s,u,v$</li>
+<li>上界性质：$v.d$撑死就是$\delta(s,v)$</li>
+<li>非路径性质：$s-v$之间没路则$\delta(s,v)=+\infty$</li>
+<li>收敛性质：松弛前是最短路径，松弛后也是最短路径</li>
+<li>路径松弛性质：一条最短路径上的点按先后顺序松弛，则终点的估计值等于最短路径长度</li>
+<li>前驱子图性质：$v.d=\delta(s,v)$，则前驱子图是一棵根结点为$s$的最短路径树</li>
+</ul>
+<h2 id="Bellman-Ford"><a href="#Bellman-Ford" class="headerlink" title="Bellman-Ford"></a>Bellman-Ford</h2><ul>
+<li>对每条边进行$|V|-1$次relax</li>
+<li>可以识别负权重环</li>
+<li>$O(VE)$</li>
+<li>本质上是DP</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">bellman_ford</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    dist[s] = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n - <span class="number">1</span>; ++i) &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= m; ++j) &#123;</span><br><span class="line">            <span class="keyword">if</span>(dist[e[j].u &lt; INF &amp;&amp; dist[e[j].v] &gt; dist[e[j].u] + e[j].w) &#123;</span><br><span class="line">                dist[e[j].v] = dist[e[j].u] + e[j].w;</span><br><span class="line">                pre[e[j].v] = e[j].u;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= m; ++j)</span><br><span class="line">        <span class="keyword">if</span>(dist[e[j].v] &gt; dist[e[j].u] + e[j].w) flag = <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="DAG"><a href="#DAG" class="headerlink" title="DAG"></a>DAG</h2><ul>
+<li>按拓扑序松弛结点（路径松弛性质保证）</li>
+<li>$\Theta(V+E)$</li>
+</ul>
+<h2 id="Dijkstra"><a href="#Dijkstra" class="headerlink" title="Dijkstra"></a>Dijkstra</h2><ul>
+<li>所有权重都非负</li>
+<li>二叉堆实现$O(E\lg V)$</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dijkstra</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    prority_queue &lt;node&gt; q;</span><br><span class="line">    ver[<span class="number">0</span>].d = <span class="number">0</span>;</span><br><span class="line">    q.push(ver[<span class="number">0</span>]);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">while</span>(!q.empty()) &#123;</span><br><span class="line">        node u = q.top();</span><br><span class="line">        q.pop();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; son[u].size(); ++i) &#123;</span><br><span class="line">            <span class="keyword">int</span> vid = son[u.id][i];</span><br><span class="line">            <span class="keyword">if</span>(ver[vid].d &lt; u.d) <span class="keyword">continue</span>;</span><br><span class="line">            <span class="keyword">if</span>(ver[vid].d &gt; u.d + <span class="built_in">map</span>[u.id][vid]) &#123;</span><br><span class="line">                ver[vid].d = u.d + <span class="built_in">map</span>[u.id][vid];</span><br><span class="line">                q.push(ver[vid]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="差分约束"><a href="#差分约束" class="headerlink" title="差分约束"></a>差分约束</h2><ul>
+<li>差分图：若$x_j-x_i\le b_k$，则$w(v_i,v_j)=b_k$</li>
+<li>Bellman-Ford可以求解</li>
+</ul>
+<h1 id="所有结点对最短路"><a href="#所有结点对最短路" class="headerlink" title="所有结点对最短路"></a>所有结点对最短路</h1><h2 id="矩阵乘法"><a href="#矩阵乘法" class="headerlink" title="矩阵乘法"></a>矩阵乘法</h2><ul>
+<li>我不想管了！！</li>
+<li>是$n$维的Bellman-Ford</li>
+</ul>
+<h2 id="Floyd-Warshall"><a href="#Floyd-Warshall" class="headerlink" title="Floyd-Warshall"></a>Floyd-Warshall</h2><ul>
+<li>本质DP，枚举最短路径上的中间结点</li>
+<li>不允许负权重环，但是能报错（看对角元是否有负数）</li>
+<li>$\Theta(n^3)$</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">floyd</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    init(); <span class="comment">//记得将所有map[i][i]置零</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> k = <span class="number">1</span>; k &lt;= n; ++k)</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i)</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= n; ++j) </span><br><span class="line">                <span class="built_in">map</span>[i][j] = min(<span class="built_in">map</span>[i][j], <span class="built_in">map</span>[i][k] + <span class="built_in">map</span>[k][j]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Johnson算法"><a href="#Johnson算法" class="headerlink" title="Johnson算法"></a>Johnson算法</h2><ul>
+<li>用于稀疏图</li>
+<li>重新赋值<ul>
+<li>新增源点$s$，该点与各点有权重为0的边</li>
+<li>先跑一次Bellman-Ford，没有负权重环就重新赋值为$\hat{w}(u,v)=w(u,v)+\delta(s,u)-\delta(s,v)$</li>
+<li>对每个点Dijkstra</li>
+<li>恢复权重并返回</li>
+</ul>
+</li>
+<li>$O(VE\lg E)$</li>
+</ul>
+<h1 id="连通度"><a href="#连通度" class="headerlink" title="连通度"></a>连通度</h1><h2 id="割点"><a href="#割点" class="headerlink" title="割点"></a>割点</h2><ul>
+<li>$v$与割边相连，则$v$是割点当且仅当$deg~v\ge 2$</li>
+<li>对于至少有3个顶点的连通图，只要有割边，就一定有割点</li>
+<li>$v$是连通图$G$的割点，当且仅当存在两个不同的顶点$u$和$w$，使得$v$位于$u-w$的任意一条路径上</li>
+<li>非平凡连通图中，距离某个点最远的点不是割点</li>
+<li>任意非平凡连通图至少包含两个非割点的顶点</li>
+<li>不可分图：没有割点的非平凡连通图</li>
+</ul>
+<h2 id="块"><a href="#块" class="headerlink" title="块"></a>块</h2><ul>
+<li>图的一个最大不可分子图【类比连通分量</li>
+<li>任意两个不同块的性质<ul>
+<li>不相交</li>
+<li>至多一个公共点</li>
+<li>如果有公共点，则该公共点为割点</li>
+</ul>
+</li>
+</ul>
+<h2 id="连通度-1"><a href="#连通度-1" class="headerlink" title="连通度"></a>连通度</h2><ul>
+<li>$\kappa(G)$点连通度=最小顶点割基数</li>
+<li>$\lambda(G)$边连通度=最小边割基数</li>
+<li>点连通度$\le$边连通度$\le$最小度数    <ul>
+<li>$\kappa(G)\le \lfloor\frac{2m}{n}\rfloor$</li>
+</ul>
+</li>
+</ul>
+<h2 id="Menger定理"><a href="#Menger定理" class="headerlink" title="Menger定理"></a>Menger定理</h2><ul>
+<li>设$u$和$v$是$G$中两个不邻接的顶点，则$u-v$的最小分离集的顶点个数等于内部不相交$u-v$路的最大个数</li>
+<li><p>类似的有边定理：分离$u-v$的边的最小个数等于边不相交$u-v$路的最大个数</p>
+</li>
+<li><p>$k$连通当且仅当任意两个顶点至少有$k$条内部不相交路</p>
+</li>
+<li>$k$连通图中任意$k$个顶点均位于某一个圈上</li>
+</ul>
+<h2 id="Tarjan算法"><a href="#Tarjan算法" class="headerlink" title="Tarjan算法"></a>Tarjan算法</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*无向图tarjan*/</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">tarjan</span><span class="params">(<span class="keyword">int</span> u, <span class="keyword">int</span> pre)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> child = <span class="number">0</span>;</span><br><span class="line">    dfs_clock ++;</span><br><span class="line">    dfn[u] = low[u] = dfs_clock;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; son[u].size(); ++i) &#123;</span><br><span class="line">        <span class="keyword">int</span> v = son[u][i];</span><br><span class="line">        <span class="keyword">if</span>(!dfn[v]) &#123;<span class="comment">//(u,v)是树边</span></span><br><span class="line">            tarjan(v,u);</span><br><span class="line">            child ++;</span><br><span class="line">            low[u] = min(low[u], low[v]);</span><br><span class="line">            <span class="keyword">if</span>((u == <span class="number">1</span> &amp;&amp; child &gt; <span class="number">1</span>) || (u != <span class="number">1</span> &amp;&amp; dfn[u] &lt;= low[v])) &#123;</span><br><span class="line">                cut_node.push_back(u);</span><br><span class="line">            &#125;<span class="comment">//割点判定：根结点有多个子树，或非根结点的访问序数小于等于能回溯的最大祖先</span></span><br><span class="line">            <span class="keyword">if</span>(low[v] &gt; dfn[u]) bridge.push_back(&#123;min(u,v), max(u,v)&#125;);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(dfn[v] &lt; dfn[u] &amp;&amp; v !=  pre) low[u] = min(low[u], dfn[v]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="旅行问题"><a href="#旅行问题" class="headerlink" title="旅行问题"></a>旅行问题</h1><h2 id="欧拉图"><a href="#欧拉图" class="headerlink" title="欧拉图"></a>欧拉图</h2><ul>
+<li>欧拉回路【闭合】/欧拉迹</li>
+<li>有欧拉回路才算欧拉图</li>
+<li>一个非平凡连通图是Euler的 当且仅当它的每个顶点的度都为偶数</li>
+<li>有欧拉迹当且仅当只有两个奇度点</li>
+</ul>
+<h2 id="哈密尔顿图"><a href="#哈密尔顿图" class="headerlink" title="哈密尔顿图"></a>哈密尔顿图</h2><ul>
+<li>哈密尔顿圈/哈密尔顿路</li>
+<li>性质<ul>
+<li>$G$的任一非空子集$S$，都有$k(G-S)\ge |S|$（$G$是哈密尔顿图，$k(G)$指图$G$的连通分支数）</li>
+</ul>
+</li>
+<li>充分条件<ul>
+<li>(Ore定理)对于不少于3个顶点的图，任意两个不邻接的顶点度数之和大于等于$n$，则$G$是哈密尔顿的。</li>
+<li>推论：每个点的度数大于等于$n/2$</li>
+<li>$u$和$v$是不邻接的两个顶点，且度数之和大于等于$n$，则$G+uv$是哈密尔顿的当且仅当$G$是哈密尔顿的</li>
+<li>一个图是哈密尔顿的当且仅当它的闭包是哈密尔顿的</li>
+<li>对于每个整数$j(1\le j\le n/2)$，$G$中度数至多为$j$的顶点数小于$j$，则$G$是哈密尔顿的</li>
+</ul>
+</li>
+</ul>
+<h1 id="匹配与覆盖"><a href="#匹配与覆盖" class="headerlink" title="匹配与覆盖"></a>匹配与覆盖</h1><h2 id="匹配"><a href="#匹配" class="headerlink" title="匹配"></a>匹配</h2><ul>
+<li>Hall条件：$\forall X\subseteq U, |N(X)\ge |X|$</li>
+<li>婚姻定理：$r$个女人，$s$个男人，可能出现$r$对婚姻当且仅当对任意$k$，任意$k$个女人共认识至少$k$个男人。</li>
+<li>最大匹配</li>
+<li>完美匹配：阶为$2k$的图存在一个基数为$k$的匹配</li>
+<li>任意$r$正则二部图均有一个完美匹配</li>
+</ul>
+<h2 id="独立性参数"><a href="#独立性参数" class="headerlink" title="独立性参数"></a>独立性参数</h2><ul>
+<li>最大边独立数$\alpha’(G)$</li>
+<li>最下边覆盖数$\beta’(G)$</li>
+<li>最大点独立数$\alpha’(G)$</li>
+<li>最小点覆盖数$\beta(G)$</li>
+<li>Gallai恒等式<ul>
+<li>点独立数+点覆盖数=$n$</li>
+<li>边独立数+边覆盖数=$n$</li>
+</ul>
+</li>
+<li>一般独立集比覆盖集好求</li>
+</ul>
+<h2 id="因子分解"><a href="#因子分解" class="headerlink" title="因子分解"></a>因子分解</h2><ul>
+<li>$r-$因子：图$G$的$r-$正则生成图</li>
+<li>完美匹配产生1-因子</li>
+<li>图$G$包含1-因子当且仅当对于$V(G)$的任意真子集$S$,$k_O(G-S)\le |S|$。($k_O(G)$表示$G$的奇连通分支个数)</li>
+<li>Petersen定理：所有无割边的3-正则图包含1-因子</li>
+<li>任一至多有两条割边的3-正则图包含1-因子</li>
+<li>可因子分解：能划分成多个因子</li>
+<li>Petersen图不可1-因子分解</li>
+</ul>
+<h2 id="匈牙利算法"><a href="#匈牙利算法" class="headerlink" title="匈牙利算法"></a>匈牙利算法</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="built_in">map</span>[x][i] &amp;&amp; !vis[i]) &#123;</span><br><span class="line">            vis[i] = <span class="literal">true</span>;</span><br><span class="line">            <span class="keyword">if</span>(match[i] == <span class="number">0</span> || find(match[i])) &#123;</span><br><span class="line">                match[i] = x;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">hungary</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">        <span class="built_in">memset</span>(vis, <span class="number">0</span> ,<span class="keyword">sizeof</span>(vis));</span><br><span class="line">        <span class="keyword">if</span>(find(i)) ans ++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="最大流"><a href="#最大流" class="headerlink" title="最大流"></a>最大流</h1><h2 id="流"><a href="#流" class="headerlink" title="流"></a>流</h2><ul>
+<li>$f:V\times V\to\mathbb{R}$</li>
+<li><strong>容量限制</strong>：$0\le f(u,v)\le c(u,v)$</li>
+<li><strong>流量守恒</strong>：$\forall u\in V-s,t, \sum\limits_{v\in V}f(u,v)=\sum_\limits_{v\in V}f(v,u)$【流入=流出】</li>
+<li>流的值$|f|=\sum\limits_{v\in V}f(s,v)-\sum\limits_{v\in V}f(v,s)$(从源结点流出的总流量-流入源结点的总流量)</li>
+</ul>
+<h2 id="几种特殊处理"><a href="#几种特殊处理" class="headerlink" title="几种特殊处理"></a>几种特殊处理</h2><ul>
+<li>反平行边：拆其中一条边为两条边</li>
+<li>多源多汇</li>
+</ul>
+<h2 id="残存网络"><a href="#残存网络" class="headerlink" title="残存网络"></a>残存网络</h2><p>残存容量<br>$$c_f=(u,v)=\begin{cases}<br>c(u,v)-f(u,v) &amp; (u,v)\in E \<br>f(v,u) &amp; (v,u)\in E\<br>0 &amp; o.w.$$</p>
+<h2 id="切割"><a href="#切割" class="headerlink" title="切割"></a>切割</h2><ul>
+<li>把$V$划分为$S$和$T$两个集合，其中$s\in S, t\in T$</li>
+<li>横跨该切割的净流量：$f(S,T)=\sum\limits_{u\in S}\sum\limits_{v\in T}f(u,v)-\sum\limits_{u\in S}\sum\limits_{v\in T}f(v,u)$【所有结点对的流量之和</li>
+<li>切割的容量：$c(S,T)=\sum\limits_{v\in S}\sum\limits_{v\in T}c(u,v)$【只考虑$S$出发进入$T$的容量</li>
+<li>最小切割：容量最小的切割</li>
+<li>最大流最小割定理</li>
+</ul>
+<h2 id="网络流解决最大匹配"><a href="#网络流解决最大匹配" class="headerlink" title="网络流解决最大匹配"></a>网络流解决最大匹配</h2><ul>
+<li>一个集合连$s$，一个集合连$t$，两个集合间两两连，每条边都是单位容量</li>
+<li>$O(VE)$</li>
+</ul>
+<h1 id="图论证明方法"><a href="#图论证明方法" class="headerlink" title="图论证明方法"></a>图论证明方法</h1><p>解题时可能会用到一个或多个</p>
+<ul>
+<li>反证法</li>
+<li>构造法</li>
+<li>临界法(最小/最大的满足条件的一个图)</li>
+<li>归纳法</li>
+<li>算两次</li>
+</ul>
+
+    </article>
+    <!-- license  -->
+    
+        <div class="license-wrapper">
+            <p>原文作者: <a href="https://mengzelev.github.io">Mengzelev</a>
+            <p>原文链接: <a href="https://mengzelev.github.io/2019/01/07/Problem-Solving-3/">https://mengzelev.github.io/2019/01/07/Problem-Solving-3/</a>
+            <p>发表日期: <a href="https://mengzelev.github.io/2019/01/07/Problem-Solving-3/">January 7th 2019, 7:21:20 pm</a>
+            <p>版权声明: 本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
+        </div>
+    
+    <!-- paginator  -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+        </li>
+        <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href= "/2018/12/29/lab4-report/" title= Lab4 实验报告 >
+                    <div class="prevTitle">Lab4 实验报告</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+<!-- City版安装代码已完成 -->
+    
+    
+    <!--PC和WAP自适应版-->
+
+    <!--PC版-->
+
+
+    
+    
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+    <div id="comment"></div>
+    <script>
+    new Valine({
+        el: '#comment' ,
+        notify:false, 
+        verify:false, 
+        appId: "yj3PGIKmV8xpEnFYOgSseo5x-gzGzoHsz",
+        appKey: "vGSIx5E7w6LLK0M0jUlIUG05",
+        placeholder: "看完了都不说一句再走么(。•ω•)σ)´Д`)",
+        path:window.location.pathname, 
+        avatar:'mm' 
+    });
+    </script>
+
+
+    <!-- 评论 -->
+</main>
+            <!-- profile -->
+            
+        </div>
+        <footer class="footer footer-unloaded">
+    <!-- social  -->
+    
+    <div class="social">
+        
+    
+        
+            
+                <a href="mailto:913426715@qq.com" class="iconfont-archer email" title=email ></a>
+            
+        
+    
+        
+            
+                <a href="//github.com/mengzelev" class="iconfont-archer github" target="_blank" title=github></a>
+            
+        
+    
+        
+            
+                <span class="iconfont-archer wechat" title=wechat>
+                  
+                  <img class="profile-qr" src="/assets/wx.png" />
+                </span>
+            
+        
+    
+        
+            
+                <span class="iconfont-archer qq" title=qq>
+                  
+                  <img class="profile-qr" src="/assets/qq.jpg" />
+                </span>
+            
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+            
+                <a href="/atom.xml" class="iconfont-archer rss" target="_blank" title=rss></a>
+            
+        
+    
+
+    </div>
+    
+    <!-- powered by Hexo  -->
+    <div class="copyright">
+        <span id="hexo-power">Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></span><span class="iconfont-archer power">&#xe635;</span><span id="theme-info">theme <a href="https://github.com/fi3ework/hexo-theme-archer" target="_blank">Archer</a></span>
+    </div>
+    <!-- 不蒜子  -->
+    
+    <div class="busuanzi-container">
+    
+     
+    <span id="busuanzi_container_site_pv">PV: <span id="busuanzi_value_site_pv"></span> :)</span>
+    
+    </div>
+    
+</footer>
+    </div>
+    <!-- toc -->
+    
+    <div class="toc-wrapper" style=
+    
+
+
+
+
+
+
+
+top:50vh;
+
+    >
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#动态规划"><span class="toc-number">1.</span> <span class="toc-text">动态规划</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#最优子结构"><span class="toc-number">1.1.</span> <span class="toc-text">最优子结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实现"><span class="toc-number">1.2.</span> <span class="toc-text">实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#能解决的问题"><span class="toc-number">1.3.</span> <span class="toc-text">能解决的问题</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#贪心"><span class="toc-number">2.</span> <span class="toc-text">贪心</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#贪心选择性质"><span class="toc-number">2.1.</span> <span class="toc-text">贪心选择性质</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#解决问题"><span class="toc-number">2.2.</span> <span class="toc-text">解决问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实现-1"><span class="toc-number">2.3.</span> <span class="toc-text">实现</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#并查集"><span class="toc-number">3.</span> <span class="toc-text">并查集</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#三个基本操作"><span class="toc-number">3.1.</span> <span class="toc-text">三个基本操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#链表"><span class="toc-number">3.2.</span> <span class="toc-text">链表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#不相交集合森林"><span class="toc-number">3.3.</span> <span class="toc-text">不相交集合森林</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#板子"><span class="toc-number">3.4.</span> <span class="toc-text">板子</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#变种"><span class="toc-number">3.5.</span> <span class="toc-text">变种</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#解决问题-1"><span class="toc-number">3.6.</span> <span class="toc-text">解决问题</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#图的基本概念"><span class="toc-number">4.</span> <span class="toc-text">图的基本概念</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#概念"><span class="toc-number">4.1.</span> <span class="toc-text">概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#几种图"><span class="toc-number">4.2.</span> <span class="toc-text">几种图</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#定理"><span class="toc-number">4.3.</span> <span class="toc-text">定理</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#树"><span class="toc-number">5.</span> <span class="toc-text">树</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#定义"><span class="toc-number">5.1.</span> <span class="toc-text">定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#定理-1"><span class="toc-number">5.2.</span> <span class="toc-text">定理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#最小生成树性质"><span class="toc-number">5.3.</span> <span class="toc-text">最小生成树性质</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Kruskal"><span class="toc-number">5.4.</span> <span class="toc-text">Kruskal</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Prim"><span class="toc-number">5.5.</span> <span class="toc-text">Prim</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#图的计算机表示及其遍历"><span class="toc-number">6.</span> <span class="toc-text">图的计算机表示及其遍历</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#图的表示"><span class="toc-number">7.</span> <span class="toc-text">图的表示</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#BFS"><span class="toc-number">7.1.</span> <span class="toc-text">BFS</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DFS"><span class="toc-number">7.2.</span> <span class="toc-text">DFS</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#拓扑排序"><span class="toc-number">7.3.</span> <span class="toc-text">拓扑排序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SCC"><span class="toc-number">7.4.</span> <span class="toc-text">SCC</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#单源最短路径"><span class="toc-number">8.</span> <span class="toc-text">单源最短路径</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#性质"><span class="toc-number">8.1.</span> <span class="toc-text">性质</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Bellman-Ford"><span class="toc-number">8.2.</span> <span class="toc-text">Bellman-Ford</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DAG"><span class="toc-number">8.3.</span> <span class="toc-text">DAG</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Dijkstra"><span class="toc-number">8.4.</span> <span class="toc-text">Dijkstra</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#差分约束"><span class="toc-number">8.5.</span> <span class="toc-text">差分约束</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#所有结点对最短路"><span class="toc-number">9.</span> <span class="toc-text">所有结点对最短路</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#矩阵乘法"><span class="toc-number">9.1.</span> <span class="toc-text">矩阵乘法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Floyd-Warshall"><span class="toc-number">9.2.</span> <span class="toc-text">Floyd-Warshall</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Johnson算法"><span class="toc-number">9.3.</span> <span class="toc-text">Johnson算法</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#连通度"><span class="toc-number">10.</span> <span class="toc-text">连通度</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#割点"><span class="toc-number">10.1.</span> <span class="toc-text">割点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#块"><span class="toc-number">10.2.</span> <span class="toc-text">块</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#连通度-1"><span class="toc-number">10.3.</span> <span class="toc-text">连通度</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Menger定理"><span class="toc-number">10.4.</span> <span class="toc-text">Menger定理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Tarjan算法"><span class="toc-number">10.5.</span> <span class="toc-text">Tarjan算法</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#旅行问题"><span class="toc-number">11.</span> <span class="toc-text">旅行问题</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#欧拉图"><span class="toc-number">11.1.</span> <span class="toc-text">欧拉图</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#哈密尔顿图"><span class="toc-number">11.2.</span> <span class="toc-text">哈密尔顿图</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#匹配与覆盖"><span class="toc-number">12.</span> <span class="toc-text">匹配与覆盖</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#匹配"><span class="toc-number">12.1.</span> <span class="toc-text">匹配</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#独立性参数"><span class="toc-number">12.2.</span> <span class="toc-text">独立性参数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#因子分解"><span class="toc-number">12.3.</span> <span class="toc-text">因子分解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#匈牙利算法"><span class="toc-number">12.4.</span> <span class="toc-text">匈牙利算法</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#最大流"><span class="toc-number">13.</span> <span class="toc-text">最大流</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#流"><span class="toc-number">13.1.</span> <span class="toc-text">流</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#几种特殊处理"><span class="toc-number">13.2.</span> <span class="toc-text">几种特殊处理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#残存网络"><span class="toc-number">13.3.</span> <span class="toc-text">残存网络</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#切割"><span class="toc-number">13.4.</span> <span class="toc-text">切割</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#网络流解决最大匹配"><span class="toc-number">13.5.</span> <span class="toc-text">网络流解决最大匹配</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#图论证明方法"><span class="toc-number">14.</span> <span class="toc-text">图论证明方法</span></a></li></ol>
+    </div>
+    
+    <div class="back-top iconfont-archer">&#xe639;</div>
+    <div class="sidebar sidebar-hide">
+    <ul class="sidebar-tabs sidebar-tabs-active-0">
+        <li class="sidebar-tab-archives"><span class="iconfont-archer">&#xe67d;</span><span class="tab-name">Archive</span></li>
+        <li class="sidebar-tab-tags"><span class="iconfont-archer">&#xe61b;</span><span class="tab-name">Tag</span></li>
+        <li class="sidebar-tab-categories"><span class="iconfont-archer">&#xe666;</span><span class="tab-name">Cate</span></li>
+    </ul>
+    <div class="sidebar-content sidebar-content-show-archive">
+          <div class="sidebar-panel-archives">
+    <!-- 在ejs中将archive按照时间排序 -->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-and-search">
+        <div class="total-archive">
+        Total : 35
+        </div>
+        <!-- search  -->
+        
+    </div>
+    
+    <div class="post-archive">
+    
+    
+    
+    
+    <div class="archive-year"> 2019 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/07</span><a class="archive-post-title" href= "/2019/01/07/Problem-Solving-3/" >问题求解3-总复习</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2018 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/29</span><a class="archive-post-title" href= "/2018/12/29/lab4-report/" >Lab4 实验报告</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/28</span><a class="archive-post-title" href= "/2018/12/28/PA4-report/" >PA4实验报告</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/18</span><a class="archive-post-title" href= "/2018/12/18/clrs28Matrix-Operation/" >算法导论学习笔记-矩阵运算</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/13</span><a class="archive-post-title" href= "/2018/12/13/planar-graph-and-coloring/" >图论学习笔记-平面图与着色</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/10</span><a class="archive-post-title" href= "/2018/12/10/Dinner/" >卫宫家今天的饭</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/08</span><a class="archive-post-title" href= "/2018/12/08/PA3-report/" >PA3实验报告</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/05</span><a class="archive-post-title" href= "/2018/12/05/clrs-26Maximum-Flow/" >算法导论学习笔记-最大流</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/28</span><a class="archive-post-title" href= "/2018/11/28/matchings/" >图论学习笔记-图中的匹配与覆盖</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/24</span><a class="archive-post-title" href= "/2018/11/24/lab3-report/" >Lab3：链接与加载（2）实验报告</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/21</span><a class="archive-post-title" href= "/2018/11/21/traversability/" >图论学习笔记-旅行问题</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/14</span><a class="archive-post-title" href= "/2018/11/14/connectivity/" >图论学习笔记-图中的连通性与距离</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/07</span><a class="archive-post-title" href= "/2018/11/07/clrs-25All-Pairs-Shortest-Paths/" >算法导论学习笔记-所有结点对的最短路径问题</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/06</span><a class="archive-post-title" href= "/2018/11/06/lab2-report/" >Lab2:链接与加载 实验报告</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/06</span><a class="archive-post-title" href= "/2018/11/06/PA2-report/" >PA2实验报告</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/30</span><a class="archive-post-title" href= "/2018/10/30/clrs-24Single-Source-Shortest-Path/" >算法导论学习笔记-单源最短路径</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/24</span><a class="archive-post-title" href= "/2018/10/24/clrs-22graphic-algs/" >算法导论学习笔记-基本图论算法</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/14</span><a class="archive-post-title" href= "/2018/10/14/tree/" >图论学习笔记-树</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/12</span><a class="archive-post-title" href= "/2018/10/12/lab1-report/" >Lab1-乘法 实验报告</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/06</span><a class="archive-post-title" href= "/2018/10/06/clrs-21DisjointSets/" >算法导论学习笔记-用于不相交集合的数据结构</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/04</span><a class="archive-post-title" href= "/2018/10/04/PA1-report/" >PA1实验报告</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/04</span><a class="archive-post-title" href= "/2018/10/04/pa-inspirations/" >做pa的时候可能会用到的操作</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/27</span><a class="archive-post-title" href= "/2018/09/27/ics-process-calling/" >关于“过程调用”的讨论</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/21</span><a class="archive-post-title" href= "/2018/09/21/regex/" >正则表达式学习笔记</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/17</span><a class="archive-post-title" href= "/2018/09/17/clrs-17amortized/" >算法导论学习笔记-摊还分析</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/17</span><a class="archive-post-title" href= "/2018/09/17/clrs-16greedy/" >算法导论学习笔记-贪心算法</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/16</span><a class="archive-post-title" href= "/2018/09/16/startjava/" >面向OJ的Java学习</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/12</span><a class="archive-post-title" href= "/2018/09/12/tmux/" >使用tmux变身炫酷程序猿(x</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/06</span><a class="archive-post-title" href= "/2018/09/06/vim/" >vim初探</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/31</span><a class="archive-post-title" href= "/2018/08/31/clrs-15dp/" >算法导论学习笔记-动态规划</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/30</span><a class="archive-post-title" href= "/2018/08/30/asm2/" >汇编语言复习笔记（二）</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/29</span><a class="archive-post-title" href= "/2018/08/29/asm-notes/" >汇编语言复习笔记（一）</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/18</span><a class="archive-post-title" href= "/2018/08/18/freshman/" >胡言乱语的大一总结</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/12</span><a class="archive-post-title" href= "/2018/08/12/test-md/" >Markdown test</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/28</span><a class="archive-post-title" href= "/2018/07/28/hello-world/" >Hello World</a>
+        </li>
+    
+    </div>
+  </div>
+        <div class="sidebar-panel-tags">
+    <div class="sidebar-tags-name">
+    
+        <span class="sidebar-tag-name" data-tags="Notes"><span class="iconfont-archer">&#xe606;</span>Notes</span>
+    
+        <span class="sidebar-tag-name" data-tags="pa"><span class="iconfont-archer">&#xe606;</span>pa</span>
+    
+        <span class="sidebar-tag-name" data-tags="Problem Solving"><span class="iconfont-archer">&#xe606;</span>Problem Solving</span>
+    
+        <span class="sidebar-tag-name" data-tags="ICS"><span class="iconfont-archer">&#xe606;</span>ICS</span>
+    
+        <span class="sidebar-tag-name" data-tags="Assembly Language"><span class="iconfont-archer">&#xe606;</span>Assembly Language</span>
+    
+        <span class="sidebar-tag-name" data-tags="CLRS"><span class="iconfont-archer">&#xe606;</span>CLRS</span>
+    
+        <span class="sidebar-tag-name" data-tags="dynamic programming"><span class="iconfont-archer">&#xe606;</span>dynamic programming</span>
+    
+        <span class="sidebar-tag-name" data-tags="amortized analysis"><span class="iconfont-archer">&#xe606;</span>amortized analysis</span>
+    
+        <span class="sidebar-tag-name" data-tags="greedy algorithm"><span class="iconfont-archer">&#xe606;</span>greedy algorithm</span>
+    
+        <span class="sidebar-tag-name" data-tags="Disjoint Sets"><span class="iconfont-archer">&#xe606;</span>Disjoint Sets</span>
+    
+        <span class="sidebar-tag-name" data-tags="Data Structure"><span class="iconfont-archer">&#xe606;</span>Data Structure</span>
+    
+        <span class="sidebar-tag-name" data-tags="Single Source Shortest Path"><span class="iconfont-archer">&#xe606;</span>Single Source Shortest Path</span>
+    
+        <span class="sidebar-tag-name" data-tags="Bellman-Ford"><span class="iconfont-archer">&#xe606;</span>Bellman-Ford</span>
+    
+        <span class="sidebar-tag-name" data-tags="Dijkstra"><span class="iconfont-archer">&#xe606;</span>Dijkstra</span>
+    
+        <span class="sidebar-tag-name" data-tags="Graph Algorithms"><span class="iconfont-archer">&#xe606;</span>Graph Algorithms</span>
+    
+        <span class="sidebar-tag-name" data-tags="Maximum Flow"><span class="iconfont-archer">&#xe606;</span>Maximum Flow</span>
+    
+        <span class="sidebar-tag-name" data-tags="Graph Theory"><span class="iconfont-archer">&#xe606;</span>Graph Theory</span>
+    
+        <span class="sidebar-tag-name" data-tags="Connectivity"><span class="iconfont-archer">&#xe606;</span>Connectivity</span>
+    
+        <span class="sidebar-tag-name" data-tags="freshman"><span class="iconfont-archer">&#xe606;</span>freshman</span>
+    
+        <span class="sidebar-tag-name" data-tags="college life"><span class="iconfont-archer">&#xe606;</span>college life</span>
+    
+        <span class="sidebar-tag-name" data-tags="ics"><span class="iconfont-archer">&#xe606;</span>ics</span>
+    
+        <span class="sidebar-tag-name" data-tags="process calling"><span class="iconfont-archer">&#xe606;</span>process calling</span>
+    
+        <span class="sidebar-tag-name" data-tags="Lab"><span class="iconfont-archer">&#xe606;</span>Lab</span>
+    
+        <span class="sidebar-tag-name" data-tags="Ics"><span class="iconfont-archer">&#xe606;</span>Ics</span>
+    
+        <span class="sidebar-tag-name" data-tags="Matchings"><span class="iconfont-archer">&#xe606;</span>Matchings</span>
+    
+        <span class="sidebar-tag-name" data-tags="Factorization"><span class="iconfont-archer">&#xe606;</span>Factorization</span>
+    
+        <span class="sidebar-tag-name" data-tags="Linux"><span class="iconfont-archer">&#xe606;</span>Linux</span>
+    
+        <span class="sidebar-tag-name" data-tags="vim"><span class="iconfont-archer">&#xe606;</span>vim</span>
+    
+        <span class="sidebar-tag-name" data-tags="Java"><span class="iconfont-archer">&#xe606;</span>Java</span>
+    
+        <span class="sidebar-tag-name" data-tags="programming"><span class="iconfont-archer">&#xe606;</span>programming</span>
+    
+        <span class="sidebar-tag-name" data-tags="regular expressions"><span class="iconfont-archer">&#xe606;</span>regular expressions</span>
+    
+        <span class="sidebar-tag-name" data-tags="linux"><span class="iconfont-archer">&#xe606;</span>linux</span>
+    
+        <span class="sidebar-tag-name" data-tags="tmux"><span class="iconfont-archer">&#xe606;</span>tmux</span>
+    
+        <span class="sidebar-tag-name" data-tags="markdown"><span class="iconfont-archer">&#xe606;</span>markdown</span>
+    
+        <span class="sidebar-tag-name" data-tags="Traversibility"><span class="iconfont-archer">&#xe606;</span>Traversibility</span>
+    
+        <span class="sidebar-tag-name" data-tags="Graph"><span class="iconfont-archer">&#xe606;</span>Graph</span>
+    
+        <span class="sidebar-tag-name" data-tags="Tree"><span class="iconfont-archer">&#xe606;</span>Tree</span>
+    
+    </div>
+    <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
+    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
+    缺失模块。<br/>
+    1、请确保node版本大于6.2<br/>
+    2、在博客根目录（注意不是archer根目录）执行以下命令：<br/>
+    <span style="color: #f75357; font-size: 1rem; line-height: 2rem;">npm i hexo-generator-json-content --save</span><br/>
+    3、在根目录_config.yml里添加配置：
+    <pre style="color: #787878; font-size: 0.6rem;">
+jsonContent:
+  meta: false
+  pages: false
+  posts:
+    title: true
+    date: true
+    path: true
+    text: false
+    raw: false
+    content: false
+    slug: false
+    updated: false
+    comments: false
+    link: false
+    permalink: false
+    excerpt: false
+    categories: true
+    tags: true</pre>
+    </div> 
+    <div class="sidebar-tags-list"></div>
+</div>
+        <div class="sidebar-panel-categories">
+    <div class="sidebar-categories-name">
+    
+        <span class="sidebar-category-name" data-categories="Notes"><span class="iconfont-archer">&#xe60a;</span>Notes</span>
+    
+        <span class="sidebar-category-name" data-categories="Diary"><span class="iconfont-archer">&#xe60a;</span>Diary</span>
+    
+    </div>
+    <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
+    <div class="sidebar-categories-list"></div>
+</div>
+    </div>
+</div> 
+    <script>
+    var siteMeta = {
+        root: "/",
+        author: "Mengzelev"
+    }
+</script>
+    <!-- CDN failover -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+    <script type="text/javascript">
+        if (typeof window.$ === 'undefined')
+        {
+            console.warn('jquery load from jsdelivr failed, will load local script')
+            document.write('<script src="/lib/jquery.min.js">\x3C/script>')
+        }
+    </script>
+    <script src="/scripts/main.js"></script>
+    <!-- algolia -->
+    
+    <!-- busuanzi  -->
+    
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+    <!-- CNZZ  -->
+    
+    </div>
+    <!-- async load share.js -->
+    
+        <script src="/scripts/share.js" async></script>    
+     
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="custom_mathjax_source">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+</body>
+</html>
+
+
