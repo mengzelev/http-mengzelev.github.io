@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://mengzelev.github.io/"/>
-  <updated>2019-01-08T15:40:21.122Z</updated>
+  <updated>2019-01-17T12:18:24.317Z</updated>
   <id>https://mengzelev.github.io/</id>
   
   <author>
@@ -15,6 +15,58 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>2019年寒假计划(flags)</title>
+    <link href="https://mengzelev.github.io/2019/01/17/2019-winter-flags/"/>
+    <id>https://mengzelev.github.io/2019/01/17/2019-winter-flags/</id>
+    <published>2019-01-17T06:02:11.000Z</published>
+    <updated>2019-01-17T12:18:24.317Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="美赛准备"><a href="#美赛准备" class="headerlink" title="美赛准备"></a>美赛准备</h1><ul><li>MATLAB入门《MATLAB数学工具软件实例简明教程》</li><li>《MATLAB在数学建模中的应用》</li><li>研读优秀论文，总结模板</li></ul><h1 id="项目"><a href="#项目" class="headerlink" title="项目"></a>项目</h1><ul><li>学习Python</li><li>分析minilab的git log中的CE数据</li></ul><h1 id="HK学术竞赛"><a href="#HK学术竞赛" class="headerlink" title="HK学术竞赛"></a>HK学术竞赛</h1><ul><li>等打完美赛再来研究</li></ul><h1 id="番剧"><a href="#番剧" class="headerlink" title="番剧"></a>番剧</h1><h2 id="追番"><a href="#追番" class="headerlink" title="追番"></a>追番</h2><ul><li>多罗罗</li><li>灵能百分百第二季</li><li>关于我转生成为史莱姆的这档事</li><li>强风吹拂</li><li>不吉波普不笑</li><li>约定的梦幻岛 </li></ul><h2 id="补番"><a href="#补番" class="headerlink" title="补番"></a>补番</h2><ul><li>战栗杀机</li><li>小林家的龙女仆</li></ul><h1 id="吉他"><a href="#吉他" class="headerlink" title="吉他"></a>吉他</h1><ul><li>看B站教学视频</li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;美赛准备&quot;&gt;&lt;a href=&quot;#美赛准备&quot; class=&quot;headerlink&quot; title=&quot;美赛准备&quot;&gt;&lt;/a&gt;美赛准备&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;MATLAB入门《MATLAB数学工具软件实例简明教程》&lt;/li&gt;
+&lt;li&gt;《MATLAB在数学建模中的应用》&lt;
+      
+    
+    </summary>
+    
+      <category term="Flags" scheme="https://mengzelev.github.io/categories/Flags/"/>
+    
+    
+      <category term="Flags" scheme="https://mengzelev.github.io/tags/Flags/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>MATLAB临时抱佛脚</title>
+    <link href="https://mengzelev.github.io/2019/01/16/matlab-getstart/"/>
+    <id>https://mengzelev.github.io/2019/01/16/matlab-getstart/</id>
+    <published>2019-01-16T09:04:59.000Z</published>
+    <updated>2019-01-17T12:32:03.074Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="入门技能"><a href="#入门技能" class="headerlink" title="入门技能"></a>入门技能</h1><h2 id="命令行命令"><a href="#命令行命令" class="headerlink" title="命令行命令"></a>命令行命令</h2><p>matlab基本可以看成一个有自己语法的命令行终端使用<br>下面列举一些我觉得自己将来可能会用到的</p><ul><li><code>clc</code>:擦除当前工作窗中所有显示内容</li><li><code>dir</code>:相当于<code>ls</code></li><li><code>cd</code>:你懂的</li><li><code>who</code>:检查内存变量</li><li><code>whos</code>:检查驻留变量的详细情况</li><li><code>help</code>:召唤FM</li><li><code>lookfor</code>:对<code>man</code>进行<code>grep</code></li></ul><p>MATLAB也是有当前工作路径的，同Linux的bash</p><h2 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h2><p>变量基本以矩阵形式存在<br>还有一些预定义的变量</p><ul><li><code>eps</code>:计算机表示的最小正数</li><li><code>pi</code>:圆周率</li><li><code>inf</code>或<code>Inf</code></li><li><code>NaN</code></li><li><code>i,j</code></li><li><code>flops</code>:浮点运算次数，用于统计计算量</li></ul><h2 id="显示格式"><a href="#显示格式" class="headerlink" title="显示格式"></a>显示格式</h2><ul><li><code>short</code></li><li><code>long</code></li><li><code>short/long e</code> 科学计数法显示</li><li><code>bank</code> 银行格式</li><li><code>hex</code> 十六进制格式</li><li><code>+</code>用于大矩阵的紧凑格式 </li></ul><h1 id="数值计算"><a href="#数值计算" class="headerlink" title="数值计算"></a>数值计算</h1><h2 id="矩阵创建"><a href="#矩阵创建" class="headerlink" title="矩阵创建"></a>矩阵创建</h2><ul><li>直接输入法</li><li><code>reshape</code>把长行向量拆成$n\times m$的矩阵</li><li><code>diag</code>可以实现向量和对角阵之间的互相转化</li><li><code>.m</code>和<code>.mat</code>文件</li></ul><h2 id="矩阵运算与数组运算"><a href="#矩阵运算与数组运算" class="headerlink" title="矩阵运算与数组运算"></a>矩阵运算与数组运算</h2><ul><li>矩阵运算：按矩阵法则进行的运算</li><li>数组运算：对元素逐个进行</li><li>可以将数组直接作为参数传入函数中，而不用写循环，不同于C<br><img src="/2019/01/16/matlab-getstart/sign.png"></li><li>MATLAB推荐：尽量使用除运算，少用逆运算</li></ul><h2 id="多项式"><a href="#多项式" class="headerlink" title="多项式"></a>多项式</h2><h3 id="表示"><a href="#表示" class="headerlink" title="表示"></a>表示</h3><ul><li>系数行向量表示：$p=[a_0,a_1,…a_n]$</li><li>指令<code>p=poly(AR)</code>产生多项式<ul><li>若<code>AR</code>是方阵，则产生特征多项式</li><li>若<code>AR</code>是向量，则<code>AR</code>中每个数是该多项式=0的解</li></ul></li></ul><h3 id="多项式运算"><a href="#多项式运算" class="headerlink" title="多项式运算"></a>多项式运算</h3><ul><li><code>R = roots(p)</code>：求根</li><li><code>PA = polyval(p,S)</code>:按数组运算规则计算多项式的值</li><li><code>PA = polyvalm(p,S)</code>:按矩阵运算规则计算多项式的值</li><li><code>P = polyfit(x,y,n)</code>:用$n$阶多项式拟合$x,y$给定的数据</li></ul><h2 id="数值积分"><a href="#数值积分" class="headerlink" title="数值积分"></a>数值积分</h2><ul><li><code>S = quad(&#39;fname&#39;, a, b, tol, trace)</code> 自适用Simpson数值积分法</li><li><code>S = quad8(&#39;fname&#39;, a, b, tol, trace)</code>自适用Newton-Cotes数值积分法</li><li><code>quad8</code>比<code>quad</code>性能和精度更好</li></ul><h2 id="非线性方程"><a href="#非线性方程" class="headerlink" title="非线性方程"></a>非线性方程</h2><ul><li><code>r = roots(p)</code> 多项式非线性函数求根</li><li><code>z = fzero(&#39;fname&#39;, x0, tol, trace)</code> 单变量函数求零点，只给出离<code>x0</code>最近的根</li></ul><h2 id="微分方程的数值解"><a href="#微分方程的数值解" class="headerlink" title="微分方程的数值解"></a>微分方程的数值解</h2><ul><li><code>[t,x] = ode23/45(&#39;xprime&#39;, [t0,tf], x0, tol, trace)</code></li></ul><h2 id="文件管理"><a href="#文件管理" class="headerlink" title="文件管理"></a>文件管理</h2><ul><li><code>cd, type, delete, dir</code>，和bash用起来差不多</li><li><code>!</code>可用于执行外部程序</li></ul><h2 id="文件输入输出"><a href="#文件输入输出" class="headerlink" title="文件输入输出"></a>文件输入输出</h2><ul><li><p><code>fopen</code>打开二进制文件</p>  <figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fid = fopen(<span class="string">'a.dat'</span>, <span class="string">'r'</span>)</span><br></pre></td></tr></table></figure></li><li><p><code>fread</code>将数据装入变量</p>  <figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a = fread(fid);</span><br><span class="line">a = fread(fid, <span class="number">100</span>);</span><br><span class="line">a = fread(fid, [<span class="number">10</span>,<span class="number">10</span>]);</span><br></pre></td></tr></table></figure></li><li><p><code>fwrite</code>按照指定的书精度将矩阵中的元素写入文件</p>  <figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cnt = fwrite(fid, <span class="built_in">magic</span>(<span class="number">5</span>), <span class="string">'integer * 4'</span>);</span><br><span class="line"><span class="comment">%返回写入数据的个数</span></span><br><span class="line">status = fclose(fid);</span><br></pre></td></tr></table></figure></li><li><p><code>save</code>命令及<code>-ascii</code>选项</p>  <figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">a = <span class="built_in">rand</span>(<span class="number">4</span>,<span class="number">3</span>)</span><br><span class="line">save a.dat a -ascii</span><br></pre></td></tr></table></figure></li></ul><h1 id="符号计算"><a href="#符号计算" class="headerlink" title="符号计算"></a>符号计算</h1><h2 id="符号定义"><a href="#符号定义" class="headerlink" title="符号定义"></a>符号定义</h2><ul><li><p><code>sym</code>定义符号或表达式</p>  <figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sym(<span class="string">'x'</span>)</span><br><span class="line">sym(`<span class="number">1</span> + x / <span class="number">2</span>`)</span><br><span class="line">syms a b c d </span><br><span class="line"><span class="comment">%syms可以定义多个符号</span></span><br></pre></td></tr></table></figure></li><li><p><code>findsym</code>确认符号表达式中的符号</p></li></ul><h2 id="微积分运算"><a href="#微积分运算" class="headerlink" title="微积分运算"></a>微积分运算</h2><h3 id="求导"><a href="#求导" class="headerlink" title="求导"></a>求导</h3><ul><li><code>diff(f,t,n)</code>函数<code>f</code>对变量<code>t</code>求<code>n</code>阶导，<code>t</code>缺省时对<code>x</code>求导，<code>n</code>缺省为1</li><li>参数为矩阵时，作用于每个元素</li></ul><h3 id="积分"><a href="#积分" class="headerlink" title="积分"></a>积分</h3><ul><li><code>int(f,t)</code> 函数<code>f</code>对变量<code>t</code>求不定积分</li><li><code>int(f,t,a,b)</code> 函数<code>f</code>对符号变量求从<code>a</code>到<code>b</code>的定积分</li></ul><h3 id="极限"><a href="#极限" class="headerlink" title="极限"></a>极限</h3><ul><li><code>limita(f,t,a)</code>当符号变量<code>t-&gt;a</code>时，函数<code>f</code>的极限，<code>t</code>缺省<code>x</code>，<code>a</code>缺省为0</li></ul><h3 id="级数和"><a href="#级数和" class="headerlink" title="级数和"></a>级数和</h3><ul><li><code>symsum(s,t,a,b)`</code>s<code>中的符号变量</code>t<code>从</code>a<code>到</code>b`的级数和</li></ul><h3 id="Taylor展开"><a href="#Taylor展开" class="headerlink" title="Taylor展开"></a>Taylor展开</h3><ul><li><code>taylor(f,n,a)</code>函数<code>f</code>对符号变量<code>x</code>或最接近字母<code>x</code>的符号变量在<code>a</code>点的<code>n-1</code>阶泰勒多项式,<code>n</code>缺省时值为6,<code>a</code>缺省值为0</li></ul><h2 id="解方程"><a href="#解方程" class="headerlink" title="解方程"></a>解方程</h2><ul><li><code>solve(f,t)</code>对<code>f</code>中的符号标量<code>t</code>解方程<code>f=0</code></li><li><code>solve(&#39;fname&#39;,t)</code> 求解形如<code>f(x)=g(x)</code>的方程</li><li><code>dsolve(&#39;S&#39;,&#39;s1&#39;,...&#39;x&#39;)</code> </li></ul><h2 id="线性代数"><a href="#线性代数" class="headerlink" title="线性代数"></a>线性代数</h2><ul><li>用，都可以用</li></ul><h2 id="化简和代换"><a href="#化简和代换" class="headerlink" title="化简和代换"></a>化简和代换</h2><ul><li><code>collect</code>合并同类项</li><li><code>expand</code>将乘积展开为和式</li><li><code>factor</code>将和式展开为乘积</li><li><code>horner</code>嵌套多项式</li><li><code>simplify</code>利用各种</li></ul><h1 id="画图"><a href="#画图" class="headerlink" title="画图"></a>画图</h1><h2 id="二维"><a href="#二维" class="headerlink" title="二维"></a>二维</h2><ul><li><code>plot(x,y)</code>其中<code>x</code>和<code>y</code>为坐标向量</li><li><p>在<code>plot</code>指令中增加一些参数，可以绘制出不同颜色与不同线性的图形，e.g.</p>  <figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plot(x, y1, <span class="string">'k:'</span>, x, y2, <span class="string">'b-'</span>)</span><br></pre></td></tr></table></figure></li><li><p>每条曲线的线型和颜色由字符串<code>&#39;cs&#39;</code>指定，其中<code>&#39;c&#39;</code>表示颜色，<code>&#39;s&#39;</code>表示线型<br>  <img src="/2019/01/16/matlab-getstart/cs.png"></p></li><li>图形标记指令<code>title</code>,<code>xlabel</code>,<code>ylabel</code>,<code>text</code>,<code>legend</code></li><li><code>axis([xmin, xmax, ymin, ymax])</code>设定坐标轴</li><li><code>hold on</code>保持已有图形绘制新的图形</li><li><code>fplot(fname, lims, tol)</code>为函数提供自适应采样</li><li><code>loglog(x,y)</code>双对数坐标</li><li><code>semilogx,semilogy</code> 单对数坐标</li><li><code>polar(theat, rho)</code> 极坐标</li></ul><p><img src="/2019/01/16/matlab-getstart/plot.png"></p><h2 id="三维"><a href="#三维" class="headerlink" title="三维"></a>三维</h2><ul><li><code>plot3</code>用法同<code>plot</code></li><li><code>mesh(x,y,z,c)</code>绘制三维网格图</li><li><code>surf(x,y,z,c)</code>三维曲面图</li><li><code>view</code>指定视点</li><li><code>contour3</code>等高线图</li></ul><h1 id="MATLAB程序设计"><a href="#MATLAB程序设计" class="headerlink" title="MATLAB程序设计"></a>MATLAB程序设计</h1><h2 id="输入输出"><a href="#输入输出" class="headerlink" title="输入输出"></a>输入输出</h2><ul><li><p><code>input</code>函数</p>  <figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">A = input(<span class="string">'Enter matrix A=&gt;'</span>)</span><br><span class="line"><span class="comment">%这样可以在执行该语句时首先给出提示，再接收键盘输入</span></span><br></pre></td></tr></table></figure></li><li><p><code>pause(延迟秒数)</code></p></li><li><code>Disp()</code>输出函数， 输出项可以为矩阵或字符串</li></ul><h2 id="分支语句"><a href="#分支语句" class="headerlink" title="分支语句"></a>分支语句</h2><h3 id="if语句"><a href="#if语句" class="headerlink" title="if语句"></a>if语句</h3><ul><li>结尾需要加<code>end</code></li><li><code>else</code>和<code>if</code>可以连起来写成<code>elseif</code></li></ul><h3 id="swith语句"><a href="#swith语句" class="headerlink" title="swith语句"></a>swith语句</h3><p>与C相比：</p><ul><li><code>default</code>改为<code>otherwise</code></li><li>结尾加<code>end</code></li></ul><h2 id="循环语句"><a href="#循环语句" class="headerlink" title="循环语句"></a>循环语句</h2><h3 id="for语句"><a href="#for语句" class="headerlink" title="for语句"></a>for语句</h3><ul><li>for 初始条件:步长(缺省为1):终值</li></ul><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> <span class="built_in">i</span> = <span class="number">1</span> : <span class="number">2</span> : <span class="number">2</span>*n<span class="number">-1</span></span><br><span class="line">    <span class="comment">%循环体</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure><ul><li>for 循环变量=矩阵表达式，使循环变量取遍矩阵里每个数的值(以行为周期)</li></ul><h3 id="while语句"><a href="#while语句" class="headerlink" title="while语句"></a>while语句</h3><ul><li>结尾加<code>end</code>，用法同C</li></ul><h2 id="函数文件"><a href="#函数文件" class="headerlink" title="函数文件"></a>函数文件</h2><ul><li>一般格式为</li></ul><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> 输出形参表 = 函数名<span class="params">(输入形参表)</span></span></span><br><span class="line">    <span class="comment">%注释说明部分</span></span><br><span class="line">    <span class="comment">%函数体</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure><ul><li>当输出形参多于1个时，用方括号括起来</li><li>函数调用<code>[输出参数表]=函数名(输入参数表)</code>，支持嵌套调用和递归</li><li>参数个数可变：通过变量<code>nargin</code>和<code>nargout</code>实现</li><li>函数内部申明的变量都是局部变量</li><li>全局变量前缀<code>global</code>，所有函数都可以对其进行存取和修改</li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;入门技能&quot;&gt;&lt;a href=&quot;#入门技能&quot; class=&quot;headerlink&quot; title=&quot;入门技能&quot;&gt;&lt;/a&gt;入门技能&lt;/h1&gt;&lt;h2 id=&quot;命令行命令&quot;&gt;&lt;a href=&quot;#命令行命令&quot; class=&quot;headerlink&quot; title=&quot;命令行命令&quot;&gt;
+      
+    
+    </summary>
+    
+      <category term="Self-learning" scheme="https://mengzelev.github.io/categories/Self-learning/"/>
+    
+    
+      <category term="MATLAB" scheme="https://mengzelev.github.io/tags/MATLAB/"/>
+    
+  </entry>
   
   <entry>
     <title>问题求解3-总复习</title>
@@ -209,7 +261,7 @@
     <link href="https://mengzelev.github.io/2018/12/05/clrs-26Maximum-Flow/"/>
     <id>https://mengzelev.github.io/2018/12/05/clrs-26Maximum-Flow/</id>
     <published>2018-12-05T07:03:20.000Z</published>
-    <updated>2018-12-08T02:14:21.948Z</updated>
+    <updated>2019-01-17T12:08:51.319Z</updated>
     
     <content type="html"><![CDATA[<h1 id="流网络"><a href="#流网络" class="headerlink" title="流网络"></a>流网络</h1><h2 id="流网络-1"><a href="#流网络-1" class="headerlink" title="流网络"></a>流网络</h2><ul><li>有向图$G=(V,E)$</li><li>图中中每条边$(u,v)\in E$有一个非负的<strong>容量值</strong>$c(u,v)\ge 0$</li><li>如果$(u,v)\notin E$，定义$c(u,v)=0$</li><li>如果边集合$E$包含一条边$(u,v)$，则图中不存在反方向的边$(v,u)$</li><li>有<strong>源结点$s$</strong>和<strong>汇点$t$</strong></li><li>流网络图是连通的</li><li>除源结点外的每个结点都至少有一条进入的边，$|E|\ge |V|-1$</li></ul><h2 id="流"><a href="#流" class="headerlink" title="流"></a>流</h2><p>设$G=(V,E)$为一个流网络，其容量函数为$c$。设$s$为网络的源结点，$t$为汇点。$G$中的流是一个实值函数$f: V\times V \to \mathbb{R}$，满足下面两条性质：</p><ul><li><strong>容量限制</strong>：对于所有的结点$u,v\in V$，要求$0\le f(u,v)\le c(u,v)$</li><li><strong>流量守恒</strong>：对于所有的结点$u\in V-{s,t}$，要求$$\sum\limits f(v,u)=\sum\limits f(u,v)$$当$(u,v)\notin E$时，从结点$u$到结点$v$之间没有流，因此$f(u,v)=0$</li></ul><p>称非负数值$f(u,v)$为从结点$u$到结点$v$的流。（流入=流出）</p><p>一个流$f$的<strong>值</strong>$|f|=\sum\limits_{v\in V}f(s,v)-\sum\limits_{v\in V}f(v,s)$ （从源结点流出的总流量减去流入源结点的总流量）</p><p><strong>最大流问题</strong>：给定一个流网络$G$、一个源结点$s$、一个汇点$t$，找到值最大的一个流</p><h2 id="反平行边"><a href="#反平行边" class="headerlink" title="反平行边 "></a><strong>反平行边</strong> </h2><p>如果要使用反平行边来模拟一个流问题，就选择两条反平行边中的一条，加入一个新结点来将其分解为两段，并以新的结点到原来边的结点的两条路替换所选边，同时将两条新设立的边的容量设置为与原来的边的容量相同。</p><p><img src="/2018/12/05/clrs-26Maximum-Flow/antiparallel.png"></p><h2 id="具有多个源结点和多个汇点的网络"><a href="#具有多个源结点和多个汇点的网络" class="headerlink" title="具有多个源结点和多个汇点的网络"></a>具有多个源结点和多个汇点的网络</h2><p>加入一个<strong>超级源结点$s$</strong>和一个<strong>超级汇点$t$</strong></p><p><img src="/2018/12/05/clrs-26Maximum-Flow/multi.png"></p><h1 id="Ford-Fulkerson方法"><a href="#Ford-Fulkerson方法" class="headerlink" title="Ford-Fulkerson方法"></a>Ford-Fulkerson方法</h1><p><img src="/2018/12/05/clrs-26Maximum-Flow/ffm.png"></p><h2 id="残存网络"><a href="#残存网络" class="headerlink" title="残存网络"></a>残存网络</h2><p>给定流网络$G$和流量$f$，残存网络$G_f$由那些仍有空间对流量进行调整的边构成。</p><p>残存容量为$c_f(u,c)=c(u,v)-f(u,v)$</p><p>对正流量的<strong>缩减</strong>：将边$(v,u)$加入到图$G_f$中，并将其残存容量设置为$c_f(v,u)=f(u,v)$</p><p><strong>残存容量</strong>的形式化定义如下：<br><img src="/2018/12/05/clrs-26Maximum-Flow/residual_capacity.png"></p><p>给定一个流网络$G=(V,E)$和一个流$f$，则有$f$所诱导的图$G$的残存网络为$G_f=(V,E_f)$，其中$E_f={(u,v)\in V\times V: c_f(u,v)&gt;0}$，有$|E_f|\le 2|E|$</p><p><strong>递增</strong>：如果$f$是$G$的一个流，$f’$是对应的残存网络$G_f$的中的一个流，定义$$f’\uparrow f’:V\times V\to\mathbb{R}$$为流$f’$对流$f$的<strong>递增</strong></p><p><img src="/2018/12/05/clrs-26Maximum-Flow/augmentation.png"></p><p><strong>抵消操作</strong>：在残存网络中将流量推送回去</p><p><strong>引理26.1</strong>：$$|f\uparrow f’|=|f|+|f’|$$</p><h2 id="增广路径"><a href="#增广路径" class="headerlink" title="增广路径"></a>增广路径</h2><p><strong>增广路径</strong>$p$：残存网络$G_f$中一条从源结点$s$到汇点$t$的简单路径</p><p><strong>残存容量</strong>：在一条增广路径$p$上能够为每条边增加的流量的最大值$$c_f(p)=\min{c_f(u,v): (u,v)\in p}$$</p><p><img src="/2018/12/05/clrs-26Maximum-Flow/Lemma26-2.png"><br><img src="/2018/12/05/clrs-26Maximum-Flow/Lemma26-3.png"></p><h2 id="流网络的切割"><a href="#流网络的切割" class="headerlink" title="流网络的切割"></a>流网络的切割</h2><p><strong>流网络的切割</strong>：将结点集合$V$划分为$S$和$T=V-S$两个集合，使得$s\in S, t\in T$</p><p>横跨切割的$(S,T)$的<strong>净流量</strong>$f(S,T)$：$$f(S,T)=\sum\limits_{u\in S}\sum\limits_{v\in T}f(u,v)-\sum\limits_{u\in S}\sum\limits_{v\in T}f(v,u)$$</p><p>切割$(S,T)$的<strong>容量</strong>：$$c(S,T)=\sum\limits_{v\in S}\sum\limits_{v\in T}c(u,v)$$<br><strong>最小切割</strong>：整个网络中容量最小的切割</p><ul><li>对于容量，只计算从集合$S$发出进入集合$T$的边的容量，而忽略反方向边上的容量</li><li>对于流，考虑从$S$到$T$的流量减去从$T$到$S$的反方向的流量</li></ul><p><strong>引理26.4</strong>：整个流网络的流量与横跨某一个切割的流量相等$$f(S,T)=|f|$$</p><p><strong>推论26.5</strong>：$|f|\ge c(S,T)$</p><p><strong>定理26.6(最大流最小割定理)</strong><br><img src="/2018/12/05/clrs-26Maximum-Flow/Theorem26-6.png"></p><h2 id="基本的Ford-Fulkerson算法"><a href="#基本的Ford-Fulkerson算法" class="headerlink" title="基本的Ford-Fulkerson算法"></a>基本的Ford-Fulkerson算法</h2><p><img src="/2018/12/05/clrs-26Maximum-Flow/ff.png"></p><p>粗糙的时间复杂度上界：$O(E|f<em>|)$（$f</em>$为将有理数流网络转换成整数流网络后，网络中的一个最大流）</p><h2 id="Edmonds-Karp算法"><a href="#Edmonds-Karp算法" class="headerlink" title="Edmonds-Karp算法"></a>Edmonds-Karp算法</h2><p>在Ford-Fulkerson算法的第三行使用<strong>广度优先搜索</strong>来寻找增广路径。<br>每次在残存网络中选择的增广路径是一条从源结点$s$到汇点$t$的最短路径，其中每条边的权重为单位距离。</p><p>时间复杂度：$O(VE^2)$</p><p><strong>引理26.7</strong>：使用Edmonds-Karp算法，对于除源结点和汇点外的所有结点$v$，残存网络$G_f$中的最短路径距离$\delta_f(s,v)$随着每次流量的递增而单调递增。</p><p><strong>定理26.8</strong>：Edmonds-Karp算法所执行的流量递增操作的总次数为$O(VE)$</p><p><strong>关键边</strong>：在残存网络中，一条路径$p$的残存容量是该条路径上边$(u,v)$的残存容量，即$c_f(p)=c_f(u,v)$<br>对于$E$的每条边来说，其成为关键边的次数最多为$|V|/2$次。</p><h1 id="最大二分匹配"><a href="#最大二分匹配" class="headerlink" title="最大二分匹配"></a>最大二分匹配</h1><p>在一个二分图中，结点集合可以划分为$V=L\cup R$，其中$L$和$R$是不相交的，并且边集合$E$中所有的边都横跨$L$和$R$。</p><p>构造一个流网络$G=(V’,E’)$，其中$$V’=V\cup{s,t}$$$$E={(s,u):u\in L, u\in L}\cup {(u,v):(u,v)\in E}\cup {(v,t):v\in\mathbb{R}}$$<br>给$E’$中的每条边赋单位容量</p><p><img src="/2018/12/05/clrs-26Maximum-Flow/26-9.png"></p><p>流$f$是<strong>整数值</strong>的：对于所有的边$(u,v)\in V\times V$，$f(u,v)$都是整数值。</p><p><strong>定理26.10（完整性定理Integrality theorem）</strong>：如果容量函数$c$只能取整数值，则$Ford-Fulkerson$方法所生成的最大流$f$满足$|f|$是整数值的性质。而且，对于所有的结点$u$和$v$，$f(u,v)$都是整数。</p><p><strong>推论26.11</strong>：二分图$G$中的一个最大匹配$M$的基数等于其对应的流网络$G’$中某一最大流$f$的值。</p><p>时间复杂度：$O(VE)$</p>]]></content>
     
@@ -232,8 +284,6 @@
       <category term="CLRS" scheme="https://mengzelev.github.io/tags/CLRS/"/>
     
       <category term="Graph Algorithms" scheme="https://mengzelev.github.io/tags/Graph-Algorithms/"/>
-    
-      <category term="Maximum Flow" scheme="https://mengzelev.github.io/tags/Maximum-Flow/"/>
     
   </entry>
   
@@ -546,66 +596,6 @@
       <category term="Graph" scheme="https://mengzelev.github.io/tags/Graph/"/>
     
       <category term="Tree" scheme="https://mengzelev.github.io/tags/Tree/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Lab1-乘法 实验报告</title>
-    <link href="https://mengzelev.github.io/2018/10/12/lab1-report/"/>
-    <id>https://mengzelev.github.io/2018/10/12/lab1-report/</id>
-    <published>2018-10-12T09:17:47.000Z</published>
-    <updated>2018-10-15T01:25:08.817Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="任务1：实现multimod"><a href="#任务1：实现multimod" class="headerlink" title="任务1：实现multimod"></a>任务1：实现<code>multimod</code></h1><p>使用了高精度数乘法计算<code>a*b</code>，然后模拟手算除法的形式写了高精度除法（取模）。代码见文件<code>p1.c</code>.</p><h2 id="正确性-伪-证明"><a href="#正确性-伪-证明" class="headerlink" title="正确性(伪)证明"></a>正确性(伪)证明</h2><p>使用python随机生成生成了1000000组a、b、m，0~9223372036854775807(int64_t的最大值)并计算对应答案，与p1.c的计算结果进行对比。</p><p>python随机数生成代码如下：</p><pre><code>import randomMAX = 9223372036854775807for i in range(1,1000000)：    a = random.randint(0,MAX)    b = random.randint(0,MAX)    m = random.randint(1,MAX)    ans = (a * b) % m    print (a,b,m,ans)</code></pre><p>测试结果一百万组全对（从零开始计数的）<br><img src="/2018/10/12/lab1-report/1.png"></p><h1 id="任务2：性能优化"><a href="#任务2：性能优化" class="headerlink" title="任务2：性能优化"></a>任务2：性能优化</h1><p>由于是先听的课再做的lab，出于惰性直接按照jyy课上讲的方法做了<s>（我去面壁）</s>就不多解释了，代码见p2.c</p><h2 id="时间测试思路"><a href="#时间测试思路" class="headerlink" title="时间测试思路"></a>时间测试思路</h2><p>STFW找到了计算使用<code>time.h</code>库函数计算运行时间的方法，也有计算时钟周期的方法，但是后者使用了汇编代码，在对未知事物的恐惧(这样真的不好)的驱使下还是选择了比较好理解、比较好控制的前者。为了防止计算步骤被优化，又不能让多于的操作占用过多的时间，就使程序计算了正确的case的个数并输出。所以得到的时间应该比实际运行时间长一些。</p><h2 id="运行时间"><a href="#运行时间" class="headerlink" title="运行时间"></a>运行时间</h2><p><img src="/2018/10/12/lab1-report/time.png"><br>注：其中<code>p1.c</code>为任务一中的高精度实现，<code>p2.c</code>为任务二中的优化算法，<code>p3.c</code>为任务三中的神奇代码</p><h2 id="运行时间分析"><a href="#运行时间分析" class="headerlink" title="运行时间分析"></a>运行时间分析</h2><p>记<code>a,b,m</code>的位数为n<br>高精度除法需要做<code>O(n)</code>次减法和比较，每次减法和比较的时间复杂度也都为<code>O(n)</code>，因此总时间复杂度是<code>O(n^2)</code><br>任务二中优化过的时间需要循环次数是<code>O(n)</code>的，每次循环的操作都能在常数时间<code>O(1)</code>内完成，因此总时间复杂度为<code>O(n)</code><br>而神奇代码对任何输入消耗的时间都是相同的，时间复杂度为<code>O(1)</code><br>从运行时间上来看的确是<code>t(p1)&gt;t(p2)&gt;t(p3)</code>，符合预期<br>一个神奇的现象是，随着优化等级的升高，运行时间不一定缩短。尤其是p2.c的运行情况，O1和O2反而不如O0（虽然也只差了0.001ms），于是我反汇编对比了一下，发现<code>multimod</code>、<code>testcases</code>和<code>main</code>几个函数的汇编代码几乎一模一样，但对应行的行数不同，可能是调用了不同的系统库函数。对优化的原理不太了解，暂时无法想到合理的解释。可能是因为这个程序的优化空间不是太大？但是编译器肯定比我智能多了，我想不到优化方法不能看不起编译器啊。</p><h1 id="任务3：解析神秘代码"><a href="#任务3：解析神秘代码" class="headerlink" title="任务3：解析神秘代码"></a>任务3：解析神秘代码</h1><p><strong>结论</strong>：<code>ab</code>乘积不超过<code>2^53</code>次方，<code>m</code>在<code>int64_t</code>范围内任意取值，可以保证<code>multimod_fast</code>总是能返回正确的数值</p><p>过程非常曲折，以下都是流水账碎碎念，老师嫌长可以不看，自己写着好玩，回头上传个人Blog</p><p>刚拿到手先试了一大堆随机数据，发现一百万组测试样例总只能过1w+组，正确率非常低。后来和同学讨论了一下，听说<code>m</code>比较小的时候结果最容易出错，我就把<code>m</code>的随机范围改成了<code>1~3</code>，果然错误率高了很多。大概是因为神秘代码中<code>(int64_t)((double)a * b / m + 1e-8)</code>强制类型转换后要除以<code>m</code>，如果<code>m</code>偏小，那么<code>a*b</code>的误差就很容易保存下来，引起答案出错。</p><p>保持<code>m</code>1~3的范围，我又试了几组大数。发现是在<code>ab</code>乘积为<code>10^19</code>左右的时候（a和b在算法找中地位是等价的，所以只需要关注<code>ab</code>的乘积的范围）会出现计算错误，于是在这个范围附近取了一些数，绝了，这个使结果正确的区间并不是连续的！然后理智烧却瞎测了几组数据，不太能发现规律，决定先冷静下来，从理论上思考一下算法。<s>毕竟这次是关于数据表示形式的Lab嘛</s></p><p>这个神奇代码大概是把ab乘积转换为<code>double</code>类型。<code>double</code>类型能表示的范围是大于<code>int64_t</code>的，但是精度不够，尾数部分只有52位的精度（加上前面的1一共是53位），所以应该是只能保证这53位的精度，于是我打开<code>python</code>计算器计算了一下<code>2^26.5 =</code>，大概是94900000，于是我把任务一中随机数的生成范围改为了<code>(0,94900000)</code>，测试了5次，每次一百万组，都是全对的。</p><p><img src="/2018/10/12/lab1-report/double.png"></p><p>到这里我就很想吐槽了，这范围怎么还能算<code>int64_t</code>的，保证结果正确的<code>a</code>和<code>b</code>的范围<code>int</code>都达不到，如果能保证输入在这个范围之内，还不如直接用<code>int64_t</code>算呢，<code>ab</code>相乘肯定不会溢出的。但是如果<code>a</code>和<code>b</code>乘积位表示下末尾零比较多，还是有可能正确的。所以这根本就是一份拼人品的神奇代码吗…..</p><p>目前尚未想通的问题：</p><ul><li>为什么要<code>+1e-8</code>？</li><li>为什么返回时需要判断<code>t</code>的正负并做相应修正？</li></ul><p>最后，这个神奇代码毕竟是<code>O(1)</code>的，凭我的算法功底实在没办法优化到<code>O(n)</code>以下，所以神奇代码虽然正确率不高，但是效率还是很感人的</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;任务1：实现multimod&quot;&gt;&lt;a href=&quot;#任务1：实现multimod&quot; class=&quot;headerlink&quot; title=&quot;任务1：实现multimod&quot;&gt;&lt;/a&gt;任务1：实现&lt;code&gt;multimod&lt;/code&gt;&lt;/h1&gt;&lt;p&gt;使用了高精度数乘法
-      
-    
-    </summary>
-    
-    
-      <category term="Notes" scheme="https://mengzelev.github.io/tags/Notes/"/>
-    
-      <category term="Lab" scheme="https://mengzelev.github.io/tags/Lab/"/>
-    
-      <category term="Ics" scheme="https://mengzelev.github.io/tags/Ics/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>算法导论学习笔记-用于不相交集合的数据结构</title>
-    <link href="https://mengzelev.github.io/2018/10/06/clrs-21DisjointSets/"/>
-    <id>https://mengzelev.github.io/2018/10/06/clrs-21DisjointSets/</id>
-    <published>2018-10-06T08:05:58.000Z</published>
-    <updated>2018-10-07T07:33:25.694Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="不相交集合的操作"><a href="#不相交集合的操作" class="headerlink" title="不相交集合的操作"></a>不相交集合的操作</h1><p>一个<strong>不相交集合数据结构</strong>维护了一个不相交动态集的集合<br>每个集合都有一个<strong>代表</strong>标识，它是该集合的某个成员</p><p>我们希望集合支持以下三个操作：</p><p><img src="/2018/10/06/clrs-21DisjointSets/operations.png"></p><h2 id="应用：确定无向图的连通分量"><a href="#应用：确定无向图的连通分量" class="headerlink" title="应用：确定无向图的连通分量"></a>应用：确定无向图的连通分量</h2><center><br><img src="/2018/10/06/clrs-21DisjointSets/g21-1.png"><br><img src="/2018/10/06/clrs-21DisjointSets/alg1.png"><br></center><p>算法就是将连通的顶点全部合并到同一个集合中。</p><h1 id="不相交集合的链表表示"><a href="#不相交集合的链表表示" class="headerlink" title="不相交集合的链表表示"></a>不相交集合的链表表示</h1><p>每个集合可以用一个自己的链表来表示<br>链表中对象可以以任意次序出现</p><p>每个链表组成为：</p><ul><li><code>head</code>– 指向表的第一个对象（代表元）</li><li><code>tail</code>– 指向表的最后一个对象</li></ul><p>链表中每个对象的组成为：</p><ul><li>关键字<code>key</code></li><li>指向<code>head</code>的指针<code>prev</code></li><li>指向后一个对象的指针<code>next</code></li></ul><p>时间复杂度：<br><code>MAKE-SET</code>  O(1)<br><code>FIND-SET</code>  O(1)<br><code>UNION</code>（简单实现） $\Theta(n^2)$  【摊还分析】</p><h2 id="简单加权合并启发式策略"><a href="#简单加权合并启发式策略" class="headerlink" title="简单加权合并启发式策略"></a>简单加权合并启发式策略</h2><p>策略是，每次合并时都将较小的链表挂到较大的链表上，需要多维护一个链表长度的属性。</p><p><img src="/2018/10/06/clrs-21DisjointSets/21.1.png"></p><p>证明的核心在于每个对象的指针在所有的<code>UNION</code>操作中最多被更新$\lceil\lg n\rceil$次，因此所有<code>UNION</code>操作中被更新的对象的指针总数为$O(n\lg n)$。加上<code>MAKE-SET</code>和<code>FIND-SEt</code>的O(m)。 </p><h1 id="不相交集合森林"><a href="#不相交集合森林" class="headerlink" title="不相交集合森林"></a>不相交集合森林</h1><p>使用有根树来表示集合。<br>每棵树表示一个集合，树的根结点是该集合的代表元。<br>执行<code>UNION</code>操作时将两棵树的树根合并。<br>实现时可以用到两种改进运行时间的启发式策略。</p><h2 id="按秩合并"><a href="#按秩合并" class="headerlink" title="按秩合并"></a>按秩合并</h2><p>类似链表的加权合并启发式策略<br>为了易于分析，对于每个结点，维护一个<strong>秩</strong>，表示该结点高度的一个上界。<br>秩<code>x.rank</code>代表x的高度的一个上界，高度即<u>从x到某一后代叶结点的最长简单路径上边的数目</u>。<br><code>UNION</code>操作中</p><ul><li>如果根的秩不同，则让较大秩的根成为较小秩的根的父结点，但秩本身保持不变</li><li>如果根的秩相同，则任意选择两个中的一个作为父结点，并使它的秩+1</li></ul><h2 id="路径压缩"><a href="#路径压缩" class="headerlink" title="路径压缩"></a>路径压缩</h2><p>在<code>FIND-SET</code>操作中是查找路径中的每个结点直接指向根，不改变任何结点的秩。</p><h2 id="伪代码"><a href="#伪代码" class="headerlink" title="伪代码"></a>伪代码</h2><center><br><img src="/2018/10/06/clrs-21DisjointSets/makeset.png"><br><img src="/2018/10/06/clrs-21DisjointSets/union.png"><br><img src="/2018/10/06/clrs-21DisjointSets/findset.png"><br></center>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;不相交集合的操作&quot;&gt;&lt;a href=&quot;#不相交集合的操作&quot; class=&quot;headerlink&quot; title=&quot;不相交集合的操作&quot;&gt;&lt;/a&gt;不相交集合的操作&lt;/h1&gt;&lt;p&gt;一个&lt;strong&gt;不相交集合数据结构&lt;/strong&gt;维护了一个不相交动态集的集合&lt;br&gt;
-      
-    
-    </summary>
-    
-      <category term="Notes" scheme="https://mengzelev.github.io/categories/Notes/"/>
-    
-    
-      <category term="Notes" scheme="https://mengzelev.github.io/tags/Notes/"/>
-    
-      <category term="Problem Solving" scheme="https://mengzelev.github.io/tags/Problem-Solving/"/>
-    
-      <category term="CLRS" scheme="https://mengzelev.github.io/tags/CLRS/"/>
-    
-      <category term="Disjoint Sets" scheme="https://mengzelev.github.io/tags/Disjoint-Sets/"/>
-    
-      <category term="Data Structure" scheme="https://mengzelev.github.io/tags/Data-Structure/"/>
     
   </entry>
   

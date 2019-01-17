@@ -339,6 +339,80 @@
     
     
     <article class="index-post">
+        <a class="abstract-title" href = "/2018/11/28/matchings/" >
+            
+                <span>图论学习笔记-图中的匹配与覆盖</span>
+        </a>
+        <div class="abstract-content">
+            匹配匹配的定义独立：若图的边集中任意两条边不邻接，则称该集合是独立的
+匹配：图$G$中的边的一个独立集$G$的匹配是一个边的集合$M={e_1,e_2,…,e_k}$，其中$e_i=u_iw_i(1\le i\le k)$，使得$u_1,u_2,…,u_k$是$U$中$k$个不同的顶点，$w_1,w_2,…,w_k$是$W$中$k$个不同的顶点。
+匹配存在的条件邻域(neighbourhood)$N(X)$：设$G$为二部图，其部集为$U$和$W$，且$|U|\le |W|$，对于$U$的非空子集$X$，$X$中所有顶点的邻域的并。
+Hall’s condition/友好的(neighb...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/11/28</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Notes">Notes</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Problem Solving">Problem Solving</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Graph Theory">Graph Theory</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Matchings">Matchings</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Factorization">Factorization</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href = "/2018/11/24/lab3-report/" >
+            
+                <span>Lab3：链接与加载（2）实验报告</span>
+        </a>
+        <div class="abstract-content">
+            实现描述寻找正确的入口地址在框架代码抽取出的symtab中主项寻找，如果该项的Type属性为STT_FUNC，就根据其st_name属性去字符串表strtab里寻找该函数的Name属性，并与main进行对比，就能找到main函数对应的表项，此时该表项的st_value属性即 我们需要的入口地址。
+加载程序loader()函数的实现需要程序头表，模仿load_elf_table()函数的写法可将程序头表抽取到结构体Elf32_phdr中，找到p_type为PT_LOAD的表项，读取其p_offset，p_vaddr，p_filesz，p_memsz属性，按照讲义的描述，使用fread函数将...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/11/24</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Notes">Notes</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Lab">Lab</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Ics">Ics</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href = "/2018/11/21/traversability/" >
             
                 <span>图论学习笔记-旅行问题</span>
@@ -677,103 +751,6 @@ $ objdump -d /lib/x86_64-linux-gnu/libc.so.6 &...
         <a class="post-tag" href="javascript:void(0);" data-tags = "Graph">Graph</a>
     
         <a class="post-tag" href="javascript:void(0);" data-tags = "Tree">Tree</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2018/10/12/lab1-report/" >
-            
-                <span>Lab1-乘法 实验报告</span>
-        </a>
-        <div class="abstract-content">
-            任务1：实现multimod使用了高精度数乘法计算a*b，然后模拟手算除法的形式写了高精度除法（取模）。代码见文件p1.c.
-正确性(伪)证明使用python随机生成生成了1000000组a、b、m，0~9223372036854775807(int64_t的最大值)并计算对应答案，与p1.c的计算结果进行对比。
-python随机数生成代码如下：
-import random
-
-MAX = 9223372036854775807
-
-for i in range(1,1000000)：
-    a = random.randint(0,MAX)
-    b = random.randint(...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/10/12</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Notes">Notes</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Lab">Lab</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Ics">Ics</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2018/10/06/clrs-21DisjointSets/" >
-            
-                <span>算法导论学习笔记-用于不相交集合的数据结构</span>
-        </a>
-        <div class="abstract-content">
-            不相交集合的操作一个不相交集合数据结构维护了一个不相交动态集的集合每个集合都有一个代表标识，它是该集合的某个成员
-我们希望集合支持以下三个操作：
-
-应用：确定无向图的连通分量
-
-算法就是将连通的顶点全部合并到同一个集合中。
-不相交集合的链表表示每个集合可以用一个自己的链表来表示链表中对象可以以任意次序出现
-每个链表组成为：
-
-head– 指向表的第一个对象（代表元）
-tail– 指向表的最后一个对象
-
-链表中每个对象的组成为：
-
-关键字key
-指向head的指针prev
-指向后一个对象的指针next
-
-时间复杂度：MAKE-SET  O(1)FIND-SET  O(1)UNION（简单实...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/10/06</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Notes">Notes</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Problem Solving">Problem Solving</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "CLRS">CLRS</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Disjoint Sets">Disjoint Sets</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Data Structure">Data Structure</a>
     
 </div>
             
@@ -1381,9 +1358,33 @@ tail– 指向表的最后一个对象
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 35
+        Total : 37
         </div>
         <!-- search  -->
         
@@ -1396,6 +1397,16 @@ tail– 指向表的最后一个对象
     
     <div class="archive-year"> 2019 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/17</span><a class="archive-post-title" href= "/2019/01/17/2019-winter-flags/" >2019年寒假计划(flags)</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/16</span><a class="archive-post-title" href= "/2019/01/16/matlab-getstart/" >MATLAB临时抱佛脚</a>
+        </li>
     
     
         <li class="archive-post-item">
@@ -1508,12 +1519,12 @@ tail– 指向表的最后一个对象
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">10/04</span><a class="archive-post-title" href= "/2018/10/04/PA1-report/" >PA1实验报告</a>
+            <span class="archive-post-date">10/04</span><a class="archive-post-title" href= "/2018/10/04/pa-inspirations/" >做pa的时候可能会用到的操作</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">10/04</span><a class="archive-post-title" href= "/2018/10/04/pa-inspirations/" >做pa的时候可能会用到的操作</a>
+            <span class="archive-post-date">10/04</span><a class="archive-post-title" href= "/2018/10/04/PA1-report/" >PA1实验报告</a>
         </li>
     
     
@@ -1586,27 +1597,25 @@ tail– 指向表的最后一个对象
         <div class="sidebar-panel-tags">
     <div class="sidebar-tags-name">
     
+        <span class="sidebar-tag-name" data-tags="Flags"><span class="iconfont-archer">&#xe606;</span>Flags</span>
+    
         <span class="sidebar-tag-name" data-tags="Notes"><span class="iconfont-archer">&#xe606;</span>Notes</span>
     
         <span class="sidebar-tag-name" data-tags="pa"><span class="iconfont-archer">&#xe606;</span>pa</span>
     
-        <span class="sidebar-tag-name" data-tags="Problem Solving"><span class="iconfont-archer">&#xe606;</span>Problem Solving</span>
-    
         <span class="sidebar-tag-name" data-tags="ICS"><span class="iconfont-archer">&#xe606;</span>ICS</span>
+    
+        <span class="sidebar-tag-name" data-tags="Problem Solving"><span class="iconfont-archer">&#xe606;</span>Problem Solving</span>
     
         <span class="sidebar-tag-name" data-tags="Assembly Language"><span class="iconfont-archer">&#xe606;</span>Assembly Language</span>
     
         <span class="sidebar-tag-name" data-tags="CLRS"><span class="iconfont-archer">&#xe606;</span>CLRS</span>
     
+        <span class="sidebar-tag-name" data-tags="greedy algorithm"><span class="iconfont-archer">&#xe606;</span>greedy algorithm</span>
+    
         <span class="sidebar-tag-name" data-tags="dynamic programming"><span class="iconfont-archer">&#xe606;</span>dynamic programming</span>
     
         <span class="sidebar-tag-name" data-tags="amortized analysis"><span class="iconfont-archer">&#xe606;</span>amortized analysis</span>
-    
-        <span class="sidebar-tag-name" data-tags="greedy algorithm"><span class="iconfont-archer">&#xe606;</span>greedy algorithm</span>
-    
-        <span class="sidebar-tag-name" data-tags="Disjoint Sets"><span class="iconfont-archer">&#xe606;</span>Disjoint Sets</span>
-    
-        <span class="sidebar-tag-name" data-tags="Data Structure"><span class="iconfont-archer">&#xe606;</span>Data Structure</span>
     
         <span class="sidebar-tag-name" data-tags="Single Source Shortest Path"><span class="iconfont-archer">&#xe606;</span>Single Source Shortest Path</span>
     
@@ -1614,9 +1623,11 @@ tail– 指向表的最后一个对象
     
         <span class="sidebar-tag-name" data-tags="Dijkstra"><span class="iconfont-archer">&#xe606;</span>Dijkstra</span>
     
-        <span class="sidebar-tag-name" data-tags="Graph Algorithms"><span class="iconfont-archer">&#xe606;</span>Graph Algorithms</span>
+        <span class="sidebar-tag-name" data-tags="Disjoint Sets"><span class="iconfont-archer">&#xe606;</span>Disjoint Sets</span>
     
-        <span class="sidebar-tag-name" data-tags="Maximum Flow"><span class="iconfont-archer">&#xe606;</span>Maximum Flow</span>
+        <span class="sidebar-tag-name" data-tags="Data Structure"><span class="iconfont-archer">&#xe606;</span>Data Structure</span>
+    
+        <span class="sidebar-tag-name" data-tags="Graph Algorithms"><span class="iconfont-archer">&#xe606;</span>Graph Algorithms</span>
     
         <span class="sidebar-tag-name" data-tags="Graph Theory"><span class="iconfont-archer">&#xe606;</span>Graph Theory</span>
     
@@ -1638,13 +1649,11 @@ tail– 指向表的最后一个对象
     
         <span class="sidebar-tag-name" data-tags="Factorization"><span class="iconfont-archer">&#xe606;</span>Factorization</span>
     
+        <span class="sidebar-tag-name" data-tags="MATLAB"><span class="iconfont-archer">&#xe606;</span>MATLAB</span>
+    
         <span class="sidebar-tag-name" data-tags="Linux"><span class="iconfont-archer">&#xe606;</span>Linux</span>
     
         <span class="sidebar-tag-name" data-tags="vim"><span class="iconfont-archer">&#xe606;</span>vim</span>
-    
-        <span class="sidebar-tag-name" data-tags="Java"><span class="iconfont-archer">&#xe606;</span>Java</span>
-    
-        <span class="sidebar-tag-name" data-tags="programming"><span class="iconfont-archer">&#xe606;</span>programming</span>
     
         <span class="sidebar-tag-name" data-tags="regular expressions"><span class="iconfont-archer">&#xe606;</span>regular expressions</span>
     
@@ -1653,6 +1662,10 @@ tail– 指向表的最后一个对象
         <span class="sidebar-tag-name" data-tags="tmux"><span class="iconfont-archer">&#xe606;</span>tmux</span>
     
         <span class="sidebar-tag-name" data-tags="markdown"><span class="iconfont-archer">&#xe606;</span>markdown</span>
+    
+        <span class="sidebar-tag-name" data-tags="Java"><span class="iconfont-archer">&#xe606;</span>Java</span>
+    
+        <span class="sidebar-tag-name" data-tags="programming"><span class="iconfont-archer">&#xe606;</span>programming</span>
     
         <span class="sidebar-tag-name" data-tags="Traversibility"><span class="iconfont-archer">&#xe606;</span>Traversibility</span>
     
@@ -1693,9 +1706,13 @@ jsonContent:
         <div class="sidebar-panel-categories">
     <div class="sidebar-categories-name">
     
+        <span class="sidebar-category-name" data-categories="Flags"><span class="iconfont-archer">&#xe60a;</span>Flags</span>
+    
         <span class="sidebar-category-name" data-categories="Notes"><span class="iconfont-archer">&#xe60a;</span>Notes</span>
     
         <span class="sidebar-category-name" data-categories="Diary"><span class="iconfont-archer">&#xe60a;</span>Diary</span>
+    
+        <span class="sidebar-category-name" data-categories="Self-learning"><span class="iconfont-archer">&#xe60a;</span>Self-learning</span>
     
     </div>
     <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
@@ -1730,6 +1747,12 @@ jsonContent:
     </div>
     <!-- async load share.js -->
      
+	<!--浏览器搞笑标题-->
+	<script type="text/javascript" src="\js\FunnyTitle.js"></script>
+	<!--动态线条背景-->
+	<script type="text/javascript"
+	color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
+	</script>
     <script type="text/x-mathjax-config">
     MathJax.Hub.Config({
         tex2jax: {
@@ -1745,7 +1768,7 @@ jsonContent:
     });
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
-</body>
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":150},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 </html>
 
 
