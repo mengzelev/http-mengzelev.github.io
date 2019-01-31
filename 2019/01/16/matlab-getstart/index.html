@@ -267,7 +267,7 @@ height:50vh;
                 
                 
                     <div class="post-intro-read">
-                        <span>Word count: <span class="post-count">1,505</span> / Reading time: <span class="post-count">6 min</span></span>
+                        <span>Word count: <span class="post-count">1,720</span> / Reading time: <span class="post-count">7 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
@@ -396,7 +396,8 @@ height:50vh;
         <div class="container container-unloaded">
             <main class="main post-page">
     <article class="article-entry">
-        <h1 id="入门技能"><a href="#入门技能" class="headerlink" title="入门技能"></a>入门技能</h1><h2 id="命令行命令"><a href="#命令行命令" class="headerlink" title="命令行命令"></a>命令行命令</h2><p>matlab基本可以看成一个有自己语法的命令行终端使用<br>下面列举一些我觉得自己将来可能会用到的</p>
+        <p>来源：王正盛 《MATLAB数学工具软件实例简明教程》</p>
+<h1 id="入门技能"><a href="#入门技能" class="headerlink" title="入门技能"></a>入门技能</h1><h2 id="命令行命令"><a href="#命令行命令" class="headerlink" title="命令行命令"></a>命令行命令</h2><p>matlab基本可以看成一个有自己语法的命令行终端使用<br>下面列举一些我觉得自己将来可能会用到的</p>
 <ul>
 <li><code>clc</code>:擦除当前工作窗中所有显示内容</li>
 <li><code>dir</code>:相当于<code>ls</code></li>
@@ -580,7 +581,10 @@ height:50vh;
 <li>函数内部申明的变量都是局部变量</li>
 <li>全局变量前缀<code>global</code>，所有函数都可以对其进行存取和修改</li>
 </ul>
-
+<h1 id="关于括号"><a href="#关于括号" class="headerlink" title="关于括号"></a>关于括号</h1><h2 id="圆括号"><a href="#圆括号" class="headerlink" title="() 圆括号"></a>() 圆括号</h2><p>引用数组中的元素</p>
+<h2 id="方括号"><a href="#方括号" class="headerlink" title="[] 方括号"></a>[] 方括号</h2><p>表示向量或矩阵</p>
+<h2 id="花括号"><a href="#花括号" class="headerlink" title="{} 花括号"></a>{} 花括号</h2><p>用于元胞(cell)数组的分配和引用<br>元胞与矩阵的区别是能放任何类似的元素，而矩阵只能放数值型数据</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">D=&#123;[<span class="number">1</span> <span class="number">2</span> <span class="number">3</span> <span class="number">4</span>],<span class="string">'abc'</span>,&#123;<span class="number">7</span> <span class="number">8</span> <span class="number">9</span>&#125;，[<span class="number">4</span> <span class="number">5</span> <span class="number">6</span>;<span class="number">11</span> <span class="number">22</span> <span class="number">33</span>]&#125;</span><br><span class="line"></span><br><span class="line">D&#123;<span class="number">1</span>&#125; <span class="comment">%表示D中第一个元素        显示为 1 2 3 4</span></span><br><span class="line"></span><br><span class="line">D&#123;<span class="number">1</span>&#125;(<span class="number">2</span>) <span class="comment">%表示D中第一个元素中第二个元素        显示为 2</span></span><br><span class="line">D&#123;<span class="number">3</span>&#125;&#123;<span class="number">1</span>&#125; <span class="comment">%表示第三个元素中第一个元素        显示为 7</span></span><br><span class="line"></span><br><span class="line">D&#123;<span class="number">3</span>&#125;(<span class="number">1</span>) <span class="comment">%表示第三个元素中第一个元素        显示为&#123;[7]&#125;</span></span><br><span class="line"></span><br><span class="line">D&#123;[<span class="number">1</span> <span class="number">2</span> <span class="number">3</span>]&#125; <span class="comment">%表示前三个元素        显示为1 2 3 4 ;    ‘abc’  ;&#123;[7]&#125;  &#123;[8]&#125;  &#123;[9]&#125;</span></span><br></pre></td></tr></table></figure>
     </article>
     <!-- license  -->
     
@@ -748,7 +752,7 @@ top:50vh;
         <div class="toc-catalog">
             <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
         </div>
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#入门技能"><span class="toc-number">1.</span> <span class="toc-text">入门技能</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#命令行命令"><span class="toc-number">1.1.</span> <span class="toc-text">命令行命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#变量"><span class="toc-number">1.2.</span> <span class="toc-text">变量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#显示格式"><span class="toc-number">1.3.</span> <span class="toc-text">显示格式</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#数值计算"><span class="toc-number">2.</span> <span class="toc-text">数值计算</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#矩阵创建"><span class="toc-number">2.1.</span> <span class="toc-text">矩阵创建</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#矩阵运算与数组运算"><span class="toc-number">2.2.</span> <span class="toc-text">矩阵运算与数组运算</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#多项式"><span class="toc-number">2.3.</span> <span class="toc-text">多项式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#表示"><span class="toc-number">2.3.1.</span> <span class="toc-text">表示</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#多项式运算"><span class="toc-number">2.3.2.</span> <span class="toc-text">多项式运算</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数值积分"><span class="toc-number">2.4.</span> <span class="toc-text">数值积分</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#非线性方程"><span class="toc-number">2.5.</span> <span class="toc-text">非线性方程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#微分方程的数值解"><span class="toc-number">2.6.</span> <span class="toc-text">微分方程的数值解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#文件管理"><span class="toc-number">2.7.</span> <span class="toc-text">文件管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#文件输入输出"><span class="toc-number">2.8.</span> <span class="toc-text">文件输入输出</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#符号计算"><span class="toc-number">3.</span> <span class="toc-text">符号计算</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#符号定义"><span class="toc-number">3.1.</span> <span class="toc-text">符号定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#微积分运算"><span class="toc-number">3.2.</span> <span class="toc-text">微积分运算</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#求导"><span class="toc-number">3.2.1.</span> <span class="toc-text">求导</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#积分"><span class="toc-number">3.2.2.</span> <span class="toc-text">积分</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#极限"><span class="toc-number">3.2.3.</span> <span class="toc-text">极限</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#级数和"><span class="toc-number">3.2.4.</span> <span class="toc-text">级数和</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Taylor展开"><span class="toc-number">3.2.5.</span> <span class="toc-text">Taylor展开</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#解方程"><span class="toc-number">3.3.</span> <span class="toc-text">解方程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#线性代数"><span class="toc-number">3.4.</span> <span class="toc-text">线性代数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#化简和代换"><span class="toc-number">3.5.</span> <span class="toc-text">化简和代换</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#画图"><span class="toc-number">4.</span> <span class="toc-text">画图</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#二维"><span class="toc-number">4.1.</span> <span class="toc-text">二维</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三维"><span class="toc-number">4.2.</span> <span class="toc-text">三维</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#MATLAB程序设计"><span class="toc-number">5.</span> <span class="toc-text">MATLAB程序设计</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#输入输出"><span class="toc-number">5.1.</span> <span class="toc-text">输入输出</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#分支语句"><span class="toc-number">5.2.</span> <span class="toc-text">分支语句</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#if语句"><span class="toc-number">5.2.1.</span> <span class="toc-text">if语句</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#swith语句"><span class="toc-number">5.2.2.</span> <span class="toc-text">swith语句</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#循环语句"><span class="toc-number">5.3.</span> <span class="toc-text">循环语句</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#for语句"><span class="toc-number">5.3.1.</span> <span class="toc-text">for语句</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#while语句"><span class="toc-number">5.3.2.</span> <span class="toc-text">while语句</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#函数文件"><span class="toc-number">5.4.</span> <span class="toc-text">函数文件</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#入门技能"><span class="toc-number">1.</span> <span class="toc-text">入门技能</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#命令行命令"><span class="toc-number">1.1.</span> <span class="toc-text">命令行命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#变量"><span class="toc-number">1.2.</span> <span class="toc-text">变量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#显示格式"><span class="toc-number">1.3.</span> <span class="toc-text">显示格式</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#数值计算"><span class="toc-number">2.</span> <span class="toc-text">数值计算</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#矩阵创建"><span class="toc-number">2.1.</span> <span class="toc-text">矩阵创建</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#矩阵运算与数组运算"><span class="toc-number">2.2.</span> <span class="toc-text">矩阵运算与数组运算</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#多项式"><span class="toc-number">2.3.</span> <span class="toc-text">多项式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#表示"><span class="toc-number">2.3.1.</span> <span class="toc-text">表示</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#多项式运算"><span class="toc-number">2.3.2.</span> <span class="toc-text">多项式运算</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数值积分"><span class="toc-number">2.4.</span> <span class="toc-text">数值积分</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#非线性方程"><span class="toc-number">2.5.</span> <span class="toc-text">非线性方程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#微分方程的数值解"><span class="toc-number">2.6.</span> <span class="toc-text">微分方程的数值解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#文件管理"><span class="toc-number">2.7.</span> <span class="toc-text">文件管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#文件输入输出"><span class="toc-number">2.8.</span> <span class="toc-text">文件输入输出</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#符号计算"><span class="toc-number">3.</span> <span class="toc-text">符号计算</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#符号定义"><span class="toc-number">3.1.</span> <span class="toc-text">符号定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#微积分运算"><span class="toc-number">3.2.</span> <span class="toc-text">微积分运算</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#求导"><span class="toc-number">3.2.1.</span> <span class="toc-text">求导</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#积分"><span class="toc-number">3.2.2.</span> <span class="toc-text">积分</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#极限"><span class="toc-number">3.2.3.</span> <span class="toc-text">极限</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#级数和"><span class="toc-number">3.2.4.</span> <span class="toc-text">级数和</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Taylor展开"><span class="toc-number">3.2.5.</span> <span class="toc-text">Taylor展开</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#解方程"><span class="toc-number">3.3.</span> <span class="toc-text">解方程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#线性代数"><span class="toc-number">3.4.</span> <span class="toc-text">线性代数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#化简和代换"><span class="toc-number">3.5.</span> <span class="toc-text">化简和代换</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#画图"><span class="toc-number">4.</span> <span class="toc-text">画图</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#二维"><span class="toc-number">4.1.</span> <span class="toc-text">二维</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三维"><span class="toc-number">4.2.</span> <span class="toc-text">三维</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#MATLAB程序设计"><span class="toc-number">5.</span> <span class="toc-text">MATLAB程序设计</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#输入输出"><span class="toc-number">5.1.</span> <span class="toc-text">输入输出</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#分支语句"><span class="toc-number">5.2.</span> <span class="toc-text">分支语句</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#if语句"><span class="toc-number">5.2.1.</span> <span class="toc-text">if语句</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#swith语句"><span class="toc-number">5.2.2.</span> <span class="toc-text">swith语句</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#循环语句"><span class="toc-number">5.3.</span> <span class="toc-text">循环语句</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#for语句"><span class="toc-number">5.3.1.</span> <span class="toc-text">for语句</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#while语句"><span class="toc-number">5.3.2.</span> <span class="toc-text">while语句</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#函数文件"><span class="toc-number">5.4.</span> <span class="toc-text">函数文件</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#关于括号"><span class="toc-number">6.</span> <span class="toc-text">关于括号</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#圆括号"><span class="toc-number">6.1.</span> <span class="toc-text">() 圆括号</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#方括号"><span class="toc-number">6.2.</span> <span class="toc-text">[] 方括号</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#花括号"><span class="toc-number">6.3.</span> <span class="toc-text">{} 花括号</span></a></li></ol></li></ol>
     </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
@@ -1278,9 +1282,72 @@ top:50vh;
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 37
+        Total : 40
         </div>
         <!-- search  -->
         
@@ -1293,6 +1360,21 @@ top:50vh;
     
     <div class="archive-year"> 2019 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/30</span><a class="archive-post-title" href= "/2019/01/30/ICM-feelings/" >2019美赛经历</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/23</span><a class="archive-post-title" href= "/2019/01/23/python-getstart/" >python学习笔记</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/19</span><a class="archive-post-title" href= "/2019/01/19/matlab-usage/" >数学建模几种常用算法</a>
+        </li>
     
     
         <li class="archive-post-item">
@@ -1501,15 +1583,19 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="ICS"><span class="iconfont-archer">&#xe606;</span>ICS</span>
     
-        <span class="sidebar-tag-name" data-tags="Problem Solving"><span class="iconfont-archer">&#xe606;</span>Problem Solving</span>
-    
         <span class="sidebar-tag-name" data-tags="Assembly Language"><span class="iconfont-archer">&#xe606;</span>Assembly Language</span>
+    
+        <span class="sidebar-tag-name" data-tags="Problem Solving"><span class="iconfont-archer">&#xe606;</span>Problem Solving</span>
     
         <span class="sidebar-tag-name" data-tags="CLRS"><span class="iconfont-archer">&#xe606;</span>CLRS</span>
     
+        <span class="sidebar-tag-name" data-tags="dynamic programming"><span class="iconfont-archer">&#xe606;</span>dynamic programming</span>
+    
         <span class="sidebar-tag-name" data-tags="greedy algorithm"><span class="iconfont-archer">&#xe606;</span>greedy algorithm</span>
     
-        <span class="sidebar-tag-name" data-tags="dynamic programming"><span class="iconfont-archer">&#xe606;</span>dynamic programming</span>
+        <span class="sidebar-tag-name" data-tags="Disjoint Sets"><span class="iconfont-archer">&#xe606;</span>Disjoint Sets</span>
+    
+        <span class="sidebar-tag-name" data-tags="Data Structure"><span class="iconfont-archer">&#xe606;</span>Data Structure</span>
     
         <span class="sidebar-tag-name" data-tags="amortized analysis"><span class="iconfont-archer">&#xe606;</span>amortized analysis</span>
     
@@ -1518,10 +1604,6 @@ top:50vh;
         <span class="sidebar-tag-name" data-tags="Bellman-Ford"><span class="iconfont-archer">&#xe606;</span>Bellman-Ford</span>
     
         <span class="sidebar-tag-name" data-tags="Dijkstra"><span class="iconfont-archer">&#xe606;</span>Dijkstra</span>
-    
-        <span class="sidebar-tag-name" data-tags="Disjoint Sets"><span class="iconfont-archer">&#xe606;</span>Disjoint Sets</span>
-    
-        <span class="sidebar-tag-name" data-tags="Data Structure"><span class="iconfont-archer">&#xe606;</span>Data Structure</span>
     
         <span class="sidebar-tag-name" data-tags="Graph Algorithms"><span class="iconfont-archer">&#xe606;</span>Graph Algorithms</span>
     
@@ -1555,19 +1637,21 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="linux"><span class="iconfont-archer">&#xe606;</span>linux</span>
     
-        <span class="sidebar-tag-name" data-tags="tmux"><span class="iconfont-archer">&#xe606;</span>tmux</span>
-    
         <span class="sidebar-tag-name" data-tags="markdown"><span class="iconfont-archer">&#xe606;</span>markdown</span>
+    
+        <span class="sidebar-tag-name" data-tags="tmux"><span class="iconfont-archer">&#xe606;</span>tmux</span>
     
         <span class="sidebar-tag-name" data-tags="Java"><span class="iconfont-archer">&#xe606;</span>Java</span>
     
         <span class="sidebar-tag-name" data-tags="programming"><span class="iconfont-archer">&#xe606;</span>programming</span>
     
-        <span class="sidebar-tag-name" data-tags="Traversibility"><span class="iconfont-archer">&#xe606;</span>Traversibility</span>
-    
         <span class="sidebar-tag-name" data-tags="Graph"><span class="iconfont-archer">&#xe606;</span>Graph</span>
     
         <span class="sidebar-tag-name" data-tags="Tree"><span class="iconfont-archer">&#xe606;</span>Tree</span>
+    
+        <span class="sidebar-tag-name" data-tags="Traversibility"><span class="iconfont-archer">&#xe606;</span>Traversibility</span>
+    
+        <span class="sidebar-tag-name" data-tags="Math Modeling"><span class="iconfont-archer">&#xe606;</span>Math Modeling</span>
     
     </div>
     <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
@@ -1609,6 +1693,8 @@ jsonContent:
         <span class="sidebar-category-name" data-categories="Diary"><span class="iconfont-archer">&#xe60a;</span>Diary</span>
     
         <span class="sidebar-category-name" data-categories="Self-learning"><span class="iconfont-archer">&#xe60a;</span>Self-learning</span>
+    
+        <span class="sidebar-category-name" data-categories="Dairy"><span class="iconfont-archer">&#xe60a;</span>Dairy</span>
     
     </div>
     <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
