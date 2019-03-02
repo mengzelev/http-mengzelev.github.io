@@ -1,0 +1,1809 @@
+<!DOCTYPE html>
+<html>
+    <!-- title -->
+
+
+
+
+<head>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" >
+    <meta name="author" content="Mengzelev">
+    <meta name="renderer" content="webkit">
+    <meta name="copyright" content="Mengzelev">
+    <meta name="keywords" content="Mengzelev's blog | Mengzelev">
+    <meta name="description" content="nothing to write">
+    <meta name="Cache-Control" content="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <title>算法导论学习笔记-线性规划 · Mengzelev&#39;s Blog</title>
+    <style type="text/css">
+    @font-face {
+        font-family: 'Oswald-Regular';
+        src: url("/font/Oswald-Regular.ttf");
+    }
+
+    body {
+        margin: 0;
+    }
+
+    header,
+    footer,
+    .back-top,
+    .sidebar,
+    .container,
+    .site-intro-meta,
+    .toc-wrapper {
+        display: none;
+    }
+
+    .site-intro {
+        position: relative;
+        z-index: 3;
+        width: 100%;
+        /* height: 50vh; */
+        overflow: hidden;
+    }
+
+    .site-intro-placeholder {
+        position: absolute;
+        z-index: -2;
+        top: 0;
+        left: 0;
+        width: calc(100% + 300px);
+        height: 100%;
+        background: repeating-linear-gradient(-45deg, #444 0, #444 80px, #333 80px, #333 160px);
+        background-position: center center;
+        transform: translate3d(-226px, 0, 0);
+        animation: gradient-move 2.5s ease-out 0s 1;
+    }
+
+    @keyframes gradient-move {
+        0% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        100% {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+
+</style>
+
+    <link rel="preload" href= /css/style.css?v=20180721 as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <link rel="stylesheet" href= /css/mobile.css?v=20180721 media="(max-width: 980px)">
+    
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    
+    <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+/* This file is meant as a standalone workflow for
+- testing support for link[rel=preload]
+- enabling async CSS loading in browsers that do not support rel=preload
+- applying rel preload css once loaded, whether supported or not.
+*/ -->
+<script>
+(function( w ){
+	"use strict";
+	// rel=preload support test
+	if( !w.loadCSS ){
+		w.loadCSS = function(){};
+	}
+	// define on the loadCSS obj
+	var rp = loadCSS.relpreload = {};
+	// rel=preload feature support test
+	// runs once and returns a function for compat purposes
+	rp.support = (function(){
+		var ret;
+		try {
+			ret = w.document.createElement( "link" ).relList.supports( "preload" );
+		} catch (e) {
+			ret = false;
+		}
+		return function(){
+			return ret;
+		};
+	})();
+
+	// if preload isn't supported, get an asynchronous load by using a non-matching media attribute
+	// then change that media back to its intended value on load
+	rp.bindMediaToggle = function( link ){
+		// remember existing media attr for ultimate state, or default to 'all'
+		var finalMedia = link.media || "all";
+
+		function enableStylesheet(){
+			link.media = finalMedia;
+		}
+
+		// bind load handlers to enable media
+		if( link.addEventListener ){
+			link.addEventListener( "load", enableStylesheet );
+		} else if( link.attachEvent ){
+			link.attachEvent( "onload", enableStylesheet );
+		}
+
+		// Set rel and non-applicable media type to start an async request
+		// note: timeout allows this to happen async to let rendering continue in IE
+		setTimeout(function(){
+			link.rel = "stylesheet";
+			link.media = "only x";
+		});
+		// also enable media after 3 seconds,
+		// which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
+		setTimeout( enableStylesheet, 3000 );
+	};
+
+	// loop through link elements in DOM
+	rp.poly = function(){
+		// double check this to prevent external calls from running
+		if( rp.support() ){
+			return;
+		}
+		var links = w.document.getElementsByTagName( "link" );
+		for( var i = 0; i < links.length; i++ ){
+			var link = links[ i ];
+			// qualify links to those with rel=preload and as=style attrs
+			if( link.rel === "preload" && link.getAttribute( "as" ) === "style" && !link.getAttribute( "data-loadcss" ) ){
+				// prevent rerunning on link
+				link.setAttribute( "data-loadcss", true );
+				// bind listeners to toggle media back
+				rp.bindMediaToggle( link );
+			}
+		}
+	};
+
+	// if unsupported, run the polyfill
+	if( !rp.support() ){
+		// run once at least
+		rp.poly();
+
+		// rerun poly on an interval until onload
+		var run = w.setInterval( rp.poly, 500 );
+		if( w.addEventListener ){
+			w.addEventListener( "load", function(){
+				rp.poly();
+				w.clearInterval( run );
+			} );
+		} else if( w.attachEvent ){
+			w.attachEvent( "onload", function(){
+				rp.poly();
+				w.clearInterval( run );
+			} );
+		}
+	}
+
+
+	// commonjs
+	if( typeof exports !== "undefined" ){
+		exports.loadCSS = loadCSS;
+	}
+	else {
+		w.loadCSS = loadCSS;
+	}
+}( typeof global !== "undefined" ? global : this ) );
+</script>
+
+    <link rel="icon" href= "/assets/moe.ico" />
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js" as="script" />
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js" as="script" />
+    <link rel="preload" href="/scripts/main.js" as="script" />
+    <link rel="preload" as="font" href="/font/Oswald-Regular.ttf" crossorigin>
+    <link rel="preload" as="font" href="https://at.alicdn.com/t/font_327081_1dta1rlogw17zaor.woff" crossorigin>
+    
+    <!-- fancybox -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" defer></script>
+    <!-- 百度统计  -->
+    
+    <!-- 谷歌统计  --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    
+</head>
+
+    
+        <body class="post-body">
+    
+    
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><header class="header">
+
+    <div class="read-progress"></div>
+    <div class="header-sidebar-menu">&#xe775;</div>
+    <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >Mengzelev&#39;s Blog</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">算法导论学习笔记-线性规划</a>
+            </div>
+    </div>
+    
+    <a class="home-link" href=/>Mengzelev's Blog</a>
+</header>
+    <div class="wrapper">
+        <div class="site-intro" style=
+
+
+
+
+
+
+
+
+height:50vh;
+
+>
+    
+    <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
+            
+    <div class="site-intro-placeholder"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/hinata.jpg)"></div>
+    <div class="site-intro-meta">
+        <!-- 标题  -->
+        <h1 class="intro-title">
+            <!-- 主页  -->
+            
+            算法导论学习笔记-线性规划
+            <!-- 404 -->
+            
+        </h1>
+        <!-- 副标题 -->
+        <p class="intro-subtitle">
+            <!-- 主页副标题  -->
+            
+            
+            <!-- 404 -->
+            
+        </p>
+        <!-- 文章页meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                    <div class= post-intro-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Problem Solving">Problem Solving</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "CLRS">CLRS</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Graph Algorithms">Graph Algorithms</a>
+    
+</div>
+                
+                
+                    <div class="post-intro-read">
+                        <span>Word count: <span class="post-count">2,178</span> / Reading time: <span class="post-count">8 min</span></span>
+                    </div>
+                
+                <div class="post-intro-meta">
+                    <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                    <span class="post-intro-time">2019/02/13</span>
+                    
+                    <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                        <span class="iconfont-archer">&#xe602;</span>
+                        <span id="busuanzi_value_page_pv"></span>
+                    </span>
+                    
+                    <span class="shareWrapper">
+                        <span class="iconfont-archer shareIcon">&#xe71d;</span>
+                        <span class="shareText">Share</span>
+                        <ul class="shareList">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
+        
+    </div>
+</div>
+        <script>
+ 
+  // get user agent
+  var browser = {
+    versions: function () {
+      var u = window.navigator.userAgent;
+      return {
+        userAgent: u,
+        trident: u.indexOf('Trident') > -1, //IE内核
+        presto: u.indexOf('Presto') > -1, //opera内核
+        webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+        gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+        mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+        ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+        android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+        iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
+        iPad: u.indexOf('iPad') > -1, //是否为iPad
+        webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
+        weixin: u.indexOf('MicroMessenger') == -1, //是否为微信浏览器
+        uc: u.indexOf('UCBrowser') > -1 //是否为android下的UC浏览器
+      };
+    }()
+  }
+  console.log("userAgent:" + browser.versions.userAgent);
+
+  // callback
+  function fontLoaded() {
+    console.log('font loaded');
+    if (document.getElementsByClassName('site-intro-meta')) {
+      document.getElementsByClassName('intro-title')[0].classList.add('intro-fade-in');
+      document.getElementsByClassName('intro-subtitle')[0].classList.add('intro-fade-in');
+      var postIntros = document.getElementsByClassName('post-intros')[0]
+      if (postIntros) {
+        postIntros.classList.add('post-fade-in');
+      }
+    }
+  }
+
+  // UC不支持跨域，所以直接显示
+  function asyncCb(){
+    if (browser.versions.uc) {
+      console.log("UCBrowser");
+      fontLoaded();
+    } else {
+      WebFont.load({
+        custom: {
+          families: ['Oswald-Regular']
+        },
+        loading: function () {  //所有字体开始加载
+          // console.log('loading');
+        },
+        active: function () {  //所有字体已渲染
+          fontLoaded();
+        },
+        inactive: function () { //字体预加载失败，无效字体或浏览器不支持加载
+          console.log('inactive: timeout');
+          fontLoaded();
+        },
+        timeout: 5000 // Set the timeout to two seconds
+      });
+    }
+  }
+
+  function asyncErr(){
+    console.warn('script load from CDN failed, will load local script')
+  }
+
+  // load webfont-loader async, and add callback function
+  function async(u, cb, err) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (cb) { o.addEventListener('load', function (e) { cb(null, e); }, false); }
+    if (err) { o.addEventListener('error', function (e) { err(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+
+  var asyncLoadWithFallBack = function(arr, success, reject) {
+      var currReject = function(){
+        reject()
+        arr.shift()
+        if(arr.length)
+          async(arr[0], success, currReject)
+        }
+
+      async(arr[0], success, currReject)
+  }
+
+  asyncLoadWithFallBack([
+    "https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js", 
+    "https://cdn.bootcss.com/webfont/1.6.28/webfontloader.js",
+    "/lib/webfontloader.min.js"
+  ], asyncCb, asyncErr)
+</script>        
+        <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
+        <div class="container container-unloaded">
+            <main class="main post-page">
+    <article class="article-entry">
+        <h1 id="知识背景"><a href="#知识背景" class="headerlink" title="知识背景"></a>知识背景</h1><ul>
+<li>一个<strong>线性规划问题</strong>是一个线性函数最小化或最大化的问题，该线性函数服从一组有限个线性约束，分为最小化线性规划和最大化线性规划</li>
+<li><strong>可行解</strong>：所有满足约束条件的自变量的取值</li>
+<li><strong>可行区域</strong>：所有可行解在二维空间中构成的凸区域</li>
+<li><strong>目标函数</strong>：希望最大化的函数</li>
+<li><strong>目标值</strong>：目标函数在一个特定点上的值</li>
+<li><strong>最优解</strong>：所有目标值中最大的一个，其目标值为<strong>最优目标值</strong></li>
+<li><strong>不可行的</strong>：一个线性规划没有可行解</li>
+<li><strong>无界的</strong>：一个线性规划有可行解但没有有限的最优目标值</li>
+</ul>
+<h1 id="标准型和松弛型"><a href="#标准型和松弛型" class="headerlink" title="标准型和松弛型"></a>标准型和松弛型</h1><h2 id="标准型"><a href="#标准型" class="headerlink" title="标准型"></a>标准型</h2><ul>
+<li>所有的约束都是不等式</li>
+<li>标准型=目标函数+约束+非负约束</li>
+</ul>
+<p><img src="/2019/02/13/clrs-29Linear-Programming/std.png"></p>
+<ul>
+<li>重写为向量与矩阵的形式，可以用一个元组$(A,b,c)$来表示一个标准型的线性规划</li>
+</ul>
+<p>最大化$$c^Tx$$<br>满足约束$$Ax\le b$$<br>$$x\ge 0$$</p>
+<ul>
+<li><strong>线性规划的等价</strong>：对两个最大化线性规划$L$和$L’$，如果对$L$的每个目标值为$z$的可行解$\overline{x}$，都存在一个对应的$L’$的目标值为$z$的可行解的$\overline{x}’$；(反过来同理)，则称$L$和$L’$是等价的。<ul>
+<li>最小化线性规划和目标函数取负后得到的最大化线性规划是等价的</li>
+</ul>
+</li>
+</ul>
+<h3 id="非标准型的标准化"><a href="#非标准型的标准化" class="headerlink" title="非标准型的标准化"></a>非标准型的标准化</h3><ul>
+<li>目标函数是最小化：取负</li>
+<li>某些变量不具有非负约束：假设$x_j$无线性约束，则将所有出现的$x_j$替换为$x_{j}’-x_{j}’’$，并令$x_{j}’\ge 0, x_{j}’’\ge 0$</li>
+<li>存在等式约束：$\ge + \le$</li>
+<li>存在大于等于约束：取负</li>
+</ul>
+<h2 id="松弛型"><a href="#松弛型" class="headerlink" title="松弛型"></a>松弛型</h2><ul>
+<li>松弛变量$s=b_i-\sum\limits_{j=1}^{n}a_{ij}x_i,s\ge 0$</li>
+<li>只有非负约束是不等式，其余都是等式</li>
+<li><p>当从标准型转换到松弛型时，我们将使用$x_{n+i}$表示与第$i$个不等式相关的松弛变量$$x_{n+i}=b_i-\sum\limits_{j=1}^{n}a_{ij}x_i,x_{n+i}\ge 0$$</p>
+<p><img src="/2019/02/13/clrs-29Linear-Programming/slack.png"></p>
+</li>
+<li><p><strong>基本变量</strong>：等式左边的变量</p>
+</li>
+<li><strong>非基本变量</strong>：等式右边的变量</li>
+<li>有时描述时会省略词语“最大化”和“满足约束”以及明显的非负约束要求</li>
+<li>简洁记号<ul>
+<li>$N$:非基本变量下标的集合</li>
+<li>$B$:基本变量下标的集合</li>
+<li>$N\cup B={1,2,…,n+m}$</li>
+<li>用一个元组$(N,B,A,b,c,v)$来表示松弛型</li>
+<li>这里的$a_{ij}$是“出现”在松弛型中的 负数</li>
+<li>$A,b,c$的小标不必是连续整数的集合，依赖于索引集合$B$和$N$</li>
+</ul>
+</li>
+</ul>
+<p><img src="/2019/02/13/clrs-29Linear-Programming/slack2.png"></p>
+<h1 id="将问题表达为线性规划"><a href="#将问题表达为线性规划" class="headerlink" title="将问题表达为线性规划"></a>将问题表达为线性规划</h1><h2 id="单对最短路径"><a href="#单对最短路径" class="headerlink" title="单对最短路径"></a>单对最短路径</h2><p>如下的线性规划可以计算从$s$到$t$的最短路径权值<br><img src="/2019/02/13/clrs-29Linear-Programming/sssp.png"></p>
+<p>之所以是<strong>最大化目标函数</strong>，是因为最短路径问题的一个最优解把每一个$\overline{d}_v$设置成所有$\overline{d}_u+w(u,v)$的最小值，使得$\overline{d}_v$是小于等于集合${\overline{d}_u+w(u,v)}$所有值的最大值；而最小化目标函数会使所有$\overline{d}_v=0$，这个解显然没有意义</p>
+<h2 id="最大流"><a href="#最大流" class="headerlink" title="最大流"></a>最大流</h2><p>最大流问题表示为一个线性规划<br><img src="/2019/02/13/clrs-29Linear-Programming/maxflow.png"></p>
+<p>这个线性规划可以重写为有$O(V+E)$个约束的表示，这样计算起来会更高效</p>
+<h2 id="最小费用流"><a href="#最小费用流" class="headerlink" title="最小费用流"></a>最小费用流</h2><h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><ul>
+<li>最大流的推广</li>
+<li>每条边除了容量还有费用值$a(u,v)$。如果通过边$(u,v)$传送了$f_{uv}$个单位的流，那么产生了一个费用$a(u,v)f_{uv}$。</li>
+<li>求从$s$到$t$发送$d$个单位的流(流目标)，使得流上发生的总费用$\sum\limits_{(u,v)\in E}a(u,v)f_{uv}$最小</li>
+</ul>
+<p>最小费用流有专门设计的多项式时间算法，但算导上没有涉及到</p>
+<h3 id="线性规划建模"><a href="#线性规划建模" class="headerlink" title="线性规划建模"></a>线性规划建模</h3><p><img src="/2019/02/13/clrs-29Linear-Programming/mincost.png"></p>
+<p><s>这不是很直观吗</s></p>
+<h2 id="多商品流"><a href="#多商品流" class="headerlink" title="多商品流"></a>多商品流</h2><h3 id="问题描述-1"><a href="#问题描述-1" class="headerlink" title="问题描述"></a>问题描述</h3><ul>
+<li>在最小费用流问题的基础上，有$k$种不同的商品$K_1,K_2,…,K_k$，其中用三元组$K_i=(s_i,t_i,d_i)$来详细说明商品的源点、汇点和需求</li>
+<li>定义商品$i$的流$f_i$，汇聚流为各种商品流的总和$f_{uv}=\sum\limits_{i=1}^{k}f_{iuv}$</li>
+<li>不用最小化任何目标函数，只需要确定是否存在这样的一个流</li>
+</ul>
+<h3 id="线性规划建模-1"><a href="#线性规划建模-1" class="headerlink" title="线性规划建模"></a>线性规划建模</h3><p><img src="/2019/02/13/clrs-29Linear-Programming/multi.png"></p>
+<h1 id="单纯性算法"><a href="#单纯性算法" class="headerlink" title="单纯性算法"></a>单纯性算法</h1><ul>
+<li>求解线性规划的经典方法</li>
+<li>在最坏情况下执行时间非多项式</li>
+<li>在实际中次算法通常相当快速</li>
+<li>可以看成不等式上的<strong>高斯消元法</strong></li>
+</ul>
+<h2 id="主要思想"><a href="#主要思想" class="headerlink" title="主要思想"></a>主要思想</h2><ul>
+<li>每轮迭代都关联一个“基本解”<ul>
+<li>从松弛型中得到“基本解”</li>
+<li>将每个非基本变量设为0，并从等式约束中计算基本变量的值</li>
+</ul>
+</li>
+<li>每轮迭代把一个松弛型转换成一个等价的松弛型 </li>
+<li>如果一个<strong>非基本变量</strong>从0开始增加时目标值也增加(目标函数中系数为正)，则增加该非基本变量直到某<strong>基本变量</strong>为0</li>
+<li>重写松弛型，<strong>交换</strong>此基本变量和选定的非基本变量，这个操作称为<strong>转动</strong><ul>
+<li>一个转动选取一个非基本变量$x_e$(替入变量)和一个基本变量$x_l$(替出变量)</li>
+</ul>
+</li>
+</ul>
+<p>单纯型算法执行了两个操作</p>
+<ol>
+<li>重写等式使得变量再等式的左边与右边之间移动</li>
+<li>替换一个等式为另一个等式</li>
+</ol>
+<p>这两个操作都建立了等价的问题</p>
+<h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2><ol>
+<li>在目标函数中选一个<strong>最大正系数非基本变量</strong>$x_1$，尝试增大$x_1$，使得$z$增大(增大时必须满足约束条件)</li>
+<li>找到最紧的约，解出$x_1$</li>
+<li>将$x_1$代入系统中其他约束和目标函数【转动】</li>
+<li>找到新系统的基本解</li>
+</ol>
+<h2 id="转动"><a href="#转动" class="headerlink" title="转动"></a>转动</h2><ul>
+<li>输入：元组$(N,B,A,b,c,v)$，替出变量$x_l$的下标$l$(从左边调到右边),以及替入变量$x_e$的下标$e$(从右边调到左边)<strong>出入是相对非基本变量集合$N$而言的</strong></li>
+<li>输出：新松弛的元组$(\hat{N},\hat{B},\hat{A},\hat{b},\hat{c},\hat{v})$</li>
+</ul>
+<p><img src="/2019/02/13/clrs-29Linear-Programming/pivot.png"></p>
+<h2 id="正式的单纯性算法"><a href="#正式的单纯性算法" class="headerlink" title="正式的单纯性算法"></a>正式的单纯性算法</h2><p>SIMPLEX</p>
+<ul>
+<li>输入：一个标准型的线性规划</li>
+<li>输出：一个$n$维向量，表示该线性规划的一个最优解</li>
+<li>假设INITIALIZE-SIMPLEX过程返回一个初始基本解可行的松弛型或不可解信息</li>
+<li>3~12行：算法主体<ul>
+<li>如果都是目标函数所有系数为负，则while循环终止，否则第4行选择替入变量$x_e$</li>
+<li>5~9行检查每个约束，然后挑出一个最严格限制$x_e$增加幅度的约束相关联的基本变量$x_l$，如果没有约束能够限制替入变量增加的幅度，则在第11行返回<strong>“无界”</strong></li>
+<li>调用PIVOT交换替入变量和替出变量</li>
+<li>13~16行吧所有非基本变量设为0，把基本变量$\overline{x_i}$设为$b_i$</li>
+<li>17行返回这些值</li>
+</ul>
+</li>
+</ul>
+<p><img src="/2019/02/13/clrs-29Linear-Programming/simplex.png"></p>
+<h3 id="循环不变式"><a href="#循环不变式" class="headerlink" title="循环不变式"></a>循环不变式</h3><p>while循环每次迭代开始：</p>
+<ul>
+<li>此松弛型等价于调用INITIALIZE-SIMPLEX返回的松弛型</li>
+<li>对每个$i\in B$，有$b_i\ge 0$(保证新系统的基本解可行)</li>
+<li>此松弛型相关的基本解是可行的</li>
+</ul>
+<p>需要保证while循环终止，可以通过第4行和第9行总是选择具有最小下标的变量来打破目标值不变的局面</p>
+<p>假设INITIALIZE-SIMPLEX返回一个基本解可行的松弛型，那么SIMPLEX要么报告一个线性规划是无界的，要么以一个可行解结束，且至多$(^{m+n}_{m})$次循环内终止</p>
+<h1 id="对偶性"><a href="#对偶性" class="headerlink" title="对偶性"></a>对偶性</h1><p>对偶性：给定一个最大化问题，我们定义一个相关的最小化问题，使得这两个问题具有同样的最优目标值(e.g.最大流最小割)</p>
+<p>给定一个标准型的原式线性规划，我们定义其对偶线性规划为(将最大化改为最小化，交换右边系数与目标函数的系数)<br><img src="/2019/02/13/clrs-29Linear-Programming/duality.png"></p>
+<p>弱对偶性：原式线性规划的任意可行解的值不大于此对偶线性规划的任意可行解的对应值</p>
+<p><strong>引理 29.8</strong>：线性规划对偶性</p>
+<p><img src="/2019/02/13/clrs-29Linear-Programming/29-10.png"></p>
+<p>证明涉及大量数学推导</p>
+<p>对偶问题都可以像最大流最小割一样，用来转移火力，找到一个等价的问题来求解原来的问题</p>
+
+    </article>
+    <!-- license  -->
+    
+        <div class="license-wrapper">
+            <p>原文作者: <a href="https://mengzelev.github.io">Mengzelev</a>
+            <p>原文链接: <a href="https://mengzelev.github.io/2019/02/13/clrs-29Linear-Programming/">https://mengzelev.github.io/2019/02/13/clrs-29Linear-Programming/</a>
+            <p>发表日期: <a href="https://mengzelev.github.io/2019/02/13/clrs-29Linear-Programming/">February 13th 2019, 8:28:03 pm</a>
+            <p>版权声明: 本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
+        </div>
+    
+    <!-- paginator  -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+                <div class="nextSlogan">Next Post</div>
+                <a href= "/2019/02/18/2019-winter-flags/" title= 2019年寒假计划(flags) >
+                    <div class="nextTitle">2019年寒假计划(flags)</div>
+                </a>
+            
+        </li>
+        <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href= "/2019/02/12/SVM-getstart/" title= SVM的临时抱佛脚for HK >
+                    <div class="prevTitle">SVM的临时抱佛脚for HK</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+<!-- City版安装代码已完成 -->
+    
+    
+    <!--PC和WAP自适应版-->
+
+    <!--PC版-->
+
+
+    
+    
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+    <div id="comment"></div>
+    <script>
+    new Valine({
+        el: '#comment' ,
+        notify:false, 
+        verify:false, 
+        appId: "yj3PGIKmV8xpEnFYOgSseo5x-gzGzoHsz",
+        appKey: "vGSIx5E7w6LLK0M0jUlIUG05",
+        placeholder: "看完了都不说一句再走么(。•ω•)σ)´Д`)",
+        path:window.location.pathname, 
+        avatar:'mm' 
+    });
+    </script>
+
+
+    <!-- 评论 -->
+</main>
+            <!-- profile -->
+            
+        </div>
+        <footer class="footer footer-unloaded">
+    <!-- social  -->
+    
+    <div class="social">
+        
+    
+        
+            
+                <a href="mailto:913426715@qq.com" class="iconfont-archer email" title=email ></a>
+            
+        
+    
+        
+            
+                <a href="//github.com/mengzelev" class="iconfont-archer github" target="_blank" title=github></a>
+            
+        
+    
+        
+            
+                <span class="iconfont-archer wechat" title=wechat>
+                  
+                  <img class="profile-qr" src="/assets/wx.png" />
+                </span>
+            
+        
+    
+        
+            
+                <span class="iconfont-archer qq" title=qq>
+                  
+                  <img class="profile-qr" src="/assets/qq.jpg" />
+                </span>
+            
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+            
+                <a href="/atom.xml" class="iconfont-archer rss" target="_blank" title=rss></a>
+            
+        
+    
+
+    </div>
+    
+    <!-- powered by Hexo  -->
+    <div class="copyright">
+        <span id="hexo-power">Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></span><span class="iconfont-archer power">&#xe635;</span><span id="theme-info">theme <a href="https://github.com/fi3ework/hexo-theme-archer" target="_blank">Archer</a></span>
+    </div>
+    <!-- 不蒜子  -->
+    
+    <div class="busuanzi-container">
+    
+     
+    <span id="busuanzi_container_site_pv">PV: <span id="busuanzi_value_site_pv"></span> :)</span>
+    
+    </div>
+    
+</footer>
+    </div>
+    <!-- toc -->
+    
+    <div class="toc-wrapper" style=
+    
+
+
+
+
+
+
+
+top:50vh;
+
+    >
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#知识背景"><span class="toc-number">1.</span> <span class="toc-text">知识背景</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#标准型和松弛型"><span class="toc-number">2.</span> <span class="toc-text">标准型和松弛型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#标准型"><span class="toc-number">2.1.</span> <span class="toc-text">标准型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#非标准型的标准化"><span class="toc-number">2.1.1.</span> <span class="toc-text">非标准型的标准化</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#松弛型"><span class="toc-number">2.2.</span> <span class="toc-text">松弛型</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#将问题表达为线性规划"><span class="toc-number">3.</span> <span class="toc-text">将问题表达为线性规划</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#单对最短路径"><span class="toc-number">3.1.</span> <span class="toc-text">单对最短路径</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#最大流"><span class="toc-number">3.2.</span> <span class="toc-text">最大流</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#最小费用流"><span class="toc-number">3.3.</span> <span class="toc-text">最小费用流</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#问题描述"><span class="toc-number">3.3.1.</span> <span class="toc-text">问题描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#线性规划建模"><span class="toc-number">3.3.2.</span> <span class="toc-text">线性规划建模</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#多商品流"><span class="toc-number">3.4.</span> <span class="toc-text">多商品流</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#问题描述-1"><span class="toc-number">3.4.1.</span> <span class="toc-text">问题描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#线性规划建模-1"><span class="toc-number">3.4.2.</span> <span class="toc-text">线性规划建模</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#单纯性算法"><span class="toc-number">4.</span> <span class="toc-text">单纯性算法</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#主要思想"><span class="toc-number">4.1.</span> <span class="toc-text">主要思想</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#步骤"><span class="toc-number">4.2.</span> <span class="toc-text">步骤</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#转动"><span class="toc-number">4.3.</span> <span class="toc-text">转动</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#正式的单纯性算法"><span class="toc-number">4.4.</span> <span class="toc-text">正式的单纯性算法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#循环不变式"><span class="toc-number">4.4.1.</span> <span class="toc-text">循环不变式</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#对偶性"><span class="toc-number">5.</span> <span class="toc-text">对偶性</span></a></li></ol>
+    </div>
+    
+    <div class="back-top iconfont-archer">&#xe639;</div>
+    <div class="sidebar sidebar-hide">
+    <ul class="sidebar-tabs sidebar-tabs-active-0">
+        <li class="sidebar-tab-archives"><span class="iconfont-archer">&#xe67d;</span><span class="tab-name">Archive</span></li>
+        <li class="sidebar-tab-tags"><span class="iconfont-archer">&#xe61b;</span><span class="tab-name">Tag</span></li>
+        <li class="sidebar-tab-categories"><span class="iconfont-archer">&#xe666;</span><span class="tab-name">Cate</span></li>
+    </ul>
+    <div class="sidebar-content sidebar-content-show-archive">
+          <div class="sidebar-panel-archives">
+    <!-- 在ejs中将archive按照时间排序 -->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-and-search">
+        <div class="total-archive">
+        Total : 43
+        </div>
+        <!-- search  -->
+        
+    </div>
+    
+    <div class="post-archive">
+    
+    
+    
+    
+    <div class="archive-year"> 2019 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/18</span><a class="archive-post-title" href= "/2019/02/18/2019-winter-flags/" >2019年寒假计划(flags)</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/13</span><a class="archive-post-title" href= "/2019/02/13/clrs-29Linear-Programming/" >算法导论学习笔记-线性规划</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/12</span><a class="archive-post-title" href= "/2019/02/12/SVM-getstart/" >SVM的临时抱佛脚for HK</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/11</span><a class="archive-post-title" href= "/2019/02/11/HKUST-discussion/" >HKUST项目讨论内容</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/30</span><a class="archive-post-title" href= "/2019/01/30/ICM-feelings/" >2019美赛经历</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/23</span><a class="archive-post-title" href= "/2019/01/23/python-getstart/" >python学习笔记</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/19</span><a class="archive-post-title" href= "/2019/01/19/matlab-usage/" >数学建模几种常用算法</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/16</span><a class="archive-post-title" href= "/2019/01/16/matlab-getstart/" >MATLAB临时抱佛脚</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/07</span><a class="archive-post-title" href= "/2019/01/07/Problem-Solving-3/" >问题求解3-总复习</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2018 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/29</span><a class="archive-post-title" href= "/2018/12/29/lab4-report/" >Lab4 实验报告</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/28</span><a class="archive-post-title" href= "/2018/12/28/PA4-report/" >PA4实验报告</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/18</span><a class="archive-post-title" href= "/2018/12/18/clrs28Matrix-Operation/" >算法导论学习笔记-矩阵运算</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/13</span><a class="archive-post-title" href= "/2018/12/13/planar-graph-and-coloring/" >图论学习笔记-平面图与着色</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/10</span><a class="archive-post-title" href= "/2018/12/10/Dinner/" >卫宫家今天的饭</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/08</span><a class="archive-post-title" href= "/2018/12/08/PA3-report/" >PA3实验报告</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/05</span><a class="archive-post-title" href= "/2018/12/05/clrs-26Maximum-Flow/" >算法导论学习笔记-最大流</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/28</span><a class="archive-post-title" href= "/2018/11/28/matchings/" >图论学习笔记-图中的匹配与覆盖</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/24</span><a class="archive-post-title" href= "/2018/11/24/lab3-report/" >Lab3：链接与加载（2）实验报告</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/21</span><a class="archive-post-title" href= "/2018/11/21/traversability/" >图论学习笔记-旅行问题</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/14</span><a class="archive-post-title" href= "/2018/11/14/connectivity/" >图论学习笔记-图中的连通性与距离</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/07</span><a class="archive-post-title" href= "/2018/11/07/clrs-25All-Pairs-Shortest-Paths/" >算法导论学习笔记-所有结点对的最短路径问题</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/06</span><a class="archive-post-title" href= "/2018/11/06/lab2-report/" >Lab2:链接与加载 实验报告</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/06</span><a class="archive-post-title" href= "/2018/11/06/PA2-report/" >PA2实验报告</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/30</span><a class="archive-post-title" href= "/2018/10/30/clrs-24Single-Source-Shortest-Path/" >算法导论学习笔记-单源最短路径</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/24</span><a class="archive-post-title" href= "/2018/10/24/clrs-22graphic-algs/" >算法导论学习笔记-基本图论算法</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/14</span><a class="archive-post-title" href= "/2018/10/14/tree/" >图论学习笔记-树</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/12</span><a class="archive-post-title" href= "/2018/10/12/lab1-report/" >Lab1-乘法 实验报告</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/06</span><a class="archive-post-title" href= "/2018/10/06/clrs-21DisjointSets/" >算法导论学习笔记-用于不相交集合的数据结构</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/04</span><a class="archive-post-title" href= "/2018/10/04/pa-inspirations/" >做pa的时候可能会用到的操作</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/04</span><a class="archive-post-title" href= "/2018/10/04/PA1-report/" >PA1实验报告</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/27</span><a class="archive-post-title" href= "/2018/09/27/ics-process-calling/" >关于“过程调用”的讨论</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/21</span><a class="archive-post-title" href= "/2018/09/21/regex/" >正则表达式学习笔记</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/17</span><a class="archive-post-title" href= "/2018/09/17/clrs-17amortized/" >算法导论学习笔记-摊还分析</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/17</span><a class="archive-post-title" href= "/2018/09/17/clrs-16greedy/" >算法导论学习笔记-贪心算法</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/16</span><a class="archive-post-title" href= "/2018/09/16/startjava/" >面向OJ的Java学习</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/12</span><a class="archive-post-title" href= "/2018/09/12/tmux/" >使用tmux变身炫酷程序猿(x</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/06</span><a class="archive-post-title" href= "/2018/09/06/vim/" >vim初探</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/31</span><a class="archive-post-title" href= "/2018/08/31/clrs-15dp/" >算法导论学习笔记-动态规划</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/30</span><a class="archive-post-title" href= "/2018/08/30/asm2/" >汇编语言复习笔记（二）</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/29</span><a class="archive-post-title" href= "/2018/08/29/asm-notes/" >汇编语言复习笔记（一）</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/18</span><a class="archive-post-title" href= "/2018/08/18/freshman/" >胡言乱语的大一总结</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/12</span><a class="archive-post-title" href= "/2018/08/12/test-md/" >Markdown test</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/28</span><a class="archive-post-title" href= "/2018/07/28/hello-world/" >Hello World</a>
+        </li>
+    
+    </div>
+  </div>
+        <div class="sidebar-panel-tags">
+    <div class="sidebar-tags-name">
+    
+        <span class="sidebar-tag-name" data-tags="Flags"><span class="iconfont-archer">&#xe606;</span>Flags</span>
+    
+        <span class="sidebar-tag-name" data-tags="Math Modeling"><span class="iconfont-archer">&#xe606;</span>Math Modeling</span>
+    
+        <span class="sidebar-tag-name" data-tags="Notes"><span class="iconfont-archer">&#xe606;</span>Notes</span>
+    
+        <span class="sidebar-tag-name" data-tags="pa"><span class="iconfont-archer">&#xe606;</span>pa</span>
+    
+        <span class="sidebar-tag-name" data-tags="ICS"><span class="iconfont-archer">&#xe606;</span>ICS</span>
+    
+        <span class="sidebar-tag-name" data-tags="Problem Solving"><span class="iconfont-archer">&#xe606;</span>Problem Solving</span>
+    
+        <span class="sidebar-tag-name" data-tags="Assembly Language"><span class="iconfont-archer">&#xe606;</span>Assembly Language</span>
+    
+        <span class="sidebar-tag-name" data-tags="CLRS"><span class="iconfont-archer">&#xe606;</span>CLRS</span>
+    
+        <span class="sidebar-tag-name" data-tags="dynamic programming"><span class="iconfont-archer">&#xe606;</span>dynamic programming</span>
+    
+        <span class="sidebar-tag-name" data-tags="greedy algorithm"><span class="iconfont-archer">&#xe606;</span>greedy algorithm</span>
+    
+        <span class="sidebar-tag-name" data-tags="amortized analysis"><span class="iconfont-archer">&#xe606;</span>amortized analysis</span>
+    
+        <span class="sidebar-tag-name" data-tags="Disjoint Sets"><span class="iconfont-archer">&#xe606;</span>Disjoint Sets</span>
+    
+        <span class="sidebar-tag-name" data-tags="Data Structure"><span class="iconfont-archer">&#xe606;</span>Data Structure</span>
+    
+        <span class="sidebar-tag-name" data-tags="Single Source Shortest Path"><span class="iconfont-archer">&#xe606;</span>Single Source Shortest Path</span>
+    
+        <span class="sidebar-tag-name" data-tags="Bellman-Ford"><span class="iconfont-archer">&#xe606;</span>Bellman-Ford</span>
+    
+        <span class="sidebar-tag-name" data-tags="Dijkstra"><span class="iconfont-archer">&#xe606;</span>Dijkstra</span>
+    
+        <span class="sidebar-tag-name" data-tags="Graph Algorithms"><span class="iconfont-archer">&#xe606;</span>Graph Algorithms</span>
+    
+        <span class="sidebar-tag-name" data-tags="Graph Theory"><span class="iconfont-archer">&#xe606;</span>Graph Theory</span>
+    
+        <span class="sidebar-tag-name" data-tags="Connectivity"><span class="iconfont-archer">&#xe606;</span>Connectivity</span>
+    
+        <span class="sidebar-tag-name" data-tags="freshman"><span class="iconfont-archer">&#xe606;</span>freshman</span>
+    
+        <span class="sidebar-tag-name" data-tags="college life"><span class="iconfont-archer">&#xe606;</span>college life</span>
+    
+        <span class="sidebar-tag-name" data-tags="ics"><span class="iconfont-archer">&#xe606;</span>ics</span>
+    
+        <span class="sidebar-tag-name" data-tags="process calling"><span class="iconfont-archer">&#xe606;</span>process calling</span>
+    
+        <span class="sidebar-tag-name" data-tags="Lab"><span class="iconfont-archer">&#xe606;</span>Lab</span>
+    
+        <span class="sidebar-tag-name" data-tags="Ics"><span class="iconfont-archer">&#xe606;</span>Ics</span>
+    
+        <span class="sidebar-tag-name" data-tags="Matchings"><span class="iconfont-archer">&#xe606;</span>Matchings</span>
+    
+        <span class="sidebar-tag-name" data-tags="Factorization"><span class="iconfont-archer">&#xe606;</span>Factorization</span>
+    
+        <span class="sidebar-tag-name" data-tags="MATLAB"><span class="iconfont-archer">&#xe606;</span>MATLAB</span>
+    
+        <span class="sidebar-tag-name" data-tags="Linux"><span class="iconfont-archer">&#xe606;</span>Linux</span>
+    
+        <span class="sidebar-tag-name" data-tags="vim"><span class="iconfont-archer">&#xe606;</span>vim</span>
+    
+        <span class="sidebar-tag-name" data-tags="Python"><span class="iconfont-archer">&#xe606;</span>Python</span>
+    
+        <span class="sidebar-tag-name" data-tags="markdown"><span class="iconfont-archer">&#xe606;</span>markdown</span>
+    
+        <span class="sidebar-tag-name" data-tags="Java"><span class="iconfont-archer">&#xe606;</span>Java</span>
+    
+        <span class="sidebar-tag-name" data-tags="programming"><span class="iconfont-archer">&#xe606;</span>programming</span>
+    
+        <span class="sidebar-tag-name" data-tags="Traversibility"><span class="iconfont-archer">&#xe606;</span>Traversibility</span>
+    
+        <span class="sidebar-tag-name" data-tags="tmux"><span class="iconfont-archer">&#xe606;</span>tmux</span>
+    
+        <span class="sidebar-tag-name" data-tags="linux"><span class="iconfont-archer">&#xe606;</span>linux</span>
+    
+        <span class="sidebar-tag-name" data-tags="regular expressions"><span class="iconfont-archer">&#xe606;</span>regular expressions</span>
+    
+        <span class="sidebar-tag-name" data-tags="Graph"><span class="iconfont-archer">&#xe606;</span>Graph</span>
+    
+        <span class="sidebar-tag-name" data-tags="Tree"><span class="iconfont-archer">&#xe606;</span>Tree</span>
+    
+    </div>
+    <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
+    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
+    缺失模块。<br/>
+    1、请确保node版本大于6.2<br/>
+    2、在博客根目录（注意不是archer根目录）执行以下命令：<br/>
+    <span style="color: #f75357; font-size: 1rem; line-height: 2rem;">npm i hexo-generator-json-content --save</span><br/>
+    3、在根目录_config.yml里添加配置：
+    <pre style="color: #787878; font-size: 0.6rem;">
+jsonContent:
+  meta: false
+  pages: false
+  posts:
+    title: true
+    date: true
+    path: true
+    text: false
+    raw: false
+    content: false
+    slug: false
+    updated: false
+    comments: false
+    link: false
+    permalink: false
+    excerpt: false
+    categories: true
+    tags: true</pre>
+    </div> 
+    <div class="sidebar-tags-list"></div>
+</div>
+        <div class="sidebar-panel-categories">
+    <div class="sidebar-categories-name">
+    
+        <span class="sidebar-category-name" data-categories="Flags"><span class="iconfont-archer">&#xe60a;</span>Flags</span>
+    
+        <span class="sidebar-category-name" data-categories="Diary"><span class="iconfont-archer">&#xe60a;</span>Diary</span>
+    
+        <span class="sidebar-category-name" data-categories="Notes"><span class="iconfont-archer">&#xe60a;</span>Notes</span>
+    
+        <span class="sidebar-category-name" data-categories="Self-learning"><span class="iconfont-archer">&#xe60a;</span>Self-learning</span>
+    
+    </div>
+    <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
+    <div class="sidebar-categories-list"></div>
+</div>
+    </div>
+</div> 
+    <script>
+    var siteMeta = {
+        root: "/",
+        author: "Mengzelev"
+    }
+</script>
+    <!-- CDN failover -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+    <script type="text/javascript">
+        if (typeof window.$ === 'undefined')
+        {
+            console.warn('jquery load from jsdelivr failed, will load local script')
+            document.write('<script src="/lib/jquery.min.js">\x3C/script>')
+        }
+    </script>
+    <script src="/scripts/main.js"></script>
+    <!-- algolia -->
+    
+    <!-- busuanzi  -->
+    
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+    <!-- CNZZ  -->
+    
+    </div>
+    <!-- async load share.js -->
+    
+        <script src="/scripts/share.js" async></script>    
+     
+	<!--浏览器搞笑标题-->
+	<script type="text/javascript" src="\js\FunnyTitle.js"></script>
+	<!--动态线条背景-->
+	<script type="text/javascript"
+	color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
+	</script>
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="custom_mathjax_source">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":150},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
+
+

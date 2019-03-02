@@ -354,6 +354,129 @@ height:50vh;
     
     
     <article class="index-post">
+        <a class="abstract-title" href = "/2018/11/07/clrs-25All-Pairs-Shortest-Paths/" >
+            
+                <span>算法导论学习笔记-所有结点对的最短路径问题</span>
+        </a>
+        <div class="abstract-content">
+            矩阵乘法最优子结构$l_{ij}^(m)}$:从结点$i$到结点$j$的至多包含$m$条边的任意路径中的最小权重。$$l_{ij}^{(m)} = \min\limits_{1\lek\le n}{l_{ik}^{(m1)}+w_{kj}}$$
+自底向上计算最短路径权重
+三重循环，时间复杂度为$\Theta(n^3)$
+形式上与矩阵乘法的计算非常类似
+计算$L^{(n-1)}=W^{n-1}$
+这个算法本质上就是对$n$个点每个跑了一遍Bellman-Ford
+改进运行时间重复平方技术二分计算矩阵的幂
+
+
+优化后时间复杂度为$\Theta(n^3\lgn n)$
+Floyd-Warsha...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/11/07</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Problem Solving">Problem Solving</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "CLRS">CLRS</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Graph Algorithms">Graph Algorithms</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href = "/2018/11/06/lab2-report/" >
+            
+                <span>Lab2:链接与加载 实验报告</span>
+        </a>
+        <div class="abstract-content">
+            实验过程按照实验讲义的提示，首先找到了libc库所在的位置，输出基本与讲义中给出的一致，不作赘述。
+编写的测试文件a.c的代码为
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+int main (){
+    int a = rand();
+    printf(&quot;%d\n&quot;,a);
+    return 0;
+}
+只需要有对rand的调用且保证不会被编译器优化掉就可以了。
+找到动态库文件之后，对该二进制文件进行反汇编
+$ objdump -d /lib/x86_64-linux-gnu/libc.so.6 &...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/11/06</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Notes">Notes</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Lab">Lab</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Ics">Ics</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href = "/2018/11/06/PA2-report/" >
+            
+                <span>PA2实验报告</span>
+        </a>
+        <div class="abstract-content">
+            实验进度描述2018/10/04RTF实验讲义，RTFSC，我是谁，我在哪儿，我要干什么
+2018/10/05经历了两天的RTFSC后终于看懂了框架代码是干嘛的，RTFM实现了sub,push,ret,call等指令，在nemu中运行了第一个程序dummy
+2018/10/21听了同学们的建议，先实现了diff-test，结果发现PA2.1的指令实现有bug。修复了这些bug并温故框架代码的构成
+2018/10/22花了一整天对照着FM实现了exec目录下大部分指令，填写opcode_table巨表，然而有海量bug等待发现
+2018/10/27开diff-test跑完了cputest中...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/11/06</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Notes">Notes</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "pa">pa</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href = "/2018/10/30/clrs-24Single-Source-Shortest-Path/" >
             
                 <span>算法导论学习笔记-单源最短路径</span>
@@ -672,133 +795,10 @@ $开头的表示在命令行中键入的代码，否则为文件中的代码
         </div>
     </article>
     
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2018/09/27/ics-process-calling/" >
-            
-                <span>关于“过程调用”的讨论</span>
-        </a>
-        <div class="abstract-content">
-            这是计算机系统基础课上的开放课题，在不同环境下测试一些UB的结果，照理说此处应该有分析但是萌捷列夫懒了，等ddl处理掉了再来写。
-实验一代码#include &lt;stdio.h&gt; 
-
-int main(int argc, char* argv[]){
-    int a = 10;
-    double *p = (double*)&amp;a;
-    printf(&quot;%f\n&quot;, *p);
-    printf(&quot;%f\n&quot;, ((double)(a)));
-return 0;
-}
-windows10环境：dev-cpp/TDM-GC...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/09/27</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "ics">ics</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "process calling">process calling</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2018/09/21/regex/" >
-            
-                <span>正则表达式学习笔记</span>
-        </a>
-        <div class="abstract-content">
-            废话不多说，贴4张截图就跑路（。
-有空还是会回来写的，容我先把ddl肝完（瘫）。
-PA讲义中的Linux-C教程
-
-
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/09/21</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Notes">Notes</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "pa">pa</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "regular expressions">regular expressions</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "linux">linux</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2018/09/17/clrs-17amortized/" >
-            
-                <span>算法导论学习笔记-摊还分析</span>
-        </a>
-        <div class="abstract-content">
-            聚合分析聚合分析指，证明对所有n，一个n个操作的序列的最坏情况下花费的总时间为T(n)。因此在最坏情况下，每个操作的平均代价，或摊还代价为T(n)/n。
-摊还操作可以看作是不带概率计算的平均情况分析。因为概率不好计算。概率什么时候好计算过了
-此摊还代价适用于每个操作，即使序列中有多种类型的操作也是如此。
-算法导论上给出的示例为增加了MULTIPOP的栈操作和二进制计数器递增问题，简单概括一下二者的共同点：
-
-需要分析复杂度的操作由连续的n个操作构成
-每个单步操作的时间复杂度难以确定为与n有关的表达式，与当前状态密切相关
-对每个单步操作取最坏情况得出的上界过于宽松，浪费时间
-n个连续操作的...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/09/17</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Notes">Notes</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Problem Solving">Problem Solving</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "CLRS">CLRS</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "amortized analysis">amortized analysis</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
     <!-- paginator  -->
     
     <nav class="page-nav">
-        <a class="extend prev" rel="prev" href="/page/2/">&#60; PREV</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/4/">NEXT &#62;</a>
+        <a class="extend prev" rel="prev" href="/page/2/">&#60; PREV</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/4/">NEXT &#62;</a>
     </nav>
     
 </main>
@@ -1579,9 +1579,76 @@ n个连续操作的...
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 40
+        Total : 43
         </div>
         <!-- search  -->
         
@@ -1597,6 +1664,26 @@ n个连续操作的...
     
     
         <li class="archive-post-item">
+            <span class="archive-post-date">02/18</span><a class="archive-post-title" href= "/2019/02/18/2019-winter-flags/" >2019年寒假计划(flags)</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/13</span><a class="archive-post-title" href= "/2019/02/13/clrs-29Linear-Programming/" >算法导论学习笔记-线性规划</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/12</span><a class="archive-post-title" href= "/2019/02/12/SVM-getstart/" >SVM的临时抱佛脚for HK</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/11</span><a class="archive-post-title" href= "/2019/02/11/HKUST-discussion/" >HKUST项目讨论内容</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
             <span class="archive-post-date">01/30</span><a class="archive-post-title" href= "/2019/01/30/ICM-feelings/" >2019美赛经历</a>
         </li>
     
@@ -1608,11 +1695,6 @@ n个连续操作的...
     
         <li class="archive-post-item">
             <span class="archive-post-date">01/19</span><a class="archive-post-title" href= "/2019/01/19/matlab-usage/" >数学建模几种常用算法</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">01/17</span><a class="archive-post-title" href= "/2019/01/17/2019-winter-flags/" >2019年寒假计划(flags)</a>
         </li>
     
     
@@ -1811,15 +1893,17 @@ n个连续操作的...
     
         <span class="sidebar-tag-name" data-tags="Flags"><span class="iconfont-archer">&#xe606;</span>Flags</span>
     
+        <span class="sidebar-tag-name" data-tags="Math Modeling"><span class="iconfont-archer">&#xe606;</span>Math Modeling</span>
+    
         <span class="sidebar-tag-name" data-tags="Notes"><span class="iconfont-archer">&#xe606;</span>Notes</span>
     
         <span class="sidebar-tag-name" data-tags="pa"><span class="iconfont-archer">&#xe606;</span>pa</span>
     
         <span class="sidebar-tag-name" data-tags="ICS"><span class="iconfont-archer">&#xe606;</span>ICS</span>
     
-        <span class="sidebar-tag-name" data-tags="Assembly Language"><span class="iconfont-archer">&#xe606;</span>Assembly Language</span>
-    
         <span class="sidebar-tag-name" data-tags="Problem Solving"><span class="iconfont-archer">&#xe606;</span>Problem Solving</span>
+    
+        <span class="sidebar-tag-name" data-tags="Assembly Language"><span class="iconfont-archer">&#xe606;</span>Assembly Language</span>
     
         <span class="sidebar-tag-name" data-tags="CLRS"><span class="iconfont-archer">&#xe606;</span>CLRS</span>
     
@@ -1827,11 +1911,11 @@ n个连续操作的...
     
         <span class="sidebar-tag-name" data-tags="greedy algorithm"><span class="iconfont-archer">&#xe606;</span>greedy algorithm</span>
     
+        <span class="sidebar-tag-name" data-tags="amortized analysis"><span class="iconfont-archer">&#xe606;</span>amortized analysis</span>
+    
         <span class="sidebar-tag-name" data-tags="Disjoint Sets"><span class="iconfont-archer">&#xe606;</span>Disjoint Sets</span>
     
         <span class="sidebar-tag-name" data-tags="Data Structure"><span class="iconfont-archer">&#xe606;</span>Data Structure</span>
-    
-        <span class="sidebar-tag-name" data-tags="amortized analysis"><span class="iconfont-archer">&#xe606;</span>amortized analysis</span>
     
         <span class="sidebar-tag-name" data-tags="Single Source Shortest Path"><span class="iconfont-archer">&#xe606;</span>Single Source Shortest Path</span>
     
@@ -1867,25 +1951,25 @@ n个连续操作的...
     
         <span class="sidebar-tag-name" data-tags="vim"><span class="iconfont-archer">&#xe606;</span>vim</span>
     
-        <span class="sidebar-tag-name" data-tags="regular expressions"><span class="iconfont-archer">&#xe606;</span>regular expressions</span>
-    
-        <span class="sidebar-tag-name" data-tags="linux"><span class="iconfont-archer">&#xe606;</span>linux</span>
+        <span class="sidebar-tag-name" data-tags="Python"><span class="iconfont-archer">&#xe606;</span>Python</span>
     
         <span class="sidebar-tag-name" data-tags="markdown"><span class="iconfont-archer">&#xe606;</span>markdown</span>
-    
-        <span class="sidebar-tag-name" data-tags="tmux"><span class="iconfont-archer">&#xe606;</span>tmux</span>
     
         <span class="sidebar-tag-name" data-tags="Java"><span class="iconfont-archer">&#xe606;</span>Java</span>
     
         <span class="sidebar-tag-name" data-tags="programming"><span class="iconfont-archer">&#xe606;</span>programming</span>
     
+        <span class="sidebar-tag-name" data-tags="Traversibility"><span class="iconfont-archer">&#xe606;</span>Traversibility</span>
+    
+        <span class="sidebar-tag-name" data-tags="tmux"><span class="iconfont-archer">&#xe606;</span>tmux</span>
+    
+        <span class="sidebar-tag-name" data-tags="linux"><span class="iconfont-archer">&#xe606;</span>linux</span>
+    
+        <span class="sidebar-tag-name" data-tags="regular expressions"><span class="iconfont-archer">&#xe606;</span>regular expressions</span>
+    
         <span class="sidebar-tag-name" data-tags="Graph"><span class="iconfont-archer">&#xe606;</span>Graph</span>
     
         <span class="sidebar-tag-name" data-tags="Tree"><span class="iconfont-archer">&#xe606;</span>Tree</span>
-    
-        <span class="sidebar-tag-name" data-tags="Traversibility"><span class="iconfont-archer">&#xe606;</span>Traversibility</span>
-    
-        <span class="sidebar-tag-name" data-tags="Math Modeling"><span class="iconfont-archer">&#xe606;</span>Math Modeling</span>
     
     </div>
     <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
@@ -1922,13 +2006,11 @@ jsonContent:
     
         <span class="sidebar-category-name" data-categories="Flags"><span class="iconfont-archer">&#xe60a;</span>Flags</span>
     
-        <span class="sidebar-category-name" data-categories="Notes"><span class="iconfont-archer">&#xe60a;</span>Notes</span>
-    
         <span class="sidebar-category-name" data-categories="Diary"><span class="iconfont-archer">&#xe60a;</span>Diary</span>
     
-        <span class="sidebar-category-name" data-categories="Self-learning"><span class="iconfont-archer">&#xe60a;</span>Self-learning</span>
+        <span class="sidebar-category-name" data-categories="Notes"><span class="iconfont-archer">&#xe60a;</span>Notes</span>
     
-        <span class="sidebar-category-name" data-categories="Dairy"><span class="iconfont-archer">&#xe60a;</span>Dairy</span>
+        <span class="sidebar-category-name" data-categories="Self-learning"><span class="iconfont-archer">&#xe60a;</span>Self-learning</span>
     
     </div>
     <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
@@ -1983,8 +2065,7 @@ jsonContent:
             all[i].SourceElement().parentNode.className += ' has-jax';
     });
 </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
-<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":150},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
 <script type="text/x-mathjax-config">
   MathJax.Hub.Config("");
 </script>
@@ -2001,7 +2082,8 @@ jsonContent:
 <script type="text/javascript" src="custom_mathjax_source">
 </script>
 <!-- End: Injected MathJax -->
-<!-- hexo-inject:end --></body>
+<!-- hexo-inject:end -->
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":150},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 </html>
 
 
