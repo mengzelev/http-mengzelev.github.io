@@ -395,9 +395,10 @@
                 <span>算法导论学习笔记-矩阵运算</span>
         </a>
         <div class="abstract-content">
-            求解线性方程组$$Ax=b$$欠定的(underdetermined)：方程的数目少于未知变量数目$n$，则该线性方程组为欠定的超定的(overdetermined):方程数目超过未知变量数目$n$非奇异矩阵：$A$的秩等于未知变量的个数$n$
-LUP分解思想：找出3个$n\times n$矩阵$L,U,P$，满足$PA=LU$,其中$L$是一个单位下三角矩阵$U$是一个上三角矩阵$P$是一个置换矩阵每一个非奇异矩阵$A$都会有这样一种分解$$Ax=b$$$$PAx=Pb$$$$LUx=Pbx$$求解两个三角线性系统下三角系统$Ly=Pb$上三角系统$Ux=y$
-正向替换与方向替换可在$...
+            求解线性方程组Ax=b欠定的(underdetermined)：方程的数目少于未知变量数目$n$，则该线性方程组为欠定的超定的(overdetermined):方程数目超过未知变量数目$n$非奇异矩阵：$A$的秩等于未知变量的个数$n$
+LUP分解思想：找出3个$n\times n$矩阵$L,U,P$，满足$PA=LU$,其中$L$是一个单位下三角矩阵$U$是一个上三角矩阵$P$是一个置换矩阵每一个非奇异矩阵$A$都会有这样一种分解
+Ax=bPAx=PbLUx=Pbx求解两个三角线性系统下三角系统$Ly=Pb$上三角系统$Ux=y$
+正向替换与方向替换可在$\Theta(n^2)$时间内...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
@@ -476,8 +477,9 @@ LUP分解思想：找出3个$n\times n$矩阵$L,U,P$，满足$PA=LU$,其中$L$�
                 <span>算法导论学习笔记-所有结点对的最短路径问题</span>
         </a>
         <div class="abstract-content">
-            矩阵乘法最优子结构$l_{ij}^(m)}$:从结点$i$到结点$j$的至多包含$m$条边的任意路径中的最小权重。$$l_{ij}^{(m)} = \min\limits_{1\lek\le n}{l_{ik}^{(m1)}+w_{kj}}$$
-自底向上计算最短路径权重
+            矩阵乘法最优子结构$l_{ij}^(m)}$:从结点$i$到结点$j$的至多包含$m$条边的任意路径中的最小权重。
+
+l_{ij}^{(m)} = \min\limits_{1\lek\le n}\{l_{ik}^{(m1)}+w_{kj}\}自底向上计算最短路径权重
 三重循环，时间复杂度为$\Theta(n^3)$
 形式上与矩阵乘法的计算非常类似
 计算$L^{(n-1)}=W^{n-1}$
@@ -486,7 +488,7 @@ LUP分解思想：找出3个$n\times n$矩阵$L,U,P$，满足$PA=LU$,其中$L$�
 
 
 优化后时间复杂度为$\Theta(n^3\lgn n)$
-Floyd-Warsha...
+Floyd-Warshal...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
@@ -1309,9 +1311,21 @@ Floyd-Warsha...
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 43
+        Total : 45
         </div>
         <!-- search  -->
         
@@ -1324,6 +1338,16 @@ Floyd-Warsha...
     
     <div class="archive-year"> 2019 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/09</span><a class="archive-post-title" href= "/2019/03/09/ps-4-3-permutation-lagrange/" >问求学习笔记-置换群与拉格朗日定理</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/02</span><a class="archive-post-title" href= "/2019/03/02/ps-4-2-group/" >问求学习笔记-群论初步</a>
+        </li>
     
     
         <li class="archive-post-item">
@@ -1566,19 +1590,21 @@ Floyd-Warsha...
     
         <span class="sidebar-tag-name" data-tags="Problem Solving"><span class="iconfont-archer">&#xe606;</span>Problem Solving</span>
     
+        <span class="sidebar-tag-name" data-tags="Machine Learning"><span class="iconfont-archer">&#xe606;</span>Machine Learning</span>
+    
         <span class="sidebar-tag-name" data-tags="Assembly Language"><span class="iconfont-archer">&#xe606;</span>Assembly Language</span>
     
         <span class="sidebar-tag-name" data-tags="CLRS"><span class="iconfont-archer">&#xe606;</span>CLRS</span>
     
-        <span class="sidebar-tag-name" data-tags="dynamic programming"><span class="iconfont-archer">&#xe606;</span>dynamic programming</span>
-    
         <span class="sidebar-tag-name" data-tags="greedy algorithm"><span class="iconfont-archer">&#xe606;</span>greedy algorithm</span>
     
-        <span class="sidebar-tag-name" data-tags="amortized analysis"><span class="iconfont-archer">&#xe606;</span>amortized analysis</span>
+        <span class="sidebar-tag-name" data-tags="dynamic programming"><span class="iconfont-archer">&#xe606;</span>dynamic programming</span>
     
         <span class="sidebar-tag-name" data-tags="Disjoint Sets"><span class="iconfont-archer">&#xe606;</span>Disjoint Sets</span>
     
         <span class="sidebar-tag-name" data-tags="Data Structure"><span class="iconfont-archer">&#xe606;</span>Data Structure</span>
+    
+        <span class="sidebar-tag-name" data-tags="amortized analysis"><span class="iconfont-archer">&#xe606;</span>amortized analysis</span>
     
         <span class="sidebar-tag-name" data-tags="Single Source Shortest Path"><span class="iconfont-archer">&#xe606;</span>Single Source Shortest Path</span>
     
@@ -1588,13 +1614,13 @@ Floyd-Warsha...
     
         <span class="sidebar-tag-name" data-tags="Graph Algorithms"><span class="iconfont-archer">&#xe606;</span>Graph Algorithms</span>
     
-        <span class="sidebar-tag-name" data-tags="Graph Theory"><span class="iconfont-archer">&#xe606;</span>Graph Theory</span>
-    
-        <span class="sidebar-tag-name" data-tags="Connectivity"><span class="iconfont-archer">&#xe606;</span>Connectivity</span>
-    
         <span class="sidebar-tag-name" data-tags="freshman"><span class="iconfont-archer">&#xe606;</span>freshman</span>
     
         <span class="sidebar-tag-name" data-tags="college life"><span class="iconfont-archer">&#xe606;</span>college life</span>
+    
+        <span class="sidebar-tag-name" data-tags="Graph Theory"><span class="iconfont-archer">&#xe606;</span>Graph Theory</span>
+    
+        <span class="sidebar-tag-name" data-tags="Connectivity"><span class="iconfont-archer">&#xe606;</span>Connectivity</span>
     
         <span class="sidebar-tag-name" data-tags="ics"><span class="iconfont-archer">&#xe606;</span>ics</span>
     
@@ -1614,25 +1640,27 @@ Floyd-Warsha...
     
         <span class="sidebar-tag-name" data-tags="vim"><span class="iconfont-archer">&#xe606;</span>vim</span>
     
+        <span class="sidebar-tag-name" data-tags="Group Theory"><span class="iconfont-archer">&#xe606;</span>Group Theory</span>
+    
         <span class="sidebar-tag-name" data-tags="Python"><span class="iconfont-archer">&#xe606;</span>Python</span>
     
-        <span class="sidebar-tag-name" data-tags="markdown"><span class="iconfont-archer">&#xe606;</span>markdown</span>
+        <span class="sidebar-tag-name" data-tags="regular expressions"><span class="iconfont-archer">&#xe606;</span>regular expressions</span>
+    
+        <span class="sidebar-tag-name" data-tags="linux"><span class="iconfont-archer">&#xe606;</span>linux</span>
     
         <span class="sidebar-tag-name" data-tags="Java"><span class="iconfont-archer">&#xe606;</span>Java</span>
     
         <span class="sidebar-tag-name" data-tags="programming"><span class="iconfont-archer">&#xe606;</span>programming</span>
     
-        <span class="sidebar-tag-name" data-tags="Traversibility"><span class="iconfont-archer">&#xe606;</span>Traversibility</span>
+        <span class="sidebar-tag-name" data-tags="markdown"><span class="iconfont-archer">&#xe606;</span>markdown</span>
     
         <span class="sidebar-tag-name" data-tags="tmux"><span class="iconfont-archer">&#xe606;</span>tmux</span>
-    
-        <span class="sidebar-tag-name" data-tags="linux"><span class="iconfont-archer">&#xe606;</span>linux</span>
-    
-        <span class="sidebar-tag-name" data-tags="regular expressions"><span class="iconfont-archer">&#xe606;</span>regular expressions</span>
     
         <span class="sidebar-tag-name" data-tags="Graph"><span class="iconfont-archer">&#xe606;</span>Graph</span>
     
         <span class="sidebar-tag-name" data-tags="Tree"><span class="iconfont-archer">&#xe606;</span>Tree</span>
+    
+        <span class="sidebar-tag-name" data-tags="Traversibility"><span class="iconfont-archer">&#xe606;</span>Traversibility</span>
     
     </div>
     <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>

@@ -271,7 +271,7 @@ height:50vh;
                 
                 
                     <div class="post-intro-read">
-                        <span>Word count: <span class="post-count">1,299</span> / Reading time: <span class="post-count">5 min</span></span>
+                        <span>Word count: <span class="post-count">1,287</span> / Reading time: <span class="post-count">5 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
@@ -413,7 +413,7 @@ height:50vh;
 <p><strong>极大平面的(maximal planar)</strong>：若$G$是平面的，且在$G$的任意两个不邻接的顶点之间添加一条边即可产生一个非平面图。<br>另一种表述：$G$是平面的，但$G$不是任何一个平面图的生成子图<br>极大平面图满足$m=3n-6$</p>
 <p><strong>定理9.5</strong>：图$K_{3,3}$是非平面的</p>
 <p><strong>细分(subdivision)</strong>： 如果有一个或多个度为2的顶点被插入到$G$的一条或多条边中，则称图$G’$是图$G$的一个细分</p>
-<p><strong>定理9.7(Kuratowski定理)</strong>：一个图$G$是平面图当且仅当$G$不含$K_5$，$K_{3,3}$，或者$K_5$或$K_{3,3}$的一个细分作为子图。</p>
+<p><strong>定理9.7(Kuratowski定理)</strong>：一个图$G$是平面图当且仅当$G$不含$K<em>5$，$K</em>{3,3}$，或者$K<em>5$或$K</em>{3,3}$的一个细分作为子图。</p>
 <p>如果一个图$G$含有(1)至多4个度大于或等于4的顶点(2)至多5个度大于或等于3的顶点，则$G$必定是平面的。</p>
 <h1 id="顶点染色"><a href="#顶点染色" class="headerlink" title="顶点染色"></a>顶点染色</h1><p><strong>对偶(dual)</strong>：每张地图都有一个与之关联的图$G$，称为该地图的对偶，其中$G$的顶点即为地图的区域，$G$的两个顶点是邻接的当且仅当它们所对应的区域是相邻的<br>每张地图的对偶图都是平面图，每个连通的平面图都是某个地图的对偶。</p>
 <p><strong>真染色(proper coloring)</strong>：给$G$的顶点分配一些颜色(来自于某个颜色集合)，是的每个顶点都能分配到一种颜色，且邻接的顶点被染成不同的颜色，简称为<strong>染色(coloring)</strong></p>
@@ -432,11 +432,11 @@ height:50vh;
 </ul>
 <p>若$H$为$G$的一个子图，则$\chi(H)\le\chi(G)$</p>
 <p><strong>团(clique)</strong>：$G$的一个完全子图<br><strong>团数(clique number)\omega(G)</strong>：图$G$中最大团的阶数<br>$\alpha(G)=k$当且仅当$\omega(G)=k$</p>
-<p><strong>定理10.5</strong>：对每个$n$阶图$G$：$$\chi(G)\ge\omega(G), \chi(G)\ge\frac{n}{\alpha(G)}$$<br>(给出了图$G$的色数的下限)</p>
+<p><strong>定理10.5</strong>：对每个$n$阶图$G$：<script type="math/tex">\chi(G)\ge\omega(G), \chi(G)\ge\frac{n}{\alpha(G)}</script><br>(给出了图$G$的色数的下限)</p>
 <p>图$G$的染色可以看成是$V(G)\to\mathbb{N}$的一个函数$c:V(G)\to\mathbb{N}$，使得当$uv\in E(G)$时，$c(u)\neq c(v)$</p>
 <p><strong>定理10.7</strong>：对于每个图$G$，$\chi(G)\le 1+\Delta(G)$。($\Delta(G)$为$G$的最大度)</p>
 <p><strong>定理10.8(Brooks定理)</strong>：对每个非奇圈也非完全的连通图$G$，$\chi(G)\le\Delta(G)$</p>
-<p><strong>定理10.9</strong>：对于每个图$G$,$\chi(G)\le 1+\max{\delta(H)}$，其中$\max$取遍$G$的所有诱导子图$H$。</p>
+<p><strong>定理10.9</strong>：对于每个图$G$,$\chi(G)\le 1+\max\{\delta(H)\}$，其中$\max$取遍$G$的所有诱导子图$H$。</p>
 <p><strong>影子图(shadow graph)$S(G)$</strong>:通过在$G$中，对其每个顶点$v$，增加一个新的顶点$v’$，称之为$v$的<strong>影子顶点(shadow vertex)</strong></p>
 <p><img src="/2018/12/13/planar-graph-and-coloring/shadow.png"></p>
 <p><strong>定理10.10</strong>：对于每个整数$k\ge 3$，都存在一个色数为$k$的无三角的图。</p>
@@ -1268,9 +1268,21 @@ top:50vh;
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 43
+        Total : 45
         </div>
         <!-- search  -->
         
@@ -1283,6 +1295,16 @@ top:50vh;
     
     <div class="archive-year"> 2019 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/09</span><a class="archive-post-title" href= "/2019/03/09/ps-4-3-permutation-lagrange/" >问求学习笔记-置换群与拉格朗日定理</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/02</span><a class="archive-post-title" href= "/2019/03/02/ps-4-2-group/" >问求学习笔记-群论初步</a>
+        </li>
     
     
         <li class="archive-post-item">
@@ -1525,19 +1547,21 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="Problem Solving"><span class="iconfont-archer">&#xe606;</span>Problem Solving</span>
     
+        <span class="sidebar-tag-name" data-tags="Machine Learning"><span class="iconfont-archer">&#xe606;</span>Machine Learning</span>
+    
         <span class="sidebar-tag-name" data-tags="Assembly Language"><span class="iconfont-archer">&#xe606;</span>Assembly Language</span>
     
         <span class="sidebar-tag-name" data-tags="CLRS"><span class="iconfont-archer">&#xe606;</span>CLRS</span>
     
-        <span class="sidebar-tag-name" data-tags="dynamic programming"><span class="iconfont-archer">&#xe606;</span>dynamic programming</span>
-    
         <span class="sidebar-tag-name" data-tags="greedy algorithm"><span class="iconfont-archer">&#xe606;</span>greedy algorithm</span>
     
-        <span class="sidebar-tag-name" data-tags="amortized analysis"><span class="iconfont-archer">&#xe606;</span>amortized analysis</span>
+        <span class="sidebar-tag-name" data-tags="dynamic programming"><span class="iconfont-archer">&#xe606;</span>dynamic programming</span>
     
         <span class="sidebar-tag-name" data-tags="Disjoint Sets"><span class="iconfont-archer">&#xe606;</span>Disjoint Sets</span>
     
         <span class="sidebar-tag-name" data-tags="Data Structure"><span class="iconfont-archer">&#xe606;</span>Data Structure</span>
+    
+        <span class="sidebar-tag-name" data-tags="amortized analysis"><span class="iconfont-archer">&#xe606;</span>amortized analysis</span>
     
         <span class="sidebar-tag-name" data-tags="Single Source Shortest Path"><span class="iconfont-archer">&#xe606;</span>Single Source Shortest Path</span>
     
@@ -1547,13 +1571,13 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="Graph Algorithms"><span class="iconfont-archer">&#xe606;</span>Graph Algorithms</span>
     
-        <span class="sidebar-tag-name" data-tags="Graph Theory"><span class="iconfont-archer">&#xe606;</span>Graph Theory</span>
-    
-        <span class="sidebar-tag-name" data-tags="Connectivity"><span class="iconfont-archer">&#xe606;</span>Connectivity</span>
-    
         <span class="sidebar-tag-name" data-tags="freshman"><span class="iconfont-archer">&#xe606;</span>freshman</span>
     
         <span class="sidebar-tag-name" data-tags="college life"><span class="iconfont-archer">&#xe606;</span>college life</span>
+    
+        <span class="sidebar-tag-name" data-tags="Graph Theory"><span class="iconfont-archer">&#xe606;</span>Graph Theory</span>
+    
+        <span class="sidebar-tag-name" data-tags="Connectivity"><span class="iconfont-archer">&#xe606;</span>Connectivity</span>
     
         <span class="sidebar-tag-name" data-tags="ics"><span class="iconfont-archer">&#xe606;</span>ics</span>
     
@@ -1573,25 +1597,27 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="vim"><span class="iconfont-archer">&#xe606;</span>vim</span>
     
+        <span class="sidebar-tag-name" data-tags="Group Theory"><span class="iconfont-archer">&#xe606;</span>Group Theory</span>
+    
         <span class="sidebar-tag-name" data-tags="Python"><span class="iconfont-archer">&#xe606;</span>Python</span>
     
-        <span class="sidebar-tag-name" data-tags="markdown"><span class="iconfont-archer">&#xe606;</span>markdown</span>
+        <span class="sidebar-tag-name" data-tags="regular expressions"><span class="iconfont-archer">&#xe606;</span>regular expressions</span>
+    
+        <span class="sidebar-tag-name" data-tags="linux"><span class="iconfont-archer">&#xe606;</span>linux</span>
     
         <span class="sidebar-tag-name" data-tags="Java"><span class="iconfont-archer">&#xe606;</span>Java</span>
     
         <span class="sidebar-tag-name" data-tags="programming"><span class="iconfont-archer">&#xe606;</span>programming</span>
     
-        <span class="sidebar-tag-name" data-tags="Traversibility"><span class="iconfont-archer">&#xe606;</span>Traversibility</span>
+        <span class="sidebar-tag-name" data-tags="markdown"><span class="iconfont-archer">&#xe606;</span>markdown</span>
     
         <span class="sidebar-tag-name" data-tags="tmux"><span class="iconfont-archer">&#xe606;</span>tmux</span>
-    
-        <span class="sidebar-tag-name" data-tags="linux"><span class="iconfont-archer">&#xe606;</span>linux</span>
-    
-        <span class="sidebar-tag-name" data-tags="regular expressions"><span class="iconfont-archer">&#xe606;</span>regular expressions</span>
     
         <span class="sidebar-tag-name" data-tags="Graph"><span class="iconfont-archer">&#xe606;</span>Graph</span>
     
         <span class="sidebar-tag-name" data-tags="Tree"><span class="iconfont-archer">&#xe606;</span>Tree</span>
+    
+        <span class="sidebar-tag-name" data-tags="Traversibility"><span class="iconfont-archer">&#xe606;</span>Traversibility</span>
     
     </div>
     <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
@@ -1689,7 +1715,8 @@ jsonContent:
             all[i].SourceElement().parentNode.className += ' has-jax';
     });
 </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":150},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
 <script type="text/x-mathjax-config">
   MathJax.Hub.Config("");
 </script>
@@ -1706,8 +1733,7 @@ jsonContent:
 <script type="text/javascript" src="custom_mathjax_source">
 </script>
 <!-- End: Injected MathJax -->
-<!-- hexo-inject:end -->
-<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":150},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+<!-- hexo-inject:end --></body>
 </html>
 
 
