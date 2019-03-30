@@ -407,17 +407,14 @@ height:50vh;
         <h1 id="不相交集合的操作"><a href="#不相交集合的操作" class="headerlink" title="不相交集合的操作"></a>不相交集合的操作</h1><p>一个<strong>不相交集合数据结构</strong>维护了一个不相交动态集的集合<br>每个集合都有一个<strong>代表</strong>标识，它是该集合的某个成员</p>
 <p>我们希望集合支持以下三个操作：</p>
 <p><img src="/2018/10/06/clrs-21DisjointSets/operations.png"></p>
-<h2 id="应用：确定无向图的连通分量"><a href="#应用：确定无向图的连通分量" class="headerlink" title="应用：确定无向图的连通分量"></a>应用：确定无向图的连通分量</h2><center>
-<img src="/2018/10/06/clrs-21DisjointSets/g21-1.png">
-<img src="/2018/10/06/clrs-21DisjointSets/alg1.png">
-</center>
+<h2 id="应用：确定无向图的连通分量"><a href="#应用：确定无向图的连通分量" class="headerlink" title="应用：确定无向图的连通分量"></a>应用：确定无向图的连通分量</h2><center><br><img src="/2018/10/06/clrs-21DisjointSets/g21-1.png"><br><img src="/2018/10/06/clrs-21DisjointSets/alg1.png"><br></center>
 
 <p>算法就是将连通的顶点全部合并到同一个集合中。</p>
 <h1 id="不相交集合的链表表示"><a href="#不相交集合的链表表示" class="headerlink" title="不相交集合的链表表示"></a>不相交集合的链表表示</h1><p>每个集合可以用一个自己的链表来表示<br>链表中对象可以以任意次序出现</p>
 <p>每个链表组成为：</p>
 <ul>
-<li><code>head</code>— 指向表的第一个对象（代表元）</li>
-<li><code>tail</code>— 指向表的最后一个对象</li>
+<li><code>head</code>– 指向表的第一个对象（代表元）</li>
+<li><code>tail</code>– 指向表的最后一个对象</li>
 </ul>
 <p>链表中每个对象的组成为：</p>
 <ul>
@@ -436,11 +433,7 @@ height:50vh;
 <li>如果根的秩相同，则任意选择两个中的一个作为父结点，并使它的秩+1</li>
 </ul>
 <h2 id="路径压缩"><a href="#路径压缩" class="headerlink" title="路径压缩"></a>路径压缩</h2><p>在<code>FIND-SET</code>操作中是查找路径中的每个结点直接指向根，不改变任何结点的秩。</p>
-<h2 id="伪代码"><a href="#伪代码" class="headerlink" title="伪代码"></a>伪代码</h2><center>
-<img src="/2018/10/06/clrs-21DisjointSets/makeset.png">
-<img src="/2018/10/06/clrs-21DisjointSets/union.png">
-<img src="/2018/10/06/clrs-21DisjointSets/findset.png">
-</center>
+<h2 id="伪代码"><a href="#伪代码" class="headerlink" title="伪代码"></a>伪代码</h2><center><br><img src="/2018/10/06/clrs-21DisjointSets/makeset.png"><br><img src="/2018/10/06/clrs-21DisjointSets/union.png"><br><img src="/2018/10/06/clrs-21DisjointSets/findset.png"><br></center>
     </article>
     <!-- license  -->
     
@@ -1280,9 +1273,19 @@ top:50vh;
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 45
+        Total : 47
         </div>
         <!-- search  -->
         
@@ -1295,6 +1298,16 @@ top:50vh;
     
     <div class="archive-year"> 2019 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/23</span><a class="archive-post-title" href= "/2019/03/23/clrs-32String-Mathcing/" >算法导论学习笔记-字符串匹配</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/14</span><a class="archive-post-title" href= "/2019/03/14/ps-4-4-isomorphism/" >问求学习笔记-群同构基本定理与正规子群</a>
+        </li>
     
     
         <li class="archive-post-item">
@@ -1545,9 +1558,9 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="ICS"><span class="iconfont-archer">&#xe606;</span>ICS</span>
     
-        <span class="sidebar-tag-name" data-tags="Problem Solving"><span class="iconfont-archer">&#xe606;</span>Problem Solving</span>
-    
         <span class="sidebar-tag-name" data-tags="Machine Learning"><span class="iconfont-archer">&#xe606;</span>Machine Learning</span>
+    
+        <span class="sidebar-tag-name" data-tags="Problem Solving"><span class="iconfont-archer">&#xe606;</span>Problem Solving</span>
     
         <span class="sidebar-tag-name" data-tags="Assembly Language"><span class="iconfont-archer">&#xe606;</span>Assembly Language</span>
     
@@ -1557,11 +1570,11 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="dynamic programming"><span class="iconfont-archer">&#xe606;</span>dynamic programming</span>
     
+        <span class="sidebar-tag-name" data-tags="amortized analysis"><span class="iconfont-archer">&#xe606;</span>amortized analysis</span>
+    
         <span class="sidebar-tag-name" data-tags="Disjoint Sets"><span class="iconfont-archer">&#xe606;</span>Disjoint Sets</span>
     
         <span class="sidebar-tag-name" data-tags="Data Structure"><span class="iconfont-archer">&#xe606;</span>Data Structure</span>
-    
-        <span class="sidebar-tag-name" data-tags="amortized analysis"><span class="iconfont-archer">&#xe606;</span>amortized analysis</span>
     
         <span class="sidebar-tag-name" data-tags="Single Source Shortest Path"><span class="iconfont-archer">&#xe606;</span>Single Source Shortest Path</span>
     
@@ -1571,21 +1584,21 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="Graph Algorithms"><span class="iconfont-archer">&#xe606;</span>Graph Algorithms</span>
     
-        <span class="sidebar-tag-name" data-tags="freshman"><span class="iconfont-archer">&#xe606;</span>freshman</span>
-    
-        <span class="sidebar-tag-name" data-tags="college life"><span class="iconfont-archer">&#xe606;</span>college life</span>
-    
-        <span class="sidebar-tag-name" data-tags="Graph Theory"><span class="iconfont-archer">&#xe606;</span>Graph Theory</span>
-    
-        <span class="sidebar-tag-name" data-tags="Connectivity"><span class="iconfont-archer">&#xe606;</span>Connectivity</span>
-    
         <span class="sidebar-tag-name" data-tags="ics"><span class="iconfont-archer">&#xe606;</span>ics</span>
     
         <span class="sidebar-tag-name" data-tags="process calling"><span class="iconfont-archer">&#xe606;</span>process calling</span>
     
+        <span class="sidebar-tag-name" data-tags="freshman"><span class="iconfont-archer">&#xe606;</span>freshman</span>
+    
+        <span class="sidebar-tag-name" data-tags="college life"><span class="iconfont-archer">&#xe606;</span>college life</span>
+    
         <span class="sidebar-tag-name" data-tags="Lab"><span class="iconfont-archer">&#xe606;</span>Lab</span>
     
         <span class="sidebar-tag-name" data-tags="Ics"><span class="iconfont-archer">&#xe606;</span>Ics</span>
+    
+        <span class="sidebar-tag-name" data-tags="Graph Theory"><span class="iconfont-archer">&#xe606;</span>Graph Theory</span>
+    
+        <span class="sidebar-tag-name" data-tags="Connectivity"><span class="iconfont-archer">&#xe606;</span>Connectivity</span>
     
         <span class="sidebar-tag-name" data-tags="Matchings"><span class="iconfont-archer">&#xe606;</span>Matchings</span>
     
@@ -1613,11 +1626,11 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="tmux"><span class="iconfont-archer">&#xe606;</span>tmux</span>
     
+        <span class="sidebar-tag-name" data-tags="Traversibility"><span class="iconfont-archer">&#xe606;</span>Traversibility</span>
+    
         <span class="sidebar-tag-name" data-tags="Graph"><span class="iconfont-archer">&#xe606;</span>Graph</span>
     
         <span class="sidebar-tag-name" data-tags="Tree"><span class="iconfont-archer">&#xe606;</span>Tree</span>
-    
-        <span class="sidebar-tag-name" data-tags="Traversibility"><span class="iconfont-archer">&#xe606;</span>Traversibility</span>
     
     </div>
     <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>

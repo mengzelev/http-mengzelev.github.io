@@ -339,14 +339,94 @@
     
     
     <article class="index-post">
+        <a class="abstract-title" href = "/2018/11/21/traversability/" >
+            
+                <span>图论学习笔记-旅行问题</span>
+        </a>
+        <div class="abstract-content">
+            Euler图Euler回路(Euler cycle)：图$G$的一条包含$G$的每一条边的回路$C$
+Euler图(Euler graph):含有Euler回路的连通图
+Euler迹(Euler trial)含有连通图$G$的每条边的开迹
+当讨论图的Euler性质时，
+定理6.1：一个非平凡连通图$G$是Euler的 当且仅当 $G$的每个顶点的度都为偶数
+推论6.2：一个连通图$G$含有一条Euler迹当且仅当$G$恰有两个度为奇数的顶点，而且$G$的每一条Euler迹始于一个度为奇数的顶点而终止于另一个度为奇数的顶点。
+例6.3结论：设$G$和$H$是两个非平凡的连通图，则$G\ti...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/11/21</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Notes">Notes</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Problem Solving">Problem Solving</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Graph Theory">Graph Theory</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Traversibility">Traversibility</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href = "/2018/11/14/connectivity/" >
+            
+                <span>图论学习笔记-图中的连通性与距离</span>
+        </a>
+        <div class="abstract-content">
+            割点割点的定义：去掉这个点后，原图不再连通
+定理5.1：设$v$是连通图$G$中与bridge相连的一个结点，则$v$是割点当且仅当$deg v\ge 2$非简单树 = 端点 + 割点
+推论5.2：设$G$是一个至少有3个顶点的连通图，若$G$有bridge，则$G$一定有割点
+定理5.3：设$v$是连通图$G$的一个割点，$u$和$w$是$G-v$不同components中的两个顶点，则$v$位于$G$的任意一条$u-w$路径上。
+回顾定理4.1：边$e$是bridge当且仅当$e$不存在于任何一个cycle上
+推论5.4：$v$是连通图$G$的一个割点 当且仅当 存在与$v$不同的两...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/11/14</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Notes">Notes</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Problem Solving">Problem Solving</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Graph Theory">Graph Theory</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Connectivity">Connectivity</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href = "/2018/11/07/clrs-25All-Pairs-Shortest-Paths/" >
             
                 <span>算法导论学习笔记-所有结点对的最短路径问题</span>
         </a>
         <div class="abstract-content">
-            矩阵乘法最优子结构$l_{ij}^(m)}$:从结点$i$到结点$j$的至多包含$m$条边的任意路径中的最小权重。
-
-l_{ij}^{(m)} = \min\limits_{1\lek\le n}\{l_{ik}^{(m1)}+w_{kj}\}自底向上计算最短路径权重
+            矩阵乘法最优子结构$l_{ij}^(m)}$:从结点$i$到结点$j$的至多包含$m$条边的任意路径中的最小权重。$$l_{ij}^{(m)} = \min\limits_{1\lek\le n}{l_{ik}^{(m1)}+w_{kj}}$$
+自底向上计算最短路径权重
 三重循环，时间复杂度为$\Theta(n^3)$
 形式上与矩阵乘法的计算非常类似
 计算$L^{(n-1)}=W^{n-1}$
@@ -355,7 +435,7 @@ l_{ij}^{(m)} = \min\limits_{1\lek\le n}\{l_{ik}^{(m1)}+w_{kj}\}自底向上计�
 
 
 优化后时间复杂度为$\Theta(n^3\lgn n)$
-Floyd-Warshal...
+Floyd-Warsha...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
@@ -539,15 +619,12 @@ Floyd-Warshal...
 
 应用：确定无向图的连通分量
 
-
-
-
 算法就是将连通的顶点全部合并到同一个集合中。
 不相交集合的链表表示每个集合可以用一个自己的链表来表示链表中对象可以以任意次序出现
 每个链表组成为：
 
-head— 指向表的第一个对象（代表元）
-tail— 指向表的最后一个对象
+head– 指向表的第一个对象（代表元）
+tail– 指向表的最后一个对象
 
 链表中每个对象的组成为：
 
@@ -555,7 +632,7 @@ tail— 指向表的最后一个对象
 指向head的指针prev
 指向后一个对象的指针next
 
-时间复杂度：MAKE-SET  O(1)FIND-SET  O(1)UNION（...
+时间复杂度：MAKE-SET  O(1)FIND-SET  O(1)UNION（简单实...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
@@ -1483,9 +1560,19 @@ n个连续操作的...
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 45
+        Total : 47
         </div>
         <!-- search  -->
         
@@ -1498,6 +1585,16 @@ n个连续操作的...
     
     <div class="archive-year"> 2019 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/23</span><a class="archive-post-title" href= "/2019/03/23/clrs-32String-Mathcing/" >算法导论学习笔记-字符串匹配</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/14</span><a class="archive-post-title" href= "/2019/03/14/ps-4-4-isomorphism/" >问求学习笔记-群同构基本定理与正规子群</a>
+        </li>
     
     
         <li class="archive-post-item">
@@ -1748,9 +1845,9 @@ n个连续操作的...
     
         <span class="sidebar-tag-name" data-tags="ICS"><span class="iconfont-archer">&#xe606;</span>ICS</span>
     
-        <span class="sidebar-tag-name" data-tags="Problem Solving"><span class="iconfont-archer">&#xe606;</span>Problem Solving</span>
-    
         <span class="sidebar-tag-name" data-tags="Machine Learning"><span class="iconfont-archer">&#xe606;</span>Machine Learning</span>
+    
+        <span class="sidebar-tag-name" data-tags="Problem Solving"><span class="iconfont-archer">&#xe606;</span>Problem Solving</span>
     
         <span class="sidebar-tag-name" data-tags="Assembly Language"><span class="iconfont-archer">&#xe606;</span>Assembly Language</span>
     
@@ -1760,11 +1857,11 @@ n个连续操作的...
     
         <span class="sidebar-tag-name" data-tags="dynamic programming"><span class="iconfont-archer">&#xe606;</span>dynamic programming</span>
     
+        <span class="sidebar-tag-name" data-tags="amortized analysis"><span class="iconfont-archer">&#xe606;</span>amortized analysis</span>
+    
         <span class="sidebar-tag-name" data-tags="Disjoint Sets"><span class="iconfont-archer">&#xe606;</span>Disjoint Sets</span>
     
         <span class="sidebar-tag-name" data-tags="Data Structure"><span class="iconfont-archer">&#xe606;</span>Data Structure</span>
-    
-        <span class="sidebar-tag-name" data-tags="amortized analysis"><span class="iconfont-archer">&#xe606;</span>amortized analysis</span>
     
         <span class="sidebar-tag-name" data-tags="Single Source Shortest Path"><span class="iconfont-archer">&#xe606;</span>Single Source Shortest Path</span>
     
@@ -1774,21 +1871,21 @@ n个连续操作的...
     
         <span class="sidebar-tag-name" data-tags="Graph Algorithms"><span class="iconfont-archer">&#xe606;</span>Graph Algorithms</span>
     
-        <span class="sidebar-tag-name" data-tags="freshman"><span class="iconfont-archer">&#xe606;</span>freshman</span>
-    
-        <span class="sidebar-tag-name" data-tags="college life"><span class="iconfont-archer">&#xe606;</span>college life</span>
-    
-        <span class="sidebar-tag-name" data-tags="Graph Theory"><span class="iconfont-archer">&#xe606;</span>Graph Theory</span>
-    
-        <span class="sidebar-tag-name" data-tags="Connectivity"><span class="iconfont-archer">&#xe606;</span>Connectivity</span>
-    
         <span class="sidebar-tag-name" data-tags="ics"><span class="iconfont-archer">&#xe606;</span>ics</span>
     
         <span class="sidebar-tag-name" data-tags="process calling"><span class="iconfont-archer">&#xe606;</span>process calling</span>
     
+        <span class="sidebar-tag-name" data-tags="freshman"><span class="iconfont-archer">&#xe606;</span>freshman</span>
+    
+        <span class="sidebar-tag-name" data-tags="college life"><span class="iconfont-archer">&#xe606;</span>college life</span>
+    
         <span class="sidebar-tag-name" data-tags="Lab"><span class="iconfont-archer">&#xe606;</span>Lab</span>
     
         <span class="sidebar-tag-name" data-tags="Ics"><span class="iconfont-archer">&#xe606;</span>Ics</span>
+    
+        <span class="sidebar-tag-name" data-tags="Graph Theory"><span class="iconfont-archer">&#xe606;</span>Graph Theory</span>
+    
+        <span class="sidebar-tag-name" data-tags="Connectivity"><span class="iconfont-archer">&#xe606;</span>Connectivity</span>
     
         <span class="sidebar-tag-name" data-tags="Matchings"><span class="iconfont-archer">&#xe606;</span>Matchings</span>
     
@@ -1816,11 +1913,11 @@ n个连续操作的...
     
         <span class="sidebar-tag-name" data-tags="tmux"><span class="iconfont-archer">&#xe606;</span>tmux</span>
     
+        <span class="sidebar-tag-name" data-tags="Traversibility"><span class="iconfont-archer">&#xe606;</span>Traversibility</span>
+    
         <span class="sidebar-tag-name" data-tags="Graph"><span class="iconfont-archer">&#xe606;</span>Graph</span>
     
         <span class="sidebar-tag-name" data-tags="Tree"><span class="iconfont-archer">&#xe606;</span>Tree</span>
-    
-        <span class="sidebar-tag-name" data-tags="Traversibility"><span class="iconfont-archer">&#xe606;</span>Traversibility</span>
     
     </div>
     <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>

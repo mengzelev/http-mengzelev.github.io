@@ -273,7 +273,7 @@ height:50vh;
                 
                 
                     <div class="post-intro-read">
-                        <span>Word count: <span class="post-count">1,247</span> / Reading time: <span class="post-count">5 min</span></span>
+                        <span>Word count: <span class="post-count">1,269</span> / Reading time: <span class="post-count">5 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
@@ -423,13 +423,13 @@ height:50vh;
 <h1 id="连通度"><a href="#连通度" class="headerlink" title="连通度"></a>连通度</h1><h2 id="顶点割"><a href="#顶点割" class="headerlink" title="顶点割"></a>顶点割</h2><p><strong>顶点割(vertex-cut)</strong>：顶点集$U$，$G-U$是不连通的</p>
 <p><strong>最小顶点割</strong>：自行感受一下</p>
 <p>只有非完全图才有顶点割，且所有非完全图都有顶点割</p>
-<p><strong>(点)连通度(vertex-connectivity)</strong>:$\kappa(G)$=最小顶点割的基数</p>
-<script type="math/tex; mode=display">0\le \kappa(G)\le n-1</script><p>图$G$是k-连通的(k-connected)，即$\kappa(G)\ge k$，随便去掉$k$个点之后依然是连通的</p>
+<p><strong>(点)连通度(vertex-connectivity)</strong>:$\kappa(G)$=最小顶点割的基数<br>$$ 0\le \kappa(G)\le n-1 $$</p>
+<p>图$G$是k-连通的(k-connected)，即$\kappa(G)\ge k$，随便去掉$k$个点之后依然是连通的</p>
 <h2 id="边割-edge-cut"><a href="#边割-edge-cut" class="headerlink" title="边割(edge-cut)"></a>边割(edge-cut)</h2><p><strong>边割(edge-cut)</strong>：边集$X$，$G-X$是不连通的</p>
 <p><strong>最小边割</strong>和<strong>极小边割</strong>是不同的概念</p>
-<p><strong>边连通度(edge-connectivity)</strong>:$\lambda(G)$=最小边割的基数</p>
-<script type="math/tex; mode=display">0\le \lambda(G)\le n-1</script><p>完全图的边连通度$\lambda(K_n)=n-1$</p>
-<h2 id="点、边连通度间的关系"><a href="#点、边连通度间的关系" class="headerlink" title="点、边连通度间的关系"></a>点、边连通度间的关系</h2><p><strong>定理5.11</strong>：对于任意图$G$，<script type="math/tex">\kappa(G)\le \lambda(G)\le \delta(G)</script><br>点连通度$\le$边连通度$\le$最小度数</p>
+<p><strong>边连通度(edge-connectivity)</strong>:$\lambda(G)$=最小边割的基数<br>$$ 0\le \lambda(G)\le n-1 $$</p>
+<p>完全图的边连通度$\lambda(K_n)=n-1$</p>
+<h2 id="点、边连通度间的关系"><a href="#点、边连通度间的关系" class="headerlink" title="点、边连通度间的关系"></a>点、边连通度间的关系</h2><p><strong>定理5.11</strong>：对于任意图$G$，$$\kappa(G)\le \lambda(G)\le \delta(G)$$<br>点连通度$\le$边连通度$\le$最小度数</p>
 <p><strong>定理5.12</strong>：立方图$\kappa(G)=\lambda(G)$</p>
 <p><strong>定理5.13</strong>：$G$顶点数为$n$，边数为$m$，则$\kappa(G)\le \lfloor\frac{2m}{n}\rfloor$</p>
 <h2 id="Harary图"><a href="#Harary图" class="headerlink" title="Harary图"></a>Harary图</h2><p><strong>定理5.14</strong>：如果$G$是至少有3个结点的连通图，则$G^2$时候2-连通的。</p>
@@ -1283,9 +1283,19 @@ top:50vh;
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 45
+        Total : 47
         </div>
         <!-- search  -->
         
@@ -1298,6 +1308,16 @@ top:50vh;
     
     <div class="archive-year"> 2019 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/23</span><a class="archive-post-title" href= "/2019/03/23/clrs-32String-Mathcing/" >算法导论学习笔记-字符串匹配</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/14</span><a class="archive-post-title" href= "/2019/03/14/ps-4-4-isomorphism/" >问求学习笔记-群同构基本定理与正规子群</a>
+        </li>
     
     
         <li class="archive-post-item">
@@ -1548,9 +1568,9 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="ICS"><span class="iconfont-archer">&#xe606;</span>ICS</span>
     
-        <span class="sidebar-tag-name" data-tags="Problem Solving"><span class="iconfont-archer">&#xe606;</span>Problem Solving</span>
-    
         <span class="sidebar-tag-name" data-tags="Machine Learning"><span class="iconfont-archer">&#xe606;</span>Machine Learning</span>
+    
+        <span class="sidebar-tag-name" data-tags="Problem Solving"><span class="iconfont-archer">&#xe606;</span>Problem Solving</span>
     
         <span class="sidebar-tag-name" data-tags="Assembly Language"><span class="iconfont-archer">&#xe606;</span>Assembly Language</span>
     
@@ -1560,11 +1580,11 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="dynamic programming"><span class="iconfont-archer">&#xe606;</span>dynamic programming</span>
     
+        <span class="sidebar-tag-name" data-tags="amortized analysis"><span class="iconfont-archer">&#xe606;</span>amortized analysis</span>
+    
         <span class="sidebar-tag-name" data-tags="Disjoint Sets"><span class="iconfont-archer">&#xe606;</span>Disjoint Sets</span>
     
         <span class="sidebar-tag-name" data-tags="Data Structure"><span class="iconfont-archer">&#xe606;</span>Data Structure</span>
-    
-        <span class="sidebar-tag-name" data-tags="amortized analysis"><span class="iconfont-archer">&#xe606;</span>amortized analysis</span>
     
         <span class="sidebar-tag-name" data-tags="Single Source Shortest Path"><span class="iconfont-archer">&#xe606;</span>Single Source Shortest Path</span>
     
@@ -1574,21 +1594,21 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="Graph Algorithms"><span class="iconfont-archer">&#xe606;</span>Graph Algorithms</span>
     
-        <span class="sidebar-tag-name" data-tags="freshman"><span class="iconfont-archer">&#xe606;</span>freshman</span>
-    
-        <span class="sidebar-tag-name" data-tags="college life"><span class="iconfont-archer">&#xe606;</span>college life</span>
-    
-        <span class="sidebar-tag-name" data-tags="Graph Theory"><span class="iconfont-archer">&#xe606;</span>Graph Theory</span>
-    
-        <span class="sidebar-tag-name" data-tags="Connectivity"><span class="iconfont-archer">&#xe606;</span>Connectivity</span>
-    
         <span class="sidebar-tag-name" data-tags="ics"><span class="iconfont-archer">&#xe606;</span>ics</span>
     
         <span class="sidebar-tag-name" data-tags="process calling"><span class="iconfont-archer">&#xe606;</span>process calling</span>
     
+        <span class="sidebar-tag-name" data-tags="freshman"><span class="iconfont-archer">&#xe606;</span>freshman</span>
+    
+        <span class="sidebar-tag-name" data-tags="college life"><span class="iconfont-archer">&#xe606;</span>college life</span>
+    
         <span class="sidebar-tag-name" data-tags="Lab"><span class="iconfont-archer">&#xe606;</span>Lab</span>
     
         <span class="sidebar-tag-name" data-tags="Ics"><span class="iconfont-archer">&#xe606;</span>Ics</span>
+    
+        <span class="sidebar-tag-name" data-tags="Graph Theory"><span class="iconfont-archer">&#xe606;</span>Graph Theory</span>
+    
+        <span class="sidebar-tag-name" data-tags="Connectivity"><span class="iconfont-archer">&#xe606;</span>Connectivity</span>
     
         <span class="sidebar-tag-name" data-tags="Matchings"><span class="iconfont-archer">&#xe606;</span>Matchings</span>
     
@@ -1616,11 +1636,11 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="tmux"><span class="iconfont-archer">&#xe606;</span>tmux</span>
     
+        <span class="sidebar-tag-name" data-tags="Traversibility"><span class="iconfont-archer">&#xe606;</span>Traversibility</span>
+    
         <span class="sidebar-tag-name" data-tags="Graph"><span class="iconfont-archer">&#xe606;</span>Graph</span>
     
         <span class="sidebar-tag-name" data-tags="Tree"><span class="iconfont-archer">&#xe606;</span>Tree</span>
-    
-        <span class="sidebar-tag-name" data-tags="Traversibility"><span class="iconfont-archer">&#xe606;</span>Traversibility</span>
     
     </div>
     <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
