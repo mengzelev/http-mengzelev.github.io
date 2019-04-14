@@ -354,6 +354,98 @@ height:50vh;
     
     
     <article class="index-post">
+        <a class="abstract-title" href = "/2019/04/13/ps-4-7-cryptographic-algorithm/" >
+            
+                <span>问题求解学习笔记-密码算法</span>
+        </a>
+        <div class="abstract-content">
+            RSA公钥加密系统每个参与者都有一把公钥($P$)和密钥($S$)
+$\mathcal{D}$表示允许信息的集合，要求公钥与密钥指定一种从$\mathcal{D}$到自身的一一对应的函数。Alice的公钥函数$P_A()$和密钥函数$S_A()$都是$\mathcal{D}$的排列
+系统中任何参与者的公钥与密钥都是匹配对，指定函数互为反函数，对任何消息$M\in \mathcal{D}$，有$$M=S_A(P_A(M))$$$$M=P_A(S_A(M))$$
+加密过程
+Bob取得Alice的公钥$P_A$
+Bob计算出相应与$M$的密文$C=P_A(M)$，并把$C$发送给Alice
+当...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/04/13</span>
+            </div>
+            <!-- tags  -->
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href = "/2019/04/06/clrs-31Number-Theoretic-Algorithms/" >
+            
+                <span>算法导论学习笔记-数论算法</span>
+        </a>
+        <div class="abstract-content">
+            输入规模和算数计算的代价给定$k$个整数输入$a_1,a_2,\cdots ,a_k$，如果算法可以在关于$\lg~a_1,\lg~a_2,\cdots ,\lg~a_k$的多项式时间内完成，即算法在关于二进制编码后的输入长度的多项式时间内完成，则称该算法为多项式时间算法
+当输入很大时，基本运算也会变得耗时。两个$\beta$位整数相乘需要耗时$\Theta(\beta^2)$.一个$\beta$为整数除以另一个较短整数的商或余数需要耗时$\Theta(\beta^2)$
+基础数论概念整除性与约数你懂的
+素数与合数你也懂的
+除法定理、余数和等模定理31.1(除法定理): 对于任何整数$a...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/04/06</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Problem Solving">Problem Solving</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "CLRS">CLRS</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href = "/2019/03/30/ps-4-6-basic-number-theory/" >
+            
+                <span>问题求解学习笔记-数论基础</span>
+        </a>
+        <div class="abstract-content">
+            数学归纳法你都懂的
+辗转相除法(Division Algorithm)定理2.9(辗转相除法): $a,b$为整数，满足$b&gt;0$，则存在唯一的整数$q$和$r$使得$a=bq+r$，此处$0\le r&lt;b$
+$a\mid b$: $a$能整除$b$,$b$能被$a$整除
+定理2.10: $a,b$为非零整数，则存在整数$r,s$使得gcd($a,b)=ar+bs$. $gcd(a,b)$是唯一的。但$r,s$不唯一
+推论2.11: $a,b$为互质的整数，则存在整数$r,s$使得$ar+bs=1$【事实上是当且仅当的关系】
+欧几里得算法(The Euclidean Algo...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/03/30</span>
+            </div>
+            <!-- tags  -->
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href = "/2019/03/23/clrs-32String-Mathcing/" >
             
                 <span>算法导论学习笔记-字符串匹配</span>
@@ -666,120 +758,6 @@ If $n$ is large(relative to $m$)...
         </div>
     </article>
     
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2019/02/11/HKUST-discussion/" >
-            
-                <span>HKUST项目讨论内容</span>
-        </a>
-        <div class="abstract-content">
-            问题理解原文【来自有道机翻】预测Sklearn程序的运行时间在共享基础设施上高效运行分布式应用程序具有挑战性。过去的研究表明，选择合适的硬件配置可以显著提高性能和降低成本。为了选择最佳配置，需要准确地预测不同应用程序的性能。
-我们考虑这个挑战的一个简化版本:预测单个服务器上机器学习程序的性能。Scikit-learn (sklearn)是一个用于python的机器学习库。提供的数据集描述了在sklearn中运行SGDClassifier的几个示例。数据集的特征描述了SGDClassifier以及用于生成综合训练数据的特征。待分析数据为SGDClassifier的训练时间。
-在这个文件夹中...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/02/11</span>
-            </div>
-            <!-- tags  -->
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2019/01/30/ICM-feelings/" >
-            
-                <span>2019美赛经历</span>
-        </a>
-        <div class="abstract-content">
-            在经过了一夜的通宵之后终于把论文交上去惹，然后睡了一天，摸了一天，终于想起来要写这篇blog了。
-赛前准备
-学习MATLAB基本语法，笔记见MATLAB临时抱佛脚
-学习数模基本算法，资料见NJUBroccoli的github仓库
-抄写常用算法模板，如：规划问题、AHP、灰色系统、灰色预测、主成分分析、方差分析等
-阅读往年赛题和O奖论文，摸清套路
-和朋友出去看电影
-和队友做迫真模拟
-补番
-
-团队配置
-po主：cs大二狗，会C/C++，LaTeX，以及Java和Verilog的皮毛，MATLAB是比赛前速成的。建模、计算、写论文、校对多面打杂，兼职美工和排版工人。
-队友A：数学系大二小姐姐。...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/01/30</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Math Modeling">Math Modeling</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2019/01/23/python-getstart/" >
-            
-                <span>python学习笔记</span>
-        </a>
-        <div class="abstract-content">
-            持续更新中参考：
-
-廖雪峰的Python3教程
-《Python编程：从入门到实践》
-
-数据类型Python是动态语言，即变量本身类型不固定，不需要提前声明变量类型的Python有三大数据类型：整数、浮点数、字符串
-整数整数可以是任意大小的
-浮点数浮点数可以是任意精度的【但是运算也会出现误差】
-字符串
-字符串用单引号或双引号括起来
-会涉及到转义符的问题
-在字符串前加r表示让所有的转义符都不转
-字符串拼接：+号
-
-几个骚方法
-title()首字母大写
-upper()全部大写
-lower()全部小写
-rstrip()暂时删除字符串右端的空白
-  123456&gt;&gt;&gt; s = '...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/01/23</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Python">Python</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
     <!-- paginator  -->
     
     <nav class="page-nav">
@@ -814,21 +792,7 @@ rstrip()暂时删除字符串右端的空白
         
     
         
-            
-                <span class="iconfont-archer wechat" title=wechat>
-                  
-                  <img class="profile-qr" src="/assets/wx.png" />
-                </span>
-            
-        
     
-        
-            
-                <span class="iconfont-archer qq" title=qq>
-                  
-                  <img class="profile-qr" src="/assets/qq.jpg" />
-                </span>
-            
         
     
         
@@ -905,21 +869,7 @@ rstrip()暂时删除字符串右端的空白
         
     
         
-            
-                <span class="iconfont-archer wechat" title=wechat>
-                  
-                  <img class="profile-qr" src="/assets/wx.png" />
-                </span>
-            
-        
     
-        
-            
-                <span class="iconfont-archer qq" title=qq>
-                  
-                  <img class="profile-qr" src="/assets/qq.jpg" />
-                </span>
-            
         
     
         
@@ -1653,9 +1603,104 @@ rstrip()暂时删除字符串右端的空白
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 47
+        Total : 50
         </div>
         <!-- search  -->
         
@@ -1668,6 +1713,21 @@ rstrip()暂时删除字符串右端的空白
     
     <div class="archive-year"> 2019 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/13</span><a class="archive-post-title" href= "/2019/04/13/ps-4-7-cryptographic-algorithm/" >问题求解学习笔记-密码算法</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/06</span><a class="archive-post-title" href= "/2019/04/06/clrs-31Number-Theoretic-Algorithms/" >算法导论学习笔记-数论算法</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/30</span><a class="archive-post-title" href= "/2019/03/30/ps-4-6-basic-number-theory/" >问题求解学习笔记-数论基础</a>
+        </li>
     
     
         <li class="archive-post-item">
@@ -1920,19 +1980,19 @@ rstrip()暂时删除字符串右端的空白
     
         <span class="sidebar-tag-name" data-tags="Flags"><span class="iconfont-archer">&#xe606;</span>Flags</span>
     
-        <span class="sidebar-tag-name" data-tags="Math Modeling"><span class="iconfont-archer">&#xe606;</span>Math Modeling</span>
-    
         <span class="sidebar-tag-name" data-tags="Notes"><span class="iconfont-archer">&#xe606;</span>Notes</span>
     
         <span class="sidebar-tag-name" data-tags="pa"><span class="iconfont-archer">&#xe606;</span>pa</span>
+    
+        <span class="sidebar-tag-name" data-tags="Math Modeling"><span class="iconfont-archer">&#xe606;</span>Math Modeling</span>
     
         <span class="sidebar-tag-name" data-tags="ICS"><span class="iconfont-archer">&#xe606;</span>ICS</span>
     
         <span class="sidebar-tag-name" data-tags="Machine Learning"><span class="iconfont-archer">&#xe606;</span>Machine Learning</span>
     
-        <span class="sidebar-tag-name" data-tags="Problem Solving"><span class="iconfont-archer">&#xe606;</span>Problem Solving</span>
-    
         <span class="sidebar-tag-name" data-tags="Assembly Language"><span class="iconfont-archer">&#xe606;</span>Assembly Language</span>
+    
+        <span class="sidebar-tag-name" data-tags="Problem Solving"><span class="iconfont-archer">&#xe606;</span>Problem Solving</span>
     
         <span class="sidebar-tag-name" data-tags="CLRS"><span class="iconfont-archer">&#xe606;</span>CLRS</span>
     
@@ -1942,65 +2002,65 @@ rstrip()暂时删除字符串右端的空白
     
         <span class="sidebar-tag-name" data-tags="amortized analysis"><span class="iconfont-archer">&#xe606;</span>amortized analysis</span>
     
-        <span class="sidebar-tag-name" data-tags="Disjoint Sets"><span class="iconfont-archer">&#xe606;</span>Disjoint Sets</span>
-    
-        <span class="sidebar-tag-name" data-tags="Data Structure"><span class="iconfont-archer">&#xe606;</span>Data Structure</span>
-    
         <span class="sidebar-tag-name" data-tags="Single Source Shortest Path"><span class="iconfont-archer">&#xe606;</span>Single Source Shortest Path</span>
     
         <span class="sidebar-tag-name" data-tags="Bellman-Ford"><span class="iconfont-archer">&#xe606;</span>Bellman-Ford</span>
     
         <span class="sidebar-tag-name" data-tags="Dijkstra"><span class="iconfont-archer">&#xe606;</span>Dijkstra</span>
     
+        <span class="sidebar-tag-name" data-tags="Disjoint Sets"><span class="iconfont-archer">&#xe606;</span>Disjoint Sets</span>
+    
+        <span class="sidebar-tag-name" data-tags="Data Structure"><span class="iconfont-archer">&#xe606;</span>Data Structure</span>
+    
         <span class="sidebar-tag-name" data-tags="Graph Algorithms"><span class="iconfont-archer">&#xe606;</span>Graph Algorithms</span>
-    
-        <span class="sidebar-tag-name" data-tags="ics"><span class="iconfont-archer">&#xe606;</span>ics</span>
-    
-        <span class="sidebar-tag-name" data-tags="process calling"><span class="iconfont-archer">&#xe606;</span>process calling</span>
-    
-        <span class="sidebar-tag-name" data-tags="freshman"><span class="iconfont-archer">&#xe606;</span>freshman</span>
-    
-        <span class="sidebar-tag-name" data-tags="college life"><span class="iconfont-archer">&#xe606;</span>college life</span>
-    
-        <span class="sidebar-tag-name" data-tags="Lab"><span class="iconfont-archer">&#xe606;</span>Lab</span>
-    
-        <span class="sidebar-tag-name" data-tags="Ics"><span class="iconfont-archer">&#xe606;</span>Ics</span>
     
         <span class="sidebar-tag-name" data-tags="Graph Theory"><span class="iconfont-archer">&#xe606;</span>Graph Theory</span>
     
         <span class="sidebar-tag-name" data-tags="Connectivity"><span class="iconfont-archer">&#xe606;</span>Connectivity</span>
     
+        <span class="sidebar-tag-name" data-tags="freshman"><span class="iconfont-archer">&#xe606;</span>freshman</span>
+    
+        <span class="sidebar-tag-name" data-tags="college life"><span class="iconfont-archer">&#xe606;</span>college life</span>
+    
+        <span class="sidebar-tag-name" data-tags="ics"><span class="iconfont-archer">&#xe606;</span>ics</span>
+    
+        <span class="sidebar-tag-name" data-tags="process calling"><span class="iconfont-archer">&#xe606;</span>process calling</span>
+    
+        <span class="sidebar-tag-name" data-tags="Lab"><span class="iconfont-archer">&#xe606;</span>Lab</span>
+    
+        <span class="sidebar-tag-name" data-tags="Ics"><span class="iconfont-archer">&#xe606;</span>Ics</span>
+    
         <span class="sidebar-tag-name" data-tags="Matchings"><span class="iconfont-archer">&#xe606;</span>Matchings</span>
     
         <span class="sidebar-tag-name" data-tags="Factorization"><span class="iconfont-archer">&#xe606;</span>Factorization</span>
-    
-        <span class="sidebar-tag-name" data-tags="MATLAB"><span class="iconfont-archer">&#xe606;</span>MATLAB</span>
     
         <span class="sidebar-tag-name" data-tags="Linux"><span class="iconfont-archer">&#xe606;</span>Linux</span>
     
         <span class="sidebar-tag-name" data-tags="vim"><span class="iconfont-archer">&#xe606;</span>vim</span>
     
-        <span class="sidebar-tag-name" data-tags="Group Theory"><span class="iconfont-archer">&#xe606;</span>Group Theory</span>
+        <span class="sidebar-tag-name" data-tags="MATLAB"><span class="iconfont-archer">&#xe606;</span>MATLAB</span>
     
-        <span class="sidebar-tag-name" data-tags="Python"><span class="iconfont-archer">&#xe606;</span>Python</span>
+        <span class="sidebar-tag-name" data-tags="Group Theory"><span class="iconfont-archer">&#xe606;</span>Group Theory</span>
     
         <span class="sidebar-tag-name" data-tags="regular expressions"><span class="iconfont-archer">&#xe606;</span>regular expressions</span>
     
         <span class="sidebar-tag-name" data-tags="linux"><span class="iconfont-archer">&#xe606;</span>linux</span>
     
+        <span class="sidebar-tag-name" data-tags="Python"><span class="iconfont-archer">&#xe606;</span>Python</span>
+    
         <span class="sidebar-tag-name" data-tags="Java"><span class="iconfont-archer">&#xe606;</span>Java</span>
     
         <span class="sidebar-tag-name" data-tags="programming"><span class="iconfont-archer">&#xe606;</span>programming</span>
     
-        <span class="sidebar-tag-name" data-tags="markdown"><span class="iconfont-archer">&#xe606;</span>markdown</span>
-    
         <span class="sidebar-tag-name" data-tags="tmux"><span class="iconfont-archer">&#xe606;</span>tmux</span>
-    
-        <span class="sidebar-tag-name" data-tags="Traversibility"><span class="iconfont-archer">&#xe606;</span>Traversibility</span>
     
         <span class="sidebar-tag-name" data-tags="Graph"><span class="iconfont-archer">&#xe606;</span>Graph</span>
     
         <span class="sidebar-tag-name" data-tags="Tree"><span class="iconfont-archer">&#xe606;</span>Tree</span>
+    
+        <span class="sidebar-tag-name" data-tags="markdown"><span class="iconfont-archer">&#xe606;</span>markdown</span>
+    
+        <span class="sidebar-tag-name" data-tags="Traversibility"><span class="iconfont-archer">&#xe606;</span>Traversibility</span>
     
     </div>
     <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
