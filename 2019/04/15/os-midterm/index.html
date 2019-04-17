@@ -15,7 +15,7 @@
     <meta name="description" content="nothing to write">
     <meta name="Cache-Control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-    <title>2019美赛经历 · Mengzelev&#39;s Blog</title>
+    <title>os期中复习 · Mengzelev&#39;s Blog</title>
     <style type="text/css">
     @font-face {
         font-family: 'Oswald-Regular';
@@ -210,7 +210,7 @@
                 <a href="/" >Mengzelev&#39;s Blog</a>
             </div>
             <div class="post-title">
-                <a href="#" class="post-name">2019美赛经历</a>
+                <a href="#" class="post-name">os期中复习</a>
             </div>
     </div>
     
@@ -242,7 +242,7 @@ height:50vh;
         <h1 class="intro-title">
             <!-- 主页  -->
             
-            2019美赛经历
+            os期中复习
             <!-- 404 -->
             
         </h1>
@@ -259,20 +259,14 @@ height:50vh;
             <div class="post-intros">
                 <!-- 文章页标签  -->
                 
-                    <div class= post-intro-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Math Modeling">Math Modeling</a>
-    
-</div>
-                
                 
                     <div class="post-intro-read">
-                        <span>Word count: <span class="post-count">1,442</span> / Reading time: <span class="post-count">5 min</span></span>
+                        <span>Word count: <span class="post-count">1,760</span> / Reading time: <span class="post-count">7 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
                     <span class="post-intro-calander iconfont-archer">&#xe676;</span>
-                    <span class="post-intro-time">2019/01/30</span>
+                    <span class="post-intro-time">2019/04/15</span>
                     
                     <span id="busuanzi_container_page_pv" class="busuanzi-pv">
                         <span class="iconfont-archer">&#xe602;</span>
@@ -396,93 +390,164 @@ height:50vh;
         <div class="container container-unloaded">
             <main class="main post-page">
     <article class="article-entry">
-        <p>在经过了一夜的通宵之后终于把论文交上去惹，然后睡了一天，摸了一天，终于想起来要写这篇blog了。</p>
-<h1 id="赛前准备"><a href="#赛前准备" class="headerlink" title="赛前准备"></a>赛前准备</h1><ul>
-<li>学习MATLAB基本语法，笔记见<a href="https://mengzelev.github.io/2019/01/16/matlab-getstart/">MATLAB临时抱佛脚</a></li>
-<li>学习数模基本算法，资料见<a href="https://github.com/NJUBroccoli/Material-of-MCM-ICM" target="_blank" rel="noopener">NJUBroccoli的github仓库</a></li>
-<li>抄写常用算法模板，如：规划问题、AHP、灰色系统、灰色预测、主成分分析、方差分析等</li>
-<li>阅读往年赛题和O奖论文，摸清套路</li>
-<li><s>和朋友出去看电影</s></li>
-<li>和队友做迫真模拟</li>
-<li><s>补番</s></li>
+        <h1 id="应用眼中的OS"><a href="#应用眼中的OS" class="headerlink" title="应用眼中的OS"></a>应用眼中的OS</h1><ul>
+<li>操作系统一方面需要提供程序的<strong>执行的环境</strong>和<strong>相应的资源</strong>，还要提供<strong>和操作系统世界中其他对象交互的方法和约定</strong></li>
 </ul>
-<h1 id="团队配置"><a href="#团队配置" class="headerlink" title="团队配置"></a>团队配置</h1><ul>
-<li>po主：cs大二狗，会C/C++，LaTeX，以及Java和Verilog的皮毛，MATLAB是比赛前速成的。建模、计算、写论文、校对多面打杂，兼职美工和排版工人。</li>
-<li>队友A：数学系大二小姐姐。建模扛把子。</li>
-<li>队友B：大气科学大二小哥哥。负责给建模提供灵感，负责抱大气老师教授大腿，负责询问环科同学、商科同学…<s>这么写会不会被打死</s></li>
+<h1 id="并发"><a href="#并发" class="headerlink" title="并发"></a>并发</h1><h2 id="共享内存多线程"><a href="#共享内存多线程" class="headerlink" title="共享内存多线程"></a>共享内存多线程</h2><ul>
+<li>并发定义：一个程序、算法或问题的不同部分乱序或偏序执行而不影响最终结果的能力</li>
+<li>程序经历了什么？<ul>
+<li>编译器优化$\to$顺序丧失</li>
+<li>操作系统中断，多处理器、缓存(硬件)$\to$原子性)(all or nothing)丧失</li>
+<li>缓存，乱序（硬件）$\to$可见性丧失</li>
 </ul>
-<h2 id="分工"><a href="#分工" class="headerlink" title="分工"></a>分工</h2><ul>
-<li>模型是一起讨论建的</li>
-<li>数据是一起找的(虽然后来没怎么用上)</li>
-<li>编程队友B不会所以我和队友A小姐姐一起负责</li>
-<li>论文是每个人挑几个部分一起写的</li>
-<li>翻译是交给有道姬完成的，由我和队友A校对<s>因为队友B校对的质量堪忧</s></li>
-<li>排版由原po一人完成</li>
+</li>
 </ul>
-<h1 id="比赛过程"><a href="#比赛过程" class="headerlink" title="比赛过程"></a>比赛过程</h1><h2 id="选题"><a href="#选题" class="headerlink" title="选题"></a>选题</h2><p>之前和队友商量好了选E或F题，因为MCM比较有难度，<s>D题需要排队论和马氏链不想看</s>。比赛当天题目公布的时候，看到F题需要不少硬核经济学知识果断放弃了，然后果断就上了E题这条贼船。MCM碰都没碰所以错过了养龙的机会，<s>我想养康娜酱啊呜呜呜</s></p>
-<p>今年赛题内容大致为</p>
+<h2 id="互斥"><a href="#互斥" class="headerlink" title="互斥"></a>互斥</h2><p>评估一把锁的基本准则</p>
 <ul>
-<li>A题：养龙</li>
-<li>B题：救救难民</li>
-<li>C题：美国总统五大洲四日游</li>
-<li>D题：逃离卢浮宫</li>
-<li>E题：生态服务成本估价</li>
-<li>F题：电子货币</li>
+<li>所能够完成基本任务：提供互斥性质</li>
+<li>锁的分配是公平的：不会有现成想要上锁却永远得不到它</li>
+<li>锁的高效的：无等待时性能？多线程同时等待时性能？多CPU每个核的线程都要上锁时性能？</li>
 </ul>
-<p>(只有E题是认真看过的，如有偏差欢迎指出)</p>
-<h2 id="题目概述"><a href="#题目概述" class="headerlink" title="题目概述"></a>题目概述</h2><p>E题按照惯例是环境问题，今年是要求对生态系统服务(ecological services)进行估价。生态系统服务是指生态系统提供的诸如净化空气、水体自净、保持水土等功能。要求大概有以下几点</p>
+<h3 id="几种上锁方法"><a href="#几种上锁方法" class="headerlink" title="几种上锁方法"></a>几种上锁方法</h3><ul>
+<li>TestAndSet；相当于<code>atomic_xchg</code></li>
+<li>CompareAndWait</li>
+<li>LL&amp;SC</li>
+<li>FetchAndAdd：彩票锁，保证公平性</li>
+</ul>
+<h2 id="同步-CV"><a href="#同步-CV" class="headerlink" title="同步(CV)"></a>同步(CV)</h2><ul>
+<li><code>wait(&amp;cond)</code>：当前进程进入睡眠状态，等待cond被满足后唤醒</li>
+<li><code>signal(&amp;cond)</code>：唤醒在等待cond条件的某个进程</li>
+<li><code>broadcast(&amp;cond)</code>: 唤醒在等待cond条件的所有进程</li>
+<li>需要配合互斥锁使用：读取状态到<code>wait()</code>之间不能被打断，改变状态到<code>signal</code>之间也不能被打断</li>
+</ul>
+<h2 id="信号量"><a href="#信号量" class="headerlink" title="信号量"></a>信号量</h2><p>互斥锁(二元信号量)和同步都可以使用信号量来实现<br>信号量就相当于有一个管理员manage了一堆资源，进程需要资源时先向管理员请求(<code>semi_wait</code>)，暂时没有资源就等，使用完毕后归还(<code>semi_post</code>)给管理员</p>
+<h3 id="APIs"><a href="#APIs" class="headerlink" title="APIs"></a>APIs</h3><ul>
+<li><code>sem_wait</code>：信号量-1，表示在等待的线程增加了一个，消耗一个执行名额；如果信号量&lt;0, 表示等待的线程数多于可执行线程数，当前线程进入睡眠</li>
+<li><code>sem_post</code>：信号量+1，表示执行的线程少了一个，可以让出一个执行名额</li>
+</ul>
+<h2 id="并发Bugs"><a href="#并发Bugs" class="headerlink" title="并发Bugs"></a>并发Bugs</h2><ul>
+<li>原子性违反(AV) —&gt; 上锁</li>
+<li>顺序违反(OV) -&gt; 同步</li>
+</ul>
+<h3 id="死锁出现的四个条件"><a href="#死锁出现的四个条件" class="headerlink" title="死锁出现的四个条件"></a>死锁出现的四个条件</h3><ul>
+<li>互斥</li>
+<li>请求与保持(同一个进程要同时上多把锁)</li>
+<li>没有抢占(不能强制解锁)</li>
+<li>循环等待</li>
+</ul>
+<h3 id="对付死锁"><a href="#对付死锁" class="headerlink" title="对付死锁"></a>对付死锁</h3><ul>
+<li>避免：规定上锁顺序</li>
+<li>检测：打log</li>
+</ul>
+<h1 id="虚拟化"><a href="#虚拟化" class="headerlink" title="虚拟化"></a>虚拟化</h1><p>每个进程都以为自己独占CPU和整个内存空间<br>进程：OS提供的对运行程序的抽象</p>
+<h2 id="进程抽象"><a href="#进程抽象" class="headerlink" title="进程抽象"></a>进程抽象</h2><h3 id="进程状态"><a href="#进程状态" class="headerlink" title="进程状态"></a>进程状态</h3><ul>
+<li>Running: 进程正在处理器上执行命令</li>
+<li>Ready：进程准备执行，但由于某些原因OS决定现在不让它运行</li>
+<li>Blocked：进程此前执行了某些操作(e.g. I/O)，让它在其他事件发生前停止执行</li>
+</ul>
+<h3 id="实现进程"><a href="#实现进程" class="headerlink" title="实现进程"></a>实现进程</h3><ul>
+<li>进程=线程+地址空间</li>
+<li>进程就是个结构体<ul>
+<li>名字</li>
+<li>pid</li>
+<li>上下文</li>
+<li>地址空间</li>
+<li>堆栈</li>
+<li>状态</li>
+<li>其他信息（如父进程、文件描述符等）</li>
+</ul>
+</li>
+</ul>
+<h2 id="文件描述符"><a href="#文件描述符" class="headerlink" title="文件描述符"></a>文件描述符</h2><p>一个指向os内对象的指针<br><code>fork-exec</code>不改变文件描述符</p>
+<h3 id="重定向"><a href="#重定向" class="headerlink" title="重定向"></a>重定向</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> fd = open(<span class="string">"a.txt"</span>);</span><br><span class="line">dup2(STDOUT_FILENO, fd); <span class="comment">//???</span></span><br></pre></td></tr></table></figure>
+<h3 id="管道"><a href="#管道" class="headerlink" title="管道"></a>管道</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(pipe(fds) != <span class="number">0</span>) &#123;panic(<span class="string">"pipe error"</span>);&#125;</span><br><span class="line">pid = fork();</span><br><span class="line"><span class="keyword">if</span>(pid == <span class="number">0</span>) &#123;<span class="comment">//child</span></span><br><span class="line">    dup2(fds[<span class="number">1</span>], STUOUT_FILENO); <span class="comment">//连接写口，往管道内写数据</span></span><br><span class="line">    close(fds[<span class="number">1</span>]);</span><br><span class="line">    close(fds[<span class="number">0</span>]);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span>&#123; <span class="comment">//parent</span></span><br><span class="line">    dup2(fds[<span class="number">0</span>], STDIN_FILENO); <span class="comment">//连接读口，从管道内读数据</span></span><br><span class="line">    close(fds[<span class="number">0</span>]);</span><br><span class="line">    close(fds[<span class="number">1</span>]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="信号"><a href="#信号" class="headerlink" title="信号"></a>信号</h2><p>进程组实现</p>
+<h2 id="进程调度"><a href="#进程调度" class="headerlink" title="进程调度"></a>进程调度</h2><h3 id="衡量标准"><a href="#衡量标准" class="headerlink" title="衡量标准"></a>衡量标准</h3><ul>
+<li>轮转时间(turnaround time): $\sum t_{complete}-t_{arrival}$</li>
+<li>响应时间(response time): $\sum t_{firstrun}-t_{arrival}$</li>
+</ul>
+<h3 id="FIFO"><a href="#FIFO" class="headerlink" title="FIFO"></a>FIFO</h3><ul>
+<li>优点：简单易实现</li>
+<li>缺点： 会产生护航效应</li>
+</ul>
+<h3 id="SJF-Shortest-Job-First"><a href="#SJF-Shortest-Job-First" class="headerlink" title="SJF(Shortest Job First)"></a>SJF(Shortest Job First)</h3><ul>
+<li>当假设所有任务同时到达时的最优算法</li>
+<li>非抢占式(preemptive)算法</li>
+</ul>
+<h3 id="STCF-Shortest-Time-to-Completion-First"><a href="#STCF-Shortest-Time-to-Completion-First" class="headerlink" title="STCF(Shortest Time-to-Completion First)"></a>STCF(Shortest Time-to-Completion First)</h3><ul>
+<li>抢占式策略，又名Preemptive Shortest Job First(PSJF)</li>
+<li>轮转时间短但响应时间长</li>
+</ul>
+<h3 id="RR-Round-Robin"><a href="#RR-Round-Robin" class="headerlink" title="RR(Round Robin)"></a>RR(Round Robin)</h3><ul>
+<li>每个进程运行一段时间片(time slice, sometimes called scheduling quantum)</li>
+<li>时间片越短，响应时间越短，但是切换上下文的时间会变长(trade-off)</li>
+<li>当考虑轮转时间时非常糟糕</li>
+<li>保证了公平性但是损失了效率</li>
+</ul>
+<h3 id="MLFQ-Multi-level-Feedback-Queue"><a href="#MLFQ-Multi-level-Feedback-Queue" class="headerlink" title="MLFQ(Multi-level Feedback Queue)"></a>MLFQ(Multi-level Feedback Queue)</h3><p>MLFQ有很多种实现但都大同小异，书上只介绍一种</p>
 <ul>
-<li>建立生态系统估价模型(ecological services valuation model)</li>
-<li>对不同规模的土地开发利用项目进行成本效益分析(CBA)，评估这些项目的真实经济成本</li>
-<li>决策者和管理者提出建议(implication)</li>
-<li>随着时间推移模型如何修改</li>
+<li>有很多队列，每个队列具有不同的优先级，优先级高的先运行</li>
+<li>通过观察进程过去的行为调整优先级<ul>
+<li>如果一个进程频繁让出CPU，保持高优先级；反之一个进程如果长时间占用CPU则会被降低优先级</li>
 </ul>
-<p>本来是抱着AHP+GRA+PCA的觉悟来选的E题，结果一看这tm难道不是$\sum$单价$\times$数量的小学生模型吗，只要我找到每吨废水处理的价格，每吨垃圾回收的价格etc.<br>然后标准结局出现了：找不到！！！<br>比如污水处理费，中国大陆，HK和法国是按吨收的，美国英国是每年交固定的类似于下水道保护费一样的费用。<br>而且题干里都说了“现在的土地利用项目一般不考虑环境成本”，所以根本就找不到工程前后环境相关的数据。几篇类似的论文都是有自己的监测站的啊！！！！我们上哪找去啊！！！<br>环境经济学的书查了一堆啊！！！直接说环境估价是一个尚未解决的难题啊！！！！【废话要是解决了还会出成赛题吗<br>如此绝望了一天半之后，我们决定，死马当活马医：gtnd，上AHP！<br>然后就开始了玄学AHP玄学建模玄学论文解释<br>由于只是个心路历程记录，所以就不详细解释了</p>
-<h2 id="计算"><a href="#计算" class="headerlink" title="计算"></a>计算</h2><p>我们的玄学模型只有CBA那一块有一丢丢计算量，直接上MATLAB<br>甚至把图调得更好看花的时间还多一些【丢人</p>
-<h2 id="论文"><a href="#论文" class="headerlink" title="论文"></a>论文</h2><p>是大家一起写的中文稿，然后扔给有道姬翻成英文，再手动修改</p>
-<h2 id="流水账"><a href="#流水账" class="headerlink" title="流水账"></a>流水账</h2><p>DAY1：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">选题</span><br><span class="line"><span class="keyword">while</span>(<span class="literal">true</span>)&#123;</span><br><span class="line">    讨论模;</span><br><span class="line">    找论文;</span><br><span class="line">    找数据;</span><br><span class="line">    推翻模型;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>DAY2：</p>
+</li>
+<li>并不知道一个任务是长是短，因此先假设是短的，然后根据进程的后续表现修改认知</li>
+</ul>
+<h4 id="优先级的修改"><a href="#优先级的修改" class="headerlink" title="优先级的修改"></a>优先级的修改</h4><p>workload: 交互式短时间任务(会频繁让出CPU)+不交互的长时间任务(响应时间不那么重要)</p>
+<h4 id="Basic-Rules"><a href="#Basic-Rules" class="headerlink" title="Basic Rules"></a>Basic Rules</h4><ol>
+<li>If Priority(A)&gt;Priority(B), A runs (B doesn’t)</li>
+<li>If Priority(B)==Priority(B), A &amp; B runs in RR</li>
+<li>一个任务最初进入系统时位于最高优先级<br>4(a). 如果一个任务耗尽了时间片，则优先级下降<br>4(b). 如果一个任务在时间片耗尽之前放弃了CPU,优先级不变<br>4(改进). 当一个任务在一定程度上用尽了被分配到的时间，优先级就下降<br>5(新增). 在一段时间$S$后，将所有任务移到最高优先级上(Priority-boost) </li>
+</ol>
+<p>缺陷： </p>
 <ul>
-<li>找数据</li>
-<li>推翻模型</li>
-<li>玄学建模开始</li>
-<li>玄学AHP</li>
-<li>玄学CBA</li>
-<li>玄学编程</li>
-<li>队友B开始玄学扯淡写论文</li>
+<li>饥饿：如果交互式进程很多就会完全占用CPU使得长任务得不到调度(5解决)</li>
+<li>有些心脏的应用可以玩弄这个规则，一直主动让出一小会儿CPU来使自己停留在高优先级上(4解决)</li>
+<li>任务的行为可能会随着时间改变(5解决)</li>
 </ul>
-<p>DAY3：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span>(<span class="literal">true</span>)&#123;</span><br><span class="line">    论文扯淡;</span><br><span class="line">    发现模型有问题;</span><br><span class="line">    打补丁;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>DAY4(通宵)：</p>
+<h3 id="PS-Proportional-share"><a href="#PS-Proportional-share" class="headerlink" title="PS(Proportional-share)"></a>PS(Proportional-share)</h3><ul>
+<li>老子才不管什么的轮转时间和响应时间，老子只要每个任务都能按比例分到一定时间</li>
+</ul>
+<h4 id="lottery-scheduling"><a href="#lottery-scheduling" class="headerlink" title="lottery scheduling"></a>lottery scheduling</h4><blockquote>
+<p>随机的好处</p>
 <ul>
-<li>写论文</li>
-<li>继续给模型打补丁</li>
-<li>翻译并校对</li>
-<li>排版</li>
-<li>提交</li>
+<li>防止了边界情况</li>
+<li>轻量级，需要记录的信息少</li>
+<li>快(太快了可能会变成伪随机数)</li>
 </ul>
-<h1 id="感想"><a href="#感想" class="headerlink" title="感想"></a>感想</h1><ul>
-<li>美赛是<strong>真的很累</strong>！！！【不过也有些队伍早早就做完提交了根本没有通宵</li>
-<li>前面不知道做些什么，所以每天都睡足了8小时，事情都积到最后一天做了，所以不得不通宵，所幸还是赶上了的</li>
-<li>没有养龙好遗憾啊，反正哪题都不会做，不如养龙爽一把，非要吊死在E题上</li>
-<li>美赛过于昂贵。3人平分100美元的报名费不说，因为作死没有留在学校里打，导致只能去市图书馆讨论，花费大量金钱在吃饭上，最后一天为了通宵还开了个房</li>
-<li>这次的E题感觉还是挺坑的，涉及到不少环境经济学的知识，外行人慎选。<s>其实哪道题都是坑</s></li>
-<li>我们的模型后来算出来西气东输是个失败的工程，感觉小命不保了</li>
-<li>33.33美元，体验通宵的感觉，参赛一次，受益一生【棒读】</li>
-</ul>
-<blockquote>
-<p>MCM/ICM真是一个骗钱又坑爹的比赛啊</p>
 </blockquote>
-<p><img src="/2019/01/30/ICM-feelings/trump.jpeg"></p>
+<p>怎么分配彩票也是个很棘手的问题</p>
+<h4 id="stride-scheduling"><a href="#stride-scheduling" class="headerlink" title="stride scheduling"></a>stride scheduling</h4><ul>
+<li>根据每个任务的彩票数决定每次调度执行的时间长短</li>
+<li>每次调度都选取运行时间最短的任务</li>
+</ul>
+<h3 id="多处理器调度"><a href="#多处理器调度" class="headerlink" title="多处理器调度"></a>多处理器调度</h3><p>不想看了【瘫</p>
+<h2 id="链接和加载"><a href="#链接和加载" class="headerlink" title="链接和加载"></a>链接和加载</h2><ul>
+<li>静态链接下的加载：<code>_start-&gt;__libc_start_main-&gt;generic_start_main-&gt;...-&gt;main</code></li>
+<li>动态链接：<ul>
+<li>PLT：程序链接表，放入进行链接的代码，方便lazy linking</li>
+<li>GOT：全局偏移表，存放函数代码开始的地址</li>
+</ul>
+</li>
+</ul>
+<h2 id="虚存抽象"><a href="#虚存抽象" class="headerlink" title="虚存抽象"></a>虚存抽象</h2><ul>
+<li>mmap：把操作系统里的对象映射到进程的地址空间<ul>
+<li>e.g.加载可执行文件的时候把文件搬到某个地址处</li>
+<li>不映射任何文件的时候就相当于malloc</li>
+<li>只记录相关信息，余下的等发生缺页时再处理，所以非常快</li>
+<li>可以用红黑树维护分配的内存</li>
+<li>fork采用写时复制</li>
+</ul>
+</li>
+</ul>
 
     </article>
     <!-- license  -->
     
         <div class="license-wrapper">
             <p>原文作者: <a href="https://mengzelev.github.io">Mengzelev</a>
-            <p>原文链接: <a href="https://mengzelev.github.io/2019/01/30/ICM-feelings/">https://mengzelev.github.io/2019/01/30/ICM-feelings/</a>
-            <p>发表日期: <a href="https://mengzelev.github.io/2019/01/30/ICM-feelings/">January 30th 2019, 5:45:38 pm</a>
+            <p>原文链接: <a href="https://mengzelev.github.io/2019/04/15/os-midterm/">https://mengzelev.github.io/2019/04/15/os-midterm/</a>
+            <p>发表日期: <a href="https://mengzelev.github.io/2019/04/15/os-midterm/">April 15th 2019, 10:17:55 pm</a>
             <p>版权声明: 本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
         </div>
     
@@ -490,17 +555,12 @@ height:50vh;
     <ul class="post-paginator">
         <li class="next">
             
-                <div class="nextSlogan">Next Post</div>
-                <a href= "/2019/02/11/HKUST-discussion/" title= HKUST项目讨论内容 >
-                    <div class="nextTitle">HKUST项目讨论内容</div>
-                </a>
-            
         </li>
         <li class="previous">
             
                 <div class="prevSlogan">Previous Post</div>
-                <a href= "/2019/01/23/python-getstart/" title= python学习笔记 >
-                    <div class="prevTitle">python学习笔记</div>
+                <a href= "/2019/04/13/ps-4-7-cryptographic-algorithm/" title= 问题求解学习笔记-密码算法 >
+                    <div class="prevTitle">问题求解学习笔记-密码算法</div>
                 </a>
             
         </li>
@@ -629,7 +689,7 @@ top:50vh;
         <div class="toc-catalog">
             <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
         </div>
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#赛前准备"><span class="toc-number">1.</span> <span class="toc-text">赛前准备</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#团队配置"><span class="toc-number">2.</span> <span class="toc-text">团队配置</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#分工"><span class="toc-number">2.1.</span> <span class="toc-text">分工</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#比赛过程"><span class="toc-number">3.</span> <span class="toc-text">比赛过程</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#选题"><span class="toc-number">3.1.</span> <span class="toc-text">选题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#题目概述"><span class="toc-number">3.2.</span> <span class="toc-text">题目概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#计算"><span class="toc-number">3.3.</span> <span class="toc-text">计算</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#论文"><span class="toc-number">3.4.</span> <span class="toc-text">论文</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#流水账"><span class="toc-number">3.5.</span> <span class="toc-text">流水账</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#感想"><span class="toc-number">4.</span> <span class="toc-text">感想</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#应用眼中的OS"><span class="toc-number">1.</span> <span class="toc-text">应用眼中的OS</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#并发"><span class="toc-number">2.</span> <span class="toc-text">并发</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#共享内存多线程"><span class="toc-number">2.1.</span> <span class="toc-text">共享内存多线程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#互斥"><span class="toc-number">2.2.</span> <span class="toc-text">互斥</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#几种上锁方法"><span class="toc-number">2.2.1.</span> <span class="toc-text">几种上锁方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#同步-CV"><span class="toc-number">2.3.</span> <span class="toc-text">同步(CV)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#信号量"><span class="toc-number">2.4.</span> <span class="toc-text">信号量</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#APIs"><span class="toc-number">2.4.1.</span> <span class="toc-text">APIs</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#并发Bugs"><span class="toc-number">2.5.</span> <span class="toc-text">并发Bugs</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#死锁出现的四个条件"><span class="toc-number">2.5.1.</span> <span class="toc-text">死锁出现的四个条件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#对付死锁"><span class="toc-number">2.5.2.</span> <span class="toc-text">对付死锁</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#虚拟化"><span class="toc-number">3.</span> <span class="toc-text">虚拟化</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#进程抽象"><span class="toc-number">3.1.</span> <span class="toc-text">进程抽象</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#进程状态"><span class="toc-number">3.1.1.</span> <span class="toc-text">进程状态</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实现进程"><span class="toc-number">3.1.2.</span> <span class="toc-text">实现进程</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#文件描述符"><span class="toc-number">3.2.</span> <span class="toc-text">文件描述符</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#重定向"><span class="toc-number">3.2.1.</span> <span class="toc-text">重定向</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#管道"><span class="toc-number">3.2.2.</span> <span class="toc-text">管道</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#信号"><span class="toc-number">3.3.</span> <span class="toc-text">信号</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#进程调度"><span class="toc-number">3.4.</span> <span class="toc-text">进程调度</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#衡量标准"><span class="toc-number">3.4.1.</span> <span class="toc-text">衡量标准</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#FIFO"><span class="toc-number">3.4.2.</span> <span class="toc-text">FIFO</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SJF-Shortest-Job-First"><span class="toc-number">3.4.3.</span> <span class="toc-text">SJF(Shortest Job First)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#STCF-Shortest-Time-to-Completion-First"><span class="toc-number">3.4.4.</span> <span class="toc-text">STCF(Shortest Time-to-Completion First)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RR-Round-Robin"><span class="toc-number">3.4.5.</span> <span class="toc-text">RR(Round Robin)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MLFQ-Multi-level-Feedback-Queue"><span class="toc-number">3.4.6.</span> <span class="toc-text">MLFQ(Multi-level Feedback Queue)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#优先级的修改"><span class="toc-number">3.4.6.1.</span> <span class="toc-text">优先级的修改</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Basic-Rules"><span class="toc-number">3.4.6.2.</span> <span class="toc-text">Basic Rules</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PS-Proportional-share"><span class="toc-number">3.4.7.</span> <span class="toc-text">PS(Proportional-share)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#lottery-scheduling"><span class="toc-number">3.4.7.1.</span> <span class="toc-text">lottery scheduling</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#stride-scheduling"><span class="toc-number">3.4.7.2.</span> <span class="toc-text">stride scheduling</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#多处理器调度"><span class="toc-number">3.4.8.</span> <span class="toc-text">多处理器调度</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#链接和加载"><span class="toc-number">3.5.</span> <span class="toc-text">链接和加载</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#虚存抽象"><span class="toc-number">3.6.</span> <span class="toc-text">虚存抽象</span></a></li></ol></li></ol>
     </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
