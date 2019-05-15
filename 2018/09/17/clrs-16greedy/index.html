@@ -273,7 +273,7 @@ height:50vh;
                 
                 
                     <div class="post-intro-read">
-                        <span>Word count: <span class="post-count">1,428</span> / Reading time: <span class="post-count">5 min</span></span>
+                        <span>Word count: <span class="post-count">1,429</span> / Reading time: <span class="post-count">5 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
@@ -421,17 +421,37 @@ height:50vh;
 </ul>
 <p>共同的条件是有一堆不同价值、重量的东西，用一个有一定承重量的背包去装，求装得的最大价值。<br>不同在于，<strong>0-1背包问题</strong>中每个东西要么拿要么不拿，而<strong>分数背包问题</strong>中可以拿分数个东西。</p>
 <p>前者无法用贪心算法求解，但后者可以，主要区别在于考虑<strong>0-1背包问题</strong>中是否将一个商品装入背包时，必须比较包含此商品的子问题的解和不包含此商品的子问题的解。简单来说就是，空闲空间的存在非常讨厌。只能使用动态规划来求解</p>
-<h1 id="活动选择问题"><a href="#活动选择问题" class="headerlink" title="活动选择问题"></a>活动选择问题</h1><h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><center><br><img src="/2018/09/17/clrs-16greedy/activity1.png" height="200"><br></center>
+<h1 id="活动选择问题"><a href="#活动选择问题" class="headerlink" title="活动选择问题"></a>活动选择问题</h1><h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><center>
+<img src="/2018/09/17/clrs-16greedy/activity1.png" height="200">
+</center>
 
 <h2 id="最优子结构-1"><a href="#最优子结构-1" class="headerlink" title="最优子结构"></a>最优子结构</h2><p>通俗地说，对于某一个活动$a_k$，在它开始之前结束的所有活动，和在它结束之后开始的所有活动，这两个集合都应该取到最优解，可以使用剪切-粘贴发得到证明。因为如果子问题存在更优解，只需替换即可得到原问题的最优解，与原问题已经是最优解矛盾。</p>
 <p>严谨化表述可以描述为：</p>
-<center><br><img src="/2018/09/17/clrs-16greedy/activity2.png" height="100"><br></center><br>其中，$S{ij}$表示在$ai$结束后开始、在$aj$开始前结束的活动的集合；<br>c[i,j]表示集合$S{ij}$的最优解。<br><br>贪心选择<br>———————————<br>抛开各种分析直接来看这个问题，或者说和一个不知道动态规划的人谈起这个问题，很容易（大概）有这样一种想法：<br>对于每一次选择，都取不冲突的、最早结束的活动，感觉应该能够得到最优解。<br><br>事实上这个想法是对的，可以使用<a href="#replace">替换法</a>进行证明。<br><center><br><img src="/2018/09/17/clrs-16greedy/activity3.png" height="200"><br></center>
+<center>
+<img src="/2018/09/17/clrs-16greedy/activity2.png" height="100">
+</center>
+其中，$S{ij}$表示在$ai$结束后开始、在$aj$开始前结束的活动的集合；
+c[i,j]表示集合$S{ij}$的最优解。
+
+贪心选择
+---------------------------------
+抛开各种分析直接来看这个问题，或者说和一个不知道动态规划的人谈起这个问题，很容易（大概）有这样一种想法：
+对于每一次选择，都取不冲突的、最早结束的活动，感觉应该能够得到最优解。
+
+事实上这个想法是对的，可以使用[替换法](#replace)进行证明。
+<center>
+<img src="/2018/09/17/clrs-16greedy/activity3.png" height="200">
+</center>
 
 <p>这样每次做选择的时候就只剩下了一个子问题。</p>
 <h2 id="递归实现"><a href="#递归实现" class="headerlink" title="递归实现"></a>递归实现</h2><p>贪心算法可以自顶向下实现。</p>
-<center><br><img src="/2018/09/17/clrs-16greedy/activity4.png" height="200"><br></center>
+<center>
+<img src="/2018/09/17/clrs-16greedy/activity4.png" height="200">
+</center>
 
-<h2 id="迭代实现"><a href="#迭代实现" class="headerlink" title="迭代实现"></a>迭代实现</h2><center><br><img src="/2018/09/17/clrs-16greedy/activity5.png" height="250"><br></center>
+<h2 id="迭代实现"><a href="#迭代实现" class="headerlink" title="迭代实现"></a>迭代实现</h2><center>
+<img src="/2018/09/17/clrs-16greedy/activity5.png" height="250">
+</center>
 
 <p>其中Q是一个单调队列。如果用最小堆实现，则该算法的时间复杂度为O(nlgn)。</p>
 <h2 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h2><p>如果直接使用dp，状态转移是O(n)的，子问题总数为O(n^2)，因此总时间复杂度为O(n^3)。</p>
@@ -445,16 +465,24 @@ height:50vh;
 <li>用变长编码压缩编码长度</li>
 <li>Huffman树的叶结点与码字的编码一一对应</li>
 <li>字符的二进制码字用从根结点到该字符对应的叶结点的简单路径表示</li>
-<li>代价的定义：<center><br><img src="/2018/09/17/clrs-16greedy/huffman2.png" height="150"><br></center>
+<li>代价的定义：<center>
+<img src="/2018/09/17/clrs-16greedy/huffman2.png" height="150">
+</center>
 
 </li>
 </ul>
-<h2 id="伪代码"><a href="#伪代码" class="headerlink" title="伪代码"></a>伪代码</h2><center><br><img src="/2018/09/17/clrs-16greedy/huffman1.png" height="200"><br></center>
+<h2 id="伪代码"><a href="#伪代码" class="headerlink" title="伪代码"></a>伪代码</h2><center>
+<img src="/2018/09/17/clrs-16greedy/huffman1.png" height="200">
+</center>
 
 <h2 id="正确性证明"><a href="#正确性证明" class="headerlink" title="正确性证明"></a>正确性证明</h2><p>这一块设计很多数学推导，难度比较大，此处指概括大致思路，<u>配合算法导论原书食用风味更佳</u></p>
 <p>主要是需要证明两个引理。</p>
-<p><center><br><img src="/2018/09/17/clrs-16greedy/huffman3.png" height="100"><br></center><br>引理2旨在说明在单步选择下，贪心能得到是最优解。用的是<strong>替换法</strong>。从假想出一个<strong>抽象的最优解T</strong>，经过某些变换得到<strong>根据贪心选择构造出的解T’’</strong>，运用数学手段证明这两个解具有相等的代价。<br>此处采用的是相减得到大于等于关系，与最优解天然具有的小于等于构造解相结合，证明等价。</p>
-<p><center><br><img src="/2018/09/17/clrs-16greedy/huffman4.png" height="120"><br></center><br>引理3旨在证明该问题的最优子结构。采用了<s>喜闻乐见的</s>的剪切-粘贴法，也使用了一定的数学手段导出了矛盾。</p>
+<p><center>
+<img src="/2018/09/17/clrs-16greedy/huffman3.png" height="100">
+</center><br>引理2旨在说明在单步选择下，贪心能得到是最优解。用的是<strong>替换法</strong>。从假想出一个<strong>抽象的最优解T</strong>，经过某些变换得到<strong>根据贪心选择构造出的解T’’</strong>，运用数学手段证明这两个解具有相等的代价。<br>此处采用的是相减得到大于等于关系，与最优解天然具有的小于等于构造解相结合，证明等价。</p>
+<p><center>
+<img src="/2018/09/17/clrs-16greedy/huffman4.png" height="120">
+</center><br>引理3旨在证明该问题的最优子结构。采用了<s>喜闻乐见的</s>的剪切-粘贴法，也使用了一定的数学手段导出了矛盾。</p>
 <p>引理2+引理3能证明上文的贪心算法可以生成一个最优前缀码。</p>
 <p><s>课程要求暂时只需要看前三章</s></p>
 
@@ -1456,16 +1484,9 @@ top:50vh;
     
     
     
-    
-    
-    
-    
-    
-    
-    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 51
+        Total : 54
         </div>
         <!-- search  -->
         
@@ -1478,6 +1499,21 @@ top:50vh;
     
     <div class="archive-year"> 2019 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/28</span><a class="archive-post-title" href= "/2019/04/28/ps-4-10-Formal-description-of-problems/" >难问题求解-问题的形式化描述</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/20</span><a class="archive-post-title" href= "/2019/04/20/ps-4-9-algebraic-coding/" >算法导论学习笔记-代数编码</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/19</span><a class="archive-post-title" href= "/2019/04/19/oj-templates/" >自己看得惯的板子整理</a>
+        </li>
     
     
         <li class="archive-post-item">
@@ -1670,12 +1706,12 @@ top:50vh;
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">10/04</span><a class="archive-post-title" href= "/2018/10/04/PA1-report/" >PA1实验报告</a>
+            <span class="archive-post-date">10/04</span><a class="archive-post-title" href= "/2018/10/04/pa-inspirations/" >做pa的时候可能会用到的操作</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">10/04</span><a class="archive-post-title" href= "/2018/10/04/pa-inspirations/" >做pa的时候可能会用到的操作</a>
+            <span class="archive-post-date">10/04</span><a class="archive-post-title" href= "/2018/10/04/PA1-report/" >PA1实验报告</a>
         </li>
     
     
@@ -1750,19 +1786,19 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="Flags"><span class="iconfont-archer">&#xe606;</span>Flags</span>
     
+        <span class="sidebar-tag-name" data-tags="Math Modeling"><span class="iconfont-archer">&#xe606;</span>Math Modeling</span>
+    
         <span class="sidebar-tag-name" data-tags="Notes"><span class="iconfont-archer">&#xe606;</span>Notes</span>
     
         <span class="sidebar-tag-name" data-tags="pa"><span class="iconfont-archer">&#xe606;</span>pa</span>
-    
-        <span class="sidebar-tag-name" data-tags="Math Modeling"><span class="iconfont-archer">&#xe606;</span>Math Modeling</span>
     
         <span class="sidebar-tag-name" data-tags="ICS"><span class="iconfont-archer">&#xe606;</span>ICS</span>
     
         <span class="sidebar-tag-name" data-tags="Machine Learning"><span class="iconfont-archer">&#xe606;</span>Machine Learning</span>
     
-        <span class="sidebar-tag-name" data-tags="Problem Solving"><span class="iconfont-archer">&#xe606;</span>Problem Solving</span>
-    
         <span class="sidebar-tag-name" data-tags="Assembly Language"><span class="iconfont-archer">&#xe606;</span>Assembly Language</span>
+    
+        <span class="sidebar-tag-name" data-tags="Problem Solving"><span class="iconfont-archer">&#xe606;</span>Problem Solving</span>
     
         <span class="sidebar-tag-name" data-tags="CLRS"><span class="iconfont-archer">&#xe606;</span>CLRS</span>
     
@@ -1788,6 +1824,10 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="Connectivity"><span class="iconfont-archer">&#xe606;</span>Connectivity</span>
     
+        <span class="sidebar-tag-name" data-tags="ics"><span class="iconfont-archer">&#xe606;</span>ics</span>
+    
+        <span class="sidebar-tag-name" data-tags="process calling"><span class="iconfont-archer">&#xe606;</span>process calling</span>
+    
         <span class="sidebar-tag-name" data-tags="freshman"><span class="iconfont-archer">&#xe606;</span>freshman</span>
     
         <span class="sidebar-tag-name" data-tags="college life"><span class="iconfont-archer">&#xe606;</span>college life</span>
@@ -1796,15 +1836,11 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="Ics"><span class="iconfont-archer">&#xe606;</span>Ics</span>
     
-        <span class="sidebar-tag-name" data-tags="ics"><span class="iconfont-archer">&#xe606;</span>ics</span>
-    
-        <span class="sidebar-tag-name" data-tags="process calling"><span class="iconfont-archer">&#xe606;</span>process calling</span>
+        <span class="sidebar-tag-name" data-tags="MATLAB"><span class="iconfont-archer">&#xe606;</span>MATLAB</span>
     
         <span class="sidebar-tag-name" data-tags="Matchings"><span class="iconfont-archer">&#xe606;</span>Matchings</span>
     
         <span class="sidebar-tag-name" data-tags="Factorization"><span class="iconfont-archer">&#xe606;</span>Factorization</span>
-    
-        <span class="sidebar-tag-name" data-tags="MATLAB"><span class="iconfont-archer">&#xe606;</span>MATLAB</span>
     
         <span class="sidebar-tag-name" data-tags="Linux"><span class="iconfont-archer">&#xe606;</span>Linux</span>
     
@@ -1812,21 +1848,21 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="Group Theory"><span class="iconfont-archer">&#xe606;</span>Group Theory</span>
     
-        <span class="sidebar-tag-name" data-tags="Python"><span class="iconfont-archer">&#xe606;</span>Python</span>
-    
         <span class="sidebar-tag-name" data-tags="regular expressions"><span class="iconfont-archer">&#xe606;</span>regular expressions</span>
     
         <span class="sidebar-tag-name" data-tags="linux"><span class="iconfont-archer">&#xe606;</span>linux</span>
+    
+        <span class="sidebar-tag-name" data-tags="Python"><span class="iconfont-archer">&#xe606;</span>Python</span>
+    
+        <span class="sidebar-tag-name" data-tags="markdown"><span class="iconfont-archer">&#xe606;</span>markdown</span>
     
         <span class="sidebar-tag-name" data-tags="Java"><span class="iconfont-archer">&#xe606;</span>Java</span>
     
         <span class="sidebar-tag-name" data-tags="programming"><span class="iconfont-archer">&#xe606;</span>programming</span>
     
-        <span class="sidebar-tag-name" data-tags="markdown"><span class="iconfont-archer">&#xe606;</span>markdown</span>
+        <span class="sidebar-tag-name" data-tags="tmux"><span class="iconfont-archer">&#xe606;</span>tmux</span>
     
         <span class="sidebar-tag-name" data-tags="Traversibility"><span class="iconfont-archer">&#xe606;</span>Traversibility</span>
-    
-        <span class="sidebar-tag-name" data-tags="tmux"><span class="iconfont-archer">&#xe606;</span>tmux</span>
     
         <span class="sidebar-tag-name" data-tags="Graph"><span class="iconfont-archer">&#xe606;</span>Graph</span>
     

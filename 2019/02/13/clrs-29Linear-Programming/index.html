@@ -271,7 +271,7 @@ height:50vh;
                 
                 
                     <div class="post-intro-read">
-                        <span>Word count: <span class="post-count">2,178</span> / Reading time: <span class="post-count">8 min</span></span>
+                        <span>Word count: <span class="post-count">2,170</span> / Reading time: <span class="post-count">8 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
@@ -418,8 +418,8 @@ height:50vh;
 <ul>
 <li>重写为向量与矩阵的形式，可以用一个元组$(A,b,c)$来表示一个标准型的线性规划</li>
 </ul>
-<p>最大化$$c^Tx$$<br>满足约束$$Ax\le b$$<br>$$x\ge 0$$</p>
-<ul>
+<p>最大化<script type="math/tex">c^Tx</script><br>满足约束<script type="math/tex">Ax\le b</script></p>
+<script type="math/tex; mode=display">x\ge 0</script><ul>
 <li><strong>线性规划的等价</strong>：对两个最大化线性规划$L$和$L’$，如果对$L$的每个目标值为$z$的可行解$\overline{x}$，都存在一个对应的$L’$的目标值为$z$的可行解的$\overline{x}’$；(反过来同理)，则称$L$和$L’$是等价的。<ul>
 <li>最小化线性规划和目标函数取负后得到的最大化线性规划是等价的</li>
 </ul>
@@ -427,14 +427,14 @@ height:50vh;
 </ul>
 <h3 id="非标准型的标准化"><a href="#非标准型的标准化" class="headerlink" title="非标准型的标准化"></a>非标准型的标准化</h3><ul>
 <li>目标函数是最小化：取负</li>
-<li>某些变量不具有非负约束：假设$x_j$无线性约束，则将所有出现的$x_j$替换为$x_{j}’-x_{j}’’$，并令$x_{j}’\ge 0, x_{j}’’\ge 0$</li>
+<li>某些变量不具有非负约束：假设$x<em>j$无线性约束，则将所有出现的$x_j$替换为$x</em>{j}’-x<em>{j}’’$，并令$x</em>{j}’\ge 0, x_{j}’’\ge 0$</li>
 <li>存在等式约束：$\ge + \le$</li>
 <li>存在大于等于约束：取负</li>
 </ul>
 <h2 id="松弛型"><a href="#松弛型" class="headerlink" title="松弛型"></a>松弛型</h2><ul>
-<li>松弛变量$s=b_i-\sum\limits_{j=1}^{n}a_{ij}x_i,s\ge 0$</li>
+<li>松弛变量$s=b<em>i-\sum\limits</em>{j=1}^{n}a_{ij}x_i,s\ge 0$</li>
 <li>只有非负约束是不等式，其余都是等式</li>
-<li><p>当从标准型转换到松弛型时，我们将使用$x_{n+i}$表示与第$i$个不等式相关的松弛变量$$x_{n+i}=b_i-\sum\limits_{j=1}^{n}a_{ij}x_i,x_{n+i}\ge 0$$</p>
+<li><p>当从标准型转换到松弛型时，我们将使用$x<em>{n+i}$表示与第$i$个不等式相关的松弛变量$$x</em>{n+i}=b<em>i-\sum\limits</em>{j=1}^{n}a<em>{ij}x_i,x</em>{n+i}\ge 0$$</p>
 <p><img src="/2019/02/13/clrs-29Linear-Programming/slack.png"></p>
 </li>
 <li><p><strong>基本变量</strong>：等式左边的变量</p>
@@ -444,7 +444,7 @@ height:50vh;
 <li>简洁记号<ul>
 <li>$N$:非基本变量下标的集合</li>
 <li>$B$:基本变量下标的集合</li>
-<li>$N\cup B={1,2,…,n+m}$</li>
+<li>$N\cup B=\{1,2,…,n+m\}$</li>
 <li>用一个元组$(N,B,A,b,c,v)$来表示松弛型</li>
 <li>这里的$a_{ij}$是“出现”在松弛型中的 负数</li>
 <li>$A,b,c$的小标不必是连续整数的集合，依赖于索引集合$B$和$N$</li>
@@ -453,20 +453,20 @@ height:50vh;
 </ul>
 <p><img src="/2019/02/13/clrs-29Linear-Programming/slack2.png"></p>
 <h1 id="将问题表达为线性规划"><a href="#将问题表达为线性规划" class="headerlink" title="将问题表达为线性规划"></a>将问题表达为线性规划</h1><h2 id="单对最短路径"><a href="#单对最短路径" class="headerlink" title="单对最短路径"></a>单对最短路径</h2><p>如下的线性规划可以计算从$s$到$t$的最短路径权值<br><img src="/2019/02/13/clrs-29Linear-Programming/sssp.png"></p>
-<p>之所以是<strong>最大化目标函数</strong>，是因为最短路径问题的一个最优解把每一个$\overline{d}_v$设置成所有$\overline{d}_u+w(u,v)$的最小值，使得$\overline{d}_v$是小于等于集合${\overline{d}_u+w(u,v)}$所有值的最大值；而最小化目标函数会使所有$\overline{d}_v=0$，这个解显然没有意义</p>
+<p>之所以是<strong>最大化目标函数</strong>，是因为最短路径问题的一个最优解把每一个$\overline{d}_v$设置成所有$\overline{d}_u+w(u,v)$的最小值，使得$\overline{d}_v$是小于等于集合$\{\overline{d}_u+w(u,v)\}$所有值的最大值；而最小化目标函数会使所有$\overline{d}_v=0$，这个解显然没有意义</p>
 <h2 id="最大流"><a href="#最大流" class="headerlink" title="最大流"></a>最大流</h2><p>最大流问题表示为一个线性规划<br><img src="/2019/02/13/clrs-29Linear-Programming/maxflow.png"></p>
 <p>这个线性规划可以重写为有$O(V+E)$个约束的表示，这样计算起来会更高效</p>
 <h2 id="最小费用流"><a href="#最小费用流" class="headerlink" title="最小费用流"></a>最小费用流</h2><h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><ul>
 <li>最大流的推广</li>
-<li>每条边除了容量还有费用值$a(u,v)$。如果通过边$(u,v)$传送了$f_{uv}$个单位的流，那么产生了一个费用$a(u,v)f_{uv}$。</li>
-<li>求从$s$到$t$发送$d$个单位的流(流目标)，使得流上发生的总费用$\sum\limits_{(u,v)\in E}a(u,v)f_{uv}$最小</li>
+<li>每条边除了容量还有费用值$a(u,v)$。如果通过边$(u,v)$传送了$f<em>{uv}$个单位的流，那么产生了一个费用$a(u,v)f</em>{uv}$。</li>
+<li>求从$s$到$t$发送$d$个单位的流(流目标)，使得流上发生的总费用$\sum\limits<em>{(u,v)\in E}a(u,v)f</em>{uv}$最小</li>
 </ul>
 <p>最小费用流有专门设计的多项式时间算法，但算导上没有涉及到</p>
 <h3 id="线性规划建模"><a href="#线性规划建模" class="headerlink" title="线性规划建模"></a>线性规划建模</h3><p><img src="/2019/02/13/clrs-29Linear-Programming/mincost.png"></p>
 <p><s>这不是很直观吗</s></p>
 <h2 id="多商品流"><a href="#多商品流" class="headerlink" title="多商品流"></a>多商品流</h2><h3 id="问题描述-1"><a href="#问题描述-1" class="headerlink" title="问题描述"></a>问题描述</h3><ul>
 <li>在最小费用流问题的基础上，有$k$种不同的商品$K_1,K_2,…,K_k$，其中用三元组$K_i=(s_i,t_i,d_i)$来详细说明商品的源点、汇点和需求</li>
-<li>定义商品$i$的流$f_i$，汇聚流为各种商品流的总和$f_{uv}=\sum\limits_{i=1}^{k}f_{iuv}$</li>
+<li>定义商品$i$的流$f<em>i$，汇聚流为各种商品流的总和$f</em>{uv}=\sum\limits<em>{i=1}^{k}f</em>{iuv}$</li>
 <li>不用最小化任何目标函数，只需要确定是否存在这样的一个流</li>
 </ul>
 <h3 id="线性规划建模-1"><a href="#线性规划建模-1" class="headerlink" title="线性规划建模"></a>线性规划建模</h3><p><img src="/2019/02/13/clrs-29Linear-Programming/multi.png"></p>
@@ -1535,16 +1535,9 @@ top:50vh;
     
     
     
-    
-    
-    
-    
-    
-    
-    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 51
+        Total : 54
         </div>
         <!-- search  -->
         
@@ -1557,6 +1550,21 @@ top:50vh;
     
     <div class="archive-year"> 2019 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/28</span><a class="archive-post-title" href= "/2019/04/28/ps-4-10-Formal-description-of-problems/" >难问题求解-问题的形式化描述</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/20</span><a class="archive-post-title" href= "/2019/04/20/ps-4-9-algebraic-coding/" >算法导论学习笔记-代数编码</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/19</span><a class="archive-post-title" href= "/2019/04/19/oj-templates/" >自己看得惯的板子整理</a>
+        </li>
     
     
         <li class="archive-post-item">
@@ -1749,12 +1757,12 @@ top:50vh;
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">10/04</span><a class="archive-post-title" href= "/2018/10/04/PA1-report/" >PA1实验报告</a>
+            <span class="archive-post-date">10/04</span><a class="archive-post-title" href= "/2018/10/04/pa-inspirations/" >做pa的时候可能会用到的操作</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">10/04</span><a class="archive-post-title" href= "/2018/10/04/pa-inspirations/" >做pa的时候可能会用到的操作</a>
+            <span class="archive-post-date">10/04</span><a class="archive-post-title" href= "/2018/10/04/PA1-report/" >PA1实验报告</a>
         </li>
     
     
@@ -1829,19 +1837,19 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="Flags"><span class="iconfont-archer">&#xe606;</span>Flags</span>
     
+        <span class="sidebar-tag-name" data-tags="Math Modeling"><span class="iconfont-archer">&#xe606;</span>Math Modeling</span>
+    
         <span class="sidebar-tag-name" data-tags="Notes"><span class="iconfont-archer">&#xe606;</span>Notes</span>
     
         <span class="sidebar-tag-name" data-tags="pa"><span class="iconfont-archer">&#xe606;</span>pa</span>
-    
-        <span class="sidebar-tag-name" data-tags="Math Modeling"><span class="iconfont-archer">&#xe606;</span>Math Modeling</span>
     
         <span class="sidebar-tag-name" data-tags="ICS"><span class="iconfont-archer">&#xe606;</span>ICS</span>
     
         <span class="sidebar-tag-name" data-tags="Machine Learning"><span class="iconfont-archer">&#xe606;</span>Machine Learning</span>
     
-        <span class="sidebar-tag-name" data-tags="Problem Solving"><span class="iconfont-archer">&#xe606;</span>Problem Solving</span>
-    
         <span class="sidebar-tag-name" data-tags="Assembly Language"><span class="iconfont-archer">&#xe606;</span>Assembly Language</span>
+    
+        <span class="sidebar-tag-name" data-tags="Problem Solving"><span class="iconfont-archer">&#xe606;</span>Problem Solving</span>
     
         <span class="sidebar-tag-name" data-tags="CLRS"><span class="iconfont-archer">&#xe606;</span>CLRS</span>
     
@@ -1867,6 +1875,10 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="Connectivity"><span class="iconfont-archer">&#xe606;</span>Connectivity</span>
     
+        <span class="sidebar-tag-name" data-tags="ics"><span class="iconfont-archer">&#xe606;</span>ics</span>
+    
+        <span class="sidebar-tag-name" data-tags="process calling"><span class="iconfont-archer">&#xe606;</span>process calling</span>
+    
         <span class="sidebar-tag-name" data-tags="freshman"><span class="iconfont-archer">&#xe606;</span>freshman</span>
     
         <span class="sidebar-tag-name" data-tags="college life"><span class="iconfont-archer">&#xe606;</span>college life</span>
@@ -1875,15 +1887,11 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="Ics"><span class="iconfont-archer">&#xe606;</span>Ics</span>
     
-        <span class="sidebar-tag-name" data-tags="ics"><span class="iconfont-archer">&#xe606;</span>ics</span>
-    
-        <span class="sidebar-tag-name" data-tags="process calling"><span class="iconfont-archer">&#xe606;</span>process calling</span>
+        <span class="sidebar-tag-name" data-tags="MATLAB"><span class="iconfont-archer">&#xe606;</span>MATLAB</span>
     
         <span class="sidebar-tag-name" data-tags="Matchings"><span class="iconfont-archer">&#xe606;</span>Matchings</span>
     
         <span class="sidebar-tag-name" data-tags="Factorization"><span class="iconfont-archer">&#xe606;</span>Factorization</span>
-    
-        <span class="sidebar-tag-name" data-tags="MATLAB"><span class="iconfont-archer">&#xe606;</span>MATLAB</span>
     
         <span class="sidebar-tag-name" data-tags="Linux"><span class="iconfont-archer">&#xe606;</span>Linux</span>
     
@@ -1891,21 +1899,21 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="Group Theory"><span class="iconfont-archer">&#xe606;</span>Group Theory</span>
     
-        <span class="sidebar-tag-name" data-tags="Python"><span class="iconfont-archer">&#xe606;</span>Python</span>
-    
         <span class="sidebar-tag-name" data-tags="regular expressions"><span class="iconfont-archer">&#xe606;</span>regular expressions</span>
     
         <span class="sidebar-tag-name" data-tags="linux"><span class="iconfont-archer">&#xe606;</span>linux</span>
+    
+        <span class="sidebar-tag-name" data-tags="Python"><span class="iconfont-archer">&#xe606;</span>Python</span>
+    
+        <span class="sidebar-tag-name" data-tags="markdown"><span class="iconfont-archer">&#xe606;</span>markdown</span>
     
         <span class="sidebar-tag-name" data-tags="Java"><span class="iconfont-archer">&#xe606;</span>Java</span>
     
         <span class="sidebar-tag-name" data-tags="programming"><span class="iconfont-archer">&#xe606;</span>programming</span>
     
-        <span class="sidebar-tag-name" data-tags="markdown"><span class="iconfont-archer">&#xe606;</span>markdown</span>
+        <span class="sidebar-tag-name" data-tags="tmux"><span class="iconfont-archer">&#xe606;</span>tmux</span>
     
         <span class="sidebar-tag-name" data-tags="Traversibility"><span class="iconfont-archer">&#xe606;</span>Traversibility</span>
-    
-        <span class="sidebar-tag-name" data-tags="tmux"><span class="iconfont-archer">&#xe606;</span>tmux</span>
     
         <span class="sidebar-tag-name" data-tags="Graph"><span class="iconfont-archer">&#xe606;</span>Graph</span>
     

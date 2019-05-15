@@ -269,7 +269,7 @@ height:50vh;
                 
                 
                     <div class="post-intro-read">
-                        <span>Word count: <span class="post-count">1,626</span> / Reading time: <span class="post-count">7 min</span></span>
+                        <span>Word count: <span class="post-count">1,562</span> / Reading time: <span class="post-count">6 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
@@ -413,7 +413,7 @@ height:50vh;
 <li>$\varepsilon$: 长度为0的空字符串，$\varepsilon\in\Sigma^*$</li>
 <li>$|x|$: 字符串$x$的长度</li>
 <li>$xy$: 两个字符串$x$和$y$的<strong>连结(concatenation)</strong></li>
-<li>若对某个字符串$y\in \Sigma^*$有$x=wy$，则称字符串$w$是字符串$x$的<strong>前缀</strong>，记作$w\sqsubset x$</li>
+<li>若对某个字符串$y\in \Sigma^<em>$有$x=wy$，则称字符串$w$是字符串$x$的<em>*前缀</em></em>，记作$w\sqsubset x$</li>
 <li>若对某个字符串$y$有$x=yw$，则称字符串$w$是字符串$x$的后缀，记作$w\sqsupset x$</li>
 <li>空字符串$\varepsilon$同时是任何一个字符串的前缀和后缀</li>
 <li>$x\sqsupset y$当且仅当$xa\sqsupset ya$</li>
@@ -429,9 +429,11 @@ height:50vh;
 <h1 id="朴素字符串匹配算法"><a href="#朴素字符串匹配算法" class="headerlink" title="朴素字符串匹配算法"></a>朴素字符串匹配算法</h1><p>通过循环找到所有有效偏移<br>对$n-m+1$个可能的$s$进行检测</p>
 <p><img src="/2019/03/23/clrs-32String-Mathcing/naive.png"></p>
 <h3 id="运行时间"><a href="#运行时间" class="headerlink" title="运行时间"></a>运行时间</h3><p>最坏情况下：$O((n-m+1)m)$<br>无预处理时间</p>
-<h1 id="Rabin-Karp算法"><a href="#Rabin-Karp算法" class="headerlink" title="Rabin-Karp算法"></a>Rabin-Karp算法</h1><p>为了便于说明，假设$\Sigma={0,1,2,…,9}$<br>在通常情况下可以假定每个字符都是以$d$为基数表示的数字<br>$p$: 模式$P$表示的十进制值<br>$t_s$: 文本$T[s+1..s+m]$对应的十进制值<br><strong>把字符串匹配转化为数值匹配</strong></p>
-<p>计算$t_1,…t_s$时，可以根据$t_s$计算$t_{s+1}$<br>$$t_{s+1}=10(t_s-10^{m-1}T[s+1])+T[s+m+1]$$<br>(去掉高位数字，左移，加上低位数字)</p>
-<p>如果$p$和$t_s$的值太大，可以选取一个合适的模$q$来计算$p$和$t_s$的模<br>在一般情况下，选取一个$q$，使得$dq$在一个计算机字长内，调整递归式<br>$$t_{s+1}=(d(t_s-T[s+1]h)+T[s+m+1])\mod~q$$<br>其中$h\equiv d^{m-1}(mod q)$是一个具有$m$数位的文本窗口的高位数位上的数字”1”的值</p>
+<h1 id="Rabin-Karp算法"><a href="#Rabin-Karp算法" class="headerlink" title="Rabin-Karp算法"></a>Rabin-Karp算法</h1><p>为了便于说明，假设$\Sigma=\{0,1,2,…,9\}$<br>在通常情况下可以假定每个字符都是以$d$为基数表示的数字<br>$p$: 模式$P$表示的十进制值<br>$t_s$: 文本$T[s+1..s+m]$对应的十进制值<br><strong>把字符串匹配转化为数值匹配</strong></p>
+<p>计算$t<em>1,…t_s$时，可以根据$t_s$计算$t</em>{s+1}$</p>
+<script type="math/tex; mode=display">t_{s+1}=10(t_s-10^{m-1}T[s+1])+T[s+m+1]</script><p>(去掉高位数字，左移，加上低位数字)</p>
+<p>如果$p$和$t_s$的值太大，可以选取一个合适的模$q$来计算$p$和$t_s$的模<br>在一般情况下，选取一个$q$，使得$dq$在一个计算机字长内，调整递归式</p>
+<script type="math/tex; mode=display">t_{s+1}=(d(t_s-T[s+1]h)+T[s+m+1])\mod~q</script><p>其中$h\equiv d^{m-1}(mod q)$是一个具有$m$数位的文本窗口的高位数位上的数字”1”的值</p>
 <h2 id="运行过程"><a href="#运行过程" class="headerlink" title="运行过程"></a>运行过程</h2><p><img src="/2019/03/23/clrs-32String-Mathcing/RK.png"></p>
 <ul>
 <li>计算所有长度为$m$的文本窗口对$q$取模的值</li>
@@ -445,7 +447,7 @@ height:50vh;
 </ul>
 <h2 id="运行时间-1"><a href="#运行时间-1" class="headerlink" title="运行时间"></a>运行时间</h2><p>预处理：$\Theta(m)$<br>最坏情况运行时间: $\Theta((n-m+1)m)$(e.g.$P=a^m$且$T=a^n$时需要对所有可能进行字符串匹配验证，相当于退化为朴素算法)</p>
 <p>若有效便宜只有常数$c$个，算法的期望匹配时间为$O((n-m+1)+cm)=O(n+m)$</p>
-<p>若假设$q$是从适当大的整数中随机得出的，则伪命中的次数为$O(n/q)$(因为任意$t_s$模A$q$与$p$同余的概率为$1/q$)。 第10行中的测试会在$O(n)$个位置上失败，每次命中的时间代价是$O(m)$。因此Rabin-Karp算法的期望运行时间是$$O(n)+O(m(v+n/q))$$其中$v$为有效偏移量</p>
+<p>若假设$q$是从适当大的整数中随机得出的，则伪命中的次数为$O(n/q)$(因为任意$t_s$模A$q$与$p$同余的概率为$1/q$)。 第10行中的测试会在$O(n)$个位置上失败，每次命中的时间代价是$O(m)$。因此Rabin-Karp算法的期望运行时间是<script type="math/tex">O(n)+O(m(v+n/q))</script>其中$v$为有效偏移量</p>
 <p>若选取的素数$q$大于模式的长度，则可以估计Rabin-Karp算法的匹配时间为$O(n+m)=O(n)$</p>
 <h1 id="利用有限自动机进行字符串匹配"><a href="#利用有限自动机进行字符串匹配" class="headerlink" title="利用有限自动机进行字符串匹配"></a>利用有限自动机进行字符串匹配</h1><h2 id="有限自动机"><a href="#有限自动机" class="headerlink" title="有限自动机"></a>有限自动机</h2><p>一个有限自动机$M$是一个五元组$(Q,q_0,A,\Sigma,\delta)$,其中：</p>
 <ul>
@@ -461,9 +463,10 @@ height:50vh;
 <li>当前状态$q\in A$时，就说$M$<strong>接受</strong>了迄今为止所读入的字符串，没有被接受的输入称为<strong>被拒绝</strong>的输入</li>
 </ul>
 <h3 id="终态函数"><a href="#终态函数" class="headerlink" title="终态函数"></a>终态函数</h3><p>终态函数$\phi:\Sigma^*\to Q$<br>$\phi(w)$: $M$在扫描字符串$w$后终止时的状态<br>当且仅当$\phi(w)\in A$时，$M$接受字符串$w$</p>
-<p>用转移函数递归定义$\phi$:<br>$$\phi(\varepsilon)=q_0,$$<br>$$\phi(wa)=\delta(\phi(w),a), ~~w\in\Sigma^*,a\in\Sigma$$</p>
-<h2 id="字符匹配自动机"><a href="#字符匹配自动机" class="headerlink" title="字符匹配自动机"></a>字符匹配自动机</h2><p>后缀函数$\sigma:\Sigma^*\to{0,1,…,m}$，满足$\sigma(x)$是同时是$x$的后缀和$P$的前缀的字符串的长度<br>$$\sigma(x)=\max{k:P_k\sqsupset x}$$</p>
-<p>对于任意的状态$q$和字符串$a$，转移函数$\delta$定义如下：<br>$$\delta(q,a)=\sigma(P_qa)$$<br>记录已得到的与模式$P$匹配的文本字符串$T$的最长前缀</p>
+<p>用转移函数递归定义$\phi$:</p>
+<script type="math/tex; mode=display">\phi(\varepsilon)=q_0,</script><script type="math/tex; mode=display">\phi(wa)=\delta(\phi(w),a), ~~w\in\Sigma^*,a\in\Sigma</script><h2 id="字符匹配自动机"><a href="#字符匹配自动机" class="headerlink" title="字符匹配自动机"></a>字符匹配自动机</h2><p>后缀函数$\sigma:\Sigma^*\to\{0,1,…,m\}$，满足$\sigma(x)$是同时是$x$的后缀和$P$的前缀的字符串的长度</p>
+<script type="math/tex; mode=display">\sigma(x)=\max\{k:P_k\sqsupset x\}</script><p>对于任意的状态$q$和字符串$a$，转移函数$\delta$定义如下：</p>
+<script type="math/tex; mode=display">\delta(q,a)=\sigma(P_qa)</script><p>记录已得到的与模式$P$匹配的文本字符串$T$的最长前缀</p>
 <p><img src="/2019/03/23/clrs-32String-Mathcing/auto.png"></p>
 <p>匹配时间为$\Theta(n)$</p>
 <h2 id="正确性证明"><a href="#正确性证明" class="headerlink" title="正确性证明"></a>正确性证明</h2><p><strong>引理32.2(后缀函数不等式)</strong>: 对任意字符串$x$和字符$a$，$\sigma(xa)\le\sigma(x)+1$</p>
@@ -1470,16 +1473,9 @@ top:50vh;
     
     
     
-    
-    
-    
-    
-    
-    
-    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 51
+        Total : 54
         </div>
         <!-- search  -->
         
@@ -1492,6 +1488,21 @@ top:50vh;
     
     <div class="archive-year"> 2019 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/28</span><a class="archive-post-title" href= "/2019/04/28/ps-4-10-Formal-description-of-problems/" >难问题求解-问题的形式化描述</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/20</span><a class="archive-post-title" href= "/2019/04/20/ps-4-9-algebraic-coding/" >算法导论学习笔记-代数编码</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/19</span><a class="archive-post-title" href= "/2019/04/19/oj-templates/" >自己看得惯的板子整理</a>
+        </li>
     
     
         <li class="archive-post-item">
@@ -1684,12 +1695,12 @@ top:50vh;
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">10/04</span><a class="archive-post-title" href= "/2018/10/04/PA1-report/" >PA1实验报告</a>
+            <span class="archive-post-date">10/04</span><a class="archive-post-title" href= "/2018/10/04/pa-inspirations/" >做pa的时候可能会用到的操作</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">10/04</span><a class="archive-post-title" href= "/2018/10/04/pa-inspirations/" >做pa的时候可能会用到的操作</a>
+            <span class="archive-post-date">10/04</span><a class="archive-post-title" href= "/2018/10/04/PA1-report/" >PA1实验报告</a>
         </li>
     
     
@@ -1764,19 +1775,19 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="Flags"><span class="iconfont-archer">&#xe606;</span>Flags</span>
     
+        <span class="sidebar-tag-name" data-tags="Math Modeling"><span class="iconfont-archer">&#xe606;</span>Math Modeling</span>
+    
         <span class="sidebar-tag-name" data-tags="Notes"><span class="iconfont-archer">&#xe606;</span>Notes</span>
     
         <span class="sidebar-tag-name" data-tags="pa"><span class="iconfont-archer">&#xe606;</span>pa</span>
-    
-        <span class="sidebar-tag-name" data-tags="Math Modeling"><span class="iconfont-archer">&#xe606;</span>Math Modeling</span>
     
         <span class="sidebar-tag-name" data-tags="ICS"><span class="iconfont-archer">&#xe606;</span>ICS</span>
     
         <span class="sidebar-tag-name" data-tags="Machine Learning"><span class="iconfont-archer">&#xe606;</span>Machine Learning</span>
     
-        <span class="sidebar-tag-name" data-tags="Problem Solving"><span class="iconfont-archer">&#xe606;</span>Problem Solving</span>
-    
         <span class="sidebar-tag-name" data-tags="Assembly Language"><span class="iconfont-archer">&#xe606;</span>Assembly Language</span>
+    
+        <span class="sidebar-tag-name" data-tags="Problem Solving"><span class="iconfont-archer">&#xe606;</span>Problem Solving</span>
     
         <span class="sidebar-tag-name" data-tags="CLRS"><span class="iconfont-archer">&#xe606;</span>CLRS</span>
     
@@ -1802,6 +1813,10 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="Connectivity"><span class="iconfont-archer">&#xe606;</span>Connectivity</span>
     
+        <span class="sidebar-tag-name" data-tags="ics"><span class="iconfont-archer">&#xe606;</span>ics</span>
+    
+        <span class="sidebar-tag-name" data-tags="process calling"><span class="iconfont-archer">&#xe606;</span>process calling</span>
+    
         <span class="sidebar-tag-name" data-tags="freshman"><span class="iconfont-archer">&#xe606;</span>freshman</span>
     
         <span class="sidebar-tag-name" data-tags="college life"><span class="iconfont-archer">&#xe606;</span>college life</span>
@@ -1810,15 +1825,11 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="Ics"><span class="iconfont-archer">&#xe606;</span>Ics</span>
     
-        <span class="sidebar-tag-name" data-tags="ics"><span class="iconfont-archer">&#xe606;</span>ics</span>
-    
-        <span class="sidebar-tag-name" data-tags="process calling"><span class="iconfont-archer">&#xe606;</span>process calling</span>
+        <span class="sidebar-tag-name" data-tags="MATLAB"><span class="iconfont-archer">&#xe606;</span>MATLAB</span>
     
         <span class="sidebar-tag-name" data-tags="Matchings"><span class="iconfont-archer">&#xe606;</span>Matchings</span>
     
         <span class="sidebar-tag-name" data-tags="Factorization"><span class="iconfont-archer">&#xe606;</span>Factorization</span>
-    
-        <span class="sidebar-tag-name" data-tags="MATLAB"><span class="iconfont-archer">&#xe606;</span>MATLAB</span>
     
         <span class="sidebar-tag-name" data-tags="Linux"><span class="iconfont-archer">&#xe606;</span>Linux</span>
     
@@ -1826,21 +1837,21 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="Group Theory"><span class="iconfont-archer">&#xe606;</span>Group Theory</span>
     
-        <span class="sidebar-tag-name" data-tags="Python"><span class="iconfont-archer">&#xe606;</span>Python</span>
-    
         <span class="sidebar-tag-name" data-tags="regular expressions"><span class="iconfont-archer">&#xe606;</span>regular expressions</span>
     
         <span class="sidebar-tag-name" data-tags="linux"><span class="iconfont-archer">&#xe606;</span>linux</span>
+    
+        <span class="sidebar-tag-name" data-tags="Python"><span class="iconfont-archer">&#xe606;</span>Python</span>
+    
+        <span class="sidebar-tag-name" data-tags="markdown"><span class="iconfont-archer">&#xe606;</span>markdown</span>
     
         <span class="sidebar-tag-name" data-tags="Java"><span class="iconfont-archer">&#xe606;</span>Java</span>
     
         <span class="sidebar-tag-name" data-tags="programming"><span class="iconfont-archer">&#xe606;</span>programming</span>
     
-        <span class="sidebar-tag-name" data-tags="markdown"><span class="iconfont-archer">&#xe606;</span>markdown</span>
+        <span class="sidebar-tag-name" data-tags="tmux"><span class="iconfont-archer">&#xe606;</span>tmux</span>
     
         <span class="sidebar-tag-name" data-tags="Traversibility"><span class="iconfont-archer">&#xe606;</span>Traversibility</span>
-    
-        <span class="sidebar-tag-name" data-tags="tmux"><span class="iconfont-archer">&#xe606;</span>tmux</span>
     
         <span class="sidebar-tag-name" data-tags="Graph"><span class="iconfont-archer">&#xe606;</span>Graph</span>
     

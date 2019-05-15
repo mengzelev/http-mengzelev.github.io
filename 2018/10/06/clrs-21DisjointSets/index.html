@@ -407,14 +407,17 @@ height:50vh;
         <h1 id="不相交集合的操作"><a href="#不相交集合的操作" class="headerlink" title="不相交集合的操作"></a>不相交集合的操作</h1><p>一个<strong>不相交集合数据结构</strong>维护了一个不相交动态集的集合<br>每个集合都有一个<strong>代表</strong>标识，它是该集合的某个成员</p>
 <p>我们希望集合支持以下三个操作：</p>
 <p><img src="/2018/10/06/clrs-21DisjointSets/operations.png"></p>
-<h2 id="应用：确定无向图的连通分量"><a href="#应用：确定无向图的连通分量" class="headerlink" title="应用：确定无向图的连通分量"></a>应用：确定无向图的连通分量</h2><center><br><img src="/2018/10/06/clrs-21DisjointSets/g21-1.png"><br><img src="/2018/10/06/clrs-21DisjointSets/alg1.png"><br></center>
+<h2 id="应用：确定无向图的连通分量"><a href="#应用：确定无向图的连通分量" class="headerlink" title="应用：确定无向图的连通分量"></a>应用：确定无向图的连通分量</h2><center>
+<img src="/2018/10/06/clrs-21DisjointSets/g21-1.png">
+<img src="/2018/10/06/clrs-21DisjointSets/alg1.png">
+</center>
 
 <p>算法就是将连通的顶点全部合并到同一个集合中。</p>
 <h1 id="不相交集合的链表表示"><a href="#不相交集合的链表表示" class="headerlink" title="不相交集合的链表表示"></a>不相交集合的链表表示</h1><p>每个集合可以用一个自己的链表来表示<br>链表中对象可以以任意次序出现</p>
 <p>每个链表组成为：</p>
 <ul>
-<li><code>head</code>– 指向表的第一个对象（代表元）</li>
-<li><code>tail</code>– 指向表的最后一个对象</li>
+<li><code>head</code>— 指向表的第一个对象（代表元）</li>
+<li><code>tail</code>— 指向表的最后一个对象</li>
 </ul>
 <p>链表中每个对象的组成为：</p>
 <ul>
@@ -433,7 +436,11 @@ height:50vh;
 <li>如果根的秩相同，则任意选择两个中的一个作为父结点，并使它的秩+1</li>
 </ul>
 <h2 id="路径压缩"><a href="#路径压缩" class="headerlink" title="路径压缩"></a>路径压缩</h2><p>在<code>FIND-SET</code>操作中是查找路径中的每个结点直接指向根，不改变任何结点的秩。</p>
-<h2 id="伪代码"><a href="#伪代码" class="headerlink" title="伪代码"></a>伪代码</h2><center><br><img src="/2018/10/06/clrs-21DisjointSets/makeset.png"><br><img src="/2018/10/06/clrs-21DisjointSets/union.png"><br><img src="/2018/10/06/clrs-21DisjointSets/findset.png"><br></center>
+<h2 id="伪代码"><a href="#伪代码" class="headerlink" title="伪代码"></a>伪代码</h2><center>
+<img src="/2018/10/06/clrs-21DisjointSets/makeset.png">
+<img src="/2018/10/06/clrs-21DisjointSets/union.png">
+<img src="/2018/10/06/clrs-21DisjointSets/findset.png">
+</center>
     </article>
     <!-- license  -->
     
@@ -1432,16 +1439,9 @@ top:50vh;
     
     
     
-    
-    
-    
-    
-    
-    
-    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 51
+        Total : 54
         </div>
         <!-- search  -->
         
@@ -1454,6 +1454,21 @@ top:50vh;
     
     <div class="archive-year"> 2019 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/28</span><a class="archive-post-title" href= "/2019/04/28/ps-4-10-Formal-description-of-problems/" >难问题求解-问题的形式化描述</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/20</span><a class="archive-post-title" href= "/2019/04/20/ps-4-9-algebraic-coding/" >算法导论学习笔记-代数编码</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/19</span><a class="archive-post-title" href= "/2019/04/19/oj-templates/" >自己看得惯的板子整理</a>
+        </li>
     
     
         <li class="archive-post-item">
@@ -1646,12 +1661,12 @@ top:50vh;
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">10/04</span><a class="archive-post-title" href= "/2018/10/04/PA1-report/" >PA1实验报告</a>
+            <span class="archive-post-date">10/04</span><a class="archive-post-title" href= "/2018/10/04/pa-inspirations/" >做pa的时候可能会用到的操作</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">10/04</span><a class="archive-post-title" href= "/2018/10/04/pa-inspirations/" >做pa的时候可能会用到的操作</a>
+            <span class="archive-post-date">10/04</span><a class="archive-post-title" href= "/2018/10/04/PA1-report/" >PA1实验报告</a>
         </li>
     
     
@@ -1726,19 +1741,19 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="Flags"><span class="iconfont-archer">&#xe606;</span>Flags</span>
     
+        <span class="sidebar-tag-name" data-tags="Math Modeling"><span class="iconfont-archer">&#xe606;</span>Math Modeling</span>
+    
         <span class="sidebar-tag-name" data-tags="Notes"><span class="iconfont-archer">&#xe606;</span>Notes</span>
     
         <span class="sidebar-tag-name" data-tags="pa"><span class="iconfont-archer">&#xe606;</span>pa</span>
-    
-        <span class="sidebar-tag-name" data-tags="Math Modeling"><span class="iconfont-archer">&#xe606;</span>Math Modeling</span>
     
         <span class="sidebar-tag-name" data-tags="ICS"><span class="iconfont-archer">&#xe606;</span>ICS</span>
     
         <span class="sidebar-tag-name" data-tags="Machine Learning"><span class="iconfont-archer">&#xe606;</span>Machine Learning</span>
     
-        <span class="sidebar-tag-name" data-tags="Problem Solving"><span class="iconfont-archer">&#xe606;</span>Problem Solving</span>
-    
         <span class="sidebar-tag-name" data-tags="Assembly Language"><span class="iconfont-archer">&#xe606;</span>Assembly Language</span>
+    
+        <span class="sidebar-tag-name" data-tags="Problem Solving"><span class="iconfont-archer">&#xe606;</span>Problem Solving</span>
     
         <span class="sidebar-tag-name" data-tags="CLRS"><span class="iconfont-archer">&#xe606;</span>CLRS</span>
     
@@ -1764,6 +1779,10 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="Connectivity"><span class="iconfont-archer">&#xe606;</span>Connectivity</span>
     
+        <span class="sidebar-tag-name" data-tags="ics"><span class="iconfont-archer">&#xe606;</span>ics</span>
+    
+        <span class="sidebar-tag-name" data-tags="process calling"><span class="iconfont-archer">&#xe606;</span>process calling</span>
+    
         <span class="sidebar-tag-name" data-tags="freshman"><span class="iconfont-archer">&#xe606;</span>freshman</span>
     
         <span class="sidebar-tag-name" data-tags="college life"><span class="iconfont-archer">&#xe606;</span>college life</span>
@@ -1772,15 +1791,11 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="Ics"><span class="iconfont-archer">&#xe606;</span>Ics</span>
     
-        <span class="sidebar-tag-name" data-tags="ics"><span class="iconfont-archer">&#xe606;</span>ics</span>
-    
-        <span class="sidebar-tag-name" data-tags="process calling"><span class="iconfont-archer">&#xe606;</span>process calling</span>
+        <span class="sidebar-tag-name" data-tags="MATLAB"><span class="iconfont-archer">&#xe606;</span>MATLAB</span>
     
         <span class="sidebar-tag-name" data-tags="Matchings"><span class="iconfont-archer">&#xe606;</span>Matchings</span>
     
         <span class="sidebar-tag-name" data-tags="Factorization"><span class="iconfont-archer">&#xe606;</span>Factorization</span>
-    
-        <span class="sidebar-tag-name" data-tags="MATLAB"><span class="iconfont-archer">&#xe606;</span>MATLAB</span>
     
         <span class="sidebar-tag-name" data-tags="Linux"><span class="iconfont-archer">&#xe606;</span>Linux</span>
     
@@ -1788,21 +1803,21 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="Group Theory"><span class="iconfont-archer">&#xe606;</span>Group Theory</span>
     
-        <span class="sidebar-tag-name" data-tags="Python"><span class="iconfont-archer">&#xe606;</span>Python</span>
-    
         <span class="sidebar-tag-name" data-tags="regular expressions"><span class="iconfont-archer">&#xe606;</span>regular expressions</span>
     
         <span class="sidebar-tag-name" data-tags="linux"><span class="iconfont-archer">&#xe606;</span>linux</span>
+    
+        <span class="sidebar-tag-name" data-tags="Python"><span class="iconfont-archer">&#xe606;</span>Python</span>
+    
+        <span class="sidebar-tag-name" data-tags="markdown"><span class="iconfont-archer">&#xe606;</span>markdown</span>
     
         <span class="sidebar-tag-name" data-tags="Java"><span class="iconfont-archer">&#xe606;</span>Java</span>
     
         <span class="sidebar-tag-name" data-tags="programming"><span class="iconfont-archer">&#xe606;</span>programming</span>
     
-        <span class="sidebar-tag-name" data-tags="markdown"><span class="iconfont-archer">&#xe606;</span>markdown</span>
+        <span class="sidebar-tag-name" data-tags="tmux"><span class="iconfont-archer">&#xe606;</span>tmux</span>
     
         <span class="sidebar-tag-name" data-tags="Traversibility"><span class="iconfont-archer">&#xe606;</span>Traversibility</span>
-    
-        <span class="sidebar-tag-name" data-tags="tmux"><span class="iconfont-archer">&#xe606;</span>tmux</span>
     
         <span class="sidebar-tag-name" data-tags="Graph"><span class="iconfont-archer">&#xe606;</span>Graph</span>
     

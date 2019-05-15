@@ -395,13 +395,13 @@ height:50vh;
 <p>$a\mid b$: $a$能整除$b$,$b$能被$a$整除</p>
 <p><strong>定理2.10</strong>: $a,b$为非零整数，则存在整数$r,s$使得gcd($a,b)=ar+bs$. $gcd(a,b)$是唯一的。但$r,s$不唯一</p>
 <p><strong>推论2.11</strong>: $a,b$为互质的整数，则存在整数$r,s$使得$ar+bs=1$【事实上是当且仅当的关系】</p>
-<h2 id="欧几里得算法-The-Euclidean-Algorithm"><a href="#欧几里得算法-The-Euclidean-Algorithm" class="headerlink" title="欧几里得算法(The Euclidean Algorithm)"></a>欧几里得算法(The Euclidean Algorithm)</h2><p>使用多次除法得到一个递减的序列来求出gcd$(a,b)$<br>$b=aq_1+r$<br>$a=r_1q_2+r_2$<br>$r_1=r_2q_3+r_3$<br>$\vdots$<br>$r_{n-2}=r_{n-1}a_n+r_n$<br>$r_{n-1}=r_nq_{n+1}$<br>将这一系列等式反过来书写可以得到$d$的表示(略)</p>
+<h2 id="欧几里得算法-The-Euclidean-Algorithm"><a href="#欧几里得算法-The-Euclidean-Algorithm" class="headerlink" title="欧几里得算法(The Euclidean Algorithm)"></a>欧几里得算法(The Euclidean Algorithm)</h2><p>使用多次除法得到一个递减的序列来求出gcd$(a,b)$<br>$b=aq<em>1+r$<br>$a=r_1q_2+r_2$<br>$r_1=r_2q_3+r_3$<br>$\vdots$<br>$r</em>{n-2}=r<em>{n-1}a_n+r_n$<br>$r</em>{n-1}=r<em>nq</em>{n+1}$<br>将这一系列等式反过来书写可以得到$d$的表示(略)</p>
 <h2 id="质数"><a href="#质数" class="headerlink" title="质数"></a>质数</h2><p><strong>引理2.13(Euclid)</strong>: $a,b$为整数，$p$为质数。如果$p\mid ab$,则$p\mid a$或$p\mid b$</p>
 <p><strong>定理2.14(Euclid)</strong>: 质数的个数是无限的</p>
 <p><strong>定理2.15(算术基本定理Fundamental Theorem of Arithmetic)</strong>: $n$为大于1的整数，则$n=p_1p_2\cdots p_k$，其中$p_1,…,p_k$为质数。这个分解是唯一的，即若$n=q_1q_2\cdots q_l$，则$k=l$且$q_i$只是$p_i$的排列</p>
 <p>以下内容出自CZ</p>
 <h2 id="mathbb-Z-n-上的乘法逆元"><a href="#mathbb-Z-n-上的乘法逆元" class="headerlink" title="$\mathbb{Z}_n$上的乘法逆元"></a>$\mathbb{Z}_n$上的乘法逆元</h2><p><strong>乘法逆元(multiplicative inverse)</strong>: $a’\cdot_{n}a=1$,则称$a’$是$a$在$\mathbb{Z}_n<br>$中的乘法逆元</p>
-<p><strong>引理2.5</strong>: 设$a$在$\mathbb{Z}_n$中存在乘法逆元$a’$. 则对于任意$b\in\mathbb{Z}<em>n$,等式$a\cdot</em>{n}x=b$有唯一解$x=a’\cdot_{n}b$.</p>
+<p><strong>引理2.5</strong>: 设$a$在$\mathbb{Z}<em>n$中存在乘法逆元$a’$. 则对于任意$b\in\mathbb{Z}_n$,等式$a\cdot</em>{n}x=b$有唯一解$x=a’\cdot_{n}b$.</p>
 <p><strong>推论2.6</strong>: 若存在$b\in\mathbb{Z}<em>n$使得$a\cdot</em>{n}x=b$的$a$无解，则$a$在$\mathbb{Z}_n$上不存在乘法逆元</p>
 <p><strong>定理2.7</strong>: 若$\mathbb{Z}_n$中的元素有一个乘法逆元，则它的乘法逆元是唯一的。<br>因此可以用$a^{-1}$来表示乘法逆元。</p>
 <p><strong>引理2.8</strong>: $a\cdot_{n}x=1$有解当且仅当存在整数$x,y$使得$ax+ny=1$</p>
@@ -1414,16 +1414,9 @@ top:50vh;
     
     
     
-    
-    
-    
-    
-    
-    
-    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 51
+        Total : 54
         </div>
         <!-- search  -->
         
@@ -1436,6 +1429,21 @@ top:50vh;
     
     <div class="archive-year"> 2019 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/28</span><a class="archive-post-title" href= "/2019/04/28/ps-4-10-Formal-description-of-problems/" >难问题求解-问题的形式化描述</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/20</span><a class="archive-post-title" href= "/2019/04/20/ps-4-9-algebraic-coding/" >算法导论学习笔记-代数编码</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/19</span><a class="archive-post-title" href= "/2019/04/19/oj-templates/" >自己看得惯的板子整理</a>
+        </li>
     
     
         <li class="archive-post-item">
@@ -1628,12 +1636,12 @@ top:50vh;
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">10/04</span><a class="archive-post-title" href= "/2018/10/04/PA1-report/" >PA1实验报告</a>
+            <span class="archive-post-date">10/04</span><a class="archive-post-title" href= "/2018/10/04/pa-inspirations/" >做pa的时候可能会用到的操作</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">10/04</span><a class="archive-post-title" href= "/2018/10/04/pa-inspirations/" >做pa的时候可能会用到的操作</a>
+            <span class="archive-post-date">10/04</span><a class="archive-post-title" href= "/2018/10/04/PA1-report/" >PA1实验报告</a>
         </li>
     
     
@@ -1708,19 +1716,19 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="Flags"><span class="iconfont-archer">&#xe606;</span>Flags</span>
     
+        <span class="sidebar-tag-name" data-tags="Math Modeling"><span class="iconfont-archer">&#xe606;</span>Math Modeling</span>
+    
         <span class="sidebar-tag-name" data-tags="Notes"><span class="iconfont-archer">&#xe606;</span>Notes</span>
     
         <span class="sidebar-tag-name" data-tags="pa"><span class="iconfont-archer">&#xe606;</span>pa</span>
-    
-        <span class="sidebar-tag-name" data-tags="Math Modeling"><span class="iconfont-archer">&#xe606;</span>Math Modeling</span>
     
         <span class="sidebar-tag-name" data-tags="ICS"><span class="iconfont-archer">&#xe606;</span>ICS</span>
     
         <span class="sidebar-tag-name" data-tags="Machine Learning"><span class="iconfont-archer">&#xe606;</span>Machine Learning</span>
     
-        <span class="sidebar-tag-name" data-tags="Problem Solving"><span class="iconfont-archer">&#xe606;</span>Problem Solving</span>
-    
         <span class="sidebar-tag-name" data-tags="Assembly Language"><span class="iconfont-archer">&#xe606;</span>Assembly Language</span>
+    
+        <span class="sidebar-tag-name" data-tags="Problem Solving"><span class="iconfont-archer">&#xe606;</span>Problem Solving</span>
     
         <span class="sidebar-tag-name" data-tags="CLRS"><span class="iconfont-archer">&#xe606;</span>CLRS</span>
     
@@ -1746,6 +1754,10 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="Connectivity"><span class="iconfont-archer">&#xe606;</span>Connectivity</span>
     
+        <span class="sidebar-tag-name" data-tags="ics"><span class="iconfont-archer">&#xe606;</span>ics</span>
+    
+        <span class="sidebar-tag-name" data-tags="process calling"><span class="iconfont-archer">&#xe606;</span>process calling</span>
+    
         <span class="sidebar-tag-name" data-tags="freshman"><span class="iconfont-archer">&#xe606;</span>freshman</span>
     
         <span class="sidebar-tag-name" data-tags="college life"><span class="iconfont-archer">&#xe606;</span>college life</span>
@@ -1754,15 +1766,11 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="Ics"><span class="iconfont-archer">&#xe606;</span>Ics</span>
     
-        <span class="sidebar-tag-name" data-tags="ics"><span class="iconfont-archer">&#xe606;</span>ics</span>
-    
-        <span class="sidebar-tag-name" data-tags="process calling"><span class="iconfont-archer">&#xe606;</span>process calling</span>
+        <span class="sidebar-tag-name" data-tags="MATLAB"><span class="iconfont-archer">&#xe606;</span>MATLAB</span>
     
         <span class="sidebar-tag-name" data-tags="Matchings"><span class="iconfont-archer">&#xe606;</span>Matchings</span>
     
         <span class="sidebar-tag-name" data-tags="Factorization"><span class="iconfont-archer">&#xe606;</span>Factorization</span>
-    
-        <span class="sidebar-tag-name" data-tags="MATLAB"><span class="iconfont-archer">&#xe606;</span>MATLAB</span>
     
         <span class="sidebar-tag-name" data-tags="Linux"><span class="iconfont-archer">&#xe606;</span>Linux</span>
     
@@ -1770,21 +1778,21 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="Group Theory"><span class="iconfont-archer">&#xe606;</span>Group Theory</span>
     
-        <span class="sidebar-tag-name" data-tags="Python"><span class="iconfont-archer">&#xe606;</span>Python</span>
-    
         <span class="sidebar-tag-name" data-tags="regular expressions"><span class="iconfont-archer">&#xe606;</span>regular expressions</span>
     
         <span class="sidebar-tag-name" data-tags="linux"><span class="iconfont-archer">&#xe606;</span>linux</span>
+    
+        <span class="sidebar-tag-name" data-tags="Python"><span class="iconfont-archer">&#xe606;</span>Python</span>
+    
+        <span class="sidebar-tag-name" data-tags="markdown"><span class="iconfont-archer">&#xe606;</span>markdown</span>
     
         <span class="sidebar-tag-name" data-tags="Java"><span class="iconfont-archer">&#xe606;</span>Java</span>
     
         <span class="sidebar-tag-name" data-tags="programming"><span class="iconfont-archer">&#xe606;</span>programming</span>
     
-        <span class="sidebar-tag-name" data-tags="markdown"><span class="iconfont-archer">&#xe606;</span>markdown</span>
+        <span class="sidebar-tag-name" data-tags="tmux"><span class="iconfont-archer">&#xe606;</span>tmux</span>
     
         <span class="sidebar-tag-name" data-tags="Traversibility"><span class="iconfont-archer">&#xe606;</span>Traversibility</span>
-    
-        <span class="sidebar-tag-name" data-tags="tmux"><span class="iconfont-archer">&#xe606;</span>tmux</span>
     
         <span class="sidebar-tag-name" data-tags="Graph"><span class="iconfont-archer">&#xe606;</span>Graph</span>
     
