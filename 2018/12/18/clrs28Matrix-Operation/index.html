@@ -271,7 +271,7 @@ height:50vh;
                 
                 
                     <div class="post-intro-read">
-                        <span>Word count: <span class="post-count">648</span> / Reading time: <span class="post-count">2 min</span></span>
+                        <span>Word count: <span class="post-count">724</span> / Reading time: <span class="post-count">3 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
@@ -400,18 +400,12 @@ height:50vh;
         <div class="container container-unloaded">
             <main class="main post-page">
     <article class="article-entry">
-        <h1 id="求解线性方程组"><a href="#求解线性方程组" class="headerlink" title="求解线性方程组"></a>求解线性方程组</h1><script type="math/tex; mode=display">Ax=b</script><p><strong>欠定的(underdetermined)</strong>：方程的数目少于未知变量数目$n$，则该线性方程组为欠定的<br><strong>超定的(overdetermined)</strong>:方程数目超过未知变量数目$n$<br><strong>非奇异矩阵</strong>：$A$的秩等于未知变量的个数$n$</p>
-<h2 id="LUP分解"><a href="#LUP分解" class="headerlink" title="LUP分解"></a>LUP分解</h2><p>思想：找出3个$n\times n$矩阵$L,U,P$，满足$PA=LU$,其中<br>$L$是一个单位下三角矩阵<br>$U$是一个上三角矩阵<br>$P$是一个置换矩阵<br>每一个非奇异矩阵$A$都会有这样一种分解</p>
-<script type="math/tex; mode=display">Ax=b</script><script type="math/tex; mode=display">PAx=Pb</script><script type="math/tex; mode=display">LUx=Pbx</script><p>求解两个三角线性系统<br>下三角系统$Ly=Pb$<br>上三角系统$Ux=y$</p>
+        <h1 id="求解线性方程组"><a href="#求解线性方程组" class="headerlink" title="求解线性方程组"></a>求解线性方程组</h1><p>$$Ax=b$$<br><strong>欠定的(underdetermined)</strong>：方程的数目少于未知变量数目$n$，则该线性方程组为欠定的<br><strong>超定的(overdetermined)</strong>:方程数目超过未知变量数目$n$<br><strong>非奇异矩阵</strong>：$A$的秩等于未知变量的个数$n$</p>
+<h2 id="LUP分解"><a href="#LUP分解" class="headerlink" title="LUP分解"></a>LUP分解</h2><p>思想：找出3个$n\times n$矩阵$L,U,P$，满足$PA=LU$,其中<br>$L$是一个单位下三角矩阵<br>$U$是一个上三角矩阵<br>$P$是一个置换矩阵<br>每一个非奇异矩阵$A$都会有这样一种分解<br>$$Ax=b$$<br>$$PAx=Pb$$<br>$$LUx=Pbx$$<br>求解两个三角线性系统<br>下三角系统$Ly=Pb$<br>上三角系统$Ux=y$</p>
 <h2 id="正向替换与方向替换"><a href="#正向替换与方向替换" class="headerlink" title="正向替换与方向替换"></a>正向替换与方向替换</h2><p>可在$\Theta(n^2)$时间内求解下三角系统</p>
-<p>置换阵$P$可以用数组$\pi[1..n]$表示</p>
-<script type="math/tex; mode=display">P_{i,j}=
-\begin{cases}
-1 & (j == \pi[i])\\
-0 & (j\neq\pi[i])
-\end{cases}</script><p>从第一个式子开始正向替换，可以得到</p>
-<script type="math/tex; mode=display">y_i=b_{\pi[i]}-\sum\limits_{j=1}^{i-1}l_{ij}y_i</script><p>反向替换同理，最终可以得到</p>
-<script type="math/tex; mode=display">x_i=(y_i-\sum\limits_{j=i+1}^{n}u_{ij}x_j)/u_{ii}</script><p><img src="/2018/12/18/clrs28Matrix-Operation/LUP-SOLVE.png"></p>
+<p>置换阵$P$可以用数组$\pi[1..n]$表示<br>$$P_{i,j}=<br>\begin{cases}<br>1 &amp; (j == \pi[i])\<br>0 &amp; (j\neq\pi[i])<br>\end{cases}<br>$$<br>从第一个式子开始正向替换，可以得到<br>$$y_i=b_{\pi[i]}-\sum\limits_{j=1}^{i-1}l_{ij}y_i$$</p>
+<p>反向替换同理，最终可以得到<br>$$x_i=(y_i-\sum\limits_{j=i+1}^{n}u_{ij}x_j)/u_{ii}$$</p>
+<p><img src="/2018/12/18/clrs28Matrix-Operation/LUP-SOLVE.png"></p>
 <h2 id="LU分解计算"><a href="#LU分解计算" class="headerlink" title="LU分解计算"></a>LU分解计算</h2><p>Gauss消元法：</p>
 <ul>
 <li>行消元得到的行梯阵即$U$</li>
@@ -419,12 +413,12 @@ height:50vh;
 </ul>
 <p><img src="/2018/12/18/clrs28Matrix-Operation/1.png"><br><img src="/2018/12/18/clrs28Matrix-Operation/2.png"></p>
 <p><img src="/2018/12/18/clrs28Matrix-Operation/LU-DE.png"></p>
-<p>可以看成<script type="math/tex">a_{ij}=a_{ij}-\frac{a_{ik}a_{kj}}{a_{kk}}</script></p>
+<p>可以看成$$a_{ij}=a_{ij}-\frac{a_{ik}a_{kj}}{a_{kk}}$$</p>
 <p>运行时间$\Theta(n^3)$</p>
 <h2 id="LUP分解计算"><a href="#LUP分解计算" class="headerlink" title="LUP分解计算"></a>LUP分解计算</h2><p>在LU分解的基础上，为了保证除数不为0和减少数值不稳定，每次选择该列中具有最大绝对值的元素，交换到对角元的位置</p>
 <p><img src="/2018/12/18/clrs28Matrix-Operation/LUP-DE.png"></p>
 <p>运行时间$\Theta(n^3)$</p>
-<h1 id="矩阵求逆"><a href="#矩阵求逆" class="headerlink" title="矩阵求逆"></a>矩阵求逆</h1><p>LUP分解可以用于计算逆矩阵(废话，高斯消元可以，LUP当然可以)<script type="math/tex">AX_{i}=e_i</script></p>
+<h1 id="矩阵求逆"><a href="#矩阵求逆" class="headerlink" title="矩阵求逆"></a>矩阵求逆</h1><p>LUP分解可以用于计算逆矩阵(废话，高斯消元可以，LUP当然可以)$$AX_{i}=e_i$$</p>
 <p>矩阵乘法和矩阵求逆具有相同的时间复杂度</p>
 <p>证明时间复杂度相同：两个问题都能在O(另一个问题算法的时间复杂度)时间内解决</p>
 <ul>
@@ -432,13 +426,8 @@ height:50vh;
 </ul>
 <h1 id="对称正定阵"><a href="#对称正定阵" class="headerlink" title="对称正定阵"></a>对称正定阵</h1><p><strong>引理28.3</strong>：任何对称正定矩阵都是非奇异矩阵<br>任何对称正定矩阵都有逆矩阵。</p>
 <p><strong>引理28.4</strong>：如果$A$是一个对称正定矩阵，那么$A$的每一个主子矩阵都是对称正定的。</p>
-<p><strong>舒尔补</strong>：矩阵$A$关于主子矩阵$A_k$的舒尔补为$S=C-B{A_k}^{-1}B^T$。其中，$A$为对称正定阵且</p>
-<script type="math/tex; mode=display">A=\left[ 
-    \begin{matrix}
-    A_k & B^T \\
-    B & C
-    \end{matrix}
-    \right]</script><p><strong>舒尔补定理</strong>：如果$A$是一个对称正定矩阵，$A_k$是$A$的$k\times k$主子矩阵，那么$A$关于$A_k$的舒尔补是对称正定的。</p>
+<p><strong>舒尔补</strong>：矩阵$A$关于主子矩阵$A_k$的舒尔补为$S=C-B{A_k}^{-1}B^T$。其中，$A$为对称正定阵且<br>$$A=\left[<br>    \begin{matrix}<br>    A_k &amp; B^T \<br>    B &amp; C<br>    \end{matrix}<br>    \right]$$</p>
+<p><strong>舒尔补定理</strong>：如果$A$是一个对称正定矩阵，$A_k$是$A$的$k\times k$主子矩阵，那么$A$关于$A_k$的舒尔补是对称正定的。</p>
 <p><strong>推论28.6</strong>：一个对称正定矩阵的LU分解永远不会出现除数为0的情形</p>
 <h1 id="最小二乘逼近"><a href="#最小二乘逼近" class="headerlink" title="最小二乘逼近"></a>最小二乘逼近</h1><p>就是看上去很厉害实际上真的很厉害的曲线拟合</p>
 
@@ -1440,6 +1429,42 @@ top:50vh;
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
         Total : 54
@@ -1458,12 +1483,12 @@ top:50vh;
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">04/28</span><a class="archive-post-title" href= "/2019/04/28/ps-4-10-Formal-description-of-problems/" >难问题求解-问题的形式化描述</a>
+            <span class="archive-post-date">05/25</span><a class="archive-post-title" href= "/2019/05/25/ps-4-13-Randomized-Algorithms/" >难问题求解学习笔记-随机算法</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">04/20</span><a class="archive-post-title" href= "/2019/04/20/ps-4-9-algebraic-coding/" >算法导论学习笔记-代数编码</a>
+            <span class="archive-post-date">05/18</span><a class="archive-post-title" href= "/2019/05/18/ps-4-12-Approximation-Algorithms/" >难问题求解学习笔记-近似算法</a>
         </li>
     
     
@@ -1662,12 +1687,12 @@ top:50vh;
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">10/04</span><a class="archive-post-title" href= "/2018/10/04/pa-inspirations/" >做pa的时候可能会用到的操作</a>
+            <span class="archive-post-date">10/04</span><a class="archive-post-title" href= "/2018/10/04/PA1-report/" >PA1实验报告</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">10/04</span><a class="archive-post-title" href= "/2018/10/04/PA1-report/" >PA1实验报告</a>
+            <span class="archive-post-date">10/04</span><a class="archive-post-title" href= "/2018/10/04/pa-inspirations/" >做pa的时候可能会用到的操作</a>
         </li>
     
     
@@ -1742,27 +1767,31 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="Flags"><span class="iconfont-archer">&#xe606;</span>Flags</span>
     
-        <span class="sidebar-tag-name" data-tags="Math Modeling"><span class="iconfont-archer">&#xe606;</span>Math Modeling</span>
-    
         <span class="sidebar-tag-name" data-tags="Notes"><span class="iconfont-archer">&#xe606;</span>Notes</span>
     
         <span class="sidebar-tag-name" data-tags="pa"><span class="iconfont-archer">&#xe606;</span>pa</span>
     
         <span class="sidebar-tag-name" data-tags="ICS"><span class="iconfont-archer">&#xe606;</span>ICS</span>
     
-        <span class="sidebar-tag-name" data-tags="Machine Learning"><span class="iconfont-archer">&#xe606;</span>Machine Learning</span>
+        <span class="sidebar-tag-name" data-tags="Math Modeling"><span class="iconfont-archer">&#xe606;</span>Math Modeling</span>
     
-        <span class="sidebar-tag-name" data-tags="Assembly Language"><span class="iconfont-archer">&#xe606;</span>Assembly Language</span>
+        <span class="sidebar-tag-name" data-tags="Machine Learning"><span class="iconfont-archer">&#xe606;</span>Machine Learning</span>
     
         <span class="sidebar-tag-name" data-tags="Problem Solving"><span class="iconfont-archer">&#xe606;</span>Problem Solving</span>
     
-        <span class="sidebar-tag-name" data-tags="CLRS"><span class="iconfont-archer">&#xe606;</span>CLRS</span>
+        <span class="sidebar-tag-name" data-tags="Assembly Language"><span class="iconfont-archer">&#xe606;</span>Assembly Language</span>
     
-        <span class="sidebar-tag-name" data-tags="greedy algorithm"><span class="iconfont-archer">&#xe606;</span>greedy algorithm</span>
+        <span class="sidebar-tag-name" data-tags="CLRS"><span class="iconfont-archer">&#xe606;</span>CLRS</span>
     
         <span class="sidebar-tag-name" data-tags="dynamic programming"><span class="iconfont-archer">&#xe606;</span>dynamic programming</span>
     
+        <span class="sidebar-tag-name" data-tags="greedy algorithm"><span class="iconfont-archer">&#xe606;</span>greedy algorithm</span>
+    
         <span class="sidebar-tag-name" data-tags="amortized analysis"><span class="iconfont-archer">&#xe606;</span>amortized analysis</span>
+    
+        <span class="sidebar-tag-name" data-tags="Disjoint Sets"><span class="iconfont-archer">&#xe606;</span>Disjoint Sets</span>
+    
+        <span class="sidebar-tag-name" data-tags="Data Structure"><span class="iconfont-archer">&#xe606;</span>Data Structure</span>
     
         <span class="sidebar-tag-name" data-tags="Single Source Shortest Path"><span class="iconfont-archer">&#xe606;</span>Single Source Shortest Path</span>
     
@@ -1771,10 +1800,6 @@ top:50vh;
         <span class="sidebar-tag-name" data-tags="Dijkstra"><span class="iconfont-archer">&#xe606;</span>Dijkstra</span>
     
         <span class="sidebar-tag-name" data-tags="Graph Algorithms"><span class="iconfont-archer">&#xe606;</span>Graph Algorithms</span>
-    
-        <span class="sidebar-tag-name" data-tags="Disjoint Sets"><span class="iconfont-archer">&#xe606;</span>Disjoint Sets</span>
-    
-        <span class="sidebar-tag-name" data-tags="Data Structure"><span class="iconfont-archer">&#xe606;</span>Data Structure</span>
     
         <span class="sidebar-tag-name" data-tags="Graph Theory"><span class="iconfont-archer">&#xe606;</span>Graph Theory</span>
     
@@ -1792,11 +1817,11 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="Ics"><span class="iconfont-archer">&#xe606;</span>Ics</span>
     
-        <span class="sidebar-tag-name" data-tags="MATLAB"><span class="iconfont-archer">&#xe606;</span>MATLAB</span>
-    
         <span class="sidebar-tag-name" data-tags="Matchings"><span class="iconfont-archer">&#xe606;</span>Matchings</span>
     
         <span class="sidebar-tag-name" data-tags="Factorization"><span class="iconfont-archer">&#xe606;</span>Factorization</span>
+    
+        <span class="sidebar-tag-name" data-tags="MATLAB"><span class="iconfont-archer">&#xe606;</span>MATLAB</span>
     
         <span class="sidebar-tag-name" data-tags="Linux"><span class="iconfont-archer">&#xe606;</span>Linux</span>
     
@@ -1804,11 +1829,11 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="Group Theory"><span class="iconfont-archer">&#xe606;</span>Group Theory</span>
     
+        <span class="sidebar-tag-name" data-tags="Python"><span class="iconfont-archer">&#xe606;</span>Python</span>
+    
         <span class="sidebar-tag-name" data-tags="regular expressions"><span class="iconfont-archer">&#xe606;</span>regular expressions</span>
     
         <span class="sidebar-tag-name" data-tags="linux"><span class="iconfont-archer">&#xe606;</span>linux</span>
-    
-        <span class="sidebar-tag-name" data-tags="Python"><span class="iconfont-archer">&#xe606;</span>Python</span>
     
         <span class="sidebar-tag-name" data-tags="markdown"><span class="iconfont-archer">&#xe606;</span>markdown</span>
     

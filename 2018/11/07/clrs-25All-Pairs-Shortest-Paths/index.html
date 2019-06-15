@@ -271,7 +271,7 @@ height:50vh;
                 
                 
                     <div class="post-intro-read">
-                        <span>Word count: <span class="post-count">521</span> / Reading time: <span class="post-count">2 min</span></span>
+                        <span>Word count: <span class="post-count">551</span> / Reading time: <span class="post-count">2 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
@@ -400,9 +400,8 @@ height:50vh;
         <div class="container container-unloaded">
             <main class="main post-page">
     <article class="article-entry">
-        <h1 id="矩阵乘法"><a href="#矩阵乘法" class="headerlink" title="矩阵乘法"></a>矩阵乘法</h1><h2 id="最优子结构"><a href="#最优子结构" class="headerlink" title="最优子结构"></a>最优子结构</h2><p>$l_{ij}^(m)}$:从结点$i$到结点$j$的至多包含$m$条边的任意路径中的最小权重。</p>
-<script type="math/tex; mode=display">
-l_{ij}^{(m)} = \min\limits_{1\lek\le n}\{l_{ik}^{(m1)}+w_{kj}\}</script><h2 id="自底向上计算最短路径权重"><a href="#自底向上计算最短路径权重" class="headerlink" title="自底向上计算最短路径权重"></a>自底向上计算最短路径权重</h2><p><img src="/2018/11/07/clrs-25All-Pairs-Shortest-Paths/extend.png"></p>
+        <h1 id="矩阵乘法"><a href="#矩阵乘法" class="headerlink" title="矩阵乘法"></a>矩阵乘法</h1><h2 id="最优子结构"><a href="#最优子结构" class="headerlink" title="最优子结构"></a>最优子结构</h2><p>$l_{ij}^(m)}$:从结点$i$到结点$j$的至多包含$m$条边的任意路径中的最小权重。<br>$$<br>l_{ij}^{(m)} = \min\limits_{1\lek\le n}{l_{ik}^{(m1)}+w_{kj}}<br>$$</p>
+<h2 id="自底向上计算最短路径权重"><a href="#自底向上计算最短路径权重" class="headerlink" title="自底向上计算最短路径权重"></a>自底向上计算最短路径权重</h2><p><img src="/2018/11/07/clrs-25All-Pairs-Shortest-Paths/extend.png"></p>
 <p>三重循环，时间复杂度为$\Theta(n^3)$</p>
 <p>形式上与矩阵乘法的计算非常类似</p>
 <p>计算$L^{(n-1)}=W^{n-1}$</p>
@@ -416,7 +415,7 @@ l_{ij}^{(m)} = \min\limits_{1\lek\le n}\{l_{ik}^{(m1)}+w_{kj}\}</script><h2 id="
 <li>不允许有负权重环</li>
 <li>但是可以做到在有负权重环的情况下报告（看对角元是否有负数）</li>
 </ul>
-<p>$d_{ij}^{(k)}$：从$i$到$j$经过的中间结点为$\{1,…k\}$的子集的最短路径长度<br><img src="/2018/11/07/clrs-25All-Pairs-Shortest-Paths/d.png"></p>
+<p>$d_{ij}^{(k)}$：从$i$到$j$经过的中间结点为${1,…k}$的子集的最短路径长度<br><img src="/2018/11/07/clrs-25All-Pairs-Shortest-Paths/d.png"></p>
 <h2 id="伪代码"><a href="#伪代码" class="headerlink" title="伪代码"></a>伪代码</h2><p><img src="/2018/11/07/clrs-25All-Pairs-Shortest-Paths/floyd-alg.png"></p>
 <h2 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h2><p>$\Theta(n^3)$</p>
 <h2 id="空间复杂度"><a href="#空间复杂度" class="headerlink" title="空间复杂度"></a>空间复杂度</h2><p>看似需要$\Theta(n^3)$，但是作业题中证明了只需要一个矩阵来存储，为$\Theta(n^2)$</p>
@@ -429,8 +428,7 @@ l_{ij}^{(m)} = \min\limits_{1\lek\le n}\{l_{ik}^{(m1)}+w_{kj}\}</script><h2 id="
 <li>新图中的最短路径就是旧图中的最短路径</li>
 </ul>
 <h2 id="伪代码-1"><a href="#伪代码-1" class="headerlink" title="伪代码"></a>伪代码</h2><p><img src="/2018/11/07/clrs-25All-Pairs-Shortest-Paths/Johnson.png"></p>
-<p>先增加一个新结点$s$，该点到原先各结点都有边相连，权重为0<br>对新图进行一次Bellman-Ford算法，寻找是否有负权重环路<br>没有负权重环，就用神奇的长得像顶点的势能函数一样的函数给每条边重新赋值</p>
-<script type="math/tex; mode=display">\hat{w}(u,v)=w(u,v)+h(u)-h(v)</script><script type="math/tex; mode=display">h(u)=\delta(s,u)</script><p>然后对每个点进行Dijkstra<br>最后记得将最短路径的权重恢复，并存入矩阵$D$中返回</p>
+<p>先增加一个新结点$s$，该点到原先各结点都有边相连，权重为0<br>对新图进行一次Bellman-Ford算法，寻找是否有负权重环路<br>没有负权重环，就用神奇的长得像顶点的势能函数一样的函数给每条边重新赋值<br>$$ \hat{w}(u,v)=w(u,v)+h(u)-h(v)$$<br>$$ h(u)=\delta(s,u)$$<br>然后对每个点进行Dijkstra<br>最后记得将最短路径的权重恢复，并存入矩阵$D$中返回</p>
 <h2 id="时间复杂度-1"><a href="#时间复杂度-1" class="headerlink" title="时间复杂度"></a>时间复杂度</h2><p>二叉最小优先队列实现Dijkstra：$O(VE\lg V)$<br>斐波那契堆实现：$O(V^2\lgV+VE)$<br>在稀疏图的情况下，表现比Floyd-Warshall好</p>
 
     </article>
@@ -1431,6 +1429,42 @@ top:50vh;
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
         Total : 54
@@ -1449,12 +1483,12 @@ top:50vh;
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">04/28</span><a class="archive-post-title" href= "/2019/04/28/ps-4-10-Formal-description-of-problems/" >难问题求解-问题的形式化描述</a>
+            <span class="archive-post-date">05/25</span><a class="archive-post-title" href= "/2019/05/25/ps-4-13-Randomized-Algorithms/" >难问题求解学习笔记-随机算法</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">04/20</span><a class="archive-post-title" href= "/2019/04/20/ps-4-9-algebraic-coding/" >算法导论学习笔记-代数编码</a>
+            <span class="archive-post-date">05/18</span><a class="archive-post-title" href= "/2019/05/18/ps-4-12-Approximation-Algorithms/" >难问题求解学习笔记-近似算法</a>
         </li>
     
     
@@ -1653,12 +1687,12 @@ top:50vh;
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">10/04</span><a class="archive-post-title" href= "/2018/10/04/pa-inspirations/" >做pa的时候可能会用到的操作</a>
+            <span class="archive-post-date">10/04</span><a class="archive-post-title" href= "/2018/10/04/PA1-report/" >PA1实验报告</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">10/04</span><a class="archive-post-title" href= "/2018/10/04/PA1-report/" >PA1实验报告</a>
+            <span class="archive-post-date">10/04</span><a class="archive-post-title" href= "/2018/10/04/pa-inspirations/" >做pa的时候可能会用到的操作</a>
         </li>
     
     
@@ -1733,27 +1767,31 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="Flags"><span class="iconfont-archer">&#xe606;</span>Flags</span>
     
-        <span class="sidebar-tag-name" data-tags="Math Modeling"><span class="iconfont-archer">&#xe606;</span>Math Modeling</span>
-    
         <span class="sidebar-tag-name" data-tags="Notes"><span class="iconfont-archer">&#xe606;</span>Notes</span>
     
         <span class="sidebar-tag-name" data-tags="pa"><span class="iconfont-archer">&#xe606;</span>pa</span>
     
         <span class="sidebar-tag-name" data-tags="ICS"><span class="iconfont-archer">&#xe606;</span>ICS</span>
     
-        <span class="sidebar-tag-name" data-tags="Machine Learning"><span class="iconfont-archer">&#xe606;</span>Machine Learning</span>
+        <span class="sidebar-tag-name" data-tags="Math Modeling"><span class="iconfont-archer">&#xe606;</span>Math Modeling</span>
     
-        <span class="sidebar-tag-name" data-tags="Assembly Language"><span class="iconfont-archer">&#xe606;</span>Assembly Language</span>
+        <span class="sidebar-tag-name" data-tags="Machine Learning"><span class="iconfont-archer">&#xe606;</span>Machine Learning</span>
     
         <span class="sidebar-tag-name" data-tags="Problem Solving"><span class="iconfont-archer">&#xe606;</span>Problem Solving</span>
     
-        <span class="sidebar-tag-name" data-tags="CLRS"><span class="iconfont-archer">&#xe606;</span>CLRS</span>
+        <span class="sidebar-tag-name" data-tags="Assembly Language"><span class="iconfont-archer">&#xe606;</span>Assembly Language</span>
     
-        <span class="sidebar-tag-name" data-tags="greedy algorithm"><span class="iconfont-archer">&#xe606;</span>greedy algorithm</span>
+        <span class="sidebar-tag-name" data-tags="CLRS"><span class="iconfont-archer">&#xe606;</span>CLRS</span>
     
         <span class="sidebar-tag-name" data-tags="dynamic programming"><span class="iconfont-archer">&#xe606;</span>dynamic programming</span>
     
+        <span class="sidebar-tag-name" data-tags="greedy algorithm"><span class="iconfont-archer">&#xe606;</span>greedy algorithm</span>
+    
         <span class="sidebar-tag-name" data-tags="amortized analysis"><span class="iconfont-archer">&#xe606;</span>amortized analysis</span>
+    
+        <span class="sidebar-tag-name" data-tags="Disjoint Sets"><span class="iconfont-archer">&#xe606;</span>Disjoint Sets</span>
+    
+        <span class="sidebar-tag-name" data-tags="Data Structure"><span class="iconfont-archer">&#xe606;</span>Data Structure</span>
     
         <span class="sidebar-tag-name" data-tags="Single Source Shortest Path"><span class="iconfont-archer">&#xe606;</span>Single Source Shortest Path</span>
     
@@ -1762,10 +1800,6 @@ top:50vh;
         <span class="sidebar-tag-name" data-tags="Dijkstra"><span class="iconfont-archer">&#xe606;</span>Dijkstra</span>
     
         <span class="sidebar-tag-name" data-tags="Graph Algorithms"><span class="iconfont-archer">&#xe606;</span>Graph Algorithms</span>
-    
-        <span class="sidebar-tag-name" data-tags="Disjoint Sets"><span class="iconfont-archer">&#xe606;</span>Disjoint Sets</span>
-    
-        <span class="sidebar-tag-name" data-tags="Data Structure"><span class="iconfont-archer">&#xe606;</span>Data Structure</span>
     
         <span class="sidebar-tag-name" data-tags="Graph Theory"><span class="iconfont-archer">&#xe606;</span>Graph Theory</span>
     
@@ -1783,11 +1817,11 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="Ics"><span class="iconfont-archer">&#xe606;</span>Ics</span>
     
-        <span class="sidebar-tag-name" data-tags="MATLAB"><span class="iconfont-archer">&#xe606;</span>MATLAB</span>
-    
         <span class="sidebar-tag-name" data-tags="Matchings"><span class="iconfont-archer">&#xe606;</span>Matchings</span>
     
         <span class="sidebar-tag-name" data-tags="Factorization"><span class="iconfont-archer">&#xe606;</span>Factorization</span>
+    
+        <span class="sidebar-tag-name" data-tags="MATLAB"><span class="iconfont-archer">&#xe606;</span>MATLAB</span>
     
         <span class="sidebar-tag-name" data-tags="Linux"><span class="iconfont-archer">&#xe606;</span>Linux</span>
     
@@ -1795,11 +1829,11 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="Group Theory"><span class="iconfont-archer">&#xe606;</span>Group Theory</span>
     
+        <span class="sidebar-tag-name" data-tags="Python"><span class="iconfont-archer">&#xe606;</span>Python</span>
+    
         <span class="sidebar-tag-name" data-tags="regular expressions"><span class="iconfont-archer">&#xe606;</span>regular expressions</span>
     
         <span class="sidebar-tag-name" data-tags="linux"><span class="iconfont-archer">&#xe606;</span>linux</span>
-    
-        <span class="sidebar-tag-name" data-tags="Python"><span class="iconfont-archer">&#xe606;</span>Python</span>
     
         <span class="sidebar-tag-name" data-tags="markdown"><span class="iconfont-archer">&#xe606;</span>markdown</span>
     

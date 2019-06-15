@@ -271,7 +271,7 @@ height:50vh;
                 
                 
                     <div class="post-intro-read">
-                        <span>Word count: <span class="post-count">1,199</span> / Reading time: <span class="post-count">6 min</span></span>
+                        <span>Word count: <span class="post-count">1,213</span> / Reading time: <span class="post-count">6 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
@@ -432,7 +432,7 @@ height:50vh;
 <p><strong>定理3.23</strong>: 在群中，一般指数的运算律成立</p>
 <h2 id="子群"><a href="#子群" class="headerlink" title="子群"></a>子群</h2><ul>
 <li>子群(subgroup):仿照子空间的定义<ul>
-<li>平凡子群(trivial subgroup):$H=\{e\}$</li>
+<li>平凡子群(trivial subgroup):$H={e}$</li>
 <li>真子群(proper subgroup)</li>
 </ul>
 </li>
@@ -445,7 +445,7 @@ height:50vh;
 <li>If $h\in H$, then $h^{-1}\in H$</li>
 </ol>
 <p><strong>命题3.31</strong>: $H$是$G$的子群当且仅当$H\neq\emptyset$ and whenever $g,h\in H$ then $gh^{-1}$ is in $H$</p>
-<h1 id="循环子群-Cyclic-Subgroups"><a href="#循环子群-Cyclic-Subgroups" class="headerlink" title="循环子群(Cyclic Subgroups)"></a>循环子群(Cyclic Subgroups)</h1><p><strong>定理4.3</strong>: Let $G$ be a group and $a$ be any element in $G$. Then the set $\left⟨a\right⟩=\{a^k:k\in\mathbb{Z}\}$is a subgroup of $G$. Furthermore, $⟨a⟩$ is the <strong>smallest</strong> subgroup of $G$ that contains $a$.</p>
+<h1 id="循环子群-Cyclic-Subgroups"><a href="#循环子群-Cyclic-Subgroups" class="headerlink" title="循环子群(Cyclic Subgroups)"></a>循环子群(Cyclic Subgroups)</h1><p><strong>定理4.3</strong>: Let $G$ be a group and $a$ be any element in $G$. Then the set $\left⟨a\right⟩={a^k:k\in\mathbb{Z}}$is a subgroup of $G$. Furthermore, $⟨a⟩$ is the <strong>smallest</strong> subgroup of $G$ that contains $a$.</p>
 <p><strong>循环子群(Cyclic Subgroup)</strong>:$⟨a⟩$<br><strong>循环群(Cyclic group)</strong>: 包含了某个元素$a$，使得$G=⟨a⟩$.此时$⟨a⟩$是$G$的<strong>生成器(generator)</strong>.<br>The <strong>order</strong> of $a$: 最小的整数$n$满足$a^n=e$，表示为$|a|=n$。如果不存在满足要求的$n$，则称$a$是<strong>无穷的(infinite)</strong>，表示为$|a|=\infty$<br>e.g. $\mathbb{Z}$和$\mathbb{Z}_n$都是循环群，1和-1是$\mathbb{Z}$的生成器，1是$\mathbb{Z}_n$的生成器但不一定是唯一的。</p>
 <p><strong>定理4.9</strong>: 所有循环群都是可交换的。(Every cyclic group is abelian).</p>
 <p><strong>定理4.10</strong>: 循环群的子群都是循环子群。(Every subgroup of a cyclic group is cyclic.)</p>
@@ -456,9 +456,9 @@ height:50vh;
 <h2 id="复数乘法群-Multiplicative-Group-of-Complex-Numbers"><a href="#复数乘法群-Multiplicative-Group-of-Complex-Numbers" class="headerlink" title="复数乘法群(Multiplicative Group of Complex Numbers)"></a>复数乘法群(Multiplicative Group of Complex Numbers)</h2><p>一堆复数的基础知识…….</p>
 <p>$r(\cos\theta+i\sin\theta)$ 会被简写为 $r~cis\theta$</p>
 <p><strong>命题4.20</strong>: $z=r~cis\theta$ and $w=s~cis\phi$. Then $zw=rs~cis(\theta+\phi)$</p>
-<h3 id="圆群-The-circle-group"><a href="#圆群-The-circle-group" class="headerlink" title="圆群(The circle group)"></a>圆群(The circle group)</h3><p>定义: <script type="math/tex">\mathbb{T}=\{z\in\mathbb{C}: |z|=1\}</script></p>
+<h3 id="圆群-The-circle-group"><a href="#圆群-The-circle-group" class="headerlink" title="圆群(The circle group)"></a>圆群(The circle group)</h3><p>定义: $$\mathbb{T}={z\in\mathbb{C}: |z|=1}$$</p>
 <p><strong>命题4.24</strong>: 圆群是$\mathbb{C}^*$的子群</p>
-<p><strong>定理4.25</strong>: If $z^n=1$, then the nth roots of unity are <script type="math/tex">z=cis(\frac{2k\pi}{n})</script><br>where $k-0,1,…n-1$. Furthermore, the nth roors of unity form a cyclic subgroup of $\mathbb{T}$ of order $n$.</p>
+<p><strong>定理4.25</strong>: If $z^n=1$, then the nth roots of unity are $$z=cis(\frac{2k\pi}{n})$$<br>where $k-0,1,…n-1$. Furthermore, the nth roors of unity form a cyclic subgroup of $\mathbb{T}$ of order $n$.</p>
 <p>A generator for the group of the nth roots of unity is called a <strong>primitive nth root of<br>unity</strong>.</p>
 <h2 id="重复平方法-The-Method-of-Repeated-Squares"><a href="#重复平方法-The-Method-of-Repeated-Squares" class="headerlink" title="重复平方法(The Method of Repeated Squares)"></a>重复平方法(The Method of Repeated Squares)</h2><p>其实就是快速幂</p>
 <p>理论基础: If $b\equiv a^x (\mod n)$ and $c\equiv a^y (\mod n)$, then $bc\equiv a^{x+y}(\mod n)$<br>$(a^{2n})^2\equiv a^{2\cdot 2n}\equiv a^{2^{n+1}}(\mod n)$</p>
@@ -1461,6 +1461,42 @@ top:50vh;
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
         Total : 54
@@ -1479,12 +1515,12 @@ top:50vh;
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">04/28</span><a class="archive-post-title" href= "/2019/04/28/ps-4-10-Formal-description-of-problems/" >难问题求解-问题的形式化描述</a>
+            <span class="archive-post-date">05/25</span><a class="archive-post-title" href= "/2019/05/25/ps-4-13-Randomized-Algorithms/" >难问题求解学习笔记-随机算法</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">04/20</span><a class="archive-post-title" href= "/2019/04/20/ps-4-9-algebraic-coding/" >算法导论学习笔记-代数编码</a>
+            <span class="archive-post-date">05/18</span><a class="archive-post-title" href= "/2019/05/18/ps-4-12-Approximation-Algorithms/" >难问题求解学习笔记-近似算法</a>
         </li>
     
     
@@ -1683,12 +1719,12 @@ top:50vh;
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">10/04</span><a class="archive-post-title" href= "/2018/10/04/pa-inspirations/" >做pa的时候可能会用到的操作</a>
+            <span class="archive-post-date">10/04</span><a class="archive-post-title" href= "/2018/10/04/PA1-report/" >PA1实验报告</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">10/04</span><a class="archive-post-title" href= "/2018/10/04/PA1-report/" >PA1实验报告</a>
+            <span class="archive-post-date">10/04</span><a class="archive-post-title" href= "/2018/10/04/pa-inspirations/" >做pa的时候可能会用到的操作</a>
         </li>
     
     
@@ -1763,27 +1799,31 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="Flags"><span class="iconfont-archer">&#xe606;</span>Flags</span>
     
-        <span class="sidebar-tag-name" data-tags="Math Modeling"><span class="iconfont-archer">&#xe606;</span>Math Modeling</span>
-    
         <span class="sidebar-tag-name" data-tags="Notes"><span class="iconfont-archer">&#xe606;</span>Notes</span>
     
         <span class="sidebar-tag-name" data-tags="pa"><span class="iconfont-archer">&#xe606;</span>pa</span>
     
         <span class="sidebar-tag-name" data-tags="ICS"><span class="iconfont-archer">&#xe606;</span>ICS</span>
     
-        <span class="sidebar-tag-name" data-tags="Machine Learning"><span class="iconfont-archer">&#xe606;</span>Machine Learning</span>
+        <span class="sidebar-tag-name" data-tags="Math Modeling"><span class="iconfont-archer">&#xe606;</span>Math Modeling</span>
     
-        <span class="sidebar-tag-name" data-tags="Assembly Language"><span class="iconfont-archer">&#xe606;</span>Assembly Language</span>
+        <span class="sidebar-tag-name" data-tags="Machine Learning"><span class="iconfont-archer">&#xe606;</span>Machine Learning</span>
     
         <span class="sidebar-tag-name" data-tags="Problem Solving"><span class="iconfont-archer">&#xe606;</span>Problem Solving</span>
     
-        <span class="sidebar-tag-name" data-tags="CLRS"><span class="iconfont-archer">&#xe606;</span>CLRS</span>
+        <span class="sidebar-tag-name" data-tags="Assembly Language"><span class="iconfont-archer">&#xe606;</span>Assembly Language</span>
     
-        <span class="sidebar-tag-name" data-tags="greedy algorithm"><span class="iconfont-archer">&#xe606;</span>greedy algorithm</span>
+        <span class="sidebar-tag-name" data-tags="CLRS"><span class="iconfont-archer">&#xe606;</span>CLRS</span>
     
         <span class="sidebar-tag-name" data-tags="dynamic programming"><span class="iconfont-archer">&#xe606;</span>dynamic programming</span>
     
+        <span class="sidebar-tag-name" data-tags="greedy algorithm"><span class="iconfont-archer">&#xe606;</span>greedy algorithm</span>
+    
         <span class="sidebar-tag-name" data-tags="amortized analysis"><span class="iconfont-archer">&#xe606;</span>amortized analysis</span>
+    
+        <span class="sidebar-tag-name" data-tags="Disjoint Sets"><span class="iconfont-archer">&#xe606;</span>Disjoint Sets</span>
+    
+        <span class="sidebar-tag-name" data-tags="Data Structure"><span class="iconfont-archer">&#xe606;</span>Data Structure</span>
     
         <span class="sidebar-tag-name" data-tags="Single Source Shortest Path"><span class="iconfont-archer">&#xe606;</span>Single Source Shortest Path</span>
     
@@ -1792,10 +1832,6 @@ top:50vh;
         <span class="sidebar-tag-name" data-tags="Dijkstra"><span class="iconfont-archer">&#xe606;</span>Dijkstra</span>
     
         <span class="sidebar-tag-name" data-tags="Graph Algorithms"><span class="iconfont-archer">&#xe606;</span>Graph Algorithms</span>
-    
-        <span class="sidebar-tag-name" data-tags="Disjoint Sets"><span class="iconfont-archer">&#xe606;</span>Disjoint Sets</span>
-    
-        <span class="sidebar-tag-name" data-tags="Data Structure"><span class="iconfont-archer">&#xe606;</span>Data Structure</span>
     
         <span class="sidebar-tag-name" data-tags="Graph Theory"><span class="iconfont-archer">&#xe606;</span>Graph Theory</span>
     
@@ -1813,11 +1849,11 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="Ics"><span class="iconfont-archer">&#xe606;</span>Ics</span>
     
-        <span class="sidebar-tag-name" data-tags="MATLAB"><span class="iconfont-archer">&#xe606;</span>MATLAB</span>
-    
         <span class="sidebar-tag-name" data-tags="Matchings"><span class="iconfont-archer">&#xe606;</span>Matchings</span>
     
         <span class="sidebar-tag-name" data-tags="Factorization"><span class="iconfont-archer">&#xe606;</span>Factorization</span>
+    
+        <span class="sidebar-tag-name" data-tags="MATLAB"><span class="iconfont-archer">&#xe606;</span>MATLAB</span>
     
         <span class="sidebar-tag-name" data-tags="Linux"><span class="iconfont-archer">&#xe606;</span>Linux</span>
     
@@ -1825,11 +1861,11 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="Group Theory"><span class="iconfont-archer">&#xe606;</span>Group Theory</span>
     
+        <span class="sidebar-tag-name" data-tags="Python"><span class="iconfont-archer">&#xe606;</span>Python</span>
+    
         <span class="sidebar-tag-name" data-tags="regular expressions"><span class="iconfont-archer">&#xe606;</span>regular expressions</span>
     
         <span class="sidebar-tag-name" data-tags="linux"><span class="iconfont-archer">&#xe606;</span>linux</span>
-    
-        <span class="sidebar-tag-name" data-tags="Python"><span class="iconfont-archer">&#xe606;</span>Python</span>
     
         <span class="sidebar-tag-name" data-tags="markdown"><span class="iconfont-archer">&#xe606;</span>markdown</span>
     

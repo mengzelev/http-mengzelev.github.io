@@ -271,7 +271,7 @@ height:50vh;
                 
                 
                     <div class="post-intro-read">
-                        <span>Word count: <span class="post-count">1,620</span> / Reading time: <span class="post-count">7 min</span></span>
+                        <span>Word count: <span class="post-count">1,665</span> / Reading time: <span class="post-count">8 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
@@ -400,8 +400,7 @@ height:50vh;
         <div class="container container-unloaded">
             <main class="main post-page">
     <article class="article-entry">
-        <h1 id="同构-Isomorphisms"><a href="#同构-Isomorphisms" class="headerlink" title="同构(Isomorphisms)"></a>同构(Isomorphisms)</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>对两个群$(G,\cdot)$和$(H,\circ)$，若存在一个保群运算的双射$\phi:G\to H$，即对于任意$a,b\in G$</p>
-<script type="math/tex; mode=display">\phi(a\cdot b)=\phi(a)\circ\phi(b)</script><p>则称$G$和$H$<strong>同构(isomorphic)</strong>，记作$G\cong H$. $\phi$称为<strong>同构函数(isomorphism)</strong>。</p>
+        <h1 id="同构-Isomorphisms"><a href="#同构-Isomorphisms" class="headerlink" title="同构(Isomorphisms)"></a>同构(Isomorphisms)</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>对两个群$(G,\cdot)$和$(H,\circ)$，若存在一个保群运算的双射$\phi:G\to H$，即对于任意$a,b\in G$<br>$$\phi(a\cdot b)=\phi(a)\circ\phi(b)$$<br>则称$G$和$H$<strong>同构(isomorphic)</strong>，记作$G\cong H$. $\phi$称为<strong>同构函数(isomorphism)</strong>。</p>
 <h2 id="基本定理"><a href="#基本定理" class="headerlink" title="基本定理"></a>基本定理</h2><p><strong>定理9.6</strong>: Let $\phi: G\to H$ be an isomorphism of two groups. Then the following statements are true.</p>
 <ol>
 <li>$\phi^{-1}:H\to G$ is an isomorphism (废话)</li>
@@ -417,18 +416,18 @@ height:50vh;
 <h2 id="Cayley’s-Theorem"><a href="#Cayley’s-Theorem" class="headerlink" title="Cayley’s Theorem"></a>Cayley’s Theorem</h2><p><strong>定理9.12(Cayley定理)</strong>: Every group is isomorphic to a group of permutations. 任意群都与一个置换群同构。</p>
 <p>The isomorphism $g\mapsto \lambda_g$ is known as the <strong>left regular representation</strong>of G.</p>
 <h1 id="直积-Direct-Products"><a href="#直积-Direct-Products" class="headerlink" title="直积(Direct Products)"></a>直积(Direct Products)</h1><p>qlz管它叫直和</p>
-<h2 id="外直积"><a href="#外直积" class="headerlink" title="外直积"></a>外直积</h2><p>定义运算<script type="math/tex">G\times H: (g_1,h_1)(g_2,h_2)=(g1\cdot g_2, h_1\circ h_2)</script></p>
+<h2 id="外直积"><a href="#外直积" class="headerlink" title="外直积"></a>外直积</h2><p>定义运算$$G\times H: (g_1,h_1)(g_2,h_2)=(g1\cdot g_2, h_1\circ h_2)$$</p>
 <p><strong>命题9.13</strong>: Let $G$ and $H$ be groups. The set $G\times H$ is a group under the operation $(g_1,h_1)(g_2,h_2)=(g1\cdot g_2, h_1\circ h_2)$ where $g_1, g_2\in G$ and $h_1, h_2\in H$.</p>
 <p>群$G\times H$称为$G$和$H$的<strong>外直积(external direct product)</strong></p>
 <p><strong>定理9.17</strong>: 设$(g,h)\in G\times H$. 若$g$和$h$分别为有限阶$r$和$s$,则$(g,h)$在$G\times H$中的阶数是$r$和$s$的<strong>最小公倍数(least common multiple)</strong></p>
 <p><strong>推论9.18</strong>: 设$(g_1,…g_n)\in \prod G_i$. 若$g_i$在$G_i$中为有限阶$r_i$，则$(G-1,..g_n)$在$\prod G_i$中的阶数为$lcm(r_1,…r_n)$.</p>
-<p><strong>定理9.21</strong>: 群$\mathbb{Z}<em>m\times\mathbb{Z}_n$与$Z</em>{mn}$同构当且仅当$m,n$互质($gcd(m,n)=1$). (From定理9.17)</p>
-<p><strong>推论9.22</strong>: $n<em>1,…n_k$为正整数，则$\prod\limits</em>{i=1}^{k}\mathbb{Z}_{n_1…n_k}$当且仅当$gcd(i,j)=1$对任意$i\neq j$恒成立。</p>
+<p><strong>定理9.21</strong>: 群$\mathbb{Z}_m\times\mathbb{Z}<em>n$与$Z</em>{mn}$同构当且仅当$m,n$互质($gcd(m,n)=1$). (From定理9.17)</p>
+<p><strong>推论9.22</strong>: $n_1,…n_k$为正整数，则$\prod\limits_{i=1}^{k}\mathbb{Z}_{n_1…n_k}$当且仅当$gcd(i,j)=1$对任意$i\neq j$恒成立。</p>
 <h2 id="内直积-Internal-Direct-Product"><a href="#内直积-Internal-Direct-Product" class="headerlink" title="内直积(Internal Direct Product)"></a>内直积(Internal Direct Product)</h2><p>外直积把小群组建成大群，内直积把大群打碎成小群</p>
 <p>群$G$拥有子群$H,K$满足以下条件:</p>
 <ul>
-<li>$G=HK=\{hk:h\in H, k\in K\}$</li>
-<li>$H\cap K=\{e\}$</li>
+<li>$G=HK={hk:h\in H, k\in K}$</li>
+<li>$H\cap K={e}$</li>
 <li>$hk=kh$ for all $k\in K$ and $h\in H$</li>
 </ul>
 <p>称$G$是$H$和$K$的<strong>内直积</strong></p>
@@ -436,8 +435,8 @@ height:50vh;
 <p><strong>定理9.27</strong>: 设$G$是其子群$H$和$K$的内直积，则$G$与$H\times K$同构。(外直积群与内直积群同构)</p>
 <p>推广到多维：</p>
 <ul>
-<li>$G=H_1H_2…H_n=\{h_1h_2…h_n:h_i\in H_i\}$</li>
-<li>$H<em>i\cap\left\langle \cup</em>{j\neq i}H_j\right\rangle=\{e\}$</li>
+<li>$G=H_1H_2…H_n={h_1h_2…h_n:h_i\in H_i}$</li>
+<li>$H_i\cap\left\langle \cup_{j\neq i}H_j\right\rangle={e}$</li>
 <li>$H_ih_j=h_jh_i$ for all $h_i\in H_i$ and $h_j\in H_j$</li>
 </ul>
 <p><strong>定理9.29</strong>: 若$G$是其子集$H_i(i=1,2,…n)$的内直积，则$G$与$\prod_i H_i$同构</p>
@@ -461,17 +460,17 @@ height:50vh;
 <li>若$e$是$G_1$的单位元，则$e$是$G_2$的单位元</li>
 <li>对于任意$g\in G_1$, $\phi(g^{-1})=[\phi(g)]^{-1}$</li>
 <li>若$H_1$是$G_1$的子群，则$\phi(H_2)$是$G_2$的子群</li>
-<li>若$H_2$是$G_2$的子群，则$\phi^{-1}(H_2)=\{g\in G_1: \phi(g)\in H_2\}$是$G_1$的子群。此外，若$H_2$是$G_2$的正规子群，则$\phi^{-1}(H_2)$是$G_1$的正规子群</li>
+<li>若$H_2$是$G_2$的子群，则$\phi^{-1}(H_2)={g\in G_1: \phi(g)\in H_2}$是$G_1$的子群。此外，若$H_2$是$G_2$的正规子群，则$\phi^{-1}(H_2)$是$G_1$的正规子群</li>
 </ol>
-<p>由命题11.4知，$\phi^{-1}(\{e\})$是$G$的子群，这个子群被称为$\phi$的<strong>核(kernel)</strong>,记为$ker\phi$. 该子群是正规的。</p>
+<p>由命题11.4知，$\phi^{-1}({e})$是$G$的子群，这个子群被称为$\phi$的<strong>核(kernel)</strong>,记为$ker\phi$. 该子群是正规的。</p>
 <p><strong>定理11.5</strong>： 设$\phi:G\to H$是群的同态函数，则$\phi$的核是$G$的一个正规子群<br>潜台词：对于每一个同态函数都能找到一个正规子群$ker\phi$</p>
 <p>核函数可以用来推测两个群间是否存在同态函数。(e.g. Example11.9 $\mathbb{Z}<em>7$与$\mathbb{Z}</em>{12}$)</p>
-<h1 id="同态定理"><a href="#同态定理" class="headerlink" title="同态定理"></a>同态定理</h1><p>设$H$是$G$的正规子群。定义<strong>自然同态函数</strong>或<strong>规范同态函数</strong>(<strong>natural</strong> or <strong>canonical homomorphism</strong>) <script type="math/tex">\phi:G\to G/H</script>为<script type="math/tex">\phi(g)=gH</script><br>该同态函数的核为$H$</p>
+<h1 id="同态定理"><a href="#同态定理" class="headerlink" title="同态定理"></a>同态定理</h1><p>设$H$是$G$的正规子群。定义<strong>自然同态函数</strong>或<strong>规范同态函数</strong>(<strong>natural</strong> or <strong>canonical homomorphism</strong>) $$\phi:G\to G/H$$为$$\phi(g)=gH$$<br>该同态函数的核为$H$</p>
 <p><strong>定理11.10(第一同态定理)</strong>:  若$\varphi:G\to H$是核为$K$的同态函数， 则$K$是$G$的正规子群。设$\phi:G\to G/K$是规范同态函数。则存在唯一的同构函数$\eta:G/K\to\varphi(G)$使得$\varphi=\eta\phi$<br>规范同态函数产生的商群与原同态函数的像同构</p>
-<p><strong>定理11.12(第二同态定理)</strong>: 设$H$是$G$的子群(不需要正规)，$N$是$G$的正规子群，则$HN$是$G$的子群，$H\cap N$是$H$的正规子群，且</p>
-<script type="math/tex; mode=display">H/H\cap N\cong HN/N</script><p><strong>定理11.13(一致性定理)</strong>: 设$N$是$G$的正规子群，则$H\mapsto H/N$是<strong>包含$N$的子群$H$</strong>的集合与<strong>$G/N$的子群</strong>的集合间的一对一关系。此外，包含$N$的$G$的正规子群与$G/N$的正规子群相对应。</p>
+<p><strong>定理11.12(第二同态定理)</strong>: 设$H$是$G$的子群(不需要正规)，$N$是$G$的正规子群，则$HN$是$G$的子群，$H\cap N$是$H$的正规子群，且<br>$$H/H\cap N\cong HN/N$$</p>
+<p><strong>定理11.13(一致性定理)</strong>: 设$N$是$G$的正规子群，则$H\mapsto H/N$是<strong>包含$N$的子群$H$</strong>的集合与<strong>$G/N$的子群</strong>的集合间的一对一关系。此外，包含$N$的$G$的正规子群与$G/N$的正规子群相对应。</p>
 <p><img src="/2019/03/14/ps-4-4-isomorphism/corr.png" alt="wiki上的解释"></p>
-<p><strong>定理11.14(第三同构定理)</strong>: 设$N$和$H$是$G$的正规子群满足$N\subseteq H$,则<script type="math/tex">G/H\cong\frac{G/N}{H/N}</script>. (可以当成分数来直观理解)</p>
+<p><strong>定理11.14(第三同构定理)</strong>: 设$N$和$H$是$G$的正规子群满足$N\subseteq H$,则$$G/H\cong\frac{G/N}{H/N}$$. (可以当成分数来直观理解)</p>
 
     </article>
     <!-- license  -->
@@ -1471,6 +1470,42 @@ top:50vh;
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
         Total : 54
@@ -1489,12 +1524,12 @@ top:50vh;
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">04/28</span><a class="archive-post-title" href= "/2019/04/28/ps-4-10-Formal-description-of-problems/" >难问题求解-问题的形式化描述</a>
+            <span class="archive-post-date">05/25</span><a class="archive-post-title" href= "/2019/05/25/ps-4-13-Randomized-Algorithms/" >难问题求解学习笔记-随机算法</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">04/20</span><a class="archive-post-title" href= "/2019/04/20/ps-4-9-algebraic-coding/" >算法导论学习笔记-代数编码</a>
+            <span class="archive-post-date">05/18</span><a class="archive-post-title" href= "/2019/05/18/ps-4-12-Approximation-Algorithms/" >难问题求解学习笔记-近似算法</a>
         </li>
     
     
@@ -1693,12 +1728,12 @@ top:50vh;
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">10/04</span><a class="archive-post-title" href= "/2018/10/04/pa-inspirations/" >做pa的时候可能会用到的操作</a>
+            <span class="archive-post-date">10/04</span><a class="archive-post-title" href= "/2018/10/04/PA1-report/" >PA1实验报告</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">10/04</span><a class="archive-post-title" href= "/2018/10/04/PA1-report/" >PA1实验报告</a>
+            <span class="archive-post-date">10/04</span><a class="archive-post-title" href= "/2018/10/04/pa-inspirations/" >做pa的时候可能会用到的操作</a>
         </li>
     
     
@@ -1773,27 +1808,31 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="Flags"><span class="iconfont-archer">&#xe606;</span>Flags</span>
     
-        <span class="sidebar-tag-name" data-tags="Math Modeling"><span class="iconfont-archer">&#xe606;</span>Math Modeling</span>
-    
         <span class="sidebar-tag-name" data-tags="Notes"><span class="iconfont-archer">&#xe606;</span>Notes</span>
     
         <span class="sidebar-tag-name" data-tags="pa"><span class="iconfont-archer">&#xe606;</span>pa</span>
     
         <span class="sidebar-tag-name" data-tags="ICS"><span class="iconfont-archer">&#xe606;</span>ICS</span>
     
-        <span class="sidebar-tag-name" data-tags="Machine Learning"><span class="iconfont-archer">&#xe606;</span>Machine Learning</span>
+        <span class="sidebar-tag-name" data-tags="Math Modeling"><span class="iconfont-archer">&#xe606;</span>Math Modeling</span>
     
-        <span class="sidebar-tag-name" data-tags="Assembly Language"><span class="iconfont-archer">&#xe606;</span>Assembly Language</span>
+        <span class="sidebar-tag-name" data-tags="Machine Learning"><span class="iconfont-archer">&#xe606;</span>Machine Learning</span>
     
         <span class="sidebar-tag-name" data-tags="Problem Solving"><span class="iconfont-archer">&#xe606;</span>Problem Solving</span>
     
-        <span class="sidebar-tag-name" data-tags="CLRS"><span class="iconfont-archer">&#xe606;</span>CLRS</span>
+        <span class="sidebar-tag-name" data-tags="Assembly Language"><span class="iconfont-archer">&#xe606;</span>Assembly Language</span>
     
-        <span class="sidebar-tag-name" data-tags="greedy algorithm"><span class="iconfont-archer">&#xe606;</span>greedy algorithm</span>
+        <span class="sidebar-tag-name" data-tags="CLRS"><span class="iconfont-archer">&#xe606;</span>CLRS</span>
     
         <span class="sidebar-tag-name" data-tags="dynamic programming"><span class="iconfont-archer">&#xe606;</span>dynamic programming</span>
     
+        <span class="sidebar-tag-name" data-tags="greedy algorithm"><span class="iconfont-archer">&#xe606;</span>greedy algorithm</span>
+    
         <span class="sidebar-tag-name" data-tags="amortized analysis"><span class="iconfont-archer">&#xe606;</span>amortized analysis</span>
+    
+        <span class="sidebar-tag-name" data-tags="Disjoint Sets"><span class="iconfont-archer">&#xe606;</span>Disjoint Sets</span>
+    
+        <span class="sidebar-tag-name" data-tags="Data Structure"><span class="iconfont-archer">&#xe606;</span>Data Structure</span>
     
         <span class="sidebar-tag-name" data-tags="Single Source Shortest Path"><span class="iconfont-archer">&#xe606;</span>Single Source Shortest Path</span>
     
@@ -1802,10 +1841,6 @@ top:50vh;
         <span class="sidebar-tag-name" data-tags="Dijkstra"><span class="iconfont-archer">&#xe606;</span>Dijkstra</span>
     
         <span class="sidebar-tag-name" data-tags="Graph Algorithms"><span class="iconfont-archer">&#xe606;</span>Graph Algorithms</span>
-    
-        <span class="sidebar-tag-name" data-tags="Disjoint Sets"><span class="iconfont-archer">&#xe606;</span>Disjoint Sets</span>
-    
-        <span class="sidebar-tag-name" data-tags="Data Structure"><span class="iconfont-archer">&#xe606;</span>Data Structure</span>
     
         <span class="sidebar-tag-name" data-tags="Graph Theory"><span class="iconfont-archer">&#xe606;</span>Graph Theory</span>
     
@@ -1823,11 +1858,11 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="Ics"><span class="iconfont-archer">&#xe606;</span>Ics</span>
     
-        <span class="sidebar-tag-name" data-tags="MATLAB"><span class="iconfont-archer">&#xe606;</span>MATLAB</span>
-    
         <span class="sidebar-tag-name" data-tags="Matchings"><span class="iconfont-archer">&#xe606;</span>Matchings</span>
     
         <span class="sidebar-tag-name" data-tags="Factorization"><span class="iconfont-archer">&#xe606;</span>Factorization</span>
+    
+        <span class="sidebar-tag-name" data-tags="MATLAB"><span class="iconfont-archer">&#xe606;</span>MATLAB</span>
     
         <span class="sidebar-tag-name" data-tags="Linux"><span class="iconfont-archer">&#xe606;</span>Linux</span>
     
@@ -1835,11 +1870,11 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="Group Theory"><span class="iconfont-archer">&#xe606;</span>Group Theory</span>
     
+        <span class="sidebar-tag-name" data-tags="Python"><span class="iconfont-archer">&#xe606;</span>Python</span>
+    
         <span class="sidebar-tag-name" data-tags="regular expressions"><span class="iconfont-archer">&#xe606;</span>regular expressions</span>
     
         <span class="sidebar-tag-name" data-tags="linux"><span class="iconfont-archer">&#xe606;</span>linux</span>
-    
-        <span class="sidebar-tag-name" data-tags="Python"><span class="iconfont-archer">&#xe606;</span>Python</span>
     
         <span class="sidebar-tag-name" data-tags="markdown"><span class="iconfont-archer">&#xe606;</span>markdown</span>
     

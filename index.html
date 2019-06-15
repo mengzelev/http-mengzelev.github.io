@@ -354,21 +354,19 @@ height:50vh;
     
     
     <article class="index-post">
-        <a class="abstract-title" href = "/2019/04/28/ps-4-10-Formal-description-of-problems/" >
+        <a class="abstract-title" href = "/2019/05/25/ps-4-13-Randomized-Algorithms/" >
             
-                <span>难问题求解-问题的形式化描述</span>
+                <span>难问题求解学习笔记-随机算法</span>
         </a>
         <div class="abstract-content">
-            
-参考书目：Juraj Hromkovic: Algorithmics for Hard Problems - Introduction to Combinatorial Optimization, Randomization, Approximation, and Heuristics, 2nd ed. Springer, 2004
-
-字母表，单词和语言定义2.3.1.1：任意非空有限集都可以被称为字母表(alphabet).字母表$\Sigma$中的任意元素都可以被称为$\Sigma$的符号
-定义2.3.1.2：设$\Sigma$是字母表。$\Sigma$上的单词(A word ov...
+            前言输出为随机变量的算法称为蒙特卡洛算法(Monte Carlo)输出总是正确的但时间复杂度为随机变量的算法称为拉斯维加斯算法(Las Vegas)
+概率论理论引入了随机算法$A$与确定输入$x$构成的随机试验。试验可以被描述为概率空间$(S_{A,x},Prob)$，其中$S_{A,x}={C\mid C \text{is a computation (radom run) of } A \text{ on } x}$，$Prob$是$S_{A,x}$上的概率分布。
+基础一种新的复杂度度量$Random_A(x)$: 对于所有$A$在$x$上的随机计算中使用的random bits的最...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
             <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/04/28</span>
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/05/25</span>
             </div>
             <!-- tags  -->
             
@@ -381,29 +379,18 @@ height:50vh;
     
     
     <article class="index-post">
-        <a class="abstract-title" href = "/2019/04/20/ps-4-9-algebraic-coding/" >
+        <a class="abstract-title" href = "/2019/05/18/ps-4-12-Approximation-Algorithms/" >
             
-                <span>算法导论学习笔记-代数编码</span>
+                <span>难问题求解学习笔记-近似算法</span>
         </a>
         <div class="abstract-content">
-            检错码与纠错码数电你都学过了
-信仰
-
-传送错误是非常罕见的
-它们在每一位出现是独立的（概率可以相乘）
-采用最大可能译码：每一串编码都被翻译成离它最近的字
-
-血的教训： 奇（偶）校验是当1的个数为奇（偶）数时该位为0.
-
-定理8.7: 传送$n$位二进制编码，每一位出错的概率为$q=1-p$，则正好有$k$位出错的概率为$(_k^n)q^kp^{n-k}$
-划区编码定义：一个$(n,m)-$blocking code 包含了编码函数$E:\mathbb{Z}_2^m\to\mathbb{Z}_2^n$和译码函数$D:\mathbb{Z}_2^n\to\mathbb{Z}_2^m$ 
-
-$E...
+            概念近似算法是能提供最优化问题的可行解的算法，所提供的解的质量不会与最优解相差太多
+形式化定义：$U={\Sigma_I, \Sigma_O, L, L_I, \mathcal{M}, cost, goal}$是一个最优化问题，$A$是$U$的consistent algorithm. 对任意$x\in L_I$, $A$在$x$上的相对误差(relative error)$\varepsilon_A(x)$定义为$$\varepsilon_A(x)=\frac{|cost(A(x))-Opt_U(x)|}{Opt_U(x)}$$对任意$x\in\mathbb{N}$,定义$A$的相对误...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
             <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/04/20</span>
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/05/18</span>
             </div>
             <!-- tags  -->
             
@@ -485,11 +472,11 @@ $E...
         <div class="abstract-content">
             RSA公钥加密系统每个参与者都有一把公钥($P$)和密钥($S$)
 $\mathcal{D}$表示允许信息的集合，要求公钥与密钥指定一种从$\mathcal{D}$到自身的一一对应的函数。Alice的公钥函数$P_A()$和密钥函数$S_A()$都是$\mathcal{D}$的排列
-系统中任何参与者的公钥与密钥都是匹配对，指定函数互为反函数，对任何消息$M\in \mathcal{D}$，有
-M=S_A(P_A(M))M=P_A(S_A(M))加密过程
+系统中任何参与者的公钥与密钥都是匹配对，指定函数互为反函数，对任何消息$M\in \mathcal{D}$，有$$M=S_A(P_A(M))$$$$M=P_A(S_A(M))$$
+加密过程
 Bob取得Alice的公钥$P_A$
 Bob计算出相应与$M$的密文$C=P_A(M)$，并把$C$发送给Alice
-当Alice收到密...
+当...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
@@ -618,11 +605,10 @@ $\Sigma^*$: 包含所有有限长度的字符串的集合
                 <span>问求学习笔记-群同构基本定理与正规子群</span>
         </a>
         <div class="abstract-content">
-            同构(Isomorphisms)定义对两个群$(G,\cdot)$和$(H,\circ)$，若存在一个保群运算的双射$\phi:G\to H$，即对于任意$a,b\in G$
-\phi(a\cdot b)=\phi(a)\circ\phi(b)则称$G$和$H$同构(isomorphic)，记作$G\cong H$. $\phi$称为同构函数(isomorphism)。
+            同构(Isomorphisms)定义对两个群$(G,\cdot)$和$(H,\circ)$，若存在一个保群运算的双射$\phi:G\to H$，即对于任意$a,b\in G$$$\phi(a\cdot b)=\phi(a)\circ\phi(b)$$则称$G$和$H$同构(isomorphic)，记作$G\cong H$. $\phi$称为同构函数(isomorphism)。
 基本定理定理9.6: Let $\phi: G\to H$ be an isomorphism of two groups. Then the following statements are true.
 
-$\phi^...
+$\p...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
@@ -1687,6 +1673,42 @@ Cycle NotationA permutation $\sigma\in S_X$ is a cycle of length $k$ if there ex
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
         Total : 54
@@ -1705,12 +1727,12 @@ Cycle NotationA permutation $\sigma\in S_X$ is a cycle of length $k$ if there ex
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">04/28</span><a class="archive-post-title" href= "/2019/04/28/ps-4-10-Formal-description-of-problems/" >难问题求解-问题的形式化描述</a>
+            <span class="archive-post-date">05/25</span><a class="archive-post-title" href= "/2019/05/25/ps-4-13-Randomized-Algorithms/" >难问题求解学习笔记-随机算法</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">04/20</span><a class="archive-post-title" href= "/2019/04/20/ps-4-9-algebraic-coding/" >算法导论学习笔记-代数编码</a>
+            <span class="archive-post-date">05/18</span><a class="archive-post-title" href= "/2019/05/18/ps-4-12-Approximation-Algorithms/" >难问题求解学习笔记-近似算法</a>
         </li>
     
     
@@ -1909,12 +1931,12 @@ Cycle NotationA permutation $\sigma\in S_X$ is a cycle of length $k$ if there ex
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">10/04</span><a class="archive-post-title" href= "/2018/10/04/pa-inspirations/" >做pa的时候可能会用到的操作</a>
+            <span class="archive-post-date">10/04</span><a class="archive-post-title" href= "/2018/10/04/PA1-report/" >PA1实验报告</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">10/04</span><a class="archive-post-title" href= "/2018/10/04/PA1-report/" >PA1实验报告</a>
+            <span class="archive-post-date">10/04</span><a class="archive-post-title" href= "/2018/10/04/pa-inspirations/" >做pa的时候可能会用到的操作</a>
         </li>
     
     
@@ -1989,27 +2011,31 @@ Cycle NotationA permutation $\sigma\in S_X$ is a cycle of length $k$ if there ex
     
         <span class="sidebar-tag-name" data-tags="Flags"><span class="iconfont-archer">&#xe606;</span>Flags</span>
     
-        <span class="sidebar-tag-name" data-tags="Math Modeling"><span class="iconfont-archer">&#xe606;</span>Math Modeling</span>
-    
         <span class="sidebar-tag-name" data-tags="Notes"><span class="iconfont-archer">&#xe606;</span>Notes</span>
     
         <span class="sidebar-tag-name" data-tags="pa"><span class="iconfont-archer">&#xe606;</span>pa</span>
     
         <span class="sidebar-tag-name" data-tags="ICS"><span class="iconfont-archer">&#xe606;</span>ICS</span>
     
-        <span class="sidebar-tag-name" data-tags="Machine Learning"><span class="iconfont-archer">&#xe606;</span>Machine Learning</span>
+        <span class="sidebar-tag-name" data-tags="Math Modeling"><span class="iconfont-archer">&#xe606;</span>Math Modeling</span>
     
-        <span class="sidebar-tag-name" data-tags="Assembly Language"><span class="iconfont-archer">&#xe606;</span>Assembly Language</span>
+        <span class="sidebar-tag-name" data-tags="Machine Learning"><span class="iconfont-archer">&#xe606;</span>Machine Learning</span>
     
         <span class="sidebar-tag-name" data-tags="Problem Solving"><span class="iconfont-archer">&#xe606;</span>Problem Solving</span>
     
-        <span class="sidebar-tag-name" data-tags="CLRS"><span class="iconfont-archer">&#xe606;</span>CLRS</span>
+        <span class="sidebar-tag-name" data-tags="Assembly Language"><span class="iconfont-archer">&#xe606;</span>Assembly Language</span>
     
-        <span class="sidebar-tag-name" data-tags="greedy algorithm"><span class="iconfont-archer">&#xe606;</span>greedy algorithm</span>
+        <span class="sidebar-tag-name" data-tags="CLRS"><span class="iconfont-archer">&#xe606;</span>CLRS</span>
     
         <span class="sidebar-tag-name" data-tags="dynamic programming"><span class="iconfont-archer">&#xe606;</span>dynamic programming</span>
     
+        <span class="sidebar-tag-name" data-tags="greedy algorithm"><span class="iconfont-archer">&#xe606;</span>greedy algorithm</span>
+    
         <span class="sidebar-tag-name" data-tags="amortized analysis"><span class="iconfont-archer">&#xe606;</span>amortized analysis</span>
+    
+        <span class="sidebar-tag-name" data-tags="Disjoint Sets"><span class="iconfont-archer">&#xe606;</span>Disjoint Sets</span>
+    
+        <span class="sidebar-tag-name" data-tags="Data Structure"><span class="iconfont-archer">&#xe606;</span>Data Structure</span>
     
         <span class="sidebar-tag-name" data-tags="Single Source Shortest Path"><span class="iconfont-archer">&#xe606;</span>Single Source Shortest Path</span>
     
@@ -2018,10 +2044,6 @@ Cycle NotationA permutation $\sigma\in S_X$ is a cycle of length $k$ if there ex
         <span class="sidebar-tag-name" data-tags="Dijkstra"><span class="iconfont-archer">&#xe606;</span>Dijkstra</span>
     
         <span class="sidebar-tag-name" data-tags="Graph Algorithms"><span class="iconfont-archer">&#xe606;</span>Graph Algorithms</span>
-    
-        <span class="sidebar-tag-name" data-tags="Disjoint Sets"><span class="iconfont-archer">&#xe606;</span>Disjoint Sets</span>
-    
-        <span class="sidebar-tag-name" data-tags="Data Structure"><span class="iconfont-archer">&#xe606;</span>Data Structure</span>
     
         <span class="sidebar-tag-name" data-tags="Graph Theory"><span class="iconfont-archer">&#xe606;</span>Graph Theory</span>
     
@@ -2039,11 +2061,11 @@ Cycle NotationA permutation $\sigma\in S_X$ is a cycle of length $k$ if there ex
     
         <span class="sidebar-tag-name" data-tags="Ics"><span class="iconfont-archer">&#xe606;</span>Ics</span>
     
-        <span class="sidebar-tag-name" data-tags="MATLAB"><span class="iconfont-archer">&#xe606;</span>MATLAB</span>
-    
         <span class="sidebar-tag-name" data-tags="Matchings"><span class="iconfont-archer">&#xe606;</span>Matchings</span>
     
         <span class="sidebar-tag-name" data-tags="Factorization"><span class="iconfont-archer">&#xe606;</span>Factorization</span>
+    
+        <span class="sidebar-tag-name" data-tags="MATLAB"><span class="iconfont-archer">&#xe606;</span>MATLAB</span>
     
         <span class="sidebar-tag-name" data-tags="Linux"><span class="iconfont-archer">&#xe606;</span>Linux</span>
     
@@ -2051,11 +2073,11 @@ Cycle NotationA permutation $\sigma\in S_X$ is a cycle of length $k$ if there ex
     
         <span class="sidebar-tag-name" data-tags="Group Theory"><span class="iconfont-archer">&#xe606;</span>Group Theory</span>
     
+        <span class="sidebar-tag-name" data-tags="Python"><span class="iconfont-archer">&#xe606;</span>Python</span>
+    
         <span class="sidebar-tag-name" data-tags="regular expressions"><span class="iconfont-archer">&#xe606;</span>regular expressions</span>
     
         <span class="sidebar-tag-name" data-tags="linux"><span class="iconfont-archer">&#xe606;</span>linux</span>
-    
-        <span class="sidebar-tag-name" data-tags="Python"><span class="iconfont-archer">&#xe606;</span>Python</span>
     
         <span class="sidebar-tag-name" data-tags="markdown"><span class="iconfont-archer">&#xe606;</span>markdown</span>
     

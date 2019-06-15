@@ -405,9 +405,7 @@ height:50vh;
 <p>push &nbsp;&nbsp; 压栈，等价于sub+mov</p>
 <p>pop  &nbsp;&nbsp; 退栈，等价于mov+add</p>
 <p>按源操作数的长度加上b,w,l后缀，分别表示1、2、4字节。(movz,movs需要双后缀)</p>
-<center>
-<img src="/2018/08/30/asm2/mov.png" height="400">
-</center>
+<center><br><img src="/2018/08/30/asm2/mov.png" height="400"><br></center>
 
 <p>见<a href="#lealmov">leal与movl的区别</a></p>
 <p><strong>指令后缀、操作数长度、目标寄存器宽度必须要一致！！</strong></p>
@@ -416,14 +414,10 @@ height:50vh;
 <li>寄存器 Reg &nbsp;&nbsp; 加%前缀，e.g.<code>%eax,%ebx,%esp</code></li>
 <li>存储器 Mem &nbsp;&nbsp; 寻址操作</li>
 </ul>
-<center>
-<img src="/2018/08/30/asm2/memaddr.png" height="400">
-</center>
+<center><br><img src="/2018/08/30/asm2/memaddr.png" height="400"><br></center>
 
 <p><strong>不能在一条指令里实现存储器到存储器的传送！！</strong>要实现存储器间的传送必须经过寄存器。</p>
-<h2 id="寄存器"><a href="#寄存器" class="headerlink" title="寄存器"></a>寄存器</h2><center>
-<img src="/2018/08/30/asm2/regs.png" height="400">
-</center>
+<h2 id="寄存器"><a href="#寄存器" class="headerlink" title="寄存器"></a>寄存器</h2><center><br><img src="/2018/08/30/asm2/regs.png" height="400"><br></center>
 
 <p>所有寄存器都可以单独读取低16位</p>
 <p>只有%eax,%ecx,%edx,%ebx可以读取低8位（x字辈）</p>
@@ -439,21 +433,16 @@ height:50vh;
 <pre><code>//R[%edx]=x
 movl 7(%edx,%edx,4),%eax    //R[%eax]=M[5x+7]
 leal 7(%edx,%edx,4),%eax    //R[%eax]=5x+7
-</code></pre><h1 id="算术和逻辑操作"><a href="#算术和逻辑操作" class="headerlink" title="算术和逻辑操作"></a>算术和逻辑操作</h1><h2 id="看表"><a href="#看表" class="headerlink" title="看表"></a>看表</h2><center>
-<img src="/2018/08/30/asm2/arith.png" height="500">
-</center>
+</code></pre><h1 id="算术和逻辑操作"><a href="#算术和逻辑操作" class="headerlink" title="算术和逻辑操作"></a>算术和逻辑操作</h1><h2 id="看表"><a href="#看表" class="headerlink" title="看表"></a>看表</h2><center><br><img src="/2018/08/30/asm2/arith.png" height="500"><br></center>
 
 <p><strong>※使用时也需要根据操作数长度添加后缀</strong></p>
 <h2 id="特殊操作"><a href="#特殊操作" class="headerlink" title="特殊操作"></a>特殊操作</h2><p>imull &nbsp;&nbsp; 带符号乘法指令，只有一个操作数时，另一个乘数隐含在%eax中，乘积的高32位放入%edx,低32位存入%eax</p>
 <p>idivl &nbsp;&nbsp; 带符号除法指令，只有一个操作数时，%edx-%eax为被除数，操作数为除数，商存入%eax,余数存入%edx</p>
 <p>还有无符号版本mull和divl</p>
 <p>cltd 符号扩展指令，将%eax中的数符号扩展至%edx成为64位,经常用于idivl的准备工作</p>
-<center>
-<img src="/2018/08/30/asm2/sparith.png" height="350">
-</center>
+<center><br><img src="/2018/08/30/asm2/sparith.png" height="350"><br></center>
 
-<h2 id="关于imul"><a href="#关于imul" class="headerlink" title="关于imul"></a>关于imul</h2><div class="table-container">
-<table>
+<h2 id="关于imul"><a href="#关于imul" class="headerlink" title="关于imul"></a>关于imul</h2><table>
 <thead>
 <tr>
 <th style="text-align:center">操作数个数</th>
@@ -483,30 +472,21 @@ leal 7(%edx,%edx,4),%eax    //R[%eax]=5x+7
 </tr>
 </tbody>
 </table>
-</div>
 <p>具体还是看老师ppt截图吧（侵权删）</p>
-<center>
-<img src="/2018/08/30/asm2/imull.png" height="400">
-</center>
+<center><br><img src="/2018/08/30/asm2/imull.png" height="400"><br></center>
 
 
-<h1 id="条件控制指令"><a href="#条件控制指令" class="headerlink" title="条件控制指令"></a>条件控制指令</h1><h2 id="比较与测试"><a href="#比较与测试" class="headerlink" title="比较与测试"></a>比较与测试</h2><center>
-<img src="/2018/08/30/asm2/cmp.png" height="350">
-</center>
+<h1 id="条件控制指令"><a href="#条件控制指令" class="headerlink" title="条件控制指令"></a>条件控制指令</h1><h2 id="比较与测试"><a href="#比较与测试" class="headerlink" title="比较与测试"></a>比较与测试</h2><center><br><img src="/2018/08/30/asm2/cmp.png" height="350"><br></center>
 
 <p>cmp和test指令实际上是用减法和按位与操作实现的。</p>
 <p>注意两个操作数的先后顺序与实际是<strong>相反</strong>的</p>
 <h2 id="条件置位指令setX"><a href="#条件置位指令setX" class="headerlink" title="条件置位指令setX"></a>条件置位指令setX</h2><p>setX指令根据相应的条件标志位将某一位置0或置1。</p>
 <p>有符号数的大小关系用greater/less表示，无符号数的用above/below表示。</p>
-<center>
-<img src="/2018/08/30/asm2/set.png" height="400">
-</center>
+<center><br><img src="/2018/08/30/asm2/set.png" height="400"><br></center>
 
 
 <h2 id="条件跳转指令jmpX"><a href="#条件跳转指令jmpX" class="headerlink" title="条件跳转指令jmpX"></a>条件跳转指令jmpX</h2><p>基本同setX</p>
-<center>
-<img src="/2018/08/30/asm2/jmp.png" height="400">
-</center>
+<center><br><img src="/2018/08/30/asm2/jmp.png" height="400"><br></center>
 
 <p>间接跳转：跳转的目标是从寄存器或存储器中读取的，e.g.<code>jmp *%eax</code>表示跳转至R[%eax]存储的地址位置</p>
 <p>跳转地址分为<strong>绝对地址</strong>和<a href="#pc-r"><strong>相对地址(PC-relative addressing)</strong></a>。</p>
@@ -519,9 +499,7 @@ leal 7(%edx,%edx,4),%eax    //R[%eax]=5x+7
 XXXXXXX=0x8048291+0x05=0x8048296
 </code></pre><h2 id="条件传送指令cmovX"><a href="#条件传送指令cmovX" class="headerlink" title="条件传送指令cmovX"></a>条件传送指令cmovX</h2><p>满足某个条件时执行mov操作</p>
 <p><strong>※必须与cmp操作连用，比较的不是cmov指令的两个操作数而是cmp的两个操作数</strong></p>
-<center>
-<img src="/2018/08/30/asm2/cmov.png" height="400">
-</center>
+<center><br><img src="/2018/08/30/asm2/cmov.png" height="400"><br></center>
 
 <h2 id="条件分支语句的编译"><a href="#条件分支语句的编译" class="headerlink" title="条件分支语句的编译"></a>条件分支语句的编译</h2><p>if-else语句通常按goto方式执行</p>
 <p>一般翻译思路为:</p>
@@ -537,9 +515,7 @@ goto done
 false:else-statement
 done:
 </code></pre><p>可以参考下图中示例：</p>
-<center>
-<img src="/2018/08/30/asm2/ifelse.png" height="600">
-</center>
+<center><br><img src="/2018/08/30/asm2/ifelse.png" height="600"><br></center>
 
 
 <h1 id="循环控制语句"><a href="#循环控制语句" class="headerlink" title="循环控制语句"></a>循环控制语句</h1><h2 id="do-while循环"><a href="#do-while循环" class="headerlink" title="do-while循环"></a>do-while循环</h2><p>一般循环语句都最终翻译成do-while的形式</p>
@@ -550,9 +526,7 @@ while(test-expr)
 <pre><code>loop:
     body-statement
     if(test-expr) goto loop;
-</code></pre><center>
-<img src="/2018/08/30/asm2/dowhile.png" height="500">
-</center>
+</code></pre><center><br><img src="/2018/08/30/asm2/dowhile.png" height="500"><br></center>
 
 <h2 id="while循环"><a href="#while循环" class="headerlink" title="while循环"></a>while循环</h2><pre><code>while(test-expr)
     body-statement
@@ -575,10 +549,7 @@ done:
 </code></pre><h1 id="switch语句"><a href="#switch语句" class="headerlink" title="switch语句"></a>switch语句</h1><h2 id="跳跃表"><a href="#跳跃表" class="headerlink" title="跳跃表"></a>跳跃表</h2><p>跳跃表是一个数组，其中每个下标i对应一个代码段的地址<br><img src="/2018/08/30/asm2/jumplist.png" height="300"></p>
 <p>好处：执行一个switch语句的时间和case的数量无关<br>跳跃表一般被存放在内存的某个位置，可以调用gdb查看</p>
 <p>一大波截图预警</p>
-<center>
-<img src="/2018/08/30/asm2/switch1.png" height="1000">
-<img src="/2018/08/30/asm2/switch2.png" height="800">
-</center>
+<center><br><img src="/2018/08/30/asm2/switch1.png" height="1000"><br><img src="/2018/08/30/asm2/switch2.png" height="800"><br></center>
 
 
 <h1 id="作业二的教训"><a href="#作业二的教训" class="headerlink" title="作业二的教训"></a>作业二的教训</h1><hr>
@@ -1588,6 +1559,42 @@ top:50vh;
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
         Total : 54
@@ -1606,12 +1613,12 @@ top:50vh;
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">04/28</span><a class="archive-post-title" href= "/2019/04/28/ps-4-10-Formal-description-of-problems/" >难问题求解-问题的形式化描述</a>
+            <span class="archive-post-date">05/25</span><a class="archive-post-title" href= "/2019/05/25/ps-4-13-Randomized-Algorithms/" >难问题求解学习笔记-随机算法</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">04/20</span><a class="archive-post-title" href= "/2019/04/20/ps-4-9-algebraic-coding/" >算法导论学习笔记-代数编码</a>
+            <span class="archive-post-date">05/18</span><a class="archive-post-title" href= "/2019/05/18/ps-4-12-Approximation-Algorithms/" >难问题求解学习笔记-近似算法</a>
         </li>
     
     
@@ -1810,12 +1817,12 @@ top:50vh;
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">10/04</span><a class="archive-post-title" href= "/2018/10/04/pa-inspirations/" >做pa的时候可能会用到的操作</a>
+            <span class="archive-post-date">10/04</span><a class="archive-post-title" href= "/2018/10/04/PA1-report/" >PA1实验报告</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">10/04</span><a class="archive-post-title" href= "/2018/10/04/PA1-report/" >PA1实验报告</a>
+            <span class="archive-post-date">10/04</span><a class="archive-post-title" href= "/2018/10/04/pa-inspirations/" >做pa的时候可能会用到的操作</a>
         </li>
     
     
@@ -1890,27 +1897,31 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="Flags"><span class="iconfont-archer">&#xe606;</span>Flags</span>
     
-        <span class="sidebar-tag-name" data-tags="Math Modeling"><span class="iconfont-archer">&#xe606;</span>Math Modeling</span>
-    
         <span class="sidebar-tag-name" data-tags="Notes"><span class="iconfont-archer">&#xe606;</span>Notes</span>
     
         <span class="sidebar-tag-name" data-tags="pa"><span class="iconfont-archer">&#xe606;</span>pa</span>
     
         <span class="sidebar-tag-name" data-tags="ICS"><span class="iconfont-archer">&#xe606;</span>ICS</span>
     
-        <span class="sidebar-tag-name" data-tags="Machine Learning"><span class="iconfont-archer">&#xe606;</span>Machine Learning</span>
+        <span class="sidebar-tag-name" data-tags="Math Modeling"><span class="iconfont-archer">&#xe606;</span>Math Modeling</span>
     
-        <span class="sidebar-tag-name" data-tags="Assembly Language"><span class="iconfont-archer">&#xe606;</span>Assembly Language</span>
+        <span class="sidebar-tag-name" data-tags="Machine Learning"><span class="iconfont-archer">&#xe606;</span>Machine Learning</span>
     
         <span class="sidebar-tag-name" data-tags="Problem Solving"><span class="iconfont-archer">&#xe606;</span>Problem Solving</span>
     
-        <span class="sidebar-tag-name" data-tags="CLRS"><span class="iconfont-archer">&#xe606;</span>CLRS</span>
+        <span class="sidebar-tag-name" data-tags="Assembly Language"><span class="iconfont-archer">&#xe606;</span>Assembly Language</span>
     
-        <span class="sidebar-tag-name" data-tags="greedy algorithm"><span class="iconfont-archer">&#xe606;</span>greedy algorithm</span>
+        <span class="sidebar-tag-name" data-tags="CLRS"><span class="iconfont-archer">&#xe606;</span>CLRS</span>
     
         <span class="sidebar-tag-name" data-tags="dynamic programming"><span class="iconfont-archer">&#xe606;</span>dynamic programming</span>
     
+        <span class="sidebar-tag-name" data-tags="greedy algorithm"><span class="iconfont-archer">&#xe606;</span>greedy algorithm</span>
+    
         <span class="sidebar-tag-name" data-tags="amortized analysis"><span class="iconfont-archer">&#xe606;</span>amortized analysis</span>
+    
+        <span class="sidebar-tag-name" data-tags="Disjoint Sets"><span class="iconfont-archer">&#xe606;</span>Disjoint Sets</span>
+    
+        <span class="sidebar-tag-name" data-tags="Data Structure"><span class="iconfont-archer">&#xe606;</span>Data Structure</span>
     
         <span class="sidebar-tag-name" data-tags="Single Source Shortest Path"><span class="iconfont-archer">&#xe606;</span>Single Source Shortest Path</span>
     
@@ -1919,10 +1930,6 @@ top:50vh;
         <span class="sidebar-tag-name" data-tags="Dijkstra"><span class="iconfont-archer">&#xe606;</span>Dijkstra</span>
     
         <span class="sidebar-tag-name" data-tags="Graph Algorithms"><span class="iconfont-archer">&#xe606;</span>Graph Algorithms</span>
-    
-        <span class="sidebar-tag-name" data-tags="Disjoint Sets"><span class="iconfont-archer">&#xe606;</span>Disjoint Sets</span>
-    
-        <span class="sidebar-tag-name" data-tags="Data Structure"><span class="iconfont-archer">&#xe606;</span>Data Structure</span>
     
         <span class="sidebar-tag-name" data-tags="Graph Theory"><span class="iconfont-archer">&#xe606;</span>Graph Theory</span>
     
@@ -1940,11 +1947,11 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="Ics"><span class="iconfont-archer">&#xe606;</span>Ics</span>
     
-        <span class="sidebar-tag-name" data-tags="MATLAB"><span class="iconfont-archer">&#xe606;</span>MATLAB</span>
-    
         <span class="sidebar-tag-name" data-tags="Matchings"><span class="iconfont-archer">&#xe606;</span>Matchings</span>
     
         <span class="sidebar-tag-name" data-tags="Factorization"><span class="iconfont-archer">&#xe606;</span>Factorization</span>
+    
+        <span class="sidebar-tag-name" data-tags="MATLAB"><span class="iconfont-archer">&#xe606;</span>MATLAB</span>
     
         <span class="sidebar-tag-name" data-tags="Linux"><span class="iconfont-archer">&#xe606;</span>Linux</span>
     
@@ -1952,11 +1959,11 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="Group Theory"><span class="iconfont-archer">&#xe606;</span>Group Theory</span>
     
+        <span class="sidebar-tag-name" data-tags="Python"><span class="iconfont-archer">&#xe606;</span>Python</span>
+    
         <span class="sidebar-tag-name" data-tags="regular expressions"><span class="iconfont-archer">&#xe606;</span>regular expressions</span>
     
         <span class="sidebar-tag-name" data-tags="linux"><span class="iconfont-archer">&#xe606;</span>linux</span>
-    
-        <span class="sidebar-tag-name" data-tags="Python"><span class="iconfont-archer">&#xe606;</span>Python</span>
     
         <span class="sidebar-tag-name" data-tags="markdown"><span class="iconfont-archer">&#xe606;</span>markdown</span>
     

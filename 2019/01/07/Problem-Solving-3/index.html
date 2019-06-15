@@ -267,7 +267,7 @@ height:50vh;
                 
                 
                     <div class="post-intro-read">
-                        <span>Word count: <span class="post-count">4,098</span> / Reading time: <span class="post-count">17 min</span></span>
+                        <span>Word count: <span class="post-count">4,130</span> / Reading time: <span class="post-count">18 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
@@ -472,11 +472,11 @@ height:50vh;
 <h2 id="几种图"><a href="#几种图" class="headerlink" title="几种图"></a>几种图</h2><ul>
 <li>完全图$K_n$</li>
 <li>补图</li>
-<li>二部图，完全二部图($K<em>{s,t}$)，星图star($K</em>{1,s}$)</li>
+<li>二部图，完全二部图($K_{s,t}$)，星图star($K_{1,s}$)</li>
 <li>多部图，完全多部图(K_{s,s,s})</li>
 <li>$G+H$：$G$和$H$放一起，顶点两两连起来</li>
 <li>$G\times H$：$G$的每个点都替换成一个$H$</li>
-<li>n方体cube($Q<em>n=Q</em>{n-1}\times K_2$)</li>
+<li>n方体cube($Q_n=Q_{n-1}\times K_2$)</li>
 <li>$r-$正则图：每个点度数都为$r$</li>
 </ul>
 <h2 id="定理"><a href="#定理" class="headerlink" title="定理"></a>定理</h2><ul>
@@ -484,7 +484,7 @@ height:50vh;
 <li>非平凡图$G$是二部的当且仅当$G$不含奇圈</li>
 <li><strong>图论第一定理</strong>：度数和=边数*2</li>
 <li>每一个图都有偶数个奇点</li>
-<li>设$G$为$n$阶图,若对于$G$中任意两个不邻接的顶点$u$和$v$, 都满足<script type="math/tex">deg~u+deg~v\geq n-1</script>，则$G$是连通的且$diam(G)\leq$2</li>
+<li>设$G$为$n$阶图,若对于$G$中任意两个不邻接的顶点$u$和$v$, 都满足$$deg~u+deg~v\geq n-1$$，则$G$是连通的且$diam(G)\leq$2</li>
 <li>设$r$和$n$为满足$0\leq r\leq n-1$的整数． 则存在n阶的r正则图当且仅当$r$和$n$中至少有一个为偶数</li>
 <li>度序列可图的充要条件(删掉一个点依然可图)</li>
 </ul>
@@ -514,7 +514,7 @@ height:50vh;
 </ul>
 <h2 id="最小生成树性质"><a href="#最小生成树性质" class="headerlink" title="最小生成树性质"></a>最小生成树性质</h2><ul>
 <li>Cut Property <ul>
-<li>VER I:$X$是某棵最小生成树的一部分，$(S,V\setminus S)$是一个$X$没有横跨的切割，$e$为横跨$(S,V\setminus)$的一条最轻的边，则$X\cup \{e\}$是某棵最小生成树$T_2$的一部分。</li>
+<li>VER I:$X$是某棵最小生成树的一部分，$(S,V\setminus S)$是一个$X$没有横跨的切割，$e$为横跨$(S,V\setminus)$的一条最轻的边，则$X\cup {e}$是某棵最小生成树$T_2$的一部分。</li>
 <li>VER II:$e$为横跨$(S,V\setminus)$的一条最轻的边，则$e$属于某棵最小生成树</li>
 <li>贪心选择性质，可由替换法证明</li>
 </ul>
@@ -707,21 +707,18 @@ height:50vh;
 <h1 id="最大流"><a href="#最大流" class="headerlink" title="最大流"></a>最大流</h1><h2 id="流"><a href="#流" class="headerlink" title="流"></a>流</h2><ul>
 <li>$f:V\times V\to\mathbb{R}$</li>
 <li><strong>容量限制</strong>：$0\le f(u,v)\le c(u,v)$</li>
-<li><strong>流量守恒</strong>：$\forall u\in V-s,t, \sum\limits<em>{v\in V}f(u,v)=\sum</em>\limits_{v\in V}f(v,u)$【流入=流出】</li>
-<li>流的值$|f|=\sum\limits<em>{v\in V}f(s,v)-\sum\limits</em>{v\in V}f(v,s)$(从源结点流出的总流量-流入源结点的总流量)</li>
+<li><strong>流量守恒</strong>：$\forall u\in V-s,t, \sum\limits_{v\in V}f(u,v)=\sum_\limits_{v\in V}f(v,u)$【流入=流出】</li>
+<li>流的值$|f|=\sum\limits_{v\in V}f(s,v)-\sum\limits_{v\in V}f(v,s)$(从源结点流出的总流量-流入源结点的总流量)</li>
 </ul>
 <h2 id="几种特殊处理"><a href="#几种特殊处理" class="headerlink" title="几种特殊处理"></a>几种特殊处理</h2><ul>
 <li>反平行边：拆其中一条边为两条边</li>
 <li>多源多汇</li>
 </ul>
-<h2 id="残存网络"><a href="#残存网络" class="headerlink" title="残存网络"></a>残存网络</h2><p>残存容量</p>
-<script type="math/tex; mode=display">c_f=(u,v)=\begin{cases}
-c(u,v)-f(u,v) & (u,v)\in E \\
-f(v,u) & (v,u)\in E\\
-0 & o.w.</script><h2 id="切割"><a href="#切割" class="headerlink" title="切割"></a>切割</h2><ul>
+<h2 id="残存网络"><a href="#残存网络" class="headerlink" title="残存网络"></a>残存网络</h2><p>残存容量<br>$$c_f=(u,v)=\begin{cases}<br>c(u,v)-f(u,v) &amp; (u,v)\in E \<br>f(v,u) &amp; (v,u)\in E\<br>0 &amp; o.w.$$</p>
+<h2 id="切割"><a href="#切割" class="headerlink" title="切割"></a>切割</h2><ul>
 <li>把$V$划分为$S$和$T$两个集合，其中$s\in S, t\in T$</li>
-<li>横跨该切割的净流量：$f(S,T)=\sum\limits<em>{u\in S}\sum\limits</em>{v\in T}f(u,v)-\sum\limits<em>{u\in S}\sum\limits</em>{v\in T}f(v,u)$【所有结点对的流量之和</li>
-<li>切割的容量：$c(S,T)=\sum\limits<em>{v\in S}\sum\limits</em>{v\in T}c(u,v)$【只考虑$S$出发进入$T$的容量</li>
+<li>横跨该切割的净流量：$f(S,T)=\sum\limits_{u\in S}\sum\limits_{v\in T}f(u,v)-\sum\limits_{u\in S}\sum\limits_{v\in T}f(v,u)$【所有结点对的流量之和</li>
+<li>切割的容量：$c(S,T)=\sum\limits_{v\in S}\sum\limits_{v\in T}c(u,v)$【只考虑$S$出发进入$T$的容量</li>
 <li>最小切割：容量最小的切割</li>
 <li>最大流最小割定理</li>
 </ul>
@@ -1736,6 +1733,42 @@ top:50vh;
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
         Total : 54
@@ -1754,12 +1787,12 @@ top:50vh;
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">04/28</span><a class="archive-post-title" href= "/2019/04/28/ps-4-10-Formal-description-of-problems/" >难问题求解-问题的形式化描述</a>
+            <span class="archive-post-date">05/25</span><a class="archive-post-title" href= "/2019/05/25/ps-4-13-Randomized-Algorithms/" >难问题求解学习笔记-随机算法</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">04/20</span><a class="archive-post-title" href= "/2019/04/20/ps-4-9-algebraic-coding/" >算法导论学习笔记-代数编码</a>
+            <span class="archive-post-date">05/18</span><a class="archive-post-title" href= "/2019/05/18/ps-4-12-Approximation-Algorithms/" >难问题求解学习笔记-近似算法</a>
         </li>
     
     
@@ -1958,12 +1991,12 @@ top:50vh;
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">10/04</span><a class="archive-post-title" href= "/2018/10/04/pa-inspirations/" >做pa的时候可能会用到的操作</a>
+            <span class="archive-post-date">10/04</span><a class="archive-post-title" href= "/2018/10/04/PA1-report/" >PA1实验报告</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">10/04</span><a class="archive-post-title" href= "/2018/10/04/PA1-report/" >PA1实验报告</a>
+            <span class="archive-post-date">10/04</span><a class="archive-post-title" href= "/2018/10/04/pa-inspirations/" >做pa的时候可能会用到的操作</a>
         </li>
     
     
@@ -2038,27 +2071,31 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="Flags"><span class="iconfont-archer">&#xe606;</span>Flags</span>
     
-        <span class="sidebar-tag-name" data-tags="Math Modeling"><span class="iconfont-archer">&#xe606;</span>Math Modeling</span>
-    
         <span class="sidebar-tag-name" data-tags="Notes"><span class="iconfont-archer">&#xe606;</span>Notes</span>
     
         <span class="sidebar-tag-name" data-tags="pa"><span class="iconfont-archer">&#xe606;</span>pa</span>
     
         <span class="sidebar-tag-name" data-tags="ICS"><span class="iconfont-archer">&#xe606;</span>ICS</span>
     
-        <span class="sidebar-tag-name" data-tags="Machine Learning"><span class="iconfont-archer">&#xe606;</span>Machine Learning</span>
+        <span class="sidebar-tag-name" data-tags="Math Modeling"><span class="iconfont-archer">&#xe606;</span>Math Modeling</span>
     
-        <span class="sidebar-tag-name" data-tags="Assembly Language"><span class="iconfont-archer">&#xe606;</span>Assembly Language</span>
+        <span class="sidebar-tag-name" data-tags="Machine Learning"><span class="iconfont-archer">&#xe606;</span>Machine Learning</span>
     
         <span class="sidebar-tag-name" data-tags="Problem Solving"><span class="iconfont-archer">&#xe606;</span>Problem Solving</span>
     
-        <span class="sidebar-tag-name" data-tags="CLRS"><span class="iconfont-archer">&#xe606;</span>CLRS</span>
+        <span class="sidebar-tag-name" data-tags="Assembly Language"><span class="iconfont-archer">&#xe606;</span>Assembly Language</span>
     
-        <span class="sidebar-tag-name" data-tags="greedy algorithm"><span class="iconfont-archer">&#xe606;</span>greedy algorithm</span>
+        <span class="sidebar-tag-name" data-tags="CLRS"><span class="iconfont-archer">&#xe606;</span>CLRS</span>
     
         <span class="sidebar-tag-name" data-tags="dynamic programming"><span class="iconfont-archer">&#xe606;</span>dynamic programming</span>
     
+        <span class="sidebar-tag-name" data-tags="greedy algorithm"><span class="iconfont-archer">&#xe606;</span>greedy algorithm</span>
+    
         <span class="sidebar-tag-name" data-tags="amortized analysis"><span class="iconfont-archer">&#xe606;</span>amortized analysis</span>
+    
+        <span class="sidebar-tag-name" data-tags="Disjoint Sets"><span class="iconfont-archer">&#xe606;</span>Disjoint Sets</span>
+    
+        <span class="sidebar-tag-name" data-tags="Data Structure"><span class="iconfont-archer">&#xe606;</span>Data Structure</span>
     
         <span class="sidebar-tag-name" data-tags="Single Source Shortest Path"><span class="iconfont-archer">&#xe606;</span>Single Source Shortest Path</span>
     
@@ -2067,10 +2104,6 @@ top:50vh;
         <span class="sidebar-tag-name" data-tags="Dijkstra"><span class="iconfont-archer">&#xe606;</span>Dijkstra</span>
     
         <span class="sidebar-tag-name" data-tags="Graph Algorithms"><span class="iconfont-archer">&#xe606;</span>Graph Algorithms</span>
-    
-        <span class="sidebar-tag-name" data-tags="Disjoint Sets"><span class="iconfont-archer">&#xe606;</span>Disjoint Sets</span>
-    
-        <span class="sidebar-tag-name" data-tags="Data Structure"><span class="iconfont-archer">&#xe606;</span>Data Structure</span>
     
         <span class="sidebar-tag-name" data-tags="Graph Theory"><span class="iconfont-archer">&#xe606;</span>Graph Theory</span>
     
@@ -2088,11 +2121,11 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="Ics"><span class="iconfont-archer">&#xe606;</span>Ics</span>
     
-        <span class="sidebar-tag-name" data-tags="MATLAB"><span class="iconfont-archer">&#xe606;</span>MATLAB</span>
-    
         <span class="sidebar-tag-name" data-tags="Matchings"><span class="iconfont-archer">&#xe606;</span>Matchings</span>
     
         <span class="sidebar-tag-name" data-tags="Factorization"><span class="iconfont-archer">&#xe606;</span>Factorization</span>
+    
+        <span class="sidebar-tag-name" data-tags="MATLAB"><span class="iconfont-archer">&#xe606;</span>MATLAB</span>
     
         <span class="sidebar-tag-name" data-tags="Linux"><span class="iconfont-archer">&#xe606;</span>Linux</span>
     
@@ -2100,11 +2133,11 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="Group Theory"><span class="iconfont-archer">&#xe606;</span>Group Theory</span>
     
+        <span class="sidebar-tag-name" data-tags="Python"><span class="iconfont-archer">&#xe606;</span>Python</span>
+    
         <span class="sidebar-tag-name" data-tags="regular expressions"><span class="iconfont-archer">&#xe606;</span>regular expressions</span>
     
         <span class="sidebar-tag-name" data-tags="linux"><span class="iconfont-archer">&#xe606;</span>linux</span>
-    
-        <span class="sidebar-tag-name" data-tags="Python"><span class="iconfont-archer">&#xe606;</span>Python</span>
     
         <span class="sidebar-tag-name" data-tags="markdown"><span class="iconfont-archer">&#xe606;</span>markdown</span>
     

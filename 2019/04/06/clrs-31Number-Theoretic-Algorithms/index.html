@@ -269,7 +269,7 @@ height:50vh;
                 
                 
                     <div class="post-intro-read">
-                        <span>Word count: <span class="post-count">2,353</span> / Reading time: <span class="post-count">10 min</span></span>
+                        <span>Word count: <span class="post-count">2,475</span> / Reading time: <span class="post-count">11 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
@@ -403,38 +403,38 @@ height:50vh;
 <h1 id="基础数论概念"><a href="#基础数论概念" class="headerlink" title="基础数论概念"></a>基础数论概念</h1><h2 id="整除性与约数"><a href="#整除性与约数" class="headerlink" title="整除性与约数"></a>整除性与约数</h2><p>你懂的</p>
 <h2 id="素数与合数"><a href="#素数与合数" class="headerlink" title="素数与合数"></a>素数与合数</h2><p>你也懂的</p>
 <h2 id="除法定理、余数和等模"><a href="#除法定理、余数和等模" class="headerlink" title="除法定理、余数和等模"></a>除法定理、余数和等模</h2><p><strong>定理31.1(除法定理)</strong>: 对于任何整数$a$和任何正整数$n$，存在唯一整数$q$和$r$，满足$0\le r&lt;n$且$a=qn+r$</p>
-<p>根据整数模$n$的余数，可以将所有整数划分成$n$个等价类。<br>包含整数$a$的模$n$等价类为$\left[a\right]_n=\{a+kn:k\in\mathbb{Z}\}$<br>所有这类等价类的集合是$\mathbb{Z}_n=\{[a]_n:0\le a\le n-1\}$</p>
+<p>根据整数模$n$的余数，可以将所有整数划分成$n$个等价类。<br>包含整数$a$的模$n$等价类为$\left[a\right]_n={a+kn:k\in\mathbb{Z}}$<br>所有这类等价类的集合是$\mathbb{Z}_n={[a]_n:0\le a\le n-1}$</p>
 <h2 id="公约数与最大公约数"><a href="#公约数与最大公约数" class="headerlink" title="公约数与最大公约数"></a>公约数与最大公约数</h2><p>公约数的重要性质：</p>
 <ul>
 <li>$d\mid a$且$d\mid b$蕴含$d\mid (a+b)$且$d\mid (a-b)$</li>
 <li>对任意整数$x$和$y$，都有$d\mid a$且$d\mid b$蕴含$d\mid(ax+by)$</li>
 <li>$a\mid b$且$b\mid a$蕴含$a=\pm b$</li>
 </ul>
-<p><strong>定理31.2</strong>: 如果任意整数$a$和$b$不都为0，则gcd$(a,b)$是$a$与$b$线性组合集$\{ax+by:x,y\in\mathbb{Z}\}$中的<strong>最小正元素</strong>。(最小正线性组合)</p>
+<p><strong>定理31.2</strong>: 如果任意整数$a$和$b$不都为0，则gcd$(a,b)$是$a$与$b$线性组合集${ax+by:x,y\in\mathbb{Z}}$中的<strong>最小正元素</strong>。(最小正线性组合)</p>
 <p><strong>推论31.3</strong>: 对任意整数$a$与$b$，如果$d\mid a$且$d\min b$，则$d\mid gcd(a,b)$</p>
 <p><strong>推论31.4</strong>: 对所有整数$a$和$b$以及任意非负整数$n$，有$gcd(an,bn)=n~gcd(a,b)$</p>
 <p><strong>推论31.5</strong>: 对于任意正整数$n,a$和$b$，如果$n\mid ab$且$gcd(a,n)=1$,则$n\mid b$.</p>
 <h2 id="互质数"><a href="#互质数" class="headerlink" title="互质数"></a>互质数</h2><p><strong>定理31.6</strong>: 对任意整数$a,b$与$p$,如果$gcd(a,p)=1$且$gcd(b,p)=1$，则$gcd(ab,p)=1$.</p>
 <h2 id="唯一因子分解定理"><a href="#唯一因子分解定理" class="headerlink" title="唯一因子分解定理"></a>唯一因子分解定理</h2><p><strong>定理31.7</strong>: 对所有素数$p$和所有整数$a,b$，如果$p\mid ab$,则$p\mid a$或$p\mid b$(或两者都成立)。</p>
-<p><strong>定理31.8(唯一因子分解定理)</strong>: 合数$a$仅能以一种方式写成如下乘积形式</p>
-<script type="math/tex; mode=display">a=p_1^{e_1}p_2^{e_2}\cdots p_r^{e_r}</script><p>其中$p_i$为素数，$p_1&lt;p_2&lt;\cdots p_r$且$e_i$为正整数</p>
+<p><strong>定理31.8(唯一因子分解定理)</strong>: 合数$a$仅能以一种方式写成如下乘积形式<br>$$a=p_1^{e_1}p_2^{e_2}\cdots p_r^{e_r}$$<br>其中$p_i$为素数，$p_1&lt;p_2&lt;\cdots p_r$且$e_i$为正整数</p>
 <h1 id="最大公约数"><a href="#最大公约数" class="headerlink" title="最大公约数"></a>最大公约数</h1><p><strong>定理31.9(GCD递归定理)</strong>: 对任意非负整数$a$和任意正整数$b$，$gcd(a,b)=gcd(b,a\bmod b)$</p>
-<h2 id="欧几里得算法"><a href="#欧几里得算法" class="headerlink" title="欧几里得算法"></a>欧几里得算法</h2><h3 id="运行时间"><a href="#运行时间" class="headerlink" title="运行时间"></a>运行时间</h3><p><strong>引理31.10</strong>: 如果$a&gt;b\ge 1$并且EUCLID($a,b$)执行了$k\ge 1$次递归调用，则$a\ge F<em>{k+2}， b\ge F</em>{k+1}$.($F_n$为斐波那契数列的第$n$项)</p>
-<p><strong>定理31.11(Lame定理)</strong>: 对任意整数$k\ge 1$,如果$a&gt;b\ge 1$,且$b&lt;F<em>{k+1}$,则EUCLID($a,b$)的递归调用次数少于$k$次<br>该上界是最优的，因为$k\ge 2$时，EUCLID$(F</em>{k+1},F_k)$正好调用了$k$次</p>
+<h2 id="欧几里得算法"><a href="#欧几里得算法" class="headerlink" title="欧几里得算法"></a>欧几里得算法</h2><h3 id="运行时间"><a href="#运行时间" class="headerlink" title="运行时间"></a>运行时间</h3><p><strong>引理31.10</strong>: 如果$a&gt;b\ge 1$并且EUCLID($a,b$)执行了$k\ge 1$次递归调用，则$a\ge F_{k+2}， b\ge F_{k+1}$.($F_n$为斐波那契数列的第$n$项)</p>
+<p><strong>定理31.11(Lame定理)</strong>: 对任意整数$k\ge 1$,如果$a&gt;b\ge 1$,且$b&lt;F_{k+1}$,则EUCLID($a,b$)的递归调用次数少于$k$次<br>该上界是最优的，因为$k\ge 2$时，EUCLID$(F_{k+1},F_k)$正好调用了$k$次</p>
 <p>$F_k$约为$\phi^k/\sqrt{5}$, $\phi=(1+\sqrt{5})/2$<br>EUCLID执行中递归调用的次数为$O(\lg b)$<br>如果EUCLID作用于两个$\beta$位数，则将执行$O(\beta)$次算术运算和$O(\beta^3)$次位操作</p>
-<h3 id="扩展形式"><a href="#扩展形式" class="headerlink" title="扩展形式"></a>扩展形式</h3><p>用于计算满足下列条件的整系数$x$和$y$(可能为0或负数):</p>
-<script type="math/tex; mode=display">d=gcd(a,b)=ax+by</script><p><img src="/2019/04/06/clrs-31Number-Theoretic-Algorithms/exEUCLID.png"></p>
+<h3 id="扩展形式"><a href="#扩展形式" class="headerlink" title="扩展形式"></a>扩展形式</h3><p>用于计算满足下列条件的整系数$x$和$y$(可能为0或负数):<br>$$d=gcd(a,b)=ax+by$$</p>
+<p><img src="/2019/04/06/clrs-31Number-Theoretic-Algorithms/exEUCLID.png"></p>
 <p>运行时间与EUCLID相同</p>
 <h1 id="模运算"><a href="#模运算" class="headerlink" title="模运算"></a>模运算</h1><p>群论复习</p>
 <h2 id="模-n-加法群"><a href="#模-n-加法群" class="headerlink" title="模$n$加法群"></a>模$n$加法群</h2><p>你懂的</p>
-<h2 id="模-n-乘法群"><a href="#模-n-乘法群" class="headerlink" title="模$n$乘法群"></a>模$n$乘法群</h2><script type="math/tex; mode=display">(\mathbb{Z}_n^*, \cdot_n)</script><script type="math/tex; mode=display">\mathbb{Z}_n^*=\{[a]_n\in\mathbb{Z}_n: gcd(a,n)=1\}</script><p><strong>定理31.13</strong>: 模$n$乘法群是有限交换群</p>
+<h2 id="模-n-乘法群"><a href="#模-n-乘法群" class="headerlink" title="模$n$乘法群"></a>模$n$乘法群</h2><p>$$(\mathbb{Z}_n^*, \cdot_n)$$</p>
+<p>$$\mathbb{Z}_n^*={[a]_n\in\mathbb{Z}_n: gcd(a,n)=1}$$</p>
+<p><strong>定理31.13</strong>: 模$n$乘法群是有限交换群</p>
 <p>$\mathbb{Z}_n^*$中的除法由等式$a/b\equiv ab^{-1}\pmod n$定义</p>
-<p>$\mathbb{Z}_n^*$的规模表示为欧拉phi函数($\phi(n)$)</p>
-<script type="math/tex; mode=display">\phi(n)=n\prod\limits_{p:\text{p is prime and }p\mid n}(1-\frac{1}{p})</script><p>直观理解(类似筛法求质数思想)：开始有一张$n$个余数组成的表，然后对于每个能整除$n$的素数$p$,在表中划掉所有$p$的倍数。</p>
+<p>$\mathbb{Z}<em>n^*$的规模表示为欧拉phi函数($\phi(n)$)<br>$$\phi(n)=n\prod\limits</em>{p:\text{p is prime and }p\mid n}(1-\frac{1}{p})$$<br>直观理解(类似筛法求质数思想)：开始有一张$n$个余数组成的表，然后对于每个能整除$n$的素数$p$,在表中划掉所有$p$的倍数。</p>
 <ul>
 <li>若$p$是素数，则$\phi(p)=p-1$</li>
-<li>若$n$是合数，<script type="math/tex">\frac{n}{e^\gamma\ln\ln n+\frac{3}{\ln\ln n}}<\phi(n)<n-1</script>($n\ge 3$, $\gamma=0.5772156649\cdots$是欧拉常数)<ul>
-<li>$n&gt;5$时有个更松弛的下界<script type="math/tex">\phi(n)>\frac{n}{6\ln\ln n}</script></li>
+<li>若$n$是合数，$$\frac{n}{e^\gamma\ln\ln n+\frac{3}{\ln\ln n}}&lt;\phi(n)&lt;n-1$$($n\ge 3$, $\gamma=0.5772156649\cdots$是欧拉常数)<ul>
+<li>$n&gt;5$时有个更松弛的下界$$\phi(n)&gt;\frac{n}{6\ln\ln n}$$</li>
 </ul>
 </li>
 </ul>
@@ -445,22 +445,22 @@ height:50vh;
 <p>$a^{(0)}=e, a^{(i)}=a^{(i\bmod t)}(t=\bmod a)$</p>
 <p><strong>推论31.18</strong>: 序列$a^{(1)},a^{(2)},\cdots$是周期序列，其周期为$t=\bmod a$, 即$a^{(i)}=a^{(j)}$当且仅当$i\equiv j\pmod t$</p>
 <p><strong>推论31.19</strong>: 如果$(S,+)$是具有单位元$e$的有限群，则对所有$a\in S$，$a^{(|S|)}=e$</p>
-<h1 id="求解模线性方程"><a href="#求解模线性方程" class="headerlink" title="求解模线性方程"></a>求解模线性方程</h1><h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><script type="math/tex; mode=display">ax\equiv b\pmod n</script><p>假设已知$a,b$和$n$，求出所有满足上述方程的对模$n$的$x$的值<br>该方程可能无解、仅有一解或有多解</p>
-<h2 id="数学准备"><a href="#数学准备" class="headerlink" title="数学准备"></a>数学准备</h2><p><strong>定理31.20</strong>: 对任意正整数$a$和$n$，如果$d=gcd(a,n)$, 则在$\mathbb{Z}_n^*$中，<script type="math/tex">\langle a\rangle=\langle d\rangle=\{0,d,2d,\cdots,((n/d)-1)d\}</script><br>因此，$|\langle a\rangle|=n/d$.</p>
+<h1 id="求解模线性方程"><a href="#求解模线性方程" class="headerlink" title="求解模线性方程"></a>求解模线性方程</h1><h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>$$ax\equiv b\pmod n$$<br>假设已知$a,b$和$n$，求出所有满足上述方程的对模$n$的$x$的值<br>该方程可能无解、仅有一解或有多解</p>
+<h2 id="数学准备"><a href="#数学准备" class="headerlink" title="数学准备"></a>数学准备</h2><p><strong>定理31.20</strong>: 对任意正整数$a$和$n$，如果$d=gcd(a,n)$, 则在$\mathbb{Z}_n^*$中，$$\langle a\rangle=\langle d\rangle={0,d,2d,\cdots,((n/d)-1)d}$$<br>因此，$|\langle a\rangle|=n/d$.</p>
 <p><strong>推论31.21</strong>: 当且仅当$d\mid b$时，方程$ax\equiv b\pmod n$对于未知量$x$有解。这里$d=gcd(a,n)$.<br>i.e. 当且仅当$[b]\in\langle a\rangle$时，方程有解</p>
 <p><strong>推论31.22</strong>: 方程$ax\equiv b\pmod n$或者对模$n$有$d$个不同的解，或者无解。这里$d=gcd(a,d)$.</p>
-<p><strong>定理31.23</strong>: 令$d=gcd(a,n)$, 假设对某些整数$x’$和$y’$,有$d=ax’+ny’$(例如EXTENDED-EUCLID所计算出的结果)。如果$d\mid b$,则方程$ax\equiv b\pmod n$有一个解的值为$x_0$,这里$x_0=x’(b/d)\pmod n$.\\</p>
+<p><strong>定理31.23</strong>: 令$d=gcd(a,n)$, 假设对某些整数$x’$和$y’$,有$d=ax’+ny’$(例如EXTENDED-EUCLID所计算出的结果)。如果$d\mid b$,则方程$ax\equiv b\pmod n$有一个解的值为$x_0$,这里$x_0=x’(b/d)\pmod n$.\</p>
 <p><strong>定理31.24</strong>: 假设方程$ax\equiv b\pmod b$有解(即$d\mid b$),且$x_0$是该方程的任意一个解。因此，该方程对模$n$恰好有$d$个不同的解，分别为$x_i=x_0+i(n/d)$, 这里$i=0,1,\cdots,d-1$.</p>
 <h2 id="伪代码"><a href="#伪代码" class="headerlink" title="伪代码"></a>伪代码</h2><p><img src="/2019/04/06/clrs-31Number-Theoretic-Algorithms/mod.png"></p>
 <h2 id="运行时间-1"><a href="#运行时间-1" class="headerlink" title="运行时间"></a>运行时间</h2><p>执行$O(\lg n+gcd(a,n))$次算术运算</p>
 <p><strong>推论31.25</strong>： 对任意$n&gt;1$, $a$和$n$互质时方程对模$n$有唯一解</p>
 <p><strong>推论31.26</strong>： 对任意$n&gt;1$，若$a,n$互质，则方程$ax\equiv 1\bmod n$对模$n$有唯一解，否则方程无解。<br>因此，当$a$和$n$互质时，可以用记号$a^{-1}\bmod n$表示$a$对模$n$的乘法逆元</p>
-<h1 id="中国余数定理"><a href="#中国余数定理" class="headerlink" title="中国余数定理"></a>中国余数定理</h1><p><strong>定理31.27(中国余数定理)</strong>: 令$n=n<em>1n_2\cdots n_k$,其中因子$n_i$两两互质。考虑以下对应关系:<script type="math/tex">a\leftrightarrow(a_1,a_2,\cdots,a_k)</script>这里$a\in\mathbb{Z}_n,a_i\in\mathbb{Z}</em>{n_i}$, 而且对$i=1,2,\cdots,k$, <script type="math/tex">a_i=a\bmod n_i</script>.</p>
-<p>该映射是一个在$\mathbb{Z}_n$ 与笛卡尔积 $\mathbb{Z}_{n<em>1}\times\mathbb{Z}\</em>{n<em>2}\times\cdots\times\mathbb{Z}</em>{n_k}$之间的一一对应，对$\mathbb{Z}_n$中元素所执行的运算可以等价地作用于对应的$k$元组</p>
+<h1 id="中国余数定理"><a href="#中国余数定理" class="headerlink" title="中国余数定理"></a>中国余数定理</h1><p><strong>定理31.27(中国余数定理)</strong>: 令$n=n_1n_2\cdots n_k$,其中因子$n_i$两两互质。考虑以下对应关系:$$a\leftrightarrow(a_1,a_2,\cdots,a_k)$$这里$a\in\mathbb{Z}_n,a_i\in\mathbb{Z}_{n_i}$, 而且对$i=1,2,\cdots,k$, $$a_i=a\bmod n_i$$.</p>
+<p>该映射是一个在$\mathbb{Z}_n$ 与笛卡尔积 $\mathbb{Z}_{n_1}\times\mathbb{Z}_{n_2}\times\cdots\times\mathbb{Z}_{n_k}$之间的一一对应，对$\mathbb{Z}_n$中元素所执行的运算可以等价地作用于对应的$k$元组</p>
 <p><img src="/2019/04/06/clrs-31Number-Theoretic-Algorithms/a+b.png"></p>
 <p>从$(a_1,a_2,\cdots,a_k)$计算$a$：</p>
 <ul>
-<li>定义$m<em>i=n/n_i=n_1n_2\cdots n</em>{i-1}n_{i+1}\cdots n_l$</li>
+<li>定义$m_i=n/n_i=n_1n_2\cdots n_{i-1}n_{i+1}\cdots n_l$</li>
 <li>对$i=1,2, \cdots l$, 定义$c_i=m_i(m_i^{-1}\bmod n_i)$<ul>
 <li>In fact, $c_i\leftrightarrow(0,0,\cdots ,0,1,0,\cdots 0)$ 除了在$i$个坐标上为1外其余坐标均为0</li>
 </ul>
@@ -468,15 +468,15 @@ height:50vh;
 <li>$a\equiv (a_1c_1+a_2c_2+\cdots +a_kc_k)\pmod n$</li>
 </ul>
 <p>对任意$x$和$i=1,2,\cdots k,$有$x\bmod n_i=(x\bmod n)\mod n_i$.</p>
-<p><strong>推论31.28</strong>: 如果$n_1,n_2,\cdots ,n_k$两两互质，$n=n_1n_2\cdots n_k$,则对任意整数$a_1,a_2,\cdots ,a_k$, 关于未知量$x$的联立方程组<script type="math/tex">x\equiv a_i\pmod n_i,i=1,2,\cdots k</script>对模$n$有唯一解</p>
+<p><strong>推论31.28</strong>: 如果$n_1,n_2,\cdots ,n_k$两两互质，$n=n_1n_2\cdots n_k$,则对任意整数$a_1,a_2,\cdots ,a_k$, 关于未知量$x$的联立方程组$$x\equiv a_i\pmod n_i,i=1,2,\cdots k$$对模$n$有唯一解</p>
 <p><strong>推论31.29</strong>: 如果$n_1,n_2,\cdots ,n_k$两两互质，$n=n_1n_2\cdots n_k$, 则对所有整数$x$和$a$，$x\equiv a\pmod n_i$(其中$i=1,2,\cdots k$)当且仅当$x\equiv a\pmod n$.</p>
 <p><strong>可以把模大数的线性方程转换为模小数的线性方程组</strong></p>
 <h1 id="元素的幂"><a href="#元素的幂" class="headerlink" title="元素的幂"></a>元素的幂</h1><p><strong>定理31.30</strong>: 对于任意整数$n&gt;1$, $a^{\phi(n)}\equiv 1\pmod n$对所有$a\in\mathbb{Z}_n^*$都成立</p>
 <p><strong>定理31.31</strong>: 若$p$是素数，则$a^{p-1}\equiv 1\pmod p$对所有$a\in\mathbb{Z}_p^*$都成立</p>
 <p><strong>定理31.32</strong>: 对所有素数$p&gt;2$和所有正整数$e$，使得$\mathbb{Z}_n^*$是循环群的$n&gt;1$的值为2,4，$p^e$和$2p^e$。</p>
-<p>若$g$是$\mathbb{Z}<em>n^<em>$的生成元，则对于任意$a\in\mathbb{Z}_n^</em>$存在一个$z$，使得$g^z\equiv a\pmod n$. 这个$z$称为对模$n$到基$g$上的$a$的一个<strong>离散对数</strong>或<strong>指数</strong>，记为$ind</em>{n,g}(a)$</p>
+<p>若$g$是$\mathbb{Z}_n^<em>$的生成元，则对于任意$a\in\mathbb{Z}_n^</em>$存在一个$z$，使得$g^z\equiv a\pmod n$. 这个$z$称为对模$n$到基$g$上的$a$的一个<strong>离散对数</strong>或<strong>指数</strong>，记为$ind_{n,g}(a)$</p>
 <p><strong>定理31.33(离散对数定理)</strong>: 如果$g$是$\mathbb{Z}_n^*$的一个生成元，则当且仅当等式$x\equiv y\pmod {\phi(n)}$ 成立时，有等式$g^x\equiv g^y\pmod n$成立。</p>
-<p><strong>定理31.34</strong>: 如果$p$是一个奇素数且$e\ge 1$，则方程<script type="math/tex">x^2\equiv 1\pmod p^e</script>仅有两个解，即$x=\pm 1$。</p>
+<p><strong>定理31.34</strong>: 如果$p$是一个奇素数且$e\ge 1$，则方程$$x^2\equiv 1\pmod p^e$$仅有两个解，即$x=\pm 1$。</p>
 <p>如果$x$满足$x^2\equiv 1\pmod n$， 但$x$不等于以$n$为模的两个平凡平方根，则$x$是一个以$n$为模的<strong>非平凡平方根</strong></p>
 <p><strong>推论31.35</strong>: 如果对模$n$存在1的非平凡平方根，则$n$是合数</p>
 <h2 id="快速幂"><a href="#快速幂" class="headerlink" title="快速幂"></a>快速幂</h2><p>又名：用反复平方法求数的幂</p>
@@ -484,7 +484,7 @@ height:50vh;
 <p>$c$只是用来辅助正确性证明的变量</p>
 <p>循环不变式：</p>
 <ul>
-<li>$c$的值与$b$的二进制表示的前缀$\langle b<em>k,b</em>{k-1},\cdots b_{i+1}\rangle$相同</li>
+<li>$c$的值与$b$的二进制表示的前缀$\langle b_k,b_{k-1},\cdots b_{i+1}\rangle$相同</li>
 <li>$d=a^c\pmod n$</li>
 </ul>
 <p>时间复杂度$O(\beta^3)$</p>
@@ -1487,6 +1487,42 @@ top:50vh;
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
         Total : 54
@@ -1505,12 +1541,12 @@ top:50vh;
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">04/28</span><a class="archive-post-title" href= "/2019/04/28/ps-4-10-Formal-description-of-problems/" >难问题求解-问题的形式化描述</a>
+            <span class="archive-post-date">05/25</span><a class="archive-post-title" href= "/2019/05/25/ps-4-13-Randomized-Algorithms/" >难问题求解学习笔记-随机算法</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">04/20</span><a class="archive-post-title" href= "/2019/04/20/ps-4-9-algebraic-coding/" >算法导论学习笔记-代数编码</a>
+            <span class="archive-post-date">05/18</span><a class="archive-post-title" href= "/2019/05/18/ps-4-12-Approximation-Algorithms/" >难问题求解学习笔记-近似算法</a>
         </li>
     
     
@@ -1709,12 +1745,12 @@ top:50vh;
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">10/04</span><a class="archive-post-title" href= "/2018/10/04/pa-inspirations/" >做pa的时候可能会用到的操作</a>
+            <span class="archive-post-date">10/04</span><a class="archive-post-title" href= "/2018/10/04/PA1-report/" >PA1实验报告</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">10/04</span><a class="archive-post-title" href= "/2018/10/04/PA1-report/" >PA1实验报告</a>
+            <span class="archive-post-date">10/04</span><a class="archive-post-title" href= "/2018/10/04/pa-inspirations/" >做pa的时候可能会用到的操作</a>
         </li>
     
     
@@ -1789,27 +1825,31 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="Flags"><span class="iconfont-archer">&#xe606;</span>Flags</span>
     
-        <span class="sidebar-tag-name" data-tags="Math Modeling"><span class="iconfont-archer">&#xe606;</span>Math Modeling</span>
-    
         <span class="sidebar-tag-name" data-tags="Notes"><span class="iconfont-archer">&#xe606;</span>Notes</span>
     
         <span class="sidebar-tag-name" data-tags="pa"><span class="iconfont-archer">&#xe606;</span>pa</span>
     
         <span class="sidebar-tag-name" data-tags="ICS"><span class="iconfont-archer">&#xe606;</span>ICS</span>
     
-        <span class="sidebar-tag-name" data-tags="Machine Learning"><span class="iconfont-archer">&#xe606;</span>Machine Learning</span>
+        <span class="sidebar-tag-name" data-tags="Math Modeling"><span class="iconfont-archer">&#xe606;</span>Math Modeling</span>
     
-        <span class="sidebar-tag-name" data-tags="Assembly Language"><span class="iconfont-archer">&#xe606;</span>Assembly Language</span>
+        <span class="sidebar-tag-name" data-tags="Machine Learning"><span class="iconfont-archer">&#xe606;</span>Machine Learning</span>
     
         <span class="sidebar-tag-name" data-tags="Problem Solving"><span class="iconfont-archer">&#xe606;</span>Problem Solving</span>
     
-        <span class="sidebar-tag-name" data-tags="CLRS"><span class="iconfont-archer">&#xe606;</span>CLRS</span>
+        <span class="sidebar-tag-name" data-tags="Assembly Language"><span class="iconfont-archer">&#xe606;</span>Assembly Language</span>
     
-        <span class="sidebar-tag-name" data-tags="greedy algorithm"><span class="iconfont-archer">&#xe606;</span>greedy algorithm</span>
+        <span class="sidebar-tag-name" data-tags="CLRS"><span class="iconfont-archer">&#xe606;</span>CLRS</span>
     
         <span class="sidebar-tag-name" data-tags="dynamic programming"><span class="iconfont-archer">&#xe606;</span>dynamic programming</span>
     
+        <span class="sidebar-tag-name" data-tags="greedy algorithm"><span class="iconfont-archer">&#xe606;</span>greedy algorithm</span>
+    
         <span class="sidebar-tag-name" data-tags="amortized analysis"><span class="iconfont-archer">&#xe606;</span>amortized analysis</span>
+    
+        <span class="sidebar-tag-name" data-tags="Disjoint Sets"><span class="iconfont-archer">&#xe606;</span>Disjoint Sets</span>
+    
+        <span class="sidebar-tag-name" data-tags="Data Structure"><span class="iconfont-archer">&#xe606;</span>Data Structure</span>
     
         <span class="sidebar-tag-name" data-tags="Single Source Shortest Path"><span class="iconfont-archer">&#xe606;</span>Single Source Shortest Path</span>
     
@@ -1818,10 +1858,6 @@ top:50vh;
         <span class="sidebar-tag-name" data-tags="Dijkstra"><span class="iconfont-archer">&#xe606;</span>Dijkstra</span>
     
         <span class="sidebar-tag-name" data-tags="Graph Algorithms"><span class="iconfont-archer">&#xe606;</span>Graph Algorithms</span>
-    
-        <span class="sidebar-tag-name" data-tags="Disjoint Sets"><span class="iconfont-archer">&#xe606;</span>Disjoint Sets</span>
-    
-        <span class="sidebar-tag-name" data-tags="Data Structure"><span class="iconfont-archer">&#xe606;</span>Data Structure</span>
     
         <span class="sidebar-tag-name" data-tags="Graph Theory"><span class="iconfont-archer">&#xe606;</span>Graph Theory</span>
     
@@ -1839,11 +1875,11 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="Ics"><span class="iconfont-archer">&#xe606;</span>Ics</span>
     
-        <span class="sidebar-tag-name" data-tags="MATLAB"><span class="iconfont-archer">&#xe606;</span>MATLAB</span>
-    
         <span class="sidebar-tag-name" data-tags="Matchings"><span class="iconfont-archer">&#xe606;</span>Matchings</span>
     
         <span class="sidebar-tag-name" data-tags="Factorization"><span class="iconfont-archer">&#xe606;</span>Factorization</span>
+    
+        <span class="sidebar-tag-name" data-tags="MATLAB"><span class="iconfont-archer">&#xe606;</span>MATLAB</span>
     
         <span class="sidebar-tag-name" data-tags="Linux"><span class="iconfont-archer">&#xe606;</span>Linux</span>
     
@@ -1851,11 +1887,11 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="Group Theory"><span class="iconfont-archer">&#xe606;</span>Group Theory</span>
     
+        <span class="sidebar-tag-name" data-tags="Python"><span class="iconfont-archer">&#xe606;</span>Python</span>
+    
         <span class="sidebar-tag-name" data-tags="regular expressions"><span class="iconfont-archer">&#xe606;</span>regular expressions</span>
     
         <span class="sidebar-tag-name" data-tags="linux"><span class="iconfont-archer">&#xe606;</span>linux</span>
-    
-        <span class="sidebar-tag-name" data-tags="Python"><span class="iconfont-archer">&#xe606;</span>Python</span>
     
         <span class="sidebar-tag-name" data-tags="markdown"><span class="iconfont-archer">&#xe606;</span>markdown</span>
     
