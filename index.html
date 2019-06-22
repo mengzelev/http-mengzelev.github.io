@@ -354,6 +354,62 @@ height:50vh;
     
     
     <article class="index-post">
+        <a class="abstract-title" href = "/2019/06/21/os-review/" >
+            
+                <span>操作系统期末复习笔记</span>
+        </a>
+        <div class="abstract-content">
+            这其实是jyy课程讲义摘抄
+存储介质维度：价格、容量、速度、可靠性
+持久化存储介质统称Non-Volatile Memory
+IO设备与驱动设备：三种操作（发送命令、读取状态、传输数据）的集合
+管理IO设备查看系统IO设备：lspci,lsblk(实现： open(/sys/bus/pci))
+Loop Back Device(回路设备)：把一个文件模拟成一个块设备a pseudo-device that makes a file accessible as a block device in Unix-like operating systems
+IO设备类型众多、访问模式差距很大解决...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/06/21</span>
+            </div>
+            <!-- tags  -->
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href = "/2019/06/21/OSTEP-persistence/" >
+            
+                <span>OSTEP阅读笔记-持久化部分</span>
+        </a>
+        <div class="abstract-content">
+            Ch36 IO设备典型设备协议设备的两个重要组成部分：硬件接口+内部结构
+
+OS通过读写状态、命令和数据寄存器来控制设备行为
+协议模型
+1234567while(STATUS == BUSY);//wait until device is not busy(polling)write data to DATA reg;write cmd to cmd reg;  (Doing so starts the device and executes the cmd)while(STATUS == BUSY);//wait until device is done with your reque...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/06/21</span>
+            </div>
+            <!-- tags  -->
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href = "/2019/05/25/ps-4-13-Randomized-Algorithms/" >
             
                 <span>难问题求解学习笔记-随机算法</span>
@@ -437,17 +493,18 @@ height:50vh;
 并发共享内存多线程
 并发定义：一个程序、算法或问题的不同部分乱序或偏序执行而不影响最终结果的能力
 程序经历了什么？
+
 编译器优化$\to$顺序丧失
-操作系统中断，多处理器、缓存(硬件)$\to$原子性)(all or nothing)丧失
+操作系统中断，多处理器、缓存(硬件)$\to$原子性(all or nothing)丧失
 缓存，乱序（硬件）$\to$可见性丧失
 
 
+顺序丧失：允许源代码中内存访问指令不再按顺序甚至不再出现
 
-互斥评估一把锁的基本准则
+原子性的丧失：指令序列可以在任意时刻被中断，然后操作系统切换到其他线程执行
+可见性丧失：缓存&amp;乱序
 
-所能够完成基本任务：提供互斥性质
-锁的分配是公平的：不会有现成想要上锁却永远得不到它
-锁的高效的：无等待时性能？多线程同时等待时性能？多CPU每个核的线程都要上锁...
+互斥评估一把锁的基本准...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
@@ -471,12 +528,12 @@ height:50vh;
         </a>
         <div class="abstract-content">
             RSA公钥加密系统每个参与者都有一把公钥($P$)和密钥($S$)
-$\mathcal{D}$表示允许信息的集合，要求公钥与密钥指定一种从$\mathcal{D}$到自身的一一对应的函数。Alice的公钥函数$P_A()$和密钥函数$S_A()$都是$\mathcal{D}$的排列
+$\mathcal{D}$表示允许信息的集合，要求公钥与密钥指定一种从$\mathcal{D}$到自身的一一对应的函数。Alice的公钥函数$P_A$和密钥函数$S_A$都是$\mathcal{D}$的排列
 系统中任何参与者的公钥与密钥都是匹配对，指定函数互为反函数，对任何消息$M\in \mathcal{D}$，有$$M=S_A(P_A(M))$$$$M=P_A(S_A(M))$$
 加密过程
 Bob取得Alice的公钥$P_A$
 Bob计算出相应与$M$的密文$C=P_A(M)$，并把$C$发送给Alice
-当...
+当Alic...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
@@ -588,77 +645,6 @@ $\Sigma^*$: 包含所有有限长度的字符串的集合
         <a class="post-tag" href="javascript:void(0);" data-tags = "Problem Solving">Problem Solving</a>
     
         <a class="post-tag" href="javascript:void(0);" data-tags = "CLRS">CLRS</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2019/03/14/ps-4-4-isomorphism/" >
-            
-                <span>问求学习笔记-群同构基本定理与正规子群</span>
-        </a>
-        <div class="abstract-content">
-            同构(Isomorphisms)定义对两个群$(G,\cdot)$和$(H,\circ)$，若存在一个保群运算的双射$\phi:G\to H$，即对于任意$a,b\in G$$$\phi(a\cdot b)=\phi(a)\circ\phi(b)$$则称$G$和$H$同构(isomorphic)，记作$G\cong H$. $\phi$称为同构函数(isomorphism)。
-基本定理定理9.6: Let $\phi: G\to H$ be an isomorphism of two groups. Then the following statements are true.
-
-$\p...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/03/14</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Problem Solving">Problem Solving</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "CLRS">CLRS</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Group Theory">Group Theory</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2019/03/09/ps-4-3-permutation-lagrange/" >
-            
-                <span>问求学习笔记-置换群与拉格朗日定理</span>
-        </a>
-        <div class="abstract-content">
-            置换群(Permutation Group)定理5.1:The symmetric group on $n$ letters, $S_n$, is a group with $n!$ elements, wherethe binary operation is the composition of maps.
-置换群(permutation group):所有排列的集合$S_n$的一个子集
-Cycle NotationA permutation $\sigma\in S_X$ is a cycle of length $k$ if there exite elements $a_1,a_...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/03/09</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Problem Solving">Problem Solving</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "CLRS">CLRS</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Group Theory">Group Theory</a>
     
 </div>
             
@@ -1689,29 +1675,9 @@ Cycle NotationA permutation $\sigma\in S_X$ is a cycle of length $k$ if there ex
     
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 54
+        Total : 56
         </div>
         <!-- search  -->
         
@@ -1724,6 +1690,16 @@ Cycle NotationA permutation $\sigma\in S_X$ is a cycle of length $k$ if there ex
     
     <div class="archive-year"> 2019 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/21</span><a class="archive-post-title" href= "/2019/06/21/os-review/" >操作系统期末复习笔记</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/21</span><a class="archive-post-title" href= "/2019/06/21/OSTEP-persistence/" >OSTEP阅读笔记-持久化部分</a>
+        </li>
     
     
         <li class="archive-post-item">
@@ -2009,7 +1985,7 @@ Cycle NotationA permutation $\sigma\in S_X$ is a cycle of length $k$ if there ex
         <div class="sidebar-panel-tags">
     <div class="sidebar-tags-name">
     
-        <span class="sidebar-tag-name" data-tags="Flags"><span class="iconfont-archer">&#xe606;</span>Flags</span>
+        <span class="sidebar-tag-name" data-tags="Math Modeling"><span class="iconfont-archer">&#xe606;</span>Math Modeling</span>
     
         <span class="sidebar-tag-name" data-tags="Notes"><span class="iconfont-archer">&#xe606;</span>Notes</span>
     
@@ -2017,11 +1993,11 @@ Cycle NotationA permutation $\sigma\in S_X$ is a cycle of length $k$ if there ex
     
         <span class="sidebar-tag-name" data-tags="ICS"><span class="iconfont-archer">&#xe606;</span>ICS</span>
     
-        <span class="sidebar-tag-name" data-tags="Math Modeling"><span class="iconfont-archer">&#xe606;</span>Math Modeling</span>
+        <span class="sidebar-tag-name" data-tags="Problem Solving"><span class="iconfont-archer">&#xe606;</span>Problem Solving</span>
+    
+        <span class="sidebar-tag-name" data-tags="Flags"><span class="iconfont-archer">&#xe606;</span>Flags</span>
     
         <span class="sidebar-tag-name" data-tags="Machine Learning"><span class="iconfont-archer">&#xe606;</span>Machine Learning</span>
-    
-        <span class="sidebar-tag-name" data-tags="Problem Solving"><span class="iconfont-archer">&#xe606;</span>Problem Solving</span>
     
         <span class="sidebar-tag-name" data-tags="Assembly Language"><span class="iconfont-archer">&#xe606;</span>Assembly Language</span>
     
@@ -2029,13 +2005,11 @@ Cycle NotationA permutation $\sigma\in S_X$ is a cycle of length $k$ if there ex
     
         <span class="sidebar-tag-name" data-tags="dynamic programming"><span class="iconfont-archer">&#xe606;</span>dynamic programming</span>
     
-        <span class="sidebar-tag-name" data-tags="greedy algorithm"><span class="iconfont-archer">&#xe606;</span>greedy algorithm</span>
-    
-        <span class="sidebar-tag-name" data-tags="amortized analysis"><span class="iconfont-archer">&#xe606;</span>amortized analysis</span>
-    
         <span class="sidebar-tag-name" data-tags="Disjoint Sets"><span class="iconfont-archer">&#xe606;</span>Disjoint Sets</span>
     
         <span class="sidebar-tag-name" data-tags="Data Structure"><span class="iconfont-archer">&#xe606;</span>Data Structure</span>
+    
+        <span class="sidebar-tag-name" data-tags="amortized analysis"><span class="iconfont-archer">&#xe606;</span>amortized analysis</span>
     
         <span class="sidebar-tag-name" data-tags="Single Source Shortest Path"><span class="iconfont-archer">&#xe606;</span>Single Source Shortest Path</span>
     
@@ -2043,19 +2017,21 @@ Cycle NotationA permutation $\sigma\in S_X$ is a cycle of length $k$ if there ex
     
         <span class="sidebar-tag-name" data-tags="Dijkstra"><span class="iconfont-archer">&#xe606;</span>Dijkstra</span>
     
+        <span class="sidebar-tag-name" data-tags="greedy algorithm"><span class="iconfont-archer">&#xe606;</span>greedy algorithm</span>
+    
         <span class="sidebar-tag-name" data-tags="Graph Algorithms"><span class="iconfont-archer">&#xe606;</span>Graph Algorithms</span>
     
         <span class="sidebar-tag-name" data-tags="Graph Theory"><span class="iconfont-archer">&#xe606;</span>Graph Theory</span>
     
         <span class="sidebar-tag-name" data-tags="Connectivity"><span class="iconfont-archer">&#xe606;</span>Connectivity</span>
     
-        <span class="sidebar-tag-name" data-tags="ics"><span class="iconfont-archer">&#xe606;</span>ics</span>
-    
-        <span class="sidebar-tag-name" data-tags="process calling"><span class="iconfont-archer">&#xe606;</span>process calling</span>
-    
         <span class="sidebar-tag-name" data-tags="freshman"><span class="iconfont-archer">&#xe606;</span>freshman</span>
     
         <span class="sidebar-tag-name" data-tags="college life"><span class="iconfont-archer">&#xe606;</span>college life</span>
+    
+        <span class="sidebar-tag-name" data-tags="ics"><span class="iconfont-archer">&#xe606;</span>ics</span>
+    
+        <span class="sidebar-tag-name" data-tags="process calling"><span class="iconfont-archer">&#xe606;</span>process calling</span>
     
         <span class="sidebar-tag-name" data-tags="Lab"><span class="iconfont-archer">&#xe606;</span>Lab</span>
     
@@ -2079,13 +2055,13 @@ Cycle NotationA permutation $\sigma\in S_X$ is a cycle of length $k$ if there ex
     
         <span class="sidebar-tag-name" data-tags="linux"><span class="iconfont-archer">&#xe606;</span>linux</span>
     
-        <span class="sidebar-tag-name" data-tags="markdown"><span class="iconfont-archer">&#xe606;</span>markdown</span>
+        <span class="sidebar-tag-name" data-tags="tmux"><span class="iconfont-archer">&#xe606;</span>tmux</span>
     
         <span class="sidebar-tag-name" data-tags="Java"><span class="iconfont-archer">&#xe606;</span>Java</span>
     
         <span class="sidebar-tag-name" data-tags="programming"><span class="iconfont-archer">&#xe606;</span>programming</span>
     
-        <span class="sidebar-tag-name" data-tags="tmux"><span class="iconfont-archer">&#xe606;</span>tmux</span>
+        <span class="sidebar-tag-name" data-tags="markdown"><span class="iconfont-archer">&#xe606;</span>markdown</span>
     
         <span class="sidebar-tag-name" data-tags="Traversibility"><span class="iconfont-archer">&#xe606;</span>Traversibility</span>
     
@@ -2126,11 +2102,11 @@ jsonContent:
         <div class="sidebar-panel-categories">
     <div class="sidebar-categories-name">
     
-        <span class="sidebar-category-name" data-categories="Flags"><span class="iconfont-archer">&#xe60a;</span>Flags</span>
-    
         <span class="sidebar-category-name" data-categories="Diary"><span class="iconfont-archer">&#xe60a;</span>Diary</span>
     
         <span class="sidebar-category-name" data-categories="Notes"><span class="iconfont-archer">&#xe60a;</span>Notes</span>
+    
+        <span class="sidebar-category-name" data-categories="Flags"><span class="iconfont-archer">&#xe60a;</span>Flags</span>
     
         <span class="sidebar-category-name" data-categories="Self-learning"><span class="iconfont-archer">&#xe60a;</span>Self-learning</span>
     
