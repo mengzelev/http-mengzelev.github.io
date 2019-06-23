@@ -261,7 +261,7 @@ height:50vh;
                 
                 
                     <div class="post-intro-read">
-                        <span>Word count: <span class="post-count">1,875</span> / Reading time: <span class="post-count">7 min</span></span>
+                        <span>Word count: <span class="post-count">2,528</span> / Reading time: <span class="post-count">10 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
@@ -430,14 +430,26 @@ height:50vh;
 <li><code>broadcast(&amp;cond)</code>: 唤醒在等待cond条件的所有进程</li>
 <li>需要配合互斥锁使用：读取状态到<code>wait()</code>之间不能被打断，改变状态到<code>signal</code>之间也不能被打断</li>
 </ul>
+<h3 id="使用条件变量"><a href="#使用条件变量" class="headerlink" title="使用条件变量"></a>使用条件变量</h3><p>记 得 上 锁</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">worker</span><span class="params">(<span class="keyword">int</span> id)</span> </span>&#123;</span><br><span class="line">    mutex_lock(&amp;mutex);</span><br><span class="line">    done[id] = <span class="number">1</span>;</span><br><span class="line">    signal(&amp;joins);</span><br><span class="line">    mutex_unlock(&amp;mutex);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nworkers; ++i) create(worker,i);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nworkers; ++i) &#123;</span><br><span class="line">        mutex_lock(&amp;mutex);</span><br><span class="line">        <span class="keyword">if</span>(!done[i]) wait(&amp;joins, &amp;mutex);</span><br><span class="line">        mutex_unlock(&amp;mutex);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="信号量"><a href="#信号量" class="headerlink" title="信号量"></a>信号量</h2><p>互斥锁(二元信号量)和同步都可以使用信号量来实现<br>信号量就相当于有一个管理员manage了一堆资源，进程需要资源时先向管理员请求(<code>semi_wait</code>)，暂时没有资源就等，使用完毕后归还(<code>semi_post</code>)给管理员</p>
+<p>需要配合锁使用<br>注意死锁：lock之后P，其他线程是无法获得lock的</p>
+<p>期中考题</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'('</span>: lock(<span class="string">"("</span>); <span class="comment">// assume lock can nest</span></span><br><span class="line">     <span class="built_in">putchar</span>(); V(fill1);</span><br><span class="line"><span class="string">')'</span>: P(fill1); <span class="built_in">putchar</span>();</span><br><span class="line">     unlock(<span class="string">"("</span>);</span><br><span class="line"></span><br><span class="line"><span class="string">'['</span>: lock(<span class="string">"("</span>);</span><br><span class="line">     <span class="built_in">putchar</span>();</span><br><span class="line">     V(fill2);</span><br><span class="line">     unlock(<span class="string">"("</span>);</span><br><span class="line"><span class="string">']'</span>: P(fill2);</span><br><span class="line">     lock(<span class="string">"("</span>);</span><br><span class="line">     <span class="built_in">putchar</span>();</span><br><span class="line">     unlock(<span class="string">"("</span>);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>不能上一把大锁（会死锁），所以拆了小锁来保证原子性</li>
+<li>P不能在锁中间进行</li>
+<li>自旋锁是为了保证圆括号和方括号不冲突（互斥），信号量是为了保证左右括号配对（同步）</li>
+<li>之所以用锁而非信号量来处理圆括号和方括号的关系，是因为为了保证原子性本来就要上锁，这样一举两得。用信号量不是不可以，但一样也要上锁，造成了资源浪费。</li>
+</ul>
 <h3 id="APIs"><a href="#APIs" class="headerlink" title="APIs"></a>APIs</h3><ul>
 <li><code>sem_wait</code>：信号量-1，表示在等待的线程增加了一个，消耗一个执行名额；如果信号量&lt;0, 表示等待的线程数多于可执行线程数，当前线程进入睡眠</li>
 <li><code>sem_post</code>：信号量+1，表示执行的线程少了一个，可以让出一个执行名额</li>
 </ul>
+<h3 id="哲学家吃饭问题"><a href="#哲学家吃饭问题" class="headerlink" title="哲学家吃饭问题"></a>哲学家吃饭问题</h3><p>One general solution: 让一个人集中管理所有叉子(信号量)</p>
 <h2 id="并发Bugs"><a href="#并发Bugs" class="headerlink" title="并发Bugs"></a>并发Bugs</h2><ul>
-<li>原子性违反(AV) —&gt; 上锁</li>
-<li>顺序违反(OV) -&gt; 同步</li>
+<li>原子性违反(AV) –&gt; 上锁</li>
+<li>顺序违反(OV) –&gt; 同步</li>
 </ul>
 <h3 id="死锁出现的四个条件"><a href="#死锁出现的四个条件" class="headerlink" title="死锁出现的四个条件"></a>死锁出现的四个条件</h3><ul>
 <li>互斥</li>
@@ -450,7 +462,8 @@ height:50vh;
 <li>检测：打log</li>
 </ul>
 <h1 id="虚拟化"><a href="#虚拟化" class="headerlink" title="虚拟化"></a>虚拟化</h1><p>每个进程都以为自己独占CPU和整个内存空间<br>进程：OS提供的对运行程序的抽象</p>
-<h2 id="进程抽象"><a href="#进程抽象" class="headerlink" title="进程抽象"></a>进程抽象</h2><h3 id="进程状态"><a href="#进程状态" class="headerlink" title="进程状态"></a>进程状态</h3><ul>
+<h2 id="进程抽象"><a href="#进程抽象" class="headerlink" title="进程抽象"></a>进程抽象</h2><p>CPU执行指令时假设自己直接占有整个CPU<br>进程分时共享物理CPU</p>
+<h3 id="进程状态"><a href="#进程状态" class="headerlink" title="进程状态"></a>进程状态</h3><ul>
 <li>Running: 进程正在处理器上执行命令</li>
 <li>Ready：进程准备执行，但由于某些原因OS决定现在不让它运行</li>
 <li>Blocked：进程此前执行了某些操作(e.g. I/O)，让它在其他事件发生前停止执行</li>
@@ -468,8 +481,16 @@ height:50vh;
 </ul>
 </li>
 </ul>
-<h2 id="文件描述符"><a href="#文件描述符" class="headerlink" title="文件描述符"></a>文件描述符</h2><p>一个指向os内对象的指针<br><code>fork-exec</code>不改变文件描述符</p>
-<h3 id="重定向"><a href="#重定向" class="headerlink" title="重定向"></a>重定向</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> fd = open(<span class="string">"a.txt"</span>);</span><br><span class="line">dup2(STDOUT_FILENO, fd); <span class="comment">//???</span></span><br></pre></td></tr></table></figure>
+<h2 id="进程管理"><a href="#进程管理" class="headerlink" title="进程管理"></a>进程管理</h2><ul>
+<li>fork</li>
+<li>execve</li>
+<li>exit<ul>
+<li><code>exit()</code>是库函数，<code>_exit()</code>是系统调用</li>
+</ul>
+</li>
+</ul>
+<h2 id="文件描述符"><a href="#文件描述符" class="headerlink" title="文件描述符"></a>文件描述符</h2><p>一个指向os内对象的指针<br><code>fork-exec</code>不改变文件描述符<br><code>int dup2(int oldfd, int newfd);</code> - 关闭<code>newfd</code>，并复制<code>oldfd</code>到<code>newfd</code>(<code>dup+close</code>的并发版)</p>
+<h3 id="重定向"><a href="#重定向" class="headerlink" title="重定向"></a>重定向</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">pid_t</span> pid = fork();</span><br><span class="line">assert(pid != <span class="number">0</span>);</span><br><span class="line"><span class="keyword">if</span>(pid == <span class="number">0</span>) &#123; <span class="comment">//子进程</span></span><br><span class="line">    <span class="keyword">int</span> fd = open(...);</span><br><span class="line">    dup2(fd, STDOUT_FILENO);</span><br><span class="line">    close(fd);</span><br><span class="line">    execve(...);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span>&#123;...&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="管道"><a href="#管道" class="headerlink" title="管道"></a>管道</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(pipe(fds) != <span class="number">0</span>) &#123;panic(<span class="string">"pipe error"</span>);&#125;</span><br><span class="line">pid = fork();</span><br><span class="line"><span class="keyword">if</span>(pid == <span class="number">0</span>) &#123;<span class="comment">//child</span></span><br><span class="line">    dup2(fds[<span class="number">1</span>], STUOUT_FILENO); <span class="comment">//连接写口，往管道内写数据</span></span><br><span class="line">    close(fds[<span class="number">1</span>]);</span><br><span class="line">    close(fds[<span class="number">0</span>]);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span>&#123; <span class="comment">//parent</span></span><br><span class="line">    dup2(fds[<span class="number">0</span>], STDIN_FILENO); <span class="comment">//连接读口，从管道内读数据</span></span><br><span class="line">    close(fds[<span class="number">0</span>]);</span><br><span class="line">    close(fds[<span class="number">1</span>]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="信号"><a href="#信号" class="headerlink" title="信号"></a>信号</h2><p>进程组实现</p>
 <h2 id="进程调度"><a href="#进程调度" class="headerlink" title="进程调度"></a>进程调度</h2><h3 id="衡量标准"><a href="#衡量标准" class="headerlink" title="衡量标准"></a>衡量标准</h3><ul>
@@ -478,7 +499,7 @@ height:50vh;
 </ul>
 <h3 id="FIFO"><a href="#FIFO" class="headerlink" title="FIFO"></a>FIFO</h3><ul>
 <li>优点：简单易实现</li>
-<li>缺点： 会产生护航效应</li>
+<li>缺点： 会产生护航效应（有一个<s>不要脸的</s>任务占坑很久）</li>
 </ul>
 <h3 id="SJF-Shortest-Job-First"><a href="#SJF-Shortest-Job-First" class="headerlink" title="SJF(Shortest Job First)"></a>SJF(Shortest Job First)</h3><ul>
 <li>当假设所有任务同时到达时的最优算法</li>
@@ -533,23 +554,30 @@ height:50vh;
 </ul>
 <h3 id="多处理器调度"><a href="#多处理器调度" class="headerlink" title="多处理器调度"></a>多处理器调度</h3><p>不想看了【瘫</p>
 <h2 id="链接和加载"><a href="#链接和加载" class="headerlink" title="链接和加载"></a>链接和加载</h2><ul>
-<li>静态链接下的加载：<code>_start-&gt;__libc_start_main-&gt;generic_start_main-&gt;...-&gt;main</code></li>
+<li>静态链接下的加载：<code>_start(程序自己的)-&gt;__libc_start_main-&gt;generic_start_main-&gt;...-&gt;main</code></li>
 <li>动态链接：<ul>
-<li>PLT：程序链接表，放入进行链接的代码，方便lazy linking</li>
+<li>PLT：程序链接表，放入进行链接的代码，方便lazy linking(名字叫表格其实就是一小段代码，用来判断是否已经完成链接)</li>
 <li>GOT：全局偏移表，存放函数代码开始的地址</li>
 </ul>
 </li>
 </ul>
-<h2 id="虚存抽象"><a href="#虚存抽象" class="headerlink" title="虚存抽象"></a>虚存抽象</h2><ul>
-<li>mmap：把操作系统里的对象映射到进程的地址空间<ul>
+<h3 id="第一条指令"><a href="#第一条指令" class="headerlink" title="第一条指令"></a>第一条指令</h3><ul>
+<li>静态链接：<code>a.out</code>的entry</li>
+<li>动态链接：<code>ld.so</code>的entry</li>
+<li>动态链接libc：链接器使用一系列mmap把libc链接进进程地址空间</li>
+</ul>
+<h2 id="虚存抽象"><a href="#虚存抽象" class="headerlink" title="虚存抽象"></a>虚存抽象</h2><p>多级页表(PML): 复习ICS<br>反置页表(IPT): 硬件维护一个全局的hash table，计算$f(as,x)$<br>IPT实现Copy-on-Write有困难，且PML能高效地标记一段连续内存为某个权限</p>
+<h3 id="mmap"><a href="#mmap" class="headerlink" title="mmap"></a>mmap</h3><p>把操作系统里的对象映射到进程的地址空间</p>
+<ul>
 <li>e.g.加载可执行文件的时候把文件搬到某个地址处</li>
 <li>不映射任何文件的时候就相当于malloc</li>
 <li>只记录相关信息，余下的等发生缺页时再处理，所以非常快</li>
 <li>可以用红黑树维护分配的内存</li>
 <li>fork采用写时复制</li>
 </ul>
-</li>
-</ul>
+<h3 id="进程的地址空间"><a href="#进程的地址空间" class="headerlink" title="进程的地址空间"></a>进程的地址空间</h3><p><code>pmap</code>-查看进程的地址空间</p>
+<p>静态链接的程序的地址空间：代码、数据、bss、堆、栈、用户态系统调用<br>动态链接：多了动态链接库和链接器</p>
+<h1 id="期中复习"><a href="#期中复习" class="headerlink" title="期中复习"></a>期中复习</h1><p>系统调用：操作系统为用户进程提供的一组API，通常在内核空间中实现，实现用户进程对操作系统对象/物理硬件访问的请求。<br>进程=操作系统中的数据<br>系统调用=这些数据上的操作</p>
 
     </article>
     <!-- license  -->
@@ -704,7 +732,7 @@ top:50vh;
         <div class="toc-catalog">
             <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
         </div>
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#应用眼中的OS"><span class="toc-number">1.</span> <span class="toc-text">应用眼中的OS</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#并发"><span class="toc-number">2.</span> <span class="toc-text">并发</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#共享内存多线程"><span class="toc-number">2.1.</span> <span class="toc-text">共享内存多线程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#互斥"><span class="toc-number">2.2.</span> <span class="toc-text">互斥</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#几种上锁方法"><span class="toc-number">2.2.1.</span> <span class="toc-text">几种上锁方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#同步-CV"><span class="toc-number">2.3.</span> <span class="toc-text">同步(CV)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#信号量"><span class="toc-number">2.4.</span> <span class="toc-text">信号量</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#APIs"><span class="toc-number">2.4.1.</span> <span class="toc-text">APIs</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#并发Bugs"><span class="toc-number">2.5.</span> <span class="toc-text">并发Bugs</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#死锁出现的四个条件"><span class="toc-number">2.5.1.</span> <span class="toc-text">死锁出现的四个条件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#对付死锁"><span class="toc-number">2.5.2.</span> <span class="toc-text">对付死锁</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#虚拟化"><span class="toc-number">3.</span> <span class="toc-text">虚拟化</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#进程抽象"><span class="toc-number">3.1.</span> <span class="toc-text">进程抽象</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#进程状态"><span class="toc-number">3.1.1.</span> <span class="toc-text">进程状态</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实现进程"><span class="toc-number">3.1.2.</span> <span class="toc-text">实现进程</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#文件描述符"><span class="toc-number">3.2.</span> <span class="toc-text">文件描述符</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#重定向"><span class="toc-number">3.2.1.</span> <span class="toc-text">重定向</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#管道"><span class="toc-number">3.2.2.</span> <span class="toc-text">管道</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#信号"><span class="toc-number">3.3.</span> <span class="toc-text">信号</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#进程调度"><span class="toc-number">3.4.</span> <span class="toc-text">进程调度</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#衡量标准"><span class="toc-number">3.4.1.</span> <span class="toc-text">衡量标准</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#FIFO"><span class="toc-number">3.4.2.</span> <span class="toc-text">FIFO</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SJF-Shortest-Job-First"><span class="toc-number">3.4.3.</span> <span class="toc-text">SJF(Shortest Job First)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#STCF-Shortest-Time-to-Completion-First"><span class="toc-number">3.4.4.</span> <span class="toc-text">STCF(Shortest Time-to-Completion First)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RR-Round-Robin"><span class="toc-number">3.4.5.</span> <span class="toc-text">RR(Round Robin)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MLFQ-Multi-level-Feedback-Queue"><span class="toc-number">3.4.6.</span> <span class="toc-text">MLFQ(Multi-level Feedback Queue)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#优先级的修改"><span class="toc-number">3.4.6.1.</span> <span class="toc-text">优先级的修改</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Basic-Rules"><span class="toc-number">3.4.6.2.</span> <span class="toc-text">Basic Rules</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PS-Proportional-share"><span class="toc-number">3.4.7.</span> <span class="toc-text">PS(Proportional-share)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#lottery-scheduling"><span class="toc-number">3.4.7.1.</span> <span class="toc-text">lottery scheduling</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#stride-scheduling"><span class="toc-number">3.4.7.2.</span> <span class="toc-text">stride scheduling</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#多处理器调度"><span class="toc-number">3.4.8.</span> <span class="toc-text">多处理器调度</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#链接和加载"><span class="toc-number">3.5.</span> <span class="toc-text">链接和加载</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#虚存抽象"><span class="toc-number">3.6.</span> <span class="toc-text">虚存抽象</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#应用眼中的OS"><span class="toc-number">1.</span> <span class="toc-text">应用眼中的OS</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#并发"><span class="toc-number">2.</span> <span class="toc-text">并发</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#共享内存多线程"><span class="toc-number">2.1.</span> <span class="toc-text">共享内存多线程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#互斥"><span class="toc-number">2.2.</span> <span class="toc-text">互斥</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#几种上锁方法"><span class="toc-number">2.2.1.</span> <span class="toc-text">几种上锁方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#同步-CV"><span class="toc-number">2.3.</span> <span class="toc-text">同步(CV)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#使用条件变量"><span class="toc-number">2.3.1.</span> <span class="toc-text">使用条件变量</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#信号量"><span class="toc-number">2.4.</span> <span class="toc-text">信号量</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#APIs"><span class="toc-number">2.4.1.</span> <span class="toc-text">APIs</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#哲学家吃饭问题"><span class="toc-number">2.4.2.</span> <span class="toc-text">哲学家吃饭问题</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#并发Bugs"><span class="toc-number">2.5.</span> <span class="toc-text">并发Bugs</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#死锁出现的四个条件"><span class="toc-number">2.5.1.</span> <span class="toc-text">死锁出现的四个条件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#对付死锁"><span class="toc-number">2.5.2.</span> <span class="toc-text">对付死锁</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#虚拟化"><span class="toc-number">3.</span> <span class="toc-text">虚拟化</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#进程抽象"><span class="toc-number">3.1.</span> <span class="toc-text">进程抽象</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#进程状态"><span class="toc-number">3.1.1.</span> <span class="toc-text">进程状态</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实现进程"><span class="toc-number">3.1.2.</span> <span class="toc-text">实现进程</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#进程管理"><span class="toc-number">3.2.</span> <span class="toc-text">进程管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#文件描述符"><span class="toc-number">3.3.</span> <span class="toc-text">文件描述符</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#重定向"><span class="toc-number">3.3.1.</span> <span class="toc-text">重定向</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#管道"><span class="toc-number">3.3.2.</span> <span class="toc-text">管道</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#信号"><span class="toc-number">3.4.</span> <span class="toc-text">信号</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#进程调度"><span class="toc-number">3.5.</span> <span class="toc-text">进程调度</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#衡量标准"><span class="toc-number">3.5.1.</span> <span class="toc-text">衡量标准</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#FIFO"><span class="toc-number">3.5.2.</span> <span class="toc-text">FIFO</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SJF-Shortest-Job-First"><span class="toc-number">3.5.3.</span> <span class="toc-text">SJF(Shortest Job First)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#STCF-Shortest-Time-to-Completion-First"><span class="toc-number">3.5.4.</span> <span class="toc-text">STCF(Shortest Time-to-Completion First)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RR-Round-Robin"><span class="toc-number">3.5.5.</span> <span class="toc-text">RR(Round Robin)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MLFQ-Multi-level-Feedback-Queue"><span class="toc-number">3.5.6.</span> <span class="toc-text">MLFQ(Multi-level Feedback Queue)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#优先级的修改"><span class="toc-number">3.5.6.1.</span> <span class="toc-text">优先级的修改</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Basic-Rules"><span class="toc-number">3.5.6.2.</span> <span class="toc-text">Basic Rules</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PS-Proportional-share"><span class="toc-number">3.5.7.</span> <span class="toc-text">PS(Proportional-share)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#lottery-scheduling"><span class="toc-number">3.5.7.1.</span> <span class="toc-text">lottery scheduling</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#stride-scheduling"><span class="toc-number">3.5.7.2.</span> <span class="toc-text">stride scheduling</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#多处理器调度"><span class="toc-number">3.5.8.</span> <span class="toc-text">多处理器调度</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#链接和加载"><span class="toc-number">3.6.</span> <span class="toc-text">链接和加载</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#第一条指令"><span class="toc-number">3.6.1.</span> <span class="toc-text">第一条指令</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#虚存抽象"><span class="toc-number">3.7.</span> <span class="toc-text">虚存抽象</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#mmap"><span class="toc-number">3.7.1.</span> <span class="toc-text">mmap</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#进程的地址空间"><span class="toc-number">3.7.2.</span> <span class="toc-text">进程的地址空间</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#期中复习"><span class="toc-number">4.</span> <span class="toc-text">期中复习</span></a></li></ol>
     </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
@@ -717,40 +745,6 @@ top:50vh;
     <div class="sidebar-content sidebar-content-show-archive">
           <div class="sidebar-panel-archives">
     <!-- 在ejs中将archive按照时间排序 -->
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
     
     
@@ -1797,12 +1791,12 @@ top:50vh;
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">10/04</span><a class="archive-post-title" href= "/2018/10/04/PA1-report/" >PA1实验报告</a>
+            <span class="archive-post-date">10/04</span><a class="archive-post-title" href= "/2018/10/04/pa-inspirations/" >做pa的时候可能会用到的操作</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">10/04</span><a class="archive-post-title" href= "/2018/10/04/pa-inspirations/" >做pa的时候可能会用到的操作</a>
+            <span class="archive-post-date">10/04</span><a class="archive-post-title" href= "/2018/10/04/PA1-report/" >PA1实验报告</a>
         </li>
     
     
@@ -1875,6 +1869,8 @@ top:50vh;
         <div class="sidebar-panel-tags">
     <div class="sidebar-tags-name">
     
+        <span class="sidebar-tag-name" data-tags="Flags"><span class="iconfont-archer">&#xe606;</span>Flags</span>
+    
         <span class="sidebar-tag-name" data-tags="Math Modeling"><span class="iconfont-archer">&#xe606;</span>Math Modeling</span>
     
         <span class="sidebar-tag-name" data-tags="Notes"><span class="iconfont-archer">&#xe606;</span>Notes</span>
@@ -1885,8 +1881,6 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="Problem Solving"><span class="iconfont-archer">&#xe606;</span>Problem Solving</span>
     
-        <span class="sidebar-tag-name" data-tags="Flags"><span class="iconfont-archer">&#xe606;</span>Flags</span>
-    
         <span class="sidebar-tag-name" data-tags="Machine Learning"><span class="iconfont-archer">&#xe606;</span>Machine Learning</span>
     
         <span class="sidebar-tag-name" data-tags="Assembly Language"><span class="iconfont-archer">&#xe606;</span>Assembly Language</span>
@@ -1895,19 +1889,19 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="dynamic programming"><span class="iconfont-archer">&#xe606;</span>dynamic programming</span>
     
+        <span class="sidebar-tag-name" data-tags="greedy algorithm"><span class="iconfont-archer">&#xe606;</span>greedy algorithm</span>
+    
+        <span class="sidebar-tag-name" data-tags="amortized analysis"><span class="iconfont-archer">&#xe606;</span>amortized analysis</span>
+    
         <span class="sidebar-tag-name" data-tags="Disjoint Sets"><span class="iconfont-archer">&#xe606;</span>Disjoint Sets</span>
     
         <span class="sidebar-tag-name" data-tags="Data Structure"><span class="iconfont-archer">&#xe606;</span>Data Structure</span>
-    
-        <span class="sidebar-tag-name" data-tags="amortized analysis"><span class="iconfont-archer">&#xe606;</span>amortized analysis</span>
     
         <span class="sidebar-tag-name" data-tags="Single Source Shortest Path"><span class="iconfont-archer">&#xe606;</span>Single Source Shortest Path</span>
     
         <span class="sidebar-tag-name" data-tags="Bellman-Ford"><span class="iconfont-archer">&#xe606;</span>Bellman-Ford</span>
     
         <span class="sidebar-tag-name" data-tags="Dijkstra"><span class="iconfont-archer">&#xe606;</span>Dijkstra</span>
-    
-        <span class="sidebar-tag-name" data-tags="greedy algorithm"><span class="iconfont-archer">&#xe606;</span>greedy algorithm</span>
     
         <span class="sidebar-tag-name" data-tags="Graph Algorithms"><span class="iconfont-archer">&#xe606;</span>Graph Algorithms</span>
     
@@ -1919,13 +1913,13 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="college life"><span class="iconfont-archer">&#xe606;</span>college life</span>
     
-        <span class="sidebar-tag-name" data-tags="ics"><span class="iconfont-archer">&#xe606;</span>ics</span>
-    
-        <span class="sidebar-tag-name" data-tags="process calling"><span class="iconfont-archer">&#xe606;</span>process calling</span>
-    
         <span class="sidebar-tag-name" data-tags="Lab"><span class="iconfont-archer">&#xe606;</span>Lab</span>
     
         <span class="sidebar-tag-name" data-tags="Ics"><span class="iconfont-archer">&#xe606;</span>Ics</span>
+    
+        <span class="sidebar-tag-name" data-tags="ics"><span class="iconfont-archer">&#xe606;</span>ics</span>
+    
+        <span class="sidebar-tag-name" data-tags="process calling"><span class="iconfont-archer">&#xe606;</span>process calling</span>
     
         <span class="sidebar-tag-name" data-tags="Matchings"><span class="iconfont-archer">&#xe606;</span>Matchings</span>
     
@@ -1945,13 +1939,13 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="linux"><span class="iconfont-archer">&#xe606;</span>linux</span>
     
-        <span class="sidebar-tag-name" data-tags="tmux"><span class="iconfont-archer">&#xe606;</span>tmux</span>
-    
         <span class="sidebar-tag-name" data-tags="Java"><span class="iconfont-archer">&#xe606;</span>Java</span>
     
         <span class="sidebar-tag-name" data-tags="programming"><span class="iconfont-archer">&#xe606;</span>programming</span>
     
         <span class="sidebar-tag-name" data-tags="markdown"><span class="iconfont-archer">&#xe606;</span>markdown</span>
+    
+        <span class="sidebar-tag-name" data-tags="tmux"><span class="iconfont-archer">&#xe606;</span>tmux</span>
     
         <span class="sidebar-tag-name" data-tags="Traversibility"><span class="iconfont-archer">&#xe606;</span>Traversibility</span>
     
@@ -1992,11 +1986,11 @@ jsonContent:
         <div class="sidebar-panel-categories">
     <div class="sidebar-categories-name">
     
+        <span class="sidebar-category-name" data-categories="Flags"><span class="iconfont-archer">&#xe60a;</span>Flags</span>
+    
         <span class="sidebar-category-name" data-categories="Diary"><span class="iconfont-archer">&#xe60a;</span>Diary</span>
     
         <span class="sidebar-category-name" data-categories="Notes"><span class="iconfont-archer">&#xe60a;</span>Notes</span>
-    
-        <span class="sidebar-category-name" data-categories="Flags"><span class="iconfont-archer">&#xe60a;</span>Flags</span>
     
         <span class="sidebar-category-name" data-categories="Self-learning"><span class="iconfont-archer">&#xe60a;</span>Self-learning</span>
     
