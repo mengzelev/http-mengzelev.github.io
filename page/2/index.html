@@ -354,6 +354,157 @@ height:50vh;
     
     
     <article class="index-post">
+        <a class="abstract-title" href = "/2019/05/18/ps-4-12-Approximation-Algorithms/" >
+            
+                <span>难问题求解学习笔记-近似算法</span>
+        </a>
+        <div class="abstract-content">
+            概念近似算法是能提供最优化问题的可行解的算法，所提供的解的质量不会与最优解相差太多
+形式化定义：$U={\Sigma_I, \Sigma_O, L, L_I, \mathcal{M}, cost, goal}$是一个最优化问题，$A$是$U$的consistent algorithm. 对任意$x\in L_I$, $A$在$x$上的相对误差(relative error)$\varepsilon_A(x)$定义为$$\varepsilon_A(x)=\frac{|cost(A(x))-Opt_U(x)|}{Opt_U(x)}$$对任意$x\in\mathbb{N}$,定义$A$的相对误...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/05/18</span>
+            </div>
+            <!-- tags  -->
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href = "/2019/04/19/oj-templates/" >
+            
+                <span>自己看得惯的板子整理</span>
+        </a>
+        <div class="abstract-content">
+            动态规划状态压缩dpdfs版1234567891011121314151617int dfs(int i, int rnd, int status) &#123;    int j;    if (status == two[num] - 1) return 0;    if (f[i][status] &gt; 0) return f[i][status];    int q = 1e9;    for (j = num; j &gt; 0; --j) &#123;        int temp = 1 &lt;&lt; (j - 1);        if (j != i &amp...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/04/19</span>
+            </div>
+            <!-- tags  -->
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href = "/2019/04/15/os-midterm/" >
+            
+                <span>os期中复习</span>
+        </a>
+        <div class="abstract-content">
+            应用眼中的OS
+操作系统一方面需要提供程序的执行的环境和相应的资源，还要提供和操作系统世界中其他对象交互的方法和约定
+
+并发共享内存多线程
+并发定义：一个程序、算法或问题的不同部分乱序或偏序执行而不影响最终结果的能力
+程序经历了什么？
+
+编译器优化$\to$顺序丧失
+操作系统中断，多处理器、缓存(硬件)$\to$原子性(all or nothing)丧失
+缓存，乱序（硬件）$\to$可见性丧失
+
+
+顺序丧失：允许源代码中内存访问指令不再按顺序甚至不再出现
+
+原子性的丧失：指令序列可以在任意时刻被中断，然后操作系统切换到其他线程执行
+可见性丧失：缓存&amp;乱序
+
+互斥评估一把锁的基本准...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/04/15</span>
+            </div>
+            <!-- tags  -->
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href = "/2019/04/13/ps-4-7-cryptographic-algorithm/" >
+            
+                <span>问题求解学习笔记-密码算法</span>
+        </a>
+        <div class="abstract-content">
+            RSA公钥加密系统每个参与者都有一把公钥($P$)和密钥($S$)
+$\mathcal{D}$表示允许信息的集合，要求公钥与密钥指定一种从$\mathcal{D}$到自身的一一对应的函数。Alice的公钥函数$P_A$和密钥函数$S_A$都是$\mathcal{D}$的排列
+系统中任何参与者的公钥与密钥都是匹配对，指定函数互为反函数，对任何消息$M\in \mathcal{D}$，有$$M=S_A(P_A(M))$$$$M=P_A(S_A(M))$$
+加密过程
+Bob取得Alice的公钥$P_A$
+Bob计算出相应与$M$的密文$C=P_A(M)$，并把$C$发送给Alice
+当Alic...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/04/13</span>
+            </div>
+            <!-- tags  -->
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href = "/2019/04/06/clrs-31Number-Theoretic-Algorithms/" >
+            
+                <span>算法导论学习笔记-数论算法</span>
+        </a>
+        <div class="abstract-content">
+            输入规模和算数计算的代价给定$k$个整数输入$a_1,a_2,\cdots ,a_k$，如果算法可以在关于$\lg~a_1,\lg~a_2,\cdots ,\lg~a_k$的多项式时间内完成，即算法在关于二进制编码后的输入长度的多项式时间内完成，则称该算法为多项式时间算法
+当输入很大时，基本运算也会变得耗时。两个$\beta$位整数相乘需要耗时$\Theta(\beta^2)$.一个$\beta$为整数除以另一个较短整数的商或余数需要耗时$\Theta(\beta^2)$
+基础数论概念整除性与约数你懂的
+素数与合数你也懂的
+除法定理、余数和等模定理31.1(除法定理): 对于任何整数$a...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/04/06</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Problem Solving">Problem Solving</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "CLRS">CLRS</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href = "/2019/03/30/ps-4-6-basic-number-theory/" >
             
                 <span>问题求解学习笔记-数论基础</span>
@@ -535,235 +686,10 @@ $a$为非零整数，$gcd(a,n)=1$当且仅当$a$存在乘法逆元，即存在�
         </div>
     </article>
     
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2019/02/18/2019-winter-flags/" >
-            
-                <span>2019年寒假计划(flags)</span>
-        </a>
-        <div class="abstract-content">
-            美赛准备
-MATLAB入门《MATLAB数学工具软件实例简明教程》
-《MATLAB在数学建模中的应用》
-研读优秀论文，总结模板
-
-项目
-学习Python
-分析minilab的git log中的CE数据
-
-HK学术竞赛
-等打完美赛再来研究
-
-番剧追番
-多罗罗
-灵能百分百第二季
-关于我转生成为史莱姆的这档事
-强风吹拂
-不吉波普不笑
-约定的梦幻岛 
-
-补番
-战栗杀机
-小林家的龙女仆
-
-吉他
-看B站教学视频
-
-
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/02/18</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Flags">Flags</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2019/02/13/clrs-29Linear-Programming/" >
-            
-                <span>算法导论学习笔记-线性规划</span>
-        </a>
-        <div class="abstract-content">
-            知识背景
-一个线性规划问题是一个线性函数最小化或最大化的问题，该线性函数服从一组有限个线性约束，分为最小化线性规划和最大化线性规划
-可行解：所有满足约束条件的自变量的取值
-可行区域：所有可行解在二维空间中构成的凸区域
-目标函数：希望最大化的函数
-目标值：目标函数在一个特定点上的值
-最优解：所有目标值中最大的一个，其目标值为最优目标值
-不可行的：一个线性规划没有可行解
-无界的：一个线性规划有可行解但没有有限的最优目标值
-
-标准型和松弛型标准型
-所有的约束都是不等式
-标准型=目标函数+约束+非负约束
-
-
-
-重写为向量与矩阵的形式，可以用一个元组$(A,b,c)$来表示一个标准型的线性规划
-
-...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/02/13</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Problem Solving">Problem Solving</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "CLRS">CLRS</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Graph Algorithms">Graph Algorithms</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2019/02/12/SVM-getstart/" >
-            
-                <span>SVM的临时抱佛脚for HK</span>
-        </a>
-        <div class="abstract-content">
-            参考资料B站 机器学习（Machine Learning）- 吴恩达（Andrew Ng）
-关于调参使用SVM需要指定的参数
-
-参数$C$
-$C$较大：小偏差，大方差
-$C$较小：大偏差，小方差
-
-
-核函数(kernel)的选择
-线性核函数(Linear Kernel/No Kernel)
-高斯核函数(Gaussian Kernel)
-以上是两个最常用的核函数
-多项式核函数
-字符串核函数
-卡方核函数
-….
-
-
-
-$n=$number of features, $m=$number of training examples
-
-If $n$ is large(relative to $m$)...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/02/12</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Notes">Notes</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Machine Learning">Machine Learning</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2019/02/11/HKUST-discussion/" >
-            
-                <span>HKUST项目讨论内容</span>
-        </a>
-        <div class="abstract-content">
-            问题理解原文【来自有道机翻】预测Sklearn程序的运行时间在共享基础设施上高效运行分布式应用程序具有挑战性。过去的研究表明，选择合适的硬件配置可以显著提高性能和降低成本。为了选择最佳配置，需要准确地预测不同应用程序的性能。
-我们考虑这个挑战的一个简化版本:预测单个服务器上机器学习程序的性能。Scikit-learn (sklearn)是一个用于python的机器学习库。提供的数据集描述了在sklearn中运行SGDClassifier的几个示例。数据集的特征描述了SGDClassifier以及用于生成综合训练数据的特征。待分析数据为SGDClassifier的训练时间。
-在这个文件夹中...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/02/11</span>
-            </div>
-            <!-- tags  -->
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2019/01/30/ICM-feelings/" >
-            
-                <span>2019美赛经历</span>
-        </a>
-        <div class="abstract-content">
-            在经过了一夜的通宵之后终于把论文交上去惹，然后睡了一天，摸了一天，终于想起来要写这篇blog了。
-赛前准备
-学习MATLAB基本语法，笔记见MATLAB临时抱佛脚
-学习数模基本算法，资料见NJUBroccoli的github仓库
-抄写常用算法模板，如：规划问题、AHP、灰色系统、灰色预测、主成分分析、方差分析等
-阅读往年赛题和O奖论文，摸清套路
-和朋友出去看电影
-和队友做迫真模拟
-补番
-
-团队配置
-po主：cs大二狗，会C/C++，LaTeX，以及Java和Verilog的皮毛，MATLAB是比赛前速成的。建模、计算、写论文、校对多面打杂，兼职美工和排版工人。
-队友A：数学系大二小姐姐。...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/01/30</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Math Modeling">Math Modeling</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
     <!-- paginator  -->
     
     <nav class="page-nav">
-        <a class="extend prev" rel="prev" href="/">&#60; PREV</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/3/">NEXT &#62;</a>
+        <a class="extend prev" rel="prev" href="/">&#60; PREV</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/3/">NEXT &#62;</a>
     </nav>
     
 </main>
@@ -783,7 +709,7 @@ po主：cs大二狗，会C/C++，LaTeX，以及Java和Verilog的皮毛，MATLAB�
     
         
             
-                <a href="mailto:913426715@qq.com" class="iconfont-archer email" title=email ></a>
+                <a href="mailto:Mengzelev@gmail.com" class="iconfont-archer email" title=email ></a>
             
         
     
@@ -860,7 +786,7 @@ po主：cs大二狗，会C/C++，LaTeX，以及Java和Verilog的皮毛，MATLAB�
     
         
             
-                <a href="mailto:913426715@qq.com" class="iconfont-archer email" title=email ></a>
+                <a href="mailto:Mengzelev@gmail.com" class="iconfont-archer email" title=email ></a>
             
         
     
@@ -1793,9 +1719,122 @@ po主：cs大二狗，会C/C++，LaTeX，以及Java和Verilog的皮毛，MATLAB�
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 57
+        Total : 62
         </div>
         <!-- search  -->
         
@@ -1808,6 +1847,31 @@ po主：cs大二狗，会C/C++，LaTeX，以及Java和Verilog的皮毛，MATLAB�
     
     <div class="archive-year"> 2019 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/03</span><a class="archive-post-title" href= "/2019/11/03/tofel-1st-exp/" >托福首考日记</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/12</span><a class="archive-post-title" href= "/2019/10/12/network-notes/" >计算机网络-课程笔记</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/11</span><a class="archive-post-title" href= "/2019/10/11/dip-notes/" >数字图像处理课程笔记</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/09</span><a class="archive-post-title" href= "/2019/10/09/database/" >数据库学习笔记</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/20</span><a class="archive-post-title" href= "/2019/07/20/paper-reading/" >论文阅读笔记</a>
+        </li>
     
     
         <li class="archive-post-item">
@@ -2116,31 +2180,31 @@ po主：cs大二狗，会C/C++，LaTeX，以及Java和Verilog的皮毛，MATLAB�
     
         <span class="sidebar-tag-name" data-tags="pa"><span class="iconfont-archer">&#xe606;</span>pa</span>
     
-        <span class="sidebar-tag-name" data-tags="ICS"><span class="iconfont-archer">&#xe606;</span>ICS</span>
-    
         <span class="sidebar-tag-name" data-tags="Problem Solving"><span class="iconfont-archer">&#xe606;</span>Problem Solving</span>
     
         <span class="sidebar-tag-name" data-tags="Machine Learning"><span class="iconfont-archer">&#xe606;</span>Machine Learning</span>
     
-        <span class="sidebar-tag-name" data-tags="Assembly Language"><span class="iconfont-archer">&#xe606;</span>Assembly Language</span>
+        <span class="sidebar-tag-name" data-tags="ICS"><span class="iconfont-archer">&#xe606;</span>ICS</span>
     
         <span class="sidebar-tag-name" data-tags="CLRS"><span class="iconfont-archer">&#xe606;</span>CLRS</span>
     
-        <span class="sidebar-tag-name" data-tags="greedy algorithm"><span class="iconfont-archer">&#xe606;</span>greedy algorithm</span>
-    
         <span class="sidebar-tag-name" data-tags="dynamic programming"><span class="iconfont-archer">&#xe606;</span>dynamic programming</span>
     
+        <span class="sidebar-tag-name" data-tags="Assembly Language"><span class="iconfont-archer">&#xe606;</span>Assembly Language</span>
+    
+        <span class="sidebar-tag-name" data-tags="greedy algorithm"><span class="iconfont-archer">&#xe606;</span>greedy algorithm</span>
+    
         <span class="sidebar-tag-name" data-tags="amortized analysis"><span class="iconfont-archer">&#xe606;</span>amortized analysis</span>
+    
+        <span class="sidebar-tag-name" data-tags="Disjoint Sets"><span class="iconfont-archer">&#xe606;</span>Disjoint Sets</span>
+    
+        <span class="sidebar-tag-name" data-tags="Data Structure"><span class="iconfont-archer">&#xe606;</span>Data Structure</span>
     
         <span class="sidebar-tag-name" data-tags="Single Source Shortest Path"><span class="iconfont-archer">&#xe606;</span>Single Source Shortest Path</span>
     
         <span class="sidebar-tag-name" data-tags="Bellman-Ford"><span class="iconfont-archer">&#xe606;</span>Bellman-Ford</span>
     
         <span class="sidebar-tag-name" data-tags="Dijkstra"><span class="iconfont-archer">&#xe606;</span>Dijkstra</span>
-    
-        <span class="sidebar-tag-name" data-tags="Disjoint Sets"><span class="iconfont-archer">&#xe606;</span>Disjoint Sets</span>
-    
-        <span class="sidebar-tag-name" data-tags="Data Structure"><span class="iconfont-archer">&#xe606;</span>Data Structure</span>
     
         <span class="sidebar-tag-name" data-tags="Graph Algorithms"><span class="iconfont-archer">&#xe606;</span>Graph Algorithms</span>
     
@@ -2184,9 +2248,9 @@ po主：cs大二狗，会C/C++，LaTeX，以及Java和Verilog的皮毛，MATLAB�
     
         <span class="sidebar-tag-name" data-tags="programming"><span class="iconfont-archer">&#xe606;</span>programming</span>
     
-        <span class="sidebar-tag-name" data-tags="Traversibility"><span class="iconfont-archer">&#xe606;</span>Traversibility</span>
-    
         <span class="sidebar-tag-name" data-tags="tmux"><span class="iconfont-archer">&#xe606;</span>tmux</span>
+    
+        <span class="sidebar-tag-name" data-tags="Traversibility"><span class="iconfont-archer">&#xe606;</span>Traversibility</span>
     
         <span class="sidebar-tag-name" data-tags="Graph"><span class="iconfont-archer">&#xe606;</span>Graph</span>
     

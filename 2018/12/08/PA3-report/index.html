@@ -269,7 +269,7 @@ height:50vh;
                 
                 
                     <div class="post-intro-read">
-                        <span>Word count: <span class="post-count">2,503</span> / Reading time: <span class="post-count">9 min</span></span>
+                        <span>Word count: <span class="post-count">1,752</span> / Reading time: <span class="post-count">6 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
@@ -405,32 +405,7 @@ height:50vh;
 <p>2018/12/1<br>开始自闭PA3.3，实现了文件读写操作，死活看不到PASS!!!，文件读写时对长度超过文件大小的情况的处理有一些麻烦，调了半天，最后发现是PA3.2时就好了的SYS_write没有加上刚刚写的<code>fs_write</code>，喷了。开始编写设备文件操作，看不懂vga那块到底是要干啥，机房关门了，回去睡觉。</p>
 <p>2018/12/2<br>继续自闭PA3.3。为了看懂VGA那块的架构直接翻出了bmptest的源码，然后一路摸到NDL库的源码，花了大概一个下去终于显示出了ProjectN的Logo。实现<code>events_read()</code>时还把事件的格式搞错了debug了半天，终于可以开始跑仙剑了。小心翼翼地开始游戏，没有注释掉<code>Log</code>因此看到了瀑布般的<code>Log</code>信息，然后50min才播放完片头对话，所幸无事。然后注释掉了所有<code>Log</code>，又胆战心惊地开始尝试所有存档点，尝试了穿墙和穿人，全部失败，确认了没有肉眼可见的bug。长舒一口气，然后加急写完了批处理系统，机房关门，走人。难以置信我居然跑出了仙剑，亢奋。</p>
 <h1 id="必答题"><a href="#必答题" class="headerlink" title="必答题"></a>必答题</h1><p><s>其实我写PA的时候都在系统调用过程梳理里做好笔记了</s></p>
-<h2 id="游戏的存档"><a href="#游戏的存档" class="headerlink" title="游戏的存档"></a>游戏的存档</h2><ul>
-<li>仙剑奇侠传中调用C标准I/O库函数<code>fread()</code></li>
-<li>库函数<code>fread()</code>会调用libos中的系统调用的封装函数<code>_read()</code></li>
-<li>libos中的<code>_read()</code>函数通过调用<code>_syscall_()</code>，直接使用内联汇编语句编译出<code>int 0x81</code>的系统调用内陷指令，并将相应的参数放入约定的寄存器中(<code>%eax</code>,<code>%ebx</code>，<code>%ecx</code>，<code>%edx</code>)</li>
-<li>nemu执行指令时遇到了<code>int 0x81</code>指令，译码后执行<code>raise_intr()</code>，将EFLAGS，CS，EIP的值压入栈中，并到am中的中断门描述符表<code>idt</code>中查询0x81对应的跳转目标的偏移量offset，为<code>vectrap()</code></li>
-<li><code>vectrap()</code>直接通过汇编指令将错误码<code>irq</code>压栈，然后跳转到<code>asm_jmp</code>函数执行（nexus-am/am/arch/x86-nemu/src/trap.S中定义）</li>
-<li>在<code>asm_trap</code>中通过<code>pusha</code>指令让nemu将所有寄存器压栈，然后执行<code>irq_handle()</code>函数（在nexus-am/am/arch/x86-nemu/src/cte.c中）</li>
-<li><code>irq_handle()</code>把执行流切换的原因打包成事件，然后调用在<code>_cte_init()</code> 中注册的事件处理回调函数, 将事件交给Nanos-lite来处理</li>
-<li>Nanos-lite中的<code>do_event()</code>函数根据nemu打包传过来的时间决定系统调用类型，此处是<code>_EVENT_SYSCALL</code>类型的，就调用<code>do_syscall()</code>函数来处理这个系统调用</li>
-<li><code>do_syscall()</code>根据上下文中寄存器<code>%eax</code>保存的参数确定系统调用的类型，此时为<code>SYS_read</code>类型，就调用文件系统中的<code>fs_read()</code>并将相应的参数传入</li>
-<li><code>fs_read()</code>根据传入的文件名（存档信息文件的名称）读取需要的长度到指定的位置，恢复成存档前的状态，就可以从存档点继续游戏</li>
-<li><code>fs_read()</code>执行完成后，一路返回到<code>asm_trap</code>中，恢复之前压入栈中保存的寄存器，然后执行<code>iret</code>指令</li>
-<li>nemu执行<code>iret</code>指令，恢复EFLAGS，CS，EIP，跳转到EIP所指向的地方继续执行之后的指令</li>
-</ul>
-<p>至此，一次读取存档的系统调用全部完成</p>
-<h2 id="更新屏幕"><a href="#更新屏幕" class="headerlink" title="更新屏幕"></a>更新屏幕</h2><ul>
-<li>仙剑奇侠传中调用libndl中的库函数<code>NDL_DrawRect()</code></li>
-<li><code>NDL_DrawRect()</code>会调用C标准I/O库函数<code>fwrite()</code>，将当前的像素信息写入<code>stdout</code>中，这里的<code>stdout</code>不是终端里的标准输出，而是应用程序的标准输出<code>_REENT-&gt;stdout</code></li>
-<li>系统调用过程同上，此处不再赘述。进入Nanos-lite的文件系统后，由于是对显示设备抽象成的文件<code>/dev/fb</code>进行读取，<code>fs_write()</code>调用的是<code>fb_write()</code></li>
-<li><code>fb_write()</code>调用了am的klib中提供的<code>screen_width()</code>和<code>draw_rect()</code></li>
-<li>am中的<code>draw_rect()</code>调用了vga设备的写函数<code>video_write()</code>，把相应的像素信息写入到映射到<code>vga_memory</code>的物理内存中</li>
-<li>当nemu访问到从0x4000开始的一段被映射到I/O空间的物理地址时，就会通过<code>mmio_write</code>来修改I/O空间的数据</li>
-<li>I/O空间的数据被修改后调用了<code>update_screen()</code>，由nemu把更新后的屏幕显示信息显示了出来</li>
-<li>进行系统调用的返回操作，同样不再赘述</li>
-</ul>
-<p>至此，一次更新屏幕的系统调用完成</p>
+<p>好孩子要自己做！</p>
 <h1 id="蓝框思考题"><a href="#蓝框思考题" class="headerlink" title="蓝框思考题"></a>蓝框思考题</h1><p>最近太忙了一题都没写…<br>想写的时候讲义又挂了…<br>二周目的时候再思考吧orz</p>
 <h1 id="实验中的发现"><a href="#实验中的发现" class="headerlink" title="实验中的发现"></a>实验中的发现</h1><h2 id="关于nanos-lite和nemu是怎么通讯的"><a href="#关于nanos-lite和nemu是怎么通讯的" class="headerlink" title="关于nanos-lite和nemu是怎么通讯的"></a>关于nanos-lite和nemu是怎么通讯的</h2><p>在写PA3.1中的<code>lidt</code>指令的时候，我有个很大的疑惑，<code>idt</code>是在nanos-lite里被定义的，nemu要怎么获取它的地址呢？<code>_cte_init</code>中有一步调用了<code>set_idt</code>函数，将idt的地址和大小用内联汇编语句写入了指令集。因此当nanos编译成nemu可执行的指令后，idt的地址就可以通过相应的译码函数写入<code>id_dest</code>中。<br>问了一位nb的学长后，学长给出了如下理解</p>
 <blockquote>
@@ -544,7 +519,7 @@ height:50vh;
     
         
             
-                <a href="mailto:913426715@qq.com" class="iconfont-archer email" title=email ></a>
+                <a href="mailto:Mengzelev@gmail.com" class="iconfont-archer email" title=email ></a>
             
         
     
@@ -625,7 +600,7 @@ top:50vh;
         <div class="toc-catalog">
             <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
         </div>
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#实验进度"><span class="toc-number">1.</span> <span class="toc-text">实验进度</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#必答题"><span class="toc-number">2.</span> <span class="toc-text">必答题</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#游戏的存档"><span class="toc-number">2.1.</span> <span class="toc-text">游戏的存档</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#更新屏幕"><span class="toc-number">2.2.</span> <span class="toc-text">更新屏幕</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#蓝框思考题"><span class="toc-number">3.</span> <span class="toc-text">蓝框思考题</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#实验中的发现"><span class="toc-number">4.</span> <span class="toc-text">实验中的发现</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#关于nanos-lite和nemu是怎么通讯的"><span class="toc-number">4.1.</span> <span class="toc-text">关于nanos-lite和nemu是怎么通讯的</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#关于如何判断-Context结构的组织顺序"><span class="toc-number">4.2.</span> <span class="toc-text">关于如何判断_Context结构的组织顺序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#系统调用过程梳理"><span class="toc-number">4.3.</span> <span class="toc-text">系统调用过程梳理</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#我遇到的bug"><span class="toc-number">5.</span> <span class="toc-text">我遇到的bug</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#对讲义的一些建议（你们选择性反馈给yzh）"><span class="toc-number">6.</span> <span class="toc-text">对讲义的一些建议（你们选择性反馈给yzh）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#实验心得"><span class="toc-number">7.</span> <span class="toc-text">实验心得</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Appreciation"><span class="toc-number">8.</span> <span class="toc-text">Appreciation</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#实验进度"><span class="toc-number">1.</span> <span class="toc-text">实验进度</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#必答题"><span class="toc-number">2.</span> <span class="toc-text">必答题</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#蓝框思考题"><span class="toc-number">3.</span> <span class="toc-text">蓝框思考题</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#实验中的发现"><span class="toc-number">4.</span> <span class="toc-text">实验中的发现</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#关于nanos-lite和nemu是怎么通讯的"><span class="toc-number">4.1.</span> <span class="toc-text">关于nanos-lite和nemu是怎么通讯的</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#关于如何判断-Context结构的组织顺序"><span class="toc-number">4.2.</span> <span class="toc-text">关于如何判断_Context结构的组织顺序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#系统调用过程梳理"><span class="toc-number">4.3.</span> <span class="toc-text">系统调用过程梳理</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#我遇到的bug"><span class="toc-number">5.</span> <span class="toc-text">我遇到的bug</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#对讲义的一些建议（你们选择性反馈给yzh）"><span class="toc-number">6.</span> <span class="toc-text">对讲义的一些建议（你们选择性反馈给yzh）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#实验心得"><span class="toc-number">7.</span> <span class="toc-text">实验心得</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Appreciation"><span class="toc-number">8.</span> <span class="toc-text">Appreciation</span></a></li></ol>
     </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
@@ -1495,9 +1470,122 @@ top:50vh;
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 57
+        Total : 62
         </div>
         <!-- search  -->
         
@@ -1510,6 +1598,31 @@ top:50vh;
     
     <div class="archive-year"> 2019 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/03</span><a class="archive-post-title" href= "/2019/11/03/tofel-1st-exp/" >托福首考日记</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/12</span><a class="archive-post-title" href= "/2019/10/12/network-notes/" >计算机网络-课程笔记</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/11</span><a class="archive-post-title" href= "/2019/10/11/dip-notes/" >数字图像处理课程笔记</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/09</span><a class="archive-post-title" href= "/2019/10/09/database/" >数据库学习笔记</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/20</span><a class="archive-post-title" href= "/2019/07/20/paper-reading/" >论文阅读笔记</a>
+        </li>
     
     
         <li class="archive-post-item">
@@ -1818,31 +1931,31 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="pa"><span class="iconfont-archer">&#xe606;</span>pa</span>
     
-        <span class="sidebar-tag-name" data-tags="ICS"><span class="iconfont-archer">&#xe606;</span>ICS</span>
-    
         <span class="sidebar-tag-name" data-tags="Problem Solving"><span class="iconfont-archer">&#xe606;</span>Problem Solving</span>
     
         <span class="sidebar-tag-name" data-tags="Machine Learning"><span class="iconfont-archer">&#xe606;</span>Machine Learning</span>
     
-        <span class="sidebar-tag-name" data-tags="Assembly Language"><span class="iconfont-archer">&#xe606;</span>Assembly Language</span>
+        <span class="sidebar-tag-name" data-tags="ICS"><span class="iconfont-archer">&#xe606;</span>ICS</span>
     
         <span class="sidebar-tag-name" data-tags="CLRS"><span class="iconfont-archer">&#xe606;</span>CLRS</span>
     
-        <span class="sidebar-tag-name" data-tags="greedy algorithm"><span class="iconfont-archer">&#xe606;</span>greedy algorithm</span>
-    
         <span class="sidebar-tag-name" data-tags="dynamic programming"><span class="iconfont-archer">&#xe606;</span>dynamic programming</span>
     
+        <span class="sidebar-tag-name" data-tags="Assembly Language"><span class="iconfont-archer">&#xe606;</span>Assembly Language</span>
+    
+        <span class="sidebar-tag-name" data-tags="greedy algorithm"><span class="iconfont-archer">&#xe606;</span>greedy algorithm</span>
+    
         <span class="sidebar-tag-name" data-tags="amortized analysis"><span class="iconfont-archer">&#xe606;</span>amortized analysis</span>
+    
+        <span class="sidebar-tag-name" data-tags="Disjoint Sets"><span class="iconfont-archer">&#xe606;</span>Disjoint Sets</span>
+    
+        <span class="sidebar-tag-name" data-tags="Data Structure"><span class="iconfont-archer">&#xe606;</span>Data Structure</span>
     
         <span class="sidebar-tag-name" data-tags="Single Source Shortest Path"><span class="iconfont-archer">&#xe606;</span>Single Source Shortest Path</span>
     
         <span class="sidebar-tag-name" data-tags="Bellman-Ford"><span class="iconfont-archer">&#xe606;</span>Bellman-Ford</span>
     
         <span class="sidebar-tag-name" data-tags="Dijkstra"><span class="iconfont-archer">&#xe606;</span>Dijkstra</span>
-    
-        <span class="sidebar-tag-name" data-tags="Disjoint Sets"><span class="iconfont-archer">&#xe606;</span>Disjoint Sets</span>
-    
-        <span class="sidebar-tag-name" data-tags="Data Structure"><span class="iconfont-archer">&#xe606;</span>Data Structure</span>
     
         <span class="sidebar-tag-name" data-tags="Graph Algorithms"><span class="iconfont-archer">&#xe606;</span>Graph Algorithms</span>
     
@@ -1886,9 +1999,9 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="programming"><span class="iconfont-archer">&#xe606;</span>programming</span>
     
-        <span class="sidebar-tag-name" data-tags="Traversibility"><span class="iconfont-archer">&#xe606;</span>Traversibility</span>
-    
         <span class="sidebar-tag-name" data-tags="tmux"><span class="iconfont-archer">&#xe606;</span>tmux</span>
+    
+        <span class="sidebar-tag-name" data-tags="Traversibility"><span class="iconfont-archer">&#xe606;</span>Traversibility</span>
     
         <span class="sidebar-tag-name" data-tags="Graph"><span class="iconfont-archer">&#xe606;</span>Graph</span>
     
