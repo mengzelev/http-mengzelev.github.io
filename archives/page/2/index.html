@@ -339,6 +339,114 @@
     
     
     <article class="index-post">
+        <a class="abstract-title" href = "/2019/07/08/system-rebuild-notes/" >
+            
+                <span>Windows-Ubuntu双系统重装笔记</span>
+        </a>
+        <div class="abstract-content">
+            之前Linux只给了20个G过于局促，Windows企图装WSL又出现了各种各样的问题，于是就脑子一发热把两个系统备份以后都重装了。期间查了很多教程，就统一汇总在这里了。
+Windows重装
+原来装的是win10家庭版，很多功能被阉割掉了，就决定重装学校买的win10教育版，几种版本的nb程度大概是教育版≈企业版&gt;专业版&gt;家庭版
+如果是同一个版本内的重装，只需要到设置里找”重装windows”就可以了，甚至可以保留个人文件
+下载windows的iso文件到U盘里(U盘不需要格式化)，解压，启动盘就做好了。因为现在的笔记本电脑基本都装有UEFI，可以自己选择启动方式，所以不需要...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/07/08</span>
+            </div>
+            <!-- tags  -->
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href = "/2019/06/21/os-review/" >
+            
+                <span>操作系统期末复习笔记</span>
+        </a>
+        <div class="abstract-content">
+            这其实是jyy课程讲义摘抄
+存储介质维度：价格、容量、速度、可靠性
+持久化存储介质统称Non-Volatile Memory
+IO设备与驱动设备：三种操作（发送命令、读取状态、传输数据）的集合
+管理IO设备查看系统IO设备：lspci,lsblk(实现： open(&quot;/sys/bus/pci&quot;))
+Loop Back Device(回路设备)：把一个文件模拟成一个块设备a pseudo-device that makes a file accessible as a block device in Unix-like operating systems
+IO设备类型众...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/06/21</span>
+            </div>
+            <!-- tags  -->
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href = "/2019/06/21/OSTEP-persistence/" >
+            
+                <span>OSTEP阅读笔记-持久化部分</span>
+        </a>
+        <div class="abstract-content">
+            Ch36 IO设备典型设备协议设备的两个重要组成部分：硬件接口+内部结构
+
+OS通过读写状态、命令和数据寄存器来控制设备行为
+协议模型
+1234567while(STATUS == BUSY);//wait until device is not busy(polling)write data to DATA reg;write cmd to cmd reg;  (Doing so starts the device and executes the cmd)while(STATUS == BUSY);//wait until device is done with your reque...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/06/21</span>
+            </div>
+            <!-- tags  -->
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href = "/2019/05/25/ps-4-13-Randomized-Algorithms/" >
+            
+                <span>难问题求解学习笔记-随机算法</span>
+        </a>
+        <div class="abstract-content">
+            前言输出为随机变量的算法称为蒙特卡洛算法(Monte Carlo)输出总是正确的但时间复杂度为随机变量的算法称为拉斯维加斯算法(Las Vegas)
+概率论理论引入了随机算法$A$与确定输入$x$构成的随机试验。试验可以被描述为概率空间$(S_{A,x},Prob)$，其中$S_{A,x}={C\mid C \text{is a computation (radom run) of } A \text{ on } x}$，$Prob$是$S_{A,x}$上的概率分布。
+基础一种新的复杂度度量$Random_A(x)$: 对于所有$A$在$x$上的随机计算中使用的random bits的最...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/05/25</span>
+            </div>
+            <!-- tags  -->
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href = "/2019/05/18/ps-4-12-Approximation-Algorithms/" >
             
                 <span>难问题求解学习笔记-近似算法</span>
@@ -508,165 +616,6 @@ $a\mid b$: $a$能整除$b$,$b$能被$a$整除
                 <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/03/30</span>
             </div>
             <!-- tags  -->
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2019/03/23/clrs-32String-Mathcing/" >
-            
-                <span>算法导论学习笔记-字符串匹配</span>
-        </a>
-        <div class="abstract-content">
-            基本知识问题的形式化定义
-文本是一个长度为$n$的数组$T[1,…n]$
-模式是一个长度为$m$的数组$P1,…m$
-$P$和$T$的元素都是来自一个有限字母集$\Sigma$的字符
-若$0\le s\le n-m$,且$T[s+1,…s+m]=P[1,…m]$,则称模式$P$在文本$T$中出现，且偏移为$s$(模式$P$在文本$T$中出现的位置是$s+1$开始的)
-如果$P$在$T$中以偏移$s$出现，那么称$s$是有效偏移，否则是无效偏移
-字符串匹配问题：找到所有的有效偏移
-算法总运行时间=预处理时间+匹配时间
-
-
-符号和术语
-$\Sigma^*$: 包含所有有限长度的字符串的集合
-...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/03/23</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Problem Solving">Problem Solving</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "CLRS">CLRS</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2019/03/14/ps-4-4-isomorphism/" >
-            
-                <span>问求学习笔记-群同构基本定理与正规子群</span>
-        </a>
-        <div class="abstract-content">
-            同构(Isomorphisms)定义对两个群$(G,\cdot)$和$(H,\circ)$，若存在一个保群运算的双射$\phi:G\to H$，即对于任意$a,b\in G$$$\phi(a\cdot b)=\phi(a)\circ\phi(b)$$则称$G$和$H$同构(isomorphic)，记作$G\cong H$. $\phi$称为同构函数(isomorphism)。
-基本定理定理9.6: Let $\phi: G\to H$ be an isomorphism of two groups. Then the following statements are true.
-
-$\p...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/03/14</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Problem Solving">Problem Solving</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "CLRS">CLRS</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Group Theory">Group Theory</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2019/03/09/ps-4-3-permutation-lagrange/" >
-            
-                <span>问求学习笔记-置换群与拉格朗日定理</span>
-        </a>
-        <div class="abstract-content">
-            置换群(Permutation Group)定理5.1:The symmetric group on $n$ letters, $S_n$, is a group with $n!$ elements, wherethe binary operation is the composition of maps.
-置换群(permutation group):所有排列的集合$S_n$的一个子集
-Cycle NotationA permutation $\sigma\in S_X$ is a cycle of length $k$ if there exist elements $a_1,a_...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/03/09</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Problem Solving">Problem Solving</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "CLRS">CLRS</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Group Theory">Group Theory</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2019/03/02/ps-4-2-group/" >
-            
-                <span>问求学习笔记-群论初步</span>
-        </a>
-        <div class="abstract-content">
-            由于接下来的书没有中文版了，因此笔记中英文都看心情
-群整数等价类命题3.4：模运算下的整数等价类具有以下性质：
-
-加法和乘法交换律
-加法和乘法结合律
-加法(0)与乘法(1)恒等式
-乘法分配律
-任意元素都存在加法逆元
-$a$为非零整数，$gcd(a,n)=1$当且仅当$a$存在乘法逆元，即存在非零整数$b$，使得$ab\equiv 1(mod n)$
-
-(虽然我觉得这玩意儿记了应该没什么卵用)【复习时的我回来打脸了
-定义
-二元运算(binary operation)或合成律(law of composition):a function $G\times G\to G$ that assig...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/03/02</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Problem Solving">Problem Solving</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "CLRS">CLRS</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Group Theory">Group Theory</a>
-    
-</div>
             
         </div>
     </article>
@@ -1735,9 +1684,61 @@ $a$为非零整数，$gcd(a,n)=1$当且仅当$a$存在乘法逆元，即存在�
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 62
+        Total : 66
         </div>
         <!-- search  -->
         
@@ -1748,8 +1749,42 @@ $a$为非零整数，$gcd(a,n)=1$当且仅当$a$存在乘法逆元，即存在�
     
     
     
+    <div class="archive-year"> 2020 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/15</span><a class="archive-post-title" href= "/2020/05/15/leetcode-notes/" >leetcode-notes</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/30</span><a class="archive-post-title" href= "/2020/03/30/BlinkFill/" >BlinkFill</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/19</span><a class="archive-post-title" href= "/2020/01/19/gre-words/" >gre-words</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
     <div class="archive-year"> 2019 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/29</span><a class="archive-post-title" href= "/2019/12/29/network-review/" >计算机网络-期末复习</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/13</span><a class="archive-post-title" href= "/2019/11/13/project-python-notes/" >做项目时用到的Python功能</a>
+        </li>
     
     
         <li class="archive-post-item">
@@ -1779,11 +1814,6 @@ $a$为非零整数，$gcd(a,n)=1$当且仅当$a$存在乘法逆元，即存在�
     
         <li class="archive-post-item">
             <span class="archive-post-date">07/08</span><a class="archive-post-title" href= "/2019/07/08/system-rebuild-notes/" >Windows-Ubuntu双系统重装笔记</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">07/08</span><a class="archive-post-title" href= "/2019/07/08/hello-world/" >Hello World</a>
         </li>
     
     
@@ -2002,12 +2032,12 @@ $a$为非零整数，$gcd(a,n)=1$当且仅当$a$存在乘法逆元，即存在�
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">10/04</span><a class="archive-post-title" href= "/2018/10/04/PA1-report/" >PA1实验报告</a>
+            <span class="archive-post-date">10/04</span><a class="archive-post-title" href= "/2018/10/04/pa-inspirations/" >做pa的时候可能会用到的操作</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">10/04</span><a class="archive-post-title" href= "/2018/10/04/pa-inspirations/" >做pa的时候可能会用到的操作</a>
+            <span class="archive-post-date">10/04</span><a class="archive-post-title" href= "/2018/10/04/PA1-report/" >PA1实验报告</a>
         </li>
     
     
@@ -2077,31 +2107,27 @@ $a$为非零整数，$gcd(a,n)=1$当且仅当$a$存在乘法逆元，即存在�
     
         <span class="sidebar-tag-name" data-tags="Flags"><span class="iconfont-archer">&#xe606;</span>Flags</span>
     
-        <span class="sidebar-tag-name" data-tags="Math Modeling"><span class="iconfont-archer">&#xe606;</span>Math Modeling</span>
+        <span class="sidebar-tag-name" data-tags="paper"><span class="iconfont-archer">&#xe606;</span>paper</span>
     
         <span class="sidebar-tag-name" data-tags="Notes"><span class="iconfont-archer">&#xe606;</span>Notes</span>
     
         <span class="sidebar-tag-name" data-tags="pa"><span class="iconfont-archer">&#xe606;</span>pa</span>
     
-        <span class="sidebar-tag-name" data-tags="Problem Solving"><span class="iconfont-archer">&#xe606;</span>Problem Solving</span>
+        <span class="sidebar-tag-name" data-tags="Math Modeling"><span class="iconfont-archer">&#xe606;</span>Math Modeling</span>
     
         <span class="sidebar-tag-name" data-tags="Machine Learning"><span class="iconfont-archer">&#xe606;</span>Machine Learning</span>
     
         <span class="sidebar-tag-name" data-tags="ICS"><span class="iconfont-archer">&#xe606;</span>ICS</span>
     
+        <span class="sidebar-tag-name" data-tags="Problem Solving"><span class="iconfont-archer">&#xe606;</span>Problem Solving</span>
+    
+        <span class="sidebar-tag-name" data-tags="Assembly Language"><span class="iconfont-archer">&#xe606;</span>Assembly Language</span>
+    
         <span class="sidebar-tag-name" data-tags="CLRS"><span class="iconfont-archer">&#xe606;</span>CLRS</span>
     
         <span class="sidebar-tag-name" data-tags="dynamic programming"><span class="iconfont-archer">&#xe606;</span>dynamic programming</span>
     
-        <span class="sidebar-tag-name" data-tags="Assembly Language"><span class="iconfont-archer">&#xe606;</span>Assembly Language</span>
-    
         <span class="sidebar-tag-name" data-tags="greedy algorithm"><span class="iconfont-archer">&#xe606;</span>greedy algorithm</span>
-    
-        <span class="sidebar-tag-name" data-tags="amortized analysis"><span class="iconfont-archer">&#xe606;</span>amortized analysis</span>
-    
-        <span class="sidebar-tag-name" data-tags="Disjoint Sets"><span class="iconfont-archer">&#xe606;</span>Disjoint Sets</span>
-    
-        <span class="sidebar-tag-name" data-tags="Data Structure"><span class="iconfont-archer">&#xe606;</span>Data Structure</span>
     
         <span class="sidebar-tag-name" data-tags="Single Source Shortest Path"><span class="iconfont-archer">&#xe606;</span>Single Source Shortest Path</span>
     
@@ -2110,6 +2136,12 @@ $a$为非零整数，$gcd(a,n)=1$当且仅当$a$存在乘法逆元，即存在�
         <span class="sidebar-tag-name" data-tags="Dijkstra"><span class="iconfont-archer">&#xe606;</span>Dijkstra</span>
     
         <span class="sidebar-tag-name" data-tags="Graph Algorithms"><span class="iconfont-archer">&#xe606;</span>Graph Algorithms</span>
+    
+        <span class="sidebar-tag-name" data-tags="amortized analysis"><span class="iconfont-archer">&#xe606;</span>amortized analysis</span>
+    
+        <span class="sidebar-tag-name" data-tags="Disjoint Sets"><span class="iconfont-archer">&#xe606;</span>Disjoint Sets</span>
+    
+        <span class="sidebar-tag-name" data-tags="Data Structure"><span class="iconfont-archer">&#xe606;</span>Data Structure</span>
     
         <span class="sidebar-tag-name" data-tags="Graph Theory"><span class="iconfont-archer">&#xe606;</span>Graph Theory</span>
     
@@ -2127,15 +2159,17 @@ $a$为非零整数，$gcd(a,n)=1$当且仅当$a$存在乘法逆元，即存在�
     
         <span class="sidebar-tag-name" data-tags="Ics"><span class="iconfont-archer">&#xe606;</span>Ics</span>
     
+        <span class="sidebar-tag-name" data-tags="MATLAB"><span class="iconfont-archer">&#xe606;</span>MATLAB</span>
+    
         <span class="sidebar-tag-name" data-tags="Matchings"><span class="iconfont-archer">&#xe606;</span>Matchings</span>
     
         <span class="sidebar-tag-name" data-tags="Factorization"><span class="iconfont-archer">&#xe606;</span>Factorization</span>
     
-        <span class="sidebar-tag-name" data-tags="MATLAB"><span class="iconfont-archer">&#xe606;</span>MATLAB</span>
-    
         <span class="sidebar-tag-name" data-tags="Linux"><span class="iconfont-archer">&#xe606;</span>Linux</span>
     
         <span class="sidebar-tag-name" data-tags="vim"><span class="iconfont-archer">&#xe606;</span>vim</span>
+    
+        <span class="sidebar-tag-name" data-tags="notes"><span class="iconfont-archer">&#xe606;</span>notes</span>
     
         <span class="sidebar-tag-name" data-tags="Group Theory"><span class="iconfont-archer">&#xe606;</span>Group Theory</span>
     
@@ -2145,19 +2179,19 @@ $a$为非零整数，$gcd(a,n)=1$当且仅当$a$存在乘法逆元，即存在�
     
         <span class="sidebar-tag-name" data-tags="markdown"><span class="iconfont-archer">&#xe606;</span>markdown</span>
     
-        <span class="sidebar-tag-name" data-tags="Python"><span class="iconfont-archer">&#xe606;</span>Python</span>
+        <span class="sidebar-tag-name" data-tags="tmux"><span class="iconfont-archer">&#xe606;</span>tmux</span>
     
         <span class="sidebar-tag-name" data-tags="Java"><span class="iconfont-archer">&#xe606;</span>Java</span>
     
         <span class="sidebar-tag-name" data-tags="programming"><span class="iconfont-archer">&#xe606;</span>programming</span>
-    
-        <span class="sidebar-tag-name" data-tags="tmux"><span class="iconfont-archer">&#xe606;</span>tmux</span>
     
         <span class="sidebar-tag-name" data-tags="Traversibility"><span class="iconfont-archer">&#xe606;</span>Traversibility</span>
     
         <span class="sidebar-tag-name" data-tags="Graph"><span class="iconfont-archer">&#xe606;</span>Graph</span>
     
         <span class="sidebar-tag-name" data-tags="Tree"><span class="iconfont-archer">&#xe606;</span>Tree</span>
+    
+        <span class="sidebar-tag-name" data-tags="Python"><span class="iconfont-archer">&#xe606;</span>Python</span>
     
     </div>
     <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>

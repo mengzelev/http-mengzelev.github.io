@@ -261,7 +261,7 @@ height:50vh;
                 
                 
                     <div class="post-intro-read">
-                        <span>Word count: <span class="post-count">788</span> / Reading time: <span class="post-count">3 min</span></span>
+                        <span>Word count: <span class="post-count">1,067</span> / Reading time: <span class="post-count">4 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
@@ -427,6 +427,40 @@ height:50vh;
 <h2 id="RQ2：错误原因"><a href="#RQ2：错误原因" class="headerlink" title="RQ2：错误原因"></a>RQ2：错误原因</h2><p>把各种编译错误分成了5个大类：Dependency, Type mismatch, Syntax, Semantic, Other<br>对于C++和Java来说，Dependency-related error都是最常见的错误类型</p>
 <h2 id="RQ3：修复时间"><a href="#RQ3：修复时间" class="headerlink" title="RQ3：修复时间"></a>RQ3：修复时间</h2><p>把研究对象限定为单一类型的错误信息，排除多错误修复时间带来的误差</p>
 <p>进一步分析，还进行了case study<br>首先随机选择了25个Java的cant.resolve类型的编译错误，这些错误都是在下一次build的时候就修复了的，对比了修复前后的文件来观察错误是如何被修复的，并将结果记入表格</p>
+<h1 id="How-do-fixes-become-bugs"><a href="#How-do-fixes-become-bugs" class="headerlink" title="How do fixes become bugs?"></a>How do fixes become bugs?</h1><h2 id="Intro"><a href="#Intro" class="headerlink" title="Intro."></a>Intro.</h2><ul>
+<li>举例证明incorrect fix普遍存在性</li>
+<li>提出了导致incorrect fix的三个可能原因</li>
+<li>吹一下自己研究的重要性</li>
+</ul>
+<h2 id="Methodology"><a href="#Methodology" class="headerlink" title="Methodology"></a>Methodology</h2><h3 id="software-projects-under-study"><a href="#software-projects-under-study" class="headerlink" title="software projects under study"></a>software projects under study</h3><p>四个OS(一个闭源商业OS，FreeBSD, OpenSolaris, Linux)<br>选择stable&amp;widely deployed的series<br>为了机密性把四个OSmap成了ABCD而不知道哪个是哪个</p>
+<h3 id="find-incorrect-fixes"><a href="#find-incorrect-fixes" class="headerlink" title="find incorrect fixes"></a>find incorrect fixes</h3><p>def: introduce new problems or not completely fixed<br>identify bug fix: whether associatied with a bug report</p>
+<ul>
+<li>not always systematically maintained</li>
+<li>leverage the verbal info in bug reports oir cahnge logs to reconstruct the links<br>semi-automatically check whether fixed correctly:<ul>
+<li>automatically select potential incorrect fix candidates</li>
+</ul>
+</li>
+<li>source code overlap between changes -&gt; the latter may be to correct the first(more comprehensive)</li>
+<li>search for words in bug report indicating incorrect fixes<ul>
+<li>manually check each candidate(unique challenge)</li>
+</ul>
+</li>
+<li>even discuss with developers<br>may prune a few incorrect fixes out, but rare</li>
+</ul>
+<h3 id="target-bugs-to-study"><a href="#target-bugs-to-study" class="headerlink" title="target bugs to study"></a>target bugs to study</h3><p>Sample set1: post-release bugs<br>Sample set2: fixes to memory leaks, buffer overflow, data race, deadlock bugs</p>
+<h3 id="Measuring-code-knowledge"><a href="#Measuring-code-knowledge" class="headerlink" title="Measuring code knowledge"></a>Measuring code knowledge</h3><p>略</p>
+<h2 id="Significance"><a href="#Significance" class="headerlink" title="Significance"></a>Significance</h2><ul>
+<li>proportion of incorrect bug fixes(14.8%~24.4%)</li>
+<li>result what kinds of problems(crash, hang, data loss, …)</li>
+</ul>
+<h2 id="Incorrect-fix-patterns"><a href="#Incorrect-fix-patterns" class="headerlink" title="Incorrect fix patterns"></a>Incorrect fix patterns</h2><ul>
+<li>concurrency bugs: hardest to fix</li>
+<li>data race -&gt; add locks -&gt; deadlock</li>
+<li>deadlock -&gt; new deadlock/hided bugs</li>
+<li>buffer overflow: use safe string function is safest, enlarged buffer may not solve, dynamic allocation introduces memory leaks</li>
+<li>memory leak -&gt; dangling pointer/null pointer dereference -&gt; good to nullify pointer after fix</li>
+<li>semantic bugs: conditions are difficult to fix </li>
+</ul>
 
     </article>
     <!-- license  -->
@@ -581,7 +615,7 @@ top:50vh;
         <div class="toc-catalog">
             <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
         </div>
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#A-Large-Scale-Empirical-Study-of-Compile-Errors-in-Continuous-Integration"><span class="toc-number">1.</span> <span class="toc-text">A Large-Scale Empirical Study of Compile Errors in Continuous Integration</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#频率分析"><span class="toc-number">1.1.</span> <span class="toc-text">频率分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#分布分析"><span class="toc-number">1.2.</span> <span class="toc-text">分布分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#fix-effort分析"><span class="toc-number">1.3.</span> <span class="toc-text">fix effort分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#fix-pattern分析"><span class="toc-number">1.4.</span> <span class="toc-text">fix pattern分析</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Programmers’-Build-Errors-A-Case-Study-at-Google"><span class="toc-number">2.</span> <span class="toc-text">Programmers’ Build Errors: A Case Study(at Google)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#标准"><span class="toc-number">2.1.</span> <span class="toc-text">标准</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RQ1：错误频率"><span class="toc-number">2.2.</span> <span class="toc-text">RQ1：错误频率</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RQ2：错误原因"><span class="toc-number">2.3.</span> <span class="toc-text">RQ2：错误原因</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RQ3：修复时间"><span class="toc-number">2.4.</span> <span class="toc-text">RQ3：修复时间</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#A-Large-Scale-Empirical-Study-of-Compile-Errors-in-Continuous-Integration"><span class="toc-number">1.</span> <span class="toc-text">A Large-Scale Empirical Study of Compile Errors in Continuous Integration</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#频率分析"><span class="toc-number">1.1.</span> <span class="toc-text">频率分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#分布分析"><span class="toc-number">1.2.</span> <span class="toc-text">分布分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#fix-effort分析"><span class="toc-number">1.3.</span> <span class="toc-text">fix effort分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#fix-pattern分析"><span class="toc-number">1.4.</span> <span class="toc-text">fix pattern分析</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Programmers’-Build-Errors-A-Case-Study-at-Google"><span class="toc-number">2.</span> <span class="toc-text">Programmers’ Build Errors: A Case Study(at Google)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#标准"><span class="toc-number">2.1.</span> <span class="toc-text">标准</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RQ1：错误频率"><span class="toc-number">2.2.</span> <span class="toc-text">RQ1：错误频率</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RQ2：错误原因"><span class="toc-number">2.3.</span> <span class="toc-text">RQ2：错误原因</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RQ3：修复时间"><span class="toc-number">2.4.</span> <span class="toc-text">RQ3：修复时间</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#How-do-fixes-become-bugs"><span class="toc-number">3.</span> <span class="toc-text">How do fixes become bugs?</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Intro"><span class="toc-number">3.1.</span> <span class="toc-text">Intro.</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Methodology"><span class="toc-number">3.2.</span> <span class="toc-text">Methodology</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#software-projects-under-study"><span class="toc-number">3.2.1.</span> <span class="toc-text">software projects under study</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#find-incorrect-fixes"><span class="toc-number">3.2.2.</span> <span class="toc-text">find incorrect fixes</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#target-bugs-to-study"><span class="toc-number">3.2.3.</span> <span class="toc-text">target bugs to study</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Measuring-code-knowledge"><span class="toc-number">3.2.4.</span> <span class="toc-text">Measuring code knowledge</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Significance"><span class="toc-number">3.3.</span> <span class="toc-text">Significance</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Incorrect-fix-patterns"><span class="toc-number">3.4.</span> <span class="toc-text">Incorrect fix patterns</span></a></li></ol></li></ol>
     </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
@@ -1564,9 +1598,61 @@ top:50vh;
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 62
+        Total : 66
         </div>
         <!-- search  -->
         
@@ -1577,8 +1663,42 @@ top:50vh;
     
     
     
+    <div class="archive-year"> 2020 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/15</span><a class="archive-post-title" href= "/2020/05/15/leetcode-notes/" >leetcode-notes</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/30</span><a class="archive-post-title" href= "/2020/03/30/BlinkFill/" >BlinkFill</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/19</span><a class="archive-post-title" href= "/2020/01/19/gre-words/" >gre-words</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
     <div class="archive-year"> 2019 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/29</span><a class="archive-post-title" href= "/2019/12/29/network-review/" >计算机网络-期末复习</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/13</span><a class="archive-post-title" href= "/2019/11/13/project-python-notes/" >做项目时用到的Python功能</a>
+        </li>
     
     
         <li class="archive-post-item">
@@ -1608,11 +1728,6 @@ top:50vh;
     
         <li class="archive-post-item">
             <span class="archive-post-date">07/08</span><a class="archive-post-title" href= "/2019/07/08/system-rebuild-notes/" >Windows-Ubuntu双系统重装笔记</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">07/08</span><a class="archive-post-title" href= "/2019/07/08/hello-world/" >Hello World</a>
         </li>
     
     
@@ -1831,12 +1946,12 @@ top:50vh;
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">10/04</span><a class="archive-post-title" href= "/2018/10/04/PA1-report/" >PA1实验报告</a>
+            <span class="archive-post-date">10/04</span><a class="archive-post-title" href= "/2018/10/04/pa-inspirations/" >做pa的时候可能会用到的操作</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">10/04</span><a class="archive-post-title" href= "/2018/10/04/pa-inspirations/" >做pa的时候可能会用到的操作</a>
+            <span class="archive-post-date">10/04</span><a class="archive-post-title" href= "/2018/10/04/PA1-report/" >PA1实验报告</a>
         </li>
     
     
@@ -1906,31 +2021,27 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="Flags"><span class="iconfont-archer">&#xe606;</span>Flags</span>
     
-        <span class="sidebar-tag-name" data-tags="Math Modeling"><span class="iconfont-archer">&#xe606;</span>Math Modeling</span>
+        <span class="sidebar-tag-name" data-tags="paper"><span class="iconfont-archer">&#xe606;</span>paper</span>
     
         <span class="sidebar-tag-name" data-tags="Notes"><span class="iconfont-archer">&#xe606;</span>Notes</span>
     
         <span class="sidebar-tag-name" data-tags="pa"><span class="iconfont-archer">&#xe606;</span>pa</span>
     
-        <span class="sidebar-tag-name" data-tags="Problem Solving"><span class="iconfont-archer">&#xe606;</span>Problem Solving</span>
+        <span class="sidebar-tag-name" data-tags="Math Modeling"><span class="iconfont-archer">&#xe606;</span>Math Modeling</span>
     
         <span class="sidebar-tag-name" data-tags="Machine Learning"><span class="iconfont-archer">&#xe606;</span>Machine Learning</span>
     
         <span class="sidebar-tag-name" data-tags="ICS"><span class="iconfont-archer">&#xe606;</span>ICS</span>
     
+        <span class="sidebar-tag-name" data-tags="Problem Solving"><span class="iconfont-archer">&#xe606;</span>Problem Solving</span>
+    
+        <span class="sidebar-tag-name" data-tags="Assembly Language"><span class="iconfont-archer">&#xe606;</span>Assembly Language</span>
+    
         <span class="sidebar-tag-name" data-tags="CLRS"><span class="iconfont-archer">&#xe606;</span>CLRS</span>
     
         <span class="sidebar-tag-name" data-tags="dynamic programming"><span class="iconfont-archer">&#xe606;</span>dynamic programming</span>
     
-        <span class="sidebar-tag-name" data-tags="Assembly Language"><span class="iconfont-archer">&#xe606;</span>Assembly Language</span>
-    
         <span class="sidebar-tag-name" data-tags="greedy algorithm"><span class="iconfont-archer">&#xe606;</span>greedy algorithm</span>
-    
-        <span class="sidebar-tag-name" data-tags="amortized analysis"><span class="iconfont-archer">&#xe606;</span>amortized analysis</span>
-    
-        <span class="sidebar-tag-name" data-tags="Disjoint Sets"><span class="iconfont-archer">&#xe606;</span>Disjoint Sets</span>
-    
-        <span class="sidebar-tag-name" data-tags="Data Structure"><span class="iconfont-archer">&#xe606;</span>Data Structure</span>
     
         <span class="sidebar-tag-name" data-tags="Single Source Shortest Path"><span class="iconfont-archer">&#xe606;</span>Single Source Shortest Path</span>
     
@@ -1939,6 +2050,12 @@ top:50vh;
         <span class="sidebar-tag-name" data-tags="Dijkstra"><span class="iconfont-archer">&#xe606;</span>Dijkstra</span>
     
         <span class="sidebar-tag-name" data-tags="Graph Algorithms"><span class="iconfont-archer">&#xe606;</span>Graph Algorithms</span>
+    
+        <span class="sidebar-tag-name" data-tags="amortized analysis"><span class="iconfont-archer">&#xe606;</span>amortized analysis</span>
+    
+        <span class="sidebar-tag-name" data-tags="Disjoint Sets"><span class="iconfont-archer">&#xe606;</span>Disjoint Sets</span>
+    
+        <span class="sidebar-tag-name" data-tags="Data Structure"><span class="iconfont-archer">&#xe606;</span>Data Structure</span>
     
         <span class="sidebar-tag-name" data-tags="Graph Theory"><span class="iconfont-archer">&#xe606;</span>Graph Theory</span>
     
@@ -1956,15 +2073,17 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="Ics"><span class="iconfont-archer">&#xe606;</span>Ics</span>
     
+        <span class="sidebar-tag-name" data-tags="MATLAB"><span class="iconfont-archer">&#xe606;</span>MATLAB</span>
+    
         <span class="sidebar-tag-name" data-tags="Matchings"><span class="iconfont-archer">&#xe606;</span>Matchings</span>
     
         <span class="sidebar-tag-name" data-tags="Factorization"><span class="iconfont-archer">&#xe606;</span>Factorization</span>
     
-        <span class="sidebar-tag-name" data-tags="MATLAB"><span class="iconfont-archer">&#xe606;</span>MATLAB</span>
-    
         <span class="sidebar-tag-name" data-tags="Linux"><span class="iconfont-archer">&#xe606;</span>Linux</span>
     
         <span class="sidebar-tag-name" data-tags="vim"><span class="iconfont-archer">&#xe606;</span>vim</span>
+    
+        <span class="sidebar-tag-name" data-tags="notes"><span class="iconfont-archer">&#xe606;</span>notes</span>
     
         <span class="sidebar-tag-name" data-tags="Group Theory"><span class="iconfont-archer">&#xe606;</span>Group Theory</span>
     
@@ -1974,19 +2093,19 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="markdown"><span class="iconfont-archer">&#xe606;</span>markdown</span>
     
-        <span class="sidebar-tag-name" data-tags="Python"><span class="iconfont-archer">&#xe606;</span>Python</span>
+        <span class="sidebar-tag-name" data-tags="tmux"><span class="iconfont-archer">&#xe606;</span>tmux</span>
     
         <span class="sidebar-tag-name" data-tags="Java"><span class="iconfont-archer">&#xe606;</span>Java</span>
     
         <span class="sidebar-tag-name" data-tags="programming"><span class="iconfont-archer">&#xe606;</span>programming</span>
-    
-        <span class="sidebar-tag-name" data-tags="tmux"><span class="iconfont-archer">&#xe606;</span>tmux</span>
     
         <span class="sidebar-tag-name" data-tags="Traversibility"><span class="iconfont-archer">&#xe606;</span>Traversibility</span>
     
         <span class="sidebar-tag-name" data-tags="Graph"><span class="iconfont-archer">&#xe606;</span>Graph</span>
     
         <span class="sidebar-tag-name" data-tags="Tree"><span class="iconfont-archer">&#xe606;</span>Tree</span>
+    
+        <span class="sidebar-tag-name" data-tags="Python"><span class="iconfont-archer">&#xe606;</span>Python</span>
     
     </div>
     <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
