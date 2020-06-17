@@ -261,7 +261,7 @@ height:50vh;
                 
                 
                     <div class="post-intro-read">
-                        <span>Word count: <span class="post-count">2,795</span> / Reading time: <span class="post-count">10 min</span></span>
+                        <span>Word count: <span class="post-count">5,343</span> / Reading time: <span class="post-count">20 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
@@ -407,6 +407,54 @@ height:50vh;
 <td>不要递归；进位善后；一数到底的处理；</td>
 </tr>
 <tr>
+<td style="text-align:center">3.无重复字符的最长字符串</td>
+<td style="text-align:left">给定一个字符串，找出其中不含有重复字符的<strong>最长子串</strong>的长度。（不是子序列）</td>
+<td>滑动窗口。双指针实现。当字串中无重复元素时向右移动右指针，否则向右移动左指针，直到无重复为止。</td>
+<td>注意开始条件（长度为1和2的字符串）</td>
+</tr>
+<tr>
+<td style="text-align:center">4. 寻找两个正序数组的中位数</td>
+<td style="text-align:left">给定两个排好序的数组，找出这两个数组中的数的中位数，并且要求算法的时间复杂度为 O(log(m + n))。</td>
+<td>二分。法一：转换为寻找第k小的数。每次检查A[k/2-1]和B[k/2-1]，若A[k/2-1]&lt;=B[k/2-1]，说明比A[k/2-1]小的数最多只有k-2个，因此可以删去A[0:k/2-1]的数；反之同理。当范围缩小到只剩一个数组或为k为1时返回。法二：转换为寻找最大的i，满足A[i-1]&lt;=B[(m+n+1)/2 -i]即可（此处有复杂数学证明）</td>
+<td>难。中位数的本质：第n/2小的数（奇数个数）或 一个划分标准，使得一半的数比它小，另一半的数比它大；</td>
+</tr>
+<tr>
+<td style="text-align:center">9. 回文数</td>
+<td style="text-align:left">判断输入数是否为回文数</td>
+<td>法一：转成字符串，直接比较/双指针比较；法二：使用运算反转数字的一半（<code>while x &gt; reverse_x</code>），比较<code>x==reverse_x</code>（偶数位数）或<code>reverse_x//10 == x</code>（奇数位数）</td>
+<td>Python的整除是<strong>双斜杠</strong>；Python反转字符串<code>s[::-1]</code></td>
+</tr>
+<tr>
+<td style="text-align:center">14. 最长公共前缀</td>
+<td style="text-align:left">找出输入的一组字符串的最长公共前缀</td>
+<td>法一：无脑模拟。可以在前缀为空时提前退出。法二：二分分治。对strs数组进行分治查找。</td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:center">70.爬楼梯</td>
+<td style="text-align:left">每次可以爬 1 或 2 个台阶。有多少种不同的方法可以爬到n阶楼梯楼顶</td>
+<td>DP。<code>dp[i]=dp[i-1]+dp[i-2] (i &gt;= 2)</code>，即斐波那契数。</td>
+<td>可以用矩阵快速幂或通项公式优化为$O(\log n)$</td>
+</tr>
+<tr>
+<td style="text-align:center">990. 等式方程的可满足性</td>
+<td style="text-align:left">给定一系列变量不等或相等关系，判断是否存在一种赋值使这些关系被全部满足</td>
+<td>并查集。第一次遍历将相等的变量合并到用一个并查集中；第二次遍历查找是否有不等但处于同一个并查集中的变量。</td>
+<td>并查集的非递归写法；由于题意要求变量全是小写字母故最多26个变量（使用<code>ord(var)-ord(&#39;a&#39;)</code>索引变量）；时间复杂度$O(n+ClogC)`</td>
+</tr>
+<tr>
+<td style="text-align:center">1014.最佳观光组合</td>
+<td style="text-align:left">给定一个数组A，寻找一对i,j(i&lt;j)使得A[i]+A[j]+i-j最大</td>
+<td>枚举。维护目前最大的a[i]+i，对每个j计算a[j]-j+max(a[i]+i)</td>
+<td>可以将一个属性递推维护来减少枚举的维度</td>
+</tr>
+<tr>
+<td style="text-align:center">1300. 转变数组后最接近目标值的数组和</td>
+<td style="text-align:left">给定一个整数数组 arr 和一个目标值 target ，返回一个整数 value ，使得将数组中所有大于 value 的值变成 value 后，数组的和最接近  target （最接近表示两者之差的绝对值最小）。优先返回最小的解。</td>
+<td>双重二分。1. 在[0, max(arr)]二分搜索出一个<code>value</code>，使得<code>sum(arr, val)&lt;=target&lt;=sum(arr, val+1)</code>；2. 计算<code>sum(arr, val)</code>时，先将<code>arr</code>排序，然后找到第一个比<code>val</code>的大的数的下标<code>id</code>，则<code>sum(arr, val)=prefix_sum[id] + (n-id)*val</code></td>
+<td>Python可以使用<code>bisect.bisect_left(arr, x)</code>二分查找并返回第一个比<code>x</code>大的数的下标；二分搜索模板。（见涨姿势部分）</td>
+</tr>
+<tr>
 <td style="text-align:center">1465. 一次编辑</td>
 <td style="text-align:left">给定两个字符串a和b，判断是否能通过一次编辑（增删改）由a得到b</td>
 <td>双指针逐个遍历字符，不相同时比较该字符之后的字符串</td>
@@ -463,8 +511,8 @@ height:50vh;
 <tr>
 <td style="text-align:center">1601.正则表达式匹配</td>
 <td style="text-align:left">判断字符串<code>s</code>是否与包含<code>&#39;. &#39;</code>和<code>&#39;*&#39;</code>的正则表达式<code>p</code>相匹配</td>
-<td>dp，用<code>f[i][j]</code>表示<code>s</code>的前<code>i</code>位与<code>p</code>的前<code>j</code>位是否匹配。若<code>s[i-1]==p[j-1] or p[j-1]==&#39;.&#39;</code>，则<code>f[i][j]=f[i-1][j-1]</code>；若<code>p[j-1]==&#39;*&#39;</code>，如果之前的字符只出现0次，只需去掉最后了两个字符（<code>f[i][j]=f[i][j-2]</code>），否则回溯<code>s</code>串考察该字符是否出现了多次，即`if(s[i-1]==p[j-2] or p[j-2]==’.’) f[i][j]</td>
-<td></td>
+<td>dp，用<code>f[i][j]</code>表示<code>s</code>的前<code>i</code>位与<code>p</code>的前<code>j</code>位是否匹配。若<code>s[i-1]==p[j-1] or p[j-1]==&#39;.&#39;</code>，则<code>f[i][j]=f[i-1][j-1]</code>；若<code>p[j-1]==&#39;*&#39;</code>，如果之前的字符只出现0次，只需去掉最后了两个字符（<code>f[i][j]=f[i][j-2]</code>），否则回溯<code>s</code>串考察该字符是否出现了多次，即`if(s[i-1]==p[j-2] or p[j-2]==’.’) f[i][j] \</td>
+<td>\</td>
 <td>= f[i-1][j]`</td>
 <td>动态规划；边界条件</td>
 </tr>
@@ -535,10 +583,70 @@ height:50vh;
 <td>Python中可以使用<code>self.xx</code>当成<strong>全局变量</strong>；<strong>强化记忆</strong>：BST的中序遍历就是排序序列</td>
 </tr>
 <tr>
+<td style="text-align:center">面试题37. 序列化二叉树</td>
+<td style="text-align:left">实现两个函数，分别用来序列化和反序列化二叉树。（序列化：把数据结构变成字符串）</td>
+<td>BFS。序列化和反序列化都通过队列保存候选根节点，BFS遍历整棵树。不必须序列化成leetcode的规范。</td>
+<td>Python字符串格式化合并<code>join</code>与分割<code>split</code>；使用<code>if x</code>判断<code>x</code>非空时注意<code>x</code>可能会有非空但值为0的情况；（leetcode规范）反序列化时注意右子树可能无；</td>
+</tr>
+<tr>
 <td style="text-align:center">面试题38.字符串的排列</td>
 <td style="text-align:left">输出给定字符串的全排列。（同样的字符视为同一个如”aab”前两个”a”视为相同）</td>
 <td>回溯。递归确定每一位上的字符，已经在该位上出现过的字符不再考虑（使用<code>set</code>）。当确定了前<code>len(s)-1</code>位时记录答案并返回。</td>
 <td>注意相同字符去重；python有<code>itertools.permutations()</code></td>
+</tr>
+<tr>
+<td style="text-align:center">面试题41. 数据流中的中位数</td>
+<td style="text-align:left">设计一个支持“插入元素”与“返回所有元素”操作的数据结构。</td>
+<td>堆。维护两个堆，小堆A维护较大的一半元素，大堆B维护较小的一半元素（奇数个元素时A多一个）。插入元素：若AB大小相等，则向A插入元素（先向B插入元素，然后将B的堆顶弹出插入A中）；否则向B插入元素（方法同前）。返回中位数：根据AB大小，返回A的堆顶或AB堆顶的平均数。</td>
+<td>Python的list的insert操作不是O(1)的；插入元素时要先插入另一个堆中然后迁移堆顶；</td>
+</tr>
+<tr>
+<td style="text-align:center">面试题43.1出现的次数</td>
+<td style="text-align:left">输入<code>n</code>，求出1~n十进制整数中1在数位上出现的次数。</td>
+<td>模拟（？）。迭代计算1在每个数位上出现的次数。维护基数<code>base</code>和低位数<code>low</code>。每次循环判断<code>n</code>的最低位，至少<code>ans+=(n/10)*base</code>；若最低位为1则<code>ans+=(low+1)</code>；若最低位大于1则<code>ans+=base</code>。然后更新使<code>low=low+base*(n%10), base*=10, n/=10</code>。</td>
+<td>注意<code>low</code>的更新；注意最低位为1的情况；</td>
+</tr>
+<tr>
+<td style="text-align:center">面试题44. 数字序列中某一位的数字</td>
+<td style="text-align:left">数字以0123456789101112131415…的格式序列化到一个字符序列中。在这个序列中，如第5位（从下标0开始计数）是5，第13位是1，第19位是4</td>
+<td>模拟（找规律）。先求出目标数位属于几位数的范畴，然后计算出目标数位是这个区间的第几个数的第几位。</td>
+<td>注意下标从0开始。</td>
+</tr>
+<tr>
+<td style="text-align:center">面试题45. 把数组排成最小的数</td>
+<td style="text-align:left">输入一个非负整数数组，把数组里所有数字拼接起来排成一个数，打印能拼接出的所有数字中最小的一个。</td>
+<td>排序。比较规则：对于数$a,b$，$a$应带排在$b$前面当且仅当$\overline{ab}&lt;\overline{ba}$。</td>
+<td>Python3里使用<code>sorted(str_list, key=functools.cmp_to_key(cmp))</code>实现自定义排序。</td>
+</tr>
+<tr>
+<td style="text-align:center">面试题46.把数字翻译成字符串</td>
+<td style="text-align:left">数字0~25编码为字符a~z，给定一串数字，求编码成字符串的方案数</td>
+<td>DP。<code>dp[i]</code>表示<code>[0..i]</code>位的数的编码方案数。转移方程：$dp[i]=dp[i-1]+dp[i-2]$ if  $10n_{i-1}+n_[i]\in [10,25]$;  $dp[i-1]$ o.w.。由于只用到前两位的信息因此计算过程中可以只维护两个变量、</td>
+<td>0的处理，00不表示字母a；</td>
+</tr>
+<tr>
+<td style="text-align:center">面试题47. 礼物的最大价值</td>
+<td style="text-align:left">给定一个矩阵，求从左上角走到右下角（只能向下和向右）经过路线上数字之和的最大值</td>
+<td>DP。<code>dp[i][j]</code>表示走到坐标为<code>(i,j)</code>的点经过路线上数字之和的最大值。非边界情况递推式：<code>dp[i][j]=max(dp[i-1][j] +dp[i][j-1])</code>。边界情况为<code>i=0</code>或<code>j=0</code>的情况。</td>
+<td>记忆化搜索会超时，因为只需要考虑向右和向下的路径所以可以dp；可以直接在输入list上做dp</td>
+</tr>
+<tr>
+<td style="text-align:center">面试题49.丑数</td>
+<td style="text-align:left">丑数是质因子只有2,3,5的数。1是第一个丑数，求第$n$个丑数。</td>
+<td>DP。<code>dp[i]</code>表示第<code>i+1</code>个丑数。递推式形式为<code>dp[i]=min(dp[a]*2, dp[b]*3, dp[c]*5)</code>。<code>a,b,c</code>在之前的递推中维护，当<code>dp[j]&gt;=dp[a]*2</code>时，<code>a=j</code>。（3和5同理）初始条件<code>dp[0]=1, a=b=c=0</code></td>
+<td>此题递推时同时需要维护；</td>
+</tr>
+<tr>
+<td style="text-align:center">面试题51. 数组中的逆序对</td>
+<td style="text-align:left">求给定数组中逆序对的个数。</td>
+<td>法一：归并排序。当右侧指针移动时走过的就是逆序对。法二：树状数组。将输入数组离散化，用一个桶统计每个数出现的次数。反向扫描原数组，某数被扫描到时在桶中的前缀和就是以该数为首的逆序对的个数。（这个数之后比它小的数的个数）</td>
+<td>离散化：排序后使用二分法为每个数分配一个Index，之后使用index代表这个数。Python树状数组实现见涨姿势部分。</td>
+</tr>
+<tr>
+<td style="text-align:center">面试题56 - I. 数组中数字出现的次数</td>
+<td style="text-align:left">一个整型数组 <code>nums</code> 里除两个数字之外，其他数字都出现了两次。找出这两个只出现一次的数字。要求时间复杂度是O(n)，空间复杂度是O(1)。</td>
+<td>位运算（异或）。如果只有一个数字只出现一次，整个数组的异或和就是答案。此时有两个只出现一次的数字，因此需要将数组分组。分组依据为取整个数组的异或中为1的某位，然后根据该位是否为1将整个数组分成两组分别求异或和，就能得到答案。</td>
+<td>异或和可以用来寻找只出现了一次的数；Python求异或和可以使用<code>functools.reduce</code></td>
 </tr>
 <tr>
 <td style="text-align:center">面试题64.求1+2+…+n</td>
@@ -568,6 +676,26 @@ height:50vh;
 <li><p>Python设置最大值：<code>float(&quot;+inf&quot;)</code></p>
 </li>
 <li><p>借助<strong>栈</strong>可以将遍历序列还原为BST</p>
+</li>
+<li><p>Python反转字符串<code>s[::-1]</code></p>
+</li>
+<li><p>Python同时迭代元素和下标：<code>for i, x in enumerate(a)</code></p>
+</li>
+<li><p>Python自定义排序：</p>
+<ul>
+<li>定义一个函数<code>cmp(a, b)</code>，满足<code>a</code>排在<code>b</code>前面时返回-1（任意负数）,否则返回1（任意正数）</li>
+<li>对待排序列表使用<code>sorted(list_to_sort, key=functools.cmp_to_key(cmp))</code></li>
+<li>原理<code>cmp_to_key(cmp)</code>里面定义了一个类，该类的<code>__lt__()</code>方法返回<code>True</code>当且仅当<code>cmp(self.obj, other.obj)&lt;0</code></li>
+</ul>
+</li>
+<li><p>二分搜索模板（+1-1傻傻分不清）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># find the largest 'x' that f(x) &lt;= target</span></span><br><span class="line"><span class="keyword">while</span> l &lt; r:</span><br><span class="line">    m = (l + r + <span class="number">1</span>) // <span class="number">2</span></span><br><span class="line">    <span class="keyword">if</span> f(m) &lt;= target:</span><br><span class="line">        l = m</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        r = m - <span class="number">1</span></span><br><span class="line"><span class="keyword">return</span> l <span class="comment"># return r is the same</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Python树状数组模板</p>
+<ul>
+<li><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BIT</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, n)</span>:</span></span><br><span class="line">        self.n = n</span><br><span class="line">        self.tree = [<span class="number">0</span>] * (n + <span class="number">1</span>)</span><br><span class="line">    </span><br><span class="line"><span class="meta">    @staticmethod</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">lowbit</span><span class="params">(x)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> x &amp; (-x)</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">query</span><span class="params">(self, x)</span>:</span></span><br><span class="line">        ret = <span class="number">0</span></span><br><span class="line">        <span class="keyword">while</span> x &gt; <span class="number">0</span>:</span><br><span class="line">            ret += self.tree[x]</span><br><span class="line">            x -= BIT.lowbit(x)</span><br><span class="line">        <span class="keyword">return</span> ret</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">update</span><span class="params">(self, x, delta)</span>:</span></span><br><span class="line">        <span class="keyword">while</span> x &lt;= self.n:</span><br><span class="line">            self.tree[x] += delta</span><br><span class="line">            x += BIT.lowbit(x)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
 </li>
 </ul>
 <h2 id="Python语言相关"><a href="#Python语言相关" class="headerlink" title="Python语言相关"></a>Python语言相关</h2><p><strong>全局解释器锁GIL</strong></p>
@@ -743,40 +871,6 @@ top:50vh;
     <div class="sidebar-content sidebar-content-show-archive">
           <div class="sidebar-panel-archives">
     <!-- 在ejs中将archive按照时间排序 -->
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
     
     
@@ -2011,12 +2105,12 @@ top:50vh;
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">10/04</span><a class="archive-post-title" href= "/2018/10/04/pa-inspirations/" >做pa的时候可能会用到的操作</a>
+            <span class="archive-post-date">10/04</span><a class="archive-post-title" href= "/2018/10/04/PA1-report/" >PA1实验报告</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">10/04</span><a class="archive-post-title" href= "/2018/10/04/PA1-report/" >PA1实验报告</a>
+            <span class="archive-post-date">10/04</span><a class="archive-post-title" href= "/2018/10/04/pa-inspirations/" >做pa的时候可能会用到的操作</a>
         </li>
     
     
@@ -2098,11 +2192,11 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="Problem Solving"><span class="iconfont-archer">&#xe606;</span>Problem Solving</span>
     
-        <span class="sidebar-tag-name" data-tags="Assembly Language"><span class="iconfont-archer">&#xe606;</span>Assembly Language</span>
-    
         <span class="sidebar-tag-name" data-tags="CLRS"><span class="iconfont-archer">&#xe606;</span>CLRS</span>
     
         <span class="sidebar-tag-name" data-tags="dynamic programming"><span class="iconfont-archer">&#xe606;</span>dynamic programming</span>
+    
+        <span class="sidebar-tag-name" data-tags="Assembly Language"><span class="iconfont-archer">&#xe606;</span>Assembly Language</span>
     
         <span class="sidebar-tag-name" data-tags="greedy algorithm"><span class="iconfont-archer">&#xe606;</span>greedy algorithm</span>
     
@@ -2136,11 +2230,11 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="Ics"><span class="iconfont-archer">&#xe606;</span>Ics</span>
     
+        <span class="sidebar-tag-name" data-tags="MATLAB"><span class="iconfont-archer">&#xe606;</span>MATLAB</span>
+    
         <span class="sidebar-tag-name" data-tags="Matchings"><span class="iconfont-archer">&#xe606;</span>Matchings</span>
     
         <span class="sidebar-tag-name" data-tags="Factorization"><span class="iconfont-archer">&#xe606;</span>Factorization</span>
-    
-        <span class="sidebar-tag-name" data-tags="MATLAB"><span class="iconfont-archer">&#xe606;</span>MATLAB</span>
     
         <span class="sidebar-tag-name" data-tags="Group Theory"><span class="iconfont-archer">&#xe606;</span>Group Theory</span>
     
@@ -2148,11 +2242,15 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="linux"><span class="iconfont-archer">&#xe606;</span>linux</span>
     
+        <span class="sidebar-tag-name" data-tags="Python"><span class="iconfont-archer">&#xe606;</span>Python</span>
+    
+        <span class="sidebar-tag-name" data-tags="markdown"><span class="iconfont-archer">&#xe606;</span>markdown</span>
+    
         <span class="sidebar-tag-name" data-tags="Java"><span class="iconfont-archer">&#xe606;</span>Java</span>
     
         <span class="sidebar-tag-name" data-tags="programming"><span class="iconfont-archer">&#xe606;</span>programming</span>
     
-        <span class="sidebar-tag-name" data-tags="Python"><span class="iconfont-archer">&#xe606;</span>Python</span>
+        <span class="sidebar-tag-name" data-tags="tmux"><span class="iconfont-archer">&#xe606;</span>tmux</span>
     
         <span class="sidebar-tag-name" data-tags="Traversibility"><span class="iconfont-archer">&#xe606;</span>Traversibility</span>
     
@@ -2161,10 +2259,6 @@ top:50vh;
         <span class="sidebar-tag-name" data-tags="Tree"><span class="iconfont-archer">&#xe606;</span>Tree</span>
     
         <span class="sidebar-tag-name" data-tags="vim"><span class="iconfont-archer">&#xe606;</span>vim</span>
-    
-        <span class="sidebar-tag-name" data-tags="markdown"><span class="iconfont-archer">&#xe606;</span>markdown</span>
-    
-        <span class="sidebar-tag-name" data-tags="tmux"><span class="iconfont-archer">&#xe606;</span>tmux</span>
     
         <span class="sidebar-tag-name" data-tags="Linux"><span class="iconfont-archer">&#xe606;</span>Linux</span>
     
@@ -2266,8 +2360,7 @@ jsonContent:
             all[i].SourceElement().parentNode.className += ' has-jax';
     });
 </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
-<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":150},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
 <script type="text/x-mathjax-config">
   MathJax.Hub.Config("");
 </script>
@@ -2284,7 +2377,8 @@ jsonContent:
 <script type="text/javascript" src="custom_mathjax_source">
 </script>
 <!-- End: Injected MathJax -->
-<!-- hexo-inject:end --></body>
+<!-- hexo-inject:end -->
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":150},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 </html>
 
 
