@@ -339,6 +339,46 @@
     
     
     <article class="index-post">
+        <a class="abstract-title" href = "/2018/11/14/connectivity/" >
+            
+                <span>图论学习笔记-图中的连通性与距离</span>
+        </a>
+        <div class="abstract-content">
+            割点割点的定义：去掉这个点后，原图不再连通
+定理5.1：设$v$是连通图$G$中与bridge相连的一个结点，则$v$是割点当且仅当$deg v\ge 2$非简单树 = 端点 + 割点
+推论5.2：设$G$是一个至少有3个顶点的连通图，若$G$有bridge，则$G$一定有割点
+定理5.3：设$v$是连通图$G$的一个割点，$u$和$w$是$G-v$不同components中的两个顶点，则$v$位于$G$的任意一条$u-w$路径上。
+回顾定理4.1：边$e$是bridge当且仅当$e$不存在于任何一个cycle上
+推论5.4：$v$是连通图$G$的一个割点 当且仅当 存在与$v$不同的两...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/11/14</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Notes">Notes</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Problem Solving">Problem Solving</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Graph Theory">Graph Theory</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Connectivity">Connectivity</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href = "/2018/11/06/lab2-report/" >
             
                 <span>Lab2:链接与加载 实验报告</span>
@@ -722,49 +762,6 @@ PA讲义中的Linux-C教程
         <a class="post-tag" href="javascript:void(0);" data-tags = "regular expressions">regular expressions</a>
     
         <a class="post-tag" href="javascript:void(0);" data-tags = "linux">linux</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2018/09/17/clrs-17amortized/" >
-            
-                <span>算法导论学习笔记-摊还分析</span>
-        </a>
-        <div class="abstract-content">
-            聚合分析聚合分析指，证明对所有n，一个n个操作的序列的最坏情况下花费的总时间为T(n)。因此在最坏情况下，每个操作的平均代价，或摊还代价为T(n)/n。
-摊还操作可以看作是不带概率计算的平均情况分析。因为概率不好计算。概率什么时候好计算过了
-此摊还代价适用于每个操作，即使序列中有多种类型的操作也是如此。
-算法导论上给出的示例为增加了MULTIPOP的栈操作和二进制计数器递增问题，简单概括一下二者的共同点：
-
-需要分析复杂度的操作由连续的n个操作构成
-每个单步操作的时间复杂度难以确定为与n有关的表达式，与当前状态密切相关
-对每个单步操作取最坏情况得出的上界过于宽松，浪费时间
-n个连续操作的...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/09/17</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Notes">Notes</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Problem Solving">Problem Solving</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "CLRS">CLRS</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "amortized analysis">amortized analysis</a>
     
 </div>
             
@@ -1818,9 +1815,96 @@ n个连续操作的...
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 63
+        Total : 64
         </div>
         <!-- search  -->
         
@@ -1833,6 +1917,11 @@ n个连续操作的...
     
     <div class="archive-year"> 2020 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/17</span><a class="archive-post-title" href= "/2020/06/17/my-projects/" >我做过的项目</a>
+        </li>
     
     
         <li class="archive-post-item">
@@ -2099,12 +2188,12 @@ n个连续操作的...
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">10/04</span><a class="archive-post-title" href= "/2018/10/04/PA1-report/" >PA1实验报告</a>
+            <span class="archive-post-date">10/04</span><a class="archive-post-title" href= "/2018/10/04/pa-inspirations/" >做pa的时候可能会用到的操作</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">10/04</span><a class="archive-post-title" href= "/2018/10/04/pa-inspirations/" >做pa的时候可能会用到的操作</a>
+            <span class="archive-post-date">10/04</span><a class="archive-post-title" href= "/2018/10/04/PA1-report/" >PA1实验报告</a>
         </li>
     
     
@@ -2174,23 +2263,23 @@ n个连续操作的...
     
         <span class="sidebar-tag-name" data-tags="Flags"><span class="iconfont-archer">&#xe606;</span>Flags</span>
     
-        <span class="sidebar-tag-name" data-tags="Math Modeling"><span class="iconfont-archer">&#xe606;</span>Math Modeling</span>
-    
         <span class="sidebar-tag-name" data-tags="Notes"><span class="iconfont-archer">&#xe606;</span>Notes</span>
     
         <span class="sidebar-tag-name" data-tags="pa"><span class="iconfont-archer">&#xe606;</span>pa</span>
     
-        <span class="sidebar-tag-name" data-tags="Machine Learning"><span class="iconfont-archer">&#xe606;</span>Machine Learning</span>
-    
         <span class="sidebar-tag-name" data-tags="ICS"><span class="iconfont-archer">&#xe606;</span>ICS</span>
     
+        <span class="sidebar-tag-name" data-tags="Math Modeling"><span class="iconfont-archer">&#xe606;</span>Math Modeling</span>
+    
+        <span class="sidebar-tag-name" data-tags="Machine Learning"><span class="iconfont-archer">&#xe606;</span>Machine Learning</span>
+    
         <span class="sidebar-tag-name" data-tags="Problem Solving"><span class="iconfont-archer">&#xe606;</span>Problem Solving</span>
+    
+        <span class="sidebar-tag-name" data-tags="Assembly Language"><span class="iconfont-archer">&#xe606;</span>Assembly Language</span>
     
         <span class="sidebar-tag-name" data-tags="CLRS"><span class="iconfont-archer">&#xe606;</span>CLRS</span>
     
         <span class="sidebar-tag-name" data-tags="dynamic programming"><span class="iconfont-archer">&#xe606;</span>dynamic programming</span>
-    
-        <span class="sidebar-tag-name" data-tags="Assembly Language"><span class="iconfont-archer">&#xe606;</span>Assembly Language</span>
     
         <span class="sidebar-tag-name" data-tags="greedy algorithm"><span class="iconfont-archer">&#xe606;</span>greedy algorithm</span>
     
@@ -2224,19 +2313,23 @@ n个连续操作的...
     
         <span class="sidebar-tag-name" data-tags="Ics"><span class="iconfont-archer">&#xe606;</span>Ics</span>
     
-        <span class="sidebar-tag-name" data-tags="MATLAB"><span class="iconfont-archer">&#xe606;</span>MATLAB</span>
+        <span class="sidebar-tag-name" data-tags="Interview"><span class="iconfont-archer">&#xe606;</span>Interview</span>
     
         <span class="sidebar-tag-name" data-tags="Matchings"><span class="iconfont-archer">&#xe606;</span>Matchings</span>
     
         <span class="sidebar-tag-name" data-tags="Factorization"><span class="iconfont-archer">&#xe606;</span>Factorization</span>
+    
+        <span class="sidebar-tag-name" data-tags="MATLAB"><span class="iconfont-archer">&#xe606;</span>MATLAB</span>
+    
+        <span class="sidebar-tag-name" data-tags="Linux"><span class="iconfont-archer">&#xe606;</span>Linux</span>
+    
+        <span class="sidebar-tag-name" data-tags="vim"><span class="iconfont-archer">&#xe606;</span>vim</span>
     
         <span class="sidebar-tag-name" data-tags="Group Theory"><span class="iconfont-archer">&#xe606;</span>Group Theory</span>
     
         <span class="sidebar-tag-name" data-tags="regular expressions"><span class="iconfont-archer">&#xe606;</span>regular expressions</span>
     
         <span class="sidebar-tag-name" data-tags="linux"><span class="iconfont-archer">&#xe606;</span>linux</span>
-    
-        <span class="sidebar-tag-name" data-tags="Python"><span class="iconfont-archer">&#xe606;</span>Python</span>
     
         <span class="sidebar-tag-name" data-tags="markdown"><span class="iconfont-archer">&#xe606;</span>markdown</span>
     
@@ -2252,9 +2345,7 @@ n个连续操作的...
     
         <span class="sidebar-tag-name" data-tags="Tree"><span class="iconfont-archer">&#xe606;</span>Tree</span>
     
-        <span class="sidebar-tag-name" data-tags="vim"><span class="iconfont-archer">&#xe606;</span>vim</span>
-    
-        <span class="sidebar-tag-name" data-tags="Linux"><span class="iconfont-archer">&#xe606;</span>Linux</span>
+        <span class="sidebar-tag-name" data-tags="Python"><span class="iconfont-archer">&#xe606;</span>Python</span>
     
         <span class="sidebar-tag-name" data-tags="notes"><span class="iconfont-archer">&#xe606;</span>notes</span>
     
