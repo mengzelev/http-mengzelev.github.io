@@ -191,9 +191,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" defer></script>
     <!-- 百度统计  -->
     
-    <!-- 谷歌统计  --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    <!-- 谷歌统计  -->
     
-</head>
+<meta name="generator" content="Hexo 5.3.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
 
     
         <body class="post-body">
@@ -261,7 +261,7 @@ height:50vh;
                 
                 
                     <div class="post-intro-read">
-                        <span>Word count: <span class="post-count">1,712</span> / Reading time: <span class="post-count">8 min</span></span>
+                        <span>Word count: <span class="post-count">1,650</span> / Reading time: <span class="post-count">7 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
@@ -391,7 +391,8 @@ height:50vh;
             <main class="main post-page">
     <article class="article-entry">
         <h1 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h1><p>近似算法是能提供最优化问题的可行解的算法，所提供的解的质量不会与最优解相差太多</p>
-<p><strong>形式化定义</strong>：$U={\Sigma_I, \Sigma_O, L, L_I, \mathcal{M}, cost, goal}$是一个最优化问题，$A$是$U$的consistent algorithm. 对任意$x\in L_I$, $A$在$x$上的相对误差(relative error)$\varepsilon_A(x)$定义为<br>$$\varepsilon_A(x)=\frac{|cost(A(x))-Opt_U(x)|}{Opt_U(x)}$$<br>对任意$x\in\mathbb{N}$,定义$A$的相对误差$$\varepsilon_A(n)=\max{\varepsilon_A(x)|x\in L_I\cap (\Sigma_I)^n}$$<br>对每个$x\in L_I$,$A$在$x$上的的近似率(approximation ration)$R_A(x)$定义为$$R_A(x)=\max{\frac{cost(A(x))}{Opt_U(x)}, \frac{Opt_U(x)}{cost(A(x))}}$$<br>对任意$n\in\mathbb{N}$,定义$A$的近似率为$$R_A(n)=\max{R_A(x)|x\in L_I\cap (\Sigma_I)^n}$$<br>$R_A$又名最坏情况性能(worst case performance)，近似因子(approximation factor), 性能约束(performance bound)，性能率(performance ratio)，误差率(error ratio)</p>
+<p><strong>形式化定义</strong>：$U={\Sigma_I, \Sigma_O, L, L_I, \mathcal{M}, cost, goal}$是一个最优化问题，$A$是$U$的consistent algorithm. 对任意$x\in L_I$, $A$在$x$上的相对误差(relative error)$\varepsilon_A(x)$定义为</p>
+<script type="math/tex; mode=display">\varepsilon_A(x)=\frac{|cost(A(x))-Opt_U(x)|}{Opt_U(x)}</script><p>对任意$x\in\mathbb{N}$,定义$A$的相对误差<script type="math/tex">\varepsilon_A(n)=\max\{\varepsilon_A(x)|x\in L_I\cap (\Sigma_I)^n\}</script><br>对每个$x\in L_I$,$A$在$x$上的的近似率(approximation ration)$R_A(x)$定义为<script type="math/tex">R_A(x)=\max\{\frac{cost(A(x))}{Opt_U(x)}, \frac{Opt_U(x)}{cost(A(x))}\}</script><br>对任意$n\in\mathbb{N}$,定义$A$的近似率为<script type="math/tex">R_A(n)=\max\{R_A(x)|x\in L_I\cap (\Sigma_I)^n\}</script><br>$R_A$又名最坏情况性能(worst case performance)，近似因子(approximation factor), 性能约束(performance bound)，性能率(performance ratio)，误差率(error ratio)</p>
 <p>若$A$是最小化问题且$R_A(x)=\frac{Opt_U(x)}{cost(A(x))}$,则$R_A(x)=1+\varepsilon_A(x)$</p>
 <p>对于任意正实数$\delta&gt;1$，若$R_A(x)\le\delta$对任意$x\in L_I$恒成立，则称$A$是$U$的$\delta-$近似算法<br>对任意函数$f:\mathbb{N}\to\mathbb{R}^+$,若$R_A(x)\le f(n)$对任意$n\in\mathbb{N}$恒成立，则称$A$是$U$的$f(n)-$近似算法</p>
 <h1 id="近似方案-approximation-scheme"><a href="#近似方案-approximation-scheme" class="headerlink" title="近似方案(approximation scheme)"></a>近似方案(approximation scheme)</h1><p>用户可以指定一个小的相对误差值$\varepsilon$，程序可以提供出一个误差至多为$\varepsilon$的可行解</p>
@@ -424,16 +425,16 @@ height:50vh;
 <li>对任意$x\in L_I, h_L(x)=0$</li>
 <li>$h$可以在多项式时间内计算</li>
 </ul>
-<p>定义：对任意$r\in\mathbb{R}^+$,$$Ball_{r,h}(L_I)={w\in L\mid h(w)\le r}$$</p>
-<p>$p$是正实数，若对任意实数$0\le r\le p$, 存在$\delta_{r,\varepsilon}\in\mathbb{R}^{&gt;1}$, $A$是$U_r={\Sigma_I, \Sigma_O, L, Ball_{r,h}, \mathcal{M}, cost, goal}$的$\delta_{r,\varepsilon}-$近似算法，则称$A$是<strong>p-stable</strong> according to $h$</p>
+<p>定义：对任意$r\in\mathbb{R}^+$,<script type="math/tex">Ball_{r,h}(L_I)=\{w\in L\mid h(w)\le r\}</script></p>
+<p>$p$是正实数，若对任意实数$0\le r\le p$, 存在$\delta<em>{r,\varepsilon}\in\mathbb{R}^{&gt;1}$, $A$是$U_r={\Sigma_I, \Sigma_O, L, Ball</em>{r,h}, \mathcal{M}, cost, goal}$的$\delta_{r,\varepsilon}-$近似算法，则称$A$是<strong>p-stable</strong> according to $h$</p>
 <p>若对任意$p\in\mathbb{R}^+$，$A$都是p-stable的，则称$A$是stable according to $h$<br>反之，若对任意$p\in\mathbb{R}^+$，$A$都不是p-stable的，则称$A$是unstable according to $h$</p>
-<p>对任意正整数$r$和任意函数$f:\mathbb{N}\to\mathbb{R}^{&gt;1}$,若$A$是$U_r={\Sigma_I, \Sigma_O, L, Ball_{r,h}, \mathcal{M}, cost, goal}$的$f_r(n)-$近似算法，则称$A$是$(r,f_r(n))$-quasistable accroding to $h$</p>
-<p>把PTAS$A$看作一系列多项式时间$(1+\varepsilon)-$近似算法的集合$A_\varepsilon$.若在某个距离度量$h$下对任意$\varepsilon&gt;0$,$A_\varepsilon$都是稳定的，则我们可以得到以下二者之一</p>
+<p>对任意正整数$r$和任意函数$f:\mathbb{N}\to\mathbb{R}^{&gt;1}$,若$A$是$U<em>r={\Sigma_I, \Sigma_O, L, Ball</em>{r,h}, \mathcal{M}, cost, goal}$的$f_r(n)-$近似算法，则称$A$是$(r,f_r(n))$-quasistable accroding to $h$</p>
+<p>把PTAS$A$看作一系列多项式时间$(1+\varepsilon)-$近似算法的集合$A<em>\varepsilon$.若在某个距离度量$h$下对任意$\varepsilon&gt;0$,$A</em>\varepsilon$都是稳定的，则我们可以得到以下二者之一</p>
 <ul>
 <li>$U_r$的一个PTAS(for every $r\in\mathbb{R}^+$)</li>
-<li>$U_r$的一个$\delta_{r,\varepsilon}$近似算法，但没有PTAS</li>
+<li>$U<em>r$的一个$\delta</em>{r,\varepsilon}$近似算法，但没有PTAS</li>
 </ul>
-<p><strong>定义4.2.3.6</strong>： $U,\overline{U}$定义同上。$h$是$\overline{U}$根据$L_I$的距离函数，$U_r$同上。设$A={A_\varepsilon}<em>{\varepsilon&gt;0}$是$U$的一个PTAS<br>若对任意$r&gt;0$和$\varepsilon&gt;0$,$A</em>\varepsilon$是$\delta_{r,\varepsilon}$-近似算法，则$A$是关于$h$stable的<br>若$\delta_{r,\varepsilon}\le f(\varepsilon)\cdot g(r)$，其中$f$和$g$是某些$\mathbb{R}^{\ge 0}\to\mathbb{R}^+$的函数且$\lim\limits_{\varepsilon\to 0}f(\varepsilon)=0$, 则称$A$关于$h$超稳定(superstable).</p>
+<p><strong>定义4.2.3.6</strong>： $U,\overline{U}$定义同上。$h$是$\overline{U}$根据$L<em>I$的距离函数，$U_r$同上。设$A={A</em>\varepsilon}<em>{\varepsilon&gt;0}$是$U$的一个PTAS<br>若对任意$r&gt;0$和$\varepsilon&gt;0$,$A</em>\varepsilon$是$\delta<em>{r,\varepsilon}$-近似算法，则$A$是关于$h$stable的<br>若$\delta</em>{r,\varepsilon}\le f(\varepsilon)\cdot g(r)$，其中$f$和$g$是某些$\mathbb{R}^{\ge 0}\to\mathbb{R}^+$的函数且$\lim\limits_{\varepsilon\to 0}f(\varepsilon)=0$, 则称$A$关于$h$超稳定(superstable).</p>
 <p>如果$A$对$U$超稳定，则$A$对$U_r$也超稳定</p>
 <h1 id="对偶近似算法"><a href="#对偶近似算法" class="headerlink" title="对偶近似算法"></a>对偶近似算法</h1><p>修改限制条件$\mathcal(M)$来简化计算</p>
 <p><strong>定义4.2.4.1</strong>：$U={\Sigma_I, \Sigma_O, L, L_I, \mathcal{M}, cost, goal}$是一个最优化问题。$U$的<strong>限制距离函数(constraint distance function)</strong>是任何满足下列条件的函数$h:L_I\times\Sigma^*_O\to\mathbb{R}^{\ge 0}$:</p>
@@ -442,11 +443,11 @@ height:50vh;
 <li>对任意$S\notin\mathcal{M}(x), h(x,S)&gt;0$</li>
 <li>$h$是多项式时间内可计算的</li>
 </ul>
-<p>对任意$\varepsilon\in\mathbb{R}^+$,任意$x\in L_I$,$\mathcal{M}_\varepsilon^h(x)={S\in\Sigma_O^*\mid h(x,S)\le\varepsilon}$是$\varepsilon-$ball of $\mathcal{M}(x)$ according to $h$.</p>
-<p><strong>定义4.2.4.2</strong>: $U$是最优化问题，$h$是$U$的限制距离函数. 若对任意$x\in L_1$,有$A(x)\in\mathcal{M}_\varepsilon^h(x)$且$cost(A(x))\ge Opt_U(x)$ if $goal=maximum$且$cost(A(x))\le Opt_U(x)$ if $goal=minimum$, 则称$A$是$U$的$h-$对偶$\varepsilon-$近似算法</p>
+<p>对任意$\varepsilon\in\mathbb{R}^+$,任意$x\in L<em>I$,$\mathcal{M}</em>\varepsilon^h(x)={S\in\Sigma_O^*\mid h(x,S)\le\varepsilon}$是$\varepsilon-$ball of $\mathcal{M}(x)$ according to $h$.</p>
+<p><strong>定义4.2.4.2</strong>: $U$是最优化问题，$h$是$U$的限制距离函数. 若对任意$x\in L<em>1$,有$A(x)\in\mathcal{M}</em>\varepsilon^h(x)$且$cost(A(x))\ge Opt_U(x)$ if $goal=maximum$且$cost(A(x))\le Opt_U(x)$ if $goal=minimum$, 则称$A$是$U$的$h-$对偶$\varepsilon-$近似算法</p>
 <p><strong>定义4.2.4.3</strong>: 条件同上。若</p>
 <ul>
-<li>对任意输入$(x,\varepsilon)\in L_I\times\mathbb{R}^+, A(x,\varepsilon)\in\mathcal{M}_\varepsilon^h(x)$</li>
+<li>对任意输入$(x,\varepsilon)\in L<em>I\times\mathbb{R}^+, A(x,\varepsilon)\in\mathcal{M}</em>\varepsilon^h(x)$</li>
 <li>$cost(A(x))\ge Opt_U(x)$ if $goal=maximum$且$cost(A(x))\le Opt_U(x)$ if $goal=minimum$</li>
 <li>$Time_A(x,\varepsilon^{-1})$以某个$|x|$的多项式函数为界</li>
 </ul>
@@ -464,7 +465,7 @@ height:50vh;
             <p>原文作者: <a href="https://mengzelev.github.io">Mengzelev</a>
             <p>原文链接: <a href="https://mengzelev.github.io/2019/05/18/ps-4-12-Approximation-Algorithms/">https://mengzelev.github.io/2019/05/18/ps-4-12-Approximation-Algorithms/</a>
             <p>发表日期: <a href="https://mengzelev.github.io/2019/05/18/ps-4-12-Approximation-Algorithms/">May 18th 2019, 11:03:30 am</a>
-            <p>版权声明: 本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
+            <p>版权声明: 本文采用<a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
         </div>
     
     <!-- paginator  -->
@@ -610,7 +611,7 @@ top:50vh;
         <div class="toc-catalog">
             <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
         </div>
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#概念"><span class="toc-number">1.</span> <span class="toc-text">概念</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#近似方案-approximation-scheme"><span class="toc-number">2.</span> <span class="toc-text">近似方案(approximation scheme)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#最优化问题的分类"><span class="toc-number">3.</span> <span class="toc-text">最优化问题的分类</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#近似算法的稳定性"><span class="toc-number">4.</span> <span class="toc-text">近似算法的稳定性</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#对偶近似算法"><span class="toc-number">5.</span> <span class="toc-text">对偶近似算法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#总结"><span class="toc-number">6.</span> <span class="toc-text">总结</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%A6%82%E5%BF%B5"><span class="toc-number">1.</span> <span class="toc-text">概念</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%BF%91%E4%BC%BC%E6%96%B9%E6%A1%88-approximation-scheme"><span class="toc-number">2.</span> <span class="toc-text">近似方案(approximation scheme)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%9C%80%E4%BC%98%E5%8C%96%E9%97%AE%E9%A2%98%E7%9A%84%E5%88%86%E7%B1%BB"><span class="toc-number">3.</span> <span class="toc-text">最优化问题的分类</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%BF%91%E4%BC%BC%E7%AE%97%E6%B3%95%E7%9A%84%E7%A8%B3%E5%AE%9A%E6%80%A7"><span class="toc-number">4.</span> <span class="toc-text">近似算法的稳定性</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AF%B9%E5%81%B6%E8%BF%91%E4%BC%BC%E7%AE%97%E6%B3%95"><span class="toc-number">5.</span> <span class="toc-text">对偶近似算法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">6.</span> <span class="toc-text">总结</span></a></li></ol>
     </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
@@ -1587,85 +1588,9 @@ top:50vh;
     
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 64
+        Total : 66
         </div>
         <!-- search  -->
         
@@ -1678,6 +1603,16 @@ top:50vh;
     
     <div class="archive-year"> 2020 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/27</span><a class="archive-post-title" href= "/2020/06/27/Le-Deuxieme-Sexe/" >西蒙·波伏娃《第二性》读书笔记</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/24</span><a class="archive-post-title" href= "/2020/06/24/OOP-design-patterns/" >面向对象设计原则-课程笔记</a>
+        </li>
     
     
         <li class="archive-post-item">
@@ -1949,12 +1884,12 @@ top:50vh;
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">10/04</span><a class="archive-post-title" href= "/2018/10/04/pa-inspirations/" >做pa的时候可能会用到的操作</a>
+            <span class="archive-post-date">10/04</span><a class="archive-post-title" href= "/2018/10/04/PA1-report/" >PA1实验报告</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">10/04</span><a class="archive-post-title" href= "/2018/10/04/PA1-report/" >PA1实验报告</a>
+            <span class="archive-post-date">10/04</span><a class="archive-post-title" href= "/2018/10/04/pa-inspirations/" >做pa的时候可能会用到的操作</a>
         </li>
     
     
@@ -2024,17 +1959,17 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="Flags"><span class="iconfont-archer">&#xe606;</span>Flags</span>
     
+        <span class="sidebar-tag-name" data-tags="Math Modeling"><span class="iconfont-archer">&#xe606;</span>Math Modeling</span>
+    
         <span class="sidebar-tag-name" data-tags="Notes"><span class="iconfont-archer">&#xe606;</span>Notes</span>
     
         <span class="sidebar-tag-name" data-tags="pa"><span class="iconfont-archer">&#xe606;</span>pa</span>
     
         <span class="sidebar-tag-name" data-tags="ICS"><span class="iconfont-archer">&#xe606;</span>ICS</span>
     
-        <span class="sidebar-tag-name" data-tags="Math Modeling"><span class="iconfont-archer">&#xe606;</span>Math Modeling</span>
+        <span class="sidebar-tag-name" data-tags="Problem Solving"><span class="iconfont-archer">&#xe606;</span>Problem Solving</span>
     
         <span class="sidebar-tag-name" data-tags="Machine Learning"><span class="iconfont-archer">&#xe606;</span>Machine Learning</span>
-    
-        <span class="sidebar-tag-name" data-tags="Problem Solving"><span class="iconfont-archer">&#xe606;</span>Problem Solving</span>
     
         <span class="sidebar-tag-name" data-tags="Assembly Language"><span class="iconfont-archer">&#xe606;</span>Assembly Language</span>
     
@@ -2074,13 +2009,13 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="Ics"><span class="iconfont-archer">&#xe606;</span>Ics</span>
     
-        <span class="sidebar-tag-name" data-tags="Interview"><span class="iconfont-archer">&#xe606;</span>Interview</span>
-    
         <span class="sidebar-tag-name" data-tags="Matchings"><span class="iconfont-archer">&#xe606;</span>Matchings</span>
     
         <span class="sidebar-tag-name" data-tags="Factorization"><span class="iconfont-archer">&#xe606;</span>Factorization</span>
     
         <span class="sidebar-tag-name" data-tags="MATLAB"><span class="iconfont-archer">&#xe606;</span>MATLAB</span>
+    
+        <span class="sidebar-tag-name" data-tags="Interview"><span class="iconfont-archer">&#xe606;</span>Interview</span>
     
         <span class="sidebar-tag-name" data-tags="Linux"><span class="iconfont-archer">&#xe606;</span>Linux</span>
     
@@ -2092,11 +2027,11 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="linux"><span class="iconfont-archer">&#xe606;</span>linux</span>
     
-        <span class="sidebar-tag-name" data-tags="markdown"><span class="iconfont-archer">&#xe606;</span>markdown</span>
-    
         <span class="sidebar-tag-name" data-tags="Java"><span class="iconfont-archer">&#xe606;</span>Java</span>
     
         <span class="sidebar-tag-name" data-tags="programming"><span class="iconfont-archer">&#xe606;</span>programming</span>
+    
+        <span class="sidebar-tag-name" data-tags="markdown"><span class="iconfont-archer">&#xe606;</span>markdown</span>
     
         <span class="sidebar-tag-name" data-tags="tmux"><span class="iconfont-archer">&#xe606;</span>tmux</span>
     
@@ -2206,10 +2141,10 @@ jsonContent:
             all[i].SourceElement().parentNode.className += ' has-jax';
     });
 </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
-<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":150},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":150},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
 <script type="text/x-mathjax-config">
-  MathJax.Hub.Config("");
+  MathJax.Hub.Config({{ JSON.stringify(config) }});
 </script>
 
 <script type="text/x-mathjax-config">
@@ -2221,7 +2156,7 @@ jsonContent:
   });
 </script>
 
-<script type="text/javascript" src="custom_mathjax_source">
+<script type="text/javascript" src="{{ src }}">
 </script>
 <!-- End: Injected MathJax -->
 <!-- hexo-inject:end --></body>

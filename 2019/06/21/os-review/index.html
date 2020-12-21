@@ -191,9 +191,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" defer></script>
     <!-- 百度统计  -->
     
-    <!-- 谷歌统计  --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    <!-- 谷歌统计  -->
     
-</head>
+<meta name="generator" content="Hexo 5.3.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
 
     
         <body class="post-body">
@@ -462,7 +462,8 @@ height:50vh;
 <li>元数据信息（类型，大小，权限，访问时间、链接数量、索引）</li>
 </ul>
 <h2 id="目录文件"><a href="#目录文件" class="headerlink" title="目录文件"></a>目录文件</h2><p>目录=文件名$\to$文件id的映射</p>
-<h3 id="Inode的存储"><a href="#Inode的存储" class="headerlink" title="Inode的存储"></a>Inode的存储</h3><table>
+<h3 id="Inode的存储"><a href="#Inode的存储" class="headerlink" title="Inode的存储"></a>Inode的存储</h3><div class="table-container">
+<table>
 <thead>
 <tr>
 <th style="text-align:left">存储方式</th>
@@ -487,6 +488,7 @@ height:50vh;
 </tr>
 </tbody>
 </table>
+</div>
 <h3 id="评价文件系统"><a href="#评价文件系统" class="headerlink" title="评价文件系统"></a>评价文件系统</h3><ul>
 <li>性能<ul>
 <li>存在超大文件、超大目录时各个操作的性能表现</li>
@@ -528,6 +530,7 @@ height:50vh;
 <ul>
 <li>方案1</li>
 </ul>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -554,9 +557,11 @@ height:50vh;
 </tr>
 </tbody>
 </table>
+</div>
 <ul>
 <li>方案2</li>
 </ul>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -583,6 +588,8 @@ height:50vh;
 </tr>
 </tbody>
 </table>
+</div>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -604,9 +611,11 @@ height:50vh;
 </tr>
 </tbody>
 </table>
+</div>
 <p>实际使用中对目录访问较多（顺序读写），方案2中磁盘2等于没有</p>
 <p>毫无容错</p>
 <h3 id="RAID-1-镜像"><a href="#RAID-1-镜像" class="headerlink" title="RAID-1 镜像"></a>RAID-1 镜像</h3><p>维护两块数据完全一样的磁盘实现容错</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -638,7 +647,9 @@ height:50vh;
 </tr>
 </tbody>
 </table>
-<h3 id="RAID-4"><a href="#RAID-4" class="headerlink" title="RAID-4"></a>RAID-4</h3><table>
+</div>
+<h3 id="RAID-4"><a href="#RAID-4" class="headerlink" title="RAID-4"></a>RAID-4</h3><div class="table-container">
+<table>
 <thead>
 <tr>
 <th>Block</th>
@@ -684,6 +695,7 @@ height:50vh;
 </tr>
 </tbody>
 </table>
+</div>
 <ul>
 <li>顺序读：4X</li>
 <li>顺序写：4X</li>
@@ -691,6 +703,7 @@ height:50vh;
 <li>随机写：X/2(校验盘是性能瓶颈)</li>
 </ul>
 <h3 id="RAID-5"><a href="#RAID-5" class="headerlink" title="RAID-5"></a>RAID-5</h3><p>RAID-4升级版</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -737,6 +750,7 @@ height:50vh;
 </tr>
 </tbody>
 </table>
+</div>
 <ul>
 <li>随机写可以并发</li>
 </ul>
@@ -811,7 +825,8 @@ height:50vh;
 <li>目录项顺序存储inode编号、该目录项长度、类型、文件名</li>
 <li>分组：不用管理全局的bitmap，性能优化，简化磁盘大小动态调整</li>
 </ul>
-<h2 id="保护数据不受损害"><a href="#保护数据不受损害" class="headerlink" title="保护数据不受损害"></a>保护数据不受损害</h2><h3 id="RAID-1"><a href="#RAID-1" class="headerlink" title="RAID"></a>RAID</h3><table>
+<h2 id="保护数据不受损害"><a href="#保护数据不受损害" class="headerlink" title="保护数据不受损害"></a>保护数据不受损害</h2><h3 id="RAID-1"><a href="#RAID-1" class="headerlink" title="RAID"></a>RAID</h3><div class="table-container">
+<table>
 <thead>
 <tr>
 <th style="text-align:center">RAID lv.</th>
@@ -862,6 +877,7 @@ height:50vh;
 </tr>
 </tbody>
 </table>
+</div>
 <h3 id="fsck"><a href="#fsck" class="headerlink" title="fsck"></a>fsck</h3><p>崩溃之后的补救措施</p>
 <ul>
 <li>扫描inodes里所有数据块，检查bitmap的一致性</li>
@@ -883,7 +899,7 @@ height:50vh;
             <p>原文作者: <a href="https://mengzelev.github.io">Mengzelev</a>
             <p>原文链接: <a href="https://mengzelev.github.io/2019/06/21/os-review/">https://mengzelev.github.io/2019/06/21/os-review/</a>
             <p>发表日期: <a href="https://mengzelev.github.io/2019/06/21/os-review/">June 21st 2019, 8:58:41 pm</a>
-            <p>版权声明: 本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
+            <p>版权声明: 本文采用<a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
         </div>
     
     <!-- paginator  -->
@@ -1029,7 +1045,7 @@ top:50vh;
         <div class="toc-catalog">
             <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
         </div>
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#存储介质"><span class="toc-number">1.</span> <span class="toc-text">存储介质</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#IO设备与驱动"><span class="toc-number">2.</span> <span class="toc-text">IO设备与驱动</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#管理IO设备"><span class="toc-number">2.1.</span> <span class="toc-text">管理IO设备</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DMA"><span class="toc-number">2.2.</span> <span class="toc-text">DMA</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#文件系统概念"><span class="toc-number">3.</span> <span class="toc-text">文件系统概念</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#文件系统设计"><span class="toc-number">3.1.</span> <span class="toc-text">文件系统设计</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#文件系统API"><span class="toc-number">4.</span> <span class="toc-text">文件系统API</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#文件系统管理"><span class="toc-number">4.1.</span> <span class="toc-text">文件系统管理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#chroot"><span class="toc-number">4.1.1.</span> <span class="toc-text">chroot</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#目录管理"><span class="toc-number">4.2.</span> <span class="toc-text">目录管理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#硬♂链接"><span class="toc-number">4.2.1.</span> <span class="toc-text">硬♂链接</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#符号链接"><span class="toc-number">4.2.2.</span> <span class="toc-text">符号链接</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#文件管理：打开文件"><span class="toc-number">4.3.</span> <span class="toc-text">文件管理：打开文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#文件操作：文件描述符"><span class="toc-number">4.4.</span> <span class="toc-text">文件操作：文件描述符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#文件系统的同步"><span class="toc-number">4.5.</span> <span class="toc-text">文件系统的同步</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#文件系统实现"><span class="toc-number">5.</span> <span class="toc-text">文件系统实现</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#块设备"><span class="toc-number">5.1.</span> <span class="toc-text">块设备</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#虚拟磁盘"><span class="toc-number">5.2.</span> <span class="toc-text">虚拟磁盘</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#目录文件"><span class="toc-number">5.3.</span> <span class="toc-text">目录文件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Inode的存储"><span class="toc-number">5.3.1.</span> <span class="toc-text">Inode的存储</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#评价文件系统"><span class="toc-number">5.3.2.</span> <span class="toc-text">评价文件系统</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#FAT和ext2"><span class="toc-number">6.</span> <span class="toc-text">FAT和ext2</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#File-Allocationg-Table"><span class="toc-number">6.1.</span> <span class="toc-text">File Allocationg Table</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#缺陷"><span class="toc-number">6.1.1.</span> <span class="toc-text">缺陷</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ext2"><span class="toc-number">6.2.</span> <span class="toc-text">ext2</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#分组"><span class="toc-number">6.2.1.</span> <span class="toc-text">分组</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#持久数据的可靠性"><span class="toc-number">7.</span> <span class="toc-text">持久数据的可靠性</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#RAID"><span class="toc-number">7.1.</span> <span class="toc-text">RAID</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#RAID-0"><span class="toc-number">7.1.1.</span> <span class="toc-text">RAID-0</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RAID-1-镜像"><span class="toc-number">7.1.2.</span> <span class="toc-text">RAID-1 镜像</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RAID-4"><span class="toc-number">7.1.3.</span> <span class="toc-text">RAID-4</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RAID-5"><span class="toc-number">7.1.4.</span> <span class="toc-text">RAID-5</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#带宽分析"><span class="toc-number">7.1.5.</span> <span class="toc-text">带宽分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RAID硬件"><span class="toc-number">7.1.6.</span> <span class="toc-text">RAID硬件</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#崩溃恢复与日志"><span class="toc-number">8.</span> <span class="toc-text">崩溃恢复与日志</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#磁盘上的数据结构"><span class="toc-number">8.1.</span> <span class="toc-text">磁盘上的数据结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#原子性的丧失"><span class="toc-number">8.2.</span> <span class="toc-text">原子性的丧失</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#简单的workload-追加写"><span class="toc-number">8.2.1.</span> <span class="toc-text">简单的workload: 追加写</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#文件系统一致性"><span class="toc-number">8.3.</span> <span class="toc-text">文件系统一致性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#FSCK"><span class="toc-number">8.4.</span> <span class="toc-text">FSCK</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实现崩溃一致性"><span class="toc-number">8.5.</span> <span class="toc-text">实现崩溃一致性</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#日志-Journaling"><span class="toc-number">8.5.1.</span> <span class="toc-text">日志(Journaling)</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#期末复习"><span class="toc-number">9.</span> <span class="toc-text">期末复习</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#I-O设备模型"><span class="toc-number">9.1.</span> <span class="toc-text">I/O设备模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#main函数之前的故事"><span class="toc-number">9.2.</span> <span class="toc-text">main函数之前的故事</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#线程安全的printf"><span class="toc-number">9.3.</span> <span class="toc-text">线程安全的printf</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#文件系统的实现"><span class="toc-number">9.4.</span> <span class="toc-text">文件系统的实现</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#FAT"><span class="toc-number">9.4.1.</span> <span class="toc-text">FAT</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ext2-1"><span class="toc-number">9.4.2.</span> <span class="toc-text">ext2</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#保护数据不受损害"><span class="toc-number">9.5.</span> <span class="toc-text">保护数据不受损害</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#RAID-1"><span class="toc-number">9.5.1.</span> <span class="toc-text">RAID</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#fsck"><span class="toc-number">9.5.2.</span> <span class="toc-text">fsck</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#日志"><span class="toc-number">9.5.3.</span> <span class="toc-text">日志</span></a></li></ol></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AD%98%E5%82%A8%E4%BB%8B%E8%B4%A8"><span class="toc-number">1.</span> <span class="toc-text">存储介质</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#IO%E8%AE%BE%E5%A4%87%E4%B8%8E%E9%A9%B1%E5%8A%A8"><span class="toc-number">2.</span> <span class="toc-text">IO设备与驱动</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%A1%E7%90%86IO%E8%AE%BE%E5%A4%87"><span class="toc-number">2.1.</span> <span class="toc-text">管理IO设备</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DMA"><span class="toc-number">2.2.</span> <span class="toc-text">DMA</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%A6%82%E5%BF%B5"><span class="toc-number">3.</span> <span class="toc-text">文件系统概念</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1"><span class="toc-number">3.1.</span> <span class="toc-text">文件系统设计</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9FAPI"><span class="toc-number">4.</span> <span class="toc-text">文件系统API</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86"><span class="toc-number">4.1.</span> <span class="toc-text">文件系统管理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#chroot"><span class="toc-number">4.1.1.</span> <span class="toc-text">chroot</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9B%AE%E5%BD%95%E7%AE%A1%E7%90%86"><span class="toc-number">4.2.</span> <span class="toc-text">目录管理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A1%AC%E2%99%82%E9%93%BE%E6%8E%A5"><span class="toc-number">4.2.1.</span> <span class="toc-text">硬♂链接</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%A6%E5%8F%B7%E9%93%BE%E6%8E%A5"><span class="toc-number">4.2.2.</span> <span class="toc-text">符号链接</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%EF%BC%9A%E6%89%93%E5%BC%80%E6%96%87%E4%BB%B6"><span class="toc-number">4.3.</span> <span class="toc-text">文件管理：打开文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C%EF%BC%9A%E6%96%87%E4%BB%B6%E6%8F%8F%E8%BF%B0%E7%AC%A6"><span class="toc-number">4.4.</span> <span class="toc-text">文件操作：文件描述符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%90%8C%E6%AD%A5"><span class="toc-number">4.5.</span> <span class="toc-text">文件系统的同步</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0"><span class="toc-number">5.</span> <span class="toc-text">文件系统实现</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9D%97%E8%AE%BE%E5%A4%87"><span class="toc-number">5.1.</span> <span class="toc-text">块设备</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%99%9A%E6%8B%9F%E7%A3%81%E7%9B%98"><span class="toc-number">5.2.</span> <span class="toc-text">虚拟磁盘</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9B%AE%E5%BD%95%E6%96%87%E4%BB%B6"><span class="toc-number">5.3.</span> <span class="toc-text">目录文件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Inode%E7%9A%84%E5%AD%98%E5%82%A8"><span class="toc-number">5.3.1.</span> <span class="toc-text">Inode的存储</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%84%E4%BB%B7%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F"><span class="toc-number">5.3.2.</span> <span class="toc-text">评价文件系统</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#FAT%E5%92%8Cext2"><span class="toc-number">6.</span> <span class="toc-text">FAT和ext2</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#File-Allocationg-Table"><span class="toc-number">6.1.</span> <span class="toc-text">File Allocationg Table</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%BA%E9%99%B7"><span class="toc-number">6.1.1.</span> <span class="toc-text">缺陷</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ext2"><span class="toc-number">6.2.</span> <span class="toc-text">ext2</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E7%BB%84"><span class="toc-number">6.2.1.</span> <span class="toc-text">分组</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%8C%81%E4%B9%85%E6%95%B0%E6%8D%AE%E7%9A%84%E5%8F%AF%E9%9D%A0%E6%80%A7"><span class="toc-number">7.</span> <span class="toc-text">持久数据的可靠性</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#RAID"><span class="toc-number">7.1.</span> <span class="toc-text">RAID</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#RAID-0"><span class="toc-number">7.1.1.</span> <span class="toc-text">RAID-0</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RAID-1-%E9%95%9C%E5%83%8F"><span class="toc-number">7.1.2.</span> <span class="toc-text">RAID-1 镜像</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RAID-4"><span class="toc-number">7.1.3.</span> <span class="toc-text">RAID-4</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RAID-5"><span class="toc-number">7.1.4.</span> <span class="toc-text">RAID-5</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%A6%E5%AE%BD%E5%88%86%E6%9E%90"><span class="toc-number">7.1.5.</span> <span class="toc-text">带宽分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RAID%E7%A1%AC%E4%BB%B6"><span class="toc-number">7.1.6.</span> <span class="toc-text">RAID硬件</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B4%A9%E6%BA%83%E6%81%A2%E5%A4%8D%E4%B8%8E%E6%97%A5%E5%BF%97"><span class="toc-number">8.</span> <span class="toc-text">崩溃恢复与日志</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A3%81%E7%9B%98%E4%B8%8A%E7%9A%84%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="toc-number">8.1.</span> <span class="toc-text">磁盘上的数据结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8E%9F%E5%AD%90%E6%80%A7%E7%9A%84%E4%B8%A7%E5%A4%B1"><span class="toc-number">8.2.</span> <span class="toc-text">原子性的丧失</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AE%80%E5%8D%95%E7%9A%84workload-%E8%BF%BD%E5%8A%A0%E5%86%99"><span class="toc-number">8.2.1.</span> <span class="toc-text">简单的workload: 追加写</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E4%B8%80%E8%87%B4%E6%80%A7"><span class="toc-number">8.3.</span> <span class="toc-text">文件系统一致性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#FSCK"><span class="toc-number">8.4.</span> <span class="toc-text">FSCK</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0%E5%B4%A9%E6%BA%83%E4%B8%80%E8%87%B4%E6%80%A7"><span class="toc-number">8.5.</span> <span class="toc-text">实现崩溃一致性</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%A5%E5%BF%97-Journaling"><span class="toc-number">8.5.1.</span> <span class="toc-text">日志(Journaling)</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0"><span class="toc-number">9.</span> <span class="toc-text">期末复习</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#I-O%E8%AE%BE%E5%A4%87%E6%A8%A1%E5%9E%8B"><span class="toc-number">9.1.</span> <span class="toc-text">I&#x2F;O设备模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#main%E5%87%BD%E6%95%B0%E4%B9%8B%E5%89%8D%E7%9A%84%E6%95%85%E4%BA%8B"><span class="toc-number">9.2.</span> <span class="toc-text">main函数之前的故事</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E7%9A%84printf"><span class="toc-number">9.3.</span> <span class="toc-text">线程安全的printf</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="toc-number">9.4.</span> <span class="toc-text">文件系统的实现</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#FAT"><span class="toc-number">9.4.1.</span> <span class="toc-text">FAT</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ext2-1"><span class="toc-number">9.4.2.</span> <span class="toc-text">ext2</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%9D%E6%8A%A4%E6%95%B0%E6%8D%AE%E4%B8%8D%E5%8F%97%E6%8D%9F%E5%AE%B3"><span class="toc-number">9.5.</span> <span class="toc-text">保护数据不受损害</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#RAID-1"><span class="toc-number">9.5.1.</span> <span class="toc-text">RAID</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#fsck"><span class="toc-number">9.5.2.</span> <span class="toc-text">fsck</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%A5%E5%BF%97"><span class="toc-number">9.5.3.</span> <span class="toc-text">日志</span></a></li></ol></li></ol></li></ol>
     </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
@@ -2006,85 +2022,9 @@ top:50vh;
     
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 64
+        Total : 66
         </div>
         <!-- search  -->
         
@@ -2097,6 +2037,16 @@ top:50vh;
     
     <div class="archive-year"> 2020 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/27</span><a class="archive-post-title" href= "/2020/06/27/Le-Deuxieme-Sexe/" >西蒙·波伏娃《第二性》读书笔记</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/24</span><a class="archive-post-title" href= "/2020/06/24/OOP-design-patterns/" >面向对象设计原则-课程笔记</a>
+        </li>
     
     
         <li class="archive-post-item">
@@ -2368,12 +2318,12 @@ top:50vh;
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">10/04</span><a class="archive-post-title" href= "/2018/10/04/pa-inspirations/" >做pa的时候可能会用到的操作</a>
+            <span class="archive-post-date">10/04</span><a class="archive-post-title" href= "/2018/10/04/PA1-report/" >PA1实验报告</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">10/04</span><a class="archive-post-title" href= "/2018/10/04/PA1-report/" >PA1实验报告</a>
+            <span class="archive-post-date">10/04</span><a class="archive-post-title" href= "/2018/10/04/pa-inspirations/" >做pa的时候可能会用到的操作</a>
         </li>
     
     
@@ -2443,17 +2393,17 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="Flags"><span class="iconfont-archer">&#xe606;</span>Flags</span>
     
+        <span class="sidebar-tag-name" data-tags="Math Modeling"><span class="iconfont-archer">&#xe606;</span>Math Modeling</span>
+    
         <span class="sidebar-tag-name" data-tags="Notes"><span class="iconfont-archer">&#xe606;</span>Notes</span>
     
         <span class="sidebar-tag-name" data-tags="pa"><span class="iconfont-archer">&#xe606;</span>pa</span>
     
         <span class="sidebar-tag-name" data-tags="ICS"><span class="iconfont-archer">&#xe606;</span>ICS</span>
     
-        <span class="sidebar-tag-name" data-tags="Math Modeling"><span class="iconfont-archer">&#xe606;</span>Math Modeling</span>
+        <span class="sidebar-tag-name" data-tags="Problem Solving"><span class="iconfont-archer">&#xe606;</span>Problem Solving</span>
     
         <span class="sidebar-tag-name" data-tags="Machine Learning"><span class="iconfont-archer">&#xe606;</span>Machine Learning</span>
-    
-        <span class="sidebar-tag-name" data-tags="Problem Solving"><span class="iconfont-archer">&#xe606;</span>Problem Solving</span>
     
         <span class="sidebar-tag-name" data-tags="Assembly Language"><span class="iconfont-archer">&#xe606;</span>Assembly Language</span>
     
@@ -2493,13 +2443,13 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="Ics"><span class="iconfont-archer">&#xe606;</span>Ics</span>
     
-        <span class="sidebar-tag-name" data-tags="Interview"><span class="iconfont-archer">&#xe606;</span>Interview</span>
-    
         <span class="sidebar-tag-name" data-tags="Matchings"><span class="iconfont-archer">&#xe606;</span>Matchings</span>
     
         <span class="sidebar-tag-name" data-tags="Factorization"><span class="iconfont-archer">&#xe606;</span>Factorization</span>
     
         <span class="sidebar-tag-name" data-tags="MATLAB"><span class="iconfont-archer">&#xe606;</span>MATLAB</span>
+    
+        <span class="sidebar-tag-name" data-tags="Interview"><span class="iconfont-archer">&#xe606;</span>Interview</span>
     
         <span class="sidebar-tag-name" data-tags="Linux"><span class="iconfont-archer">&#xe606;</span>Linux</span>
     
@@ -2511,11 +2461,11 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="linux"><span class="iconfont-archer">&#xe606;</span>linux</span>
     
-        <span class="sidebar-tag-name" data-tags="markdown"><span class="iconfont-archer">&#xe606;</span>markdown</span>
-    
         <span class="sidebar-tag-name" data-tags="Java"><span class="iconfont-archer">&#xe606;</span>Java</span>
     
         <span class="sidebar-tag-name" data-tags="programming"><span class="iconfont-archer">&#xe606;</span>programming</span>
+    
+        <span class="sidebar-tag-name" data-tags="markdown"><span class="iconfont-archer">&#xe606;</span>markdown</span>
     
         <span class="sidebar-tag-name" data-tags="tmux"><span class="iconfont-archer">&#xe606;</span>tmux</span>
     
@@ -2625,10 +2575,10 @@ jsonContent:
             all[i].SourceElement().parentNode.className += ' has-jax';
     });
 </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
-<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":150},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":150},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
 <script type="text/x-mathjax-config">
-  MathJax.Hub.Config("");
+  MathJax.Hub.Config({{ JSON.stringify(config) }});
 </script>
 
 <script type="text/x-mathjax-config">
@@ -2640,7 +2590,7 @@ jsonContent:
   });
 </script>
 
-<script type="text/javascript" src="custom_mathjax_source">
+<script type="text/javascript" src="{{ src }}">
 </script>
 <!-- End: Injected MathJax -->
 <!-- hexo-inject:end --></body>

@@ -191,9 +191,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" defer></script>
     <!-- 百度统计  -->
     
-    <!-- 谷歌统计  --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    <!-- 谷歌统计  -->
     
-</head>
+<meta name="generator" content="Hexo 5.3.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
 
     
         <body class="post-body">
@@ -407,14 +407,17 @@ height:50vh;
         <h1 id="不相交集合的操作"><a href="#不相交集合的操作" class="headerlink" title="不相交集合的操作"></a>不相交集合的操作</h1><p>一个<strong>不相交集合数据结构</strong>维护了一个不相交动态集的集合<br>每个集合都有一个<strong>代表</strong>标识，它是该集合的某个成员</p>
 <p>我们希望集合支持以下三个操作：</p>
 <p><img src="/2018/10/06/clrs-21DisjointSets/operations.png"></p>
-<h2 id="应用：确定无向图的连通分量"><a href="#应用：确定无向图的连通分量" class="headerlink" title="应用：确定无向图的连通分量"></a>应用：确定无向图的连通分量</h2><center><br><img src="/2018/10/06/clrs-21DisjointSets/g21-1.png"><br><img src="/2018/10/06/clrs-21DisjointSets/alg1.png"><br></center>
+<h2 id="应用：确定无向图的连通分量"><a href="#应用：确定无向图的连通分量" class="headerlink" title="应用：确定无向图的连通分量"></a>应用：确定无向图的连通分量</h2><center>
+<img src="/2018/10/06/clrs-21DisjointSets/g21-1.png">
+<img src="/2018/10/06/clrs-21DisjointSets/alg1.png">
+</center>
 
 <p>算法就是将连通的顶点全部合并到同一个集合中。</p>
 <h1 id="不相交集合的链表表示"><a href="#不相交集合的链表表示" class="headerlink" title="不相交集合的链表表示"></a>不相交集合的链表表示</h1><p>每个集合可以用一个自己的链表来表示<br>链表中对象可以以任意次序出现</p>
 <p>每个链表组成为：</p>
 <ul>
-<li><code>head</code>– 指向表的第一个对象（代表元）</li>
-<li><code>tail</code>– 指向表的最后一个对象</li>
+<li><code>head</code>— 指向表的第一个对象（代表元）</li>
+<li><code>tail</code>— 指向表的最后一个对象</li>
 </ul>
 <p>链表中每个对象的组成为：</p>
 <ul>
@@ -433,7 +436,11 @@ height:50vh;
 <li>如果根的秩相同，则任意选择两个中的一个作为父结点，并使它的秩+1</li>
 </ul>
 <h2 id="路径压缩"><a href="#路径压缩" class="headerlink" title="路径压缩"></a>路径压缩</h2><p>在<code>FIND-SET</code>操作中是查找路径中的每个结点直接指向根，不改变任何结点的秩。</p>
-<h2 id="伪代码"><a href="#伪代码" class="headerlink" title="伪代码"></a>伪代码</h2><center><br><img src="/2018/10/06/clrs-21DisjointSets/makeset.png"><br><img src="/2018/10/06/clrs-21DisjointSets/union.png"><br><img src="/2018/10/06/clrs-21DisjointSets/findset.png"><br></center>
+<h2 id="伪代码"><a href="#伪代码" class="headerlink" title="伪代码"></a>伪代码</h2><center>
+<img src="/2018/10/06/clrs-21DisjointSets/makeset.png">
+<img src="/2018/10/06/clrs-21DisjointSets/union.png">
+<img src="/2018/10/06/clrs-21DisjointSets/findset.png">
+</center>
     </article>
     <!-- license  -->
     
@@ -441,7 +448,7 @@ height:50vh;
             <p>原文作者: <a href="https://mengzelev.github.io">Mengzelev</a>
             <p>原文链接: <a href="https://mengzelev.github.io/2018/10/06/clrs-21DisjointSets/">https://mengzelev.github.io/2018/10/06/clrs-21DisjointSets/</a>
             <p>发表日期: <a href="https://mengzelev.github.io/2018/10/06/clrs-21DisjointSets/">October 6th 2018, 4:05:58 pm</a>
-            <p>版权声明: 本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
+            <p>版权声明: 本文采用<a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
         </div>
     
     <!-- paginator  -->
@@ -587,7 +594,7 @@ top:50vh;
         <div class="toc-catalog">
             <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
         </div>
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#不相交集合的操作"><span class="toc-number">1.</span> <span class="toc-text">不相交集合的操作</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#应用：确定无向图的连通分量"><span class="toc-number">1.1.</span> <span class="toc-text">应用：确定无向图的连通分量</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#不相交集合的链表表示"><span class="toc-number">2.</span> <span class="toc-text">不相交集合的链表表示</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#简单加权合并启发式策略"><span class="toc-number">2.1.</span> <span class="toc-text">简单加权合并启发式策略</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#不相交集合森林"><span class="toc-number">3.</span> <span class="toc-text">不相交集合森林</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#按秩合并"><span class="toc-number">3.1.</span> <span class="toc-text">按秩合并</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#路径压缩"><span class="toc-number">3.2.</span> <span class="toc-text">路径压缩</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#伪代码"><span class="toc-number">3.3.</span> <span class="toc-text">伪代码</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%8D%E7%9B%B8%E4%BA%A4%E9%9B%86%E5%90%88%E7%9A%84%E6%93%8D%E4%BD%9C"><span class="toc-number">1.</span> <span class="toc-text">不相交集合的操作</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BA%94%E7%94%A8%EF%BC%9A%E7%A1%AE%E5%AE%9A%E6%97%A0%E5%90%91%E5%9B%BE%E7%9A%84%E8%BF%9E%E9%80%9A%E5%88%86%E9%87%8F"><span class="toc-number">1.1.</span> <span class="toc-text">应用：确定无向图的连通分量</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%8D%E7%9B%B8%E4%BA%A4%E9%9B%86%E5%90%88%E7%9A%84%E9%93%BE%E8%A1%A8%E8%A1%A8%E7%A4%BA"><span class="toc-number">2.</span> <span class="toc-text">不相交集合的链表表示</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%80%E5%8D%95%E5%8A%A0%E6%9D%83%E5%90%88%E5%B9%B6%E5%90%AF%E5%8F%91%E5%BC%8F%E7%AD%96%E7%95%A5"><span class="toc-number">2.1.</span> <span class="toc-text">简单加权合并启发式策略</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%8D%E7%9B%B8%E4%BA%A4%E9%9B%86%E5%90%88%E6%A3%AE%E6%9E%97"><span class="toc-number">3.</span> <span class="toc-text">不相交集合森林</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8C%89%E7%A7%A9%E5%90%88%E5%B9%B6"><span class="toc-number">3.1.</span> <span class="toc-text">按秩合并</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B7%AF%E5%BE%84%E5%8E%8B%E7%BC%A9"><span class="toc-number">3.2.</span> <span class="toc-text">路径压缩</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BC%AA%E4%BB%A3%E7%A0%81"><span class="toc-number">3.3.</span> <span class="toc-text">伪代码</span></a></li></ol></li></ol>
     </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
@@ -1564,85 +1571,9 @@ top:50vh;
     
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 64
+        Total : 66
         </div>
         <!-- search  -->
         
@@ -1655,6 +1586,16 @@ top:50vh;
     
     <div class="archive-year"> 2020 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/27</span><a class="archive-post-title" href= "/2020/06/27/Le-Deuxieme-Sexe/" >西蒙·波伏娃《第二性》读书笔记</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/24</span><a class="archive-post-title" href= "/2020/06/24/OOP-design-patterns/" >面向对象设计原则-课程笔记</a>
+        </li>
     
     
         <li class="archive-post-item">
@@ -1926,12 +1867,12 @@ top:50vh;
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">10/04</span><a class="archive-post-title" href= "/2018/10/04/pa-inspirations/" >做pa的时候可能会用到的操作</a>
+            <span class="archive-post-date">10/04</span><a class="archive-post-title" href= "/2018/10/04/PA1-report/" >PA1实验报告</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">10/04</span><a class="archive-post-title" href= "/2018/10/04/PA1-report/" >PA1实验报告</a>
+            <span class="archive-post-date">10/04</span><a class="archive-post-title" href= "/2018/10/04/pa-inspirations/" >做pa的时候可能会用到的操作</a>
         </li>
     
     
@@ -2001,17 +1942,17 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="Flags"><span class="iconfont-archer">&#xe606;</span>Flags</span>
     
+        <span class="sidebar-tag-name" data-tags="Math Modeling"><span class="iconfont-archer">&#xe606;</span>Math Modeling</span>
+    
         <span class="sidebar-tag-name" data-tags="Notes"><span class="iconfont-archer">&#xe606;</span>Notes</span>
     
         <span class="sidebar-tag-name" data-tags="pa"><span class="iconfont-archer">&#xe606;</span>pa</span>
     
         <span class="sidebar-tag-name" data-tags="ICS"><span class="iconfont-archer">&#xe606;</span>ICS</span>
     
-        <span class="sidebar-tag-name" data-tags="Math Modeling"><span class="iconfont-archer">&#xe606;</span>Math Modeling</span>
+        <span class="sidebar-tag-name" data-tags="Problem Solving"><span class="iconfont-archer">&#xe606;</span>Problem Solving</span>
     
         <span class="sidebar-tag-name" data-tags="Machine Learning"><span class="iconfont-archer">&#xe606;</span>Machine Learning</span>
-    
-        <span class="sidebar-tag-name" data-tags="Problem Solving"><span class="iconfont-archer">&#xe606;</span>Problem Solving</span>
     
         <span class="sidebar-tag-name" data-tags="Assembly Language"><span class="iconfont-archer">&#xe606;</span>Assembly Language</span>
     
@@ -2051,13 +1992,13 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="Ics"><span class="iconfont-archer">&#xe606;</span>Ics</span>
     
-        <span class="sidebar-tag-name" data-tags="Interview"><span class="iconfont-archer">&#xe606;</span>Interview</span>
-    
         <span class="sidebar-tag-name" data-tags="Matchings"><span class="iconfont-archer">&#xe606;</span>Matchings</span>
     
         <span class="sidebar-tag-name" data-tags="Factorization"><span class="iconfont-archer">&#xe606;</span>Factorization</span>
     
         <span class="sidebar-tag-name" data-tags="MATLAB"><span class="iconfont-archer">&#xe606;</span>MATLAB</span>
+    
+        <span class="sidebar-tag-name" data-tags="Interview"><span class="iconfont-archer">&#xe606;</span>Interview</span>
     
         <span class="sidebar-tag-name" data-tags="Linux"><span class="iconfont-archer">&#xe606;</span>Linux</span>
     
@@ -2069,11 +2010,11 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="linux"><span class="iconfont-archer">&#xe606;</span>linux</span>
     
-        <span class="sidebar-tag-name" data-tags="markdown"><span class="iconfont-archer">&#xe606;</span>markdown</span>
-    
         <span class="sidebar-tag-name" data-tags="Java"><span class="iconfont-archer">&#xe606;</span>Java</span>
     
         <span class="sidebar-tag-name" data-tags="programming"><span class="iconfont-archer">&#xe606;</span>programming</span>
+    
+        <span class="sidebar-tag-name" data-tags="markdown"><span class="iconfont-archer">&#xe606;</span>markdown</span>
     
         <span class="sidebar-tag-name" data-tags="tmux"><span class="iconfont-archer">&#xe606;</span>tmux</span>
     
@@ -2183,10 +2124,10 @@ jsonContent:
             all[i].SourceElement().parentNode.className += ' has-jax';
     });
 </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
-<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":150},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":150},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
 <script type="text/x-mathjax-config">
-  MathJax.Hub.Config("");
+  MathJax.Hub.Config({{ JSON.stringify(config) }});
 </script>
 
 <script type="text/x-mathjax-config">
@@ -2198,7 +2139,7 @@ jsonContent:
   });
 </script>
 
-<script type="text/javascript" src="custom_mathjax_source">
+<script type="text/javascript" src="{{ src }}">
 </script>
 <!-- End: Injected MathJax -->
 <!-- hexo-inject:end --></body>

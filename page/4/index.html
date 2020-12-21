@@ -189,9 +189,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" defer></script>
     <!-- 百度统计  -->
     
-    <!-- 谷歌统计  --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    <!-- 谷歌统计  -->
     
-</head>
+<meta name="generator" content="Hexo 5.3.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
 
     
         <body class="home-body">
@@ -354,6 +354,82 @@ height:50vh;
     
     
     <article class="index-post">
+        <a class="abstract-title" href = "/2019/01/19/matlab-usage/" >
+            
+                <span>数学建模几种常用算法</span>
+        </a>
+        <div class="abstract-content">
+            数据拟合多项式拟合123456x = [...];y = [...];P = polyfit(x,y,n); % n是多项式的次数xi = 0: .2 :10;yi = polyval(P, xi);plot(xi, yi, x, y, &#x27;r*&#x27;);
+规划线性规划标准型\min~c^Tx s.t. Ax\le b
+1[x,y] = linprog(c, -a, -b, [], [], zeros(3,1))
+非线性规划123456[x,y] = fmincon(fun, x0, A, B, Aeq, Beq, LB, UB, [c,ceq], OPTIONS)% fu...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/01/19</span>
+            </div>
+            <!-- tags  -->
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href = "/2019/01/16/matlab-getstart/" >
+            
+                <span>MATLAB临时抱佛脚</span>
+        </a>
+        <div class="abstract-content">
+            来源：王正盛 《MATLAB数学工具软件实例简明教程》
+入门技能命令行命令matlab基本可以看成一个有自己语法的命令行终端使用下面列举一些我觉得自己将来可能会用到的
+
+clc:擦除当前工作窗中所有显示内容
+dir:相当于ls
+cd:你懂的
+who:检查内存变量
+whos:检查驻留变量的详细情况
+help:召唤FM
+lookfor:对man进行grep
+
+MATLAB也是有当前工作路径的，同Linux的bash
+变量变量基本以矩阵形式存在还有一些预定义的变量
+
+eps:计算机表示的最小正数
+pi:圆周率
+inf或Inf
+NaN
+i,j
+flops:浮点运算次数，用于统计计算量
+
+显示格式...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/01/16</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "MATLAB">MATLAB</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href = "/2019/01/07/Problem-Solving-3/" >
             
                 <span>问题求解3-总复习</span>
@@ -483,9 +559,10 @@ height:50vh;
                 <span>算法导论学习笔记-矩阵运算</span>
         </a>
         <div class="abstract-content">
-            求解线性方程组$$Ax=b$$欠定的(underdetermined)：方程的数目少于未知变量数目$n$，则该线性方程组为欠定的超定的(overdetermined):方程数目超过未知变量数目$n$非奇异矩阵：$A$的秩等于未知变量的个数$n$
-LUP分解思想：找出3个$n\times n$矩阵$L,U,P$，满足$PA=LU$,其中$L$是一个单位下三角矩阵$U$是一个上三角矩阵$P$是一个置换矩阵每一个非奇异矩阵$A$都会有这样一种分解$$Ax=b$$$$PAx=Pb$$$$LUx=Pbx$$求解两个三角线性系统下三角系统$Ly=Pb$上三角系统$Ux=y$
-正向替换与方向替换可在$...
+            求解线性方程组Ax=b欠定的(underdetermined)：方程的数目少于未知变量数目$n$，则该线性方程组为欠定的超定的(overdetermined):方程数目超过未知变量数目$n$非奇异矩阵：$A$的秩等于未知变量的个数$n$
+LUP分解思想：找出3个$n\times n$矩阵$L,U,P$，满足$PA=LU$,其中$L$是一个单位下三角矩阵$U$是一个上三角矩阵$P$是一个置换矩阵每一个非奇异矩阵$A$都会有这样一种分解
+Ax=bPAx=PbLUx=Pbx求解两个三角线性系统下三角系统$Ly=Pb$上三角系统$Ux=y$
+正向替换与方向替换可在$\Theta(n^2)$时间内...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
@@ -670,84 +747,10 @@ EK完全OK
         </div>
     </article>
     
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2018/11/28/matchings/" >
-            
-                <span>图论学习笔记-图中的匹配与覆盖</span>
-        </a>
-        <div class="abstract-content">
-            匹配匹配的定义独立：若图的边集中任意两条边不邻接，则称该集合是独立的
-匹配：图$G$中的边的一个独立集$G$的匹配是一个边的集合$M={e_1,e_2,…,e_k}$，其中$e_i=u_iw_i(1\le i\le k)$，使得$u_1,u_2,…,u_k$是$U$中$k$个不同的顶点，$w_1,w_2,…,w_k$是$W$中$k$个不同的顶点。
-匹配存在的条件邻域(neighbourhood)$N(X)$：设$G$为二部图，其部集为$U$和$W$，且$|U|\le |W|$，对于$U$的非空子集$X$，$X$中所有顶点的邻域的并。
-Hall’s condition/友好的(neighb...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/11/28</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Notes">Notes</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Problem Solving">Problem Solving</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Graph Theory">Graph Theory</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Matchings">Matchings</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Factorization">Factorization</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2018/11/24/lab3-report/" >
-            
-                <span>Lab3：链接与加载（2）实验报告</span>
-        </a>
-        <div class="abstract-content">
-            实现描述寻找正确的入口地址在框架代码抽取出的symtab中主项寻找，如果该项的Type属性为STT_FUNC，就根据其st_name属性去字符串表strtab里寻找该函数的Name属性，并与main进行对比，就能找到main函数对应的表项，此时该表项的st_value属性即 我们需要的入口地址。
-加载程序loader()函数的实现需要程序头表，模仿load_elf_table()函数的写法可将程序头表抽取到结构体Elf32_phdr中，找到p_type为PT_LOAD的表项，读取其p_offset，p_vaddr，p_filesz，p_memsz属性，按照讲义的描述，使用fread函数将...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/11/24</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Notes">Notes</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Lab">Lab</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Ics">Ics</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
     <!-- paginator  -->
     
     <nav class="page-nav">
-        <a class="extend prev" rel="prev" href="/page/3/">&#60; PREV</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/5/">NEXT &#62;</a>
+        <a class="extend prev" rel="prev" href="/page/3/">&amp;#60; PREV</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/5/">NEXT &amp;#62;</a>
     </nav>
     
 </main>
@@ -1884,85 +1887,9 @@ Hall’s condition/友好的(neighb...
     
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 64
+        Total : 66
         </div>
         <!-- search  -->
         
@@ -1975,6 +1902,16 @@ Hall’s condition/友好的(neighb...
     
     <div class="archive-year"> 2020 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/27</span><a class="archive-post-title" href= "/2020/06/27/Le-Deuxieme-Sexe/" >西蒙·波伏娃《第二性》读书笔记</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/24</span><a class="archive-post-title" href= "/2020/06/24/OOP-design-patterns/" >面向对象设计原则-课程笔记</a>
+        </li>
     
     
         <li class="archive-post-item">
@@ -2246,12 +2183,12 @@ Hall’s condition/友好的(neighb...
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">10/04</span><a class="archive-post-title" href= "/2018/10/04/pa-inspirations/" >做pa的时候可能会用到的操作</a>
+            <span class="archive-post-date">10/04</span><a class="archive-post-title" href= "/2018/10/04/PA1-report/" >PA1实验报告</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">10/04</span><a class="archive-post-title" href= "/2018/10/04/PA1-report/" >PA1实验报告</a>
+            <span class="archive-post-date">10/04</span><a class="archive-post-title" href= "/2018/10/04/pa-inspirations/" >做pa的时候可能会用到的操作</a>
         </li>
     
     
@@ -2321,17 +2258,17 @@ Hall’s condition/友好的(neighb...
     
         <span class="sidebar-tag-name" data-tags="Flags"><span class="iconfont-archer">&#xe606;</span>Flags</span>
     
+        <span class="sidebar-tag-name" data-tags="Math Modeling"><span class="iconfont-archer">&#xe606;</span>Math Modeling</span>
+    
         <span class="sidebar-tag-name" data-tags="Notes"><span class="iconfont-archer">&#xe606;</span>Notes</span>
     
         <span class="sidebar-tag-name" data-tags="pa"><span class="iconfont-archer">&#xe606;</span>pa</span>
     
         <span class="sidebar-tag-name" data-tags="ICS"><span class="iconfont-archer">&#xe606;</span>ICS</span>
     
-        <span class="sidebar-tag-name" data-tags="Math Modeling"><span class="iconfont-archer">&#xe606;</span>Math Modeling</span>
+        <span class="sidebar-tag-name" data-tags="Problem Solving"><span class="iconfont-archer">&#xe606;</span>Problem Solving</span>
     
         <span class="sidebar-tag-name" data-tags="Machine Learning"><span class="iconfont-archer">&#xe606;</span>Machine Learning</span>
-    
-        <span class="sidebar-tag-name" data-tags="Problem Solving"><span class="iconfont-archer">&#xe606;</span>Problem Solving</span>
     
         <span class="sidebar-tag-name" data-tags="Assembly Language"><span class="iconfont-archer">&#xe606;</span>Assembly Language</span>
     
@@ -2371,13 +2308,13 @@ Hall’s condition/友好的(neighb...
     
         <span class="sidebar-tag-name" data-tags="Ics"><span class="iconfont-archer">&#xe606;</span>Ics</span>
     
-        <span class="sidebar-tag-name" data-tags="Interview"><span class="iconfont-archer">&#xe606;</span>Interview</span>
-    
         <span class="sidebar-tag-name" data-tags="Matchings"><span class="iconfont-archer">&#xe606;</span>Matchings</span>
     
         <span class="sidebar-tag-name" data-tags="Factorization"><span class="iconfont-archer">&#xe606;</span>Factorization</span>
     
         <span class="sidebar-tag-name" data-tags="MATLAB"><span class="iconfont-archer">&#xe606;</span>MATLAB</span>
+    
+        <span class="sidebar-tag-name" data-tags="Interview"><span class="iconfont-archer">&#xe606;</span>Interview</span>
     
         <span class="sidebar-tag-name" data-tags="Linux"><span class="iconfont-archer">&#xe606;</span>Linux</span>
     
@@ -2389,11 +2326,11 @@ Hall’s condition/友好的(neighb...
     
         <span class="sidebar-tag-name" data-tags="linux"><span class="iconfont-archer">&#xe606;</span>linux</span>
     
-        <span class="sidebar-tag-name" data-tags="markdown"><span class="iconfont-archer">&#xe606;</span>markdown</span>
-    
         <span class="sidebar-tag-name" data-tags="Java"><span class="iconfont-archer">&#xe606;</span>Java</span>
     
         <span class="sidebar-tag-name" data-tags="programming"><span class="iconfont-archer">&#xe606;</span>programming</span>
+    
+        <span class="sidebar-tag-name" data-tags="markdown"><span class="iconfont-archer">&#xe606;</span>markdown</span>
     
         <span class="sidebar-tag-name" data-tags="tmux"><span class="iconfont-archer">&#xe606;</span>tmux</span>
     
@@ -2501,10 +2438,10 @@ jsonContent:
             all[i].SourceElement().parentNode.className += ' has-jax';
     });
 </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
-<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":150},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":150},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
 <script type="text/x-mathjax-config">
-  MathJax.Hub.Config("");
+  MathJax.Hub.Config({{ JSON.stringify(config) }});
 </script>
 
 <script type="text/x-mathjax-config">
@@ -2516,7 +2453,7 @@ jsonContent:
   });
 </script>
 
-<script type="text/javascript" src="custom_mathjax_source">
+<script type="text/javascript" src="{{ src }}">
 </script>
 <!-- End: Injected MathJax -->
 <!-- hexo-inject:end --></body>

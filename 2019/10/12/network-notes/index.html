@@ -191,9 +191,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" defer></script>
     <!-- 百度统计  -->
     
-    <!-- 谷歌统计  --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    <!-- 谷歌统计  -->
     
-</head>
+<meta name="generator" content="Hexo 5.3.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
 
     
         <body class="post-body">
@@ -261,7 +261,7 @@ height:50vh;
                 
                 
                     <div class="post-intro-read">
-                        <span>Word count: <span class="post-count">19,703</span> / Reading time: <span class="post-count">70 min</span></span>
+                        <span>Word count: <span class="post-count">19,579</span> / Reading time: <span class="post-count">69 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
@@ -437,7 +437,7 @@ height:50vh;
 <li>毫秒量级</li>
 </ul>
 </li>
-<li>节点总时延$d_{nodal}=d_{proc}+d_{queue}+d_{trans}+d_{prop}$</li>
+<li>节点总时延$d<em>{nodal}=d</em>{proc}+d<em>{queue}+d</em>{trans}+d_{prop}$</li>
 <li>时延成分所起的作用可能会有很大不同</li>
 </ul>
 <h2 id="排队时延"><a href="#排队时延" class="headerlink" title="排队时延"></a>排队时延</h2><ul>
@@ -447,7 +447,7 @@ height:50vh;
 </ul>
 </li>
 <li>流量强度越大，丢包的比例越大</li>
-<li>假设没有排队时延的端到端时延：$d_{end-to-end}=N(d_{proc}+d_{trans}+d_{prop})$</li>
+<li>假设没有排队时延的端到端时延：$d<em>{end-to-end}=N(d</em>{proc}+d<em>{trans}+d</em>{prop})$</li>
 </ul>
 <h2 id="吞吐量"><a href="#吞吐量" class="headerlink" title="吞吐量"></a>吞吐量</h2><ul>
 <li>瓶颈链路</li>
@@ -478,8 +478,7 @@ height:50vh;
 <li>以太网、WiFi、电缆接入网DOCSIS、PPP</li>
 <li>帧(frame)</li>
 </ul>
-<p>###　物理层</p>
-<ul>
+<h3 id="物理层"><a href="#物理层" class="headerlink" title="　物理层"></a>　物理层</h3><ul>
 <li>将帧中的一个个比特从一个节点移动到下一个节点</li>
 <li>协议是链路相关的，并进一步与实际传输媒体相关</li>
 </ul>
@@ -522,8 +521,7 @@ height:50vh;
 </ul>
 <p>实现：网络适配器（网络接口卡），硬件实现</p>
 <h2 id="差错检测和纠正技术"><a href="#差错检测和纠正技术" class="headerlink" title="差错检测和纠正技术"></a>差错检测和纠正技术</h2><p>EDC：差错检测和纠正比特</p>
-<p>###　奇偶校验</p>
-<ul>
+<h3 id="奇偶校验"><a href="#奇偶校验" class="headerlink" title="　奇偶校验"></a>　奇偶校验</h3><ul>
 <li>二位奇偶校验：可以纠正单比特错，可检测但不能纠正两个比特错</li>
 <li>前向纠错FEC:接收方检测和纠正差错的能力</li>
 </ul>
@@ -535,7 +533,8 @@ height:50vh;
 <li>又称多项式编码：将发送的比特串看成多项式系数</li>
 </ul>
 <p>$D\cdot 2^r \text{ XOR } R = nG$<br>$D\cdot 2^r=nG \text{ XOR }  R$<br>$R=\text{remainder}\frac{D\cdot 2^r}{G}$</p>
-<p>转自阿姨博客的表示方法：<br>$$\frac{X^{n-k}D(X)}{P(X)}=Q(X)+\frac{R(X)}{P(X)}$$<br>$$T(X)=X^{n-k}D(X)+R(X)$$<br>其中，$X$是二进制串对应的多项式，如$P=11001, P(X)=X^4+X^3+1$<br>接收方用$T/P$，如果不能整除，说明存在差错。</p>
+<p>转自阿姨博客的表示方法：</p>
+<script type="math/tex; mode=display">\frac{X^{n-k}D(X)}{P(X)}=Q(X)+\frac{R(X)}{P(X)}</script><script type="math/tex; mode=display">T(X)=X^{n-k}D(X)+R(X)</script><p>其中，$X$是二进制串对应的多项式，如$P=11001, P(X)=X^4+X^3+1$<br>接收方用$T/P$，如果不能整除，说明存在差错。</p>
 <ul>
 <li>$P\to G$</li>
 <li><p>位数：$P/G: n-k+1, D:k, T:n-k$</p>
@@ -593,7 +592,7 @@ height:50vh;
 </ul>
 </li>
 <li>不考虑近期过去时间内可能已经发生的任何碰撞</li>
-<li>效率$= n\frac{1}{1+5d_{prop}/d_{trans}}$</li>
+<li>效率$= n\frac{1}{1+5d<em>{prop}/d</em>{trans}}$</li>
 </ul>
 <h3 id="轮流协议"><a href="#轮流协议" class="headerlink" title="轮流协议"></a>轮流协议</h3><h4 id="轮询协议"><a href="#轮询协议" class="headerlink" title="轮询协议"></a>轮询协议</h4><ul>
 <li>主节点轮询告诉每个节点能够传输的帧的最多数量</li>
@@ -608,10 +607,9 @@ height:50vh;
 <h2 id="交换局域网"><a href="#交换局域网" class="headerlink" title="交换局域网"></a>交换局域网</h2><h3 id="MAC地址"><a href="#MAC地址" class="headerlink" title="MAC地址"></a>MAC地址</h3><ul>
 <li>链路层地址</li>
 <li>6个字节，$2^48$个可能，每个字节表示为一堆十六进制数</li>
-<li>没有两块适配器具有相同的地址–IEEE管理</li>
+<li>没有两块适配器具有相同的地址—IEEE管理</li>
 </ul>
-<p>###　地址解析协议ARP</p>
-<ul>
+<h3 id="地址解析协议ARP"><a href="#地址解析协议ARP" class="headerlink" title="　地址解析协议ARP"></a>　地址解析协议ARP</h3><ul>
 <li>ARP表：包含IP地址到MAC地址的映射关系</li>
 <li>TTL寿命值：表示从表中删除每个映射的时间</li>
 <li>ARP分组：包含发送和接受IP地址及MAC地址<ul>
@@ -690,6 +688,7 @@ height:50vh;
 <li>活跃拓扑限制为一棵生成树</li>
 <li>对于广播风暴不提供保护措施</li>
 </ul>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -720,6 +719,7 @@ height:50vh;
 </tr>
 </tbody>
 </table>
+</div>
 <h3 id="虚拟局域网"><a href="#虚拟局域网" class="headerlink" title="虚拟局域网"></a>虚拟局域网</h3><h1 id="CH7-无线网络和移动网络"><a href="#CH7-无线网络和移动网络" class="headerlink" title="CH7 无线网络和移动网络"></a>CH7 无线网络和移动网络</h1><p>无线$\neq$移动</p>
 <ul>
 <li>无线主机：到处都是</li>
@@ -777,6 +777,7 @@ height:50vh;
 <li>一个鉴别服务器可以服务于多个AP</li>
 </ul>
 <h1 id="CH4-网络层：数据平面"><a href="#CH4-网络层：数据平面" class="headerlink" title="CH4 网络层：数据平面"></a>CH4 网络层：数据平面</h1><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>数据平面：从输入链路向输出链路转发数据报<br>控制平面：协调本地的每个路由器的转发动作，使得数据报沿着源和目的地主机之间的路由器路径最终进行端到端传送</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -799,6 +800,7 @@ height:50vh;
 </tr>
 </tbody>
 </table>
+</div>
 <p>路由选择算法决定插入该路由器转发表的内容</p>
 <p>软件定义网络(SDN): 路由选择设备仅执行转发，远程控制器计算并分发转发表(软件实现)</p>
 <p>网络服务模型：尽力而为服务</p>
@@ -841,11 +843,10 @@ height:50vh;
 <li>多级交换元素</li>
 </ul>
 <h3 id="输出端口处理"><a href="#输出端口处理" class="headerlink" title="输出端口处理"></a>输出端口处理</h3><p>交换结构-&gt;排队(缓存管理)-&gt;数据链路处理(协议，封装)-&gt;线路端接-&gt;</p>
-<p>###　排队</p>
-<p>丢包：排队导致路由器的缓存空间耗尽</p>
+<h3 id="排队"><a href="#排队" class="headerlink" title="　排队"></a>　排队</h3><p>丢包：排队导致路由器的缓存空间耗尽</p>
 <ul>
 <li>输入排队<ul>
-<li>线路前部(HOL)阻塞：在一个输入队列中排队的分组必须等待通过交换结构发送(即使输出端口是空闲的)，因为它被位于线路前部的另一个分组所阻塞 – 对纵横式交换结构而言</li>
+<li>线路前部(HOL)阻塞：在一个输入队列中排队的分组必须等待通过交换结构发送(即使输出端口是空闲的)，因为它被位于线路前部的另一个分组所阻塞 — 对纵横式交换结构而言</li>
 </ul>
 </li>
 <li>输出排队<ul>
@@ -864,7 +865,7 @@ height:50vh;
 </li>
 <li>循环排队<ul>
 <li>没有服务优先权，循环调度器在类之间轮流提供服务</li>
-<li>保持工作排队规则：在有分组排队等待传输时不允许链路保持空闲–当寻找给定类的分组但没有找到时立即检查下一个类</li>
+<li>保持工作排队规则：在有分组排队等待传输时不允许链路保持空闲—当寻找给定类的分组但没有找到时立即检查下一个类</li>
 </ul>
 </li>
 <li>加权公平排队(WFQ)<ul>
@@ -884,7 +885,7 @@ height:50vh;
 <li>标识、标志、片偏移：与IP分片有关。</li>
 <li>寿命(TTL)：确保数据报不会永远（如由于长时间的路由选择环路）在网络中循环。每当一台路由器处理时该字段的值-1，为0时自动丢弃。</li>
 <li>协议：仅当到达最终目的地时才会有用，指示了IP数据报需要交给哪个特定的运输层协议。协议号是将网络层与运输层绑定到一起的黏合剂。（端口号是将运输层和应用层绑定到一起的黏合剂）</li>
-<li>首部检验和：首部中的每两个字节当成一个数，用反码算术求和。每台路由器上必须重新计算检验和并再次存放到远处，因为TTL字段以及可能的选项字段会改变。【为什么TCP/IP都执行差错检测？–因为TCP和IP可以分别运行在不同的协议栈上</li>
+<li>首部检验和：首部中的每两个字节当成一个数，用反码算术求和。每台路由器上必须重新计算检验和并再次存放到远处，因为TTL字段以及可能的选项字段会改变。【为什么TCP/IP都执行差错检测？—因为TCP和IP可以分别运行在不同的协议栈上</li>
 <li>源和目的地IP地址：源主机通过DNS查找来决定目的地址。</li>
 <li>选项：允许IP首部被扩展，很少使用。</li>
 <li>数据(有效载荷)：大多数时候承载运输层报文，也可承载其他类型的数据,e.g.ICMP报文</li>
@@ -895,7 +896,7 @@ height:50vh;
 <li>发送主机将发送的每个数据报的标识号+1</li>
 <li>路由器对数据报分片时，每个片具有初始数据报的源地址、目的地址和标识号</li>
 <li>目的地主机能够检查数据报的标识号以确定哪些数据报实际上是同一较大数据报的片</li>
-<li>IP是不可靠服务–初始数据报的最后一篇标志比特为0，其他片为1</li>
+<li>IP是不可靠服务—初始数据报的最后一篇标志比特为0，其他片为1</li>
 <li>为了让目的主机确定是否丢了一个片且按正确顺序组装片，使用偏移字段制定该片应该放在初始IP数据报的哪个位置</li>
 </ul>
 <h3 id="编址"><a href="#编址" class="headerlink" title="编址"></a>编址</h3><p>一台主机通常只有一条链路连接到网络，主机与物理链路之间的边界叫作<strong>接口</strong>。<br>路由必须拥有多条链路与之相连接，路由器与它任意一条链路之间的边界也叫作<strong>接口</strong>。<br>一个IP地址与一个接口相关联。</p>
@@ -1046,7 +1047,8 @@ height:50vh;
 <p>当一个节点检测到从它自己到邻居的链路开销发生变化时，它就更新其距离向量——可能会出现路由选择环路：y通过z到x，同时z通过y到x<br>因为开销改变的链路在其他节点的距离表中的信息仍没有被抹去</p>
 <p>链路开销的增加会导致坏消息传播得很慢——无穷计数问题</p>
 <p>毒性逆转：撒谎设置$D_z(x)=\infty$，这样y就永远不会试图经由z路由选择到x<br>Wiki: In computer networking, split-horizon route advertisement is a method of preventing routing loops in distance-vector routing protocols by prohibiting a router from advertising a route back onto the interface from which it was learned.(从哪里学习来的，就拒绝发回到哪里去)<br>依然无法解决无穷计数问题</p>
-<h3 id="比较"><a href="#比较" class="headerlink" title="比较"></a>比较</h3><table>
+<h3 id="比较"><a href="#比较" class="headerlink" title="比较"></a>比较</h3><div class="table-container">
+<table>
 <thead>
 <tr>
 <th style="text-align:center">维度</th>
@@ -1074,6 +1076,7 @@ height:50vh;
 </tr>
 </tbody>
 </table>
+</div>
 <h2 id="因特网自治系统内部的路由选择：OSPF"><a href="#因特网自治系统内部的路由选择：OSPF" class="headerlink" title="因特网自治系统内部的路由选择：OSPF"></a>因特网自治系统内部的路由选择：OSPF</h2><p>规模(无穷计数)和管理自治(ISP按自己意愿运行路由器)问题——解决：自治系统(AS)<br>每个AS由一组通常处在相同管理控制下的路由器组成<br>一个自治系统由其全局唯一的AS号(ASN)所标识，ASN由ICANN区域注册机构发放</p>
 <p>OSPF：开放最短路优先，Open Shortest Path First<br>开放：公众可用<br>LS协议，使用洪泛链路状态信息和Dijkstra最短路径算法<br>各条链路开销为网络管理员手动配置</p>
 <ul>
@@ -1197,8 +1200,7 @@ height:50vh;
 <p>前提假设：底层信道不会对分组重排序</p>
 <h3 id="构造可靠数据传输协议"><a href="#构造可靠数据传输协议" class="headerlink" title="构造可靠数据传输协议"></a>构造可靠数据传输协议</h3><p>肯定确认(ACK), 否定确认(NAK)<br>自动重传请求(ARQ)<br>停等协议：除非发送方确信接收方已经正确接收当前分组，否则发送方将不会发送一块新数据<br>一个ACK丢失、或者只是该分组或ACK过度延时，发送方都进行重传<br>比特交替协议：rdt3.0</p>
 <h3 id="流水线可靠数据传输协议"><a href="#流水线可靠数据传输协议" class="headerlink" title="流水线可靠数据传输协议"></a>流水线可靠数据传输协议</h3><p> 停等协议：发送方利用率低</p>
-<p>$$U_{\text{sender}}=\frac{L/R}{RTT+L/R}$$</p>
-<p>流水线：不以停等方式运行，允许发送放发送多个分组而无须等待确认</p>
+<script type="math/tex; mode=display">U_{\text{sender}}=\frac{L/R}{RTT+L/R}</script><p>流水线：不以停等方式运行，允许发送放发送多个分组而无须等待确认</p>
 <h4 id="回退N步（GBN）"><a href="#回退N步（GBN）" class="headerlink" title="回退N步（GBN）"></a>回退N步（GBN）</h4><p>$N$：在流水线中未确认分组数的最大允许数</p>
 <p>base：最早未确认分组的序号</p>
 <p>nextseqnum: 最小的未使用序号（即下一个待发分组的序号</p>
@@ -1295,16 +1297,16 @@ height:50vh;
 </ul>
 </li>
 <li>EstimatedRTT：TCP维护的SampleRTT的均值，为了应对SampleRTT的波动<ul>
-<li>一旦获得新的SampleRTT，更新公式为 $$\text{EstimatedRTT}=(1-\alpha)\cdot\text{EstimatedRTT}+\alpha\cdot\text{SampleRTT}$$，$\alpha$的推荐值为0.125(1/8)</li>
+<li>一旦获得新的SampleRTT，更新公式为 <script type="math/tex">\text{EstimatedRTT}=(1-\alpha)\cdot\text{EstimatedRTT}+\alpha\cdot\text{SampleRTT}</script>，$\alpha$的推荐值为0.125(1/8)</li>
 <li>EstimatedRTT是对SampleRTT的<strong>指数加权移动平均</strong>（EWMA，Exponential Weighted Moving Average），指一个给定的SampleRTT的权值在更新过程中呈指数型快速衰减</li>
 </ul>
 </li>
 <li>DevRTT：RTT偏差，用于估算SampleRTT一般会偏离EstimatedRTT的程度<ul>
-<li>计算公式为$$\text{DevRTT}=(1-\beta)\cdot\text{DevRTT}+\beta\cdot|\text{SampleRTT}-\text{EstimatedRTT}|$$，$\beta$的推荐取值为0.25</li>
+<li>计算公式为<script type="math/tex">\text{DevRTT}=(1-\beta)\cdot\text{DevRTT}+\beta\cdot|\text{SampleRTT}-\text{EstimatedRTT}|</script>，$\beta$的推荐取值为0.25</li>
 </ul>
 </li>
 <li>超时间隔TimeoutInterval：EstimatedRTT加上一定余量，与SampleRTT的波动正相关<ul>
-<li>计算公式为$$\text{TimeoutInterval}=\text{EstimatedRTT}+4\cdot\text{DevRTT}$$</li>
+<li>计算公式为<script type="math/tex">\text{TimeoutInterval}=\text{EstimatedRTT}+4\cdot\text{DevRTT}</script></li>
 <li>推荐的TimeoutInterval的初始值为1s</li>
 <li>当出现超时后，TimeoutIntetval将加倍，以免即将被确认的后继报文段过早出现超时。</li>
 <li>只要收到报文段并更新EstimatedRTT，就更新TimeoutInterval</li>
@@ -1353,9 +1355,9 @@ height:50vh;
 <h3 id="流量控制"><a href="#流量控制" class="headerlink" title="流量控制"></a>流量控制</h3><p>接收方如果读数据不够快，就会导致接收缓存溢出。TCP提供了<strong>流量控制服务</strong>以消除发送方使接收方缓存溢出的可能性。（区分流量控制与拥塞控制）</p>
 <p>TCP发送方维护一个称为<strong>接收窗口</strong>的变量，指示接收方还有多少可用空间，需要满足</p>
 <ul>
-<li>$$\text{LastByteRcvd}-\text{LastByteRead}\le \text{RcvBuffer}$$</li>
-<li>接收窗口长度用rwnd表示，$$\text{rwnd}=\text{RcvBuffer}-[\text{LastByteRcvd}-\text{LastByteRead}]$$</li>
-<li>$$\text{LastByteSent}-\text{LastByteAcked}\le\text{rwnd}$$</li>
+<li><script type="math/tex; mode=display">\text{LastByteRcvd}-\text{LastByteRead}\le \text{RcvBuffer}</script></li>
+<li>接收窗口长度用rwnd表示，<script type="math/tex">\text{rwnd}=\text{RcvBuffer}-[\text{LastByteRcvd}-\text{LastByteRead}]</script></li>
+<li><script type="math/tex; mode=display">\text{LastByteSent}-\text{LastByteAcked}\le\text{rwnd}</script></li>
 <li>人话：主机Ａ发送但未被确认的数据大小　不会超过　主机Ｂ接收缓存的剩余可用空间</li>
 </ul>
 <p>为了防止主机A被阻塞，当主机B的接收窗口为0时，主机A继续发送只有一个字节数据的报文段。这些报文段将会被接收方确认。最终缓存开始清空，并且确认报文里包含一个非0的rwnd值。</p>
@@ -1398,7 +1400,7 @@ height:50vh;
 </ul>
 <h3 id="情况3-4个发送方和具有有限缓存的多台路由器及多跳路径"><a href="#情况3-4个发送方和具有有限缓存的多台路由器及多跳路径" class="headerlink" title="情况3:4个发送方和具有有限缓存的多台路由器及多跳路径"></a>情况3:4个发送方和具有有限缓存的多台路由器及多跳路径</h3><p><img src="/2019/10/12/network-notes/case3.png" style="zoom:60%;"></p>
 <ul>
-<li>对于较小的$\lambda_{in}$，$\lambda_{in}$的增大会导致$\lambda_{out}$的增大</li>
+<li>对于较小的$\lambda<em>{in}$，$\lambda</em>{in}$的增大会导致$\lambda_{out}$的增大</li>
 <li>当$\lambda_{in}$很大的时候，不同路径的流量会在同一个路由器上为有限缓存空间竞争，导致一条路径成功通过的流量越来越少。</li>
 <li>在极限重载情况下，端到端吞吐量会趋近于0。</li>
 <li>当一个分组沿一条路径被丢弃时，每个上游路由器用于转发该分组到丢弃该分组而使用的传输容量全部木大了。</li>
@@ -1409,8 +1411,7 @@ height:50vh;
 </ul>
 <h2 id="TCP拥塞控制"><a href="#TCP拥塞控制" class="headerlink" title="TCP拥塞控制"></a>TCP拥塞控制</h2><p>让每一个发送方根据所感知到的网络拥塞成都来限制其发送流量的速率。</p>
 <p>发送方TCP跟踪一个<strong>拥塞窗口</strong>变量cwnd，它对一个TCP发送方能向网络中发送流量的速率进行了限制。</p>
-<p>$$\text{LastByteSent}-\text{LastByteAcked}\le\min{\text{cwnd},\text{rwnd}}$$</p>
-<p>发送方的速率大概是cwnd/RTT字节/秒。</p>
+<script type="math/tex; mode=display">\text{LastByteSent}-\text{LastByteAcked}\le\min\{\text{cwnd},\text{rwnd}\}</script><p>发送方的速率大概是cwnd/RTT字节/秒。</p>
 <p>丢包事件：出现超时，或收到来自接收方的3个冗余ACK。此时发送方认为出现了拥塞指示。</p>
 <p>自计时：TCP使用收到的ACK（或计时）增大它的拥塞窗口长度。</p>
 <h3 id="TCP拥塞控制算法"><a href="#TCP拥塞控制算法" class="headerlink" title="TCP拥塞控制算法"></a>TCP拥塞控制算法</h3><p>具体看图</p>
@@ -1439,13 +1440,13 @@ height:50vh;
 <li>超时：cwnd重置为1并重新开始慢启动过程，ssthresh(慢启动阈值)变为cwnd/2，进入慢启动状态</li>
 </ul>
 <p>忽略慢启动，TCP的拥塞控制：每个RTT内线性增加1MSS，出现3个冗余ACK时cwnd减半——加性增，乘性减（AIMD）</p>
-<h4 id="吞吐量-1"><a href="#吞吐量-1" class="headerlink" title="吞吐量"></a>吞吐量</h4><p>一条连接的平均吞吐量$$=\frac{0.75\times W}{\text{RTT}}$$</p>
+<h4 id="吞吐量-1"><a href="#吞吐量-1" class="headerlink" title="吞吐量"></a>吞吐量</h4><p>一条连接的平均吞吐量<script type="math/tex">=\frac{0.75\times W}{\text{RTT}}</script></p>
 <ul>
 <li>$W$：丢包事件发生时的窗口长度</li>
 <li>TCP的发送速率大约是$w/RTT$,$w$为窗口长度</li>
 <li>TCP的传输速率在$W/(2\times\text{RTT})$和$W/\text{RTT}$之间线性变化</li>
 </ul>
-<p>考虑丢包率（$L$）和MSS，一条连接的平均吞吐量$$=\frac{1.22\times\text{MSS}}{\text{RTT}\sqrt{L}}$$</p>
+<p>考虑丢包率（$L$）和MSS，一条连接的平均吞吐量<script type="math/tex">=\frac{1.22\times\text{MSS}}{\text{RTT}\sqrt{L}}</script></p>
 <h3 id="公平性"><a href="#公平性" class="headerlink" title="公平性"></a>公平性</h3><p>如果每条连接都得到相同份额的带宽，则认为该拥塞控制机制是公平的。</p>
 <p><img src="/2019/10/12/network-notes/fair.png" style="zoom:50%;"></p>
 <p>实际情况下具有较小RTT的连接能够更快地抢到可用带宽。</p>
@@ -1530,8 +1531,8 @@ height:50vh;
 <li>$t_i$：第$i$个分组的时间戳，该分组在发送方产生的时间</li>
 <li>$r_i$：分组$i$被接收方接收的时间</li>
 <li>$p_i$：分组$i$在接收方播放的时间</li>
-<li>$d_i=(1-u)d_{i-1}+u(r_i-t_i)$：接收到第$i$分组时的平均网络时延的估计值，$u$为固定的常数</li>
-<li>$v_i=(1-u)v_{i-1}+u|r_i-t_i-d_i$：与估计平均时延的绝对偏差的估计值</li>
+<li>$d<em>i=(1-u)d</em>{i-1}+u(r_i-t_i)$：接收到第$i$分组时的平均网络时延的估计值，$u$为固定的常数</li>
+<li>$v<em>i=(1-u)v</em>{i-1}+u|r_i-t_i-d_i$：与估计平均时延的绝对偏差的估计值</li>
 <li>$p_i=t_i+d_i+Kv_i$</li>
 <li>在一个话音突峰期中任何后续分组的播放点被计算为相对于这个话音突峰期第一个分组播放时间点的偏移</li>
 <li>类似TCP的拥塞控制</li>
@@ -1551,8 +1552,7 @@ height:50vh;
 <li>漏桶监管的流的<strong>最大突发长度</strong>是$b$个分组，任何长度为$t$的时间间隔内能够进入网络中的最大分组数目为$rt+b$（<strong>平均速率</strong>）</li>
 <li>在原漏桶下方再加一个令牌产生速率为$p$漏桶可以实现限制<strong>峰值速率</strong>到$p$</li>
 </ul>
-<h4 id="漏桶-加权公平排队-队列中可证明的最大时延"><a href="#漏桶-加权公平排队-队列中可证明的最大时延" class="headerlink" title="漏桶+加权公平排队=队列中可证明的最大时延"></a>漏桶+加权公平排队=队列中可证明的最大时延</h4><p>$$d_{max}=\frac{b_i}{R\cdot \frac{w_i}{\sum w_j}}$$</p>
-<h1 id="口嗨考题"><a href="#口嗨考题" class="headerlink" title="口嗨考题"></a>口嗨考题</h1><ul>
+<h4 id="漏桶-加权公平排队-队列中可证明的最大时延"><a href="#漏桶-加权公平排队-队列中可证明的最大时延" class="headerlink" title="漏桶+加权公平排队=队列中可证明的最大时延"></a>漏桶+加权公平排队=队列中可证明的最大时延</h4><script type="math/tex; mode=display">d_{max}=\frac{b_i}{R\cdot \frac{w_i}{\sum w_j}}</script><h1 id="口嗨考题"><a href="#口嗨考题" class="headerlink" title="口嗨考题"></a>口嗨考题</h1><ul>
 <li>IPv4的首部的哪些字段经过中间路由器的时候不会被修改？考虑NAT和不考虑NAT。（以前出过，可能还会考到</li>
 <li>(ppt p28)SYNj</li>
 <li>5道大题*20分</li>
@@ -1586,7 +1586,7 @@ height:50vh;
             <p>原文作者: <a href="https://mengzelev.github.io">Mengzelev</a>
             <p>原文链接: <a href="https://mengzelev.github.io/2019/10/12/network-notes/">https://mengzelev.github.io/2019/10/12/network-notes/</a>
             <p>发表日期: <a href="https://mengzelev.github.io/2019/10/12/network-notes/">October 12th 2019, 11:25:20 am</a>
-            <p>版权声明: 本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
+            <p>版权声明: 本文采用<a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
         </div>
     
     <!-- paginator  -->
@@ -1732,7 +1732,7 @@ top:50vh;
         <div class="toc-catalog">
             <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
         </div>
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Introduction"><span class="toc-number">1.</span> <span class="toc-text">Introduction</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#分组交换"><span class="toc-number">1.1.</span> <span class="toc-text">分组交换</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#电路交换"><span class="toc-number">1.2.</span> <span class="toc-text">电路交换</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#时延"><span class="toc-number">1.3.</span> <span class="toc-text">时延</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#排队时延"><span class="toc-number">1.4.</span> <span class="toc-text">排队时延</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#吞吐量"><span class="toc-number">1.5.</span> <span class="toc-text">吞吐量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#协议分层"><span class="toc-number">1.6.</span> <span class="toc-text">协议分层</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#应用层"><span class="toc-number">1.6.1.</span> <span class="toc-text">应用层</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#运输层"><span class="toc-number">1.6.2.</span> <span class="toc-text">运输层</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#网络层"><span class="toc-number">1.6.3.</span> <span class="toc-text">网络层</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#链路层"><span class="toc-number">1.6.4.</span> <span class="toc-text">链路层</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#OSI模型"><span class="toc-number">1.6.5.</span> <span class="toc-text">OSI模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#封装"><span class="toc-number">1.6.6.</span> <span class="toc-text">封装</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#网络攻击"><span class="toc-number">1.7.</span> <span class="toc-text">网络攻击</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Ch6-链路层和局域网"><span class="toc-number">2.</span> <span class="toc-text">Ch6 链路层和局域网</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#服务"><span class="toc-number">2.1.</span> <span class="toc-text">服务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#差错检测和纠正技术"><span class="toc-number">2.2.</span> <span class="toc-text">差错检测和纠正技术</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Internet-checksum"><span class="toc-number">2.2.1.</span> <span class="toc-text">Internet checksum</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#循环冗余检测CRC"><span class="toc-number">2.2.2.</span> <span class="toc-text">循环冗余检测CRC</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#多路访问链路和协议"><span class="toc-number">2.3.</span> <span class="toc-text">多路访问链路和协议</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#信道划分协议"><span class="toc-number">2.3.1.</span> <span class="toc-text">信道划分协议</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#随机接入协议"><span class="toc-number">2.3.2.</span> <span class="toc-text">随机接入协议</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#时隙ALOHA"><span class="toc-number">2.3.2.1.</span> <span class="toc-text">时隙ALOHA</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ALOHA"><span class="toc-number">2.3.2.2.</span> <span class="toc-text">ALOHA</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#CSMA-载波侦听多路访问"><span class="toc-number">2.3.2.3.</span> <span class="toc-text">CSMA(载波侦听多路访问)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#CSMA-CD-具有碰撞检测的载波侦听多路访问"><span class="toc-number">2.3.2.4.</span> <span class="toc-text">CSMA/CD(具有碰撞检测的载波侦听多路访问)</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#轮流协议"><span class="toc-number">2.3.3.</span> <span class="toc-text">轮流协议</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#轮询协议"><span class="toc-number">2.3.3.1.</span> <span class="toc-text">轮询协议</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#令牌传递协议"><span class="toc-number">2.3.3.2.</span> <span class="toc-text">令牌传递协议</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#交换局域网"><span class="toc-number">2.4.</span> <span class="toc-text">交换局域网</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#MAC地址"><span class="toc-number">2.4.1.</span> <span class="toc-text">MAC地址</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#过程"><span class="toc-number">2.4.1.1.</span> <span class="toc-text">过程</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#以太网"><span class="toc-number">2.4.2.</span> <span class="toc-text">以太网</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#帧结构"><span class="toc-number">2.4.2.1.</span> <span class="toc-text">帧结构</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#链路层交换机"><span class="toc-number">2.4.3.</span> <span class="toc-text">链路层交换机</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#交换机表"><span class="toc-number">2.4.3.1.</span> <span class="toc-text">交换机表</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#自学习"><span class="toc-number">2.4.3.2.</span> <span class="toc-text">自学习</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#优点"><span class="toc-number">2.4.3.3.</span> <span class="toc-text">优点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#缺点"><span class="toc-number">2.4.3.4.</span> <span class="toc-text">缺点</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#虚拟局域网"><span class="toc-number">2.4.4.</span> <span class="toc-text">虚拟局域网</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#CH7-无线网络和移动网络"><span class="toc-number">3.</span> <span class="toc-text">CH7 无线网络和移动网络</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#无线链路和网络特征"><span class="toc-number">3.1.</span> <span class="toc-text">无线链路和网络特征</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CDMA"><span class="toc-number">3.2.</span> <span class="toc-text">CDMA</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#WiFi-802-11无线LAN"><span class="toc-number">3.3.</span> <span class="toc-text">WiFi: 802.11无线LAN</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#信道与关联"><span class="toc-number">3.3.1.</span> <span class="toc-text">信道与关联</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#CH4-网络层：数据平面"><span class="toc-number">4.</span> <span class="toc-text">CH4 网络层：数据平面</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#概述"><span class="toc-number">4.1.</span> <span class="toc-text">概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#路由工作原理"><span class="toc-number">4.2.</span> <span class="toc-text">路由工作原理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#输入端口处理"><span class="toc-number">4.2.1.</span> <span class="toc-text">输入端口处理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#交换"><span class="toc-number">4.2.2.</span> <span class="toc-text">交换</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#输出端口处理"><span class="toc-number">4.2.3.</span> <span class="toc-text">输出端口处理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#分组调度"><span class="toc-number">4.2.4.</span> <span class="toc-text">分组调度</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IPv4"><span class="toc-number">4.3.</span> <span class="toc-text">IPv4</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#数据报格式"><span class="toc-number">4.3.1.</span> <span class="toc-text">数据报格式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#数据报分片"><span class="toc-number">4.3.2.</span> <span class="toc-text">数据报分片</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#编址"><span class="toc-number">4.3.3.</span> <span class="toc-text">编址</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#获取一块地址"><span class="toc-number">4.3.4.</span> <span class="toc-text">获取一块地址</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#获取主机地址：DHCP"><span class="toc-number">4.3.5.</span> <span class="toc-text">获取主机地址：DHCP</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#DHCP协议4步"><span class="toc-number">4.3.5.1.</span> <span class="toc-text">DHCP协议4步</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#网络地址转换-NAT"><span class="toc-number">4.4.</span> <span class="toc-text">网络地址转换(NAT)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IPv6"><span class="toc-number">4.5.</span> <span class="toc-text">IPv6</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#数据报格式-1"><span class="toc-number">4.5.1.</span> <span class="toc-text">数据报格式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#相对IPv4的变化"><span class="toc-number">4.5.2.</span> <span class="toc-text">相对IPv4的变化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#IPv4到IPv6的迁移"><span class="toc-number">4.5.3.</span> <span class="toc-text">IPv4到IPv6的迁移</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#通用转发和SDN"><span class="toc-number">4.6.</span> <span class="toc-text">通用转发和SDN</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#匹配"><span class="toc-number">4.6.1.</span> <span class="toc-text">匹配</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#CH5-网络层：控制平面"><span class="toc-number">5.</span> <span class="toc-text">CH5 网络层：控制平面</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#路由选择算法"><span class="toc-number">5.1.</span> <span class="toc-text">路由选择算法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#链路状态路由选择算法"><span class="toc-number">5.1.1.</span> <span class="toc-text">链路状态路由选择算法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#距离向量-DV-路由选择算法"><span class="toc-number">5.1.2.</span> <span class="toc-text">距离向量(DV)路由选择算法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#比较"><span class="toc-number">5.1.3.</span> <span class="toc-text">比较</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#因特网自治系统内部的路由选择：OSPF"><span class="toc-number">5.2.</span> <span class="toc-text">因特网自治系统内部的路由选择：OSPF</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#AS间的路由选择协议：BGP"><span class="toc-number">5.3.</span> <span class="toc-text">AS间的路由选择协议：BGP</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#通告BGP路由信息"><span class="toc-number">5.3.1.</span> <span class="toc-text">通告BGP路由信息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#热土豆路由选择"><span class="toc-number">5.3.2.</span> <span class="toc-text">热土豆路由选择</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#路由选择算法-1"><span class="toc-number">5.3.3.</span> <span class="toc-text">路由选择算法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#IP任播"><span class="toc-number">5.3.4.</span> <span class="toc-text">IP任播</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#路由选择策略"><span class="toc-number">5.3.5.</span> <span class="toc-text">路由选择策略</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-6-ICMP因特网控制报文协议"><span class="toc-number">5.4.</span> <span class="toc-text">5.6 ICMP因特网控制报文协议</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#CH3-运输层"><span class="toc-number">6.</span> <span class="toc-text">CH3 运输层</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#多路复用和多路分解"><span class="toc-number">6.1.</span> <span class="toc-text">多路复用和多路分解</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#UDP的多路复用与多路分解"><span class="toc-number">6.1.1.</span> <span class="toc-text">UDP的多路复用与多路分解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TCP的多路复用与多路分解"><span class="toc-number">6.1.2.</span> <span class="toc-text">TCP的多路复用与多路分解</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#无连接运输：UDP"><span class="toc-number">6.2.</span> <span class="toc-text">无连接运输：UDP</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#UDP的优点"><span class="toc-number">6.2.1.</span> <span class="toc-text">UDP的优点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#UDP报文段结构"><span class="toc-number">6.2.2.</span> <span class="toc-text">UDP报文段结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#UDP检验和"><span class="toc-number">6.2.3.</span> <span class="toc-text">UDP检验和</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#可靠数据传输原理"><span class="toc-number">6.3.</span> <span class="toc-text">可靠数据传输原理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#构造可靠数据传输协议"><span class="toc-number">6.3.1.</span> <span class="toc-text">构造可靠数据传输协议</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#流水线可靠数据传输协议"><span class="toc-number">6.3.2.</span> <span class="toc-text">流水线可靠数据传输协议</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#回退N步（GBN）"><span class="toc-number">6.3.2.1.</span> <span class="toc-text">回退N步（GBN）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#选择重传（SR）"><span class="toc-number">6.3.2.2.</span> <span class="toc-text">选择重传（SR）</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#面向连接的运输：TCP"><span class="toc-number">6.4.</span> <span class="toc-text">面向连接的运输：TCP</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#TCP连接"><span class="toc-number">6.4.1.</span> <span class="toc-text">TCP连接</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TCP报文段结构"><span class="toc-number">6.4.2.</span> <span class="toc-text">TCP报文段结构</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#序号和确认号"><span class="toc-number">6.4.2.1.</span> <span class="toc-text">序号和确认号</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#往返时间估计与超时"><span class="toc-number">6.4.3.</span> <span class="toc-text">往返时间估计与超时</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#可靠数据传输"><span class="toc-number">6.4.4.</span> <span class="toc-text">可靠数据传输</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#快速重传"><span class="toc-number">6.4.4.1.</span> <span class="toc-text">快速重传</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#流量控制"><span class="toc-number">6.4.5.</span> <span class="toc-text">流量控制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TCP连接管理"><span class="toc-number">6.4.6.</span> <span class="toc-text">TCP连接管理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#建立TCP连接：三次握手"><span class="toc-number">6.4.6.1.</span> <span class="toc-text">建立TCP连接：三次握手</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#关闭TCP连接"><span class="toc-number">6.4.7.</span> <span class="toc-text">关闭TCP连接</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#TCP状态"><span class="toc-number">6.4.7.1.</span> <span class="toc-text">TCP状态</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#nmap端口扫描工具"><span class="toc-number">6.4.7.2.</span> <span class="toc-text">nmap端口扫描工具</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#拥塞控制原理"><span class="toc-number">6.5.</span> <span class="toc-text">拥塞控制原理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#情况1：两个发送方和一台具有无穷大缓存的路由器"><span class="toc-number">6.5.1.</span> <span class="toc-text">情况1：两个发送方和一台具有无穷大缓存的路由器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#情况2：两个发送方和一台具有有限缓存的路由器"><span class="toc-number">6.5.2.</span> <span class="toc-text">情况2：两个发送方和一台具有有限缓存的路由器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#情况3-4个发送方和具有有限缓存的多台路由器及多跳路径"><span class="toc-number">6.5.3.</span> <span class="toc-text">情况3:4个发送方和具有有限缓存的多台路由器及多跳路径</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#拥塞控制方法"><span class="toc-number">6.5.4.</span> <span class="toc-text">拥塞控制方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TCP拥塞控制"><span class="toc-number">6.6.</span> <span class="toc-text">TCP拥塞控制</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#TCP拥塞控制算法"><span class="toc-number">6.6.1.</span> <span class="toc-text">TCP拥塞控制算法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#慢启动"><span class="toc-number">6.6.1.1.</span> <span class="toc-text">慢启动</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#拥塞避免"><span class="toc-number">6.6.1.2.</span> <span class="toc-text">拥塞避免</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#快速恢复"><span class="toc-number">6.6.1.3.</span> <span class="toc-text">快速恢复</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#吞吐量-1"><span class="toc-number">6.6.1.4.</span> <span class="toc-text">吞吐量</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#公平性"><span class="toc-number">6.6.2.</span> <span class="toc-text">公平性</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#CH9-多媒体网络"><span class="toc-number">7.</span> <span class="toc-text">CH9 多媒体网络</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#多媒体网络应用"><span class="toc-number">7.1.</span> <span class="toc-text">多媒体网络应用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#流式存储视频"><span class="toc-number">7.2.</span> <span class="toc-text">流式存储视频</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#UDP流"><span class="toc-number">7.2.1.</span> <span class="toc-text">UDP流</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HTTP流"><span class="toc-number">7.2.2.</span> <span class="toc-text">HTTP流</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IP语音"><span class="toc-number">7.3.</span> <span class="toc-text">IP语音</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#尽力而为的服务限制"><span class="toc-number">7.3.1.</span> <span class="toc-text">尽力而为的服务限制</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#丢包"><span class="toc-number">7.3.1.1.</span> <span class="toc-text">丢包</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#端到端时延"><span class="toc-number">7.3.1.2.</span> <span class="toc-text">端到端时延</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#分组时延抖动"><span class="toc-number">7.3.1.3.</span> <span class="toc-text">分组时延抖动</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#在接收方消除音频的时延抖动"><span class="toc-number">7.3.2.</span> <span class="toc-text">在接收方消除音频的时延抖动</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#固定播放时延"><span class="toc-number">7.3.2.1.</span> <span class="toc-text">固定播放时延</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#适应性延迟播放"><span class="toc-number">7.3.2.2.</span> <span class="toc-text">适应性延迟播放</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#从丢包中恢复"><span class="toc-number">7.3.3.</span> <span class="toc-text">从丢包中恢复</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#前向纠错（FEC）"><span class="toc-number">7.3.3.1.</span> <span class="toc-text">前向纠错（FEC）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#交织"><span class="toc-number">7.3.3.2.</span> <span class="toc-text">交织</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#差错掩盖"><span class="toc-number">7.3.3.3.</span> <span class="toc-text">差错掩盖</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实时会话式应用的协议"><span class="toc-number">7.4.</span> <span class="toc-text">实时会话式应用的协议</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#支持多媒体的网络"><span class="toc-number">7.5.</span> <span class="toc-text">支持多媒体的网络</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#提供多种类型的服务"><span class="toc-number">7.5.1.</span> <span class="toc-text">提供多种类型的服务</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#监管：漏桶"><span class="toc-number">7.5.1.1.</span> <span class="toc-text">监管：漏桶</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#漏桶-加权公平排队-队列中可证明的最大时延"><span class="toc-number">7.5.1.2.</span> <span class="toc-text">漏桶+加权公平排队=队列中可证明的最大时延</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#口嗨考题"><span class="toc-number">8.</span> <span class="toc-text">口嗨考题</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#划重点"><span class="toc-number">9.</span> <span class="toc-text">划重点</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#第一章"><span class="toc-number">9.1.</span> <span class="toc-text">第一章</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第二章"><span class="toc-number">9.2.</span> <span class="toc-text">第二章</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第三章"><span class="toc-number">9.3.</span> <span class="toc-text">第三章</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第四章"><span class="toc-number">9.4.</span> <span class="toc-text">第四章</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第五章"><span class="toc-number">9.5.</span> <span class="toc-text">第五章</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第六章"><span class="toc-number">9.6.</span> <span class="toc-text">第六章</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第七章"><span class="toc-number">9.7.</span> <span class="toc-text">第七章</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第九章"><span class="toc-number">9.8.</span> <span class="toc-text">第九章</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Introduction"><span class="toc-number">1.</span> <span class="toc-text">Introduction</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%86%E7%BB%84%E4%BA%A4%E6%8D%A2"><span class="toc-number">1.1.</span> <span class="toc-text">分组交换</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%B5%E8%B7%AF%E4%BA%A4%E6%8D%A2"><span class="toc-number">1.2.</span> <span class="toc-text">电路交换</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%97%B6%E5%BB%B6"><span class="toc-number">1.3.</span> <span class="toc-text">时延</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8E%92%E9%98%9F%E6%97%B6%E5%BB%B6"><span class="toc-number">1.4.</span> <span class="toc-text">排队时延</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%90%9E%E5%90%90%E9%87%8F"><span class="toc-number">1.5.</span> <span class="toc-text">吞吐量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%8F%E8%AE%AE%E5%88%86%E5%B1%82"><span class="toc-number">1.6.</span> <span class="toc-text">协议分层</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%94%E7%94%A8%E5%B1%82"><span class="toc-number">1.6.1.</span> <span class="toc-text">应用层</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%90%E8%BE%93%E5%B1%82"><span class="toc-number">1.6.2.</span> <span class="toc-text">运输层</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E5%B1%82"><span class="toc-number">1.6.3.</span> <span class="toc-text">网络层</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%93%BE%E8%B7%AF%E5%B1%82"><span class="toc-number">1.6.4.</span> <span class="toc-text">链路层</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%89%A9%E7%90%86%E5%B1%82"><span class="toc-number">1.6.5.</span> <span class="toc-text">　物理层</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#OSI%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.6.6.</span> <span class="toc-text">OSI模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B0%81%E8%A3%85"><span class="toc-number">1.6.7.</span> <span class="toc-text">封装</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E6%94%BB%E5%87%BB"><span class="toc-number">1.7.</span> <span class="toc-text">网络攻击</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Ch6-%E9%93%BE%E8%B7%AF%E5%B1%82%E5%92%8C%E5%B1%80%E5%9F%9F%E7%BD%91"><span class="toc-number">2.</span> <span class="toc-text">Ch6 链路层和局域网</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%8D%E5%8A%A1"><span class="toc-number">2.1.</span> <span class="toc-text">服务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B7%AE%E9%94%99%E6%A3%80%E6%B5%8B%E5%92%8C%E7%BA%A0%E6%AD%A3%E6%8A%80%E6%9C%AF"><span class="toc-number">2.2.</span> <span class="toc-text">差错检测和纠正技术</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A5%87%E5%81%B6%E6%A0%A1%E9%AA%8C"><span class="toc-number">2.2.1.</span> <span class="toc-text">　奇偶校验</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Internet-checksum"><span class="toc-number">2.2.2.</span> <span class="toc-text">Internet checksum</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BE%AA%E7%8E%AF%E5%86%97%E4%BD%99%E6%A3%80%E6%B5%8BCRC"><span class="toc-number">2.2.3.</span> <span class="toc-text">循环冗余检测CRC</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%9A%E8%B7%AF%E8%AE%BF%E9%97%AE%E9%93%BE%E8%B7%AF%E5%92%8C%E5%8D%8F%E8%AE%AE"><span class="toc-number">2.3.</span> <span class="toc-text">多路访问链路和协议</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BF%A1%E9%81%93%E5%88%92%E5%88%86%E5%8D%8F%E8%AE%AE"><span class="toc-number">2.3.1.</span> <span class="toc-text">信道划分协议</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9A%8F%E6%9C%BA%E6%8E%A5%E5%85%A5%E5%8D%8F%E8%AE%AE"><span class="toc-number">2.3.2.</span> <span class="toc-text">随机接入协议</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%97%B6%E9%9A%99ALOHA"><span class="toc-number">2.3.2.1.</span> <span class="toc-text">时隙ALOHA</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ALOHA"><span class="toc-number">2.3.2.2.</span> <span class="toc-text">ALOHA</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#CSMA-%E8%BD%BD%E6%B3%A2%E4%BE%A6%E5%90%AC%E5%A4%9A%E8%B7%AF%E8%AE%BF%E9%97%AE"><span class="toc-number">2.3.2.3.</span> <span class="toc-text">CSMA(载波侦听多路访问)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#CSMA-CD-%E5%85%B7%E6%9C%89%E7%A2%B0%E6%92%9E%E6%A3%80%E6%B5%8B%E7%9A%84%E8%BD%BD%E6%B3%A2%E4%BE%A6%E5%90%AC%E5%A4%9A%E8%B7%AF%E8%AE%BF%E9%97%AE"><span class="toc-number">2.3.2.4.</span> <span class="toc-text">CSMA&#x2F;CD(具有碰撞检测的载波侦听多路访问)</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BD%AE%E6%B5%81%E5%8D%8F%E8%AE%AE"><span class="toc-number">2.3.3.</span> <span class="toc-text">轮流协议</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BD%AE%E8%AF%A2%E5%8D%8F%E8%AE%AE"><span class="toc-number">2.3.3.1.</span> <span class="toc-text">轮询协议</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BB%A4%E7%89%8C%E4%BC%A0%E9%80%92%E5%8D%8F%E8%AE%AE"><span class="toc-number">2.3.3.2.</span> <span class="toc-text">令牌传递协议</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%A4%E6%8D%A2%E5%B1%80%E5%9F%9F%E7%BD%91"><span class="toc-number">2.4.</span> <span class="toc-text">交换局域网</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#MAC%E5%9C%B0%E5%9D%80"><span class="toc-number">2.4.1.</span> <span class="toc-text">MAC地址</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%B0%E5%9D%80%E8%A7%A3%E6%9E%90%E5%8D%8F%E8%AE%AEARP"><span class="toc-number">2.4.2.</span> <span class="toc-text">　地址解析协议ARP</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%87%E7%A8%8B"><span class="toc-number">2.4.2.1.</span> <span class="toc-text">过程</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%A5%E5%A4%AA%E7%BD%91"><span class="toc-number">2.4.3.</span> <span class="toc-text">以太网</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B8%A7%E7%BB%93%E6%9E%84"><span class="toc-number">2.4.3.1.</span> <span class="toc-text">帧结构</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%93%BE%E8%B7%AF%E5%B1%82%E4%BA%A4%E6%8D%A2%E6%9C%BA"><span class="toc-number">2.4.4.</span> <span class="toc-text">链路层交换机</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%A4%E6%8D%A2%E6%9C%BA%E8%A1%A8"><span class="toc-number">2.4.4.1.</span> <span class="toc-text">交换机表</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%87%AA%E5%AD%A6%E4%B9%A0"><span class="toc-number">2.4.4.2.</span> <span class="toc-text">自学习</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BC%98%E7%82%B9"><span class="toc-number">2.4.4.3.</span> <span class="toc-text">优点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BC%BA%E7%82%B9"><span class="toc-number">2.4.4.4.</span> <span class="toc-text">缺点</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%99%9A%E6%8B%9F%E5%B1%80%E5%9F%9F%E7%BD%91"><span class="toc-number">2.4.5.</span> <span class="toc-text">虚拟局域网</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#CH7-%E6%97%A0%E7%BA%BF%E7%BD%91%E7%BB%9C%E5%92%8C%E7%A7%BB%E5%8A%A8%E7%BD%91%E7%BB%9C"><span class="toc-number">3.</span> <span class="toc-text">CH7 无线网络和移动网络</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%97%A0%E7%BA%BF%E9%93%BE%E8%B7%AF%E5%92%8C%E7%BD%91%E7%BB%9C%E7%89%B9%E5%BE%81"><span class="toc-number">3.1.</span> <span class="toc-text">无线链路和网络特征</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CDMA"><span class="toc-number">3.2.</span> <span class="toc-text">CDMA</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#WiFi-802-11%E6%97%A0%E7%BA%BFLAN"><span class="toc-number">3.3.</span> <span class="toc-text">WiFi: 802.11无线LAN</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BF%A1%E9%81%93%E4%B8%8E%E5%85%B3%E8%81%94"><span class="toc-number">3.3.1.</span> <span class="toc-text">信道与关联</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#CH4-%E7%BD%91%E7%BB%9C%E5%B1%82%EF%BC%9A%E6%95%B0%E6%8D%AE%E5%B9%B3%E9%9D%A2"><span class="toc-number">4.</span> <span class="toc-text">CH4 网络层：数据平面</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A6%82%E8%BF%B0"><span class="toc-number">4.1.</span> <span class="toc-text">概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B7%AF%E7%94%B1%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="toc-number">4.2.</span> <span class="toc-text">路由工作原理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%93%E5%85%A5%E7%AB%AF%E5%8F%A3%E5%A4%84%E7%90%86"><span class="toc-number">4.2.1.</span> <span class="toc-text">输入端口处理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%A4%E6%8D%A2"><span class="toc-number">4.2.2.</span> <span class="toc-text">交换</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%93%E5%87%BA%E7%AB%AF%E5%8F%A3%E5%A4%84%E7%90%86"><span class="toc-number">4.2.3.</span> <span class="toc-text">输出端口处理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8E%92%E9%98%9F"><span class="toc-number">4.2.4.</span> <span class="toc-text">　排队</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E7%BB%84%E8%B0%83%E5%BA%A6"><span class="toc-number">4.2.5.</span> <span class="toc-text">分组调度</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IPv4"><span class="toc-number">4.3.</span> <span class="toc-text">IPv4</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E6%8A%A5%E6%A0%BC%E5%BC%8F"><span class="toc-number">4.3.1.</span> <span class="toc-text">数据报格式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E6%8A%A5%E5%88%86%E7%89%87"><span class="toc-number">4.3.2.</span> <span class="toc-text">数据报分片</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%96%E5%9D%80"><span class="toc-number">4.3.3.</span> <span class="toc-text">编址</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E4%B8%80%E5%9D%97%E5%9C%B0%E5%9D%80"><span class="toc-number">4.3.4.</span> <span class="toc-text">获取一块地址</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E4%B8%BB%E6%9C%BA%E5%9C%B0%E5%9D%80%EF%BC%9ADHCP"><span class="toc-number">4.3.5.</span> <span class="toc-text">获取主机地址：DHCP</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#DHCP%E5%8D%8F%E8%AE%AE4%E6%AD%A5"><span class="toc-number">4.3.5.1.</span> <span class="toc-text">DHCP协议4步</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E5%9C%B0%E5%9D%80%E8%BD%AC%E6%8D%A2-NAT"><span class="toc-number">4.4.</span> <span class="toc-text">网络地址转换(NAT)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IPv6"><span class="toc-number">4.5.</span> <span class="toc-text">IPv6</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E6%8A%A5%E6%A0%BC%E5%BC%8F-1"><span class="toc-number">4.5.1.</span> <span class="toc-text">数据报格式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%B8%E5%AF%B9IPv4%E7%9A%84%E5%8F%98%E5%8C%96"><span class="toc-number">4.5.2.</span> <span class="toc-text">相对IPv4的变化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#IPv4%E5%88%B0IPv6%E7%9A%84%E8%BF%81%E7%A7%BB"><span class="toc-number">4.5.3.</span> <span class="toc-text">IPv4到IPv6的迁移</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%80%9A%E7%94%A8%E8%BD%AC%E5%8F%91%E5%92%8CSDN"><span class="toc-number">4.6.</span> <span class="toc-text">通用转发和SDN</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8C%B9%E9%85%8D"><span class="toc-number">4.6.1.</span> <span class="toc-text">匹配</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#CH5-%E7%BD%91%E7%BB%9C%E5%B1%82%EF%BC%9A%E6%8E%A7%E5%88%B6%E5%B9%B3%E9%9D%A2"><span class="toc-number">5.</span> <span class="toc-text">CH5 网络层：控制平面</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B7%AF%E7%94%B1%E9%80%89%E6%8B%A9%E7%AE%97%E6%B3%95"><span class="toc-number">5.1.</span> <span class="toc-text">路由选择算法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%93%BE%E8%B7%AF%E7%8A%B6%E6%80%81%E8%B7%AF%E7%94%B1%E9%80%89%E6%8B%A9%E7%AE%97%E6%B3%95"><span class="toc-number">5.1.1.</span> <span class="toc-text">链路状态路由选择算法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B7%9D%E7%A6%BB%E5%90%91%E9%87%8F-DV-%E8%B7%AF%E7%94%B1%E9%80%89%E6%8B%A9%E7%AE%97%E6%B3%95"><span class="toc-number">5.1.2.</span> <span class="toc-text">距离向量(DV)路由选择算法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AF%94%E8%BE%83"><span class="toc-number">5.1.3.</span> <span class="toc-text">比较</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%A0%E7%89%B9%E7%BD%91%E8%87%AA%E6%B2%BB%E7%B3%BB%E7%BB%9F%E5%86%85%E9%83%A8%E7%9A%84%E8%B7%AF%E7%94%B1%E9%80%89%E6%8B%A9%EF%BC%9AOSPF"><span class="toc-number">5.2.</span> <span class="toc-text">因特网自治系统内部的路由选择：OSPF</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#AS%E9%97%B4%E7%9A%84%E8%B7%AF%E7%94%B1%E9%80%89%E6%8B%A9%E5%8D%8F%E8%AE%AE%EF%BC%9ABGP"><span class="toc-number">5.3.</span> <span class="toc-text">AS间的路由选择协议：BGP</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%9A%E5%91%8ABGP%E8%B7%AF%E7%94%B1%E4%BF%A1%E6%81%AF"><span class="toc-number">5.3.1.</span> <span class="toc-text">通告BGP路由信息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%83%AD%E5%9C%9F%E8%B1%86%E8%B7%AF%E7%94%B1%E9%80%89%E6%8B%A9"><span class="toc-number">5.3.2.</span> <span class="toc-text">热土豆路由选择</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B7%AF%E7%94%B1%E9%80%89%E6%8B%A9%E7%AE%97%E6%B3%95-1"><span class="toc-number">5.3.3.</span> <span class="toc-text">路由选择算法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#IP%E4%BB%BB%E6%92%AD"><span class="toc-number">5.3.4.</span> <span class="toc-text">IP任播</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B7%AF%E7%94%B1%E9%80%89%E6%8B%A9%E7%AD%96%E7%95%A5"><span class="toc-number">5.3.5.</span> <span class="toc-text">路由选择策略</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-6-ICMP%E5%9B%A0%E7%89%B9%E7%BD%91%E6%8E%A7%E5%88%B6%E6%8A%A5%E6%96%87%E5%8D%8F%E8%AE%AE"><span class="toc-number">5.4.</span> <span class="toc-text">5.6 ICMP因特网控制报文协议</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#CH3-%E8%BF%90%E8%BE%93%E5%B1%82"><span class="toc-number">6.</span> <span class="toc-text">CH3 运输层</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8%E5%92%8C%E5%A4%9A%E8%B7%AF%E5%88%86%E8%A7%A3"><span class="toc-number">6.1.</span> <span class="toc-text">多路复用和多路分解</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#UDP%E7%9A%84%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8%E4%B8%8E%E5%A4%9A%E8%B7%AF%E5%88%86%E8%A7%A3"><span class="toc-number">6.1.1.</span> <span class="toc-text">UDP的多路复用与多路分解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TCP%E7%9A%84%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8%E4%B8%8E%E5%A4%9A%E8%B7%AF%E5%88%86%E8%A7%A3"><span class="toc-number">6.1.2.</span> <span class="toc-text">TCP的多路复用与多路分解</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%97%A0%E8%BF%9E%E6%8E%A5%E8%BF%90%E8%BE%93%EF%BC%9AUDP"><span class="toc-number">6.2.</span> <span class="toc-text">无连接运输：UDP</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#UDP%E7%9A%84%E4%BC%98%E7%82%B9"><span class="toc-number">6.2.1.</span> <span class="toc-text">UDP的优点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#UDP%E6%8A%A5%E6%96%87%E6%AE%B5%E7%BB%93%E6%9E%84"><span class="toc-number">6.2.2.</span> <span class="toc-text">UDP报文段结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#UDP%E6%A3%80%E9%AA%8C%E5%92%8C"><span class="toc-number">6.2.3.</span> <span class="toc-text">UDP检验和</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%AF%E9%9D%A0%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93%E5%8E%9F%E7%90%86"><span class="toc-number">6.3.</span> <span class="toc-text">可靠数据传输原理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9E%84%E9%80%A0%E5%8F%AF%E9%9D%A0%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE"><span class="toc-number">6.3.1.</span> <span class="toc-text">构造可靠数据传输协议</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B5%81%E6%B0%B4%E7%BA%BF%E5%8F%AF%E9%9D%A0%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE"><span class="toc-number">6.3.2.</span> <span class="toc-text">流水线可靠数据传输协议</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9B%9E%E9%80%80N%E6%AD%A5%EF%BC%88GBN%EF%BC%89"><span class="toc-number">6.3.2.1.</span> <span class="toc-text">回退N步（GBN）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%80%89%E6%8B%A9%E9%87%8D%E4%BC%A0%EF%BC%88SR%EF%BC%89"><span class="toc-number">6.3.2.2.</span> <span class="toc-text">选择重传（SR）</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9D%A2%E5%90%91%E8%BF%9E%E6%8E%A5%E7%9A%84%E8%BF%90%E8%BE%93%EF%BC%9ATCP"><span class="toc-number">6.4.</span> <span class="toc-text">面向连接的运输：TCP</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#TCP%E8%BF%9E%E6%8E%A5"><span class="toc-number">6.4.1.</span> <span class="toc-text">TCP连接</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TCP%E6%8A%A5%E6%96%87%E6%AE%B5%E7%BB%93%E6%9E%84"><span class="toc-number">6.4.2.</span> <span class="toc-text">TCP报文段结构</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BA%8F%E5%8F%B7%E5%92%8C%E7%A1%AE%E8%AE%A4%E5%8F%B7"><span class="toc-number">6.4.2.1.</span> <span class="toc-text">序号和确认号</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BE%80%E8%BF%94%E6%97%B6%E9%97%B4%E4%BC%B0%E8%AE%A1%E4%B8%8E%E8%B6%85%E6%97%B6"><span class="toc-number">6.4.3.</span> <span class="toc-text">往返时间估计与超时</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%AF%E9%9D%A0%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93"><span class="toc-number">6.4.4.</span> <span class="toc-text">可靠数据传输</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BF%AB%E9%80%9F%E9%87%8D%E4%BC%A0"><span class="toc-number">6.4.4.1.</span> <span class="toc-text">快速重传</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B5%81%E9%87%8F%E6%8E%A7%E5%88%B6"><span class="toc-number">6.4.5.</span> <span class="toc-text">流量控制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TCP%E8%BF%9E%E6%8E%A5%E7%AE%A1%E7%90%86"><span class="toc-number">6.4.6.</span> <span class="toc-text">TCP连接管理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BB%BA%E7%AB%8BTCP%E8%BF%9E%E6%8E%A5%EF%BC%9A%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B"><span class="toc-number">6.4.6.1.</span> <span class="toc-text">建立TCP连接：三次握手</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B3%E9%97%ADTCP%E8%BF%9E%E6%8E%A5"><span class="toc-number">6.4.7.</span> <span class="toc-text">关闭TCP连接</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#TCP%E7%8A%B6%E6%80%81"><span class="toc-number">6.4.7.1.</span> <span class="toc-text">TCP状态</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#nmap%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F%E5%B7%A5%E5%85%B7"><span class="toc-number">6.4.7.2.</span> <span class="toc-text">nmap端口扫描工具</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8B%A5%E5%A1%9E%E6%8E%A7%E5%88%B6%E5%8E%9F%E7%90%86"><span class="toc-number">6.5.</span> <span class="toc-text">拥塞控制原理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%83%85%E5%86%B51%EF%BC%9A%E4%B8%A4%E4%B8%AA%E5%8F%91%E9%80%81%E6%96%B9%E5%92%8C%E4%B8%80%E5%8F%B0%E5%85%B7%E6%9C%89%E6%97%A0%E7%A9%B7%E5%A4%A7%E7%BC%93%E5%AD%98%E7%9A%84%E8%B7%AF%E7%94%B1%E5%99%A8"><span class="toc-number">6.5.1.</span> <span class="toc-text">情况1：两个发送方和一台具有无穷大缓存的路由器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%83%85%E5%86%B52%EF%BC%9A%E4%B8%A4%E4%B8%AA%E5%8F%91%E9%80%81%E6%96%B9%E5%92%8C%E4%B8%80%E5%8F%B0%E5%85%B7%E6%9C%89%E6%9C%89%E9%99%90%E7%BC%93%E5%AD%98%E7%9A%84%E8%B7%AF%E7%94%B1%E5%99%A8"><span class="toc-number">6.5.2.</span> <span class="toc-text">情况2：两个发送方和一台具有有限缓存的路由器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%83%85%E5%86%B53-4%E4%B8%AA%E5%8F%91%E9%80%81%E6%96%B9%E5%92%8C%E5%85%B7%E6%9C%89%E6%9C%89%E9%99%90%E7%BC%93%E5%AD%98%E7%9A%84%E5%A4%9A%E5%8F%B0%E8%B7%AF%E7%94%B1%E5%99%A8%E5%8F%8A%E5%A4%9A%E8%B7%B3%E8%B7%AF%E5%BE%84"><span class="toc-number">6.5.3.</span> <span class="toc-text">情况3:4个发送方和具有有限缓存的多台路由器及多跳路径</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8B%A5%E5%A1%9E%E6%8E%A7%E5%88%B6%E6%96%B9%E6%B3%95"><span class="toc-number">6.5.4.</span> <span class="toc-text">拥塞控制方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TCP%E6%8B%A5%E5%A1%9E%E6%8E%A7%E5%88%B6"><span class="toc-number">6.6.</span> <span class="toc-text">TCP拥塞控制</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#TCP%E6%8B%A5%E5%A1%9E%E6%8E%A7%E5%88%B6%E7%AE%97%E6%B3%95"><span class="toc-number">6.6.1.</span> <span class="toc-text">TCP拥塞控制算法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%85%A2%E5%90%AF%E5%8A%A8"><span class="toc-number">6.6.1.1.</span> <span class="toc-text">慢启动</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8B%A5%E5%A1%9E%E9%81%BF%E5%85%8D"><span class="toc-number">6.6.1.2.</span> <span class="toc-text">拥塞避免</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BF%AB%E9%80%9F%E6%81%A2%E5%A4%8D"><span class="toc-number">6.6.1.3.</span> <span class="toc-text">快速恢复</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%90%9E%E5%90%90%E9%87%8F-1"><span class="toc-number">6.6.1.4.</span> <span class="toc-text">吞吐量</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%AC%E5%B9%B3%E6%80%A7"><span class="toc-number">6.6.2.</span> <span class="toc-text">公平性</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#CH9-%E5%A4%9A%E5%AA%92%E4%BD%93%E7%BD%91%E7%BB%9C"><span class="toc-number">7.</span> <span class="toc-text">CH9 多媒体网络</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%9A%E5%AA%92%E4%BD%93%E7%BD%91%E7%BB%9C%E5%BA%94%E7%94%A8"><span class="toc-number">7.1.</span> <span class="toc-text">多媒体网络应用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B5%81%E5%BC%8F%E5%AD%98%E5%82%A8%E8%A7%86%E9%A2%91"><span class="toc-number">7.2.</span> <span class="toc-text">流式存储视频</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#UDP%E6%B5%81"><span class="toc-number">7.2.1.</span> <span class="toc-text">UDP流</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HTTP%E6%B5%81"><span class="toc-number">7.2.2.</span> <span class="toc-text">HTTP流</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IP%E8%AF%AD%E9%9F%B3"><span class="toc-number">7.3.</span> <span class="toc-text">IP语音</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B0%BD%E5%8A%9B%E8%80%8C%E4%B8%BA%E7%9A%84%E6%9C%8D%E5%8A%A1%E9%99%90%E5%88%B6"><span class="toc-number">7.3.1.</span> <span class="toc-text">尽力而为的服务限制</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%A2%E5%8C%85"><span class="toc-number">7.3.1.1.</span> <span class="toc-text">丢包</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AB%AF%E5%88%B0%E7%AB%AF%E6%97%B6%E5%BB%B6"><span class="toc-number">7.3.1.2.</span> <span class="toc-text">端到端时延</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%86%E7%BB%84%E6%97%B6%E5%BB%B6%E6%8A%96%E5%8A%A8"><span class="toc-number">7.3.1.3.</span> <span class="toc-text">分组时延抖动</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%A8%E6%8E%A5%E6%94%B6%E6%96%B9%E6%B6%88%E9%99%A4%E9%9F%B3%E9%A2%91%E7%9A%84%E6%97%B6%E5%BB%B6%E6%8A%96%E5%8A%A8"><span class="toc-number">7.3.2.</span> <span class="toc-text">在接收方消除音频的时延抖动</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9B%BA%E5%AE%9A%E6%92%AD%E6%94%BE%E6%97%B6%E5%BB%B6"><span class="toc-number">7.3.2.1.</span> <span class="toc-text">固定播放时延</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%80%82%E5%BA%94%E6%80%A7%E5%BB%B6%E8%BF%9F%E6%92%AD%E6%94%BE"><span class="toc-number">7.3.2.2.</span> <span class="toc-text">适应性延迟播放</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%8E%E4%B8%A2%E5%8C%85%E4%B8%AD%E6%81%A2%E5%A4%8D"><span class="toc-number">7.3.3.</span> <span class="toc-text">从丢包中恢复</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%89%8D%E5%90%91%E7%BA%A0%E9%94%99%EF%BC%88FEC%EF%BC%89"><span class="toc-number">7.3.3.1.</span> <span class="toc-text">前向纠错（FEC）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%A4%E7%BB%87"><span class="toc-number">7.3.3.2.</span> <span class="toc-text">交织</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B7%AE%E9%94%99%E6%8E%A9%E7%9B%96"><span class="toc-number">7.3.3.3.</span> <span class="toc-text">差错掩盖</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E6%97%B6%E4%BC%9A%E8%AF%9D%E5%BC%8F%E5%BA%94%E7%94%A8%E7%9A%84%E5%8D%8F%E8%AE%AE"><span class="toc-number">7.4.</span> <span class="toc-text">实时会话式应用的协议</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%94%AF%E6%8C%81%E5%A4%9A%E5%AA%92%E4%BD%93%E7%9A%84%E7%BD%91%E7%BB%9C"><span class="toc-number">7.5.</span> <span class="toc-text">支持多媒体的网络</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8F%90%E4%BE%9B%E5%A4%9A%E7%A7%8D%E7%B1%BB%E5%9E%8B%E7%9A%84%E6%9C%8D%E5%8A%A1"><span class="toc-number">7.5.1.</span> <span class="toc-text">提供多种类型的服务</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%9B%91%E7%AE%A1%EF%BC%9A%E6%BC%8F%E6%A1%B6"><span class="toc-number">7.5.1.1.</span> <span class="toc-text">监管：漏桶</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%BC%8F%E6%A1%B6-%E5%8A%A0%E6%9D%83%E5%85%AC%E5%B9%B3%E6%8E%92%E9%98%9F-%E9%98%9F%E5%88%97%E4%B8%AD%E5%8F%AF%E8%AF%81%E6%98%8E%E7%9A%84%E6%9C%80%E5%A4%A7%E6%97%B6%E5%BB%B6"><span class="toc-number">7.5.1.2.</span> <span class="toc-text">漏桶+加权公平排队&#x3D;队列中可证明的最大时延</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%A3%E5%97%A8%E8%80%83%E9%A2%98"><span class="toc-number">8.</span> <span class="toc-text">口嗨考题</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%88%92%E9%87%8D%E7%82%B9"><span class="toc-number">9.</span> <span class="toc-text">划重点</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E7%AB%A0"><span class="toc-number">9.1.</span> <span class="toc-text">第一章</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E7%AB%A0"><span class="toc-number">9.2.</span> <span class="toc-text">第二章</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E7%AB%A0"><span class="toc-number">9.3.</span> <span class="toc-text">第三章</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E5%9B%9B%E7%AB%A0"><span class="toc-number">9.4.</span> <span class="toc-text">第四章</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%BA%94%E7%AB%A0"><span class="toc-number">9.5.</span> <span class="toc-text">第五章</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E5%85%AD%E7%AB%A0"><span class="toc-number">9.6.</span> <span class="toc-text">第六章</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%B8%83%E7%AB%A0"><span class="toc-number">9.7.</span> <span class="toc-text">第七章</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%B9%9D%E7%AB%A0"><span class="toc-number">9.8.</span> <span class="toc-text">第九章</span></a></li></ol></li></ol>
     </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
@@ -2709,85 +2709,9 @@ top:50vh;
     
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 64
+        Total : 66
         </div>
         <!-- search  -->
         
@@ -2800,6 +2724,16 @@ top:50vh;
     
     <div class="archive-year"> 2020 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/27</span><a class="archive-post-title" href= "/2020/06/27/Le-Deuxieme-Sexe/" >西蒙·波伏娃《第二性》读书笔记</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/24</span><a class="archive-post-title" href= "/2020/06/24/OOP-design-patterns/" >面向对象设计原则-课程笔记</a>
+        </li>
     
     
         <li class="archive-post-item">
@@ -3071,12 +3005,12 @@ top:50vh;
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">10/04</span><a class="archive-post-title" href= "/2018/10/04/pa-inspirations/" >做pa的时候可能会用到的操作</a>
+            <span class="archive-post-date">10/04</span><a class="archive-post-title" href= "/2018/10/04/PA1-report/" >PA1实验报告</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">10/04</span><a class="archive-post-title" href= "/2018/10/04/PA1-report/" >PA1实验报告</a>
+            <span class="archive-post-date">10/04</span><a class="archive-post-title" href= "/2018/10/04/pa-inspirations/" >做pa的时候可能会用到的操作</a>
         </li>
     
     
@@ -3146,17 +3080,17 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="Flags"><span class="iconfont-archer">&#xe606;</span>Flags</span>
     
+        <span class="sidebar-tag-name" data-tags="Math Modeling"><span class="iconfont-archer">&#xe606;</span>Math Modeling</span>
+    
         <span class="sidebar-tag-name" data-tags="Notes"><span class="iconfont-archer">&#xe606;</span>Notes</span>
     
         <span class="sidebar-tag-name" data-tags="pa"><span class="iconfont-archer">&#xe606;</span>pa</span>
     
         <span class="sidebar-tag-name" data-tags="ICS"><span class="iconfont-archer">&#xe606;</span>ICS</span>
     
-        <span class="sidebar-tag-name" data-tags="Math Modeling"><span class="iconfont-archer">&#xe606;</span>Math Modeling</span>
+        <span class="sidebar-tag-name" data-tags="Problem Solving"><span class="iconfont-archer">&#xe606;</span>Problem Solving</span>
     
         <span class="sidebar-tag-name" data-tags="Machine Learning"><span class="iconfont-archer">&#xe606;</span>Machine Learning</span>
-    
-        <span class="sidebar-tag-name" data-tags="Problem Solving"><span class="iconfont-archer">&#xe606;</span>Problem Solving</span>
     
         <span class="sidebar-tag-name" data-tags="Assembly Language"><span class="iconfont-archer">&#xe606;</span>Assembly Language</span>
     
@@ -3196,13 +3130,13 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="Ics"><span class="iconfont-archer">&#xe606;</span>Ics</span>
     
-        <span class="sidebar-tag-name" data-tags="Interview"><span class="iconfont-archer">&#xe606;</span>Interview</span>
-    
         <span class="sidebar-tag-name" data-tags="Matchings"><span class="iconfont-archer">&#xe606;</span>Matchings</span>
     
         <span class="sidebar-tag-name" data-tags="Factorization"><span class="iconfont-archer">&#xe606;</span>Factorization</span>
     
         <span class="sidebar-tag-name" data-tags="MATLAB"><span class="iconfont-archer">&#xe606;</span>MATLAB</span>
+    
+        <span class="sidebar-tag-name" data-tags="Interview"><span class="iconfont-archer">&#xe606;</span>Interview</span>
     
         <span class="sidebar-tag-name" data-tags="Linux"><span class="iconfont-archer">&#xe606;</span>Linux</span>
     
@@ -3214,11 +3148,11 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="linux"><span class="iconfont-archer">&#xe606;</span>linux</span>
     
-        <span class="sidebar-tag-name" data-tags="markdown"><span class="iconfont-archer">&#xe606;</span>markdown</span>
-    
         <span class="sidebar-tag-name" data-tags="Java"><span class="iconfont-archer">&#xe606;</span>Java</span>
     
         <span class="sidebar-tag-name" data-tags="programming"><span class="iconfont-archer">&#xe606;</span>programming</span>
+    
+        <span class="sidebar-tag-name" data-tags="markdown"><span class="iconfont-archer">&#xe606;</span>markdown</span>
     
         <span class="sidebar-tag-name" data-tags="tmux"><span class="iconfont-archer">&#xe606;</span>tmux</span>
     
@@ -3328,10 +3262,10 @@ jsonContent:
             all[i].SourceElement().parentNode.className += ' has-jax';
     });
 </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
-<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":150},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":150},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
 <script type="text/x-mathjax-config">
-  MathJax.Hub.Config("");
+  MathJax.Hub.Config({{ JSON.stringify(config) }});
 </script>
 
 <script type="text/x-mathjax-config">
@@ -3343,7 +3277,7 @@ jsonContent:
   });
 </script>
 
-<script type="text/javascript" src="custom_mathjax_source">
+<script type="text/javascript" src="{{ src }}">
 </script>
 <!-- End: Injected MathJax -->
 <!-- hexo-inject:end --></body>

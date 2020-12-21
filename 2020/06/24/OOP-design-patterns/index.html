@@ -1,0 +1,3398 @@
+<!DOCTYPE html>
+<html>
+    <!-- title -->
+
+
+
+
+<head>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" >
+    <meta name="author" content="Mengzelev">
+    <meta name="renderer" content="webkit">
+    <meta name="copyright" content="Mengzelev">
+    <meta name="keywords" content="Mengzelev's blog | Mengzelev">
+    <meta name="description" content="nothing to write">
+    <meta name="Cache-Control" content="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <title>面向对象设计原则-课程笔记 · Mengzelev&#39;s Blog</title>
+    <style type="text/css">
+    @font-face {
+        font-family: 'Oswald-Regular';
+        src: url("/font/Oswald-Regular.ttf");
+    }
+
+    body {
+        margin: 0;
+    }
+
+    header,
+    footer,
+    .back-top,
+    .sidebar,
+    .container,
+    .site-intro-meta,
+    .toc-wrapper {
+        display: none;
+    }
+
+    .site-intro {
+        position: relative;
+        z-index: 3;
+        width: 100%;
+        /* height: 50vh; */
+        overflow: hidden;
+    }
+
+    .site-intro-placeholder {
+        position: absolute;
+        z-index: -2;
+        top: 0;
+        left: 0;
+        width: calc(100% + 300px);
+        height: 100%;
+        background: repeating-linear-gradient(-45deg, #444 0, #444 80px, #333 80px, #333 160px);
+        background-position: center center;
+        transform: translate3d(-226px, 0, 0);
+        animation: gradient-move 2.5s ease-out 0s 1;
+    }
+
+    @keyframes gradient-move {
+        0% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        100% {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+
+</style>
+
+    <link rel="preload" href= /css/style.css?v=20180721 as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <link rel="stylesheet" href= /css/mobile.css?v=20180721 media="(max-width: 980px)">
+    
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    
+    <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+/* This file is meant as a standalone workflow for
+- testing support for link[rel=preload]
+- enabling async CSS loading in browsers that do not support rel=preload
+- applying rel preload css once loaded, whether supported or not.
+*/ -->
+<script>
+(function( w ){
+	"use strict";
+	// rel=preload support test
+	if( !w.loadCSS ){
+		w.loadCSS = function(){};
+	}
+	// define on the loadCSS obj
+	var rp = loadCSS.relpreload = {};
+	// rel=preload feature support test
+	// runs once and returns a function for compat purposes
+	rp.support = (function(){
+		var ret;
+		try {
+			ret = w.document.createElement( "link" ).relList.supports( "preload" );
+		} catch (e) {
+			ret = false;
+		}
+		return function(){
+			return ret;
+		};
+	})();
+
+	// if preload isn't supported, get an asynchronous load by using a non-matching media attribute
+	// then change that media back to its intended value on load
+	rp.bindMediaToggle = function( link ){
+		// remember existing media attr for ultimate state, or default to 'all'
+		var finalMedia = link.media || "all";
+
+		function enableStylesheet(){
+			link.media = finalMedia;
+		}
+
+		// bind load handlers to enable media
+		if( link.addEventListener ){
+			link.addEventListener( "load", enableStylesheet );
+		} else if( link.attachEvent ){
+			link.attachEvent( "onload", enableStylesheet );
+		}
+
+		// Set rel and non-applicable media type to start an async request
+		// note: timeout allows this to happen async to let rendering continue in IE
+		setTimeout(function(){
+			link.rel = "stylesheet";
+			link.media = "only x";
+		});
+		// also enable media after 3 seconds,
+		// which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
+		setTimeout( enableStylesheet, 3000 );
+	};
+
+	// loop through link elements in DOM
+	rp.poly = function(){
+		// double check this to prevent external calls from running
+		if( rp.support() ){
+			return;
+		}
+		var links = w.document.getElementsByTagName( "link" );
+		for( var i = 0; i < links.length; i++ ){
+			var link = links[ i ];
+			// qualify links to those with rel=preload and as=style attrs
+			if( link.rel === "preload" && link.getAttribute( "as" ) === "style" && !link.getAttribute( "data-loadcss" ) ){
+				// prevent rerunning on link
+				link.setAttribute( "data-loadcss", true );
+				// bind listeners to toggle media back
+				rp.bindMediaToggle( link );
+			}
+		}
+	};
+
+	// if unsupported, run the polyfill
+	if( !rp.support() ){
+		// run once at least
+		rp.poly();
+
+		// rerun poly on an interval until onload
+		var run = w.setInterval( rp.poly, 500 );
+		if( w.addEventListener ){
+			w.addEventListener( "load", function(){
+				rp.poly();
+				w.clearInterval( run );
+			} );
+		} else if( w.attachEvent ){
+			w.attachEvent( "onload", function(){
+				rp.poly();
+				w.clearInterval( run );
+			} );
+		}
+	}
+
+
+	// commonjs
+	if( typeof exports !== "undefined" ){
+		exports.loadCSS = loadCSS;
+	}
+	else {
+		w.loadCSS = loadCSS;
+	}
+}( typeof global !== "undefined" ? global : this ) );
+</script>
+
+    <link rel="icon" href= "/assets/moe.ico" />
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js" as="script" />
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js" as="script" />
+    <link rel="preload" href="/scripts/main.js" as="script" />
+    <link rel="preload" as="font" href="/font/Oswald-Regular.ttf" crossorigin>
+    <link rel="preload" as="font" href="https://at.alicdn.com/t/font_327081_1dta1rlogw17zaor.woff" crossorigin>
+    
+    <!-- fancybox -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" defer></script>
+    <!-- 百度统计  -->
+    
+    <!-- 谷歌统计  -->
+    
+<meta name="generator" content="Hexo 5.3.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+
+    
+        <body class="post-body">
+    
+    
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><header class="header">
+
+    <div class="read-progress"></div>
+    <div class="header-sidebar-menu">&#xe775;</div>
+    <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >Mengzelev&#39;s Blog</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">面向对象设计原则-课程笔记</a>
+            </div>
+    </div>
+    
+    <a class="home-link" href=/>Mengzelev's Blog</a>
+</header>
+    <div class="wrapper">
+        <div class="site-intro" style=
+
+
+
+
+
+
+
+
+height:50vh;
+
+>
+    
+    <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
+            
+    <div class="site-intro-placeholder"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/hinata.jpg)"></div>
+    <div class="site-intro-meta">
+        <!-- 标题  -->
+        <h1 class="intro-title">
+            <!-- 主页  -->
+            
+            面向对象设计原则-课程笔记
+            <!-- 404 -->
+            
+        </h1>
+        <!-- 副标题 -->
+        <p class="intro-subtitle">
+            <!-- 主页副标题  -->
+            
+            
+            <!-- 404 -->
+            
+        </p>
+        <!-- 文章页meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                
+                    <div class="post-intro-read">
+                        <span>Word count: <span class="post-count">17,384</span> / Reading time: <span class="post-count">62 min</span></span>
+                    </div>
+                
+                <div class="post-intro-meta">
+                    <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                    <span class="post-intro-time">2020/06/24</span>
+                    
+                    <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                        <span class="iconfont-archer">&#xe602;</span>
+                        <span id="busuanzi_value_page_pv"></span>
+                    </span>
+                    
+                    <span class="shareWrapper">
+                        <span class="iconfont-archer shareIcon">&#xe71d;</span>
+                        <span class="shareText">Share</span>
+                        <ul class="shareList">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
+        
+    </div>
+</div>
+        <script>
+ 
+  // get user agent
+  var browser = {
+    versions: function () {
+      var u = window.navigator.userAgent;
+      return {
+        userAgent: u,
+        trident: u.indexOf('Trident') > -1, //IE内核
+        presto: u.indexOf('Presto') > -1, //opera内核
+        webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+        gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+        mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+        ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+        android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+        iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
+        iPad: u.indexOf('iPad') > -1, //是否为iPad
+        webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
+        weixin: u.indexOf('MicroMessenger') == -1, //是否为微信浏览器
+        uc: u.indexOf('UCBrowser') > -1 //是否为android下的UC浏览器
+      };
+    }()
+  }
+  console.log("userAgent:" + browser.versions.userAgent);
+
+  // callback
+  function fontLoaded() {
+    console.log('font loaded');
+    if (document.getElementsByClassName('site-intro-meta')) {
+      document.getElementsByClassName('intro-title')[0].classList.add('intro-fade-in');
+      document.getElementsByClassName('intro-subtitle')[0].classList.add('intro-fade-in');
+      var postIntros = document.getElementsByClassName('post-intros')[0]
+      if (postIntros) {
+        postIntros.classList.add('post-fade-in');
+      }
+    }
+  }
+
+  // UC不支持跨域，所以直接显示
+  function asyncCb(){
+    if (browser.versions.uc) {
+      console.log("UCBrowser");
+      fontLoaded();
+    } else {
+      WebFont.load({
+        custom: {
+          families: ['Oswald-Regular']
+        },
+        loading: function () {  //所有字体开始加载
+          // console.log('loading');
+        },
+        active: function () {  //所有字体已渲染
+          fontLoaded();
+        },
+        inactive: function () { //字体预加载失败，无效字体或浏览器不支持加载
+          console.log('inactive: timeout');
+          fontLoaded();
+        },
+        timeout: 5000 // Set the timeout to two seconds
+      });
+    }
+  }
+
+  function asyncErr(){
+    console.warn('script load from CDN failed, will load local script')
+  }
+
+  // load webfont-loader async, and add callback function
+  function async(u, cb, err) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (cb) { o.addEventListener('load', function (e) { cb(null, e); }, false); }
+    if (err) { o.addEventListener('error', function (e) { err(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+
+  var asyncLoadWithFallBack = function(arr, success, reject) {
+      var currReject = function(){
+        reject()
+        arr.shift()
+        if(arr.length)
+          async(arr[0], success, currReject)
+        }
+
+      async(arr[0], success, currReject)
+  }
+
+  asyncLoadWithFallBack([
+    "https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js", 
+    "https://cdn.bootcss.com/webfont/1.6.28/webfontloader.js",
+    "/lib/webfontloader.min.js"
+  ], asyncCb, asyncErr)
+</script>        
+        <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
+        <div class="container container-unloaded">
+            <main class="main post-page">
+    <article class="article-entry">
+        <h1 id="OOP设计原则"><a href="#OOP设计原则" class="headerlink" title="OOP设计原则"></a>OOP设计原则</h1><h2 id="单一职责原则（SRP）"><a href="#单一职责原则（SRP）" class="headerlink" title="单一职责原则（SRP）"></a>单一职责原则（SRP）</h2><ul>
+<li>一个对象应该只包含单一的职责，并且该职责被完整地封装在一个类中</li>
+<li>e.g.矩形的绘制方法（图形意义上的矩形）和矩形的求面积方法（数学意义上的矩形）分开，分别实现在Rectangle类和GeometricRectangle类中</li>
+</ul>
+<h2 id="开放-封闭原则（OCP）"><a href="#开放-封闭原则（OCP）" class="headerlink" title="开放-封闭原则（OCP）"></a>开放-封闭原则（OCP）</h2><ul>
+<li>“向扩展开放，向修改关闭”</li>
+<li>不修改源代码实现对实体功能的扩展（继承）</li>
+<li>e.g.图形类声明<code>Draw()</code>方法，方形圆形等作为子类扩展父类的<code>Draw()</code>方法</li>
+</ul>
+<h2 id="里氏替换原则（LSP）"><a href="#里氏替换原则（LSP）" class="headerlink" title="里氏替换原则（LSP）"></a>里氏替换原则（LSP）</h2><ul>
+<li>所有引用基类的地方必须能透明地使用其子类对象</li>
+<li>规定了继承关系的形式</li>
+<li>相当于更弱的precondition和更强的postcondition</li>
+<li>e.g.正方形不能成为长方形的一个子类，因为调用长方形设置长宽的方法的地方，替换成正方形的设置长宽的方法会导致程序状态于原来不一致</li>
+</ul>
+<h2 id="依赖倒置原则（DIP）"><a href="#依赖倒置原则（DIP）" class="headerlink" title="依赖倒置原则（DIP）"></a>依赖倒置原则（DIP）</h2><ul>
+<li>高层模块不应该依赖底层模块（传统设计模式），应该都依赖抽象。</li>
+<li>在高层与低层之间设置Adapter（抽象层），Adapter规定了模块间通信的抽象。这样高层可以更换不同的低层实现，提高复用性。</li>
+</ul>
+<h2 id="接口隔离原则（ISP）"><a href="#接口隔离原则（ISP）" class="headerlink" title="接口隔离原则（ISP）"></a>接口隔离原则（ISP）</h2><ul>
+<li>客户端不应该依赖那些它不需要的接口。</li>
+<li>把太大的接口（胖接口）分割成一些更细小的接口。</li>
+</ul>
+<h2 id="合成-聚合复用原则（CARP）"><a href="#合成-聚合复用原则（CARP）" class="headerlink" title="合成/聚合复用原则（CARP）"></a>合成/聚合复用原则（CARP）</h2><ul>
+<li>优先使用对象组合，而不是继承来达到复用目的</li>
+<li>聚合：拥有关系，整体与部分的关系（汽车和引擎）</li>
+<li>合成：更强的拥有关系，部分离不开整体，部分和整体的生命周期是一样的（脸和嘴）</li>
+<li>Coad法则：什么时候使用继承<ul>
+<li>Is-A关系：继承；Has-A关系：聚合</li>
+<li>永远不要出现需要将子类替换成另外一个类的子类的情况</li>
+<li>子类不能大量置换超类行为</li>
+<li>分类学角度上有意义（这啥</li>
+<li>不要从工具类继承</li>
+</ul>
+</li>
+</ul>
+<h2 id="迪米特法则（LoD）"><a href="#迪米特法则（LoD）" class="headerlink" title="迪米特法则（LoD）"></a>迪米特法则（LoD）</h2><ul>
+<li>最少知识原则（LKP）</li>
+<li>每一个软件单位对其他单位都只有最少的知识，而且局限于那些与本单位密切相关的软件单位</li>
+<li>e.g.将界面中各种控件都只与一个mediator(中间者)依赖，而不互相依赖</li>
+</ul>
+<h1 id="设计模式"><a href="#设计模式" class="headerlink" title="设计模式"></a>设计模式</h1><h2 id="创建型模式"><a href="#创建型模式" class="headerlink" title="创建型模式"></a>创建型模式</h2><h3 id="简单工厂模式-Simple-Factory"><a href="#简单工厂模式-Simple-Factory" class="headerlink" title="简单工厂模式 Simple Factory"></a>简单工厂模式 Simple Factory</h3><ul>
+<li><p>定义：定义一个工厂类，它可以根据不同的参数返回不同的实例，被创建的实例通常都具有共同的父类</p>
+</li>
+<li><p>用于创建实例的方法通常为<strong>静态工厂方法</strong></p>
+<ul>
+<li><p>目的：由一个工厂对象决定创建出哪一种产品类的实例</p>
+</li>
+<li><p>动机：负责将大量有共同接口的类实例化</p>
+</li>
+<li><p>要点：只需传入一个正确的参数就可以获取所需对象，而无需知晓实现细节</p>
+</li>
+<li><p>实现：一堆<code>if-else</code>语句</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(arg.equalsIgnoreCase(<span class="string">&quot;Apple&quot;</span>)) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> Apple();</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span>(arg.equalsIgnoreCase(<span class="string">&quot;Banan&quot;</span>)) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> Banana();</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span> ...</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>参与者</p>
+<ul>
+<li>Product：定义产品共同拥有的接口</li>
+<li>Concrete Product：具体产品，实现Product接口</li>
+<li>Creator(工厂类)：创建产品对象</li>
+</ul>
+</li>
+<li><p>简化：将抽象产品类和工厂类合并，静态工厂方法转移到抽象产品类中</p>
+</li>
+<li><p>Java创建对象的方式</p>
+<ul>
+<li><p><code>new</code></p>
+</li>
+<li><p>反射机制</p>
+<ul>
+<li><p>程序运行时获取已知名称的类或已有对象的相关信息的一种机制,包括类的方法、属性、父类等信息,还包括实例的创建和实例类型的判断等</p>
+</li>
+<li><p>```Java<br>Class c=Class.forName(“java.lang.String”);<br>Object obj=c.newInstance();<br>return obj;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">+ 配置文件：可以将类名存储在配置文件中,例如具体工厂类的类名</span><br><span class="line"></span><br><span class="line">  &#96;&#96;&#96;xml</span><br><span class="line">  &lt;!— config.xml --&gt;</span><br><span class="line">  &lt;?xml version&#x3D;&quot;1.0&quot;?&gt;</span><br><span class="line">  &lt;config&gt;</span><br><span class="line">  &lt;className&gt;designpatterns.factorymethod.FileLoggerFactory&lt;&#x2F;className&gt;</span><br><span class="line">  &lt;&#x2F;config&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>克隆方法</p>
+</li>
+<li><p>工厂类</p>
+</li>
+</ul>
+<ul>
+<li><p>SRP：将对象的创建和使用分离。两个类的关系只能是A创建B或A使用Ｂ。</p>
+</li>
+<li><p>不符合OCP原则</p>
+</li>
+<li><p>优缺点与适用环境：</p>
+<ul>
+<li>优点<ul>
+<li>实现了对象创建和使用的分离</li>
+<li>客户端无须知道所创建的具体产品类的类名,只需要知道具体产品类所对应的参数即可</li>
+<li>通过引入配置文件,可以在不修改任何客户端代码的情况下更换和增加新的具体产品类,在一定程度上提高了系统的灵活性</li>
+</ul>
+</li>
+<li>缺点<ul>
+<li>工厂类集中了所有产品的创建逻辑,职责过重,一旦不能正常工作,整个系统都要受到影响</li>
+<li>增加系统中类的个数(引入了新的工厂类),增加了系统的复杂度和理解难度</li>
+<li>系统扩展困难,一旦添加新产品不得不修改工厂逻辑</li>
+<li>由于使用了静态工厂方法,造成工厂角色无法形成基于继承的等级结构,工厂类不能得到很好地扩展</li>
+</ul>
+</li>
+<li>适用环境<ul>
+<li>工厂类负责创建的对象比较少,由于创建的对象较少,不会造成工厂方法中的业务逻辑太过复杂</li>
+<li>客户端只知道传入工厂类的参数,对于如何创建对象并不关心</li>
+</ul>
+</li>
+<li>不需要工厂的情况：很简单且不存在太多变化的类</li>
+</ul>
+</li>
+</ul>
+<h3 id="工厂方法模式"><a href="#工厂方法模式" class="headerlink" title="工厂方法模式"></a>工厂方法模式</h3><ul>
+<li>定义：定义一个用于创建对象的接口,让子类决定实例化哪一个类。使一个类的实例化延迟到其子类。<ul>
+<li>工厂父类负责定义创建产品对象的公共接口,而工厂子类则负责生成具体的产品对象</li>
+</ul>
+</li>
+<li>参与者：<ul>
+<li>Product：抽象产品</li>
+<li>ConcreteProduct：具体产品</li>
+<li>Factory：抽象工厂</li>
+<li>ConcreteFactory：具体工厂</li>
+</ul>
+</li>
+<li>工厂方法的隐藏<ul>
+<li>目的：进一步简化客户端的使用</li>
+<li>实现:在工厂类中直接调用产品类的业务方法,客户端 无须调用工厂方法创建产品对象，直接使用工厂对象可调用所创建的产品对象中的业务方法</li>
+</ul>
+</li>
+<li>优缺点与适用环境<ul>
+<li>优点<ul>
+<li>工厂方法用来创建客户所需要的产品,同时还向客户隐藏了哪种具体产品类将被实例化这一细节</li>
+<li>能够让工厂自主确定创建何种产品对象,而如何创建这个对象的细节则完全封装在具体工厂内部</li>
+<li>在系统中加入新产品时,完全符合开闭原则</li>
+</ul>
+</li>
+<li>缺点<ul>
+<li>系统中类的个数将成对增加,在一定程度上增加了系统的复杂度,会给系统带来一些额外的开销</li>
+<li>增加了系统的抽象性和理解难度</li>
+</ul>
+</li>
+<li>适用环境<ul>
+<li>客户端不知道它所需要的对象的类(客户端不需要知道具体产品类的类名,只需要知道所对应的工厂即可,具体产品对象由具体工厂类创建)</li>
+<li>抽象工厂类通过其子类来指定创建哪个对象</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="抽象工厂模式"><a href="#抽象工厂模式" class="headerlink" title="抽象工厂模式"></a>抽象工厂模式</h3><ul>
+<li>定义：提供一个创建一系列相关或相互依赖对象的接口,而无须指定它们具体的类。</li>
+<li>目的：提供一个创建一系列相关或相互依赖对象的接口,而无需指定它们具体的类 – 客户端不必指定产品的具体类型,创建多个产品族中的产品对象<ul>
+<li>（相较于工厂模式）一个工厂可以生产一系列产品(一族产品),极大减少了工厂类的数量</li>
+<li>当一个工厂等级结构可以创建出分属于不同产品等级结构的一个产品族中的所有对象时,抽象工厂模式比工厂方法模式更为简单、更有效率</li>
+</ul>
+</li>
+<li>产品等级结构与产品族<ul>
+<li>产品等级结构：产品等级结构即产品的继承结构，e.g.空调——海信空调、海尔空调</li>
+<li>产品族:产品族是指由同一个工厂生产的,位于不同产品等级结构中的一组产品，e.g海尔空调，海尔冰箱</li>
+</ul>
+</li>
+<li>动机<ul>
+<li>当系统所提供的工厂生产的具体产品并不是一个简单的对象,而是多个位于不同产品等级结构、属于不同类型的具体产品时</li>
+<li>抽象工厂模式是所有形式的工厂模式中最为抽象和最具一般性的一种形式</li>
+</ul>
+</li>
+<li>开闭原则的倾斜性<ul>
+<li>对于增加新的产品族,抽象工厂模式很好地支持了开闭原则</li>
+<li>对于增加新的产品等级结构,需要修改所有的工厂角色,包括抽象工厂类,在所有的工厂类中都需要增加<br>生产新产品的方法,违背了开闭原则</li>
+</ul>
+</li>
+<li>优缺点<ul>
+<li>优点：<ul>
+<li>隔离了具体类的生成,使得客户端并不需要知道什么被创建</li>
+<li>当一个产品族中的多个对象被设计成一起工作时,它能够保证客户端始终只使用同一个产品族中的对象</li>
+<li>增加新的产品族很方便,无须修改已有系统,符合开闭原则</li>
+</ul>
+</li>
+<li>缺点<ul>
+<li>增加新的产品等级结构麻烦,需要对原有系统进行较大的修改,甚至需要修改抽象层代码，违背了开闭原则</li>
+</ul>
+</li>
+<li>适用环境<ul>
+<li>一个系统不依赖于产品类实例如何被创建、组合和表达的细节</li>
+<li>系统中有多于一个的产品族,但每次只使用其中某一产品族</li>
+<li>属于同一个产品族的产品将在一起使用,这一约束必须在系统的设计中体现出来</li>
+<li>产品等级结构稳定,在设计完成之后不会向系统中增加新的产品等级结构或者删除已有的产品等级结构</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="建造者模式"><a href="#建造者模式" class="headerlink" title="建造者模式"></a>建造者模式</h3><ul>
+<li><p>定义：将一个复杂对象的构建与它的表示分离,使得同样的构建过程可以创建不同的表示。</p>
+<ul>
+<li>应用：游戏角色的创建，需要创建外形、皮肤、技能等</li>
+<li>将客户端与包含多个部件的复杂对象的创建过程分离,客户端无须知道复杂对象的内部组成部分与装配方式,只需要知道所需建造者的类型即可 </li>
+<li>关注如何逐步创建一个复杂的对象,不同的建造者定义了不同的创建过程</li>
+</ul>
+</li>
+<li><p>角色</p>
+<ul>
+<li>Builder(抽象建造者)</li>
+<li><p>ConcreteBuilder(具体建造者)</p>
+</li>
+<li><p>Product(产品)</p>
+</li>
+<li>Director(指挥者)：指挥产品构建与组装方法</li>
+</ul>
+</li>
+<li><p>OCP：当需要增加新的具体角色建造者时,只需将新增具体角色建造者作为抽象角色建造者的子类,然后修改配置文件即可,原有代码无须修改,完全符合开闭原则</p>
+</li>
+<li><p>简化</p>
+<ul>
+<li><p>省略指挥者：与Builder合并，<code>Construct</code>方法写入Builder类中</p>
+</li>
+<li><p>通过钩子方法来控制产品的构建</p>
+<ul>
+<li><p>钩子方法：返回类型通常为boolean类型,方法名一般为isXXX()。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//通过钩子方法来控制产品的构建</span></span><br><span class="line"><span class="comment">//isBareheaded可以在需要光头的类里覆盖声明</span></span><br><span class="line"><span class="keyword">if</span>(!ab.isBareheaded()) &#123;</span><br><span class="line">ab.buildHairstyle();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>优缺点与适用环境</p>
+<ul>
+<li>优点<ul>
+<li>客户端不必知道产品内部组成的细节,将产品本身与产品的创建过程解耦,使得相同的创建过程可以创建不同的产品对象</li>
+<li>每一个具体建造者都相对独立,与其他的具体建造者无关,因此可以很方便地替换具体建造者或增加新的具体建造者,扩展方便,符合开闭原则</li>
+<li>可以更加精细地控制产品的创建过程</li>
+</ul>
+</li>
+<li>缺点<ul>
+<li>建造者模式所创建的产品一般具有较多的共同点,其组成部分相似,如果产品之间的差异性很大,不适合使用建造者模式,因此其使用范围受到一定的限制</li>
+<li>如果产品的内部变化复杂,可能会需要定义很多具体建造者类来实现这种变化,导致系统变得很庞大,增<br>加了系统的理解难度和运行成本</li>
+</ul>
+</li>
+<li>适用环境<ul>
+<li>需要生成的产品对象有<strong>复杂的内部结构</strong>,这些产品对象通常包含多个成员变量</li>
+<li>需要生成的产品对象的<strong>属性相互依赖</strong>,需要指定其生成顺序</li>
+<li>对象的创建过程独立于创建该对象的类。在建造者模式中通过引入了指挥者类,将创建过程封装在指挥者类中,而不在建造者类和客户类中</li>
+<li>隔离复杂对象的创建和使用,并使得相同的创建过程可以创建不同的产品</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="原型模式"><a href="#原型模式" class="headerlink" title="原型模式"></a>原型模式</h3><ul>
+<li>定义：使用原型实例指定待创建对象的类型，并且通过复制这个原型来创建新的对象。<ul>
+<li>将一个原型对象传给要发动创建的对象（即客 户端对象），这个要发动创建的对象通过请求原型对象复 制自己来实现创建过程 </li>
+<li>创建新对象（也称为克隆对象）的工厂就是原型类自身， 工厂方法由负责复制原型对象的克隆方法来实现 </li>
+<li>通过克隆方法所创建的对象是全新的对象，它们在内存中 拥有新的地址，每一个克隆对象都是独立的 </li>
+</ul>
+</li>
+<li>角色<ul>
+<li>Prototype（抽象原型类） </li>
+<li>ConcretePrototype（具体原型类） </li>
+<li>Client（客户类）</li>
+</ul>
+</li>
+<li>浅克隆与深克隆<ul>
+<li>浅克隆(Shallow Clone)：当原型对象被复制时，只复制它本身和其中包含的值类型的成员变量，而引用类型的成员变量并没有复制<ul>
+<li>在Java语言中，提供了一个clone()方法用于实现浅克隆，该方法使 用起来很方便，直接调用<code>super.clone()</code>方法即可实现克隆(<code>public ConcretePrototype implements Cloneable</code>)</li>
+</ul>
+</li>
+<li>深克隆(Deep Clone)：除了对象本身被复制外，对象 所包含的所有成员变量也将被复制</li>
+</ul>
+</li>
+<li>原型管理器<ul>
+<li>定义：将多个原型对象存储在一个集合中供客户端使用，一个专门负责克隆对象的工厂，其中定义了一个集合用于存储原型对象， 如果需要某个原型对象的一个克隆，可以通过复制集 合中对应的原型对象来获得</li>
+</ul>
+</li>
+<li>优缺点与适用环境<ul>
+<li>优点<ul>
+<li>简化对象的创建过程，通过复制一个已有实例可以提高新实例的创建效率 </li>
+<li>扩展性较好 </li>
+<li>提供了简化的创建结构，原型模式中产品的复制是通过封装在原型类中的克隆方法实现的，无须专门的工厂类来创建产品 </li>
+<li>可以使用深克隆的方式保存对象的状态，以便在需要的时候使用，可辅助实现撤销操作</li>
+</ul>
+</li>
+<li>缺点<ul>
+<li>需要为每一个类配备一个克隆方法，而且该克隆方法位于 一个类的内部，当对已有的类进行改造时，需要修改源代码，违背了开闭原则 </li>
+<li>在实现深克隆时需要编写较为复杂的代码，而且当对象之间存在多重的嵌套引用时，为了实现深克隆，每一层对象对应的类都必须支持深克隆，实现起来可能会比较麻烦</li>
+</ul>
+</li>
+<li>适用环境<ul>
+<li>创建新对象成本较大，新对象可以通过复制已有对象 来获得，如果是相似对象，则可以对其成员变量稍作修改 </li>
+<li>系统要保存对象的状态，而对象的状态变化很小 </li>
+<li>需要避免使用分层次的工厂类来创建分层次的对象 </li>
+<li>Ctrl + C $\to$ Ctrl + V</li>
+</ul>
+</li>
+<li>相关<ul>
+<li>Prototype与Abstract Factory往往是相互竞争的，但是它们也可以一起使用。Abstract Factory可以存储一个被克隆的原型的集合，并且返回产品对象</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="单例模式"><a href="#单例模式" class="headerlink" title="单例模式"></a>单例模式</h3><ul>
+<li><p>定义：确保一个类只有一个实例，并提供一个全局访问点来访问这个唯一实例。</p>
+<ul>
+<li>某个类只能有一个实例 </li>
+<li>必须自行创建这个实例 </li>
+<li>必须自行向整个系统提供这个实例</li>
+</ul>
+</li>
+<li><p>角色：</p>
+<ul>
+<li><p>Singleton（单例）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span> </span>&#123; </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Singleton instance=<span class="keyword">null</span>;  <span class="comment">//静态私有成员变量</span></span><br><span class="line">	<span class="comment">//私有构造函数 </span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span><span class="params">()</span> </span>&#123; &#125;</span><br><span class="line">	<span class="comment">//静态公有工厂方法，返回唯一实例 </span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title">getInstance</span><span class="params">()</span> </span>&#123; </span><br><span class="line">        <span class="keyword">if</span>(instance==<span class="keyword">null</span>) instance=<span class="keyword">new</span> Singleton(); </span><br><span class="line">        <span class="keyword">return</span> instance; </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>饿汉式与懒汉式</p>
+<ul>
+<li><p>饿汉式：一开始（装载时）就实例化</p>
+<ul>
+<li>```Java<br>public class EagerSingleton { <pre><code>private static final EagerSingleton instance = new EagerSingleton(); 
+private EagerSingleton() &#123; &#125;
+public static EagerSingleton getInstance() &#123; return instance; &#125;
+</code></pre>}<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">  + 基于 classloader 机制避免了多线程的同步问题;没有加锁，执行效率会提高</span><br><span class="line"></span><br><span class="line">  + 类加载时就初始化，浪费内存</span><br><span class="line"></span><br><span class="line">+ 懒汉式（线程不安全）：使用时才实例化(延迟加载)</span><br><span class="line"></span><br><span class="line">  + &#96;&#96;&#96;Java</span><br><span class="line">    public class Singleton &#123; </span><br><span class="line">        private static Singleton instance&#x3D;null; </span><br><span class="line">        private Singleton() &#123; &#125;</span><br><span class="line">        public static Singleton getInstance() &#123; </span><br><span class="line">            if(instance&#x3D;&#x3D;null) instance&#x3D;new Singleton(); </span><br><span class="line">            return instance; </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>懒汉式（线程安全）：</p>
+<ul>
+<li><p>```Java<br>synchronized public static LazySingleton getInstance(){…} //锁方法<br>synchronized (LazySingleton.class) { instance = new LazySingleton(); } //锁代码段</p>
+<p>//双重检查锁定<br>public class Singleton {  </p>
+<pre><code>private volatile static Singleton singleton;  
+private Singleton ()&#123;&#125;  
+public static Singleton getSingleton() &#123;  
+if (singleton == null) &#123;   //第一重检查
+    synchronized (Singleton.class) &#123;  //锁定
+    if (singleton == null) &#123;  //第二重检查
+        singleton = new Singleton();  
+    &#125;  
+    &#125;  
+&#125;  
+return singleton;  
+&#125;  
+</code></pre><p>}</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">  + 使用静态内部类实现单例模式 </span><br><span class="line"></span><br><span class="line">  + 比较：</span><br><span class="line"></span><br><span class="line">    + 饿汉式单例类：无须考虑多个线程同时访问的问题； 调用速度和反应时间优于懒汉式单例；资源利用效率不及懒汉式单例；系统加载时间可能会比较长 </span><br><span class="line">    + 懒汉式单例类：实现了延迟加载；必须处理好多个线程同时访问的问题；需通过双重检查锁定等机制进行 控制，将导致系统性能受到一定影响</span><br><span class="line"></span><br><span class="line">+ 优缺点与适用环境</span><br><span class="line"></span><br><span class="line">  + 优点</span><br><span class="line">    + 提供了对唯一实例的受控访问 </span><br><span class="line">    + 可以节约系统资源，提高系统的性能 </span><br><span class="line">    + 允许可变数目的实例（多例类）</span><br><span class="line">  + 缺点</span><br><span class="line">    + 扩展困难（缺少抽象层） </span><br><span class="line">    + 单例类的职责过重、一定程度上违背单一职责原则 </span><br><span class="line">    + 由于自动垃圾回收机制，可能会导致共享的单例对象的状态丢失</span><br><span class="line">  + 适用环境</span><br><span class="line">    + 系统只需要一个实例对象，或者因为资源消耗太大而只允许创建一个对象 </span><br><span class="line">    + 客户调用类的单个实例只允许使用一个公共访问点， 除了该公共访问点，不能通过其他途径访问该实例</span><br><span class="line">  + 相关</span><br><span class="line">    + Singleton与其他创建型模式并不矛盾，可以用Singleton 来实现其他模式中的对象。包括Abstract Factory、Builder、 Prototype等</span><br><span class="line"></span><br><span class="line">+ 补充：单例模式的继承（见视频）</span><br><span class="line"></span><br><span class="line">## 结构型模式</span><br><span class="line"></span><br><span class="line">+ 关注如何将现有类或 对象组织在一起形成更加强大的结构</span><br><span class="line">  + 分为类结构型模式和对象结构型模式</span><br><span class="line">  + 类结构型模式：关心类的组合，一般只存在继承关系和实现关系</span><br><span class="line">+ 对象结构型模式：关心对象的组合，通过关联关系</span><br><span class="line"></span><br><span class="line">### 适配器模式</span><br><span class="line"></span><br><span class="line">+ 定义：将一个类的接口转换成客户希望的另一个接口，让那些接口不兼容的类可以一起工作</span><br><span class="line"></span><br><span class="line">  + 别名包装器（Wrapper）模式</span><br><span class="line">  + 接口是广义的接口，可以表示一 个方法或者方法的集合</span><br><span class="line"></span><br><span class="line">+ 结构</span><br><span class="line"></span><br><span class="line">  + Target（目标抽象类）</span><br><span class="line"></span><br><span class="line">  + Adapter（适配器类）</span><br><span class="line"></span><br><span class="line">    + 类适配器(java不支持多继承)</span><br><span class="line"></span><br><span class="line">      &#96;&#96;&#96;java</span><br><span class="line">      public class Adapter extends Adaptee implements Target &#123;</span><br><span class="line">          public void request() &#123;</span><br><span class="line">          	super.specificRequest();</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>对象适配器</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Adapter</span> <span class="keyword">extends</span> <span class="title">Target</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Adaptee adaptee; <span class="comment">//维持一个对适配者对象的引用</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Adapter</span><span class="params">(Adaptee adaptee)</span> </span>&#123;</span><br><span class="line">    	<span class="keyword">this</span>.adaptee=adaptee;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">request</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    	adaptee.specificRequest(); <span class="comment">//转发调用</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>Adaptee（适配者类）</li>
+</ul>
+<ul>
+<li><p>优缺点与适用环境</p>
+<ul>
+<li>优点<ul>
+<li>目标类和适配者类解耦</li>
+<li>增加了类的透明性和复用性，同一 适配者类可以在多个不同的系统中复用</li>
+<li>灵活性和扩展性非常好</li>
+<li>类适配器模式：置换一些适配者的方法很方便（继承覆盖）</li>
+<li>对象适配器模式：可以把多个不同的适配者适配到同一个目标， 还可以适配一个适配者的子类</li>
+</ul>
+</li>
+<li>缺点<ul>
+<li>类适配器模式： <ul>
+<li>(1) 一次最多只能适配一个适配者类，不能同时适配多个适配者； </li>
+<li>(2) 适配者类不能为最终类； </li>
+<li>(3) 目标抽象类只能为接口，不能为类</li>
+</ul>
+</li>
+<li>对象适配器模式：在适配器中置换适配者类的某些方法比较麻烦</li>
+</ul>
+</li>
+<li>适用环境<ul>
+<li>系统需要使用一些现有的类，而这些类的接口不符合系统的需要，甚至没有这些类的源代码</li>
+<li>创建一个可以重使用的类，用于和一些彼此之间没有太大关联的类，包括一些可能在将来引进的类一起工作</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="缺省适配器模式"><a href="#缺省适配器模式" class="headerlink" title="缺省适配器模式"></a>缺省适配器模式</h4><ul>
+<li><p>定义：不想实现一个接口的所有方法时，先设计一个抽象类实现该接口，每个方法提供一个默认实现（空方法）。该抽象类的子类选择性覆盖父类中的方法。又称单接口适配器模式。</p>
+</li>
+<li><p>实现</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">AbstractServiceClass</span> <span class="keyword">implements</span> <span class="title">ServiceInterface</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">serviceMethod1</span><span class="params">()</span> </span>&#123; &#125; <span class="comment">//空方法</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">serviceMethod2</span><span class="params">()</span> </span>&#123; &#125; <span class="comment">//空方法</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">serviceMethod3</span><span class="params">()</span> </span>&#123; &#125; <span class="comment">//空方法</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="双向适配器"><a href="#双向适配器" class="headerlink" title="双向适配器"></a>双向适配器</h4></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Adapter</span> <span class="keyword">implements</span> <span class="title">Target</span>,<span class="title">Adaptee</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Target target;</span><br><span class="line">    <span class="keyword">private</span> Adaptee adaptee;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Adapter</span><span class="params">(Target target)</span> </span>&#123;</span><br><span class="line">    	<span class="keyword">this</span>.target = target;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Adapter</span><span class="params">(Adaptee adaptee)</span> </span>&#123;</span><br><span class="line">    	<span class="keyword">this</span>.adaptee = adaptee;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">request</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    	adaptee.specificRequest();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">specificRequest</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    	target.request();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="桥接模式"><a href="#桥接模式" class="headerlink" title="桥接模式"></a>桥接模式</h3><ul>
+<li><p>定义：将抽象部分与它的实现部分解耦，使得两者都能够独立变化</p>
+<ul>
+<li>又被称为柄体(Handle and Body)模式或接口(Interface) 模式</li>
+<li>用抽象关联取代了传统的多层继承</li>
+<li>将类之间的静态继承关系转换为动态的对象组合关系</li>
+</ul>
+</li>
+<li><p>结构</p>
+<ul>
+<li>Abstraction（抽象类）：引用实现类接口（桥）</li>
+<li>RefinedAbstraction（扩充抽象类） ：继承抽象类</li>
+<li>Implementor（实现类接口） </li>
+<li>ConcreteImplementor（具体实现类）：实现实现类接口</li>
+</ul>
+</li>
+<li><p>桥接模式与适配器模式的联用</p>
+<ul>
+<li>桥接模式：用于系统的初步设计，对于存在两个独立变化维度的类可以将其分为抽象化和实现化两个角色，使它们可以分别进行变化</li>
+<li>适配器模式：当发现系统与已有类无法协同工作时</li>
+</ul>
+</li>
+<li><p>优缺点与适用环境</p>
+<ul>
+<li>优点<ul>
+<li>分离抽象接口及其实现部分</li>
+<li>可以取代多层继承方案，极大地减少了子类的个数</li>
+<li>提高了系统的可扩展性，在两个变化维度中任意扩展 一个维度，不需要修改原有系统，符合开闭原则</li>
+</ul>
+</li>
+<li><p>缺点</p>
+<ul>
+<li>会增加系统的理解与设计难度，由于关联关系建立在 抽象层，要求开发者一开始就针对抽象层进行设计与编程</li>
+<li>正确识别出系统中两个独立变化的维度并不是一件容 易的事情</li>
+</ul>
+</li>
+<li><p>适用环境</p>
+<ul>
+<li>需要在抽象化和具体化之间增加更多的灵活性，避免在两个层次之间建立静态的继承关系</li>
+<li>抽象部分和实现部分可以以继承的方式独立扩展而互不影响</li>
+<li>一个类存在两个（或多个）独立变化的维度，且这两个（或多个）维度都需要独立地进行扩展</li>
+<li>不希望使用继承或因为多层继承导致系统类的个数急剧增加的系统</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="组合模式"><a href="#组合模式" class="headerlink" title="组合模式"></a>组合模式</h3><ul>
+<li>定义：组合多个对象形成树形结构以表示具有<strong>部分-整体</strong>关系的层次结构。组合模式让客户端可以<strong>统一</strong>对待单个对象和组合对象。<ul>
+<li>又称为“部分-整体”(Part-Whole)模式</li>
+<li>将对象组织到树形结构中，可以用来描述整体与部分 的关系</li>
+<li>e.g. 文件系统中的文件与目录</li>
+</ul>
+</li>
+<li>结构<ul>
+<li>Component（抽象构件） ：抽象类，叶子构建和容器构建都继承抽象类</li>
+<li>Leaf（叶子构件） </li>
+<li>Composite（容器构件）</li>
+</ul>
+</li>
+<li>优缺点与适用环境<ul>
+<li>优点<ul>
+<li>可以清楚地定义分层次的复杂对象，表示对象的全部或部分层次，让客户端忽略了层次的差异，方便对整个层次结构进行控 制 </li>
+<li>客户端可以一致地使用一个组合结构或其中单个对象，不必关心处理的是单个对象还是整个组合结构，简化了客户端代码 </li>
+<li>增加新的容器构件和叶子构件都很方便，符合开闭原则 </li>
+<li>为树形结构的面向对象实现提供了一种灵活的解决方案</li>
+</ul>
+</li>
+<li>缺点<ul>
+<li>在增加新构件时很难对容器中的构件类型进行限制</li>
+</ul>
+</li>
+<li>适用环境<ul>
+<li>在具有整体和部分的层次结构中，希望通过一种方式 忽略整体与部分的差异，客户端可以一致地对待它们 </li>
+<li>在一个使用面向对象语言开发的系统中需要处理一个树形结构 </li>
+<li>在一个系统中能够分离出叶子对象和容器对象，而且它们的类型不固定，需要增加一些新的类型</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="透明组合模式"><a href="#透明组合模式" class="headerlink" title="透明组合模式"></a>透明组合模式</h4><ul>
+<li>抽象构件Component中声明了所有用于管理成员对象 的方法，包括add()、remove()，以及getChild()等方法</li>
+<li>在客户端看来，叶子对象与容器对象所提供的方法是一致的，客户端可以一致地对待所有的对象 </li>
+<li>缺点是不够安全，因为叶子对象和容器对象在本质上是有区别的</li>
+</ul>
+<h4 id="安全组合模式"><a href="#安全组合模式" class="headerlink" title="安全组合模式"></a>安全组合模式</h4><ul>
+<li>抽象构件Component中没有声明任何用于管理成员对 象的方法，而是在Composite类中声明并实现这些方 法 </li>
+<li>对于叶子对象，客户端不可能调用到这些方法 </li>
+<li>缺点是不够透明，客户端不能完全针对抽象编程，必须有区别地对待叶子构件和容器构件</li>
+</ul>
+<h3 id="装饰模式"><a href="#装饰模式" class="headerlink" title="装饰模式"></a>装饰模式</h3><ul>
+<li><p>定义</p>
+<ul>
+<li>动态地给一个对象增加一些额外的职责。就扩展功能而言，装饰模式提供了一种比使用子类更加灵活的替代方案。</li>
+<li>以对客户透明的方式动态地给一个对象附加上更多的责任</li>
+<li>可以在不需要创建更多子类的情况下，让对象的功能得以扩展</li>
+</ul>
+</li>
+<li><p>结构</p>
+<ul>
+<li><p>Component（抽象构件） </p>
+</li>
+<li><p>ConcreteComponent（具体构件） ：继承或实现抽象构建类</p>
+</li>
+<li><p>Decorator（抽象装饰类） ：继承自抽象构件类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Decorator</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123; </span><br><span class="line">    <span class="keyword">private</span> Component component; <span class="comment">//维持一个对抽象构件对象的引用</span></span><br><span class="line">	<span class="comment">//注入一个抽象构件类型的对象 </span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Decorator</span><span class="params">(Component component)</span> </span>&#123; <span class="keyword">this</span>.component=component; &#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">operation</span><span class="params">()</span> </span>&#123; </span><br><span class="line">        component.operation();  <span class="comment">//调用原有业务方法 </span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>ConcreteDecorator（具体装饰类）：继承抽象装饰类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ConcreteDecorator</span> <span class="keyword">extends</span> <span class="title">Decorator</span> </span>&#123; </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ConcreteDecorator</span><span class="params">(Component component)</span> </span>&#123; <span class="keyword">super</span>(component); &#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">operation</span><span class="params">()</span> </span>&#123; </span><br><span class="line">        <span class="keyword">super</span>.operation(); </span><br><span class="line">        <span class="comment">//调用原有业务方法 </span></span><br><span class="line">        addedBehavior(); </span><br><span class="line">        <span class="comment">//调用新增业务方法 </span></span><br><span class="line">    &#125;</span><br><span class="line">	<span class="comment">//新增业务方法 </span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addedBehavior</span><span class="params">()</span> </span>&#123; …… &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>实例</p>
+<ul>
+<li>图形界面构件库：原有窗体、文本框等，用装饰类可以实现带滚动条的文本框、带黑色边框的窗体、既带滚动条又带黑色边框的列表框等</li>
+</ul>
+</li>
+<li><p>优缺点与适用环境</p>
+<ul>
+<li>优点<ul>
+<li>比继承更加灵活，不会导致类的个数急剧增加 </li>
+<li>通过一种动态的方式来扩展一个对象的功能（通过配置文 件可以在运行时选择不同的具体装饰类，从而实现不同的行为 ）</li>
+<li>可以对一个对象进行多次装饰 </li>
+<li>具体构件类与具体装饰类可以独立变化，用户可以根据需要增 加新的具体构件类和具体装饰类，且原有类库代码无须改变， 符合开闭原则</li>
+</ul>
+</li>
+<li>缺点<ul>
+<li>使用装饰模式进行系统设计时将产生很多小对象，占用更多的系统资源，影响程序性能 </li>
+<li>比继承更加易于出错，排错也更困难</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="透明装饰器模式"><a href="#透明装饰器模式" class="headerlink" title="透明装饰器模式"></a>透明装饰器模式</h4><ul>
+<li>定义：<ul>
+<li>客户端程序不应该将对象声明为具体构件类型或具体装饰类型，而应该全部声明为抽象构件类型 </li>
+<li>要求客户端完全针对抽象编程，具体构件对象和具体装饰对象没有任何区别</li>
+</ul>
+</li>
+<li>优点<ul>
+<li>可以让客户端透明地使用装饰之前的对象和装饰之后 的对象，无须关心它们的区别 </li>
+<li>可以对一个已装饰过的对象进行多次装饰</li>
+</ul>
+</li>
+<li>缺点<ul>
+<li>无法在客户端单独调用新增业务方法</li>
+</ul>
+</li>
+</ul>
+<h4 id="半透明装饰器模式"><a href="#半透明装饰器模式" class="headerlink" title="半透明装饰器模式"></a>半透明装饰器模式</h4><ul>
+<li>定义：<ul>
+<li>用<strong>具体装饰类型</strong>来定义装饰之后的对象，而具体构件使用抽象构件类型来定义</li>
+<li>具体构件类型无须关心，是透明的； 但是具体装饰类型必须指定，这是不透明的</li>
+</ul>
+</li>
+<li>优点<ul>
+<li>可以给系统带来更多的灵活性，设计相对简单，使用 起来也非常方便 </li>
+<li>客户端可以单独调用新增的业务方法</li>
+</ul>
+</li>
+<li>缺点<ul>
+<li>不能多次装饰同一个对象（存疑）</li>
+<li>客户端有区别地对待装饰前后的对象</li>
+</ul>
+</li>
+</ul>
+<h3 id="外观模式"><a href="#外观模式" class="headerlink" title="外观模式"></a>外观模式</h3><ul>
+<li>定义<ul>
+<li>为子系统中的一组接口提供一个<strong>统一的入口</strong>。（类似于餐厅服务员）</li>
+<li>又称为门面模式 </li>
+<li>是迪米特法则（最少知识原则）的一种具体实现 </li>
+<li>子系统是一个广义的概念，它可以是一个类、 一个功能模块、系统的一个组成部分或者一个完整的 系统</li>
+</ul>
+</li>
+<li>结构<ul>
+<li>Facade（外观角色） </li>
+<li>SubSystem（子系统角色）</li>
+</ul>
+</li>
+<li>抽象外观类<ul>
+<li>如果需要增加、删除或更换与外观类交互的子系统类，可以通过继承和配置文件实现替换不同的外观类，符合OCP</li>
+</ul>
+</li>
+<li>外观类也可以同时使用单例模式</li>
+<li>优缺点与适用环境<ul>
+<li>优点<ul>
+<li>它对客户端屏蔽了子系统组件，减少了客户端所需处理的对象 数目，并使得子系统使用起来更加容易 </li>
+<li>实现了子系统与客户端之间的松耦合关系，这使得子系统的 变化不会影响到调用它的客户端，只需要调整外观类即可 </li>
+<li>一个子系统的修改对其他子系统没有任何影响，而且子系统的内部变化也不会影响到外观对象</li>
+</ul>
+</li>
+<li>缺点<ul>
+<li>不能很好地限制客户端直接使用子系统类，如果对客 户端访问子系统类做太多的限制则减少了可变性和灵活性</li>
+<li>如果设计不当，增加新的子系统可能需要修改外观类 的源代码，违背了开闭原则 </li>
+</ul>
+</li>
+<li>适用环境<ul>
+<li>要为访问一系列复杂的子系统提供一个简单入口 </li>
+<li>客户端程序与多个子系统之间存在很大的依赖性 </li>
+<li>在层次化结构中，可以使用外观模式的定义系统中每 一层的入口，层与层之间不直接产生联系，而是通过 外观类建立联系，降低层之间的耦合度</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="享元模式"><a href="#享元模式" class="headerlink" title="享元模式"></a>享元模式</h3><ul>
+<li><p>定义</p>
+<ul>
+<li>运用共享技术有效地支持大量细粒度对象的复用。</li>
+<li>内部状态(Intrinsic State)：存储在享元对象内部并且不会随环境改变而改变的状态，内部状态可以共享 （例如：字符的内容） </li>
+<li>外部状态(Extrinsic State)：随环境改变而改变的、不可以共享的状态。享元对象的外部状态通常由客户端 保存，并在享元对象被创建之后，需要使用的时候再传入到享元对象内部。一个外部状态与另一个外部状态之间是相互独立的（例如：字符的颜色和大小）</li>
+</ul>
+</li>
+<li><p>结构</p>
+<ul>
+<li><p>Flyweight（抽象享元类） </p>
+</li>
+<li><p>ConcreteFlyweight（具体享元类） </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ConcreteFlyweight</span> <span class="keyword">extends</span> <span class="title">Flyweight</span> </span>&#123; </span><br><span class="line">    <span class="comment">//内部状态intrinsicState作为成员变量，同一个享元对象其内部状态是一致的 </span></span><br><span class="line">    <span class="keyword">private</span> String intrinsicState; </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ConcreteFlyweight</span><span class="params">(String intrinsicState)</span> </span>&#123; </span><br><span class="line">        <span class="keyword">this</span>.intrinsicState = intrinsicState; </span><br><span class="line">    &#125;</span><br><span class="line">	<span class="comment">//外部状态extrinsicState在使用时由外部设置，不保存在享元对象中， 即使是同一个对象，在每一次调用时可以传入不同的外部状态 </span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">operation</span><span class="params">(String extrinsicState)</span> </span>&#123; </span><br><span class="line">        <span class="comment">//实现业务方法 </span></span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>UnsharedConcreteFlyweight（非共享具体享元类） </p>
+</li>
+<li><p>FlyweightFactory（享元工厂类）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FlyweightFactory</span> </span>&#123; </span><br><span class="line">    <span class="comment">//定义一个HashMap用于存储享元对象，实现享元池 </span></span><br><span class="line">    <span class="keyword">private</span> HashMap flyweights = <span class="keyword">new</span> HashMap();</span><br><span class="line">	<span class="function"><span class="keyword">public</span> Flyweight <span class="title">getFlyweight</span><span class="params">(String key)</span> </span>&#123; </span><br><span class="line">        <span class="comment">//如果对象存在，则直接从享元池获取 </span></span><br><span class="line">        <span class="keyword">if</span> (flyweights.containsKey(key)) &#123; </span><br><span class="line">            <span class="keyword">return</span> (Flyweight)flyweights.get(key); </span><br><span class="line">        &#125; </span><br><span class="line">        <span class="comment">//如果对象不存在，先创建一个新的对象添加到享元池中，然后返回 </span></span><br><span class="line">        <span class="keyword">else</span> &#123; </span><br><span class="line">            Flyweight fw = <span class="keyword">new</span> ConcreteFlyweight(); </span><br><span class="line">            flyweights.put(key,fw); <span class="keyword">return</span> fw; </span><br><span class="line">        &#125; </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Java的String类使用了享元模式：创建时内容相同的字符串会共享一个字符串对象</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>优缺点和适用环境</p>
+<ul>
+<li>优点<ul>
+<li>可以减少内存中对象的数量，使得相同或者相似的对 象在内存中只保存一份，从而可以节约系统资源，提 高系统性能  </li>
+<li>外部状态相对独立，而且不会影响其内部状态，从而 使得享元对象可以在不同的环境中被共享</li>
+</ul>
+</li>
+<li>缺点<ul>
+<li>使得系统变得复杂，需要分离出内部状态和外部状态， 这使得程序的逻辑复杂化 </li>
+<li>为了使对象可以共享，享元模式需要将享元对象的部分状态外部化，而读取外部状态将使得运行时间变长</li>
+</ul>
+</li>
+<li>适用环境<ul>
+<li>一个系统有大量相同或者相似的对象，造成内存的大量耗费 </li>
+<li>对象的大部分状态都可以外部化，可以将这些外部状 态传入对象中 </li>
+<li>在使用享元模式时需要维护一个存储享元对象的享元池，而这需要耗费一定的系统资源，因此，在需要多次重复使用享元对象时才值得使用享元模式</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="单纯享元模式"><a href="#单纯享元模式" class="headerlink" title="单纯享元模式"></a>单纯享元模式</h4><ul>
+<li>所有的具体享元类都是可以共享的，不存在非共享具 体享元类</li>
+</ul>
+<h4 id="复合享元模式"><a href="#复合享元模式" class="headerlink" title="复合享元模式"></a>复合享元模式</h4><ul>
+<li>将一些单纯享元对象使用组合模式加以组合 </li>
+<li>如果希望为多个内部状态不同的享元对象设置相同的外部状态， 可以考虑使用复合享元模式</li>
+</ul>
+<h3 id="代理模式"><a href="#代理模式" class="headerlink" title="代理模式"></a>代理模式</h3><ul>
+<li>定义<ul>
+<li>给某一个对象提供一个代理或占位符，并由代理对象来控制对原对象的访问</li>
+<li>引入一个新的代理对象 ，代理对象在客户端对象和目标对象之间起到中介的作用 ，可以去掉客户不能看到的内容和服务或者增添客户需要的额外的新服务</li>
+</ul>
+</li>
+<li>结构<ul>
+<li>Subject（抽象主题角色） </li>
+<li>Proxy（代理主题角色） ：维持一个对真实主题对象的引用，调用真实主题对象的方法</li>
+<li>RealSubject（真实主题角色）</li>
+</ul>
+</li>
+<li>几种常见的代理模式<ul>
+<li>远程代理(Remote Proxy)：为一个位于不同的地址空间的对象提供一个本地的代理对象，这个不同的地址空间可以在同一台主机中，也可以在另一台主机中， 远程代理又称为大使(Ambassador) </li>
+<li>虚拟代理(Virtual Proxy)：如果需要创建一个资源消耗较大的对象，先创建一个消耗相对较小的对象来表示， 真实对象只在需要时才会被真正创建</li>
+<li>保护代理(Protect Proxy)：控制对一个对象的访问，可以给不同的用户提供不同级别的使用权限 </li>
+<li>缓冲代理(Cache Proxy)：为某一个目标操作的结果提供临时的存储空间，以便多个客户端可以共享这些结果 </li>
+<li>智能引用代理(Smart Reference Proxy)：当一个对象被引用时，提供一些额外的操作，例如将对象被调用的次数记录下来等</li>
+</ul>
+</li>
+<li>优缺点与适用环境<ul>
+<li>优点<ul>
+<li>能够协调调用者和被调用者，在一定程度上降低了系统的耦合度 </li>
+<li>客户端可以针对抽象主题角色进行编程，增加和更换代理类无须修改源代码，符合开闭原则，系统具有较好的灵活性和可扩展性</li>
+<li>远程代理：可以将一些消耗资源较多的对象和操作移至性能更好的计算机上，提高了系统的整体运行效率 </li>
+<li>虚拟代理：通过一个消耗资源较少的对象来代表一个消耗资源较多的对象，可以在一定程度上节省系统的运行开销 </li>
+<li>缓冲代理：为某一个操作的结果提供临时的缓存存储空间，以便在后续使用中能够共享这些结果，优化系统性能，缩短执行时间 </li>
+<li>保护代理：可以控制对一个对象的访问权限，为不同用户提供不同级别的使用权限</li>
+</ul>
+</li>
+<li>缺点<ul>
+<li>由于在客户端和真实主题之间增加了代理对象，因此 有些类型的代理模式可能会造成请求的处理速度变慢 （例如保护代理） </li>
+<li>实现代理模式需要额外的工作，而且有些代理模式的 实现过程较为复杂（例如远程代理）</li>
+</ul>
+</li>
+<li>适用环境<ul>
+<li>当客户端对象需要访问远程主机中的对象时可以使用<strong>远程代理</strong> </li>
+<li>当需要用一个消耗资源较少的对象来代表一个消耗资源较多的对象，从而降低系统开销、缩短运行时间时可以使用<strong>虚拟代理</strong> </li>
+<li>当需要为某一个被频繁访问的操作结果提供一个临时存储空间，以供多个客户端共享访问这些结果时可以使用<strong>缓冲代理</strong> </li>
+<li>当需要控制对一个对象的访问，为不同用户提供不同级别 的访问权限时可以使用保护代理 • 当需要为一个对象的访问（引用）提供一些额外的操作时可以使用<strong>智能引用代理</strong></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="远程代理"><a href="#远程代理" class="headerlink" title="远程代理"></a>远程代理</h4><ul>
+<li>客户端程序可以访问在远程主机上的对象，远程主机可能具有更好的计算性能与处理速度，可以快速地响 应并处理客户端的请求 </li>
+<li>可以将网络的细节隐藏起来，使得客户端不必考虑网络的存在 </li>
+<li>客户端完全可以认为被代理的远程业务对象是在本地而不是在远程，而远程代理对象承担了大部分的网络 通信工作，并负责对远程业务方法的调用</li>
+</ul>
+<h4 id="虚拟代理"><a href="#虚拟代理" class="headerlink" title="虚拟代理"></a>虚拟代理</h4><ul>
+<li>对于一些占用系统资源较多或者加载时间较长的对象，可以给这些对象提供一个虚拟代理（桌面快捷方式） </li>
+<li>在真实对象创建成功之前虚拟代理扮演真实对象的替身， 而当真实对象创建之后，虚拟代理将用户的请求转发给真实对象 </li>
+<li>使用一个“虚假”的代理对象来代表真实对象，通过代理对象来间接引用真实对象，可以在一定程度上提高系统的性能</li>
+</ul>
+<h4 id="Java动态代理"><a href="#Java动态代理" class="headerlink" title="Java动态代理"></a>Java动态代理</h4><ul>
+<li>动态代理(Dynamic Proxy)可以让系统在运行时根据实际需要来动态创建代理类，让同一个代理类能够代理多个不同的真实主题类而且可以代理不同的方法 </li>
+<li>Proxy类</li>
+<li>InvoationHandler接口</li>
+<li>具体使用方法略</li>
+</ul>
+<h2 id="行为型模式"><a href="#行为型模式" class="headerlink" title="行为型模式"></a>行为型模式</h2><ul>
+<li>行为型模式(Behavioral Pattern)关注系统中对象之间 的交互，研究系统在运行时对象之间的相互通信与 协作，进一步明确对象的职责</li>
+</ul>
+<h3 id="职责链模式"><a href="#职责链模式" class="headerlink" title="职责链模式"></a>职责链模式</h3><ul>
+<li><p>定义</p>
+<ul>
+<li>避免将一个请求的发送者与接收者耦合在一 起，让多个对象都有机会处理请求。将接收请求的对象连接 成一条链，并且沿着这条链传递请求，直到有一个对象能够 处理它为止。</li>
+<li>将请求的处理者组织成一条链，并让请求沿着链传递， 由链上的处理者对请求进行相应的处理 </li>
+<li>客户端无须关心请求的处理细节以及请求的传递，只需将请求发送到链上，将请求的发送者和请求的处理者解耦</li>
+<li>职责链不一定是链式结构，也可以是环状的或者树状的</li>
+</ul>
+</li>
+<li><p>结构</p>
+<ul>
+<li><p>Handler（抽象处理者） </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Handler</span> </span>&#123; </span><br><span class="line">    <span class="comment">//维持对下家的引用 </span></span><br><span class="line">    <span class="keyword">protected</span> Handler successor;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setSuccessor</span><span class="params">(Handler successor)</span> </span>&#123; <span class="keyword">this</span>.successor=successor; &#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">handleRequest</span><span class="params">(String request)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>ConcreteHandler（具体处理者）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ConcreteHandler</span> <span class="keyword">extends</span> <span class="title">Handler</span> </span>&#123; </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">handleRequest</span><span class="params">(String request)</span> </span>&#123; </span><br><span class="line">        <span class="keyword">if</span> (请求满足条件) &#123; </span><br><span class="line">            <span class="comment">//处理请求 </span></span><br><span class="line">        &#125; </span><br><span class="line">        <span class="keyword">else</span> &#123; </span><br><span class="line">            <span class="keyword">this</span>.successor.handleRequest(request); </span><br><span class="line">            <span class="comment">//转发请求 </span></span><br><span class="line">        &#125; </span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>客户端负责创建职责链和发送请求</li>
+</ul>
+</li>
+<li><p>纯与不纯</p>
+<ul>
+<li>纯的职责链模式<ul>
+<li>一个具体处理者对象只能在两个行为中选择一个：要么承担全部责任，要么将责任推给下家 </li>
+<li>一个请求必须被某一个处理者对象所接收，不能出现某个请求未被任何一个处理者对象处理的情况</li>
+</ul>
+</li>
+<li>不纯的职责链模式<ul>
+<li>允许某个请求被一个具体处理者部分处理后向下传递，或者一 个具体处理者处理完某请求后其后继处理者可以继续处理该请求</li>
+<li>一个请求可以最终不被任何处理者对象所接收并处理 </li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>优缺点与适用环境</p>
+<ul>
+<li>优点<ul>
+<li>使得一个对象无须知道是其他哪一个对象处理其请求， 降低了系统的耦合度 </li>
+<li>可简化对象之间的相互连接 </li>
+<li>给对象职责的分配带来更多的灵活性 </li>
+<li>增加一个新的具体请求处理者时无须修改原有系统的 代码，只需要在客户端重新建链即可</li>
+</ul>
+</li>
+<li>缺点<ul>
+<li>不能保证请求一定会被处理 </li>
+<li>对于比较长的职责链，系统性能将受到一定影响，在进行代码调试时不太方便 </li>
+<li>如果建链不当，可能会造成循环调用，将导致系统陷 入死循环</li>
+</ul>
+</li>
+<li>适用环境<ul>
+<li>有多个对象可以处理同一个请求，具体哪个对象处理该请求待运行时刻再确定 </li>
+<li>在不明确指定接收者的情况下，向多个对象中的一个提交一个请求 •</li>
+<li>动态指定一组对象处理请求</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="命令模式"><a href="#命令模式" class="headerlink" title="命令模式"></a>命令模式</h3><ul>
+<li>定义<ul>
+<li>将一个请求封装为一个对象，从而可以用不同的请求对客户进行参数化，对请求排队或者记录请求日志， 以及支持可撤销的操作。</li>
+<li>类比：同样的开关可以接到不同的电器上</li>
+<li>对请求进行封装 ，一个请求对应于一个命令，请求的一方不必知道接收请求的一方的接口</li>
+</ul>
+</li>
+<li>结构<ul>
+<li>Command（抽象命令类） </li>
+<li>ConcreteCommand（具体命令类） </li>
+<li>Invoker（调用者） ：通过配置文件决定引用哪个具体命令类</li>
+<li>Receiver（接收者）</li>
+</ul>
+</li>
+<li>延申<ul>
+<li>命令队列<ul>
+<li>有不止一个请求接收者产生响应，逐个执行业务方法</li>
+<li>增加一个CommandQueue类，由该类负责存储多个命令对象，而不同的命令对象可以对应不同的请求接收者</li>
+</ul>
+</li>
+<li>记录请求日志<ul>
+<li>将请求的历史记录保存下来，通常以日志文件(Log File)的形式永久存储在计算机中 ：为系统提供一种恢复机制 ，可以用于实现批处理，防止因为断电或者系统重启等原因造成请求丢失， 而且可以避免重新发送全部请求时造成某些命令的重复执行</li>
+<li>实现：将发送请求的命令对象通过序列化写到日志文件中 ，命令类必须实现接口Serializable</li>
+</ul>
+</li>
+<li>实现单步撤销<ul>
+<li>在抽象命令类中增加<code>Undo()</code>方法，继承时需要实现该方法</li>
+</ul>
+</li>
+<li>宏命令（可用于实现多步撤销）<ul>
+<li>组合模式和命令模式联用</li>
+<li>宏命令是一个具体命令类，它拥有一个集合，在该集合中包含 了对其他命令对象的引用 </li>
+<li>当调用宏命令的execute()方法时，将递归调用它所包含的每个 成员命令的execute()方法</li>
+</ul>
+</li>
+<li>优缺点与适用环境<ul>
+<li>优点<ul>
+<li>降低系统的耦合度 （请求方与接收方的解耦）</li>
+<li>新的命令可以很容易地加入到系统中，符合开闭原则 </li>
+<li>可以比较容易地设计一个命令队列或宏命令（组合命令） </li>
+<li>为请求的撤销(Undo)和恢复(Redo)操作提供了一种设计和实现方案</li>
+</ul>
+</li>
+<li>缺点<ul>
+<li>可能会导致某些系统有过多的具体命令类（针对每一个对请求接收者的调用操作都需要设计 一个具体命令类）</li>
+</ul>
+</li>
+<li>适用环境<ul>
+<li>系统需要将请求调用者和请求接收者解耦，使得调用者和接收者不直接交互 </li>
+<li>系统需要在不同的时间指定请求、将请求排队和执行请求 </li>
+<li>系统需要支持命令的撤销(Undo)操作和恢复(Redo)操作 </li>
+<li>系统需要将一组操作组合在一起形成宏命令</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="解释器模式"><a href="#解释器模式" class="headerlink" title="解释器模式"></a>解释器模式</h3><ul>
+<li><p>定义</p>
+<ul>
+<li>给定一个语言，定义它的文法的一种表示， 并定义一个解释器，这个解释器使用该表示来解释语言中的 句子。</li>
+<li>（编译原理再放送）自顶向下语法分析，每个符号一个类，类中实现分析方法</li>
+<li>用于描述如何使用面向对象语言构成一个简单 的语言解释器 </li>
+</ul>
+</li>
+<li><p>结构</p>
+<ul>
+<li>AbstractExpression（抽象表达式） </li>
+<li>TerminalExpression（终结符表达式）</li>
+<li>NonterminalExpression（非终结符表达式） </li>
+<li>Context（环境类）<ul>
+<li>用于存储一些全局信息，例如变量名与值的映射关系 (key/value)等，用于在执行具体的解释操作时从中获取相关信息（符号表警告）</li>
+<li>在环境类中增加一些所有表达式解释器都共有的功能，以 减轻解释器的职责 </li>
+<li>当系统无须提供全局公共信息时可以省略环境类，根据实际情 况决定是否需要环境类</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>优缺点与适用环境</p>
+<ul>
+<li>优点<ul>
+<li>易于改变和扩展文法：由于在解释器模式中使用类表 示语言的文法规则，因此可以通过继承等机制来改变 或扩展文法。 </li>
+<li>可以方便地实现一个简单的语言：每一条文法规则都 可以表示为一个类。 </li>
+<li>实现文法较为容易（有自动生成工具）。 </li>
+<li>增加新的解释表达式较为方便，符合开闭原则。</li>
+</ul>
+</li>
+<li>缺点<ul>
+<li>对于复杂文法难以维护：太多文法 规则，类的个数会急剧增加</li>
+<li>执行效率较低：大量的循环和递归</li>
+</ul>
+</li>
+<li>适用环境<ul>
+<li>可以将一个需要解释执行的语言中的句子表示为一 棵抽象语法树 </li>
+<li>一些重复出现的问题可以用一种简单的语言来进行 表达 </li>
+<li>一个语言的文法较为简单 </li>
+<li>执行效率不是关键问题</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="迭代器模式"><a href="#迭代器模式" class="headerlink" title="迭代器模式"></a>迭代器模式</h3><ul>
+<li><p>定义</p>
+<ul>
+<li>提供一种方法顺序访问一个聚合对象中各个 元素，且不用暴露该对象的内部表示</li>
+<li>类似Python的迭代器</li>
+<li>可以根据需 要很方便地增加新的遍历方式（如从前往后遍历和从后往前遍历</li>
+</ul>
+</li>
+<li><p>结构</p>
+<ul>
+<li><p>Iterator（抽象迭代器） </p>
+</li>
+<li><p>ConcreteIterator（具体迭代器） </p>
+</li>
+<li><p>Aggregate（抽象聚合类） </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Aggregate</span> </span>&#123; </span><br><span class="line">    <span class="function">Iterator <span class="title">createIterator</span><span class="params">()</span></span>; <span class="comment">//返回抽象迭代器</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>ConcreteAggregate（具体聚合类）</li>
+</ul>
+</li>
+<li><p>扩展</p>
+<ul>
+<li>增加新的具体聚合类和具体迭代器，都不需要修改原有代码，符合开闭原则</li>
+<li>在迭代器中增加新的方法，需要修改原有代码，违背开闭原则。</li>
+</ul>
+</li>
+<li><p>优缺点与适用环境</p>
+<ul>
+<li>优点<ul>
+<li>支持以不同的方式遍历一个聚合对象，在同一个聚合对象上可以定义多种遍历方式 </li>
+<li>简化了聚合类 </li>
+<li>由于引入了抽象层，增加新的聚合类和迭代器类都很方便，无须修改原有代码，符合开闭原则</li>
+</ul>
+</li>
+<li>缺点<ul>
+<li>在增加新的聚合类时需要对应地增加新的迭代器类， 类的个数成对增加，这在一定程度上增加了系统的复杂性</li>
+<li>抽象迭代器的设计难度较大，需要充分考虑到系统将来的扩展。在自定义迭代器时，创建一个考虑全面的抽象迭代器并不是一件很容易的事情</li>
+</ul>
+</li>
+<li>适用环境<ul>
+<li>访问一个聚合对象的内容而无须暴露它的内部表示 </li>
+<li>需要为一个聚合对象提供多种遍历方式 </li>
+<li>为遍历不同的聚合结构提供一个统一的接口，在该接口的实现类中为不同的聚合结构提供不同的遍历方式， 而客户端可以一致性地操作该接口</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>白箱聚集 v.s. 黑箱聚集</p>
+<ul>
+<li>宽窄接口<ul>
+<li>宽接口：聚合类提供了修改聚集元素的接口</li>
+<li>窄接口：聚合类没有提供修改聚集元素的接口</li>
+</ul>
+</li>
+<li>白箱聚集<ul>
+<li>聚集对象对外一律提供宽接口</li>
+<li>迭代子可以从外部控制元素的迭代（一个游标）</li>
+<li>有点语法糖的感觉（？），就是本来不可以这么做，但是这么做了会很方便</li>
+<li>外禀迭代子</li>
+</ul>
+</li>
+<li>黑箱聚集<ul>
+<li>聚集对象对迭代子提供宽接口，对其余对象提供窄接口</li>
+<li>实现：迭代子实现为聚集对象的内部类</li>
+<li>内禀迭代子</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="中介者模式"><a href="#中介者模式" class="headerlink" title="中介者模式"></a>中介者模式</h3><ul>
+<li>定义<ul>
+<li>定义一个对象来封装一系列对象的交互。中介者模式使各对象之间不需要显式地相互引用，从而使其耦合松散，而且让你可以独立地改变它们之间的交互</li>
+<li>迪米特法则的一个典型应用 </li>
+<li>对象之间多对多的复杂关系转化为相对简单的一对多关系（例如星型结构）</li>
+</ul>
+</li>
+<li>结构<ul>
+<li>Mediator（抽象中介者） </li>
+<li>ConcreteMediator（具体中介者） </li>
+<li>Colleague（抽象同事类） <ul>
+<li>维持一个抽象中介者的引用</li>
+<li>定义依赖方法，与中介者进行通信</li>
+</ul>
+</li>
+<li>ConcreteColleague（具体同事类）</li>
+</ul>
+</li>
+<li>应用<ul>
+<li>e.g.图形界面元素的变化，比如从列表里删除一项元素时combobox中同样的元素也需要相应地删除</li>
+<li>如果某个组件类需要与新的组件进行交互，无须修改 已有组件类的源代码，只需修改中介者或者对现有中介者进行扩展即可，系统具有更好的灵活性和可扩展性</li>
+</ul>
+</li>
+<li>优缺点与适用环境<ul>
+<li>优点<ul>
+<li>简化了对象之间的交互，它用中介者和同事的一对多交互代替 了原来同事之间的多对多交互，将原本难以理解的网状结构转 换成相对简单的星型结构 </li>
+<li>可将各同事对象解耦 </li>
+<li>可以减少子类生成，中介者模式将原本分布于多个对象间的行 为集中在一起，改变这些行为只需生成新的中介者子类即可， 这使得各个同事类可被重用，无须直接对同事类进行扩展</li>
+</ul>
+</li>
+<li>缺点<ul>
+<li>在具体中介者类中包含了大量的同事之间的交互细节， 可能会导致具体中介者类非常复杂，使得系统难以维护</li>
+</ul>
+</li>
+<li>适用环境<ul>
+<li>系统中对象之间存在复杂的引用关系，系统结构混乱 且难以理解 </li>
+<li>一个对象由于引用了其他很多对象并且直接和这些对象通信，导致难以复用该对象 </li>
+<li>想通过一个中间类来封装多个类中的行为，又不想生成太多的子类</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="备忘录模式"><a href="#备忘录模式" class="headerlink" title="备忘录模式"></a>备忘录模式</h3><ul>
+<li><p>定义</p>
+<ul>
+<li>在不破坏封装的前提下，捕获一个对象的内 部状态，并在该对象之外保存这个状态，这样就可以在以后 将对象恢复到原先保存的状态</li>
+<li>撤销与重做</li>
+</ul>
+</li>
+<li><p>结构与实现</p>
+<ul>
+<li><p>Originator（原发器）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Originator</span> </span>&#123; </span><br><span class="line">	<span class="keyword">private</span> String state;<span class="comment">//以某种方式存储的状态信息（不一定是String</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">Originator</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line">	<span class="comment">//创建一个备忘录对象 </span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Memento <span class="title">createMemento</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> <span class="keyword">new</span> Memento(<span class="keyword">this</span>); &#125;</span><br><span class="line">	<span class="comment">//根据备忘录对象恢复原发器状态 </span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">restoreMemento</span><span class="params">(Memento m)</span> </span>&#123; state = m.state; &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setState</span><span class="params">(String state)</span> </span>&#123; <span class="keyword">this</span>.state=state; &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getState</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> <span class="keyword">this</span>.state; &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>Memento（备忘录) </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//备忘录类，默认可见性，包内可见 </span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Memento</span> </span>&#123; </span><br><span class="line">    <span class="keyword">private</span> String state;</span><br><span class="line">    Memento(Originator o) &#123; state = o.getState(); &#125;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">setState</span><span class="params">(String state)</span> </span>&#123; <span class="keyword">this</span>.state=state; &#125;</span><br><span class="line">	<span class="function">String <span class="title">getState</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> <span class="keyword">this</span>.state; &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>Caretaker（负责人）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Caretaker</span> </span>&#123; </span><br><span class="line">    <span class="keyword">private</span> Memento memento;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> Memento <span class="title">getMemento</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> memento; &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setMemento</span><span class="params">(Memento memento)</span> </span>&#123; <span class="keyword">this</span>.memento=memento; &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>只允许生成该备忘录的原发器访问备忘录的内部状态</p>
+<ul>
+<li>java实现：将Memento类与Originator类定义在同一个包 (package)中来实现封装，使用默认可见性定义 Memento类，即保证其在包内可见 或  将备忘录类作为原发器类的内部类</li>
+</ul>
+</li>
+<li><p>多次撤销：</p>
+<ul>
+<li>在负责人类中定义一个集合来存储多个备忘录（栈可能比较优雅</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>优缺点与适用环境</p>
+<ul>
+<li>优点<ul>
+<li>提供了一种状态恢复的实现机制，使得用户可以方便地回到一个特定的历史步骤 </li>
+<li>实现了对信息的封装，一个备忘录对象是一种原发器对象状态的表示，不会被其他代码所改动</li>
+</ul>
+</li>
+<li>缺点<ul>
+<li>资源消耗过大，如果需要保存的原发器类的成员变量 太多，就不可避免地需要占用大量的存储空间，每保 存一次对象的状态都需要消耗一定的系统资源</li>
+</ul>
+</li>
+<li>适用环境<ul>
+<li>保存一个对象在某一个时刻的全部状态或部分状态， 这样以后需要时能够恢复到先前的状态，实现撤销操作 </li>
+<li>防止外界对象破坏一个对象历史状态的封装性，避免将对象历史状态的实现细节暴露给外界对象</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="观察者模式"><a href="#观察者模式" class="headerlink" title="观察者模式"></a>观察者模式</h3><ul>
+<li><p>定义</p>
+<ul>
+<li>定义对象之间的一种一对多依赖关系，使得 每当一个对象状态发生改变时，其相关依赖对象都得到通知 并被自动更新。</li>
+</ul>
+</li>
+<li><p>结构和实现</p>
+<ul>
+<li><p>Subject（被观察目标） </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Subject</span> </span>&#123; </span><br><span class="line">    <span class="comment">//定义一个观察者集合用于存储所有观察者对象 </span></span><br><span class="line">    <span class="keyword">protected</span> ArrayList observers&lt;Observer&gt; = <span class="keyword">new</span> ArrayList();</span><br><span class="line">	<span class="comment">//注册方法，用于向观察者集合中增加一个观察者 </span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">attach</span><span class="params">(Observer observer)</span> </span>&#123; observers.add(observer); &#125;</span><br><span class="line">	<span class="comment">//注销方法，用于在观察者集合中删除一个观察者 </span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">detach</span><span class="params">(Observer observer)</span> </span>&#123; observers.remove(observer); &#125;</span><br><span class="line">	<span class="comment">//声明抽象通知方法 </span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">notify</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>ConcreteSubject（具体被观察目标） </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ConcreteSubject</span> <span class="keyword">extends</span> <span class="title">Subject</span> </span>&#123; </span><br><span class="line">    <span class="comment">//实现通知方法 </span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">notify</span><span class="params">()</span> </span>&#123; </span><br><span class="line">        <span class="comment">//遍历观察者集合，调用每一个观察者的响应方法 </span></span><br><span class="line">        <span class="keyword">for</span>(Object obs:observers) &#123; </span><br><span class="line">            ((Observer)obs).update(); </span><br><span class="line">        &#125; </span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>Observer（观察者） </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Observer</span> </span>&#123;</span><br><span class="line">    <span class="comment">//声明响应方法 </span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">update</span><span class="params">()</span></span>; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>ConcreteObserver（具体观察者）</p>
+<ul>
+<li>实现响应方法</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Java事件处理</p>
+<ul>
+<li>事件源对象充当观察目标角色，事件监听器充当抽象观察者角色，事件处理对象充当具体观察者角色 </li>
+</ul>
+</li>
+<li><p>MVC</p>
+<ul>
+<li>模型(Model)，视图(View)和控制器(Controller) </li>
+<li>模型可对应于观察者模式中的观察目标，而视图对应于观察者，控制器可充当两者之间的中介者 </li>
+<li>当模型层的数据发生改变时，视图层将自动改变其显示内容</li>
+</ul>
+</li>
+<li><p>优缺点与适用环境</p>
+<ul>
+<li>优点<ul>
+<li>可以实现表示层和数据逻辑层的分离 </li>
+<li>在观察目标和观察者之间建立一个抽象的耦合 </li>
+<li>支持广播通信，简化了一对多系统设计的难度 </li>
+<li>符合开闭原则，增加新的具体观察者无须修改原有系统代码， 在具体观察者与观察目标之间不存在关联关系的情况下，增 加新的观察目标也很方便</li>
+</ul>
+</li>
+<li>缺点<ul>
+<li>将所有的观察者都通知到会花费很多时间 </li>
+<li>如果存在循环依赖时可能导致系统崩溃 </li>
+<li>没有相应的机制让观察者知道所观察的目标对象是怎 么发生变化的，而只是知道观察目标发生了变化</li>
+</ul>
+</li>
+<li>适用环境<ul>
+<li>一个抽象模型有两个方面，其中一个方面依赖于另一个方 面，将这两个方面封装在独立的对象中使它们可以各自独 立地改变和复用 </li>
+<li>一个对象的改变将导致一个或多个其他对象发生改变，且 并不知道具体有多少对象将发生改变，也不知道这些对象 是谁 </li>
+<li>需要在系统中创建一个触发链</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="状态模式"><a href="#状态模式" class="headerlink" title="状态模式"></a>状态模式</h3><ul>
+<li><p>定义</p>
+<ul>
+<li>允许一个对象在其内部状态改变时改变它的行为。对象看起来似乎修改了它的类。</li>
+<li>否则图形学<code>elif</code>警告</li>
+<li>用于解决系统中复杂对象的状态转换以及不同状态下 行为的封装问题， 客户端无须关心对象状态的转换以及对象 所处的当前状态</li>
+</ul>
+</li>
+<li><p>结构与实现</p>
+<ul>
+<li><p>Context（环境类） </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Context</span> </span>&#123; </span><br><span class="line">    <span class="keyword">private</span> State state; <span class="comment">//维持一个对抽象状态对象的引用 </span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> value;  <span class="comment">//其他属性值，该属性值的变化可能会导致对象的 状态发生变化</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setState</span><span class="params">(State state)</span> </span>&#123; <span class="keyword">this</span>.state = state; &#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">request</span><span class="params">()</span> </span>&#123; </span><br><span class="line">        <span class="comment">// ...</span></span><br><span class="line">        state.handle(); </span><br><span class="line">        <span class="comment">//调用状态对象的业务方法 </span></span><br><span class="line">        <span class="comment">// ...</span></span><br><span class="line">   	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>State（抽象状态类）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">State</span> </span>&#123; </span><br><span class="line">    <span class="comment">//声明抽象业务方法，不同的具体状态类可以有不同的实现 </span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">handle</span><span class="params">()</span></span>; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>ConcreteState（具体状态类）</p>
+<ul>
+<li>具体实现业务方法</li>
+</ul>
+</li>
+<li><p>状态转换</p>
+<ul>
+<li><p>实现在环境类中： 对于客户端而言，无须关心状态类，可以为环境类设 置默认的状态类，将状态的转换工作交给环境类（或 具体状态类）来完成，具体的转换细节对于客户端而 言是透明的 </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">changeState</span><span class="params">()</span> </span>&#123; </span><br><span class="line">    <span class="comment">//判断属性值，根据属性值进行状态转换 </span></span><br><span class="line">    <span class="keyword">if</span> (value == <span class="number">0</span>) &#123; <span class="keyword">this</span>.setState(<span class="keyword">new</span> ConcreteStateA()); &#125; </span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (value == <span class="number">1</span>) &#123; <span class="keyword">this</span>.setState(<span class="keyword">new</span> ConcreteStateB()); &#125; </span><br><span class="line">    <span class="comment">//...... </span></span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure></li>
+<li><p>实现在具体状态类中</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">changeState</span><span class="params">(Context ctx)</span> </span>&#123; </span><br><span class="line">    <span class="comment">//根据环境对象中的属性值进行状态转换 </span></span><br><span class="line">    <span class="keyword">if</span> (ctx.getValue() == <span class="number">1</span>) &#123; ctx.setState(<span class="keyword">new</span> ConcreteStateB()); &#125; </span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (ctx.getValue() == <span class="number">2</span>) &#123; ctx.setState(<span class="keyword">new</span> ConcreteStateC()); &#125; </span><br><span class="line">    <span class="comment">//...... </span></span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>共享状态</p>
+<ul>
+<li>多个环境对象可能需要共享同一个状态 ，将这些状态对象定义为环境类的<strong>静态</strong>成员对象</li>
+</ul>
+</li>
+<li><p>优缺点与适用环境</p>
+<ul>
+<li>优点<ul>
+<li>封装了状态的转换规则，可以对状态转换代码进行集中管理，而不是 分散在一个个业务方法中 </li>
+<li>将所有与某个状态有关的行为放到一个类中，只需要注入一个不同的 状态对象即可使环境对象拥有不同的行为 </li>
+<li>允许状态转换逻辑与状态对象合成一体，而不是提供一个巨大的条件 语句块，可以避免使用庞大的条件语句来将业务方法和状态转换代码 交织在一起 </li>
+<li>可以让多个环境对象共享一个状态对象，从而减少系统中对象的个数</li>
+</ul>
+</li>
+<li>缺点<ul>
+<li>会增加系统中类和对象的个数，导致系统运行开销增大 </li>
+<li>结构与实现都较为复杂，如果使用不当将导致程序结构和代 码混乱，增加系统设计的难度 </li>
+<li>对开闭原则的支持并不太好，增加新的状态类需要修改负责 状态转换的源代码，否则无法转换到新增状态；而且修改某个状态类的行为也需要修改对应类的源代码</li>
+</ul>
+</li>
+<li>适用环境<ul>
+<li>对象的行为依赖于它的状态（例如某些属性值），状 态的改变将导致行为的变化 </li>
+<li>在代码中包含大量与对象状态有关的条件语句，这些 条件语句的出现会导致代码的可维护性和灵活性变差， 不能方便地增加和删除状态，并且导致客户类与类库 之间的耦合增强</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="策略模式"><a href="#策略模式" class="headerlink" title="策略模式"></a>策略模式</h3><ul>
+<li><p>定义</p>
+<ul>
+<li>定义一系列算法，将每一个算法封装起来，并 让它们可以相互替换。策略模式让算法可以独立于使用它的 客户变化。</li>
+</ul>
+</li>
+<li><p>结构与实现</p>
+<ul>
+<li><p>Context（环境类） </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Context</span> </span>&#123; </span><br><span class="line">    <span class="keyword">private</span> Strategy strategy; <span class="comment">//维持一个对抽象策略类的引用</span></span><br><span class="line">	<span class="comment">//注入策略对象 </span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setStrategy</span><span class="params">(Strategy strategy)</span> </span>&#123; </span><br><span class="line">        <span class="keyword">this</span>.strategy= strategy; </span><br><span class="line">    &#125;</span><br><span class="line">	<span class="comment">//调用策略类中的算法 </span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">algorithm</span><span class="params">()</span> </span>&#123; </span><br><span class="line">        strategy.algorithm(); </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>Strategy（抽象策略类） </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Strategy</span> </span>&#123; </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">algorithm</span><span class="params">()</span></span>; <span class="comment">//声明抽象算法 </span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>ConcreteStrategy（具体策略类）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ConcreteStrategyAextends</span> <span class="title">Strategy</span> </span>&#123; </span><br><span class="line">    <span class="comment">//算法的具体实现 </span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">algorithm</span><span class="params">()</span> </span>&#123; <span class="comment">//算法A </span></span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>客户端</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Context context = <span class="keyword">new</span> Context(); </span><br><span class="line">Strategy strategy; strategy = <span class="keyword">new</span> ConcreteStrategyA(); </span><br><span class="line"><span class="comment">//可在运行时指定类型，通过配置 文件和反射机制实现 </span></span><br><span class="line">context.setStrategy(strategy); </span><br><span class="line">context.algorithm();</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>优缺点与适用环境</p>
+<ul>
+<li>优点<ul>
+<li>提供了对开闭原则的完美支持，用户可以在不修改原有系统的 基础上选择算法或行为，也可以灵活地增加新的算法或行为 </li>
+<li>提供了管理相关的算法族的办法 </li>
+<li>提供了一种可以替换继承关系的办法 </li>
+<li>可以避免多重条件选择语句 </li>
+<li>提供了一种算法的复用机制，不同的环境类可以方便地复用策 略类</li>
+</ul>
+</li>
+<li>缺点<ul>
+<li>客户端必须知道所有的策略类，并自行决定使用哪一 个策略类</li>
+<li>将造成系统产生很多具体策略类 </li>
+<li>无法同时在客户端使用多个策略类</li>
+</ul>
+</li>
+<li>适用环境<ul>
+<li>一个系统需要动态地在几种算法中选择一种 </li>
+<li>避免使用难以维护的多重条件选择语句 </li>
+<li>不希望客户端知道复杂的、与算法相关的数据结构， 提高算法的保密性与安全性</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="模板方法模式"><a href="#模板方法模式" class="headerlink" title="模板方法模式"></a>模板方法模式</h3><ul>
+<li>定义<ul>
+<li>定义一个操作中算法的框架，而将一些步 骤延迟到子类中。模板方法模式使得子类不改变一个算法的 结构即可重定义该算法的某些特定步骤。</li>
+</ul>
+</li>
+<li>结构与实现<ul>
+<li>AbstractClass（抽象类） <ul>
+<li>定义一系列方法和这些方法调用的顺序</li>
+</ul>
+</li>
+<li>ConcreteClass（具体子类）<ul>
+<li>实现/覆盖抽象类中的某些方法</li>
+</ul>
+</li>
+<li>模板方法</li>
+<li>具体方法<ul>
+<li>抽象方法(Abstract Method) </li>
+<li>具体方法(Concrete Method) </li>
+<li>钩子方法(Hook Method)：一般返回一个bool值，用来判断某个操作是否要执行（e.g. isdigit</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>优缺点与适用环境<ul>
+<li>优点<ul>
+<li>在父类中形式化地定义一个算法，而由它的子类来实现细节的 处理，在子类实现详细的处理算法时并不会改变算法中步骤的 执行次序 </li>
+<li>提取了类库中的公共行为，将公共行为放在父类中，而通过其 子类来实现不同的行为 </li>
+<li>可实现一种<strong>反向控制结构</strong>，通过子类覆盖父类的钩子方法来决 定某一特定步骤是否需要执行 </li>
+<li>更换和增加新的子类很方便，符合单一职责原则和开闭原则</li>
+</ul>
+</li>
+<li>缺点<ul>
+<li>需要为每一个基本方法的不同实现提供一个子类，如 果父类中可变的基本方法太多，将会导致类的个数增 加，系统会更加庞大，设计也更加抽象（可结合桥接模式）</li>
+</ul>
+</li>
+<li>适用环境<ul>
+<li>一次性实现一个算法的不变部分，并将可变的行为留 给子类来实现 </li>
+<li>各子类中公共的行为应被提取出来，并集中到一个公 共父类中，以避免代码重复 </li>
+<li>需要通过子类来决定父类算法中某个步骤是否执行， 实现子类对父类的反向控制</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="访问者模式"><a href="#访问者模式" class="headerlink" title="访问者模式"></a>访问者模式</h3><ul>
+<li><p>定义：</p>
+<ul>
+<li>表示一个作用于某对象结构中的各个元素的 操作。访问者模式让你可以在不改变各元素的类的前提下定 义作用于这些元素的新操作。</li>
+<li>不同的<strong>访问者</strong>访问不同的<strong>元素</strong></li>
+</ul>
+</li>
+<li><p>结构与实现</p>
+<ul>
+<li><p>Visitor（抽象访问者） </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Visitor</span> </span>&#123; </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">visit</span><span class="params">(ConcreteElementAelementA)</span></span>; </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">visit</span><span class="params">(ConcreteElementB elementB)</span></span>;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">visit</span><span class="params">(ConcreteElementC elementC)</span> </span>&#123; </span><br><span class="line">        <span class="comment">//元素ConcreteElementC操作代码——所有访问者对C的访问操作是一样的</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>ConcreteVisitor（具体访问者） </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ConcreteVisitor</span> <span class="keyword">extends</span> <span class="title">Visitor</span> </span>&#123; </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">visit</span><span class="params">(ConcreteElementAelementA)</span> </span>&#123; </span><br><span class="line">        <span class="comment">//元素ConcreteElementA操作代码 </span></span><br><span class="line">    &#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">visit</span><span class="params">(ConcreteElementB elementB)</span> </span>&#123; </span><br><span class="line">        <span class="comment">//元素ConcreteElementB操作代码 </span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>Element（抽象元素） </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Element</span> </span>&#123; </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">accept</span><span class="params">(Visitor visitor)</span></span>; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>ConcreteElement（具体元素） </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ConcreteElementAimplements</span> <span class="title">Element</span> </span>&#123; </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">accept</span><span class="params">(Visitor visitor)</span> </span>&#123; </span><br><span class="line">        visitor.visit(<span class="keyword">this</span>); </span><br><span class="line">    &#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">operationA</span><span class="params">()</span> </span>&#123; </span><br><span class="line">        <span class="comment">//业务方法 </span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>ObjectStructure（对象结构）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ObjectStructure</span> </span>&#123; </span><br><span class="line">    <span class="keyword">private</span> ArrayList&lt;Element&gt; list = <span class="keyword">new</span> ArrayList&lt;Element&gt;(); </span><br><span class="line">    <span class="comment">//定义一个集 合用于存储元素对象</span></span><br><span class="line">	<span class="comment">//接受访问者的访问操作 </span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">accept</span><span class="params">(Visitor visitor)</span> </span>&#123; </span><br><span class="line">        Iterator i=list.iterator();</span><br><span class="line">	<span class="keyword">while</span>(i.hasNext()) &#123; </span><br><span class="line">        ((Element)i.next()).accept(visitor); </span><br><span class="line">        <span class="comment">//遍历访问集合中的每一个元素 </span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addElement</span><span class="params">(Element element)</span> </span>&#123; </span><br><span class="line">        list.add(element); </span><br><span class="line">    &#125; </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">removeElement</span><span class="params">(Element element)</span> </span>&#123; </span><br><span class="line">        list.remove(element); </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>双重分派机制</p>
+<ul>
+<li><code>ConcreteElementA.accept(visitor) -&gt; ConcreteVisitorA.visit(element) -&gt; ConcreteElementA.operation()</code></li>
+<li>客户端：具体访问者类的对象作为参数，调用具体元素类的<code>accept()</code>方法</li>
+<li>具体元素类的<code>accept()</code>方法：以当前元素类对象(<code>this</code>)为参数，调用传入的访问者对象的<code>visit()</code>方法</li>
+<li>访问者对象的<code>visit()</code>方法执行中还能调用具体元素类的业务方法</li>
+</ul>
+</li>
+<li><p>优缺点和适用环境</p>
+<ul>
+<li>优点<ul>
+<li>增加新的访问操作很方便 </li>
+<li>将有关元素对象的访问行为集中到一个访问者对象中， 而不是分散在一个个的元素类中，类的职责更加清晰 </li>
+<li>让用户能够在不修改现有元素类层次结构的情况下， 定义作用于该层次结构的操作</li>
+</ul>
+</li>
+<li>缺点<ul>
+<li>增加新的元素类很困难 </li>
+<li>破坏了对象的封装性：元素类在<code>accept()</code>方法传入了自己</li>
+</ul>
+</li>
+<li>适用环境<ul>
+<li>一个对象结构包含多个类型的对象，希望对这些对象实施 一些依赖其具体类型的操作 </li>
+<li>需要对一个对象结构中的对象进行很多不同的且不相关的 操作，并需要避免让这些操作“污染”这些对象的类，也 不希望在增加新操作时修改这些类 </li>
+<li>对象结构中对象对应的类很少改变，但经常需要在此对象结构上定义新的操作</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+    </article>
+    <!-- license  -->
+    
+        <div class="license-wrapper">
+            <p>原文作者: <a href="https://mengzelev.github.io">Mengzelev</a>
+            <p>原文链接: <a href="https://mengzelev.github.io/2020/06/24/OOP-design-patterns/">https://mengzelev.github.io/2020/06/24/OOP-design-patterns/</a>
+            <p>发表日期: <a href="https://mengzelev.github.io/2020/06/24/OOP-design-patterns/">June 24th 2020, 2:48:28 pm</a>
+            <p>版权声明: 本文采用<a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
+        </div>
+    
+    <!-- paginator  -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+                <div class="nextSlogan">Next Post</div>
+                <a href= "/2020/06/27/Le-Deuxieme-Sexe/" title= 西蒙·波伏娃《第二性》读书笔记 >
+                    <div class="nextTitle">西蒙·波伏娃《第二性》读书笔记</div>
+                </a>
+            
+        </li>
+        <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href= "/2020/06/17/my-projects/" title= 我做过的项目 >
+                    <div class="prevTitle">我做过的项目</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+<!-- City版安装代码已完成 -->
+    
+    
+    <!--PC和WAP自适应版-->
+
+    <!--PC版-->
+
+
+    
+    
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+    <div id="comment"></div>
+    <script>
+    new Valine({
+        el: '#comment' ,
+        notify:false, 
+        verify:false, 
+        appId: "yj3PGIKmV8xpEnFYOgSseo5x-gzGzoHsz",
+        appKey: "vGSIx5E7w6LLK0M0jUlIUG05",
+        placeholder: "看完了都不说一句再走么(。•ω•)σ)´Д`)",
+        path:window.location.pathname, 
+        avatar:'mm' 
+    });
+    </script>
+
+
+    <!-- 评论 -->
+</main>
+            <!-- profile -->
+            
+        </div>
+        <footer class="footer footer-unloaded">
+    <!-- social  -->
+    
+    <div class="social">
+        
+    
+        
+            
+                <a href="mailto:Mengzelev@gmail.com" class="iconfont-archer email" title=email ></a>
+            
+        
+    
+        
+            
+                <a href="//github.com/mengzelev" class="iconfont-archer github" target="_blank" title=github></a>
+            
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+            
+                <a href="/atom.xml" class="iconfont-archer rss" target="_blank" title=rss></a>
+            
+        
+    
+
+    </div>
+    
+    <!-- powered by Hexo  -->
+    <div class="copyright">
+        <span id="hexo-power">Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></span><span class="iconfont-archer power">&#xe635;</span><span id="theme-info">theme <a href="https://github.com/fi3ework/hexo-theme-archer" target="_blank">Archer</a></span>
+    </div>
+    <!-- 不蒜子  -->
+    
+    <div class="busuanzi-container">
+    
+     
+    <span id="busuanzi_container_site_pv">PV: <span id="busuanzi_value_site_pv"></span> :)</span>
+    
+    </div>
+    
+</footer>
+    </div>
+    <!-- toc -->
+    
+    <div class="toc-wrapper" style=
+    
+
+
+
+
+
+
+
+top:50vh;
+
+    >
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#OOP%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99"><span class="toc-number">1.</span> <span class="toc-text">OOP设计原则</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%95%E4%B8%80%E8%81%8C%E8%B4%A3%E5%8E%9F%E5%88%99%EF%BC%88SRP%EF%BC%89"><span class="toc-number">1.1.</span> <span class="toc-text">单一职责原则（SRP）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%80%E6%94%BE-%E5%B0%81%E9%97%AD%E5%8E%9F%E5%88%99%EF%BC%88OCP%EF%BC%89"><span class="toc-number">1.2.</span> <span class="toc-text">开放-封闭原则（OCP）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%87%8C%E6%B0%8F%E6%9B%BF%E6%8D%A2%E5%8E%9F%E5%88%99%EF%BC%88LSP%EF%BC%89"><span class="toc-number">1.3.</span> <span class="toc-text">里氏替换原则（LSP）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BE%9D%E8%B5%96%E5%80%92%E7%BD%AE%E5%8E%9F%E5%88%99%EF%BC%88DIP%EF%BC%89"><span class="toc-number">1.4.</span> <span class="toc-text">依赖倒置原则（DIP）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8E%A5%E5%8F%A3%E9%9A%94%E7%A6%BB%E5%8E%9F%E5%88%99%EF%BC%88ISP%EF%BC%89"><span class="toc-number">1.5.</span> <span class="toc-text">接口隔离原则（ISP）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%90%88%E6%88%90-%E8%81%9A%E5%90%88%E5%A4%8D%E7%94%A8%E5%8E%9F%E5%88%99%EF%BC%88CARP%EF%BC%89"><span class="toc-number">1.6.</span> <span class="toc-text">合成&#x2F;聚合复用原则（CARP）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%AA%E7%B1%B3%E7%89%B9%E6%B3%95%E5%88%99%EF%BC%88LoD%EF%BC%89"><span class="toc-number">1.7.</span> <span class="toc-text">迪米特法则（LoD）</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F"><span class="toc-number">2.</span> <span class="toc-text">设计模式</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E5%9E%8B%E6%A8%A1%E5%BC%8F"><span class="toc-number">2.1.</span> <span class="toc-text">创建型模式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F-Simple-Factory"><span class="toc-number">2.1.1.</span> <span class="toc-text">简单工厂模式 Simple Factory</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F"><span class="toc-number">2.1.2.</span> <span class="toc-text">工厂方法模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8A%BD%E8%B1%A1%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F"><span class="toc-number">2.1.3.</span> <span class="toc-text">抽象工厂模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BB%BA%E9%80%A0%E8%80%85%E6%A8%A1%E5%BC%8F"><span class="toc-number">2.1.4.</span> <span class="toc-text">建造者模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F"><span class="toc-number">2.1.5.</span> <span class="toc-text">原型模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F"><span class="toc-number">2.1.6.</span> <span class="toc-text">单例模式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BC%BA%E7%9C%81%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F"><span class="toc-number">2.1.6.1.</span> <span class="toc-text">缺省适配器模式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%8C%E5%90%91%E9%80%82%E9%85%8D%E5%99%A8"><span class="toc-number">2.1.6.2.</span> <span class="toc-text">双向适配器</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F"><span class="toc-number">2.1.7.</span> <span class="toc-text">桥接模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%84%E5%90%88%E6%A8%A1%E5%BC%8F"><span class="toc-number">2.1.8.</span> <span class="toc-text">组合模式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%80%8F%E6%98%8E%E7%BB%84%E5%90%88%E6%A8%A1%E5%BC%8F"><span class="toc-number">2.1.8.1.</span> <span class="toc-text">透明组合模式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%89%E5%85%A8%E7%BB%84%E5%90%88%E6%A8%A1%E5%BC%8F"><span class="toc-number">2.1.8.2.</span> <span class="toc-text">安全组合模式</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A3%85%E9%A5%B0%E6%A8%A1%E5%BC%8F"><span class="toc-number">2.1.9.</span> <span class="toc-text">装饰模式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%80%8F%E6%98%8E%E8%A3%85%E9%A5%B0%E5%99%A8%E6%A8%A1%E5%BC%8F"><span class="toc-number">2.1.9.1.</span> <span class="toc-text">透明装饰器模式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8D%8A%E9%80%8F%E6%98%8E%E8%A3%85%E9%A5%B0%E5%99%A8%E6%A8%A1%E5%BC%8F"><span class="toc-number">2.1.9.2.</span> <span class="toc-text">半透明装饰器模式</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%96%E8%A7%82%E6%A8%A1%E5%BC%8F"><span class="toc-number">2.1.10.</span> <span class="toc-text">外观模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%AB%E5%85%83%E6%A8%A1%E5%BC%8F"><span class="toc-number">2.1.11.</span> <span class="toc-text">享元模式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8D%95%E7%BA%AF%E4%BA%AB%E5%85%83%E6%A8%A1%E5%BC%8F"><span class="toc-number">2.1.11.1.</span> <span class="toc-text">单纯享元模式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%8D%E5%90%88%E4%BA%AB%E5%85%83%E6%A8%A1%E5%BC%8F"><span class="toc-number">2.1.11.2.</span> <span class="toc-text">复合享元模式</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F"><span class="toc-number">2.1.12.</span> <span class="toc-text">代理模式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%90%86"><span class="toc-number">2.1.12.1.</span> <span class="toc-text">远程代理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%99%9A%E6%8B%9F%E4%BB%A3%E7%90%86"><span class="toc-number">2.1.12.2.</span> <span class="toc-text">虚拟代理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Java%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86"><span class="toc-number">2.1.12.3.</span> <span class="toc-text">Java动态代理</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A1%8C%E4%B8%BA%E5%9E%8B%E6%A8%A1%E5%BC%8F"><span class="toc-number">2.2.</span> <span class="toc-text">行为型模式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%81%8C%E8%B4%A3%E9%93%BE%E6%A8%A1%E5%BC%8F"><span class="toc-number">2.2.1.</span> <span class="toc-text">职责链模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F"><span class="toc-number">2.2.2.</span> <span class="toc-text">命令模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%A3%E9%87%8A%E5%99%A8%E6%A8%A1%E5%BC%8F"><span class="toc-number">2.2.3.</span> <span class="toc-text">解释器模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%AD%E4%BB%A3%E5%99%A8%E6%A8%A1%E5%BC%8F"><span class="toc-number">2.2.4.</span> <span class="toc-text">迭代器模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%AD%E4%BB%8B%E8%80%85%E6%A8%A1%E5%BC%8F"><span class="toc-number">2.2.5.</span> <span class="toc-text">中介者模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%87%E5%BF%98%E5%BD%95%E6%A8%A1%E5%BC%8F"><span class="toc-number">2.2.6.</span> <span class="toc-text">备忘录模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F"><span class="toc-number">2.2.7.</span> <span class="toc-text">观察者模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%8A%B6%E6%80%81%E6%A8%A1%E5%BC%8F"><span class="toc-number">2.2.8.</span> <span class="toc-text">状态模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F"><span class="toc-number">2.2.9.</span> <span class="toc-text">策略模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A8%A1%E6%9D%BF%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F"><span class="toc-number">2.2.10.</span> <span class="toc-text">模板方法模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%BF%E9%97%AE%E8%80%85%E6%A8%A1%E5%BC%8F"><span class="toc-number">2.2.11.</span> <span class="toc-text">访问者模式</span></a></li></ol></li></ol></li></ol>
+    </div>
+    
+    <div class="back-top iconfont-archer">&#xe639;</div>
+    <div class="sidebar sidebar-hide">
+    <ul class="sidebar-tabs sidebar-tabs-active-0">
+        <li class="sidebar-tab-archives"><span class="iconfont-archer">&#xe67d;</span><span class="tab-name">Archive</span></li>
+        <li class="sidebar-tab-tags"><span class="iconfont-archer">&#xe61b;</span><span class="tab-name">Tag</span></li>
+        <li class="sidebar-tab-categories"><span class="iconfont-archer">&#xe666;</span><span class="tab-name">Cate</span></li>
+    </ul>
+    <div class="sidebar-content sidebar-content-show-archive">
+          <div class="sidebar-panel-archives">
+    <!-- 在ejs中将archive按照时间排序 -->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-and-search">
+        <div class="total-archive">
+        Total : 66
+        </div>
+        <!-- search  -->
+        
+    </div>
+    
+    <div class="post-archive">
+    
+    
+    
+    
+    <div class="archive-year"> 2020 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/27</span><a class="archive-post-title" href= "/2020/06/27/Le-Deuxieme-Sexe/" >西蒙·波伏娃《第二性》读书笔记</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/24</span><a class="archive-post-title" href= "/2020/06/24/OOP-design-patterns/" >面向对象设计原则-课程笔记</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/17</span><a class="archive-post-title" href= "/2020/06/17/my-projects/" >我做过的项目</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/15</span><a class="archive-post-title" href= "/2020/05/15/leetcode-notes/" >LeetCode刷题笔记</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2019 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/29</span><a class="archive-post-title" href= "/2019/12/29/network-review/" >计算机网络-期末复习</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/03</span><a class="archive-post-title" href= "/2019/11/03/tofel-1st-exp/" >托福首考日记</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/12</span><a class="archive-post-title" href= "/2019/10/12/network-notes/" >计算机网络-课程笔记</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/11</span><a class="archive-post-title" href= "/2019/10/11/dip-notes/" >数字图像处理课程笔记</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/09</span><a class="archive-post-title" href= "/2019/10/09/database/" >数据库学习笔记</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/20</span><a class="archive-post-title" href= "/2019/07/20/paper-reading/" >论文阅读笔记</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/08</span><a class="archive-post-title" href= "/2019/07/08/system-rebuild-notes/" >Windows-Ubuntu双系统重装笔记</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/21</span><a class="archive-post-title" href= "/2019/06/21/os-review/" >操作系统期末复习笔记</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/21</span><a class="archive-post-title" href= "/2019/06/21/OSTEP-persistence/" >OSTEP阅读笔记-持久化部分</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/25</span><a class="archive-post-title" href= "/2019/05/25/ps-4-13-Randomized-Algorithms/" >难问题求解学习笔记-随机算法</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/18</span><a class="archive-post-title" href= "/2019/05/18/ps-4-12-Approximation-Algorithms/" >难问题求解学习笔记-近似算法</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/19</span><a class="archive-post-title" href= "/2019/04/19/oj-templates/" >自己看得惯的板子整理</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/15</span><a class="archive-post-title" href= "/2019/04/15/os-midterm/" >os期中复习</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/13</span><a class="archive-post-title" href= "/2019/04/13/ps-4-7-cryptographic-algorithm/" >问题求解学习笔记-密码算法</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/06</span><a class="archive-post-title" href= "/2019/04/06/clrs-31Number-Theoretic-Algorithms/" >算法导论学习笔记-数论算法</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/30</span><a class="archive-post-title" href= "/2019/03/30/ps-4-6-basic-number-theory/" >问题求解学习笔记-数论基础</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/23</span><a class="archive-post-title" href= "/2019/03/23/clrs-32String-Mathcing/" >算法导论学习笔记-字符串匹配</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/14</span><a class="archive-post-title" href= "/2019/03/14/ps-4-4-isomorphism/" >问求学习笔记-群同构基本定理与正规子群</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/09</span><a class="archive-post-title" href= "/2019/03/09/ps-4-3-permutation-lagrange/" >问求学习笔记-置换群与拉格朗日定理</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/02</span><a class="archive-post-title" href= "/2019/03/02/ps-4-2-group/" >问求学习笔记-群论初步</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/18</span><a class="archive-post-title" href= "/2019/02/18/2019-winter-flags/" >2019年寒假计划(flags)</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/13</span><a class="archive-post-title" href= "/2019/02/13/clrs-29Linear-Programming/" >算法导论学习笔记-线性规划</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/12</span><a class="archive-post-title" href= "/2019/02/12/SVM-getstart/" >SVM的临时抱佛脚for HK</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/11</span><a class="archive-post-title" href= "/2019/02/11/HKUST-discussion/" >HKUST项目讨论内容</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/30</span><a class="archive-post-title" href= "/2019/01/30/ICM-feelings/" >2019美赛经历</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/23</span><a class="archive-post-title" href= "/2019/01/23/python-getstart/" >python学习笔记</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/19</span><a class="archive-post-title" href= "/2019/01/19/matlab-usage/" >数学建模几种常用算法</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/16</span><a class="archive-post-title" href= "/2019/01/16/matlab-getstart/" >MATLAB临时抱佛脚</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/07</span><a class="archive-post-title" href= "/2019/01/07/Problem-Solving-3/" >问题求解3-总复习</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2018 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/29</span><a class="archive-post-title" href= "/2018/12/29/lab4-report/" >Lab4 实验报告</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/28</span><a class="archive-post-title" href= "/2018/12/28/PA4-report/" >PA4实验报告</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/18</span><a class="archive-post-title" href= "/2018/12/18/clrs28Matrix-Operation/" >算法导论学习笔记-矩阵运算</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/13</span><a class="archive-post-title" href= "/2018/12/13/planar-graph-and-coloring/" >图论学习笔记-平面图与着色</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/10</span><a class="archive-post-title" href= "/2018/12/10/Dinner/" >卫宫家今天的饭</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/08</span><a class="archive-post-title" href= "/2018/12/08/PA3-report/" >PA3实验报告</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/05</span><a class="archive-post-title" href= "/2018/12/05/clrs-26Maximum-Flow/" >算法导论学习笔记-最大流</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/28</span><a class="archive-post-title" href= "/2018/11/28/matchings/" >图论学习笔记-图中的匹配与覆盖</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/24</span><a class="archive-post-title" href= "/2018/11/24/lab3-report/" >Lab3：链接与加载（2）实验报告</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/21</span><a class="archive-post-title" href= "/2018/11/21/traversability/" >图论学习笔记-旅行问题</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/14</span><a class="archive-post-title" href= "/2018/11/14/connectivity/" >图论学习笔记-图中的连通性与距离</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/07</span><a class="archive-post-title" href= "/2018/11/07/clrs-25All-Pairs-Shortest-Paths/" >算法导论学习笔记-所有结点对的最短路径问题</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/06</span><a class="archive-post-title" href= "/2018/11/06/lab2-report/" >Lab2:链接与加载 实验报告</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/06</span><a class="archive-post-title" href= "/2018/11/06/PA2-report/" >PA2实验报告</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/30</span><a class="archive-post-title" href= "/2018/10/30/clrs-24Single-Source-Shortest-Path/" >算法导论学习笔记-单源最短路径</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/24</span><a class="archive-post-title" href= "/2018/10/24/clrs-22graphic-algs/" >算法导论学习笔记-基本图论算法</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/14</span><a class="archive-post-title" href= "/2018/10/14/tree/" >图论学习笔记-树</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/12</span><a class="archive-post-title" href= "/2018/10/12/lab1-report/" >Lab1-乘法 实验报告</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/06</span><a class="archive-post-title" href= "/2018/10/06/clrs-21DisjointSets/" >算法导论学习笔记-用于不相交集合的数据结构</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/04</span><a class="archive-post-title" href= "/2018/10/04/PA1-report/" >PA1实验报告</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/04</span><a class="archive-post-title" href= "/2018/10/04/pa-inspirations/" >做pa的时候可能会用到的操作</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/27</span><a class="archive-post-title" href= "/2018/09/27/ics-process-calling/" >关于“过程调用”的讨论</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/21</span><a class="archive-post-title" href= "/2018/09/21/regex/" >正则表达式学习笔记</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/17</span><a class="archive-post-title" href= "/2018/09/17/clrs-17amortized/" >算法导论学习笔记-摊还分析</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/17</span><a class="archive-post-title" href= "/2018/09/17/clrs-16greedy/" >算法导论学习笔记-贪心算法</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/16</span><a class="archive-post-title" href= "/2018/09/16/startjava/" >面向OJ的Java学习</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/12</span><a class="archive-post-title" href= "/2018/09/12/tmux/" >使用tmux变身炫酷程序猿(x</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/06</span><a class="archive-post-title" href= "/2018/09/06/vim/" >vim初探</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/31</span><a class="archive-post-title" href= "/2018/08/31/clrs-15dp/" >算法导论学习笔记-动态规划</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/30</span><a class="archive-post-title" href= "/2018/08/30/asm2/" >汇编语言复习笔记（二）</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/29</span><a class="archive-post-title" href= "/2018/08/29/asm-notes/" >汇编语言复习笔记（一）</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/18</span><a class="archive-post-title" href= "/2018/08/18/freshman/" >胡言乱语的大一总结</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/12</span><a class="archive-post-title" href= "/2018/08/12/test-md/" >Markdown test</a>
+        </li>
+    
+    </div>
+  </div>
+        <div class="sidebar-panel-tags">
+    <div class="sidebar-tags-name">
+    
+        <span class="sidebar-tag-name" data-tags="Flags"><span class="iconfont-archer">&#xe606;</span>Flags</span>
+    
+        <span class="sidebar-tag-name" data-tags="Math Modeling"><span class="iconfont-archer">&#xe606;</span>Math Modeling</span>
+    
+        <span class="sidebar-tag-name" data-tags="Notes"><span class="iconfont-archer">&#xe606;</span>Notes</span>
+    
+        <span class="sidebar-tag-name" data-tags="pa"><span class="iconfont-archer">&#xe606;</span>pa</span>
+    
+        <span class="sidebar-tag-name" data-tags="ICS"><span class="iconfont-archer">&#xe606;</span>ICS</span>
+    
+        <span class="sidebar-tag-name" data-tags="Problem Solving"><span class="iconfont-archer">&#xe606;</span>Problem Solving</span>
+    
+        <span class="sidebar-tag-name" data-tags="Machine Learning"><span class="iconfont-archer">&#xe606;</span>Machine Learning</span>
+    
+        <span class="sidebar-tag-name" data-tags="Assembly Language"><span class="iconfont-archer">&#xe606;</span>Assembly Language</span>
+    
+        <span class="sidebar-tag-name" data-tags="CLRS"><span class="iconfont-archer">&#xe606;</span>CLRS</span>
+    
+        <span class="sidebar-tag-name" data-tags="dynamic programming"><span class="iconfont-archer">&#xe606;</span>dynamic programming</span>
+    
+        <span class="sidebar-tag-name" data-tags="greedy algorithm"><span class="iconfont-archer">&#xe606;</span>greedy algorithm</span>
+    
+        <span class="sidebar-tag-name" data-tags="amortized analysis"><span class="iconfont-archer">&#xe606;</span>amortized analysis</span>
+    
+        <span class="sidebar-tag-name" data-tags="Disjoint Sets"><span class="iconfont-archer">&#xe606;</span>Disjoint Sets</span>
+    
+        <span class="sidebar-tag-name" data-tags="Data Structure"><span class="iconfont-archer">&#xe606;</span>Data Structure</span>
+    
+        <span class="sidebar-tag-name" data-tags="Single Source Shortest Path"><span class="iconfont-archer">&#xe606;</span>Single Source Shortest Path</span>
+    
+        <span class="sidebar-tag-name" data-tags="Bellman-Ford"><span class="iconfont-archer">&#xe606;</span>Bellman-Ford</span>
+    
+        <span class="sidebar-tag-name" data-tags="Dijkstra"><span class="iconfont-archer">&#xe606;</span>Dijkstra</span>
+    
+        <span class="sidebar-tag-name" data-tags="Graph Algorithms"><span class="iconfont-archer">&#xe606;</span>Graph Algorithms</span>
+    
+        <span class="sidebar-tag-name" data-tags="Graph Theory"><span class="iconfont-archer">&#xe606;</span>Graph Theory</span>
+    
+        <span class="sidebar-tag-name" data-tags="Connectivity"><span class="iconfont-archer">&#xe606;</span>Connectivity</span>
+    
+        <span class="sidebar-tag-name" data-tags="freshman"><span class="iconfont-archer">&#xe606;</span>freshman</span>
+    
+        <span class="sidebar-tag-name" data-tags="college life"><span class="iconfont-archer">&#xe606;</span>college life</span>
+    
+        <span class="sidebar-tag-name" data-tags="ics"><span class="iconfont-archer">&#xe606;</span>ics</span>
+    
+        <span class="sidebar-tag-name" data-tags="process calling"><span class="iconfont-archer">&#xe606;</span>process calling</span>
+    
+        <span class="sidebar-tag-name" data-tags="Lab"><span class="iconfont-archer">&#xe606;</span>Lab</span>
+    
+        <span class="sidebar-tag-name" data-tags="Ics"><span class="iconfont-archer">&#xe606;</span>Ics</span>
+    
+        <span class="sidebar-tag-name" data-tags="Matchings"><span class="iconfont-archer">&#xe606;</span>Matchings</span>
+    
+        <span class="sidebar-tag-name" data-tags="Factorization"><span class="iconfont-archer">&#xe606;</span>Factorization</span>
+    
+        <span class="sidebar-tag-name" data-tags="MATLAB"><span class="iconfont-archer">&#xe606;</span>MATLAB</span>
+    
+        <span class="sidebar-tag-name" data-tags="Interview"><span class="iconfont-archer">&#xe606;</span>Interview</span>
+    
+        <span class="sidebar-tag-name" data-tags="Linux"><span class="iconfont-archer">&#xe606;</span>Linux</span>
+    
+        <span class="sidebar-tag-name" data-tags="vim"><span class="iconfont-archer">&#xe606;</span>vim</span>
+    
+        <span class="sidebar-tag-name" data-tags="Group Theory"><span class="iconfont-archer">&#xe606;</span>Group Theory</span>
+    
+        <span class="sidebar-tag-name" data-tags="regular expressions"><span class="iconfont-archer">&#xe606;</span>regular expressions</span>
+    
+        <span class="sidebar-tag-name" data-tags="linux"><span class="iconfont-archer">&#xe606;</span>linux</span>
+    
+        <span class="sidebar-tag-name" data-tags="Java"><span class="iconfont-archer">&#xe606;</span>Java</span>
+    
+        <span class="sidebar-tag-name" data-tags="programming"><span class="iconfont-archer">&#xe606;</span>programming</span>
+    
+        <span class="sidebar-tag-name" data-tags="markdown"><span class="iconfont-archer">&#xe606;</span>markdown</span>
+    
+        <span class="sidebar-tag-name" data-tags="tmux"><span class="iconfont-archer">&#xe606;</span>tmux</span>
+    
+        <span class="sidebar-tag-name" data-tags="Traversibility"><span class="iconfont-archer">&#xe606;</span>Traversibility</span>
+    
+        <span class="sidebar-tag-name" data-tags="Graph"><span class="iconfont-archer">&#xe606;</span>Graph</span>
+    
+        <span class="sidebar-tag-name" data-tags="Tree"><span class="iconfont-archer">&#xe606;</span>Tree</span>
+    
+        <span class="sidebar-tag-name" data-tags="Python"><span class="iconfont-archer">&#xe606;</span>Python</span>
+    
+        <span class="sidebar-tag-name" data-tags="notes"><span class="iconfont-archer">&#xe606;</span>notes</span>
+    
+    </div>
+    <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
+    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
+    缺失模块。<br/>
+    1、请确保node版本大于6.2<br/>
+    2、在博客根目录（注意不是archer根目录）执行以下命令：<br/>
+    <span style="color: #f75357; font-size: 1rem; line-height: 2rem;">npm i hexo-generator-json-content --save</span><br/>
+    3、在根目录_config.yml里添加配置：
+    <pre style="color: #787878; font-size: 0.6rem;">
+jsonContent:
+  meta: false
+  pages: false
+  posts:
+    title: true
+    date: true
+    path: true
+    text: false
+    raw: false
+    content: false
+    slug: false
+    updated: false
+    comments: false
+    link: false
+    permalink: false
+    excerpt: false
+    categories: true
+    tags: true</pre>
+    </div> 
+    <div class="sidebar-tags-list"></div>
+</div>
+        <div class="sidebar-panel-categories">
+    <div class="sidebar-categories-name">
+    
+        <span class="sidebar-category-name" data-categories="Flags"><span class="iconfont-archer">&#xe60a;</span>Flags</span>
+    
+        <span class="sidebar-category-name" data-categories="Diary"><span class="iconfont-archer">&#xe60a;</span>Diary</span>
+    
+        <span class="sidebar-category-name" data-categories="Notes"><span class="iconfont-archer">&#xe60a;</span>Notes</span>
+    
+        <span class="sidebar-category-name" data-categories="Self-learning"><span class="iconfont-archer">&#xe60a;</span>Self-learning</span>
+    
+    </div>
+    <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
+    <div class="sidebar-categories-list"></div>
+</div>
+    </div>
+</div> 
+    <script>
+    var siteMeta = {
+        root: "/",
+        author: "Mengzelev"
+    }
+</script>
+    <!-- CDN failover -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+    <script type="text/javascript">
+        if (typeof window.$ === 'undefined')
+        {
+            console.warn('jquery load from jsdelivr failed, will load local script')
+            document.write('<script src="/lib/jquery.min.js">\x3C/script>')
+        }
+    </script>
+    <script src="/scripts/main.js"></script>
+    <!-- algolia -->
+    
+    <!-- busuanzi  -->
+    
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+    <!-- CNZZ  -->
+    
+    </div>
+    <!-- async load share.js -->
+    
+        <script src="/scripts/share.js" async></script>    
+     
+	<!--浏览器搞笑标题-->
+	<script type="text/javascript" src="\js\FunnyTitle.js"></script>
+	<!--动态线条背景-->
+	<script type="text/javascript"
+	color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
+	</script>
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":150},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({{ JSON.stringify(config) }});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="{{ src }}">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end --></body>
+</html>
+
+

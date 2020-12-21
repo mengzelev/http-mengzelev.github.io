@@ -191,9 +191,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" defer></script>
     <!-- 百度统计  -->
     
-    <!-- 谷歌统计  --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    <!-- 谷歌统计  -->
     
-</head>
+<meta name="generator" content="Hexo 5.3.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
 
     
         <body class="post-body">
@@ -261,7 +261,7 @@ height:50vh;
                 
                 
                     <div class="post-intro-read">
-                        <span>Word count: <span class="post-count">7,939</span> / Reading time: <span class="post-count">31 min</span></span>
+                        <span>Word count: <span class="post-count">7,320</span> / Reading time: <span class="post-count">28 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
@@ -397,7 +397,7 @@ height:50vh;
 <p>采样数量越多，图像越清晰（1024<em>1024$\to$ 16</em>16）<br>量化级别越高，图像越真实（256灰度级$\to$4灰度级，低灰度级会出现<strong>伪轮廓</strong>）</p>
 <p>图像有M*N个像素，每个像素有$Q$个灰度级别。<br>M,N,Q通常总是取为2的整数幂。<br>$Q=2^b$，称为图像的b bit量化，或称$Q$级灰度。<br>存在量化误差，b越大重建图像失真越小。</p>
 <p>有<strong>大量细节</strong>的图，需要的量化级数<strong>较少</strong></p>
-<p>最佳量化：使量化误差（均方误差测度）最小的量化方法<br>均方误差$\delta^2=\sum\limits_{k=1}^{K}\int_{Z_k}^{Z_{k+1}}(Z_k-q_k)^2p(Z)dZ$<br>取$q_k=\frac{1}{2}(Z_k+Z_{k+1})$达到最佳量化</p>
+<p>最佳量化：使量化误差（均方误差测度）最小的量化方法<br>均方误差$\delta^2=\sum\limits<em>{k=1}^{K}\int</em>{Z<em>k}^{Z</em>{k+1}}(Z<em>k-q_k)^2p(Z)dZ$<br>取$q_k=\frac{1}{2}(Z_k+Z</em>{k+1})$达到最佳量化</p>
 <h1 id="Ch02-空间域图像增强（Part-1）"><a href="#Ch02-空间域图像增强（Part-1）" class="headerlink" title="Ch02 空间域图像增强（Part 1）"></a>Ch02 空间域图像增强（Part 1）</h1><p>考点：灰度变换、直方图</p>
 <h2 id="基本灰度变换"><a href="#基本灰度变换" class="headerlink" title="基本灰度变换"></a>基本灰度变换</h2><p>三类基本函数：线性、对数、幂律</p>
 <ul>
@@ -434,9 +434,9 @@ height:50vh;
 <h2 id="直方图处理"><a href="#直方图处理" class="headerlink" title="直方图处理"></a>直方图处理</h2><h3 id="灰度直方图"><a href="#灰度直方图" class="headerlink" title="灰度直方图"></a>灰度直方图</h3><ul>
 <li>图像中每种灰度级的像素个数</li>
 <li>灰度直方图的横坐是灰度级，纵坐标表示该灰度级出现的<strong>频率</strong></li>
-<li>阈值面积函数$A(D)$：连续图像中具有灰度级$\ge D$的轮廓线所包围的面积$$A(D)=\int_{D}^{\infty}H(p)dp$$</li>
-<li>概率密度函数$PDF$：归一化到单位面积的直方图（每种灰度值出现的概率密度函数） $$PDF=P(D)=\frac{1}{A_0}H(D)$$</li>
-<li>累计分布函数$CDF$：归一化后灰度级$\le D$的轮廓线所包围的面积 $$CDF=P(D)=\int\limits_0^D p(u)du=\frac{1}{A_0}\int\limits_{0}^{D}H(u)du$$</li>
+<li>阈值面积函数$A(D)$：连续图像中具有灰度级$\ge D$的轮廓线所包围的面积<script type="math/tex">A(D)=\int_{D}^{\infty}H(p)dp</script></li>
+<li>概率密度函数$PDF$：归一化到单位面积的直方图（每种灰度值出现的概率密度函数） <script type="math/tex">PDF=P(D)=\frac{1}{A_0}H(D)</script></li>
+<li>累计分布函数$CDF$：归一化后灰度级$\le D$的轮廓线所包围的面积 <script type="math/tex">CDF=P(D)=\int\limits_0^D p(u)du=\frac{1}{A_0}\int\limits_{0}^{D}H(u)du</script></li>
 <li>$H(D)=A(D)-A(D+1)$</li>
 </ul>
 <h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><p>图像具有$L$级灰度，大小为$M*N$的灰度图像$f(x,t)$的灰度直方图$hist[0,\ldots L-1]$的算法</p>
@@ -452,10 +452,12 @@ height:50vh;
 </ul>
 <h1 id="Ch03-直方图处理"><a href="#Ch03-直方图处理" class="headerlink" title="Ch03 直方图处理"></a>Ch03 直方图处理</h1><p>考点：直方图均衡</p>
 <h2 id="理论"><a href="#理论" class="headerlink" title="理论"></a>理论</h2><p>直方图呈均匀分布时，对比度会有明显增加。<br>通过灰度变换函数，将原图像直方图的分布均衡化，这一过程称为<strong>直方图均衡化</strong></p>
-<p>输出图像的概率密度$$p_s(s)=p_r(T^{-1}(s))\frac{1}{|T’(T^{-1}(s))|}$$<br>若$s=T(r)$为单调递增函数：<br>$$p_s(s)=p_r(r)\frac{dr}{ds}$$<br>($r$用$s$表示)</p>
+<p>输出图像的概率密度<script type="math/tex">p_s(s)=p_r(T^{-1}(s))\frac{1}{|T'(T^{-1}(s))|}</script><br>若$s=T(r)$为单调递增函数：</p>
+<script type="math/tex; mode=display">p_s(s)=p_r(r)\frac{dr}{ds}</script><p>($r$用$s$表示)</p>
 <p>e.g. $s=T(r)=ar+b$,即$r=\frac{s-b}{a}$，则有$p_s(s)=\frac{1}{a}p_r(\frac{s-b}{a})$.</p>
-<p>直方图均衡化变换函数：<br>$$s=T(r)=(L-1)\int_{0}^{r}p_r(w)dw$$<br>离散近似：<br>$$p_r(r_k)=\frac{n_k}{MN}$$<br>$$s_k=T(r_k)=(L-1)\sum\limits_{j=0}^{k}p_r(r_j)=\frac{(L-1)}{MN}\sum\limits_{j=0}^{k}n_j$$</p>
-<p><strong>步骤</strong>：</p>
+<p>直方图均衡化变换函数：</p>
+<script type="math/tex; mode=display">s=T(r)=(L-1)\int_{0}^{r}p_r(w)dw</script><p>离散近似：</p>
+<script type="math/tex; mode=display">p_r(r_k)=\frac{n_k}{MN}</script><script type="math/tex; mode=display">s_k=T(r_k)=(L-1)\sum\limits_{j=0}^{k}p_r(r_j)=\frac{(L-1)}{MN}\sum\limits_{j=0}^{k}n_j</script><p><strong>步骤</strong>：</p>
 <ul>
 <li>给定$L$和$p_r(r_k),k=0,1,\ldots, L-1$</li>
 <li>用上述公式计算$s_k$</li>
@@ -505,7 +507,8 @@ height:50vh;
 <li>最大值滤波器</li>
 <li>最小值滤波器</li>
 </ul>
-<h2 id="锐化空间滤波器"><a href="#锐化空间滤波器" class="headerlink" title="锐化空间滤波器"></a>锐化空间滤波器</h2><h3 id="数学基础"><a href="#数学基础" class="headerlink" title="数学基础"></a>数学基础</h3><table>
+<h2 id="锐化空间滤波器"><a href="#锐化空间滤波器" class="headerlink" title="锐化空间滤波器"></a>锐化空间滤波器</h2><h3 id="数学基础"><a href="#数学基础" class="headerlink" title="数学基础"></a>数学基础</h3><div class="table-container">
+<table>
 <thead>
 <tr>
 <th style="text-align:center">一阶导数</th>
@@ -539,9 +542,12 @@ height:50vh;
 </tr>
 </tbody>
 </table>
-<h3 id="拉普拉斯算子"><a href="#拉普拉斯算子" class="headerlink" title="拉普拉斯算子"></a>拉普拉斯算子</h3><p>$$\nabla^2f=\frac{\partial^2f}{\partial x^2}+\frac{\partial^2f}{\partial y^2}$$<br>离散化<br>$$\frac{\partial^2f}{\partial x^2}=f(x+1,y)+f(x-1,y)-2f(x,y)$$<br>$$\frac{\partial^2f}{\partial x^2}=f(x,y+1)+f(x,y-1)-2f(x,y)$$<br><strong>注意减的是2倍的</strong><br>$$\nabla^2f=f(x+1,y)+f(x-1,y)+f(x,y+1)+f(x,y-1)-4f(x,y)$$<br>还有对角线形式的</p>
-<p>拉普拉斯算子结果叠加到图像中<br>$$g(x,y)=f(x,y)+c[\nabla^2f(x,y)]$$</p>
-<ul>
+</div>
+<h3 id="拉普拉斯算子"><a href="#拉普拉斯算子" class="headerlink" title="拉普拉斯算子"></a>拉普拉斯算子</h3><script type="math/tex; mode=display">\nabla^2f=\frac{\partial^2f}{\partial x^2}+\frac{\partial^2f}{\partial y^2}</script><p>离散化</p>
+<script type="math/tex; mode=display">\frac{\partial^2f}{\partial x^2}=f(x+1,y)+f(x-1,y)-2f(x,y)</script><script type="math/tex; mode=display">\frac{\partial^2f}{\partial x^2}=f(x,y+1)+f(x,y-1)-2f(x,y)</script><p><strong>注意减的是2倍的</strong></p>
+<script type="math/tex; mode=display">\nabla^2f=f(x+1,y)+f(x-1,y)+f(x,y+1)+f(x,y-1)-4f(x,y)</script><p>还有对角线形式的</p>
+<p>拉普拉斯算子结果叠加到图像中</p>
+<script type="math/tex; mode=display">g(x,y)=f(x,y)+c[\nabla^2f(x,y)]</script><ul>
 <li>采用负的中心系数，$c=-1$</li>
 <li>采用正的中心系数，$c=1$</li>
 </ul>
@@ -551,9 +557,11 @@ height:50vh;
 <li>从原图像减去模糊图像得到模板</li>
 <li>将模板加到原图像</li>
 </ol>
-<p>具体公式<br>$$g_{mask}(x,y)=f(x,y)-\overline{f}(x,y)$$<br>$$g(x,y)=f(x,y)+kg_{mask}(x,y)$$<br>非锐化掩蔽$k=1$；高提升滤波$k&gt;1$</p>
-<h3 id="使用一阶导数锐化图像"><a href="#使用一阶导数锐化图像" class="headerlink" title="使用一阶导数锐化图像"></a>使用一阶导数锐化图像</h3><p>利用梯度的大小<br>$$M(x,y)=\sqrt{(\frac{\partial f}{\partial x})^2+(\frac{\partial f}{\partial y})^2}$$<br>近似计算<br>$$M(x,y)=|g_x|+|g_y|$$</p>
-<ul>
+<p>具体公式</p>
+<script type="math/tex; mode=display">g_{mask}(x,y)=f(x,y)-\overline{f}(x,y)</script><script type="math/tex; mode=display">g(x,y)=f(x,y)+kg_{mask}(x,y)</script><p>非锐化掩蔽$k=1$；高提升滤波$k&gt;1$</p>
+<h3 id="使用一阶导数锐化图像"><a href="#使用一阶导数锐化图像" class="headerlink" title="使用一阶导数锐化图像"></a>使用一阶导数锐化图像</h3><p>利用梯度的大小</p>
+<script type="math/tex; mode=display">M(x,y)=\sqrt{(\frac{\partial f}{\partial x})^2+(\frac{\partial f}{\partial y})^2}</script><p>近似计算</p>
+<script type="math/tex; mode=display">M(x,y)=|g_x|+|g_y|</script><ul>
 <li>sobel算子（实验写过）</li>
 </ul>
 <h2 id="算数操作增强"><a href="#算数操作增强" class="headerlink" title="算数操作增强"></a>算数操作增强</h2><ul>
@@ -582,11 +590,11 @@ height:50vh;
 <li>仿射变换：什么，特点</li>
 <li>灰度内插：最近邻，线性，双线性</li>
 </ul>
-<h2 id="仿射变换"><a href="#仿射变换" class="headerlink" title="仿射变换"></a>仿射变换</h2><p>包括了旋转、伸缩、平移、倾斜等变换<br>$$x=t_{11}v+t_{21}w+t_{31}$$<br>$$y=t_{12}v+t_{22}w+t_{32}$$</p>
-<ul>
-<li>$t_{31},t_{32}$刻画了平移量</li>
-<li>$t_{11},t_{22}$刻画了伸缩比例</li>
-<li>$t_{12},t_{21}$刻画了倾斜程度</li>
+<h2 id="仿射变换"><a href="#仿射变换" class="headerlink" title="仿射变换"></a>仿射变换</h2><p>包括了旋转、伸缩、平移、倾斜等变换</p>
+<script type="math/tex; mode=display">x=t_{11}v+t_{21}w+t_{31}</script><script type="math/tex; mode=display">y=t_{12}v+t_{22}w+t_{32}</script><ul>
+<li>$t<em>{31},t</em>{32}$刻画了平移量</li>
+<li>$t<em>{11},t</em>{22}$刻画了伸缩比例</li>
+<li>$t<em>{12},t</em>{21}$刻画了倾斜程度</li>
 <li>整体组合刻画了平移、旋转角度、倾斜程度</li>
 </ul>
 <p><strong>优点</strong>：</p>
@@ -628,16 +636,19 @@ height:50vh;
 <li>原理东西掌握</li>
 </ul>
 <h2 id="傅里叶变换基本知识"><a href="#傅里叶变换基本知识" class="headerlink" title="傅里叶变换基本知识"></a>傅里叶变换基本知识</h2><h3 id="冲激与采样"><a href="#冲激与采样" class="headerlink" title="冲激与采样"></a>冲激与采样</h3><p>连续：在0点值特别大，其余点为0，$[0,1]$上积分为1<br>离散：在0点值为1，其余点为0，$(-\infty,+\infty)$上的级数和为1</p>
-<p>采样性质：<br>$$\int_{-\infty}^{\infty}f(t)\delta(t-t_0)dt=f(t_0)$$<br>$$\sum\limits_{x=-\infty}^{\infty}f(x)\delta(x-x_0)=f(x_0)$$</p>
-<p>冲激串：无穷个以$\Delta T$为间距的周期性冲激之和</p>
+<p>采样性质：</p>
+<script type="math/tex; mode=display">\int_{-\infty}^{\infty}f(t)\delta(t-t_0)dt=f(t_0)</script><script type="math/tex; mode=display">\sum\limits_{x=-\infty}^{\infty}f(x)\delta(x-x_0)=f(x_0)</script><p>冲激串：无穷个以$\Delta T$为间距的周期性冲激之和</p>
 <p>傅里叶级数：周期为$T$的连续函数$f(t)$可以表示为正弦和余弦函数的加权之和</p>
 <h2 id="卷积定理"><a href="#卷积定理" class="headerlink" title="卷积定理"></a>卷积定理</h2><ul>
-<li>空间域卷积的傅里叶变换$\Leftrightarrow$傅里叶变换在频率域的乘积 $$f(t)\star h(t)\Leftrightarrow H(\mu)F(\mu)$$</li>
-<li>空间域乘积的傅里叶变换$\Leftrightarrow$傅里叶变换在频率域的卷积 $$f(t)h(t)\Leftrightarrow H(\mu)F(\mu)$$</li>
+<li>空间域卷积的傅里叶变换$\Leftrightarrow$傅里叶变换在频率域的乘积 <script type="math/tex">f(t)\star h(t)\Leftrightarrow H(\mu)F(\mu)</script></li>
+<li>空间域乘积的傅里叶变换$\Leftrightarrow$傅里叶变换在频率域的卷积 <script type="math/tex">f(t)h(t)\Leftrightarrow H(\mu)F(\mu)</script></li>
 </ul>
-<h2 id="采样定理"><a href="#采样定理" class="headerlink" title="采样定理"></a>采样定理</h2><p>连续函数采样：把冲激串与原函数相乘<br>$$\tilde{f}(t)=f(t)s_{\Delta T}(t)=\sum\limits_{n=-\infty}^{\infty}f(t)\delta(t-n\Delta T)$$<br>$$\tilde{F}(\mu)=F(\mu)\star S(\mu), S(\mu)=\frac{1}{\Delta T}\sum\limits_{n=-\infty}^{\infty}\delta(\mu-\frac{n}{\Delta T})$$<br>采样值$f_k=f(k\Delta T)$</p>
+<h2 id="采样定理"><a href="#采样定理" class="headerlink" title="采样定理"></a>采样定理</h2><p>连续函数采样：把冲激串与原函数相乘</p>
+<script type="math/tex; mode=display">\tilde{f}(t)=f(t)s_{\Delta T}(t)=\sum\limits_{n=-\infty}^{\infty}f(t)\delta(t-n\Delta T)</script><script type="math/tex; mode=display">\tilde{F}(\mu)=F(\mu)\star S(\mu), S(\mu)=\frac{1}{\Delta T}\sum\limits_{n=-\infty}^{\infty}\delta(\mu-\frac{n}{\Delta T})</script><p>采样值$f_k=f(k\Delta T)$</p>
 <p><img src="/2019/10/11/dip-notes/caiyang.png" alt=""><br><img src="/2019/10/11/dip-notes/caiyangthm.png" alt=""></p>
-<p><strong>采样定理</strong>：如果以超过函数最高频率的两倍采样率来获得样本，连续的带限函数可以完美地从它的样本集来恢复。<br>即如果<br>$$<br>\frac{1}{2\Delta T}&gt;\mu_{\max}\Leftrightarrow \frac{1}{\Delta T}&gt;2\mu_{\max}<br>$$<br>就可以从$\tilde F(\mu)$中分离出$F(\mu)$. $2\mu_{\max}$称为奈奎斯特频率。<br><strong>二维采样定理</strong>：在两个维度上都要满足一维采样定理</p>
+<p><strong>采样定理</strong>：如果以超过函数最高频率的两倍采样率来获得样本，连续的带限函数可以完美地从它的样本集来恢复。<br>即如果</p>
+<script type="math/tex; mode=display">
+\frac{1}{2\Delta T}>\mu_{\max}\Leftrightarrow \frac{1}{\Delta T}>2\mu_{\max}</script><p>就可以从$\tilde F(\mu)$中分离出$F(\mu)$. $2\mu_{\max}$称为奈奎斯特频率。<br><strong>二维采样定理</strong>：在两个维度上都要满足一维采样定理</p>
 <h3 id="混淆"><a href="#混淆" class="headerlink" title="混淆"></a>混淆</h3><ul>
 <li>欠采样：以低于奈奎斯特频率采样。无法分离，无法补救。</li>
 <li>采样是有限的，所以实际中难以避免混淆。</li>
@@ -652,15 +663,20 @@ height:50vh;
 <li>采样时间限制在$[0,T]$，可以写成一个只在$[0,T]$为1其余地方为0的函数$h(t)$</li>
 <li>$f(t)\Rightarrow f(t)h(t)\Leftrightarrow H(\mu)\star F(\mu)$</li>
 </ul>
-<h3 id="由样本恢复原函数"><a href="#由样本恢复原函数" class="headerlink" title="由样本恢复原函数"></a>由样本恢复原函数</h3><p>$$<br>f(t)=\sum\limits_{n=-\infty}^{\infty}f(n\Delta T)sinc[(t-n\Delta T)/\Delta T]<br>$$</p>
-<ul>
+<h3 id="由样本恢复原函数"><a href="#由样本恢复原函数" class="headerlink" title="由样本恢复原函数"></a>由样本恢复原函数</h3><script type="math/tex; mode=display">
+f(t)=\sum\limits_{n=-\infty}^{\infty}f(n\Delta T)sinc[(t-n\Delta T)/\Delta T]</script><ul>
 <li>函数内插：无限个样本的内插，实际中只能近似</li>
 <li>$t=k\Delta T, f(t)=f(k\Delta T)$</li>
 </ul>
-<h2 id="离散傅里叶变换"><a href="#离散傅里叶变换" class="headerlink" title="离散傅里叶变换"></a>离散傅里叶变换</h2><h3 id="一维DFT"><a href="#一维DFT" class="headerlink" title="一维DFT"></a>一维DFT</h3><p>DFT：<br>$$<br>F(u)=\sum\limits_{n=0}^{M-1}f(x)e^{-j2\pi ux/M}, u=0,1,2,\ldots, M-1<br>$$<br>IDFT:<br>$$<br>f(x)=\frac{1}{M}\sum\limits_{u=0}^{M-1}F(u)e^{j2\pi ux/M}， x=0,1,2\ldots M-1<br>$$<br>$x$是整数<br>$\mu=\frac{m}{M\Delta T}$ 对 $\tilde{F}(\mu)$ 的一个周期 $[0,1/\Delta T]$采集$M$个样本</p>
+<h2 id="离散傅里叶变换"><a href="#离散傅里叶变换" class="headerlink" title="离散傅里叶变换"></a>离散傅里叶变换</h2><h3 id="一维DFT"><a href="#一维DFT" class="headerlink" title="一维DFT"></a>一维DFT</h3><p>DFT：</p>
+<script type="math/tex; mode=display">
+F(u)=\sum\limits_{n=0}^{M-1}f(x)e^{-j2\pi ux/M}, u=0,1,2,\ldots, M-1</script><p>IDFT:</p>
+<script type="math/tex; mode=display">
+f(x)=\frac{1}{M}\sum\limits_{u=0}^{M-1}F(u)e^{j2\pi ux/M}， x=0,1,2\ldots M-1</script><p>$x$是整数<br>$\mu=\frac{m}{M\Delta T}$ 对 $\tilde{F}(\mu)$ 的一个周期 $[0,1/\Delta T]$采集$M$个样本</p>
 <ul>
-<li><p>离散卷积<br>  $$<br>  f(x)\star h(x)=\sum\limits_{m=0}^{M-1}f(m)h(x-m)<br>  $$</p>
-<ul>
+<li><p>离散卷积</p>
+<script type="math/tex; mode=display">
+  f(x)\star h(x)=\sum\limits_{m=0}^{M-1}f(m)h(x-m)</script><ul>
 <li>周期函数，也被称为循环卷积</li>
 <li>与之前的卷积不一样，主要区别是$x$（之前的卷积对不够的地方补零，这个是取循环值）</li>
 <li>卷积定理依然成立</li>
@@ -673,12 +689,14 @@ height:50vh;
 </ul>
 </li>
 </ul>
-<h3 id="二维DFT"><a href="#二维DFT" class="headerlink" title="二维DFT"></a>二维DFT</h3><p>$$<br>F(u,v)=\sum\limits_{x=0}^{M-1}\sum\limits_{y=0}^{N-1}f(x,y)e^{-2j\pi (ux/M+vx/N)},<br>u=0,1,\ldots,M-1; v= 0,1,\ldots, N-1<br>$$</p>
-<ul>
+<h3 id="二维DFT"><a href="#二维DFT" class="headerlink" title="二维DFT"></a>二维DFT</h3><script type="math/tex; mode=display">
+F(u,v)=\sum\limits_{x=0}^{M-1}\sum\limits_{y=0}^{N-1}f(x,y)e^{-2j\pi (ux/M+vx/N)},
+u=0,1,\ldots,M-1; v= 0,1,\ldots, N-1</script><ul>
 <li>$f(x,y)$是大小为$M\times N$的二维图像</li>
 </ul>
-<p>二维IDFT<br>$$<br>f(x,y)=\frac{1}{MN}\sum\limits_{u=0}^{M-1}\sum\limits_{v=0}^{N-1}F(u,v)e^{j2\pi (ux/M+vx/N)}<br>$$</p>
-<ul>
+<p>二维IDFT</p>
+<script type="math/tex; mode=display">
+f(x,y)=\frac{1}{MN}\sum\limits_{u=0}^{M-1}\sum\limits_{v=0}^{N-1}F(u,v)e^{j2\pi (ux/M+vx/N)}</script><ul>
 <li>对连续$f(x,y)$采样，两个方向上的总时间$T=M\Delta T, Z=N\Delta Z$</li>
 <li>离散频域中的间隔$\Delta u=\frac{1}{M\Delta T}, \Delta v=\frac{1}{N\Delta Z}$</li>
 <li>离散频域范围$\frac{1}{\Delta T}, \frac{1}{\Delta Z}$</li>
@@ -748,8 +766,9 @@ height:50vh;
 <li>拉普拉斯算子，其他俩不用看</li>
 <li>低通高通模糊锐化（基本常识</li>
 </ul>
-<h2 id="高通滤波器"><a href="#高通滤波器" class="headerlink" title="高通滤波器"></a>高通滤波器</h2><p>从低通构造高通：<br>$$<br>H_{HP}(u,v)=1-H_{LP}(u,v)<br>$$</p>
-<p>图像都是低通倒过来</p>
+<h2 id="高通滤波器"><a href="#高通滤波器" class="headerlink" title="高通滤波器"></a>高通滤波器</h2><p>从低通构造高通：</p>
+<script type="math/tex; mode=display">
+H_{HP}(u,v)=1-H_{LP}(u,v)</script><p>图像都是低通倒过来</p>
 <h3 id="理想高通滤波器"><a href="#理想高通滤波器" class="headerlink" title="理想高通滤波器"></a>理想高通滤波器</h3><ul>
 <li>低频完全抑制，高频完全保留</li>
 <li>产生振铃，随着$D_0$增大振铃会有所缓解</li>
@@ -761,9 +780,14 @@ height:50vh;
 <li>结果更清晰一些</li>
 </ul>
 <h3 id="对比"><a href="#对比" class="headerlink" title="对比"></a>对比</h3><p><img src="/2019/10/11/dip-notes/gaotong.png" alt=""></p>
-<h2 id="频率域拉普拉斯算子"><a href="#频率域拉普拉斯算子" class="headerlink" title="频率域拉普拉斯算子"></a>频率域拉普拉斯算子</h2><p>频域滤波器（中心化）：<br>$$<br>H(u,v)=-4\pi^2D^2(u,v)<br>$$<br>$D(u,v)$为点$(u,v)$到中心点$(P/2,Q/2)$的距离</p>
-<p>拉普拉斯图像<br>$$<br>\Delta^2f(x,y)=\mathcal{F}^{-1}{H(u,v)F(u,v)}<br>$$<br>图像锐化$g(x,y)=f(x,y)-\Delta^2 f(x,y)$，频率域写法<br>$$<br>g(x,y)=\mathcal{F}^{-1}{F(u,v)-H(u,v)F(u,v)}=\mathcal{F}^{-1}{[1+4\pi^2D^2(u,v)]F(u,v)}<br>$$</p>
-<ul>
+<h2 id="频率域拉普拉斯算子"><a href="#频率域拉普拉斯算子" class="headerlink" title="频率域拉普拉斯算子"></a>频率域拉普拉斯算子</h2><p>频域滤波器（中心化）：</p>
+<script type="math/tex; mode=display">
+H(u,v)=-4\pi^2D^2(u,v)</script><p>$D(u,v)$为点$(u,v)$到中心点$(P/2,Q/2)$的距离</p>
+<p>拉普拉斯图像</p>
+<script type="math/tex; mode=display">
+\Delta^2f(x,y)=\mathcal{F}^{-1}\{H(u,v)F(u,v)\}</script><p>图像锐化$g(x,y)=f(x,y)-\Delta^2 f(x,y)$，频率域写法</p>
+<script type="math/tex; mode=display">
+g(x,y)=\mathcal{F}^{-1}\{F(u,v)-H(u,v)F(u,v)\}=\mathcal{F}^{-1}\{[1+4\pi^2D^2(u,v)]F(u,v)\}</script><ul>
 <li>$f(x,y)$归一到$[0,1]$，$\Delta^2f(x,y)$归一到$[-1,1]$，再计算DFT</li>
 </ul>
 <h1 id="CH10-图像复原"><a href="#CH10-图像复原" class="headerlink" title="CH10 图像复原"></a>CH10 图像复原</h1><p>考点：</p>
@@ -794,8 +818,11 @@ height:50vh;
 <li>输出$\hat{f}(x,y)$</li>
 <li>目标：$f(x,y)\approx f(x,y)$</li>
 </ul>
-<p>空间域表示<br>$$<br>g(x,y)=h(x,y)\star f(x,y)+\eta(x,y)<br>$$<br>频率域表示<br>$$<br>G(u,v)=H(u,v)F(u,v)+N(u,v)<br>$$</p>
-<h2 id="噪声模型"><a href="#噪声模型" class="headerlink" title="噪声模型"></a>噪声模型</h2><p><img src="/2019/10/11/dip-notes/noise.png" style="zoom:30%;"></p>
+<p>空间域表示</p>
+<script type="math/tex; mode=display">
+g(x,y)=h(x,y)\star f(x,y)+\eta(x,y)</script><p>频率域表示</p>
+<script type="math/tex; mode=display">
+G(u,v)=H(u,v)F(u,v)+N(u,v)</script><h2 id="噪声模型"><a href="#噪声模型" class="headerlink" title="噪声模型"></a>噪声模型</h2><p><img src="/2019/10/11/dip-notes/noise.png" style="zoom:30%;"></p>
 <p><img src="/2019/10/11/dip-notes/noise2.png" style="zoom:30%;"></p>
 <ul>
 <li>高斯噪声</li>
@@ -1074,18 +1101,18 @@ height:50vh;
 </ul>
 </li>
 </ul>
-<h3 id="对偶性"><a href="#对偶性" class="headerlink" title="对偶性"></a>对偶性</h3><p>$$<br>(A\ominus B)^c=A^c\oplus \hat{B}<br>$$</p>
-<p>$$<br>(A\oplus B)^c=A^c\ominus \hat{B}<br>$$</p>
-<h2 id="开闭操作"><a href="#开闭操作" class="headerlink" title="开闭操作"></a>开闭操作</h2><h3 id="开操作"><a href="#开操作" class="headerlink" title="开操作"></a>开操作</h3><p>$$<br>A\circ B=(A\ominus B)\oplus B<br>$$</p>
-<ul>
+<h3 id="对偶性"><a href="#对偶性" class="headerlink" title="对偶性"></a>对偶性</h3><script type="math/tex; mode=display">
+(A\ominus B)^c=A^c\oplus \hat{B}</script><script type="math/tex; mode=display">
+(A\oplus B)^c=A^c\ominus \hat{B}</script><h2 id="开闭操作"><a href="#开闭操作" class="headerlink" title="开闭操作"></a>开闭操作</h2><h3 id="开操作"><a href="#开操作" class="headerlink" title="开操作"></a>开操作</h3><script type="math/tex; mode=display">
+A\circ B=(A\ominus B)\oplus B</script><ul>
 <li>先腐蚀后膨胀</li>
 <li>平滑物体的轮廓</li>
 <li>断开窄的连接</li>
 <li>消除细的突出</li>
 </ul>
 <p><img src="/2019/10/11/dip-notes/open.png" style="zoom:40%;"></p>
-<h3 id="闭操作"><a href="#闭操作" class="headerlink" title="闭操作"></a>闭操作</h3><p>$$<br>A\bullet B=(A\oplus B)\ominus B<br>$$</p>
-<ul>
+<h3 id="闭操作"><a href="#闭操作" class="headerlink" title="闭操作"></a>闭操作</h3><script type="math/tex; mode=display">
+A\bullet B=(A\oplus B)\ominus B</script><ul>
 <li>先膨胀后腐蚀</li>
 <li>熔合窄的间断和长沟壑</li>
 <li>消除小孔洞</li>
@@ -1119,7 +1146,7 @@ height:50vh;
 <li>最佳统计分类模型（贝叶斯高斯）</li>
 </ul>
 <h2 id="最小距离分类器"><a href="#最小距离分类器" class="headerlink" title="最小距离分类器"></a>最小距离分类器</h2><ul>
-<li>把原型定义为每个类的平均向量：$m_j=\frac{1}{N_j}\sum\limits_{x_j\in \omega_j}x_j, j=1,\ldots W$<ul>
+<li>把原型定义为每个类的平均向量：$m<em>j=\frac{1}{N_j}\sum\limits</em>{x_j\in \omega_j}x_j, j=1,\ldots W$<ul>
 <li>$N_j$是类别$\omega_j$包含的模式数量</li>
 <li>就是把这个类里面所有的向量加起来取平均</li>
 </ul>
@@ -1130,17 +1157,17 @@ height:50vh;
 <li>等价计算方式：$d_j(x)=x^Tm_j-\frac{1}{2}m_j^Tm_j$，如果$d_i(x)$是最大值，那么$x\in\omega_i$</li>
 </ul>
 </li>
-<li>$\omega_i$和$\omega_j$之间的决策边界：$d_{ij}(x)=d_i(x)-d_j(x)=0$<ul>
+<li>$\omega<em>i$和$\omega_j$之间的决策边界：$d</em>{ij}(x)=d_i(x)-d_j(x)=0$<ul>
 <li>$n=2$对应直线，$n=3$对应平面</li>
 </ul>
 </li>
 </ul>
 <h2 id="最佳统计分类器"><a href="#最佳统计分类器" class="headerlink" title="最佳统计分类器"></a>最佳统计分类器</h2><h3 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h3><p><s>没学过ML我哭了</s></p>
 <ul>
-<li>把$\omega_i$的模式预测为属于$\omega_j$，遭受损失$L_{ij}$</li>
+<li>把$\omega<em>i$的模式预测为属于$\omega_j$，遭受损失$L</em>{ij}$</li>
 <li>模式$x$属于类别$\omega_i$的概率记为$p(\omega_i/x)$</li>
-<li>条件平均风险（把$x$预测为$\omega_j$会遭受的损失：$r_j=\sum\limits_{k=1}^WL_{kj}p(\omega_k/x)$</li>
-<li>根据贝叶斯公式可以写成：$r_j(x)=\frac{1}{p(x)}\sum\limits_{k=1}^WL_{kj}p(x/\omega_k)P(\omega_k)$</li>
+<li>条件平均风险（把$x$预测为$\omega<em>j$会遭受的损失：$r_j=\sum\limits</em>{k=1}^WL_{kj}p(\omega_k/x)$</li>
+<li>根据贝叶斯公式可以写成：$r<em>j(x)=\frac{1}{p(x)}\sum\limits</em>{k=1}^WL_{kj}p(x/\omega_k)P(\omega_k)$</li>
 <li>贝叶斯分类器：预测$x\in\omega_i$如果：$\forall j\neq i, r_j(x)&lt;r_i(x)$</li>
 <li>一般使用0-1损失函数：正确无损失，错误损失为1</li>
 <li>用0-1损失函数并经过一通计算，决策函数$d_j(x)=p(x/\omega_j)P(\omega_j)$</li>
@@ -1155,8 +1182,8 @@ height:50vh;
 <ul>
 <li><p>决策函数就一高斯函数</p>
 </li>
-<li><p>$$<br>d_j(\bf{x})=\frac{1}{\sqrt{2\pi}\sigma_j}e^{-\frac{(\bf{x}-m_j)^2}{2\sigma_j^2}}P(\omega_j)<br>$$</p>
-</li>
+<li><script type="math/tex; mode=display">
+d_j(\bf{x})=\frac{1}{\sqrt{2\pi}\sigma_j}e^{-\frac{(\bf{x}-m_j)^2}{2\sigma_j^2}}P(\omega_j)</script></li>
 <li><p>参数为均值和标准差</p>
 </li>
 <li><p><img src="/2019/10/11/dip-notes/2class.png" style="zoom:50%;"></p>
@@ -1180,7 +1207,7 @@ height:50vh;
             <p>原文作者: <a href="https://mengzelev.github.io">Mengzelev</a>
             <p>原文链接: <a href="https://mengzelev.github.io/2019/10/11/dip-notes/">https://mengzelev.github.io/2019/10/11/dip-notes/</a>
             <p>发表日期: <a href="https://mengzelev.github.io/2019/10/11/dip-notes/">October 11th 2019, 8:31:15 pm</a>
-            <p>版权声明: 本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
+            <p>版权声明: 本文采用<a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
         </div>
     
     <!-- paginator  -->
@@ -1326,7 +1353,7 @@ top:50vh;
         <div class="toc-catalog">
             <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
         </div>
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#期末考试"><span class="toc-number">1.</span> <span class="toc-text">期末考试</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Ch01-数字图像处理简介"><span class="toc-number">2.</span> <span class="toc-text">Ch01 数字图像处理简介</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#图像采样、图像量化"><span class="toc-number">2.1.</span> <span class="toc-text">图像采样、图像量化</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Ch02-空间域图像增强（Part-1）"><span class="toc-number">3.</span> <span class="toc-text">Ch02 空间域图像增强（Part 1）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#基本灰度变换"><span class="toc-number">3.1.</span> <span class="toc-text">基本灰度变换</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#直方图处理"><span class="toc-number">3.2.</span> <span class="toc-text">直方图处理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#灰度直方图"><span class="toc-number">3.2.1.</span> <span class="toc-text">灰度直方图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实现"><span class="toc-number">3.2.2.</span> <span class="toc-text">实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#应用"><span class="toc-number">3.2.3.</span> <span class="toc-text">应用</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Ch03-直方图处理"><span class="toc-number">4.</span> <span class="toc-text">Ch03 直方图处理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#理论"><span class="toc-number">4.1.</span> <span class="toc-text">理论</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Ch04-空间滤波、算数操作增强"><span class="toc-number">5.</span> <span class="toc-text">Ch04 空间滤波、算数操作增强</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#相关和卷积"><span class="toc-number">5.1.</span> <span class="toc-text">相关和卷积</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#平滑空间滤波器"><span class="toc-number">5.2.</span> <span class="toc-text">平滑空间滤波器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#平滑线性滤波器"><span class="toc-number">5.2.1.</span> <span class="toc-text">平滑线性滤波器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#统计排序滤波器"><span class="toc-number">5.2.2.</span> <span class="toc-text">统计排序滤波器</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#锐化空间滤波器"><span class="toc-number">5.3.</span> <span class="toc-text">锐化空间滤波器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#数学基础"><span class="toc-number">5.3.1.</span> <span class="toc-text">数学基础</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#拉普拉斯算子"><span class="toc-number">5.3.2.</span> <span class="toc-text">拉普拉斯算子</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#非锐化掩蔽"><span class="toc-number">5.3.3.</span> <span class="toc-text">非锐化掩蔽</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用一阶导数锐化图像"><span class="toc-number">5.3.4.</span> <span class="toc-text">使用一阶导数锐化图像</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#算数操作增强"><span class="toc-number">5.4.</span> <span class="toc-text">算数操作增强</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Ch05-集合逻辑操作、空间操作、灰度内插"><span class="toc-number">6.</span> <span class="toc-text">Ch05 集合逻辑操作、空间操作、灰度内插</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#仿射变换"><span class="toc-number">6.1.</span> <span class="toc-text">仿射变换</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#几种常见仿射变换"><span class="toc-number">6.1.1.</span> <span class="toc-text">几种常见仿射变换</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#灰度内插"><span class="toc-number">6.2.</span> <span class="toc-text">灰度内插</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#最近邻内插"><span class="toc-number">6.2.1.</span> <span class="toc-text">最近邻内插</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#线性内插"><span class="toc-number">6.2.2.</span> <span class="toc-text">线性内插</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#双线性内插"><span class="toc-number">6.2.3.</span> <span class="toc-text">双线性内插</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Ch06-傅里叶变换"><span class="toc-number">7.</span> <span class="toc-text">Ch06 傅里叶变换</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#傅里叶变换基本知识"><span class="toc-number">7.1.</span> <span class="toc-text">傅里叶变换基本知识</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#冲激与采样"><span class="toc-number">7.1.1.</span> <span class="toc-text">冲激与采样</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#卷积定理"><span class="toc-number">7.2.</span> <span class="toc-text">卷积定理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#采样定理"><span class="toc-number">7.3.</span> <span class="toc-text">采样定理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#混淆"><span class="toc-number">7.3.1.</span> <span class="toc-text">混淆</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#有限长度采样"><span class="toc-number">7.3.2.</span> <span class="toc-text">有限长度采样</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#由样本恢复原函数"><span class="toc-number">7.3.3.</span> <span class="toc-text">由样本恢复原函数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#离散傅里叶变换"><span class="toc-number">7.4.</span> <span class="toc-text">离散傅里叶变换</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#一维DFT"><span class="toc-number">7.4.1.</span> <span class="toc-text">一维DFT</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二维DFT"><span class="toc-number">7.4.2.</span> <span class="toc-text">二维DFT</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#性质"><span class="toc-number">7.4.2.1.</span> <span class="toc-text">性质</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#傅里叶谱和相角"><span class="toc-number">7.4.3.</span> <span class="toc-text">傅里叶谱和相角</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二维卷积定理"><span class="toc-number">7.4.4.</span> <span class="toc-text">二维卷积定理</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Ch08-频率域滤波、平滑图像"><span class="toc-number">8.</span> <span class="toc-text">Ch08 频率域滤波、平滑图像</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#频域滤波基本流程"><span class="toc-number">8.1.</span> <span class="toc-text">频域滤波基本流程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#低通滤波器"><span class="toc-number">8.2.</span> <span class="toc-text">低通滤波器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#理想低通滤波器"><span class="toc-number">8.2.1.</span> <span class="toc-text">理想低通滤波器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#巴特沃斯低通滤波器"><span class="toc-number">8.2.2.</span> <span class="toc-text">巴特沃斯低通滤波器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#高斯低通滤波器"><span class="toc-number">8.2.3.</span> <span class="toc-text">高斯低通滤波器</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Ch09-锐化图像、选择性滤波、实现"><span class="toc-number">9.</span> <span class="toc-text">Ch09 锐化图像、选择性滤波、实现</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#高通滤波器"><span class="toc-number">9.1.</span> <span class="toc-text">高通滤波器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#理想高通滤波器"><span class="toc-number">9.1.1.</span> <span class="toc-text">理想高通滤波器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#巴特沃斯高通滤波器"><span class="toc-number">9.1.2.</span> <span class="toc-text">巴特沃斯高通滤波器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#高斯高通滤波器"><span class="toc-number">9.1.3.</span> <span class="toc-text">高斯高通滤波器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#对比"><span class="toc-number">9.1.4.</span> <span class="toc-text">对比</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#频率域拉普拉斯算子"><span class="toc-number">9.2.</span> <span class="toc-text">频率域拉普拉斯算子</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#CH10-图像复原"><span class="toc-number">10.</span> <span class="toc-text">CH10 图像复原</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#图像复原"><span class="toc-number">11.</span> <span class="toc-text">图像复原</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#复原-v-s-增强"><span class="toc-number">11.1.</span> <span class="toc-text">复原 v.s. 增强</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#退化-复原建模"><span class="toc-number">11.2.</span> <span class="toc-text">退化/复原建模</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#噪声模型"><span class="toc-number">11.3.</span> <span class="toc-text">噪声模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#均值滤波器"><span class="toc-number">11.4.</span> <span class="toc-text">均值滤波器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#统计排序滤波器-1"><span class="toc-number">11.5.</span> <span class="toc-text">统计排序滤波器</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Ch11-12-彩色图像处理"><span class="toc-number">12.</span> <span class="toc-text">Ch11-12 彩色图像处理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#RGB彩色模型"><span class="toc-number">12.1.</span> <span class="toc-text">RGB彩色模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CMY-颜色模型"><span class="toc-number">12.2.</span> <span class="toc-text">CMY 颜色模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HSI颜色模型"><span class="toc-number">12.3.</span> <span class="toc-text">HSI颜色模型</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Ch13-14-图像分割"><span class="toc-number">13.</span> <span class="toc-text">Ch13-14 图像分割</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#基本边缘检测"><span class="toc-number">13.1.</span> <span class="toc-text">基本边缘检测</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#边缘检测三个基本步骤"><span class="toc-number">13.1.1.</span> <span class="toc-text">边缘检测三个基本步骤</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#梯度算子"><span class="toc-number">13.1.2.</span> <span class="toc-text">梯度算子</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Marr-Hildreth边缘检测器"><span class="toc-number">13.2.</span> <span class="toc-text">Marr-Hildreth边缘检测器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#设计理念"><span class="toc-number">13.2.1.</span> <span class="toc-text">设计理念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#用法"><span class="toc-number">13.2.2.</span> <span class="toc-text">用法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Canny边缘检测器"><span class="toc-number">13.3.</span> <span class="toc-text">Canny边缘检测器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#理念"><span class="toc-number">13.3.1.</span> <span class="toc-text">理念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#用法-1"><span class="toc-number">13.3.2.</span> <span class="toc-text">用法</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Ch15-图像压缩"><span class="toc-number">14.</span> <span class="toc-text">Ch15 图像压缩</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#基本概念"><span class="toc-number">14.1.</span> <span class="toc-text">基本概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#灰度图像的3种冗余"><span class="toc-number">14.2.</span> <span class="toc-text">灰度图像的3种冗余</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#编码冗余"><span class="toc-number">14.2.1.</span> <span class="toc-text">编码冗余</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#空间和时间冗余"><span class="toc-number">14.2.2.</span> <span class="toc-text">空间和时间冗余</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#不相关的信息"><span class="toc-number">14.2.3.</span> <span class="toc-text">不相关的信息</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#霍夫曼编码"><span class="toc-number">14.3.</span> <span class="toc-text">霍夫曼编码</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#实现-1"><span class="toc-number">14.3.1.</span> <span class="toc-text">实现</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Ch16-形态学处理"><span class="toc-number">15.</span> <span class="toc-text">Ch16 形态学处理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#腐蚀与膨胀"><span class="toc-number">15.1.</span> <span class="toc-text">腐蚀与膨胀</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#腐蚀"><span class="toc-number">15.1.1.</span> <span class="toc-text">腐蚀</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#膨胀"><span class="toc-number">15.1.2.</span> <span class="toc-text">膨胀</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#对偶性"><span class="toc-number">15.1.3.</span> <span class="toc-text">对偶性</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#开闭操作"><span class="toc-number">15.2.</span> <span class="toc-text">开闭操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#开操作"><span class="toc-number">15.2.1.</span> <span class="toc-text">开操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#闭操作"><span class="toc-number">15.2.2.</span> <span class="toc-text">闭操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#性质-1"><span class="toc-number">15.2.3.</span> <span class="toc-text">性质</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Ch17-目标识别"><span class="toc-number">16.</span> <span class="toc-text">Ch17 目标识别</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#最小距离分类器"><span class="toc-number">16.1.</span> <span class="toc-text">最小距离分类器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#最佳统计分类器"><span class="toc-number">16.2.</span> <span class="toc-text">最佳统计分类器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#基础知识"><span class="toc-number">16.2.1.</span> <span class="toc-text">基础知识</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#针对高斯模式类的贝叶斯分类器"><span class="toc-number">16.2.2.</span> <span class="toc-text">针对高斯模式类的贝叶斯分类器</span></a></li></ol></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%9C%9F%E6%9C%AB%E8%80%83%E8%AF%95"><span class="toc-number">1.</span> <span class="toc-text">期末考试</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Ch01-%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86%E7%AE%80%E4%BB%8B"><span class="toc-number">2.</span> <span class="toc-text">Ch01 数字图像处理简介</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%BE%E5%83%8F%E9%87%87%E6%A0%B7%E3%80%81%E5%9B%BE%E5%83%8F%E9%87%8F%E5%8C%96"><span class="toc-number">2.1.</span> <span class="toc-text">图像采样、图像量化</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Ch02-%E7%A9%BA%E9%97%B4%E5%9F%9F%E5%9B%BE%E5%83%8F%E5%A2%9E%E5%BC%BA%EF%BC%88Part-1%EF%BC%89"><span class="toc-number">3.</span> <span class="toc-text">Ch02 空间域图像增强（Part 1）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E7%81%B0%E5%BA%A6%E5%8F%98%E6%8D%A2"><span class="toc-number">3.1.</span> <span class="toc-text">基本灰度变换</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9B%B4%E6%96%B9%E5%9B%BE%E5%A4%84%E7%90%86"><span class="toc-number">3.2.</span> <span class="toc-text">直方图处理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%81%B0%E5%BA%A6%E7%9B%B4%E6%96%B9%E5%9B%BE"><span class="toc-number">3.2.1.</span> <span class="toc-text">灰度直方图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0"><span class="toc-number">3.2.2.</span> <span class="toc-text">实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%94%E7%94%A8"><span class="toc-number">3.2.3.</span> <span class="toc-text">应用</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Ch03-%E7%9B%B4%E6%96%B9%E5%9B%BE%E5%A4%84%E7%90%86"><span class="toc-number">4.</span> <span class="toc-text">Ch03 直方图处理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%90%86%E8%AE%BA"><span class="toc-number">4.1.</span> <span class="toc-text">理论</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Ch04-%E7%A9%BA%E9%97%B4%E6%BB%A4%E6%B3%A2%E3%80%81%E7%AE%97%E6%95%B0%E6%93%8D%E4%BD%9C%E5%A2%9E%E5%BC%BA"><span class="toc-number">5.</span> <span class="toc-text">Ch04 空间滤波、算数操作增强</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9B%B8%E5%85%B3%E5%92%8C%E5%8D%B7%E7%A7%AF"><span class="toc-number">5.1.</span> <span class="toc-text">相关和卷积</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B9%B3%E6%BB%91%E7%A9%BA%E9%97%B4%E6%BB%A4%E6%B3%A2%E5%99%A8"><span class="toc-number">5.2.</span> <span class="toc-text">平滑空间滤波器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B9%B3%E6%BB%91%E7%BA%BF%E6%80%A7%E6%BB%A4%E6%B3%A2%E5%99%A8"><span class="toc-number">5.2.1.</span> <span class="toc-text">平滑线性滤波器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%9F%E8%AE%A1%E6%8E%92%E5%BA%8F%E6%BB%A4%E6%B3%A2%E5%99%A8"><span class="toc-number">5.2.2.</span> <span class="toc-text">统计排序滤波器</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%94%90%E5%8C%96%E7%A9%BA%E9%97%B4%E6%BB%A4%E6%B3%A2%E5%99%A8"><span class="toc-number">5.3.</span> <span class="toc-text">锐化空间滤波器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80"><span class="toc-number">5.3.1.</span> <span class="toc-text">数学基础</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8B%89%E6%99%AE%E6%8B%89%E6%96%AF%E7%AE%97%E5%AD%90"><span class="toc-number">5.3.2.</span> <span class="toc-text">拉普拉斯算子</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9D%9E%E9%94%90%E5%8C%96%E6%8E%A9%E8%94%BD"><span class="toc-number">5.3.3.</span> <span class="toc-text">非锐化掩蔽</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E4%B8%80%E9%98%B6%E5%AF%BC%E6%95%B0%E9%94%90%E5%8C%96%E5%9B%BE%E5%83%8F"><span class="toc-number">5.3.4.</span> <span class="toc-text">使用一阶导数锐化图像</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%97%E6%95%B0%E6%93%8D%E4%BD%9C%E5%A2%9E%E5%BC%BA"><span class="toc-number">5.4.</span> <span class="toc-text">算数操作增强</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Ch05-%E9%9B%86%E5%90%88%E9%80%BB%E8%BE%91%E6%93%8D%E4%BD%9C%E3%80%81%E7%A9%BA%E9%97%B4%E6%93%8D%E4%BD%9C%E3%80%81%E7%81%B0%E5%BA%A6%E5%86%85%E6%8F%92"><span class="toc-number">6.</span> <span class="toc-text">Ch05 集合逻辑操作、空间操作、灰度内插</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%BF%E5%B0%84%E5%8F%98%E6%8D%A2"><span class="toc-number">6.1.</span> <span class="toc-text">仿射变换</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%A0%E7%A7%8D%E5%B8%B8%E8%A7%81%E4%BB%BF%E5%B0%84%E5%8F%98%E6%8D%A2"><span class="toc-number">6.1.1.</span> <span class="toc-text">几种常见仿射变换</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%81%B0%E5%BA%A6%E5%86%85%E6%8F%92"><span class="toc-number">6.2.</span> <span class="toc-text">灰度内插</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%80%E8%BF%91%E9%82%BB%E5%86%85%E6%8F%92"><span class="toc-number">6.2.1.</span> <span class="toc-text">最近邻内插</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BA%BF%E6%80%A7%E5%86%85%E6%8F%92"><span class="toc-number">6.2.2.</span> <span class="toc-text">线性内插</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%8C%E7%BA%BF%E6%80%A7%E5%86%85%E6%8F%92"><span class="toc-number">6.2.3.</span> <span class="toc-text">双线性内插</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Ch06-%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2"><span class="toc-number">7.</span> <span class="toc-text">Ch06 傅里叶变换</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2%E5%9F%BA%E6%9C%AC%E7%9F%A5%E8%AF%86"><span class="toc-number">7.1.</span> <span class="toc-text">傅里叶变换基本知识</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%B2%E6%BF%80%E4%B8%8E%E9%87%87%E6%A0%B7"><span class="toc-number">7.1.1.</span> <span class="toc-text">冲激与采样</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%B7%E7%A7%AF%E5%AE%9A%E7%90%86"><span class="toc-number">7.2.</span> <span class="toc-text">卷积定理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%87%87%E6%A0%B7%E5%AE%9A%E7%90%86"><span class="toc-number">7.3.</span> <span class="toc-text">采样定理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B7%B7%E6%B7%86"><span class="toc-number">7.3.1.</span> <span class="toc-text">混淆</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%89%E9%99%90%E9%95%BF%E5%BA%A6%E9%87%87%E6%A0%B7"><span class="toc-number">7.3.2.</span> <span class="toc-text">有限长度采样</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%B1%E6%A0%B7%E6%9C%AC%E6%81%A2%E5%A4%8D%E5%8E%9F%E5%87%BD%E6%95%B0"><span class="toc-number">7.3.3.</span> <span class="toc-text">由样本恢复原函数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A6%BB%E6%95%A3%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2"><span class="toc-number">7.4.</span> <span class="toc-text">离散傅里叶变换</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E7%BB%B4DFT"><span class="toc-number">7.4.1.</span> <span class="toc-text">一维DFT</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E7%BB%B4DFT"><span class="toc-number">7.4.2.</span> <span class="toc-text">二维DFT</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%80%A7%E8%B4%A8"><span class="toc-number">7.4.2.1.</span> <span class="toc-text">性质</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%82%85%E9%87%8C%E5%8F%B6%E8%B0%B1%E5%92%8C%E7%9B%B8%E8%A7%92"><span class="toc-number">7.4.3.</span> <span class="toc-text">傅里叶谱和相角</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E7%BB%B4%E5%8D%B7%E7%A7%AF%E5%AE%9A%E7%90%86"><span class="toc-number">7.4.4.</span> <span class="toc-text">二维卷积定理</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Ch08-%E9%A2%91%E7%8E%87%E5%9F%9F%E6%BB%A4%E6%B3%A2%E3%80%81%E5%B9%B3%E6%BB%91%E5%9B%BE%E5%83%8F"><span class="toc-number">8.</span> <span class="toc-text">Ch08 频率域滤波、平滑图像</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%91%E5%9F%9F%E6%BB%A4%E6%B3%A2%E5%9F%BA%E6%9C%AC%E6%B5%81%E7%A8%8B"><span class="toc-number">8.1.</span> <span class="toc-text">频域滤波基本流程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%8E%E9%80%9A%E6%BB%A4%E6%B3%A2%E5%99%A8"><span class="toc-number">8.2.</span> <span class="toc-text">低通滤波器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%90%86%E6%83%B3%E4%BD%8E%E9%80%9A%E6%BB%A4%E6%B3%A2%E5%99%A8"><span class="toc-number">8.2.1.</span> <span class="toc-text">理想低通滤波器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B7%B4%E7%89%B9%E6%B2%83%E6%96%AF%E4%BD%8E%E9%80%9A%E6%BB%A4%E6%B3%A2%E5%99%A8"><span class="toc-number">8.2.2.</span> <span class="toc-text">巴特沃斯低通滤波器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%AB%98%E6%96%AF%E4%BD%8E%E9%80%9A%E6%BB%A4%E6%B3%A2%E5%99%A8"><span class="toc-number">8.2.3.</span> <span class="toc-text">高斯低通滤波器</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Ch09-%E9%94%90%E5%8C%96%E5%9B%BE%E5%83%8F%E3%80%81%E9%80%89%E6%8B%A9%E6%80%A7%E6%BB%A4%E6%B3%A2%E3%80%81%E5%AE%9E%E7%8E%B0"><span class="toc-number">9.</span> <span class="toc-text">Ch09 锐化图像、选择性滤波、实现</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%AB%98%E9%80%9A%E6%BB%A4%E6%B3%A2%E5%99%A8"><span class="toc-number">9.1.</span> <span class="toc-text">高通滤波器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%90%86%E6%83%B3%E9%AB%98%E9%80%9A%E6%BB%A4%E6%B3%A2%E5%99%A8"><span class="toc-number">9.1.1.</span> <span class="toc-text">理想高通滤波器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B7%B4%E7%89%B9%E6%B2%83%E6%96%AF%E9%AB%98%E9%80%9A%E6%BB%A4%E6%B3%A2%E5%99%A8"><span class="toc-number">9.1.2.</span> <span class="toc-text">巴特沃斯高通滤波器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%AB%98%E6%96%AF%E9%AB%98%E9%80%9A%E6%BB%A4%E6%B3%A2%E5%99%A8"><span class="toc-number">9.1.3.</span> <span class="toc-text">高斯高通滤波器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%B9%E6%AF%94"><span class="toc-number">9.1.4.</span> <span class="toc-text">对比</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%91%E7%8E%87%E5%9F%9F%E6%8B%89%E6%99%AE%E6%8B%89%E6%96%AF%E7%AE%97%E5%AD%90"><span class="toc-number">9.2.</span> <span class="toc-text">频率域拉普拉斯算子</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#CH10-%E5%9B%BE%E5%83%8F%E5%A4%8D%E5%8E%9F"><span class="toc-number">10.</span> <span class="toc-text">CH10 图像复原</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9B%BE%E5%83%8F%E5%A4%8D%E5%8E%9F"><span class="toc-number">11.</span> <span class="toc-text">图像复原</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%8D%E5%8E%9F-v-s-%E5%A2%9E%E5%BC%BA"><span class="toc-number">11.1.</span> <span class="toc-text">复原 v.s. 增强</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%80%80%E5%8C%96-%E5%A4%8D%E5%8E%9F%E5%BB%BA%E6%A8%A1"><span class="toc-number">11.2.</span> <span class="toc-text">退化&#x2F;复原建模</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%99%AA%E5%A3%B0%E6%A8%A1%E5%9E%8B"><span class="toc-number">11.3.</span> <span class="toc-text">噪声模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9D%87%E5%80%BC%E6%BB%A4%E6%B3%A2%E5%99%A8"><span class="toc-number">11.4.</span> <span class="toc-text">均值滤波器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%9F%E8%AE%A1%E6%8E%92%E5%BA%8F%E6%BB%A4%E6%B3%A2%E5%99%A8-1"><span class="toc-number">11.5.</span> <span class="toc-text">统计排序滤波器</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Ch11-12-%E5%BD%A9%E8%89%B2%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86"><span class="toc-number">12.</span> <span class="toc-text">Ch11-12 彩色图像处理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#RGB%E5%BD%A9%E8%89%B2%E6%A8%A1%E5%9E%8B"><span class="toc-number">12.1.</span> <span class="toc-text">RGB彩色模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CMY-%E9%A2%9C%E8%89%B2%E6%A8%A1%E5%9E%8B"><span class="toc-number">12.2.</span> <span class="toc-text">CMY 颜色模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HSI%E9%A2%9C%E8%89%B2%E6%A8%A1%E5%9E%8B"><span class="toc-number">12.3.</span> <span class="toc-text">HSI颜色模型</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Ch13-14-%E5%9B%BE%E5%83%8F%E5%88%86%E5%89%B2"><span class="toc-number">13.</span> <span class="toc-text">Ch13-14 图像分割</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E8%BE%B9%E7%BC%98%E6%A3%80%E6%B5%8B"><span class="toc-number">13.1.</span> <span class="toc-text">基本边缘检测</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%B9%E7%BC%98%E6%A3%80%E6%B5%8B%E4%B8%89%E4%B8%AA%E5%9F%BA%E6%9C%AC%E6%AD%A5%E9%AA%A4"><span class="toc-number">13.1.1.</span> <span class="toc-text">边缘检测三个基本步骤</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A2%AF%E5%BA%A6%E7%AE%97%E5%AD%90"><span class="toc-number">13.1.2.</span> <span class="toc-text">梯度算子</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Marr-Hildreth%E8%BE%B9%E7%BC%98%E6%A3%80%E6%B5%8B%E5%99%A8"><span class="toc-number">13.2.</span> <span class="toc-text">Marr-Hildreth边缘检测器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%BE%E8%AE%A1%E7%90%86%E5%BF%B5"><span class="toc-number">13.2.1.</span> <span class="toc-text">设计理念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%A8%E6%B3%95"><span class="toc-number">13.2.2.</span> <span class="toc-text">用法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Canny%E8%BE%B9%E7%BC%98%E6%A3%80%E6%B5%8B%E5%99%A8"><span class="toc-number">13.3.</span> <span class="toc-text">Canny边缘检测器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%90%86%E5%BF%B5"><span class="toc-number">13.3.1.</span> <span class="toc-text">理念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%A8%E6%B3%95-1"><span class="toc-number">13.3.2.</span> <span class="toc-text">用法</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Ch15-%E5%9B%BE%E5%83%8F%E5%8E%8B%E7%BC%A9"><span class="toc-number">14.</span> <span class="toc-text">Ch15 图像压缩</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="toc-number">14.1.</span> <span class="toc-text">基本概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%81%B0%E5%BA%A6%E5%9B%BE%E5%83%8F%E7%9A%843%E7%A7%8D%E5%86%97%E4%BD%99"><span class="toc-number">14.2.</span> <span class="toc-text">灰度图像的3种冗余</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%96%E7%A0%81%E5%86%97%E4%BD%99"><span class="toc-number">14.2.1.</span> <span class="toc-text">编码冗余</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A9%BA%E9%97%B4%E5%92%8C%E6%97%B6%E9%97%B4%E5%86%97%E4%BD%99"><span class="toc-number">14.2.2.</span> <span class="toc-text">空间和时间冗余</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8D%E7%9B%B8%E5%85%B3%E7%9A%84%E4%BF%A1%E6%81%AF"><span class="toc-number">14.2.3.</span> <span class="toc-text">不相关的信息</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9C%8D%E5%A4%AB%E6%9B%BC%E7%BC%96%E7%A0%81"><span class="toc-number">14.3.</span> <span class="toc-text">霍夫曼编码</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0-1"><span class="toc-number">14.3.1.</span> <span class="toc-text">实现</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Ch16-%E5%BD%A2%E6%80%81%E5%AD%A6%E5%A4%84%E7%90%86"><span class="toc-number">15.</span> <span class="toc-text">Ch16 形态学处理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%85%90%E8%9A%80%E4%B8%8E%E8%86%A8%E8%83%80"><span class="toc-number">15.1.</span> <span class="toc-text">腐蚀与膨胀</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%85%90%E8%9A%80"><span class="toc-number">15.1.1.</span> <span class="toc-text">腐蚀</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%86%A8%E8%83%80"><span class="toc-number">15.1.2.</span> <span class="toc-text">膨胀</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%B9%E5%81%B6%E6%80%A7"><span class="toc-number">15.1.3.</span> <span class="toc-text">对偶性</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%80%E9%97%AD%E6%93%8D%E4%BD%9C"><span class="toc-number">15.2.</span> <span class="toc-text">开闭操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%80%E6%93%8D%E4%BD%9C"><span class="toc-number">15.2.1.</span> <span class="toc-text">开操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%97%AD%E6%93%8D%E4%BD%9C"><span class="toc-number">15.2.2.</span> <span class="toc-text">闭操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%A7%E8%B4%A8-1"><span class="toc-number">15.2.3.</span> <span class="toc-text">性质</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Ch17-%E7%9B%AE%E6%A0%87%E8%AF%86%E5%88%AB"><span class="toc-number">16.</span> <span class="toc-text">Ch17 目标识别</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%80%E5%B0%8F%E8%B7%9D%E7%A6%BB%E5%88%86%E7%B1%BB%E5%99%A8"><span class="toc-number">16.1.</span> <span class="toc-text">最小距离分类器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%80%E4%BD%B3%E7%BB%9F%E8%AE%A1%E5%88%86%E7%B1%BB%E5%99%A8"><span class="toc-number">16.2.</span> <span class="toc-text">最佳统计分类器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86"><span class="toc-number">16.2.1.</span> <span class="toc-text">基础知识</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%92%88%E5%AF%B9%E9%AB%98%E6%96%AF%E6%A8%A1%E5%BC%8F%E7%B1%BB%E7%9A%84%E8%B4%9D%E5%8F%B6%E6%96%AF%E5%88%86%E7%B1%BB%E5%99%A8"><span class="toc-number">16.2.2.</span> <span class="toc-text">针对高斯模式类的贝叶斯分类器</span></a></li></ol></li></ol></li></ol>
     </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
@@ -2303,85 +2330,9 @@ top:50vh;
     
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 64
+        Total : 66
         </div>
         <!-- search  -->
         
@@ -2394,6 +2345,16 @@ top:50vh;
     
     <div class="archive-year"> 2020 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/27</span><a class="archive-post-title" href= "/2020/06/27/Le-Deuxieme-Sexe/" >西蒙·波伏娃《第二性》读书笔记</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/24</span><a class="archive-post-title" href= "/2020/06/24/OOP-design-patterns/" >面向对象设计原则-课程笔记</a>
+        </li>
     
     
         <li class="archive-post-item">
@@ -2665,12 +2626,12 @@ top:50vh;
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">10/04</span><a class="archive-post-title" href= "/2018/10/04/pa-inspirations/" >做pa的时候可能会用到的操作</a>
+            <span class="archive-post-date">10/04</span><a class="archive-post-title" href= "/2018/10/04/PA1-report/" >PA1实验报告</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">10/04</span><a class="archive-post-title" href= "/2018/10/04/PA1-report/" >PA1实验报告</a>
+            <span class="archive-post-date">10/04</span><a class="archive-post-title" href= "/2018/10/04/pa-inspirations/" >做pa的时候可能会用到的操作</a>
         </li>
     
     
@@ -2740,17 +2701,17 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="Flags"><span class="iconfont-archer">&#xe606;</span>Flags</span>
     
+        <span class="sidebar-tag-name" data-tags="Math Modeling"><span class="iconfont-archer">&#xe606;</span>Math Modeling</span>
+    
         <span class="sidebar-tag-name" data-tags="Notes"><span class="iconfont-archer">&#xe606;</span>Notes</span>
     
         <span class="sidebar-tag-name" data-tags="pa"><span class="iconfont-archer">&#xe606;</span>pa</span>
     
         <span class="sidebar-tag-name" data-tags="ICS"><span class="iconfont-archer">&#xe606;</span>ICS</span>
     
-        <span class="sidebar-tag-name" data-tags="Math Modeling"><span class="iconfont-archer">&#xe606;</span>Math Modeling</span>
+        <span class="sidebar-tag-name" data-tags="Problem Solving"><span class="iconfont-archer">&#xe606;</span>Problem Solving</span>
     
         <span class="sidebar-tag-name" data-tags="Machine Learning"><span class="iconfont-archer">&#xe606;</span>Machine Learning</span>
-    
-        <span class="sidebar-tag-name" data-tags="Problem Solving"><span class="iconfont-archer">&#xe606;</span>Problem Solving</span>
     
         <span class="sidebar-tag-name" data-tags="Assembly Language"><span class="iconfont-archer">&#xe606;</span>Assembly Language</span>
     
@@ -2790,13 +2751,13 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="Ics"><span class="iconfont-archer">&#xe606;</span>Ics</span>
     
-        <span class="sidebar-tag-name" data-tags="Interview"><span class="iconfont-archer">&#xe606;</span>Interview</span>
-    
         <span class="sidebar-tag-name" data-tags="Matchings"><span class="iconfont-archer">&#xe606;</span>Matchings</span>
     
         <span class="sidebar-tag-name" data-tags="Factorization"><span class="iconfont-archer">&#xe606;</span>Factorization</span>
     
         <span class="sidebar-tag-name" data-tags="MATLAB"><span class="iconfont-archer">&#xe606;</span>MATLAB</span>
+    
+        <span class="sidebar-tag-name" data-tags="Interview"><span class="iconfont-archer">&#xe606;</span>Interview</span>
     
         <span class="sidebar-tag-name" data-tags="Linux"><span class="iconfont-archer">&#xe606;</span>Linux</span>
     
@@ -2808,11 +2769,11 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="linux"><span class="iconfont-archer">&#xe606;</span>linux</span>
     
-        <span class="sidebar-tag-name" data-tags="markdown"><span class="iconfont-archer">&#xe606;</span>markdown</span>
-    
         <span class="sidebar-tag-name" data-tags="Java"><span class="iconfont-archer">&#xe606;</span>Java</span>
     
         <span class="sidebar-tag-name" data-tags="programming"><span class="iconfont-archer">&#xe606;</span>programming</span>
+    
+        <span class="sidebar-tag-name" data-tags="markdown"><span class="iconfont-archer">&#xe606;</span>markdown</span>
     
         <span class="sidebar-tag-name" data-tags="tmux"><span class="iconfont-archer">&#xe606;</span>tmux</span>
     
@@ -2922,10 +2883,10 @@ jsonContent:
             all[i].SourceElement().parentNode.className += ' has-jax';
     });
 </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
-<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":150},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":150},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
 <script type="text/x-mathjax-config">
-  MathJax.Hub.Config("");
+  MathJax.Hub.Config({{ JSON.stringify(config) }});
 </script>
 
 <script type="text/x-mathjax-config">
@@ -2937,7 +2898,7 @@ jsonContent:
   });
 </script>
 
-<script type="text/javascript" src="custom_mathjax_source">
+<script type="text/javascript" src="{{ src }}">
 </script>
 <!-- End: Injected MathJax -->
 <!-- hexo-inject:end --></body>
