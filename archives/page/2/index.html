@@ -350,6 +350,68 @@
     
     
     <article class="index-post">
+        <a class="abstract-title" href = "/2019/10/09/database/" >
+            
+                <span>数据库学习笔记</span>
+        </a>
+        <div class="abstract-content">
+            Ch1 数据库系统概述基本概念
+数据库（DB）：  
+长期存储在计算机内、有组织、大量的、共享的数据集合
+是数据集合，具有统一的结构形式并存放于统一的存储介质内，它由多种应用数据集成，并可被应用所共享。
+
+
+数据库管理系统（DBMS）：
+位于用户与OS之间的一层数据管理软件，为用户或应用程序提供访问数据库的方法和接口
+能对持久性数据进行管理
+能对大量数据进行有效存取
+可为众多使用者使用同一数据（即数据共享）
+
+
+数据库系统（DBS）：
+实现有组织地、动态地存储大量关联数据、方便多用户访问的计算机硬件、软件和数据资源组成的系统；采用数据库技术的计算机系统
+是一个以对海量的、具有复杂数据结构...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/10/09</span>
+            </div>
+            <!-- tags  -->
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href = "/2019/07/20/paper-reading/" >
+            
+                <span>论文阅读笔记</span>
+        </a>
+        <div class="abstract-content">
+            阅读一些论文的收获整理，全是私货(雾)
+A Large-Scale Empirical Study of Compile Errors in Continuous Integration这篇论文通过整理并筛选了github上的使用了一个名叫Travis CI的java项目，统计CI历史中出现的CE与各项因素的关系主要遵循了采集数据-分析数据-发现联系-提出解释-给出建议的思路整个项目的build分为多个过程，build的状态有success, error, fail, canceled和started等，maven和gradle的error和fail分别出现在不同的步骤最后对develo...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/07/20</span>
+            </div>
+            <!-- tags  -->
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href = "/2019/07/08/system-rebuild-notes/" >
             
                 <span>Windows-Ubuntu双系统重装笔记</span>
@@ -563,69 +625,6 @@ Bob计算出相应与$M$的密文$C=P_A(M)$，并把$C$发送给Alice
             <!-- date  -->
             <div class="abstract-date">
                 <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/04/13</span>
-            </div>
-            <!-- tags  -->
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2019/04/06/clrs-31Number-Theoretic-Algorithms/" >
-            
-                <span>算法导论学习笔记-数论算法</span>
-        </a>
-        <div class="abstract-content">
-            输入规模和算数计算的代价给定$k$个整数输入$a_1,a_2,\cdots ,a_k$，如果算法可以在关于$\lg~a_1,\lg~a_2,\cdots ,\lg~a_k$的多项式时间内完成，即算法在关于二进制编码后的输入长度的多项式时间内完成，则称该算法为多项式时间算法
-当输入很大时，基本运算也会变得耗时。两个$\beta$位整数相乘需要耗时$\Theta(\beta^2)$.一个$\beta$为整数除以另一个较短整数的商或余数需要耗时$\Theta(\beta^2)$
-基础数论概念整除性与约数你懂的
-素数与合数你也懂的
-除法定理、余数和等模定理31.1(除法定理): 对于任何整数$a...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/04/06</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Problem Solving">Problem Solving</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "CLRS">CLRS</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2019/03/30/ps-4-6-basic-number-theory/" >
-            
-                <span>问题求解学习笔记-数论基础</span>
-        </a>
-        <div class="abstract-content">
-            数学归纳法你都懂的
-辗转相除法(Division Algorithm)定理2.9(辗转相除法): $a,b$为整数，满足$b&gt;0$，则存在唯一的整数$q$和$r$使得$a=bq+r$，此处$0\le r&lt;b$
-$a\mid b$: $a$能整除$b$,$b$能被$a$整除
-定理2.10: $a,b$为非零整数，则存在整数$r,s$使得gcd($a,b)=ar+bs$. $gcd(a,b)$是唯一的。但$r,s$不唯一
-推论2.11: $a,b$为互质的整数，则存在整数$r,s$使得$ar+bs=1$【事实上是当且仅当的关系】
-欧几里得算法(The Euclidean Algo...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/03/30</span>
             </div>
             <!-- tags  -->
             
@@ -1690,9 +1689,47 @@ $a\mid b$: $a$能整除$b$,$b$能被$a$整除
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 66
+        Total : 68
         </div>
         <!-- search  -->
         
@@ -1703,8 +1740,27 @@ $a\mid b$: $a$能整除$b$,$b$能被$a$整除
     
     
     
+    <div class="archive-year"> 2021 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/07</span><a class="archive-post-title" href= "/2021/01/07/static-program-analysis/" >软件分析课程期末复习笔记</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
     <div class="archive-year"> 2020 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/27</span><a class="archive-post-title" href= "/2020/12/27/MIT-how-to-speak/" >MIT公开课——如何演讲</a>
+        </li>
     
     
         <li class="archive-post-item">
@@ -2146,6 +2202,8 @@ $a\mid b$: $a$能整除$b$,$b$能被$a$整除
         <span class="sidebar-tag-name" data-tags="Python"><span class="iconfont-archer">&#xe606;</span>Python</span>
     
         <span class="sidebar-tag-name" data-tags="notes"><span class="iconfont-archer">&#xe606;</span>notes</span>
+    
+        <span class="sidebar-tag-name" data-tags="Notes; Programming Languages;"><span class="iconfont-archer">&#xe606;</span>Notes; Programming Languages;</span>
     
     </div>
     <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>

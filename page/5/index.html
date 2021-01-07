@@ -365,6 +365,86 @@ height:50vh;
     
     
     <article class="index-post">
+        <a class="abstract-title" href = "/2018/12/08/PA3-report/" >
+            
+                <span>PA3实验报告</span>
+        </a>
+        <div class="abstract-content">
+            实验进度我已完成所有内容。好，下面是惯例碎碎念。
+2018/11/18心态爆炸的一天！先是因为脑子短路完全没有想到idt的地址就在lidt译码过后的id_dest里。然后还因为惯性思维从id_dest-&gt;val里读地址，疯狂出错才发现应该在id_dest-&gt;addr里（因为是地址）。组织Context的时候思考了半天，最后问了大腿才知道怎么判断上下文的组织结构。感觉还是课本知识学得不够扎实的恶果。今日不宜PA，关机睡觉。
+2018/11/19PA3.1完成。感觉测试手段都不太给力，不知道有没有埋下隐藏bug
+2018/11/24PA3.2完成。感觉莫名顺利，可能是3.3要自闭...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/12/08</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Notes">Notes</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "pa">pa</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href = "/2018/12/05/clrs-26Maximum-Flow/" >
+            
+                <span>算法导论学习笔记-最大流</span>
+        </a>
+        <div class="abstract-content">
+            流网络流网络
+有向图$G=(V,E)$
+图中中每条边$(u,v)\in E$有一个非负的容量值$c(u,v)\ge 0$
+如果$(u,v)\notin E$，定义$c(u,v)=0$
+如果边集合$E$包含一条边$(u,v)$，则图中不存在反方向的边$(v,u)$
+有源结点$s$和汇点$t$
+流网络图是连通的
+除源结点外的每个结点都至少有一条进入的边，$|E|\ge |V|-1$
+
+流设$G=(V,E)$为一个流网络，其容量函数为$c$。设$s$为网络的源结点，$t$为汇点。$G$中的流是一个实值函数$f: V\times V \to \mathbb{R}$，满足下面两条性质：
+
+容量限制...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/12/05</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Notes">Notes</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Problem Solving">Problem Solving</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "CLRS">CLRS</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Graph Algorithms">Graph Algorithms</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href = "/2018/11/28/matchings/" >
             
                 <span>图论学习笔记-图中的匹配与覆盖</span>
@@ -682,102 +762,6 @@ $ objdump -d /lib/x86_64-linux-gnu/l...
         <a class="post-tag" href="javascript:void(0);" data-tags = "Dijkstra">Dijkstra</a>
     
         <a class="post-tag" href="javascript:void(0);" data-tags = "Graph Algorithms">Graph Algorithms</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2018/10/24/clrs-22graphic-algs/" >
-            
-                <span>算法导论学习笔记-基本图论算法</span>
-        </a>
-        <div class="abstract-content">
-            辣鸡po主只挖坑不填坑因为作业实在太多了！！！
-试一下Mathjax有没有配置成功！
-图的表示邻接链表(Adjacency-list)
-由一个包含$|V|$条链表的数组Adj所构成，Adj[u]包含所有与结点u之间有右边相连的结点v
-存储空间需求：$\Theta(V+E)$
-鲁棒性高，稍加修改可以支持许多图的变种（如：有权图）
-缺陷：无法快速判断一条边是否在图中
-
-邻接矩阵(Adjacency-matrix)
-用矩阵来存储连通信息
-存储空间需求：\Theta(V^2) 与边数|E|无关
-简单，图规模较小时优先使用
-
-广度优先搜索BFS算法描述
-从一个源结点s开始，每次从已发现的结点向未发...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/10/24</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Notes">Notes</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Problem Solving">Problem Solving</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "CLRS">CLRS</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Single Source Shortest Path">Single Source Shortest Path</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Bellman-Ford">Bellman-Ford</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Dijkstra">Dijkstra</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2018/10/14/tree/" >
-            
-                <span>图论学习笔记-树</span>
-        </a>
-        <div class="abstract-content">
-            本章可用结论整理
-定理4.1：e是图G的桥当且仅当e不在G的任何一个cycle上
-定理4.2：图G是树当且仅当G的任意两个顶点只有唯一的path相连
-定理4.3：每一棵非简单树都有至少两个端点(end-vertice)
-定理4.4：每棵有n个顶点的树都有n-1条边
-推论4.6：每棵有k个component的森林都有n-k条边
-定理4.7：每一个有n个顶点的连通图至少有n-1条边
-定理4.8：有n个顶点、m条边的图G，若满足以下3条性质中的2条：(1)连通 (2)无环 (3)m = n - 1，则G是树
-定理4.9：设T是一棵有k个顶点的树。如果图G中最小的度数不小于k-1，那么T与G的某...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/10/14</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Notes">Notes</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Problem Solving">Problem Solving</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Graph">Graph</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Tree">Tree</a>
     
 </div>
             
@@ -1924,9 +1908,47 @@ $ objdump -d /lib/x86_64-linux-gnu/l...
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 66
+        Total : 68
         </div>
         <!-- search  -->
         
@@ -1937,8 +1959,27 @@ $ objdump -d /lib/x86_64-linux-gnu/l...
     
     
     
+    <div class="archive-year"> 2021 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/07</span><a class="archive-post-title" href= "/2021/01/07/static-program-analysis/" >软件分析课程期末复习笔记</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
     <div class="archive-year"> 2020 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/27</span><a class="archive-post-title" href= "/2020/12/27/MIT-how-to-speak/" >MIT公开课——如何演讲</a>
+        </li>
     
     
         <li class="archive-post-item">
@@ -2380,6 +2421,8 @@ $ objdump -d /lib/x86_64-linux-gnu/l...
         <span class="sidebar-tag-name" data-tags="Python"><span class="iconfont-archer">&#xe606;</span>Python</span>
     
         <span class="sidebar-tag-name" data-tags="notes"><span class="iconfont-archer">&#xe606;</span>notes</span>
+    
+        <span class="sidebar-tag-name" data-tags="Notes; Programming Languages;"><span class="iconfont-archer">&#xe606;</span>Notes; Programming Languages;</span>
     
     </div>
     <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
