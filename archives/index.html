@@ -350,6 +350,99 @@
     
     
     <article class="index-post">
+        <a class="abstract-title" href = "/2021/01/25/how-to-review-paper-notes/" >
+            
+                <span>Notes on paper review</span>
+        </a>
+        <div class="abstract-content">
+            论文阅读与评价技巧笔记How to Read a Paper - S. Keshav3-pass阅读法
+
+1st pass:
+认真阅读title, abstract, introduction, conclusion；浏览section &amp; subsection的标题、数学内容；reference；其他部分一概忽略
+需要能够回答 5Cs
+Category
+Context
+Correctness
+Contributions
+Clarity
+
+
+看完第一遍后可以决定需不需要继续看下去
+
+
+2nd pass
+比第一遍看得更认真，但依然忽略诸如证明过程之类的细节。可以记一些笔记，例如针对...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2021/01/25</span>
+            </div>
+            <!-- tags  -->
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href = "/2021/01/08/artificial-intelligence/" >
+            
+                <span>人工智能-期末复习</span>
+        </a>
+        <div class="abstract-content">
+            人工智能课程期末复习笔记我宣布课程ppt写的都是$hit
+2. 搜索
+不会考概念和证明
+会给一个游戏（拼图游戏、九宫格等）
+
+状态空间搜索
+状态空间图
+结点$N$和连接（弧）$A$
+初始状态$S$: $N$的非空子集
+目标状态$G$: $N$的非空子集
+状态空间搜索：从初始状态到目标状态的解路径
+图搜索：需要检测和消解循环；树搜索可以免除检测开销；
+
+
+搜索树
+
+根节点：初始状态
+连接：父节点上的合法动作
+后继：在父节点上采用合法动作到达的结点
+搜索树：删除后继结点中已经出现的等价状态，所形成的树
+
+
+数据驱动与目标驱动
+
+数据驱动：从输入数据出发，前向搜索
+目标驱动：从预期结果出发，后...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2021/01/08</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Notes;">Notes;</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href = "/2021/01/07/static-program-analysis/" >
             
                 <span>软件分析课程期末复习笔记</span>
@@ -622,73 +715,6 @@ PA1：调试器
             <!-- date  -->
             <div class="abstract-date">
                 <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/11/03</span>
-            </div>
-            <!-- tags  -->
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2019/10/12/network-notes/" >
-            
-                <span>计算机网络-课程笔记</span>
-        </a>
-        <div class="abstract-content">
-            【工事中】
-Introduction
-ISP：因特网服务提供商
-协议：定义了两个或多个通信实体之间交换的报文的格式和顺序，以及报文发送和/或接受一条报文或其他事件所采取的动作
-主机=端系统
-以太网：以太网交换机-机构路由器-ISP
-WiFi:接入点-企业网-有限因特网
-
-分组交换
-分组交换机：路由器/链路交换机
-存储转发传输：交换机能够开始向输出链路传输该分组的第一个比特钱，必须接收到整个分组
-时延：$2L/R$，不存储是$L/R$
-通过$N$条速率均为$R$的链路组成的路径，端到端时延$d_{\text{端到端}}=N\frac{L}{R}$
-
-
-输出缓存/输出队列：链路上进入交换机前...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/10/12</span>
-            </div>
-            <!-- tags  -->
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2019/10/11/dip-notes/" >
-            
-                <span>数字图像处理课程笔记</span>
-        </a>
-        <div class="abstract-content">
-            期末考试
-题型：选择（不定选）、判断、问答、计算
-
-Ch01 数字图像处理简介图像采样、图像量化基本问题：如何将现实物理信号离散化、数字化采样：用有限的样本数目去近似无限的现实物理信号（有限近似无限）量化：用离散计算机表示去近似连续的现实物理信号（离散近似连续）
-采样数量越多，图像越清晰（10241024$\to$ 1616）量化级别越高，图像越真实（256灰度级$\to$4灰度级，低灰度级会出现伪轮廓）
-图像有M*N个像素，每个像素有$Q$个灰度级别。M,N,Q通常总是取为2的整数幂。$Q=2^b$，称为图像的b bit量化，或称$Q$级灰度。存在量化误差，b越大重建图像失真越小。
-有...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/10/11</span>
             </div>
             <!-- tags  -->
             
@@ -1791,9 +1817,47 @@ Ch01 数字图像处理简介图像采样、图像量化基本问题：如何将
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 68
+        Total : 70
         </div>
         <!-- search  -->
         
@@ -1806,6 +1870,16 @@ Ch01 数字图像处理简介图像采样、图像量化基本问题：如何将
     
     <div class="archive-year"> 2021 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/25</span><a class="archive-post-title" href= "/2021/01/25/how-to-review-paper-notes/" >Notes on paper review</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/08</span><a class="archive-post-title" href= "/2021/01/08/artificial-intelligence/" >人工智能-期末复习</a>
+        </li>
     
     
         <li class="archive-post-item">
@@ -2268,6 +2342,8 @@ Ch01 数字图像处理简介图像采样、图像量化基本问题：如何将
         <span class="sidebar-tag-name" data-tags="notes"><span class="iconfont-archer">&#xe606;</span>notes</span>
     
         <span class="sidebar-tag-name" data-tags="Notes; Programming Languages;"><span class="iconfont-archer">&#xe606;</span>Notes; Programming Languages;</span>
+    
+        <span class="sidebar-tag-name" data-tags="Notes;"><span class="iconfont-archer">&#xe606;</span>Notes;</span>
     
     </div>
     <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>

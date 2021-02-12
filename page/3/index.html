@@ -365,6 +365,75 @@ height:50vh;
     
     
     <article class="index-post">
+        <a class="abstract-title" href = "/2019/04/15/os-midterm/" >
+            
+                <span>os期中复习</span>
+        </a>
+        <div class="abstract-content">
+            应用眼中的OS
+操作系统一方面需要提供程序的执行的环境和相应的资源，还要提供和操作系统世界中其他对象交互的方法和约定
+
+并发共享内存多线程
+并发定义：一个程序、算法或问题的不同部分乱序或偏序执行而不影响最终结果的能力
+程序经历了什么？
+
+编译器优化$\to$顺序丧失
+操作系统中断，多处理器、缓存(硬件)$\to$原子性(all or nothing)丧失
+缓存，乱序（硬件）$\to$可见性丧失
+
+
+顺序丧失：允许源代码中内存访问指令不再按顺序甚至不再出现
+
+原子性的丧失：指令序列可以在任意时刻被中断，然后操作系统切换到其他线程执行
+可见性丧失：缓存&amp;乱序
+
+互斥评估一把锁的基本准...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/04/15</span>
+            </div>
+            <!-- tags  -->
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href = "/2019/04/13/ps-4-7-cryptographic-algorithm/" >
+            
+                <span>问题求解学习笔记-密码算法</span>
+        </a>
+        <div class="abstract-content">
+            RSA公钥加密系统每个参与者都有一把公钥($P$)和密钥($S$)
+$\mathcal{D}$表示允许信息的集合，要求公钥与密钥指定一种从$\mathcal{D}$到自身的一一对应的函数。Alice的公钥函数$P_A$和密钥函数$S_A$都是$\mathcal{D}$的排列
+系统中任何参与者的公钥与密钥都是匹配对，指定函数互为反函数，对任何消息$M\in \mathcal{D}$，有
+M=S_A(P_A(M))M=P_A(S_A(M))加密过程
+Bob取得Alice的公钥$P_A$
+Bob计算出相应与$M$的密文$C=P_A(M)$，并把$C$发送给Alice
+当Alice收到密文$C$...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/04/13</span>
+            </div>
+            <!-- tags  -->
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href = "/2019/04/06/clrs-31Number-Theoretic-Algorithms/" >
             
                 <span>算法导论学习笔记-数论算法</span>
@@ -689,83 +758,6 @@ HK学术竞赛
         </div>
     </article>
     
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2019/02/12/SVM-getstart/" >
-            
-                <span>SVM的临时抱佛脚for HK</span>
-        </a>
-        <div class="abstract-content">
-            参考资料B站 机器学习（Machine Learning）- 吴恩达（Andrew Ng）
-关于调参使用SVM需要指定的参数
-
-参数$C$
-$C$较大：小偏差，大方差
-$C$较小：大偏差，小方差
-
-
-核函数(kernel)的选择
-线性核函数(Linear Kernel/No Kernel)
-高斯核函数(Gaussian Kernel)
-以上是两个最常用的核函数
-多项式核函数
-字符串核函数
-卡方核函数
-….
-
-
-
-$n=$number of features, $m=$number of training examples
-
-If $n$ is large(relative to $m$)...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/02/12</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Notes">Notes</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Machine Learning">Machine Learning</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2019/02/11/HKUST-discussion/" >
-            
-                <span>HKUST项目讨论内容</span>
-        </a>
-        <div class="abstract-content">
-            问题理解原文【来自有道机翻】预测Sklearn程序的运行时间在共享基础设施上高效运行分布式应用程序具有挑战性。过去的研究表明，选择合适的硬件配置可以显著提高性能和降低成本。为了选择最佳配置，需要准确地预测不同应用程序的性能。
-我们考虑这个挑战的一个简化版本:预测单个服务器上机器学习程序的性能。Scikit-learn (sklearn)是一个用于python的机器学习库。提供的数据集描述了在sklearn中运行SGDClassifier的几个示例。数据集的特征描述了SGDClassifier以及用于生成综合训练数据的特征。待分析数据为SGDClassifier的训练时间。
-在这个文件夹中...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/02/11</span>
-            </div>
-            <!-- tags  -->
-            
-        </div>
-    </article>
-    
     <!-- paginator  -->
     
     <nav class="page-nav">
@@ -850,10 +842,6 @@ If $n$ is large(relative to $m$)...
             
         </div>
     
-    
-        <div class="about-me">
-            <a href = "/about" >ABOUT ME</a>
-        </div>
     
 </div>
             
@@ -1944,9 +1932,47 @@ If $n$ is large(relative to $m$)...
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 68
+        Total : 70
         </div>
         <!-- search  -->
         
@@ -1959,6 +1985,16 @@ If $n$ is large(relative to $m$)...
     
     <div class="archive-year"> 2021 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/25</span><a class="archive-post-title" href= "/2021/01/25/how-to-review-paper-notes/" >Notes on paper review</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/08</span><a class="archive-post-title" href= "/2021/01/08/artificial-intelligence/" >人工智能-期末复习</a>
+        </li>
     
     
         <li class="archive-post-item">
@@ -2421,6 +2457,8 @@ If $n$ is large(relative to $m$)...
         <span class="sidebar-tag-name" data-tags="notes"><span class="iconfont-archer">&#xe606;</span>notes</span>
     
         <span class="sidebar-tag-name" data-tags="Notes; Programming Languages;"><span class="iconfont-archer">&#xe606;</span>Notes; Programming Languages;</span>
+    
+        <span class="sidebar-tag-name" data-tags="Notes;"><span class="iconfont-archer">&#xe606;</span>Notes;</span>
     
     </div>
     <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>

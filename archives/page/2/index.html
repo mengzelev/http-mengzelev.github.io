@@ -350,6 +350,73 @@
     
     
     <article class="index-post">
+        <a class="abstract-title" href = "/2019/10/12/network-notes/" >
+            
+                <span>计算机网络-课程笔记</span>
+        </a>
+        <div class="abstract-content">
+            【工事中】
+Introduction
+ISP：因特网服务提供商
+协议：定义了两个或多个通信实体之间交换的报文的格式和顺序，以及报文发送和/或接受一条报文或其他事件所采取的动作
+主机=端系统
+以太网：以太网交换机-机构路由器-ISP
+WiFi:接入点-企业网-有限因特网
+
+分组交换
+分组交换机：路由器/链路交换机
+存储转发传输：交换机能够开始向输出链路传输该分组的第一个比特钱，必须接收到整个分组
+时延：$2L/R$，不存储是$L/R$
+通过$N$条速率均为$R$的链路组成的路径，端到端时延$d_{\text{端到端}}=N\frac{L}{R}$
+
+
+输出缓存/输出队列：链路上进入交换机前...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/10/12</span>
+            </div>
+            <!-- tags  -->
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href = "/2019/10/11/dip-notes/" >
+            
+                <span>数字图像处理课程笔记</span>
+        </a>
+        <div class="abstract-content">
+            期末考试
+题型：选择（不定选）、判断、问答、计算
+
+Ch01 数字图像处理简介图像采样、图像量化基本问题：如何将现实物理信号离散化、数字化采样：用有限的样本数目去近似无限的现实物理信号（有限近似无限）量化：用离散计算机表示去近似连续的现实物理信号（离散近似连续）
+采样数量越多，图像越清晰（10241024$\to$ 1616）量化级别越高，图像越真实（256灰度级$\to$4灰度级，低灰度级会出现伪轮廓）
+图像有M*N个像素，每个像素有$Q$个灰度级别。M,N,Q通常总是取为2的整数幂。$Q=2^b$，称为图像的b bit量化，或称$Q$级灰度。存在量化误差，b越大重建图像失真越小。
+有...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/10/11</span>
+            </div>
+            <!-- tags  -->
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href = "/2019/10/09/database/" >
             
                 <span>数据库学习笔记</span>
@@ -556,75 +623,6 @@ OS通过读写状态、命令和数据寄存器来控制设备行为
             <!-- date  -->
             <div class="abstract-date">
                 <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/04/19</span>
-            </div>
-            <!-- tags  -->
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2019/04/15/os-midterm/" >
-            
-                <span>os期中复习</span>
-        </a>
-        <div class="abstract-content">
-            应用眼中的OS
-操作系统一方面需要提供程序的执行的环境和相应的资源，还要提供和操作系统世界中其他对象交互的方法和约定
-
-并发共享内存多线程
-并发定义：一个程序、算法或问题的不同部分乱序或偏序执行而不影响最终结果的能力
-程序经历了什么？
-
-编译器优化$\to$顺序丧失
-操作系统中断，多处理器、缓存(硬件)$\to$原子性(all or nothing)丧失
-缓存，乱序（硬件）$\to$可见性丧失
-
-
-顺序丧失：允许源代码中内存访问指令不再按顺序甚至不再出现
-
-原子性的丧失：指令序列可以在任意时刻被中断，然后操作系统切换到其他线程执行
-可见性丧失：缓存&amp;乱序
-
-互斥评估一把锁的基本准...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/04/15</span>
-            </div>
-            <!-- tags  -->
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2019/04/13/ps-4-7-cryptographic-algorithm/" >
-            
-                <span>问题求解学习笔记-密码算法</span>
-        </a>
-        <div class="abstract-content">
-            RSA公钥加密系统每个参与者都有一把公钥($P$)和密钥($S$)
-$\mathcal{D}$表示允许信息的集合，要求公钥与密钥指定一种从$\mathcal{D}$到自身的一一对应的函数。Alice的公钥函数$P_A$和密钥函数$S_A$都是$\mathcal{D}$的排列
-系统中任何参与者的公钥与密钥都是匹配对，指定函数互为反函数，对任何消息$M\in \mathcal{D}$，有
-M=S_A(P_A(M))M=P_A(S_A(M))加密过程
-Bob取得Alice的公钥$P_A$
-Bob计算出相应与$M$的密文$C=P_A(M)$，并把$C$发送给Alice
-当Alice收到密文$C$...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/04/13</span>
             </div>
             <!-- tags  -->
             
@@ -1727,9 +1725,47 @@ Bob计算出相应与$M$的密文$C=P_A(M)$，并把$C$发送给Alice
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 68
+        Total : 70
         </div>
         <!-- search  -->
         
@@ -1742,6 +1778,16 @@ Bob计算出相应与$M$的密文$C=P_A(M)$，并把$C$发送给Alice
     
     <div class="archive-year"> 2021 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/25</span><a class="archive-post-title" href= "/2021/01/25/how-to-review-paper-notes/" >Notes on paper review</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/08</span><a class="archive-post-title" href= "/2021/01/08/artificial-intelligence/" >人工智能-期末复习</a>
+        </li>
     
     
         <li class="archive-post-item">
@@ -2204,6 +2250,8 @@ Bob计算出相应与$M$的密文$C=P_A(M)$，并把$C$发送给Alice
         <span class="sidebar-tag-name" data-tags="notes"><span class="iconfont-archer">&#xe606;</span>notes</span>
     
         <span class="sidebar-tag-name" data-tags="Notes; Programming Languages;"><span class="iconfont-archer">&#xe606;</span>Notes; Programming Languages;</span>
+    
+        <span class="sidebar-tag-name" data-tags="Notes;"><span class="iconfont-archer">&#xe606;</span>Notes;</span>
     
     </div>
     <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>

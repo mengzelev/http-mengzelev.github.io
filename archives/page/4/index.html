@@ -350,6 +350,83 @@
     
     
     <article class="index-post">
+        <a class="abstract-title" href = "/2019/02/12/SVM-getstart/" >
+            
+                <span>SVM的临时抱佛脚for HK</span>
+        </a>
+        <div class="abstract-content">
+            参考资料B站 机器学习（Machine Learning）- 吴恩达（Andrew Ng）
+关于调参使用SVM需要指定的参数
+
+参数$C$
+$C$较大：小偏差，大方差
+$C$较小：大偏差，小方差
+
+
+核函数(kernel)的选择
+线性核函数(Linear Kernel/No Kernel)
+高斯核函数(Gaussian Kernel)
+以上是两个最常用的核函数
+多项式核函数
+字符串核函数
+卡方核函数
+….
+
+
+
+$n=$number of features, $m=$number of training examples
+
+If $n$ is large(relative to $m$)...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/02/12</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Notes">Notes</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Machine Learning">Machine Learning</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href = "/2019/02/11/HKUST-discussion/" >
+            
+                <span>HKUST项目讨论内容</span>
+        </a>
+        <div class="abstract-content">
+            问题理解原文【来自有道机翻】预测Sklearn程序的运行时间在共享基础设施上高效运行分布式应用程序具有挑战性。过去的研究表明，选择合适的硬件配置可以显著提高性能和降低成本。为了选择最佳配置，需要准确地预测不同应用程序的性能。
+我们考虑这个挑战的一个简化版本:预测单个服务器上机器学习程序的性能。Scikit-learn (sklearn)是一个用于python的机器学习库。提供的数据集描述了在sklearn中运行SGDClassifier的几个示例。数据集的特征描述了SGDClassifier以及用于生成综合训练数据的特征。待分析数据为SGDClassifier的训练时间。
+在这个文件夹中...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/02/11</span>
+            </div>
+            <!-- tags  -->
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href = "/2019/01/30/ICM-feelings/" >
             
                 <span>2019美赛经历</span>
@@ -664,89 +741,6 @@ Ax=bPAx=PbLUx=Pbx求解两个三角线性系统下三角系统$Ly=Pb$上三角�
         <a class="post-tag" href="javascript:void(0);" data-tags = "Graph Algorithms">Graph Algorithms</a>
     
 </div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2018/12/13/planar-graph-and-coloring/" >
-            
-                <span>图论学习笔记-平面图与着色</span>
-        </a>
-        <div class="abstract-content">
-            平面图平面图(planar graph)：如果$G$能够被画在一个平面上而使得任何两条边都不会交叉
-平图(plane graph)：如果$G$是平面图且$G$的任何两条边都不交叉
-平面图的例子：cycle, path, star, tree
-区域(regions)：一个平图把平面分成一些连通片外区域(exterior region)：每个平图中总有的一个无界的区域边界(boundary)：在一个平图中，顶点和边斗鱼某个给定区域$R$关联的子图称为是$R$的边界
-割边总是恰好在一个区域的边界上非割边一定位于两个区域的边界上
-如果$G$是一个至少含有三条边的连通平图，则$G$的而每个区域的边...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/12/13</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Notes">Notes</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Problem Solving">Problem Solving</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Graph Theory">Graph Theory</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2018/12/10/Dinner/" >
-            
-                <span>卫宫家今天的饭</span>
-        </a>
-        <div class="abstract-content">
-            题源POJ 3281 Diningopenjudge传送门饱受OJ折磨的我决定以德报怨给大家出道水题
-题目描述基本只是把原题搬到了月球上
-
-N位客人，F种食物，D种饮料
-每位客人有多种喜欢的事物和饮料
-每位客人只吃一种食物、只喝一种饮料
-每种食物，每种饮料只能被一位客人吃/喝
-
-可以看成两个二分图最大匹配问题
-构建流网络
-先尝试：食物-客人-饮料 
-会出现一位客人对应多份食物或饮料的情况
-客人结点需要加上结点容量
-将每个客人结点拆分为两个
-
-
-源点s-食物-客人1-客人2-饮料-汇点
-
-最大流算法
-数据规模[1,100]
-EK完全OK
-没有刻意生成卡任何算法的数据，也许可以尝试暴力
-板子...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/12/10</span>
-            </div>
-            <!-- tags  -->
             
         </div>
     </article>
@@ -1847,9 +1841,47 @@ EK完全OK
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 68
+        Total : 70
         </div>
         <!-- search  -->
         
@@ -1862,6 +1894,16 @@ EK完全OK
     
     <div class="archive-year"> 2021 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/25</span><a class="archive-post-title" href= "/2021/01/25/how-to-review-paper-notes/" >Notes on paper review</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/08</span><a class="archive-post-title" href= "/2021/01/08/artificial-intelligence/" >人工智能-期末复习</a>
+        </li>
     
     
         <li class="archive-post-item">
@@ -2324,6 +2366,8 @@ EK完全OK
         <span class="sidebar-tag-name" data-tags="notes"><span class="iconfont-archer">&#xe606;</span>notes</span>
     
         <span class="sidebar-tag-name" data-tags="Notes; Programming Languages;"><span class="iconfont-archer">&#xe606;</span>Notes; Programming Languages;</span>
+    
+        <span class="sidebar-tag-name" data-tags="Notes;"><span class="iconfont-archer">&#xe606;</span>Notes;</span>
     
     </div>
     <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
